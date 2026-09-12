@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>読解ダイジェスト · Kabuki · Preview</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Noto+Serif+JP:wght@400;600;700&family=Shippori+Mincho:wght@500;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #0a0a0a;
+      --bg-2: #121212;
+      --bg-card: #161616;
+      --ink: #f5f5f5;
+      --ink-dim: #a8a29a;
+      --ink-mute: #6b6560;
+      --shu: #c41e3a;          /* 朱色 kabuki */
+      --shu-hot: #e11d48;
+      --shu-deep: #8b1228;
+      --gold: #d4a017;
+      --gold-soft: #c9a227;
+      --white: #fafafa;
+      --line: #2a2a2a;
+      --line-hot: rgba(196, 30, 58, 0.45);
+      --measure: 42rem;
+      --radius: 4px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: "Noto Sans JP", "Hiragino Sans", "Yu Gothic", system-ui, sans-serif;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* kumadori stripe accent at top */
+    .stage-bar {
+      height: 6px;
+      background: repeating-linear-gradient(
+        90deg,
+        var(--shu) 0 48px,
+        var(--white) 48px 56px,
+        #111 56px 64px,
+        var(--gold) 64px 72px,
+        #111 72px 88px
+      );
+    }
+
+    .wrap {
+      width: min(100% - 2rem, 74rem);
+      margin: 0 auto;
+      padding: 2rem 0 4.5rem;
+      display: grid;
+      grid-template-columns: 15.5rem 1fr;
+      gap: 2.75rem;
+      align-items: start;
+    }
+
+    @media (max-width: 900px) {
+      .wrap { grid-template-columns: 1fr; gap: 1.5rem; padding-top: 1.25rem; }
+      .sidebar { position: static !important; }
+    }
+
+    .sidebar { position: sticky; top: 1.25rem; }
+
+    .brand {
+      display: flex;
+      align-items: baseline;
+      gap: 0.55rem;
+      margin: 0 0 0.35rem;
+    }
+    .brand-mark {
+      font-family: "Shippori Mincho", "Noto Serif JP", serif;
+      font-size: 1.85rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      color: var(--white);
+      line-height: 1;
+    }
+    .brand-mark em {
+      font-style: normal;
+      color: var(--shu);
+    }
+    .brand-sub {
+      font-size: 0.65rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-weight: 700;
+    }
+
+    .meta {
+      color: var(--ink-mute);
+      font-size: 0.8rem;
+      margin: 0 0 1.25rem;
+    }
+
+    .stat-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-bottom: 1.35rem;
+    }
+    .stat {
+      border: 1px solid var(--line);
+      background: var(--bg-2);
+      padding: 0.32rem 0.65rem;
+      font-size: 0.72rem;
+      color: var(--ink-dim);
+      border-radius: var(--radius);
+    }
+    .stat strong { color: var(--white); font-weight: 700; }
+    .stat.hot {
+      border-color: var(--line-hot);
+      color: var(--shu-hot);
+    }
+    .stat.hot strong { color: var(--shu-hot); }
+
+    .toc {
+      background: var(--bg-card);
+      border: 1px solid var(--line);
+      border-left: 3px solid var(--shu);
+      padding: 1rem 0.85rem 0.85rem;
+    }
+    .toc h2 {
+      margin: 0 0 0.85rem 0.35rem;
+      font-size: 0.68rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-weight: 700;
+    }
+    .toc ol {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      counter-reset: toc;
+    }
+    .toc li { margin: 0 0 0.2rem; }
+    .toc a {
+      display: grid;
+      grid-template-columns: 1.5rem 1fr auto;
+      gap: 0.45rem;
+      align-items: start;
+      text-decoration: none;
+      color: inherit;
+      padding: 0.5rem 0.4rem;
+      border-radius: var(--radius);
+      transition: background 0.15s ease, color 0.15s ease;
+    }
+    .toc a:hover { background: #1f1f1f; }
+    .toc a:hover .t-title { color: var(--white); }
+    .toc a::before {
+      counter-increment: toc;
+      content: counter(toc, decimal-leading-zero);
+      font-family: "Shippori Mincho", serif;
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--shu);
+      line-height: 1.35;
+    }
+    .t-title {
+      font-size: 0.84rem;
+      line-height: 1.35;
+      color: var(--ink-dim);
+      transition: color 0.15s ease;
+    }
+    .t-min {
+      font-size: 0.68rem;
+      color: var(--ink-mute);
+      padding-top: 0.12rem;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .note {
+      margin-top: 1rem;
+      font-size: 0.74rem;
+      color: var(--ink-mute);
+      line-height: 1.5;
+    }
+
+    main { max-width: var(--measure); }
+
+    .preview-banner {
+      display: flex;
+      gap: 0.75rem;
+      align-items: flex-start;
+      background: linear-gradient(90deg, rgba(196,30,58,0.18), rgba(212,160,23,0.08));
+      border: 1px solid var(--line-hot);
+      padding: 0.85rem 1rem;
+      margin-bottom: 1.5rem;
+      font-size: 0.86rem;
+      color: var(--ink-dim);
+    }
+    .preview-banner .tag {
+      flex-shrink: 0;
+      background: var(--shu);
+      color: #fff;
+      font-size: 0.65rem;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      padding: 0.28rem 0.5rem;
+      border-radius: var(--radius);
+    }
+
+    .hero {
+      margin-bottom: 2rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid var(--line);
+      position: relative;
+    }
+    .hero::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -1px;
+      width: 4.5rem;
+      height: 2px;
+      background: var(--shu);
+    }
+    .kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.7rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--shu-hot);
+      font-weight: 800;
+      margin-bottom: 0.85rem;
+    }
+    .kicker::before {
+      content: "◆";
+      font-size: 0.55rem;
+      color: var(--gold);
+    }
+    .hero h1 {
+      font-family: "Shippori Mincho", "Noto Serif JP", serif;
+      font-size: clamp(1.85rem, 4vw, 2.55rem);
+      font-weight: 700;
+      line-height: 1.2;
+      margin: 0 0 0.75rem;
+      color: var(--white);
+      letter-spacing: 0.02em;
+    }
+    .hero p {
+      margin: 0;
+      color: var(--ink-dim);
+      font-size: 0.98rem;
+      max-width: 36rem;
+    }
+
+    article.piece {
+      background: var(--bg-card);
+      border: 1px solid var(--line);
+      margin-bottom: 1.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+    article.piece::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: linear-gradient(90deg, var(--shu) 0%, var(--shu) 35%, var(--gold) 35%, var(--gold) 42%, transparent 42%);
+    }
+
+    .piece-inner { padding: 1.6rem 1.55rem 1.35rem; }
+
+    .piece-head {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-bottom: 0.85rem;
+    }
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      border: 1px solid var(--line);
+      background: #111;
+      color: var(--ink-dim);
+      padding: 0.22rem 0.6rem;
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      border-radius: var(--radius);
+    }
+    .chip.interest {
+      border-color: var(--shu);
+      color: var(--shu-hot);
+      background: rgba(196, 30, 58, 0.12);
+    }
+    .chip.mins {
+      border-color: var(--gold);
+      color: var(--gold);
+      background: transparent;
+    }
+
+    .piece h2 {
+      font-family: "Noto Serif JP", "Shippori Mincho", "Yu Mincho", serif;
+      font-size: 1.38rem;
+      font-weight: 700;
+      line-height: 1.5;
+      margin: 0 0 0.6rem;
+      color: var(--white);
+      letter-spacing: 0.02em;
+    }
+
+    .why {
+      margin: 0 0 1rem;
+      color: var(--ink-dim);
+      font-size: 0.9rem;
+      border-left: 2px solid var(--gold);
+      padding-left: 0.85rem;
+    }
+
+    .source {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.65rem 1.1rem;
+      font-size: 0.76rem;
+      color: var(--ink-mute);
+      margin-bottom: 1.25rem;
+    }
+    .source a {
+      color: var(--shu-hot);
+      text-decoration: none;
+      font-weight: 600;
+    }
+    .source a:hover { color: var(--gold); }
+
+    .ja {
+      font-family: "Noto Serif JP", "Hiragino Mincho ProN", "Yu Mincho", serif;
+      font-size: 1.08rem;
+      line-height: 2;
+      letter-spacing: 0.03em;
+      color: #ebe7e1;
+    }
+    .ja p { margin: 0 0 1.15em; }
+    .ja p:last-child { margin-bottom: 0; }
+
+    .continue {
+      margin-top: 1.25rem;
+      padding-top: 1rem;
+      border-top: 1px solid var(--line);
+      font-size: 0.86rem;
+    }
+    .continue a {
+      color: var(--white);
+      text-decoration: none;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      border-bottom: 2px solid var(--shu);
+      padding-bottom: 0.1rem;
+    }
+    .continue a:hover {
+      color: var(--shu-hot);
+      border-bottom-color: var(--gold);
+    }
+
+    footer.site {
+      max-width: var(--measure);
+      margin-top: 1.75rem;
+      color: var(--ink-mute);
+      font-size: 0.72rem;
+      letter-spacing: 0.06em;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+    footer.site::before {
+      content: "";
+      width: 1.25rem;
+      height: 2px;
+      background: var(--shu);
+    }
+  </style>
+</head>
+<body>
+  <div class="stage-bar" aria-hidden="true"></div>
+
+  <div class="wrap">
+    <aside class="sidebar">
+      <div class="brand">
+        <p class="brand-mark">読解<em>幕</em></p>
+      </div>
+      <p class="brand-sub">Kabuki Digest</p>
+      <p class="meta">11 set 2026 · preview v2</p>
+
+      <div class="stat-row">
+        <div class="stat hot"><strong>~46</strong> min</div>
+        <div class="stat"><strong>4</strong> peças</div>
+        <div class="stat">N2–N1</div>
+      </div>
+
+      <nav class="toc" aria-label="Índice">
+        <h2>本日の演目</h2>
+        <ol>
+          <li>
+            <a href="#p1">
+              <span class="t-title">武蔵と『五輪書』の世界</span>
+              <span class="t-min">14′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p2">
+              <span class="t-title">神戸・兵庫の住まい事情</span>
+              <span class="t-min">10′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p3">
+              <span class="t-title">BAND-MAID、関西公演の余韻</span>
+              <span class="t-min">9′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p4">
+              <span class="t-title">AIエージェントと開発の現在地</span>
+              <span class="t-min">13′</span>
+            </a>
+          </li>
+        </ol>
+      </nav>
+      <p class="note">Abra no Chrome/Firefox com Yomitan. Clique no japonês pra lookup.</p>
+    </aside>
+
+    <main>
+      <div class="preview-banner">
+        <span class="tag">PREVIEW</span>
+        <span>Tema kabuki — preto, shu, branco e ouro. Textos de exemplo; o digest real às 8h usa o mesmo visual.</span>
+      </div>
+
+      <header class="hero">
+        <div class="kicker">Daily Japanese Digest</div>
+        <h1>四つの演目、ひと朝の読解</h1>
+        <p>História, Kobe, rock e AI — misturados pra não ficar monótono. Estimativa total ~46 minutos no seu ritmo.</p>
+      </header>
+
+      <article class="piece" id="p1">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★★</span>
+            <span class="chip">宮本武蔵</span>
+            <span class="chip">戦国</span>
+            <span class="chip mins">~14 min</span>
+          </div>
+          <h2 lang="ja">宮本武蔵と『五輪書』——兵法が語る「間」と「勢い」</h2>
+          <p class="why">Por quê: liga Musashi à prática do timing — vocabulário clássico sem ficar seco.</p>
+          <div class="source">
+            <span>Fonte exemplo · 歴史コラム</span>
+            <a href="#">原文を開く ↗</a>
+          </div>
+          <div class="ja" lang="ja">
+            <p>宮本武蔵は、近世日本を代表する剣豪として知られる。二天一流を創始し、『五輪書』に兵法の思想を記した。本書は地・水・火・風・空の五巻から成り、単なる技術論にとどまらず、戦いにおける心の置き方、相手との「間」の取り方、そして状況を読む目を説いている。</p>
+            <p>武蔵が強調したのは、型に縛られず、変化する状況に応じて自らを適応させることだった。剣の振り方ひとつをとっても、速さだけを追うのではなく、相手の勢いを受け止め、返す「拍子」が重要だと語る。この感覚は、戦場だけでなく、日常の判断にも通じると後世の読者は解釈してきた。</p>
+            <p>近年の研究では、武蔵の足跡を各地の史料や伝承から再検証する動きが続いている。伝説と史実を丁寧に分けながら読むことで、『五輪書』は単なる英雄譚ではなく、実践知の書として立ち上がってくる。</p>
+          </div>
+          <p class="continue"><a href="#">続きを原文で読む →</a></p>
+        </div>
+      </article>
+
+      <article class="piece" id="p2">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★☆</span>
+            <span class="chip">不動産</span>
+            <span class="chip">神戸・兵庫</span>
+            <span class="chip mins">~10 min</span>
+          </div>
+          <h2 lang="ja">神戸・兵庫の賃貸と購入——家賃相場と「住みやすさ」の話</h2>
+          <p class="why">Por quê: útil e concreto pra quem acompanha a região — números + contexto.</p>
+          <div class="source">
+            <span>Fonte exemplo · 地域経済</span>
+            <a href="#">原文を開く ↗</a>
+          </div>
+          <div class="ja" lang="ja">
+            <p>兵庫県、とりわけ神戸市内では、エリアによって家賃相場が大きく異なる。三宮や元町に近い利便性の高い地区では単身向けワンルームでも高めの水準が続き、一方で須磨や垂水など西部では比較的落ち着いた価格帯が見られる。</p>
+            <p>購入を検討する人にとっては、金利やリフォーム費用、築年数だけでなく、通勤アクセスや災害リスクも重要な判断材料だ。阪神間の鉄道網は生活の質を左右するため、駅距離や路線の選択肢を丁寧に見る必要がある。</p>
+            <p>自治体の移住・定住支援や空き家活用の動きも、静かに市場の空気を変えつつある。数字だけを追うより、「どんな暮らしをしたいか」から逆算する読み方が役に立つ。</p>
+          </div>
+          <p class="continue"><a href="#">続きを原文で読む →</a></p>
+        </div>
+      </article>
+
+      <article class="piece" id="p3">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★★</span>
+            <span class="chip">ロック</span>
+            <span class="chip">BAND-MAID</span>
+            <span class="chip mins">~9 min</span>
+          </div>
+          <h2 lang="ja">BAND-MAID——関西の熱気と、ライブが残す「余韻」</h2>
+          <p class="why">Por quê: vocabulário de shows + emoção; alivia o ritmo do digest.</p>
+          <div class="source">
+            <span>Fonte exemplo · 音楽レポート</span>
+            <a href="#">原文を開く ↗</a>
+          </div>
+          <div class="ja" lang="ja">
+            <p>BAND-MAIDのライブは、熱狂と精密さが同居する空間だ。メイド服というビジュアルの印象を超えて、演奏の密度とアンサンブルのキレが観客を一気に引き込む。関西での公演では、コール＆レスポンスの勢いや、会場全体の一体感が特に強く感じられることが多い。</p>
+            <p>セットリストの組み立て、MCの間、アンコールの演出——こうした細部が「ただ音が大きい夜」を、記憶に残る体験へ変える。ファンにとっては、新曲の初披露か、定番曲のアレンジか、その夜だけの空気が何よりの楽しみだ。</p>
+            <p>音楽メディアのレビューを日本語で追うと、批評の語彙（疾走感、重厚、疾風怒濤、情感など）も自然に身についていく。</p>
+          </div>
+          <p class="continue"><a href="#">続きを原文で読む →</a></p>
+        </div>
+      </article>
+
+      <article class="piece" id="p4">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★☆</span>
+            <span class="chip">AI</span>
+            <span class="chip">開発</span>
+            <span class="chip mins">~13 min</span>
+          </div>
+          <h2 lang="ja">AIエージェントは開発現場をどう変えつつあるか</h2>
+          <p class="why">Por quê: Cursor/Claude no seu dia a dia, em japonês técnico legível.</p>
+          <div class="source">
+            <span>Fonte exemplo · テック解説</span>
+            <a href="#">原文を開く ↗</a>
+          </div>
+          <div class="ja" lang="ja">
+            <p>ここ数年、大規模言語モデルを組み込んだ「エージェント」が、コーディング支援の中心テーマになっている。単にコード片を補完するだけでなく、リポジトリを読み、計画を立て、テストを回し、修正案を出す——そうした一連の作業を支援する道具立てが急速に整いつつある。</p>
+            <p>一方で、信頼性の問題は残る。幻覚（ハルシネーション）、権限管理、変更のレビュー負荷。現場では「すべてを任せる」のではなく、人間が設計判断を握り、エージェントを加速装置として使う実践が広がり始めている。</p>
+            <p>ベンチマークの数字だけを追うより、自分のワークフローにどうはめ込むかを日本語の技術記事で追うと、用語と実務感覚が同時に鍛えられる。</p>
+          </div>
+          <p class="continue"><a href="#">続きを原文で読む →</a></p>
+        </div>
+      </article>
+
+      <footer class="site">読解幕 · JLPBOT · kabuki theme · preview</footer>
+    </main>
+  </div>
+</body>
+</html>
