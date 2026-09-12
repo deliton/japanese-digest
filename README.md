@@ -1,8 +1,9 @@
-# Japanese Digest (読解幕)
+# 読解幕 · Japanese Digest
 
-Daily Japanese reading digest published to GitHub Pages.
+Daily curated Japanese reading (JLPT N2–N1), kabuki-themed static site.
 
-- Latest: [index.html](./index.html)
-- Archive: [2026-09-11](./2026-09-11/)
+- Today: https://deliton.github.io/japanese-digest/
+- History (lightweight index): https://deliton.github.io/japanese-digest/history/
+- Past days live under `/YYYY-MM-DD/`
 
-Site: https://deliton.github.io/japanese-digest/
+`history.json` is the source of truth; `scripts/build_history.py` regenerates the history page (links only — stays small after hundreds of days).
