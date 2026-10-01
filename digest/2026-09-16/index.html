@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>読解幕 · 2026-09-16 · Japanese Digest</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Noto+Serif+JP:wght@400;600;700&family=Shippori+Mincho:wght@500;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #0a0a0a;
+      --bg-2: #121212;
+      --bg-card: #161616;
+      --ink: #f5f5f5;
+      --ink-dim: #a8a29a;
+      --ink-mute: #6b6560;
+      --shu: #c41e3a;
+      --shu-hot: #e11d48;
+      --shu-deep: #8b1228;
+      --gold: #d4a017;
+      --gold-soft: #c9a227;
+      --white: #fafafa;
+      --line: #2a2a2a;
+      --line-hot: rgba(196, 30, 58, 0.45);
+      --measure: 42rem;
+      --radius: 4px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: "Noto Sans JP", "Hiragino Sans", "Yu Gothic", system-ui, sans-serif;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .stage-bar {
+      height: 6px;
+      background: repeating-linear-gradient(
+        90deg,
+        var(--shu) 0 48px,
+        var(--white) 48px 56px,
+        #111 56px 64px,
+        var(--gold) 64px 72px,
+        #111 72px 88px
+      );
+    }
+
+    .wrap {
+      width: min(100% - 2rem, 74rem);
+      margin: 0 auto;
+      padding: 2rem 0 4.5rem;
+      display: grid;
+      grid-template-columns: 15.5rem 1fr;
+      gap: 2.75rem;
+      align-items: start;
+    }
+
+    @media (max-width: 900px) {
+      .wrap { grid-template-columns: 1fr; gap: 1.5rem; padding-top: 1.25rem; }
+      .sidebar { position: static !important; }
+    }
+
+    .sidebar { position: sticky; top: 1.25rem; }
+
+    .brand {
+      display: flex;
+      align-items: baseline;
+      gap: 0.55rem;
+      margin: 0 0 0.35rem;
+    }
+    .brand-mark {
+      font-family: "Shippori Mincho", "Noto Serif JP", serif;
+      font-size: 1.85rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      color: var(--white);
+      line-height: 1;
+    }
+    .brand-mark em {
+      font-style: normal;
+      color: var(--shu);
+    }
+    .brand-sub {
+      font-size: 0.65rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-weight: 700;
+    }
+
+    .meta {
+      color: var(--ink-mute);
+      font-size: 0.8rem;
+      margin: 0 0 1.25rem;
+    }
+
+    .stat-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-bottom: 1.35rem;
+    }
+    .stat {
+      border: 1px solid var(--line);
+      background: var(--bg-2);
+      padding: 0.32rem 0.65rem;
+      font-size: 0.72rem;
+      color: var(--ink-dim);
+      border-radius: var(--radius);
+    }
+    .stat strong { color: var(--white); font-weight: 700; }
+    .stat.hot {
+      border-color: var(--line-hot);
+      color: var(--shu-hot);
+    }
+    .stat.hot strong { color: var(--shu-hot); }
+
+    .toc {
+      background: var(--bg-card);
+      border: 1px solid var(--line);
+      border-left: 3px solid var(--shu);
+      padding: 1rem 0.85rem 0.85rem;
+    }
+    .toc h2 {
+      margin: 0 0 0.85rem 0.35rem;
+      font-size: 0.68rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-weight: 700;
+    }
+    .toc ol {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      counter-reset: toc;
+    }
+    .toc li { margin: 0 0 0.2rem; }
+    .toc a {
+      display: grid;
+      grid-template-columns: 1.5rem 1fr auto;
+      gap: 0.45rem;
+      align-items: start;
+      text-decoration: none;
+      color: inherit;
+      padding: 0.5rem 0.4rem;
+      border-radius: var(--radius);
+      transition: background 0.15s ease, color 0.15s ease;
+    }
+    .toc a:hover { background: #1f1f1f; }
+    .toc a:hover .t-title { color: var(--white); }
+    .toc a::before {
+      counter-increment: toc;
+      content: counter(toc, decimal-leading-zero);
+      font-family: "Shippori Mincho", serif;
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--shu);
+      line-height: 1.35;
+    }
+    .t-title {
+      font-size: 0.84rem;
+      line-height: 1.35;
+      color: var(--ink-dim);
+      transition: color 0.15s ease;
+    }
+    .t-min {
+      font-size: 0.68rem;
+      color: var(--ink-mute);
+      padding-top: 0.12rem;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .note {
+      margin-top: 1rem;
+      font-size: 0.74rem;
+      color: var(--ink-mute);
+      line-height: 1.5;
+    }
+
+    main { max-width: var(--measure); }
+
+    .digest-banner {
+      display: flex;
+      gap: 0.75rem;
+      align-items: flex-start;
+      background: linear-gradient(90deg, rgba(196,30,58,0.18), rgba(212,160,23,0.08));
+      border: 1px solid var(--line-hot);
+      padding: 0.85rem 1rem;
+      margin-bottom: 1.5rem;
+      font-size: 0.86rem;
+      color: var(--ink-dim);
+    }
+    .digest-banner .tag {
+      flex-shrink: 0;
+      background: var(--shu);
+      color: #fff;
+      font-size: 0.65rem;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      padding: 0.28rem 0.5rem;
+      border-radius: var(--radius);
+    }
+
+    .hero {
+      margin-bottom: 2rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid var(--line);
+      position: relative;
+    }
+    .hero::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -1px;
+      width: 4.5rem;
+      height: 2px;
+      background: var(--shu);
+    }
+    .kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.7rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--shu-hot);
+      font-weight: 800;
+      margin-bottom: 0.85rem;
+    }
+    .kicker::before {
+      content: "◆";
+      font-size: 0.55rem;
+      color: var(--gold);
+    }
+    .hero h1 {
+      font-family: "Shippori Mincho", "Noto Serif JP", serif;
+      font-size: clamp(1.85rem, 4vw, 2.55rem);
+      font-weight: 700;
+      line-height: 1.2;
+      margin: 0 0 0.75rem;
+      color: var(--white);
+      letter-spacing: 0.02em;
+    }
+    .hero p {
+      margin: 0;
+      color: var(--ink-dim);
+      font-size: 0.98rem;
+      max-width: 36rem;
+    }
+
+    article.piece {
+      background: var(--bg-card);
+      border: 1px solid var(--line);
+      margin-bottom: 1.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+    article.piece::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: linear-gradient(90deg, var(--shu) 0%, var(--shu) 35%, var(--gold) 35%, var(--gold) 42%, transparent 42%);
+    }
+
+    .piece-inner { padding: 1.6rem 1.55rem 1.35rem; }
+
+    .piece-head {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-bottom: 0.85rem;
+    }
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      border: 1px solid var(--line);
+      background: #111;
+      color: var(--ink-dim);
+      padding: 0.22rem 0.6rem;
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      border-radius: var(--radius);
+    }
+    .chip.interest {
+      border-color: var(--shu);
+      color: var(--shu-hot);
+      background: rgba(196, 30, 58, 0.12);
+    }
+    .chip.mins {
+      border-color: var(--gold);
+      color: var(--gold);
+      background: transparent;
+    }
+
+    .piece h2 {
+      font-family: "Noto Serif JP", "Shippori Mincho", "Yu Mincho", serif;
+      font-size: 1.38rem;
+      font-weight: 700;
+      line-height: 1.5;
+      margin: 0 0 0.6rem;
+      color: var(--white);
+      letter-spacing: 0.02em;
+    }
+
+    .why {
+      margin: 0 0 1rem;
+      color: var(--ink-dim);
+      font-size: 0.9rem;
+      border-left: 2px solid var(--gold);
+      padding-left: 0.85rem;
+    }
+
+    .source {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.65rem 1.1rem;
+      font-size: 0.76rem;
+      color: var(--ink-mute);
+      margin-bottom: 1.25rem;
+    }
+    .source a {
+      color: var(--shu-hot);
+      text-decoration: none;
+      font-weight: 600;
+    }
+    .source a:hover { color: var(--gold); }
+
+    .ja {
+      font-family: "Noto Serif JP", "Hiragino Mincho ProN", "Yu Mincho", serif;
+      font-size: 1.08rem;
+      line-height: 2;
+      letter-spacing: 0.03em;
+      color: #ebe7e1;
+    }
+    .ja p { margin: 0 0 1.15em; }
+    .ja p:last-child { margin-bottom: 0; }
+
+    .continue {
+      margin-top: 1.25rem;
+      padding-top: 1rem;
+      border-top: 1px solid var(--line);
+      font-size: 0.86rem;
+    }
+    .continue a {
+      color: var(--white);
+      text-decoration: none;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      border-bottom: 2px solid var(--shu);
+      padding-bottom: 0.1rem;
+    }
+    .continue a:hover {
+      color: var(--shu-hot);
+      border-bottom-color: var(--gold);
+    }
+
+    footer.site {
+      max-width: var(--measure);
+      margin-top: 1.75rem;
+      color: var(--ink-mute);
+      font-size: 0.72rem;
+      letter-spacing: 0.06em;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+    footer.site::before {
+      content: "";
+      width: 1.25rem;
+      height: 2px;
+      background: var(--shu);
+    }
+  </style>
+</head>
+<body>
+  <div class="stage-bar" aria-hidden="true"></div>
+  <div class="wrap">
+    <aside class="sidebar">
+      <div class="brand">
+        <span class="brand-mark">読解<em>幕</em></span>
+      </div>
+      <p class="brand-sub">Kabuki Digest · <a href="../../history/" style="color:#d4a017;text-decoration:none;">History</a></p>
+      <p class="meta">2026-09-16 · America/Sao_Paulo</p>
+      <div class="stat-row">
+        <div class="stat hot"><strong>~48</strong> min</div>
+        <div class="stat"><strong>5</strong> peças</div>
+        <div class="stat">N2–N1</div>
+      </div>
+
+      <nav class="toc" aria-label="Índice">
+        <h2>本日の演目</h2>
+        <ol>
+          <li>
+            <a href="#p1">
+              <span class="t-title">享徳の乱・戦国の起点</span>
+              <span class="t-min">10′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p2">
+              <span class="t-title">箸墓・蓬莱の周濠</span>
+              <span class="t-min">9′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p3">
+              <span class="t-title">SCANDAL・ECHO 20年</span>
+              <span class="t-min">11′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p4">
+              <span class="t-title">六甲・日本一の都市山</span>
+              <span class="t-min">9′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p5">
+              <span class="t-title">React Server Components</span>
+              <span class="t-min">9′</span>
+            </a>
+          </li>
+        </ol>
+      </nav>
+      <p class="note">Abra no Chrome/Firefox com Yomitan. Clique no japonês pra lookup. Trechos + link para o original.</p>
+    </aside>
+
+    <main>
+      <div class="digest-banner">
+        <span class="tag">DIGEST</span>
+        <span>2026-09-16 — Kyōtoku reescreve o início do Sengoku, Hashihaka como Penglai, SCANDAL aos 20 em Osaka-jo Hall, Rokko “montanha urbana”, RSC vs SSR. Zero fofoca, zero manual de carpintaria.</span>
+      </div>
+
+      <header class="hero">
+        <div class="kicker">Daily Japanese Digest</div>
+        <h1>起点と残響をたどる、ひと朝の読解</h1>
+        <p>関東の享徳の乱が「戦国の始まり」をずらす。箸墓の周濠に中国神仙思想の影。ＳＣＡＮＤＡＬの２０周年『ＥＣＨＯ』、神戸の六甲という都市山、そしてＲｅａｃｔ　Ｓｅｒｖｅｒ　Ｃｏｍｐｏｎｅｎｔｓの本当の差分。推定合計 ~48 分。</p>
+      </header>
+
+      <article class="piece" id="p1">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★★</span>
+            <span class="chip">室町</span>
+            <span class="chip">享徳の乱</span>
+            <span class="chip">戦国</span>
+            <span class="chip">通説見直し</span>
+            <span class="chip mins">~10 min</span>
+          </div>
+          <h2 lang="ja">戦国時代の始まりは「応仁の乱」ではない？——足利成氏の謀殺が開いた享徳の乱</h2>
+          <p class="why">Por quê: textbook flip — Sengoku começa em 1454 no Kantō (Kyōtoku), não em 1467 em Kyoto; assassinato político + 30 anos de guerra.</p>
+          <div class="source">
+            <span>婦人公論.jp · 河合敦 / 日本歴史時代作家協会</span>
+            <a href="https://fujinkoron.jp/articles/-/13510" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <div class="ja" lang="ja">
+            <p>「戦国時代に突入するきっかけは、応仁の乱である」——その常識がいま崩れようとしている。日本史の教科書のなかには、こんな記述が登場してきている。「足利持氏の子・成氏が鎌倉公方となったが、成氏も上杉氏と対立し、１４５４（享徳３）年に成氏が上杉憲忠を謀殺したことを発端として享徳の乱がおこった。これ以後、関東は戦国の世に突入した」（『詳説日本史Ｂ』山川出版社２０１８年）。応仁の乱は１４６７年。関東地方はそれより１０年以上も前に下剋上の世に突入していた、というのが最近の研究結果が反映された教科書の記述なのだ。</p>
+            <p>享徳の乱とは、１４５４年から１４８３年まで続いた、鎌倉公方（のちに古河公方）足利成氏と関東管領・上杉氏の抗争である。太田道灌が活躍した時代でもある。暗殺された上杉憲忠は、永享の乱で鎌倉公方・足利持氏と対立し出家した関東管領・上杉憲実の子息だった。京の幕府（将軍足利義政）が任命した関東管領を、鎌倉公方みずから謀殺した——その一点が、関東全土を巻き込む大乱の導火線になる。</p>
+            <p>従来は「応仁の乱後から戦国が始まる」とされてきたが、近年は「関東の享徳の乱から始まる」との説が有力だ。応仁の乱（細川勝元と山名宗全を東西の総帥とする１１年戦争）が始まった翌年、西軍諸将は古河公方・足利成氏と手を結び、足利義視を主将に迎えて「西幕府」の形をとる。対して足利義政を戴く東軍は「東幕府」と呼ばれる。東幕府が成氏討伐をやめなかったのは、享徳の乱そのものが「京が任命した管領の謀殺」から始まっていたからだ、という見方もある。京の管領でも畠山持国は成氏に同情的、細川勝元は敵対的だったといわれ、関東の火種がそのまま中央の東西対立へ流れ込んでいく。</p>
+            <p>この東西の関係は、のちに伊勢宗瑞（北条早雲）が堀越公方を倒す流れにもつながる。つまり京都の応仁の乱は、すでに関東で燃えていた内乱と地続きだった。戦国の「起点」を応仁の乱一本に絞り込む通説は、教科書の改訂とともにずれ始めている。河合敦氏が言うように、歴史用語や人物評価は教科書が改訂されるたびに消えたり逆転したりする——その最前線のひとつが、この「享徳の乱」なのである。「聞いたこともない戦い」が、じつは戦国の扉を開いていた。</p>
+          </div>
+          <p class="continue"><a href="https://fujinkoron.jp/articles/-/13510" target="_blank" rel="noopener">続きを原文で読む →</a></p>
+        </div>
+      </article>
+
+      <article class="piece" id="p2">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★★</span>
+            <span class="chip">古墳</span>
+            <span class="chip">卑弥呼</span>
+            <span class="chip">神仙思想</span>
+            <span class="chip">考古学</span>
+            <span class="chip mins">~9 min</span>
+          </div>
+          <h2 lang="ja">「卑弥呼の墓」説の箸墓古墳——周濠に浮かぶ蓬莱山のイメージ</h2>
+          <p class="why">Por quê: NatGeo-mode — Hashihaka não é só tamanho; o fosso vira mar simbólico, o tumulus vira Penglai onde moram os imortais.</p>
+          <div class="source">
+            <span>読売新聞 · 桜井市教委 / 寺沢薫</span>
+            <a href="https://www.yomiuri.co.jp/local/kansai/news/20260220-GYO1T00010/" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <div class="ja" lang="ja">
+            <p>最初の巨大前方後円墳で、邪馬台国の女王・卑弥呼の墓との説もある奈良県桜井市の箸墓古墳（３世紀後半、全長約２８０メートル）で、周濠を横断する新たな「渡り堤」の一部が出土した。桜井市教育委員会が発表した。１９９８年に別の渡り堤が見つかっており、今回で２例目。後の時代の巨大古墳にも複数の渡り堤が確認されており、最初期の箸墓古墳がそのルーツになったことが裏付けられた形だ。</p>
+            <p>周辺の土地開発に伴い、市教委が前方部南側を発掘。確認された渡り堤の一部は古墳築造当初のもので、調査地の北側で墳丘と接続していたと推測される。渡り堤には通路としての役割があると考えられてきたが、市教委は「周濠を区画して水をまんべんなくためる堰の役割もあった」と想定する。箸墓古墳は傾斜地にあり、後円部側と前方部側の高低差は約６メートル——水をどう保つかが、設計の核心だった。</p>
+            <p>箸墓古墳に詳しい桜井市纒向学研究センターの寺沢薫所長は、こう語る。「傾斜地の巨大古墳の周濠にも水をためていたのは、古墳が古代中国の神仙思想に基づいて造られ、仙人が住むとされた海に浮かぶ蓬莱山を模していたからだろう」。つまり周濠はただの堀ではなく、「海」であり、墳丘は仙人の住む島——中国から渡ってきた思想が、３世紀のヤマトの巨大墳に投影されている、という読み方だ。</p>
+            <p>１例目の渡り堤は東に約１５０メートル離れた後円部側にあり、今回は前方部側——同じ周濠を、異なる方位から横断する構造が確認されたことになる。後の巨大前方後円墳、渋谷向山古墳（４世紀中頃、奈良県天理市）などにも複数の渡り堤がある。箸墓が「最初の型」になった、という読みが補強された形だ。</p>
+            <p>卑弥呼の墓か否か、という議論は続く。だが今回の出土が示すのは、勝敗やサイズ競争とは別の層——巨大古墳が何を「見せよう」としたのか、という物語の側だ。周濠＝海、墳丘＝蓬莱。３世紀のヤマトが、中国神仙思想をどう引き受け、どう可視化したか。その問いのほうが、いまの発掘は雄弁である。</p>
+          </div>
+          <p class="continue"><a href="https://www.yomiuri.co.jp/local/kansai/news/20260220-GYO1T00010/" target="_blank" rel="noopener">続きを原文で読む →</a></p>
+        </div>
+      </article>
+
+      <article class="piece" id="p3">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★★</span>
+            <span class="chip">ロック</span>
+            <span class="chip">SCANDAL</span>
+            <span class="chip">大阪</span>
+            <span class="chip">20周年</span>
+            <span class="chip mins">~11 min</span>
+          </div>
+          <h2 lang="ja">メンバーチェンジも活動休止もせず２０年——ＳＣＡＮＤＡＬが『ＥＣＨＯ』に込めた矜持</h2>
+          <p class="why">Por quê: teu JP rock Kansai — 20 anos sem troca/hiato, Osaka-jo Hall, writers de volta, rap pela 1ª vez; zero fofoca.</p>
+          <div class="source">
+            <span>SPICE · 山口智男</span>
+            <a href="https://spice.eplus.jp/articles/345280" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <div class="ja" lang="ja">
+            <p>この８月に結成２０周年を迎えるＳＣＡＮＤＡＬが、アニバーサリーイヤーのキックオフと位置づける１２ｔｈアルバム『ＥＣＨＯ』をリリースした。いつも以上に楽器の音圧が高めに感じられ、改めてバンドとしてのかっこよさを印象づける一枚だ。その一方では、前作にひきつづき複数の作家が書き下ろした楽曲をソリッドなバンドサウンドに落とし込むことにトライしている。ラップロックから壮大なバラードまで、曲の振り幅も聴きどころだ。</p>
+            <p>ＨＡＲＵＮＡは、大阪城ホール公演を見据え「いろいろなアーティストのファンにも今のＳＣＡＮＤＡＬを見てもらいたい」と対バンツアーを回ったうえで、キャッチーなバンドサウンドを作家に依頼。満場一致で選ばれた先行曲「Ｇｉｒｌ　ｉｓ　Ｇｈｏｓｔ」は、タイトル頭文字がＧＩＧになる遊びもある。後輩・クボタカイの曲では、ＨＡＲＵＮＡが本格ラップに初挑戦。「２０周年のタイミングで、やったことがないことにチャレンジできるメンタルを持っている自分たちでよかった」と振り返る。</p>
+            <p>ＴＯＭＯＭＩは、外部作家に任せる理由をこう語る。「自分たちで作ったら内向的・シリアスな方向に進みそうだった。もっと明るく軽やかな気持ちで２０周年を迎えたかった」。初期を支えた作家たちが今の自分たちをどう見て、どんな曲で表現するか——その興味が制作の核だった。「上がってきた曲が多種多様だったのがうれしかった。自分たちらしさは、知らない間にできていたんだと気づけた」。</p>
+            <p>ＲＩＮＡは「Heaven」にバンドへの正直な気持ちを書いた。「作家さんたちがいろいろな歌詞を書いてくれたので、バンドに対する正直な気持ちを書けるのは私しかいないと思ってトライした。２０周年という大きな区切りの前で一呼吸ついて後ろを振り返ったら、自分たちはすでにいっぱい宝物を持ってた」。ダンススクールで出会い、４人ともバンドを第一に選んできた——「１つのものを４人で大切に愛してこられたのは奇跡」と語る。</p>
+            <p>ＭＡＭＩは「ライブの再現性は考えなくていい」と作家に伝え、自由に書いてもらった結果、バンドサウンドの曲が多かったと振り返る。「これを今のＳＣＡＮＤＡＬにやってほしいということなんだろう」。リリースツアーの先には、８月２１日の大阪城ホール『Ｃｈａｐｔｅｒ　２０』が待つ。メンバーチェンジも活動休止もなく走り続けたガールズバンドの、矜持と覚悟が聴こえる一枚だ。</p>
+          </div>
+          <p class="continue"><a href="https://spice.eplus.jp/articles/345280" target="_blank" rel="noopener">続きを原文で読む →</a></p>
+        </div>
+      </article>
+
+      <article class="piece" id="p4">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★☆</span>
+            <span class="chip">神戸</span>
+            <span class="chip">六甲山</span>
+            <span class="chip">兵庫</span>
+            <span class="chip">都市</span>
+            <span class="chip mins">~9 min</span>
+          </div>
+          <h2 lang="ja">日本一の「都市山」六甲——港を生み、はげ山になり、緑を取り戻した山</h2>
+          <p class="why">Por quê: Kobe na veia — Rokko ergue o porto, vira deserto no Edo, refloresta desde 1902; “montanha urbana” que cola na cidade.</p>
+          <div class="source">
+            <span>神戸新聞NEXT · 六甲山録 / 国交省 六甲砂防</span>
+            <a href="https://www.kobe-np.co.jp/news/richb/202604/0020229164.shtml" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <div class="ja" lang="ja">
+            <p>東の空がオレンジ色に染まる。華やかさが「１０００万ドル」とも称される夜景と競演し、その背後にはびょうぶのようにひときわ大きな山々がそびえる。東西およそ３０キロにわたって広がる山地「六甲山」だ。最高峰は９３１メートル。元々はなだらかな低い丘だったが、およそ１００万年前から東西方向の圧力によって隆起した。かたや海底は大きく沈み込み、大型船が接岸できる天然の良港を生み出した。</p>
+            <p>作家の故・陳舜臣氏は故郷の神戸について「六甲の山なみにすがりついているまち」と表現した。山と海に挟まれたわずかな陸地に密集する無数の明かりは、日本有数の景観美を生む。２００万人規模の大都市圏のすぐ近くに千メートル近い山地が横たわるのは全国でもあまり例がなく、兵庫県立大学の服部保名誉教授は「日本一の都市山」と評する。</p>
+            <p>国交省六甲砂防事務所の整理によれば、六甲変動で上昇した花崗岩は破壊されてもろくなり、風化でマサ化して砂山のようになった。弥生まではうっそうとした原始林。中世には荘園と山城、戦火で自然林が壊れ、アカマツの二次林が広がる。江戸〜明治の南斜面は、燃料・肥料・マツの根まで取り尽くされ、山頂までほとんど草木のない山だった。</p>
+            <p>植林がはじまったのは明治３５年（１９０２）。砂漠のような山肌に段々を切り、積み石で土砂を止め、マツやヒノキ、スギ、カシなどが植えられた。山火事や戦争、集中豪雨、マツクイムシをのりこえ、約９０年かけて緑を取り戻した。いま神戸の夜景の背後にある山は、地殻変動と人の消費と、百年の植林が折り重なった「都市山」なのだ。</p>
+          </div>
+          <p class="continue"><a href="https://www.kobe-np.co.jp/news/richb/202604/0020229164.shtml" target="_blank" rel="noopener">続きを原文で読む →</a></p>
+        </div>
+      </article>
+
+      <article class="piece" id="p5">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★☆</span>
+            <span class="chip">React</span>
+            <span class="chip">Next.js</span>
+            <span class="chip">RSC</span>
+            <span class="chip">フロントエンド</span>
+            <span class="chip mins">~9 min</span>
+          </div>
+          <h2 lang="ja">Ｒｅａｃｔ　Ｓｅｒｖｅｒ　Ｃｏｍｐｏｎｅｎｔｓとは？——ＳＳＲとの違いをコードで確認する</h2>
+          <p class="why">Por quê: tua stack — RSC ≠ SSR; JS não vai pro browser; use client só onde precisa. Vocab que vale.</p>
+          <div class="source">
+            <span>Zenn · kiyoma</span>
+            <a href="https://zenn.dev/kiyoma/articles/a8266597684e36" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <div class="ja" lang="ja">
+            <p>Ｒｅａｃｔ　Ｓｅｒｖｅｒ　Ｃｏｍｐｏｎｅｎｔｓ（ＲＳＣ）の大きな特徴は、Ｒｅａｃｔ　Ｃｏｍｐｏｎｅｎｔをサーバー専用として実行し、そのＣｏｍｐｏｎｅｎｔのＪａｖａＳｃｒｉｐｔをブラウザへ送らなくてよいことだ。Ｐａｇｅｓ　ＲｏｕｔｅｒのＳＳＲでもＲｅａｃｔはサーバーでレンダーされる。しかしＰａｇｅ　ＣｏｍｐｏｎｅｎｔのＪａｖａＳｃｒｉｐｔはブラウザにも送られ、ｈｙｄｒａｔｉｏｎされる。ここが本質的な差分である。</p>
+            <p>ＲＳＣはサーバーで動くので、ブラウザでは使えないＮｏｄｅ．ｊｓ　ＡＰＩなどもＣｏｍｐｏｎｅｎｔから利用できる。たとえば　ｆｓ　の　ｒｅａｄＦｉｌｅ　をそのまま　ｉｍｐｏｒｔ　してファイルを読む——ブラウザ前提ではないからこそ成立する。さらに　ａｓｙｎｃ　Ｃｏｍｐｏｎｅｎｔ　として、レンダー中にデータを取得し、そのままＵＩを生成できる。Ｐａｇｅｓ　Ｒｏｕｔｅｒでは　ｇｅｔＳｅｒｖｅｒＳｉｄｅＰｒｏｐｓ　で取って　ｐｒｏｐｓ　で渡していた処理を、Ｃｏｍｐｏｎｅｎｔ内にまとめられる。</p>
+            <p>逆に、ブラウザで状態を持つ　ｕｓｅＳｔａｔｅ　や　ｏｎＣｌｉｃｋ、ｗｉｎｄｏｗ　などはＲＳＣでは使えない。必要な箇所だけファイル先頭に　＂ｕｓｅ　ｃｌｉｅｎｔ＂　を書き、Ｃｌｉｅｎｔ　Ｃｏｍｐｏｎｅｎｔに切り出す。ページ全体をブラウザで動かすのではなく、サーバーで完結する部分はＲＳＣに残し、ＪａｖａＳｃｒｉｐｔが要る部分だけ切り出す——それでクライアントへ送るＪＳを減らせる。</p>
+            <p>サーバー側のレンダー結果は、ＲＳＣ　Ｐａｙｌｏａｄとしてクライアントへ渡る。そこにはレンダー結果、Ｃｌｉｅｎｔ　Ｃｏｍｐｏｎｅｎｔの配置、ＪＳへの参照、ｐｒｏｐｓなどが含まれ、Ｓｅｒｖｅｒ　Ｃｏｍｐｏｎｅｎｔ自身のＪＳの代わりになる。整理すると、ＳＳＲは「ＨＴＭＬをどう生成するか」、ＲＳＣは「Ｃｏｍｐｏｎｅｎｔをどの環境で実行するか」という別の問題を解いている。二者択一ではなく、Ｎｅｘｔ．ｊｓ　Ａｐｐ　ＲｏｕｔｅｒはＲＳＣの結果をさらにＳＳＲして初期ＨＴＭＬを作る。用語が紛らわしいのは、似て非なる二つのレイヤーを同じ「サーバー」という言葉で呼んでしまうからだ。</p>
+          </div>
+          <p class="continue"><a href="https://zenn.dev/kiyoma/articles/a8266597684e36" target="_blank" rel="noopener">続きを原文で読む →</a></p>
+        </div>
+      </article>
+
+      <footer class="site">読解幕 · JLPBOT · kabuki theme · 2026-09-16</footer>
+    </main>
+  </div>
+</body>
+</html>

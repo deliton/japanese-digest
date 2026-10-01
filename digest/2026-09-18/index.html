@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>読解幕 · 2026-09-18 · Japanese Digest</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Noto+Serif+JP:wght@400;600;700&family=Shippori+Mincho:wght@500;700&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --bg: #0a0a0a;
+      --bg-2: #121212;
+      --bg-card: #161616;
+      --ink: #f5f5f5;
+      --ink-dim: #a8a29a;
+      --ink-mute: #6b6560;
+      --shu: #c41e3a;
+      --shu-hot: #e11d48;
+      --shu-deep: #8b1228;
+      --gold: #d4a017;
+      --gold-soft: #c9a227;
+      --white: #fafafa;
+      --line: #2a2a2a;
+      --line-hot: rgba(196, 30, 58, 0.45);
+      --measure: 42rem;
+      --radius: 4px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: "Noto Sans JP", "Hiragino Sans", "Yu Gothic", system-ui, sans-serif;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .stage-bar {
+      height: 6px;
+      background: repeating-linear-gradient(
+        90deg,
+        var(--shu) 0 48px,
+        var(--white) 48px 56px,
+        #111 56px 64px,
+        var(--gold) 64px 72px,
+        #111 72px 88px
+      );
+    }
+
+    .wrap {
+      width: min(100% - 2rem, 74rem);
+      margin: 0 auto;
+      padding: 2rem 0 4.5rem;
+      display: grid;
+      grid-template-columns: 15.5rem 1fr;
+      gap: 2.75rem;
+      align-items: start;
+    }
+
+    @media (max-width: 900px) {
+      .wrap { grid-template-columns: 1fr; gap: 1.5rem; padding-top: 1.25rem; }
+      .sidebar { position: static !important; }
+    }
+
+    .sidebar { position: sticky; top: 1.25rem; }
+
+    .brand {
+      display: flex;
+      align-items: baseline;
+      gap: 0.55rem;
+      margin: 0 0 0.35rem;
+    }
+    .brand-mark {
+      font-family: "Shippori Mincho", "Noto Serif JP", serif;
+      font-size: 1.85rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      color: var(--white);
+      line-height: 1;
+    }
+    .brand-mark em {
+      font-style: normal;
+      color: var(--shu);
+    }
+    .brand-sub {
+      font-size: 0.65rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-weight: 700;
+    }
+
+    .meta {
+      color: var(--ink-mute);
+      font-size: 0.8rem;
+      margin: 0 0 1.25rem;
+    }
+
+    .stat-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-bottom: 1.35rem;
+    }
+    .stat {
+      border: 1px solid var(--line);
+      background: var(--bg-2);
+      padding: 0.32rem 0.65rem;
+      font-size: 0.72rem;
+      color: var(--ink-dim);
+      border-radius: var(--radius);
+    }
+    .stat strong { color: var(--white); font-weight: 700; }
+    .stat.hot {
+      border-color: var(--line-hot);
+      color: var(--shu-hot);
+    }
+    .stat.hot strong { color: var(--shu-hot); }
+
+    .toc {
+      background: var(--bg-card);
+      border: 1px solid var(--line);
+      border-left: 3px solid var(--shu);
+      padding: 1rem 0.85rem 0.85rem;
+    }
+    .toc h2 {
+      margin: 0 0 0.85rem 0.35rem;
+      font-size: 0.68rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-weight: 700;
+    }
+    .toc ol {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      counter-reset: toc;
+    }
+    .toc li { margin: 0 0 0.2rem; }
+    .toc a {
+      display: grid;
+      grid-template-columns: 1.5rem 1fr auto;
+      gap: 0.45rem;
+      align-items: start;
+      text-decoration: none;
+      color: inherit;
+      padding: 0.5rem 0.4rem;
+      border-radius: var(--radius);
+      transition: background 0.15s ease, color 0.15s ease;
+    }
+    .toc a:hover { background: #1f1f1f; }
+    .toc a:hover .t-title { color: var(--white); }
+    .toc a::before {
+      counter-increment: toc;
+      content: counter(toc, decimal-leading-zero);
+      font-family: "Shippori Mincho", serif;
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--shu);
+      line-height: 1.35;
+    }
+    .t-title {
+      font-size: 0.84rem;
+      line-height: 1.35;
+      color: var(--ink-dim);
+      transition: color 0.15s ease;
+    }
+    .t-min {
+      font-size: 0.68rem;
+      color: var(--ink-mute);
+      padding-top: 0.12rem;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .note {
+      margin-top: 1rem;
+      font-size: 0.74rem;
+      color: var(--ink-mute);
+      line-height: 1.5;
+    }
+
+    main { max-width: var(--measure); }
+
+    .digest-banner {
+      display: flex;
+      gap: 0.75rem;
+      align-items: flex-start;
+      background: linear-gradient(90deg, rgba(196,30,58,0.18), rgba(212,160,23,0.08));
+      border: 1px solid var(--line-hot);
+      padding: 0.85rem 1rem;
+      margin-bottom: 1.5rem;
+      font-size: 0.86rem;
+      color: var(--ink-dim);
+    }
+    .digest-banner .tag {
+      flex-shrink: 0;
+      background: var(--shu);
+      color: #fff;
+      font-size: 0.65rem;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      padding: 0.28rem 0.5rem;
+      border-radius: var(--radius);
+    }
+
+    .hero {
+      margin-bottom: 2rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid var(--line);
+      position: relative;
+    }
+    .hero::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -1px;
+      width: 4.5rem;
+      height: 2px;
+      background: var(--shu);
+    }
+    .kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.7rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--shu-hot);
+      font-weight: 800;
+      margin-bottom: 0.85rem;
+    }
+    .kicker::before {
+      content: "◆";
+      font-size: 0.55rem;
+      color: var(--gold);
+    }
+    .hero h1 {
+      font-family: "Shippori Mincho", "Noto Serif JP", serif;
+      font-size: clamp(1.85rem, 4vw, 2.55rem);
+      font-weight: 700;
+      line-height: 1.2;
+      margin: 0 0 0.75rem;
+      color: var(--white);
+      letter-spacing: 0.02em;
+    }
+    .hero p {
+      margin: 0;
+      color: var(--ink-dim);
+      font-size: 0.98rem;
+      max-width: 36rem;
+    }
+
+    article.piece {
+      background: var(--bg-card);
+      border: 1px solid var(--line);
+      margin-bottom: 1.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+    article.piece::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: linear-gradient(90deg, var(--shu) 0%, var(--shu) 35%, var(--gold) 35%, var(--gold) 42%, transparent 42%);
+    }
+
+    .piece-inner { padding: 1.6rem 1.55rem 1.35rem; }
+
+    .piece-head {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-bottom: 0.85rem;
+    }
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      border: 1px solid var(--line);
+      background: #111;
+      color: var(--ink-dim);
+      padding: 0.22rem 0.6rem;
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      border-radius: var(--radius);
+    }
+    .chip.interest {
+      border-color: var(--shu);
+      color: var(--shu-hot);
+      background: rgba(196, 30, 58, 0.12);
+    }
+    .chip.mins {
+      border-color: var(--gold);
+      color: var(--gold);
+      background: transparent;
+    }
+
+    .piece h2 {
+      font-family: "Noto Serif JP", "Shippori Mincho", "Yu Mincho", serif;
+      font-size: 1.38rem;
+      font-weight: 700;
+      line-height: 1.5;
+      margin: 0 0 0.6rem;
+      color: var(--white);
+      letter-spacing: 0.02em;
+    }
+
+    .why {
+      margin: 0 0 1rem;
+      color: var(--ink-dim);
+      font-size: 0.9rem;
+      border-left: 2px solid var(--gold);
+      padding-left: 0.85rem;
+    }
+
+    .source {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.65rem 1.1rem;
+      font-size: 0.76rem;
+      color: var(--ink-mute);
+      margin-bottom: 1.25rem;
+    }
+    .source a {
+      color: var(--shu-hot);
+      text-decoration: none;
+      font-weight: 600;
+    }
+    .source a:hover { color: var(--gold); }
+
+    .ja {
+      font-family: "Noto Serif JP", "Hiragino Mincho ProN", "Yu Mincho", serif;
+      font-size: 1.08rem;
+      line-height: 2;
+      letter-spacing: 0.03em;
+      color: #ebe7e1;
+    }
+    .ja p { margin: 0 0 1.15em; }
+    .ja p:last-child { margin-bottom: 0; }
+
+    .continue {
+      margin-top: 1.25rem;
+      padding-top: 1rem;
+      border-top: 1px solid var(--line);
+      font-size: 0.86rem;
+    }
+    .continue a {
+      color: var(--white);
+      text-decoration: none;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      border-bottom: 2px solid var(--shu);
+      padding-bottom: 0.1rem;
+    }
+    .continue a:hover {
+      color: var(--shu-hot);
+      border-bottom-color: var(--gold);
+    }
+
+    footer.site {
+      max-width: var(--measure);
+      margin-top: 1.75rem;
+      color: var(--ink-mute);
+      font-size: 0.72rem;
+      letter-spacing: 0.06em;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+    footer.site::before {
+      content: "";
+      width: 1.25rem;
+      height: 2px;
+      background: var(--shu);
+    }
+  </style>
+</head>
+<body>
+  <div class="stage-bar" aria-hidden="true"></div>
+  <div class="wrap">
+    <aside class="sidebar">
+      <div class="brand">
+        <span class="brand-mark">読解<em>幕</em></span>
+      </div>
+      <p class="brand-sub">Kabuki Digest · <a href="../../history/" style="color:#d4a017;text-decoration:none;">History</a></p>
+      <p class="meta">2026-09-18 · America/Sao_Paulo</p>
+      <div class="stat-row">
+        <div class="stat hot"><strong>~50</strong> min</div>
+        <div class="stat"><strong>6</strong> peças</div>
+        <div class="stat">N2–N1</div>
+      </div>
+
+      <nav class="toc" aria-label="Índice">
+        <h2>本日の演目</h2>
+        <ol>
+          <li>
+            <a href="#p1">
+              <span class="t-title">手取川・勝者の雄弁</span>
+              <span class="t-min">9′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p2">
+              <span class="t-title">縄文・籃胎漆器の修理</span>
+              <span class="t-min">8′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p3">
+              <span class="t-title">鹿島・御船祭</span>
+              <span class="t-min">8′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p4">
+              <span class="t-title">ナスカ×山形大AI</span>
+              <span class="t-min">9′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p5">
+              <span class="t-title">Aimer・SCOPE</span>
+              <span class="t-min">8′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p6">
+              <span class="t-title">六甲アイランド再生</span>
+              <span class="t-min">8′</span>
+            </a>
+          </li>
+        </ol>
+      </nav>
+      <p class="note">Abra no Chrome/Firefox com Yomitan. Clique no japonês pra lookup. Trechos + link para o original.</p>
+    </aside>
+
+    <main>
+      <div class="digest-banner">
+        <span class="tag">DIGEST</span>
+        <span>2026-09-18 — Tedorigawa (Kenshin vs Oda, crítica de fontes), Jōmon rantai lacquer + CT repair, Kashima Ofune matsuri (12 anos), Nazca AI (Yamagata×IBM), Aimer SCOPE, Rokko Island rebirth. Zero fofoca, zero manual de construção.</span>
+      </div>
+
+      <header class="hero">
+        <div class="kicker">Daily Japanese Digest</div>
+        <h1>勝者の雄弁と地上絵をほどく、ひと朝の読解</h1>
+        <p>手取川で謙信の勝利報告と『信長公記』の沈黙を並べる。縄文の籃胎漆器に「絆創膏」の修理跡。１２年に一度の鹿島・御船祭。ナスカで山形大のＡＩが３００点超を発見。Ａｉｍｅｒの居場所、六甲アイランドの身の丈再生。推定合計 ~50 分。</p>
+      </header>
+
+      <article class="piece" id="p1">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★★</span> <span class="chip">戦国</span> <span class="chip">上杉謙信</span> <span class="chip">手取川</span> <span class="chip">史料批判</span> <span class="chip mins">~9 min</span>
+          </div>
+          <h2 lang="ja">手取川の戦い——謙信が織田軍を破った北陸決戦、勝者の雄弁と『信長公記』の沈黙</h2>
+          <p class="why">Por quê: Vencedor fala alto, perdedor cala: a batalha de Tedorigawa vira aula de como ler fontes Sengoku, não só um placar.</p>
+          <div class="source">
+            <span>戦国ジャーナル</span>
+            <a href="https://sengoku-journal.com/kassen/tedorigawa-no-tatakai" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <div class="ja" lang="ja">
+            <p>勝者は雄弁に語り、敗者は肝心の一夜を語らない。手取川の戦いは、この史料の非対称から入ると、ただの「上杉が勝った合戦」ではなくなる。天正五年（１５７７年）九月二十三日夜、加賀国手取川一帯で起きた上杉謙信と柴田勝家率いる織田北国軍の合戦と伝わるこの一戦は、白山連峰を源として日本海へ流れ込む手取川、現在の石川県白山市・能美市・川北町をまたぐ流域を舞台にした。</p>
+            <p>ここでぶつかったのは軍勢だけではない。戦果を語る筆と、敗報を畳む筆もまたぶつかっている。勝った上杉側は謙信書状写を通じて自軍の戦果を雄弁に伝える。</p>
+            <p>一方、敗れた織田側の主史料『信長公記』巻十は、北国出陣と羽柴秀吉の無断帰陣には言及するものの、九月二十三日夜の戦闘そのものを詳しく描かない。上杉側の勝利報告と『信長公記』の簡略な記述。その落差は、「何があったか」だけでなく「なぜそこが書かれないのか」まで問いかけてくる。</p>
+            <p>背景には北陸経略の衝突がある。謙信は越中をほぼ平定し能登へ手を伸ばし、信長は柴田勝家を北陸方面の総司令に据えた。九月十五日、能登七尾城が遊佐・温井・三宅らの内応で落城したとされ、織田救援軍の前提は崩れた。</p>
+            <p>戦闘の性格は整然とした野戦というより、夜陰と増水した川を挟んだ追撃・撤退戦の色が濃い。謙信書状写には「千余人討ち捕り」「人馬数多流す」とする勝利報告が見えるが、戦果数字は報告文書上の表現として扱う必要がある。戦後、謙信は上洛をも視野に入れる文言を残すが、翌年春日山城で急逝し、勝利を制度へ変える時間は残されなかった。</p>
+            <p>史料は書かれたことだけでできていない。書かれなかったこともまた、慎重に扱えば歴史の手がかりになる。手取川では、勝者の雄弁と敗者の沈黙を並べて初めて、戦場の温度が見えてくる。</p>
+          </div>
+          <p class="continue"><a href="https://sengoku-journal.com/kassen/tedorigawa-no-tatakai" target="_blank" rel="noopener">続きを原文で読む →</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p2">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★★</span> <span class="chip">縄文</span> <span class="chip">考古学</span> <span class="chip">科学</span> <span class="chip">籃胎漆器</span> <span class="chip mins">~8 min</span>
+          </div>
+          <h2 lang="ja">縄文人が漆器のかごを修理していた——Ｘ線ＣＴが捉えた「籃胎漆器」初の修復痕跡</h2>
+          <p class="why">Por quê: Um cesto de 3 mil anos consertado com “curativo” de fibras: a ciência revela o apego do Jōmon ao que fabricava.</p>
+          <div class="source">
+            <span>ナショナル ジオグラフィック日本版</span>
+            <a href="https://natgeo.nikkeibp.co.jp/atcl/news/25/041500199/" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <div class="ja" lang="ja">
+            <p>遺跡から出土した縄文時代の漆器の編みかごをＸ線ＣＴ（断層画像撮影装置）でスキャンしたところ、縄文人がかごを修理した痕跡が見つかった。金沢大学などのグループが明らかにした。日本列島の縄文時代において、かごの破損を修理したと確実に言える初めての事例という。</p>
+            <p>縄文時代のものづくりの技術や、器など道具への当時の人々の意識を考える知見となる。スキャンをしたのは、岩手県一戸町の山井遺跡（紀元前１０世紀ごろ）から１９９３年に出土した「籃胎（らんたい）漆器」の底から側面に向かう角部分で、幅が６・５センチほどのかけらだ。籃胎漆器はササ類を編み組みしたかごに漆を塗った容器で、縄文時代後期前葉に東日本各地で作られ始め、晩期までの遺跡から出土している。</p>
+            <p>スキャンにより編みかご部分は失われて空洞になっていることが分かった。空洞の凹凸から、厚さ０・２～０・３ミリ程度のテープのようなもので編み上げられていると推定できた。一戸町で現在も製作されている「鳥越の竹細工」で使うスズタケが材料の有力候補だ。</p>
+            <p>底部から体部への立ち上がりで側面のタテ材が途中で途切れ、絆創膏のような材が渡された跡や、糸状のものを三角形にしてタテ材を止めたパターンが確認できた。側面は「ござ目編み」、底面は「網代編み」という現代でも見られる編み方を取り入れていた。佐々木由香特任准教授は「手のひらに載るかけらほど小さな遺物から、失敗しても捨てずに直して使おうとする縄文人の技が垣間見えた」と話す。</p>
+          </div>
+          <p class="continue"><a href="https://natgeo.nikkeibp.co.jp/atcl/news/25/041500199/" target="_blank" rel="noopener">続きを原文で読む →</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p3">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★★</span> <span class="chip">神道</span> <span class="chip">まつり</span> <span class="chip">鹿島神宮</span> <span class="chip">香取神宮</span> <span class="chip mins">~8 min</span>
+          </div>
+          <h2 lang="ja">１２年に一度、神の内海を渡る——鹿島神宮・式年大祭御船祭の由緒と見どころ</h2>
+          <p class="why">Por quê: A cada 12 anos, o kami de Kashima cruza o “mar sagrado” até Katori — mito, barcos e um rito raro entre santuários.</p>
+          <div class="source">
+            <span>鹿島神宮</span>
+            <a href="https://kashimajingu.jp/news/%E4%BB%A4%E5%92%8C%E5%85%AB%E5%B9%B4-%E5%BC%8F%E5%B9%B4%E5%A4%A7%E7%A5%AD%E5%BE%A1%E8%88%B9%E7%A5%AD/" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <div class="ja" lang="ja">
+            <p>『常陸国風土記』に「毎年七月に舟を造りて津宮に奉納する」とあるように、鹿島の神と船との関係は創祀時代にまで遡ります。東路の果てに位置する鹿島はその昔『香嶋』とも記述され、周辺の広大な内海は『香取の海』と呼ばれていました。古代では鹿島神宮と香取神宮がこの内海を挟み向かい合い、荒れることの無い豊かな海を人々は「神の内海」と考えていました。</p>
+            <p>鹿島・香取の神々の営みとともに人々の営みも盛んとなり、太平洋と内海のあいだで船団の航行によって栄え、古代東国文化の要衝となりました。御船祭は東国の開拓鎮撫に当たる鹿島の大神を奉ずる足跡を伝える祭であり、およそ２０００年前の倭武天皇（ヤマトタケルノミコト）の時代に紀元を有する鹿島神宮最大の祭典です。１２年に一度の午年に斎行されるのは、十二支が一巡すること、また午は南・正午と陽性が最も盛んな方位・時刻であることから来ています。</p>
+            <p>この大祭には天下泰平、諸願成就、魔陣退散という願いが込められています。９月２日、約２千名の陸上行列ののち、龍頭で飾った御座船が九十余隻の供奉船を従えて鰐川から浪逆浦を経て香取市加藤洲の斎杭まで約２時間進みます。正午頃、香取神宮による御迎祭——神社の神職が他社の御祭神に祝詞を奏上する、国内でも極めて珍しい神事が執り行われます。</p>
+            <p>水上渡御は内海での御船祭としては最古最大級とされ、大漁旗や幟で彩られた船団が波を蹴立てて進む姿は平安絵巻を彷彿とさせます。対岸の潮来河岸では奉迎者が見守り、祭りの熱気は最高潮に達します。</p>
+          </div>
+          <p class="continue"><a href="https://kashimajingu.jp/news/%E4%BB%A4%E5%92%8C%E5%85%AB%E5%B9%B4-%E5%BC%8F%E5%B9%B4%E5%A4%A7%E7%A5%AD%E5%BE%A1%E8%88%B9%E7%A5%AD/" target="_blank" rel="noopener">続きを原文で読む →</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p4">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★★</span> <span class="chip">考古学</span> <span class="chip">AI</span> <span class="chip">ナスカ</span> <span class="chip">山形大学</span> <span class="chip mins">~9 min</span>
+          </div>
+          <h2 lang="ja">ナスカの地上絵、研究１００年——山形大×ＩＢＭのＡＩが３００点超を見つけ「解読」へ</h2>
+          <p class="why">Por quê: IA japonesa (Yamagata + IBM) dobra o catálogo de Nazca em meses — e os desenhos novos são pequenos, talvez mensagens na beira do caminho.</p>
+          <div class="source">
+            <span>ナショナル ジオグラフィック日本版</span>
+            <a href="https://natgeo.nikkeibp.co.jp/atcl/news/26/051500273/" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <div class="ja" lang="ja">
+            <p>ナスカの地上絵は１世紀にわたり科学者たちを魅了してきた。１９２６年に体系的研究が始まり、１９３０年代に民間機がペルー上空を飛んで広く知られるようになる。それから１００年。</p>
+            <p>ペルー南部での地上絵の発見は、人工知能（ＡＩ）によって飛躍的な進展を遂げている。２０２４年９月に学術誌「米国科学アカデミー紀要（ＰＮＡＳ）」に発表された研究では、わずか６カ月で３００点以上の新たな図形が特定され、当時知られていた数のほぼ２倍となった。砂漠に刻まれた浮き彫り型の図形には、家畜、人型の図像、人間の頭部などが描かれている。</p>
+            <p>筆頭著者で山形大学ナスカ研究所の考古学者・坂井正人氏が率いるチームは、ＩＢＭ研究所の支援を受け、高解像度画像で画像認識モデルを学習させ、分布調査を高度化した。新たに特定された地上絵は比較的小さく約９メートル。有名な地上絵（平均約９０メートル）とは全く異なる役割を果たしていた可能性がある。</p>
+            <p>大きな絵は赤い砂利を取り除いて明るい土を露出させる方式だが、小さな絵は暗い石を取り除くか積み上げて浮き彫り状につくられていた。ＡＩが提示した候補を考古学者が精査し１３０９カ所を選び、現地調査とドローン撮影で検証した。坂井氏はこの手法を「ゲームチェンジャー」と記している。</p>
+            <p>新しい絵は小さく、風化の影響もあり、従来の航空調査では発見が難しかっただろう。坂井氏は１９９０年代から研究を始め、衛星画像・航空写真・ドローンを組み合わせてきた。約６３０平方キロの調査は骨が折れたが、２０１８年にＡＩを導入したことで候補抽出が加速した。</p>
+            <p>小さな地上絵は小道沿いにあり、旅人へのメッセージだった可能性も指摘される。</p>
+          </div>
+          <p class="continue"><a href="https://natgeo.nikkeibp.co.jp/atcl/news/26/051500273/" target="_blank" rel="noopener">続きを原文で読む →</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p5">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★☆</span> <span class="chip">Aimer</span> <span class="chip">音楽</span> <span class="chip">インタビュー</span> <span class="chip mins">~8 min</span>
+          </div>
+          <h2 lang="ja">Ａｉｍｅｒが語る、１５周年前の心境——『ＳＣＯＰＥ』と「居場所」としての音楽</h2>
+          <p class="why">Por quê: Aimer fala de “lugar” sem glamour: de mistério no escuro ao ciclo de entregar e receber a música ao vivo.</p>
+          <div class="source">
+            <span>Rolling Stone Japan</span>
+            <a href="https://rollingstonejapan.com/articles/detail/42332/1/1/1" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <div class="ja" lang="ja">
+            <p>来年で１５周年。２５枚目のシングルまでキャリアを積んできた今、Ａｉｍｅｒはどんなアーティストになっているとご自身では思いますか？Ａｉｍｅｒ：歌い始めた１４年前には想像していなかったところに今いるなと思います。１０周年イヤーでツアーを多く回らせていただいたり、『残響散歌』をリリースしたり、いろいろ派手にお祭りモードで活動していたときに「自分の居場所ができたんだな」と感じたんですよね。</p>
+            <p>すごく煌びやかで荘厳な建物というわけではなくて、かと言ってすきま風が吹くようなところでもない、自分の音楽を聴いて下さっている方たちとそこで過ごせている、すごく大切な居場所を持っているアーティストになれているのかなって。やっぱりライブが大きいですね。音楽活動を始めたときは顔も出していなかったし、暗がりの中でライブをしたりしていたので、「そんなにライブに重きを置くのかな？」という感じだったんですよ。</p>
+            <p>でも、活動の先で私の曲を受け取ってくれる人のことをいつの間にか意識しながら創作をするようになっていて。それは自分が放ったモノを誰かが受け取って大事にしてくれているんだなと、想いの交換や循環みたいなものをライブで感じたからなんです。「私を介してＡｉｍｅｒという音楽がそこにある、あくまで私は媒介である」という意識が元々すごくあった。</p>
+            <p>でも続けていくうちに自分と楽曲は切っても切り離せないと気付き、「これは私の中から出ているモノなんだから」とひとつ開き直るようになったんです。</p>
+          </div>
+          <p class="continue"><a href="https://rollingstonejapan.com/articles/detail/42332/1/1/1" target="_blank" rel="noopener">続きを原文で読む →</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p6">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★☆</span> <span class="chip">神戸</span> <span class="chip">六甲アイランド</span> <span class="chip">インフラ</span> <span class="chip">都市</span> <span class="chip mins">~8 min</span>
+          </div>
+          <h2 lang="ja">震災から３０年、六甲アイランドは再生できるか——人工島の衰退と「身の丈」再出発</h2>
+          <p class="why">Por quê: Ilha artificial de Kobe que brilhou no boom, colapsou no terremoto e tenta renascer em escala humana — com Rokko Liner no meio.</p>
+          <div class="source">
+            <span>Merkmal（メルクマール）</span>
+            <a href="https://merkmal-biz.jp/post/85080" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <div class="ja" lang="ja">
+            <p>神戸市を代表する人気スポットだった東灘区の六甲アイランドは、１９９５（平成７）年の阪神淡路大震災で一気に衰退した。あれから３０年、どん底に落とされた街はどうなったのか。神戸市沖に浮かぶ人工島の六甲アイランド。</p>
+            <p>中心部に宇宙船のような外観の１９階建て複合施設「神戸ファッションプラザ」がある。１９９７年開業で、専門店街は１～９階に８５以上のテナントが入っていたが、売上低迷から２０１０年にシネコンが閉店、フロア閉鎖が相次ぎ、２０１８年に最後のスーパーが閉店。その後、営業店舗がない状態が続いた。</p>
+            <p>ようやく２０２４年に名称を「六甲アイパーク」と改め、スーパーやドラッグストアなど２０近いテナントで再スタートを切った。買い物中の女性は「昔は規模が大きすぎた。今ぐらいが身の丈に合っているのかも」と笑う。</p>
+            <p>六甲アイランドは１９８８年に街開きした人工島で広さ約６００ｈａ。東灘区本土と六甲大橋で結ばれ、ＪＲ住吉駅や阪神電鉄魚崎駅に通じる延長４・５ｋｍの六甲ライナー（神戸新交通六甲アイランド線）が住民の足となる。アイランド北口・センター・マリンパークの３駅から徒歩圏に住宅があり、外側に工場や港湾・物流拠点が置かれた、住環境に配慮した設計だった。</p>
+            <p>バブル期には六甲ライナー下に延長約１ｋｍの親水空間を設け、本土から水を引いた。高級住宅地に負けない豪華さも意識した街が、震災と人口減少のあと「身の丈」の再出発を探っている。</p>
+          </div>
+          <p class="continue"><a href="https://merkmal-biz.jp/post/85080" target="_blank" rel="noopener">続きを原文で読む →</a></p>
+        </div>
+      </article>
+
+      <footer class="site">読解幕 · JLPBOT · kabuki theme · 2026-09-18</footer>
+    </main>
+  </div>
+</body>
+</html>

@@ -9,6 +9,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 DATA = ROOT / "history.json"
 OUT = ROOT / "history" / "index.html"
+DIGEST_ROOT = "../digest"  # history/index.html is one directory below the site root
 
 
 def esc(s: str) -> str:
@@ -33,9 +34,10 @@ def main() -> None:
         rows = []
         for e in by_month[month]:
             topics = " · ".join(esc(t) for t in e.get("topics", [])[:6])
+            href = e.get("href") or f"{DIGEST_ROOT}/{e['date']}/"
             rows.append(
                 f"""        <li>
-          <a class="row" href="{esc(e['href'])}">
+          <a class="row" href="{esc(href)}">
             <time datetime="{esc(e['date'])}">{esc(e['date'])}</time>
             <span class="headline">{esc(e.get('headline', e['date']))}</span>
             <span class="meta"><span class="mins">~{int(e.get('minutes', 0))}′</span>

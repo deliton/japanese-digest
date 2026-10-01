@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>読解幕 · 2026-09-12 · Japanese Digest</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Noto+Serif+JP:wght@400;600;700&family=Shippori+Mincho:wght@500;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #0a0a0a;
+      --bg-2: #121212;
+      --bg-card: #161616;
+      --ink: #f5f5f5;
+      --ink-dim: #a8a29a;
+      --ink-mute: #6b6560;
+      --shu: #c41e3a;
+      --shu-hot: #e11d48;
+      --shu-deep: #8b1228;
+      --gold: #d4a017;
+      --gold-soft: #c9a227;
+      --white: #fafafa;
+      --line: #2a2a2a;
+      --line-hot: rgba(196, 30, 58, 0.45);
+      --measure: 42rem;
+      --radius: 4px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: "Noto Sans JP", "Hiragino Sans", "Yu Gothic", system-ui, sans-serif;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .stage-bar {
+      height: 6px;
+      background: repeating-linear-gradient(
+        90deg,
+        var(--shu) 0 48px,
+        var(--white) 48px 56px,
+        #111 56px 64px,
+        var(--gold) 64px 72px,
+        #111 72px 88px
+      );
+    }
+
+    .wrap {
+      width: min(100% - 2rem, 74rem);
+      margin: 0 auto;
+      padding: 2rem 0 4.5rem;
+      display: grid;
+      grid-template-columns: 15.5rem 1fr;
+      gap: 2.75rem;
+      align-items: start;
+    }
+
+    @media (max-width: 900px) {
+      .wrap { grid-template-columns: 1fr; gap: 1.5rem; padding-top: 1.25rem; }
+      .sidebar { position: static !important; }
+    }
+
+    .sidebar { position: sticky; top: 1.25rem; }
+
+    .brand {
+      display: flex;
+      align-items: baseline;
+      gap: 0.55rem;
+      margin: 0 0 0.35rem;
+    }
+    .brand-mark {
+      font-family: "Shippori Mincho", "Noto Serif JP", serif;
+      font-size: 1.85rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      color: var(--white);
+      line-height: 1;
+    }
+    .brand-mark em {
+      font-style: normal;
+      color: var(--shu);
+    }
+    .brand-sub {
+      font-size: 0.65rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-weight: 700;
+    }
+
+    .meta {
+      color: var(--ink-mute);
+      font-size: 0.8rem;
+      margin: 0 0 1.25rem;
+    }
+
+    .stat-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-bottom: 1.35rem;
+    }
+    .stat {
+      border: 1px solid var(--line);
+      background: var(--bg-2);
+      padding: 0.32rem 0.65rem;
+      font-size: 0.72rem;
+      color: var(--ink-dim);
+      border-radius: var(--radius);
+    }
+    .stat strong { color: var(--white); font-weight: 700; }
+    .stat.hot {
+      border-color: var(--line-hot);
+      color: var(--shu-hot);
+    }
+    .stat.hot strong { color: var(--shu-hot); }
+
+    .toc {
+      background: var(--bg-card);
+      border: 1px solid var(--line);
+      border-left: 3px solid var(--shu);
+      padding: 1rem 0.85rem 0.85rem;
+    }
+    .toc h2 {
+      margin: 0 0 0.85rem 0.35rem;
+      font-size: 0.68rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-weight: 700;
+    }
+    .toc ol {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      counter-reset: toc;
+    }
+    .toc li { margin: 0 0 0.2rem; }
+    .toc a {
+      display: grid;
+      grid-template-columns: 1.5rem 1fr auto;
+      gap: 0.45rem;
+      align-items: start;
+      text-decoration: none;
+      color: inherit;
+      padding: 0.5rem 0.4rem;
+      border-radius: var(--radius);
+      transition: background 0.15s ease, color 0.15s ease;
+    }
+    .toc a:hover { background: #1f1f1f; }
+    .toc a:hover .t-title { color: var(--white); }
+    .toc a::before {
+      counter-increment: toc;
+      content: counter(toc, decimal-leading-zero);
+      font-family: "Shippori Mincho", serif;
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--shu);
+      line-height: 1.35;
+    }
+    .t-title {
+      font-size: 0.84rem;
+      line-height: 1.35;
+      color: var(--ink-dim);
+      transition: color 0.15s ease;
+    }
+    .t-min {
+      font-size: 0.68rem;
+      color: var(--ink-mute);
+      padding-top: 0.12rem;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .note {
+      margin-top: 1rem;
+      font-size: 0.74rem;
+      color: var(--ink-mute);
+      line-height: 1.5;
+    }
+
+    main { max-width: var(--measure); }
+
+    .digest-banner {
+      display: flex;
+      gap: 0.75rem;
+      align-items: flex-start;
+      background: linear-gradient(90deg, rgba(196,30,58,0.18), rgba(212,160,23,0.08));
+      border: 1px solid var(--line-hot);
+      padding: 0.85rem 1rem;
+      margin-bottom: 1.5rem;
+      font-size: 0.86rem;
+      color: var(--ink-dim);
+    }
+    .digest-banner .tag {
+      flex-shrink: 0;
+      background: var(--shu);
+      color: #fff;
+      font-size: 0.65rem;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      padding: 0.28rem 0.5rem;
+      border-radius: var(--radius);
+    }
+
+    .hero {
+      margin-bottom: 2rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid var(--line);
+      position: relative;
+    }
+    .hero::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -1px;
+      width: 4.5rem;
+      height: 2px;
+      background: var(--shu);
+    }
+    .kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.7rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--shu-hot);
+      font-weight: 800;
+      margin-bottom: 0.85rem;
+    }
+    .kicker::before {
+      content: "◆";
+      font-size: 0.55rem;
+      color: var(--gold);
+    }
+    .hero h1 {
+      font-family: "Shippori Mincho", "Noto Serif JP", serif;
+      font-size: clamp(1.85rem, 4vw, 2.55rem);
+      font-weight: 700;
+      line-height: 1.2;
+      margin: 0 0 0.75rem;
+      color: var(--white);
+      letter-spacing: 0.02em;
+    }
+    .hero p {
+      margin: 0;
+      color: var(--ink-dim);
+      font-size: 0.98rem;
+      max-width: 36rem;
+    }
+
+    article.piece {
+      background: var(--bg-card);
+      border: 1px solid var(--line);
+      margin-bottom: 1.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+    article.piece::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: linear-gradient(90deg, var(--shu) 0%, var(--shu) 35%, var(--gold) 35%, var(--gold) 42%, transparent 42%);
+    }
+
+    .piece-inner { padding: 1.6rem 1.55rem 1.35rem; }
+
+    .piece-head {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-bottom: 0.85rem;
+    }
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      border: 1px solid var(--line);
+      background: #111;
+      color: var(--ink-dim);
+      padding: 0.22rem 0.6rem;
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      border-radius: var(--radius);
+    }
+    .chip.interest {
+      border-color: var(--shu);
+      color: var(--shu-hot);
+      background: rgba(196, 30, 58, 0.12);
+    }
+    .chip.mins {
+      border-color: var(--gold);
+      color: var(--gold);
+      background: transparent;
+    }
+
+    .piece h2 {
+      font-family: "Noto Serif JP", "Shippori Mincho", "Yu Mincho", serif;
+      font-size: 1.38rem;
+      font-weight: 700;
+      line-height: 1.5;
+      margin: 0 0 0.6rem;
+      color: var(--white);
+      letter-spacing: 0.02em;
+    }
+
+    .why {
+      margin: 0 0 1rem;
+      color: var(--ink-dim);
+      font-size: 0.9rem;
+      border-left: 2px solid var(--gold);
+      padding-left: 0.85rem;
+    }
+
+    .source {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.65rem 1.1rem;
+      font-size: 0.76rem;
+      color: var(--ink-mute);
+      margin-bottom: 1.25rem;
+    }
+    .source a {
+      color: var(--shu-hot);
+      text-decoration: none;
+      font-weight: 600;
+    }
+    .source a:hover { color: var(--gold); }
+
+    .ja {
+      font-family: "Noto Serif JP", "Hiragino Mincho ProN", "Yu Mincho", serif;
+      font-size: 1.08rem;
+      line-height: 2;
+      letter-spacing: 0.03em;
+      color: #ebe7e1;
+    }
+    .ja p { margin: 0 0 1.15em; }
+    .ja p:last-child { margin-bottom: 0; }
+
+    .continue {
+      margin-top: 1.25rem;
+      padding-top: 1rem;
+      border-top: 1px solid var(--line);
+      font-size: 0.86rem;
+    }
+    .continue a {
+      color: var(--white);
+      text-decoration: none;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      border-bottom: 2px solid var(--shu);
+      padding-bottom: 0.1rem;
+    }
+    .continue a:hover {
+      color: var(--shu-hot);
+      border-bottom-color: var(--gold);
+    }
+
+    footer.site {
+      max-width: var(--measure);
+      margin-top: 1.75rem;
+      color: var(--ink-mute);
+      font-size: 0.72rem;
+      letter-spacing: 0.06em;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+    footer.site::before {
+      content: "";
+      width: 1.25rem;
+      height: 2px;
+      background: var(--shu);
+    }
+  </style>
+</head>
+<body>
+  <div class="stage-bar" aria-hidden="true"></div>
+
+  <div class="wrap">
+    <aside class="sidebar">
+      <div class="brand">
+        <p class="brand-mark">読解<em>幕</em></p>
+      </div>
+      <p class="brand-sub">Kabuki Digest · <a href="../../history/" style="color:#d4a017;text-decoration:none;">History</a></p>
+      <p class="meta">12 set 2026 · dia #2</p>
+
+      <div class="stat-row">
+        <div class="stat hot"><strong>~47</strong> min</div>
+        <div class="stat"><strong>5</strong> peças</div>
+        <div class="stat">N2–N1</div>
+      </div>
+
+      <nav class="toc" aria-label="Índice">
+        <h2>本日の演目</h2>
+        <ol>
+          <li>
+            <a href="#p1">
+              <span class="t-title">平城京・八条大路の轍</span>
+              <span class="t-min">10′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p2">
+              <span class="t-title">厳島——海上の平安社殿</span>
+              <span class="t-min">11′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p3">
+              <span class="t-title">いざ、鎌倉——モザイクの古都</span>
+              <span class="t-min">9′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p4">
+              <span class="t-title">リニア「もう実験ではない」</span>
+              <span class="t-min">8′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p5">
+              <span class="t-title">BABYMETAL×HYDE 対談</span>
+              <span class="t-min">9′</span>
+            </a>
+          </li>
+        </ol>
+      </nav>
+      <p class="note">Abra no Chrome/Firefox com Yomitan. Clique no japonês pra lookup. Trechos + link para o original.</p>
+    </aside>
+
+    <main>
+      <div class="digest-banner">
+        <span class="tag">DIGEST</span>
+        <span>2026-09-12 — arqueologia Nara (hoje!), Itsukushima no mar, Kamakura, maglev, BABYMETAL×HYDE. Sem fofoca, sem Yahoo-boredom.</span>
+      </div>
+
+      <header class="hero">
+        <div class="kicker">Daily Japanese Digest</div>
+        <h1>轍と海上社殿、ひと朝の読解</h1>
+        <p>平城の牛の足跡・厳島の海・鎌倉の切通・時速500km・メタトモ対談。好奇心の軸は古代〜中世と技術・音。推定合計 ~47 分。</p>
+      </header>
+
+      <article class="piece" id="p1">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★★</span>
+            <span class="chip">考古学</span>
+            <span class="chip">奈良</span>
+            <span class="chip">平城京</span>
+            <span class="chip mins">~10 min</span>
+          </div>
+          <h2 lang="ja">平城京は一度にできなかった——八条大路の轍と牛の足跡が語る段階的造営</h2>
+          <p class="why">Por quê: achado quente (explicação no sítio hoje 12/9) — a capital Nara não nasceu pronta; rodas e pegadas de boi viram micro-história.</p>
+          <div class="source">
+            <span>読売新聞 · 奈良 / 産経</span>
+            <a href="https://www.yomiuri.co.jp/local/nara/news/20260910-GYTNT00334/" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <div class="ja" lang="ja">
+            <p>奈良市の平城京（７１０～７８４年）跡で、主要道路の一つ、八条大路が天平年間（７２９～７４９年）に整備されていたことがわかり、調査した県立橿原考古学研究所が１０日、発表した。平城遷都とともに平城京全体が一度に整備されたのではなく、段階的に整備されたことが判明した。平城京の造営過程や土地利用を考えるうえで重要な成果となる。</p>
+            <p>京奈和自動車道の大和北道路の建設に伴い、平城京の南部に当たる左京九条一坊を今年６月から発掘調査した。その結果、東西道路の八条大路の南半分（幅７・７メートル）と、その南側溝（幅３・８メートル、深さ０・４メートル）を長さ１６メートル分、確認した。道路の整地土の中から天平年間に使われた軒平瓦の破片が出土し、八条大路が整備された時期が判明した。</p>
+            <p>また、路面からわだちの痕跡９条（最長４メートル、幅６～１０センチ）や牛の足跡３個が見つかった。平城京内で複数のわだちが見つかるのは珍しく、荷車や牛が盛んに行き交っていたとみられる。道路の南側は、盛り土をして軟弱な地盤を改良していたものの、建物跡は見つからず、宅地として利用されていなかったことが判明した。</p>
+            <p>産経によれば、現場は政治の中心の平城宮から離れており、平城京南端付近では遷都後でも道路がつくられていた可能性がある。北山峰生調査第一係長は「都を造営したものの、南端付近ではあまり人が住んでいなかったのではないか」と話す。一方、奈良大学の近江俊秀教授（古代交通）は「軟弱地盤のために施工が遅れたことは考えられるが、遷都に合わせてつくられた道路が遷都後に壊れて修復した可能性」も指摘する。</p>
+            <p>橿考研の鈴木裕明・調査部長は「八条大路の整備は平城遷都から約３０年遅れ、平城京の造営時期が場所によってまちまちだということを改めて確認できた。わだちの痕跡や牛の足跡は、京での人々の暮らしが直接的にわかる成果だ」と話している。現地説明会は１２日午前１０時～午後２時（小雨決行）。</p>
+          </div>
+          <p class="continue"><a href="https://www.yomiuri.co.jp/local/nara/news/20260910-GYTNT00334/" target="_blank" rel="noopener">続きを原文で読む →</a></p>
+        </div>
+      </article>
+
+      <article class="piece" id="p2">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★★</span>
+            <span class="chip">神社建築</span>
+            <span class="chip">平安</span>
+            <span class="chip">平清盛</span>
+            <span class="chip mins">~11 min</span>
+          </div>
+          <h2 lang="ja">厳島神社——海の上に寝殿造の気配を置いた、平安の社殿群</h2>
+          <p class="why">Por quê: sacred architecture no mar — Kiyomori, eixo com o torii, Heian elegance vs. estrutura robusta; dá vontade de olhar o teto de novo.</p>
+          <div class="source">
+            <span>文化庁 · 世界遺産オンライン</span>
+            <a href="https://online.bunka.go.jp/special_content/component/45" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <div class="ja" lang="ja">
+            <p>本社は厳島神社の中心建物であり、海上に展開する社殿群の中核をなす。祓殿の左右から出て、曲折しながら東西にのびる廻廊に沿って附属舎が配置されている。本社の各建物は海中の大鳥居と軸線を揃え、前方に突出する縦長の祓殿、その背後に接して横長の拝殿、その奥に同じく横長の本殿を並行して配する。拝殿と本殿の間は幣殿でつなぎ、Ｈ字型の棟をもつ一棟の建物とし、祓殿の屋根も拝殿に接続させて全体が一連の屋根の下に覆われる。</p>
+            <p>拝殿、祓殿は１２２３年（貞応２）の火災後、１２４１年（仁治２）の造営時に再建されたもの、本殿は１５６９年（永禄１２）におきた流血事件で汚されたとして、１５７１年（元亀２）に毛利輝元により再建されたものである。後の時代の再建にもかかわらず、本社の建造物群は、平安時代、平清盛によって造営された社殿の雰囲気をよく伝えていると考えられる。</p>
+            <p>すなわち、各建物は伸び伸びと広がる軒の線と柔らかな屋根面、床、長押、頭貫などの水平線が強調されて、全体に落ちついた優美な印象を与えるが、ひとつひとつの部材を子細に観察すると、太くたくましい柱や組物、力強い架構に支えられていることがわかる。奈良時代以来の伝統を受け、構造体として堅固に組み上げられた建築本体と、建築表現としての優美さが混在するところに平安時代建築様式の特徴があらわれている。</p>
+            <p>祓殿正面中央の軒を一段切り上げるのは、平安時代に好んで使用された、主要な正面をあらわす手法であり、細部では、架構の方式、蟇股の形式、破風の曲線などに平安時代の特徴を残している。祓殿前面には平舞台が広がり、東西の廻廊からも板敷きが伸びて平舞台に取り付く。平舞台上には四方に高欄をまわした漆塗の高舞台が設けられ、ここで演じられる舞楽も遠く平安時代に都からこの地にもたらされたもので、代々の厳島神社の神官が一千年以上も守り伝えてきた。</p>
+            <p>摂社客神社は本社の東方にあり、構成は本社と同様だが規模はひとまわり小さい。客神社では廻廊が拝殿と祓殿の取り合い部分を通路のように通り抜け、祓殿前面は直接海面に面していて平舞台にあたる板敷きがない。神聖な島を傷つけず、海と社殿と鳥居を一本の軸で結ぶ——厳島は、建築そのものが景観をつくる神社である。</p>
+          </div>
+          <p class="continue"><a href="https://online.bunka.go.jp/special_content/component/45" target="_blank" rel="noopener">続きを原文で読む →</a></p>
+        </div>
+      </article>
+
+      <article class="piece" id="p3">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★☆</span>
+            <span class="chip">鎌倉</span>
+            <span class="chip">武家政権</span>
+            <span class="chip">禅</span>
+            <span class="chip mins">~9 min</span>
+          </div>
+          <h2 lang="ja">「いざ、鎌倉」——切通と禅寺が描く、モザイク画の古都</h2>
+          <p class="why">Por quê: mapa mental de Kamakura (Hachiman, kiridoshi, zen) sem romantismo vazio — do bakufu ao Mosaic heritage.</p>
+          <div class="source">
+            <span>日本遺産ポータル · STORY #025</span>
+            <a href="https://www.japan-heritage.bunka.go.jp/ja/stories/story025/" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <div class="ja" lang="ja">
+            <p>鎌倉は、源頼朝によって幕府が開かれた後、急速に都市整備が進められ、まちの中心には鶴岡八幡宮、山には切通、山裾には禅宗寺院をはじめとする大寺院が造られた。この地に活きた武士たちの歴史と哀愁を感じられる古都鎌倉は、近世には信仰と遊山の対象として脚光を浴び、近代には多くの別荘が建てられたが、歴史的遺産と自然とが調和したまちの姿は守り伝えられてきた。</p>
+            <p>鎌倉は、１２世紀末に源頼朝が幕府を開き、貴族社会から武家社会への転換という、革命的な変化が起きた舞台であり、本格的な武家政権が誕生した地である。南が海、三方を山に囲まれた内側には、まちの中心及び基軸として、政権の守護神鶴岡八幡宮とその参道の若宮大路が建設され、山には内外を結ぶために尾根を垂直に掘り下げた「切通」と呼ばれる道が開削された。また、切通近辺の山裾には、大寺院が建立されるなど、鎌倉のまちの基本構造はこの時代にほぼ確立した。</p>
+            <p>さらに、幕府は宗教政策にも積極的に取り組んだ。特に禅宗は、坐禅と問答によって悟りを開こうとする修行の形式が武士の趣向に合ったことや、茶や美術工芸など当時の最先端を行く中国文化を伴っていたことから手厚く保護され、多くの禅宗寺院が建立された。中世都市鎌倉は、幕府滅亡後も室町幕府の東国支配の拠点（鎌倉公方）として大いに繁栄したが、公方の移転に伴って徐々に衰退し、戦国時代には静かな農漁村となった。</p>
+            <p>寒村となった鎌倉にあっても、社寺は時の権力者が鎌倉を武家政権発祥の聖地として保護し続けたことから、唯一命脈を保った。江戸時代中期以降、歌舞伎や浄瑠璃、浮世絵で取り上げられると、鎌倉は信仰と遊山の対象となり、江戸近郊のいわば観光地となっていった。そして近代、別荘地として文士や芸術家を呼び込み、御谷騒動を経て古都保存法へとつながる——自然と一体の社寺、土木遺構、芸術文化が「モザイク画」のように組み合わされたまちとなったのである。</p>
+          </div>
+          <p class="continue"><a href="https://www.japan-heritage.bunka.go.jp/ja/stories/story025/" target="_blank" rel="noopener">続きを原文で読む →</a></p>
+        </div>
+      </article>
+
+      <article class="piece" id="p4">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★☆</span>
+            <span class="chip">鉄道</span>
+            <span class="chip">リニア</span>
+            <span class="chip">インフラ</span>
+            <span class="chip mins">~8 min</span>
+          </div>
+          <h2 lang="ja">リニア「もう実験段階ではない」——山梨実験線３０年、時速５００キロの信頼性</h2>
+          <p class="why">Por quê: infra geek com substância — 542万km de testes, supercondutores, custo de operação; não é press release seco.</p>
+          <div class="source">
+            <span>日経クロステック · 高橋拓也</span>
+            <a href="https://xtech.nikkei.com/atcl/nxt/column/18/03510/021800001/" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <div class="ja" lang="ja">
+            <p>リニア中央新幹線（以下、リニア）の開発が最終段階に差し掛かった。ＪＲ東海は既に営業線の基礎技術を確立し、開業に向けて維持コスト削減や保守の省力化に向けた検討に取り組む。２０２６年１月には「水問題」について静岡県と補償対応で合意した。当初予定していた２０２７年の開業は延期となったが、リニアの開業に向けた準備が着実に進みつつある。</p>
+            <p>「リニア実験線と呼ぶが、もう実験段階ではない」――。ＪＲ東海中央新幹線推進本部リニア開発本部山梨実験センター所長の古賀俊作氏は現状をこう語る。リニアで重要な車両の制御技術や超電導磁石を使った浮上システムの信頼性などを走行試験で長年確かめてきた。</p>
+            <p>リニアは乗り物としては完成したと考えている、と古賀氏は言う。１９９７年から２０２５年１２月までのリニア実験線の試験走行距離は累積で約５４２万キロメートル、試乗人数は３４万人以上になった。試乗後の感想ではリニアが想像以上に完成していると驚く人も多い。現在は営業を想定して運営・維持費を抑える方法を含めて検証している。営業速度である時速５００キロメートルで走り込み続け、信頼性を積み重ねることも重要な試験項目だ。</p>
+            <p>なぜ浮上走行か。新幹線では時速５００キロメートル級になると、車輪の空転やパンタグラフの離線といった物理的限界が立ちはだかる。そこで車両側の超電導磁石と地上の浮上案内コイルの磁力で列車を浮かせ、推進コイルで加速する。肝は変電所に置く電力変換器であり、車両側では超電導が鍵となる。高温超電導磁石の導入は冷却設備の簡素化と電力削減を狙い、開業に向けた「最後まで残った技術課題」の一つ、非接触給電と並んで検証が進む。</p>
+          </div>
+          <p class="continue"><a href="https://xtech.nikkei.com/atcl/nxt/column/18/03510/021800001/" target="_blank" rel="noopener">続きを原文で読む →</a></p>
+        </div>
+      </article>
+
+      <article class="piece" id="p5">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★★</span>
+            <span class="chip">ロック</span>
+            <span class="chip">BABYMETAL</span>
+            <span class="chip">HYDE</span>
+            <span class="chip mins">~9 min</span>
+          </div>
+          <h2 lang="ja">BABYMETAL×HYDE——声を武器にし、未踏の挑戦を続ける理由</h2>
+          <p class="why">Por quê: dois ídolos teus no mesmo microfone — originalidade da voz, Madison Square Garden vs. máscara de oxigênio na América do Sul.</p>
+          <div class="source">
+            <span>Rolling Stone Japan · 上野拓朗</span>
+            <a href="https://rollingstonejapan.com/articles/detail/43500" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <div class="ja" lang="ja">
+            <p>サマーソニック東京会場のプレスエリアで、オフィシャルメディアであるRolling Stone Japanがメタルな友達＝通称「メタトモ」をゲストに迎えて「メタトモ」の輪を広げるＢＡＢＹＭＥＴＡＬのラジオ番組「メタラジ！」とコラボ取材を敢行。唯一無二の声をどう磨いてきたか、コラボレーションの化学反応、そして挑戦を続ける原動力とは？　ＨＹＤＥとＢＡＢＹＭＥＴＡＬが語り合った核心の言葉に迫る。</p>
+            <p>ＨＹＤＥ：いろいろ試行錯誤してきましたけど、今となってみれば、「オリジナリティ」を大事にするのが一番だと思っています。以前は海外のボーカリストのように歌わなければいけない、という気持ちがあったんですが、それを真似してしまうとＨＹＤＥとしての良さがなくなってしまう気がして。だから今はＨＹＤＥとして、自分の声に自信を持って歌うのがいいと思っていて。結局、海外のスタイルに寄せていくと、みんな同じような歌い方になってしまう。それはつまらないなと今では感じています。</p>
+            <p>ＳＵ－ＭＥＴＡＬ：私はもともと、いわゆるボーカルテクニックがあまり得意ではなくて、ビブラートや裏声といった技術が苦手でした。それを当時はコンプレックスに思っていたんですが、逆にその声を「新しい」と褒めてもらえたことがきっかけで、「これが自分らしさなんだ」と気づいたんです。自分の声をいいと言ってくれる人がいると知ってからは、それまでコンプレックスに感じていた部分を強みに変えていこうと思えるようになりました。</p>
+            <p>ＨＹＤＥはマディソン・スクエア・ガーデンを「ロックの試験」と振り返り、ＭＯＭＯＭＥＴＡＬは南米初ライブで酸素が薄い状況を想定し、かなり前からマスクをつけてリハーサルしていたと明かす。コラボについてＨＹＤＥは「個性的なボーカリストと一緒にやると、自分ひとりではできない表現ができる」と語り、ＳＵ－ＭＥＴＡＬは「私たちのことをよく分かってくれている人」——Ｂｒｉｎｇ　Ｍｅ　Ｔｈｅ　Ｈｏｒｉｚｏｎとの経験を挙げる。</p>
+            <p>挑戦の原動力について、ＨＹＤＥは「やっていないことはたくさんありますけど、やれないことも同じくらいたくさんあります。もう『あとは野となれ山となれ』みたいな気持ちで、ＢＡＢＹＭＥＴＡＬの活躍を、孫のような気持ちで見守って応援しています」と笑い、ＭＯＡＭＥＴＡＬは「原動力はやっぱりお客さんです……『お客さんが待っている』と思うと踏ん張れる」と答えた。</p>
+          </div>
+          <p class="continue"><a href="https://rollingstonejapan.com/articles/detail/43500" target="_blank" rel="noopener">続きを原文で読む →</a></p>
+        </div>
+      </article>
+
+      <footer class="site">読解幕 · JLPBOT · kabuki theme · 2026-09-12</footer>
+    </main>
+  </div>
+</body>
+</html>

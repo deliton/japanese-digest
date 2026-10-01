@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>読解幕 · 2026-09-13 · Japanese Digest</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Noto+Serif+JP:wght@400;600;700&family=Shippori+Mincho:wght@500;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #0a0a0a;
+      --bg-2: #121212;
+      --bg-card: #161616;
+      --ink: #f5f5f5;
+      --ink-dim: #a8a29a;
+      --ink-mute: #6b6560;
+      --shu: #c41e3a;
+      --shu-hot: #e11d48;
+      --shu-deep: #8b1228;
+      --gold: #d4a017;
+      --gold-soft: #c9a227;
+      --white: #fafafa;
+      --line: #2a2a2a;
+      --line-hot: rgba(196, 30, 58, 0.45);
+      --measure: 42rem;
+      --radius: 4px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: "Noto Sans JP", "Hiragino Sans", "Yu Gothic", system-ui, sans-serif;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .stage-bar {
+      height: 6px;
+      background: repeating-linear-gradient(
+        90deg,
+        var(--shu) 0 48px,
+        var(--white) 48px 56px,
+        #111 56px 64px,
+        var(--gold) 64px 72px,
+        #111 72px 88px
+      );
+    }
+
+    .wrap {
+      width: min(100% - 2rem, 74rem);
+      margin: 0 auto;
+      padding: 2rem 0 4.5rem;
+      display: grid;
+      grid-template-columns: 15.5rem 1fr;
+      gap: 2.75rem;
+      align-items: start;
+    }
+
+    @media (max-width: 900px) {
+      .wrap { grid-template-columns: 1fr; gap: 1.5rem; padding-top: 1.25rem; }
+      .sidebar { position: static !important; }
+    }
+
+    .sidebar { position: sticky; top: 1.25rem; }
+
+    .brand {
+      display: flex;
+      align-items: baseline;
+      gap: 0.55rem;
+      margin: 0 0 0.35rem;
+    }
+    .brand-mark {
+      font-family: "Shippori Mincho", "Noto Serif JP", serif;
+      font-size: 1.85rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      color: var(--white);
+      line-height: 1;
+    }
+    .brand-mark em {
+      font-style: normal;
+      color: var(--shu);
+    }
+    .brand-sub {
+      font-size: 0.65rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-weight: 700;
+    }
+
+    .meta {
+      color: var(--ink-mute);
+      font-size: 0.8rem;
+      margin: 0 0 1.25rem;
+    }
+
+    .stat-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-bottom: 1.35rem;
+    }
+    .stat {
+      border: 1px solid var(--line);
+      background: var(--bg-2);
+      padding: 0.32rem 0.65rem;
+      font-size: 0.72rem;
+      color: var(--ink-dim);
+      border-radius: var(--radius);
+    }
+    .stat strong { color: var(--white); font-weight: 700; }
+    .stat.hot {
+      border-color: var(--line-hot);
+      color: var(--shu-hot);
+    }
+    .stat.hot strong { color: var(--shu-hot); }
+
+    .toc {
+      background: var(--bg-card);
+      border: 1px solid var(--line);
+      border-left: 3px solid var(--shu);
+      padding: 1rem 0.85rem 0.85rem;
+    }
+    .toc h2 {
+      margin: 0 0 0.85rem 0.35rem;
+      font-size: 0.68rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-weight: 700;
+    }
+    .toc ol {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      counter-reset: toc;
+    }
+    .toc li { margin: 0 0 0.2rem; }
+    .toc a {
+      display: grid;
+      grid-template-columns: 1.5rem 1fr auto;
+      gap: 0.45rem;
+      align-items: start;
+      text-decoration: none;
+      color: inherit;
+      padding: 0.5rem 0.4rem;
+      border-radius: var(--radius);
+      transition: background 0.15s ease, color 0.15s ease;
+    }
+    .toc a:hover { background: #1f1f1f; }
+    .toc a:hover .t-title { color: var(--white); }
+    .toc a::before {
+      counter-increment: toc;
+      content: counter(toc, decimal-leading-zero);
+      font-family: "Shippori Mincho", serif;
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--shu);
+      line-height: 1.35;
+    }
+    .t-title {
+      font-size: 0.84rem;
+      line-height: 1.35;
+      color: var(--ink-dim);
+      transition: color 0.15s ease;
+    }
+    .t-min {
+      font-size: 0.68rem;
+      color: var(--ink-mute);
+      padding-top: 0.12rem;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .note {
+      margin-top: 1rem;
+      font-size: 0.74rem;
+      color: var(--ink-mute);
+      line-height: 1.5;
+    }
+
+    main { max-width: var(--measure); }
+
+    .digest-banner {
+      display: flex;
+      gap: 0.75rem;
+      align-items: flex-start;
+      background: linear-gradient(90deg, rgba(196,30,58,0.18), rgba(212,160,23,0.08));
+      border: 1px solid var(--line-hot);
+      padding: 0.85rem 1rem;
+      margin-bottom: 1.5rem;
+      font-size: 0.86rem;
+      color: var(--ink-dim);
+    }
+    .digest-banner .tag {
+      flex-shrink: 0;
+      background: var(--shu);
+      color: #fff;
+      font-size: 0.65rem;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      padding: 0.28rem 0.5rem;
+      border-radius: var(--radius);
+    }
+
+    .hero {
+      margin-bottom: 2rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid var(--line);
+      position: relative;
+    }
+    .hero::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -1px;
+      width: 4.5rem;
+      height: 2px;
+      background: var(--shu);
+    }
+    .kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.7rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--shu-hot);
+      font-weight: 800;
+      margin-bottom: 0.85rem;
+    }
+    .kicker::before {
+      content: "◆";
+      font-size: 0.55rem;
+      color: var(--gold);
+    }
+    .hero h1 {
+      font-family: "Shippori Mincho", "Noto Serif JP", serif;
+      font-size: clamp(1.85rem, 4vw, 2.55rem);
+      font-weight: 700;
+      line-height: 1.2;
+      margin: 0 0 0.75rem;
+      color: var(--white);
+      letter-spacing: 0.02em;
+    }
+    .hero p {
+      margin: 0;
+      color: var(--ink-dim);
+      font-size: 0.98rem;
+      max-width: 36rem;
+    }
+
+    article.piece {
+      background: var(--bg-card);
+      border: 1px solid var(--line);
+      margin-bottom: 1.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+    article.piece::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: linear-gradient(90deg, var(--shu) 0%, var(--shu) 35%, var(--gold) 35%, var(--gold) 42%, transparent 42%);
+    }
+
+    .piece-inner { padding: 1.6rem 1.55rem 1.35rem; }
+
+    .piece-head {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-bottom: 0.85rem;
+    }
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      border: 1px solid var(--line);
+      background: #111;
+      color: var(--ink-dim);
+      padding: 0.22rem 0.6rem;
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      border-radius: var(--radius);
+    }
+    .chip.interest {
+      border-color: var(--shu);
+      color: var(--shu-hot);
+      background: rgba(196, 30, 58, 0.12);
+    }
+    .chip.mins {
+      border-color: var(--gold);
+      color: var(--gold);
+      background: transparent;
+    }
+
+    .piece h2 {
+      font-family: "Noto Serif JP", "Shippori Mincho", "Yu Mincho", serif;
+      font-size: 1.38rem;
+      font-weight: 700;
+      line-height: 1.5;
+      margin: 0 0 0.6rem;
+      color: var(--white);
+      letter-spacing: 0.02em;
+    }
+
+    .why {
+      margin: 0 0 1rem;
+      color: var(--ink-dim);
+      font-size: 0.9rem;
+      border-left: 2px solid var(--gold);
+      padding-left: 0.85rem;
+    }
+
+    .source {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.65rem 1.1rem;
+      font-size: 0.76rem;
+      color: var(--ink-mute);
+      margin-bottom: 1.25rem;
+    }
+    .source a {
+      color: var(--shu-hot);
+      text-decoration: none;
+      font-weight: 600;
+    }
+    .source a:hover { color: var(--gold); }
+
+    .ja {
+      font-family: "Noto Serif JP", "Hiragino Mincho ProN", "Yu Mincho", serif;
+      font-size: 1.08rem;
+      line-height: 2;
+      letter-spacing: 0.03em;
+      color: #ebe7e1;
+    }
+    .ja p { margin: 0 0 1.15em; }
+    .ja p:last-child { margin-bottom: 0; }
+
+    .continue {
+      margin-top: 1.25rem;
+      padding-top: 1rem;
+      border-top: 1px solid var(--line);
+      font-size: 0.86rem;
+    }
+    .continue a {
+      color: var(--white);
+      text-decoration: none;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      border-bottom: 2px solid var(--shu);
+      padding-bottom: 0.1rem;
+    }
+    .continue a:hover {
+      color: var(--shu-hot);
+      border-bottom-color: var(--gold);
+    }
+
+    footer.site {
+      max-width: var(--measure);
+      margin-top: 1.75rem;
+      color: var(--ink-mute);
+      font-size: 0.72rem;
+      letter-spacing: 0.06em;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+    footer.site::before {
+      content: "";
+      width: 1.25rem;
+      height: 2px;
+      background: var(--shu);
+    }
+  </style>
+</head>
+<body>
+  <div class="stage-bar" aria-hidden="true"></div>
+
+  <div class="wrap">
+    <aside class="sidebar">
+      <div class="brand">
+        <p class="brand-mark">読解<em>幕</em></p>
+      </div>
+      <p class="brand-sub">Kabuki Digest · <a href="../../history/" style="color:#d4a017;text-decoration:none;">History</a></p>
+      <p class="meta">13 set 2026 · dia #3</p>
+
+      <div class="stat-row">
+        <div class="stat hot"><strong>~48</strong> min</div>
+        <div class="stat"><strong>5</strong> peças</div>
+        <div class="stat">N2–N1</div>
+      </div>
+
+      <nav class="toc" aria-label="Índice">
+        <h2>本日の演目</h2>
+        <ol>
+          <li>
+            <a href="#p1">
+              <span class="t-title">弘法山古墳・最古級説</span>
+              <span class="t-min">10′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p2">
+              <span class="t-title">本能寺・四国政策転換説</span>
+              <span class="t-min">12′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p3">
+              <span class="t-title">近江・巨大建物と王権前夜</span>
+              <span class="t-min">10′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p4">
+              <span class="t-title">神戸電鉄・山岳と株主市</span>
+              <span class="t-min">8′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p5">
+              <span class="t-title">BAND-MAID『ENERGETIC』</span>
+              <span class="t-min">8′</span>
+            </a>
+          </li>
+        </ol>
+      </nav>
+      <p class="note">Abra no Chrome/Firefox com Yomitan. Clique no japonês pra lookup. Trechos + link para o original.</p>
+    </aside>
+
+    <main>
+      <div class="digest-banner">
+        <span class="tag">DIGEST</span>
+        <span>2026-09-13 — kofun pré-Yamato, mistério Honnoji (四国説), Yayoi em Ōmi, Shintetsu/Kobe, BAND-MAID. Zero arquitetura-de-manual, zero fofoca.</span>
+      </div>
+
+      <header class="hero">
+        <div class="kicker">Daily Japanese Digest</div>
+        <h1>王権前夜と四国説、ひと朝の読解</h1>
+        <p>ヤマト前の古墳・光秀の動機・近江の祭殿・神戸の山岳鉄道・お給仕の躍動。好奇心の軸は古代〜戦国と都市・音。推定合計 ~48 分。</p>
+      </header>
+
+      <article class="piece" id="p1">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★★</span>
+            <span class="chip">考古学</span>
+            <span class="chip">古墳</span>
+            <span class="chip">邪馬台国時代</span>
+            <span class="chip mins">~10 min</span>
+          </div>
+          <h2 lang="ja">「弘法山古墳」は日本最古級か——ヤマト政権前に造られた独自の前方後方墳</h2>
+          <p class="why">Por quê: reescreve o início do período kofun — 50 anos mais antigo, antes do Yamato, possível vínculo com Hokenoyama; mistério com stakes.</p>
+          <div class="source">
+            <span>FNNプライムオンライン · 長野放送</span>
+            <a href="https://www.fnn.jp/articles/-/1109596" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <div class="ja" lang="ja">
+            <p>長野県松本市の弘法山古墳について。桜の名所として知られているが、市の調査により、造られた年代が「日本最古級」である可能性が浮上。さらなる歴史の解明に期待が寄せられている。</p>
+            <p>松本市立博物館・小山奈津実さん：「現在の学術的な目（視点）から再検討した結果、古墳の築造年代がこれまで考えていた時代よりも５０年古くなり、“３世紀前半から半ばころ”と推定された」</p>
+            <p>弘法山で初めて本格的な調査が行われたのは１９７４年。付近の土地造成のため発掘を行ったところ、古墳の中で最も古い「前方後方墳」と分かった。「後方部」には石室があり、そこから大量の土器や副葬品も出土した。当時の鑑定結果からは、古墳時代初期＝３世紀後半に造られた「東日本最古級である」とされてきた。</p>
+            <p>最初の調査から５０年——。再調査では、周辺に「トレンチ」と呼ばれる溝を掘り、古墳の正確な形や大きさを探った。墳丘の長さは約６２メートル。形や大きさが判明したことで、全国の古墳との比較検証ができるようになった。小山さんは「研究の１つとしては奈良・ホケノ山古墳の技術が伝わってきたのではないか」と指摘する。ホケノ山古墳は３世紀半ばに造られた「日本最古級の古墳」ともいわれ、構造が似ている。</p>
+            <p>さらに、過去に出土した土器などを現代の技術で分析し、当初の見立てより古いことも分かった。これらの結果から弘法山古墳が造られたのは、「３世紀後半」より５０年ほど早い、「３世紀前半から半ばごろ」と推定される。小山さん：「ヤマト政権が成立する前の時期に、独自の古墳が造られていたのではないか。古墳時代のはじまりを知るために貴重で重要な古墳」。市はさらに検証を進め、１２月のシンポジウムで報告する予定だ。</p>
+          </div>
+          <p class="continue"><a href="https://www.fnn.jp/articles/-/1109596" target="_blank" rel="noopener">続きを原文で読む →</a></p>
+        </div>
+      </article>
+
+      <article class="piece" id="p2">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★★</span>
+            <span class="chip">戦国</span>
+            <span class="chip">本能寺</span>
+            <span class="chip">明智光秀</span>
+            <span class="chip mins">~12 min</span>
+          </div>
+          <h2 lang="ja">明智光秀を本能寺へ駆り立てた？——「四国政策転換説」の全貌</h2>
+          <p class="why">Por quê: o mistério nº1 do Sengoku com argumento de documentos (石谷家文書) — Motonaga, intermediário Mitsuhide, e o colapso diplomático.</p>
+          <div class="source">
+            <span>和樂web · 小林明</span>
+            <a href="https://intojapanwaraku.com/culture/309581/" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <div class="ja" lang="ja">
+            <p>「本能寺の変」は日本史上最大のミステリーとして関心を集めてきた。明智光秀の背後に、陰謀めいた何かが存在したのではないか、そう想像する人たちが少なくなかったからである。裏で羽柴秀吉が光秀を扇動した、いや、足利幕府１５代将軍の義昭が操っていた、はたまた織田信長と長く敵対していた大坂本願寺こそ黒幕だ——など、語り出すと切りがない。そんな中、近年話題になっているのが「四国政策転換説」である。</p>
+            <p>天正１０（１５８２）年６月２日未明、明智光秀は京の寺院に宿泊中の織田信長を急襲した。しかし事件前後の一次史料——『言継卿記』『兼見卿記』『多聞院日記』『蓮成院記録』など——は情勢を記すのみで、なぜ謀反に及んだかまでは言及していない。つまり「黒幕がいた」という話は、後の戦記物などを元にした憶測に過ぎないと考えられている。</p>
+            <p>近年、キーマンとして浮上したのが土佐の長宗我部元親だ。『元親記』によれば天正３年頃、信長は元親に「四国は切り取り次第」という朱印状を発したという。ところが天正９年、三好康長を重用し、三男・信孝を総大将とする四国遠征軍を編成——元親への朱印状を反故にする方針転換が始まる。信長は子の信孝に四国の一部を治めさせたかった、と理解してよい。</p>
+            <p>なぜそれが光秀の動機になるのか。光秀の配下に長宗我部の縁者がおり、信長は織田と長宗我部のあいだの取次役を光秀に任せていた。それを突然蔑ろにされ、家中での立場も元親からの信頼も一挙に失くし、将来に不安を感じ信長を討つ決意をした——これが四国説の骨子だ。裏付けとされるのが岡山・林原美術館の『石谷家文書』。石谷家に光秀家臣・斎藤利三の兄が養子として入っており、その義理の妹が元親の妻——だから光秀は取次に適任だった。</p>
+            <p>文書には、天正１０年１月、利三が元親の軽挙を抑えてほしいと依頼する書状、５月２１日には元親が「従う」と書き、土佐の門にあたる２城だけは所有したいと取り次ぎを頼む書状が残る。その直後の６月２日未明に信長は没し、元親は絶体絶命の危機を脱する。ただし元親が謀反を支援した形跡は見当たらず、四国説は動機として一定の信ぴょう性を示しつつも、光秀の胸中を十分には語り尽くさない——そこが弱点でもある。本能寺の変は、なお日本史最大のミステリーとして私たちを虜にし続ける。</p>
+          </div>
+          <p class="continue"><a href="https://intojapanwaraku.com/culture/309581/" target="_blank" rel="noopener">続きを原文で読む →</a></p>
+        </div>
+      </article>
+
+      <article class="piece" id="p3">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★★</span>
+            <span class="chip">弥生</span>
+            <span class="chip">近江</span>
+            <span class="chip">卑弥呼前夜</span>
+            <span class="chip mins">~10 min</span>
+          </div>
+          <h2 lang="ja">野洲の巨大建物跡——ヤマト王権誕生前に「近江の時代」があったか</h2>
+          <p class="why">Por quê: NatGeo-vibes — blank period preenchido, possível templo de dōtaku sob Mikamiyama, e a tese de que Ōmi liderou antes de Himiko.</p>
+          <div class="source">
+            <span>産経ニュース · 川西健士郎</span>
+            <a href="https://www.sankei.com/article/20260723-DDLJQ3WP75MYPNKM2A5JCH6YKE/" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <div class="ja" lang="ja">
+            <p>美しい円錐形の三上山を望む滋賀県野洲市の中畑・古里遺跡で先月、弥生時代の近畿最大級の掘っ立て柱建物跡が発見された。土器から推定された築造時期は２０００年前の西暦０年前後（弥生時代中期末）。日本列島の広い範囲で謎の社会変革が起きていた激動期にあたり、大きな建物の空白期ともされてきた。そこに燦然と出現したのが今回の巨大建物跡だ。</p>
+            <p>発掘調査は県文化財保護協会が、商業施設の開発に伴って実施。長辺１８・０メートル（５間）、短辺７・０メートル（１間）で床面積は１２６平方メートル。広縁の支えとも推測される柱穴を入れると面積は１４７平方メートルに及ぶ。近畿最大とされる池上曽根遺跡の「いずみの高殿」（１３３平方メートル）に匹敵する。計２４個の銅鐸が埋納された「大岩山銅鐸」の発見地に近く、三上山を拝む銅鐸祭祀の祭殿であった可能性がある。現地説明会には約９００人が訪れた。</p>
+            <p>考古学者の森岡秀人さんが着目したのは柱穴だ。すべて建物の外側から内側にかけて傾斜し、長大な柱を斜路に落とし込み引き起こすための構造と考えられる。約５キロ西南の伊勢遺跡にも類例があり、森岡さんは「伊勢型」と名づけた。三上山に最も近い遺跡で、最古かつ最大の伊勢型建物跡が発見された意義は大きい、と強調する。</p>
+            <p>伊勢遺跡は弥生後期に繁栄し、方形区画内に大型建物群が整然と配置された特異な遺跡だ。森岡さんらは土器編年の修正を提唱し、存続期間を西暦８０年頃から１８０年頃——卑弥呼が共立される邪馬台国時代の始まりとほぼ同時に廃絶した——と推定する。王権誕生前夜の弥生後期に近畿・東海・丹後を含む広範囲を主導したのが琵琶湖南部だった、と論じ、伊勢遺跡こそが卑弥呼共立の地であった可能性を指摘する。「近江が躍動し始め、新しい歴史的ステージに立ったことが如実にわかる物証がついに姿を現した」と感嘆する。</p>
+          </div>
+          <p class="continue"><a href="https://www.sankei.com/article/20260723-DDLJQ3WP75MYPNKM2A5JCH6YKE/" target="_blank" rel="noopener">続きを原文で読む →</a></p>
+        </div>
+      </article>
+
+      <article class="piece" id="p4">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★☆</span>
+            <span class="chip">神戸</span>
+            <span class="chip">鉄道</span>
+            <span class="chip">都市</span>
+            <span class="chip mins">~8 min</span>
+          </div>
+          <h2 lang="ja">株主になった神戸市——山岳鉄道「神鉄」沿線で描く未来</h2>
+          <p class="why">Por quê: Kobe no DNA — trem de montanha saindo do centro, 50‰ de rampa, cidade vira acionista pra salvar a linha; vida urbana real.</p>
+          <div class="source">
+            <span>神戸市公式note · ハヤシ</span>
+            <a href="https://kobe-note.jp/n/n5567ee6cd06b" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <div class="ja" lang="ja">
+            <p>最近、神戸電鉄沿線がどんどんキレイに、楽しくなっていっているの、ご存じですか？　たとえば有馬温泉駅。温泉町の玄関口らしい、わくわくする駅に変身しました。谷上駅の一つお隣、花山駅も。駅前広場ではいろんなイベントが開かれて、にぎわうように。実はこの整備、神戸市が神戸電鉄との連携協定に基づいて補助を行ったもの。今後も駅リノベーションやイベント開催など、さまざまな「モヨウガエ」が進行する予定です。</p>
+            <p>じつは神戸市、４月から神戸電鉄の株主になっています。２０２６年４月に約２・８億円で発行済み株式の１・４％を買い取り、大株主としては４番目になった。全国の鉄道会社で大きな課題になっているのが、郊外・里山地域を走る路線の経営だ。人が減り、利用が少なくなった路線は減便や廃線になることも——そうすると地域の利便性が下がり、さらに人口が減ってしまう。神戸電鉄でも、１９９２年の約６６００万人をピークに輸送人員は右肩さがり。２０２５年は約３７００万人だった。久元喜造市長は「神戸電鉄は非常に重要な市民の足だが、経営は決して楽ではない。神戸市がさらに経営参加するという趣旨で株主になる」と説明する。</p>
+            <p>特徴は、なんといっても新開地や長田という都心からスタートするのに、急な山道をぐんぐん走り抜ける「山岳路線」であること。湊川駅から９・４キロ先の北鈴蘭台駅までの標高差は、なんと３４６メートル。全線のうち約２割が、５０パーミル（１０００メートル進むと５０メートル上る）以上の急勾配だという。山と市街地が隣り合う、めちゃくちゃ「神戸っぽい」鉄道だ。でもそのぶん、山間部のメンテナンスや施設にかかる費用が経営にコストとしてのしかかる。</p>
+            <p>話題に上がったのが「都市のスポンジ化」対策——空き家や空き地がランダムに増える現象だ。神戸市と神戸電鉄は連携して、空き家のリノベーションをやりやすくしたり、移動スーパーを走らせたり、駅前で食品販売をしたりしてきた。今後はシェアサイクルなどで駅から家までの利便性を良くする施策も計画。市が持つ不動産や空き家を活用して、沿線のにぎわいを増やすことも話し合われた。神鉄沿線、これからもどんどん楽しくなる予感。</p>
+          </div>
+          <p class="continue"><a href="https://kobe-note.jp/n/n5567ee6cd06b" target="_blank" rel="noopener">続きを原文で読む →</a></p>
+        </div>
+      </article>
+
+      <article class="piece" id="p5">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★☆</span>
+            <span class="chip">ロック</span>
+            <span class="chip">BAND-MAID</span>
+            <span class="chip">ガールズメタル</span>
+            <span class="chip mins">~8 min</span>
+          </div>
+          <h2 lang="ja">BAND-MAID『ENERGETIC』——闘いの日々を踊り尽くせ、その先へ</h2>
+          <p class="why">Por quê: tua banda — soka beat + snare grave, Budokan 2 dias, pausa 2027 pra durar até o 15º aniversário; atitude sem fluff.</p>
+          <div class="source">
+            <span>rockinon.com · 高橋智樹</span>
+            <a href="https://rockinon.com/interview/detail/215456" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <div class="ja" lang="ja">
+            <p>ハードロックで「世界征服」を、という超弩級の闘いに真っ向勝負で挑み続けるＢＡＮＤ－ＭＡＩＤのひたむきな姿勢は、そのままタフでソリッドなビートの疾走感に直結してきた。が、最新シングル表題曲“ＥＮＥＲＧＥＴＩＣ”は、５人がより大局的な視線で自分たちの「その先」を見据えていることを克明に伝えている。ラテン系のリズムを取り入れた重量級のリズムで描き出す、大地ごと揺さぶるようなダンサブルな躍動感。《足掻きもがいて　楽しむんだ／踊りな　Ｙｏｕｒ　ｌｉｆｅ》というリリックとともに、闘いの日々を丸ごとリスナーとともに踊り尽くそうとする強靭な意志——。</p>
+            <p>ＫＡＮＡＭＩ（Ｇ）：この曲はもう、踊らせたい！と思って。２０２６年、武道館までみんなを巻き込んで、踊らせていきたいって——エネルギーを爆発させて、お給仕でより完成させていくような楽曲にしたいなと思って。リズムパターンはこういうのにしようって決めてて、最初はベースソロから始めたいなと思って、久しぶりにベースから始まる楽曲だったので、ＭＩＳＡちゃんに「ここベースお願い！」って伝えました。</p>
+            <p>ＡＫＡＮＥ（Ｄｒ）：曲のイメージ的には高めの、わりとカンカンっていう音のほうがいいのかな？って悩んだんですけど、やっぱり重心を低めに置いときたいなあっていうのがあったので。スネアとバスドラは下の音域にいきたいなって意識してました。ショットスピードをしっかり上げて鳴らしきらないと——高い音のほうが鳴らしやすいんですけど、低めの音にしたらヘッドも張り気味じゃなくなるので、叩いてて疲れやすくて（笑）。</p>
+            <p>小鳩ミク（Ｇ・Ｖｏ）：最初から「踊れる曲を」っていうイメージを聞いていたので、《踊りな》とか、一緒にテンションが上がるような歌詞にしようと思って。「私たちは止まるわけじゃなくて、もっともっと先に進むんだよ」って意思表示を歌詞に入れたいなと。弱い言葉よりは強さを重視しつつ、「世界征服」という目標に繋がるワードも入れつつ、今後の私たちの成長を感じてほしい、ついてきてほしい、って気持ちも込めて。ＳＡＩＫＩ（Ｖｏ）：結成１５周年を控えているし、より長くＢＡＮＤ－ＭＡＩＤを続けるために、今この選択（２０２７年度のお給仕小休止）を取らせてもらった、っていうことですね。今まで見られなかった私たちを見せるための準備期間なので。楽しみにしててほしいですね。</p>
+          </div>
+          <p class="continue"><a href="https://rockinon.com/interview/detail/215456" target="_blank" rel="noopener">続きを原文で読む →</a></p>
+        </div>
+      </article>
+
+      <footer class="site">読解幕 · JLPBOT · kabuki theme · 2026-09-13</footer>
+    </main>
+  </div>
+</body>
+</html>

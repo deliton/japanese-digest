@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>読解幕 · 2026-09-24 · Japanese Digest</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Noto+Serif+JP:wght@400;600;700&family=Shippori+Mincho:wght@500;700&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --bg: #0a0a0a;
+      --bg-2: #121212;
+      --bg-card: #161616;
+      --ink: #f5f5f5;
+      --ink-dim: #a8a29a;
+      --ink-mute: #6b6560;
+      --shu: #c41e3a;
+      --shu-hot: #e11d48;
+      --shu-deep: #8b1228;
+      --gold: #d4a017;
+      --gold-soft: #c9a227;
+      --white: #fafafa;
+      --line: #2a2a2a;
+      --line-hot: rgba(196, 30, 58, 0.45);
+      --measure: 42rem;
+      --radius: 4px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: "Noto Sans JP", "Hiragino Sans", "Yu Gothic", system-ui, sans-serif;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .stage-bar {
+      height: 6px;
+      background: repeating-linear-gradient(
+        90deg,
+        var(--shu) 0 48px,
+        var(--white) 48px 56px,
+        #111 56px 64px,
+        var(--gold) 64px 72px,
+        #111 72px 88px
+      );
+    }
+
+    .wrap {
+      width: min(100% - 2rem, 74rem);
+      margin: 0 auto;
+      padding: 2rem 0 4.5rem;
+      display: grid;
+      grid-template-columns: 15.5rem 1fr;
+      gap: 2.75rem;
+      align-items: start;
+    }
+
+    @media (max-width: 900px) {
+      .wrap { grid-template-columns: 1fr; gap: 1.5rem; padding-top: 1.25rem; }
+      .sidebar { position: static !important; }
+    }
+
+    .sidebar { position: sticky; top: 1.25rem; }
+
+    .brand {
+      display: flex;
+      align-items: baseline;
+      gap: 0.55rem;
+      margin: 0 0 0.35rem;
+    }
+    .brand-mark {
+      font-family: "Shippori Mincho", "Noto Serif JP", serif;
+      font-size: 1.85rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      color: var(--white);
+      line-height: 1;
+    }
+    .brand-mark em {
+      font-style: normal;
+      color: var(--shu);
+    }
+    .brand-sub {
+      font-size: 0.65rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-weight: 700;
+    }
+
+    .meta {
+      color: var(--ink-mute);
+      font-size: 0.8rem;
+      margin: 0 0 1.25rem;
+    }
+
+    .stat-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-bottom: 1.35rem;
+    }
+    .stat {
+      border: 1px solid var(--line);
+      background: var(--bg-2);
+      padding: 0.32rem 0.65rem;
+      font-size: 0.72rem;
+      color: var(--ink-dim);
+      border-radius: var(--radius);
+    }
+    .stat strong { color: var(--white); font-weight: 700; }
+    .stat.hot {
+      border-color: var(--line-hot);
+      color: var(--shu-hot);
+    }
+    .stat.hot strong { color: var(--shu-hot); }
+
+    .toc {
+      background: var(--bg-card);
+      border: 1px solid var(--line);
+      border-left: 3px solid var(--shu);
+      padding: 1rem 0.85rem 0.85rem;
+    }
+    .toc h2 {
+      margin: 0 0 0.85rem 0.35rem;
+      font-size: 0.68rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-weight: 700;
+    }
+    .toc ol {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      counter-reset: toc;
+    }
+    .toc li { margin: 0 0 0.2rem; }
+    .toc a {
+      display: grid;
+      grid-template-columns: 1.5rem 1fr auto;
+      gap: 0.45rem;
+      align-items: start;
+      text-decoration: none;
+      color: inherit;
+      padding: 0.5rem 0.4rem;
+      border-radius: var(--radius);
+      transition: background 0.15s ease, color 0.15s ease;
+    }
+    .toc a:hover { background: #1f1f1f; }
+    .toc a:hover .t-title { color: var(--white); }
+    .toc a::before {
+      counter-increment: toc;
+      content: counter(toc, decimal-leading-zero);
+      font-family: "Shippori Mincho", serif;
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--shu);
+      line-height: 1.35;
+    }
+    .t-title {
+      font-size: 0.84rem;
+      line-height: 1.35;
+      color: var(--ink-dim);
+      transition: color 0.15s ease;
+    }
+    .t-min {
+      font-size: 0.68rem;
+      color: var(--ink-mute);
+      padding-top: 0.12rem;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .note {
+      margin-top: 1rem;
+      font-size: 0.74rem;
+      color: var(--ink-mute);
+      line-height: 1.5;
+    }
+
+    main { max-width: var(--measure); }
+
+    .digest-banner {
+      display: flex;
+      gap: 0.75rem;
+      align-items: flex-start;
+      background: linear-gradient(90deg, rgba(196,30,58,0.18), rgba(212,160,23,0.08));
+      border: 1px solid var(--line-hot);
+      padding: 0.85rem 1rem;
+      margin-bottom: 1.5rem;
+      font-size: 0.86rem;
+      color: var(--ink-dim);
+    }
+    .digest-banner .tag {
+      flex-shrink: 0;
+      background: var(--shu);
+      color: #fff;
+      font-size: 0.65rem;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      padding: 0.28rem 0.5rem;
+      border-radius: var(--radius);
+    }
+
+    .hero {
+      margin-bottom: 2rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid var(--line);
+      position: relative;
+    }
+    .hero::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -1px;
+      width: 4.5rem;
+      height: 2px;
+      background: var(--shu);
+    }
+    .kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.7rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--shu-hot);
+      font-weight: 800;
+      margin-bottom: 0.85rem;
+    }
+    .kicker::before {
+      content: "◆";
+      font-size: 0.55rem;
+      color: var(--gold);
+    }
+    .hero h1 {
+      font-family: "Shippori Mincho", "Noto Serif JP", serif;
+      font-size: clamp(1.85rem, 4vw, 2.55rem);
+      font-weight: 700;
+      line-height: 1.2;
+      margin: 0 0 0.75rem;
+      color: var(--white);
+      letter-spacing: 0.02em;
+    }
+    .hero p {
+      margin: 0;
+      color: var(--ink-dim);
+      font-size: 0.98rem;
+      max-width: 36rem;
+    }
+
+    article.piece {
+      background: var(--bg-card);
+      border: 1px solid var(--line);
+      margin-bottom: 1.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+    article.piece::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: linear-gradient(90deg, var(--shu) 0%, var(--shu) 35%, var(--gold) 35%, var(--gold) 42%, transparent 42%);
+    }
+
+    .piece-inner { padding: 1.6rem 1.55rem 1.35rem; }
+
+    .piece-head {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-bottom: 0.85rem;
+    }
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      border: 1px solid var(--line);
+      background: #111;
+      color: var(--ink-dim);
+      padding: 0.22rem 0.6rem;
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      border-radius: var(--radius);
+    }
+    .chip.interest {
+      border-color: var(--shu);
+      color: var(--shu-hot);
+      background: rgba(196, 30, 58, 0.12);
+    }
+    .chip.mins {
+      border-color: var(--gold);
+      color: var(--gold);
+      background: transparent;
+    }
+
+    .piece h2 {
+      font-family: "Noto Serif JP", "Shippori Mincho", "Yu Mincho", serif;
+      font-size: 1.38rem;
+      font-weight: 700;
+      line-height: 1.5;
+      margin: 0 0 0.6rem;
+      color: var(--white);
+      letter-spacing: 0.02em;
+    }
+
+    .why {
+      margin: 0 0 1rem;
+      color: var(--ink-dim);
+      font-size: 0.9rem;
+      border-left: 2px solid var(--gold);
+      padding-left: 0.85rem;
+    }
+
+    .source {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.65rem 1.1rem;
+      font-size: 0.76rem;
+      color: var(--ink-mute);
+      margin-bottom: 1.25rem;
+    }
+    .source a {
+      color: var(--shu-hot);
+      text-decoration: none;
+      font-weight: 600;
+    }
+    .source a:hover { color: var(--gold); }
+
+    .ja {
+      font-family: "Noto Serif JP", "Hiragino Mincho ProN", "Yu Mincho", serif;
+      font-size: 1.08rem;
+      line-height: 2;
+      letter-spacing: 0.03em;
+      color: #ebe7e1;
+    }
+    .ja p { margin: 0 0 1.15em; }
+    .ja p:last-child { margin-bottom: 0; }
+
+    .continue {
+      margin-top: 1.25rem;
+      padding-top: 1rem;
+      border-top: 1px solid var(--line);
+      font-size: 0.86rem;
+    }
+    .continue a {
+      color: var(--white);
+      text-decoration: none;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      border-bottom: 2px solid var(--shu);
+      padding-bottom: 0.1rem;
+    }
+    .continue a:hover {
+      color: var(--shu-hot);
+      border-bottom-color: var(--gold);
+    }
+
+    footer.site {
+      max-width: var(--measure);
+      margin-top: 1.75rem;
+      color: var(--ink-mute);
+      font-size: 0.72rem;
+      letter-spacing: 0.06em;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+    footer.site::before {
+      content: "";
+      width: 1.25rem;
+      height: 2px;
+      background: var(--shu);
+    }
+  </style>
+</head>
+<body>
+  <div class="stage-bar" aria-hidden="true"></div>
+
+  <div class="wrap">
+    <aside class="sidebar">
+      <div class="brand">
+        <span class="brand-mark">読解<em>幕</em></span>
+      </div>
+      <p class="brand-sub">Kabuki Digest · <a href="../../history/" style="color:#d4a017;text-decoration:none;">History</a></p>
+      <p class="meta">2026-09-24 · America/Sao_Paulo</p>
+      <div class="stat-row">
+        <div class="stat hot"><strong>~48</strong> min</div>
+        <div class="stat"><strong>7</strong> peças</div>
+        <div class="stat">N2–N1</div>
+      </div>
+
+      <nav class="toc" aria-label="Índice">
+        <h2>本日の演目</h2>
+        <ol>
+          <li>
+            <a href="#p1">
+              <span class="t-title">淀城・薬研堀</span>
+              <span class="t-min">8′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p2">
+              <span class="t-title">王賜銘鉄剣</span>
+              <span class="t-min">8′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p3">
+              <span class="t-title">香坂山・石刃</span>
+              <span class="t-min">7′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p4">
+              <span class="t-title">武蔵・最強伝説</span>
+              <span class="t-min">7′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p5">
+              <span class="t-title">京都・清めと祇園</span>
+              <span class="t-min">6′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p6">
+              <span class="t-title">L'Arc・35周年</span>
+              <span class="t-min">6′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p7">
+              <span class="t-title">Claude×Cursor分担</span>
+              <span class="t-min">6′</span>
+            </a>
+          </li>
+        </ol>
+      </nav>
+      <p class="note">Triage: sem fofoca, sem política eleitoral, sem manual de construção. Mix: Sengoku · arqueologia/Yamato · paleolítico · Musashi · matsuri/mito · L'Arc · AI tools.</p>
+    </aside>
+
+    <main>
+      <div class="digest-banner">
+        <span class="tag">今日</span>
+        <span>2026-09-24 — Yodo (moat de Mitsuhide pós-Honnoji), espada "Oshi" vira bem cultural, Kosakayama ~36.800a (sapiens no Japão), Musashi vs lenda (Rekishi Tantei), Kyoto limpeza/Gion (epidemia, não carpintaria), L'Arc 35 anos (tetsuya), Claude Code×Cursor workflow. Zero fofoca, zero manual de construção.</span>
+      </div>
+
+      <header class="hero">
+        <div class="kicker">Daily Japanese Digest</div>
+        <h1 lang="ja">淀の堀と王賜の剣、サピエンス到来をほどく、ひと朝の読解</h1>
+        <p lang="ja">桂川の薬研堀が光秀の淀城を浮かび上がらせる。市原の「王賜」銘鉄剣が国の重文へ。佐久・香坂山が三万六千年前の石刃でサピエンス到来を示す。武蔵の強さを史料と実験で測る。京都の夏は清めと疫病退散の歴史。ラルク三十五周年の現在地。Ｃｌａｕｄｅ　ＣｏｄｅとＣｕｒｓｏｒの役割分担。推定合計 ~48 分。</p>
+      </header>
+
+      <article class="piece" id="p1">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip">淀城</span><span class="chip">光秀</span><span class="chip">本能寺</span><span class="chip">戦国</span>
+            <span class="chip interest">★★★★★</span>
+            <span class="chip mins">~8 min</span>
+          </div>
+          <h2 lang="ja">光秀の拠点か——伏見・桂川で巨大な薬研堀、室町期の淀城跡が初めて出土</h2>
+          <p class="why">Após Honnoji: V-shaped yakata-bori no Katsura aponta o castelo de Yodo que Mitsuhide usou contra Hideyoshi — política militar, não blueprint.</p>
+          <div class="source">
+            <span>読売新聞</span>
+            <a href="https://www.yomiuri.co.jp/local/kansai/news/20260831-GYO1T00054/" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <div class="ja" lang="ja">
+          <p>京都市伏見区の桂川河川敷で、室町時代の淀城のものとみられる高い防御性を備えた堀跡が初めて出土した。市埋蔵文化財研究所などが二〇二六年八月三十日に発表した。何度も掘り返した跡があり、本能寺の変（一五八二年）の直後、明智光秀が羽柴秀吉と戦うための拠点とした城などの可能性がある。近くには秀吉が一五八八年に整備し、側室の茶々（淀殿）が住んだ「淀古城」の推定地もあり、周辺が重要な軍事拠点だったことが裏付けられた。</p>
+          <p>同研究所が二〇二一年から二〇二六年五月にかけて調査。堀は深さ二・一～二・七メートル、幅三・九～五・三メートルで、南北約百メートルにわたって確認された。断面がＶ字状となった「薬研堀」で、出土した土器などから一六世紀初頭には造られ、一六世紀後半まで利用されたとみられる。深さや区画の大きさは、これまで周辺で見つかった中世土豪の施設の規模を上回り、城の一画であると判断された。</p>
+          <p>淀の地は平安時代から水運の拠点として栄え、係争の場になった。文献では一五〇四年に「淀の城」が初めて登場し、数々の戦国武将が軍事拠点として利用し、光秀が本能寺の変後に改修した記録も残る。現在の淀城跡は、江戸時代に築かれた別の城のものだ。</p>
+          <p>調査地の約三百メートル東にある淀古城推定地は、淀殿が秀吉の子・鶴松を出産した地として知られる。同城の確かな遺構は見つかっていないが、今回の調査地で大きな溝や金箔瓦一点も出土しており、秀吉が淀城を活用して整備した可能性もあるという。中井均・滋賀県立大名誉教授は「素掘りの極めて巨大な薬研堀で、記録にある光秀らが利用した淀の城跡とみて問題ない」と評する。</p>
+          </div>
+          <p class="continue"><a href="https://www.yomiuri.co.jp/local/kansai/news/20260831-GYO1T00054/" target="_blank" rel="noopener">続きを読む · 読売新聞</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p2">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip">王賜銘鉄剣</span><span class="chip">古墳</span><span class="chip">ヤマト王権</span><span class="chip">市原</span>
+            <span class="chip interest">★★★★★</span>
+            <span class="chip mins">~8 min</span>
+          </div>
+          <h2 lang="ja">「王賜」——ヤマトの王が東国の武人に授けた金錯銘鉄剣が国の重要文化財に</h2>
+          <p class="why">Espada com inscrição em ouro "o rei concede": ligação Yamato–Ichihara no séc. V; agora bem cultural nacional — história política, não tipologias.</p>
+          <div class="source">
+            <span>市原市／市原歴史博物館</span>
+            <a href="https://prtimes.jp/main/html/rd/p/000000190.000127749.html" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <div class="ja" lang="ja">
+          <p>千葉県市原市の稲荷台一号墳から出土した金錯銘鉄剣——通称「王賜」銘鉄剣——が、令和八年三月二十六日の国の文化審議会で重要文化財（考古資料）に指定するよう答申された。国産の銘文鉄剣としては国内最古級の貴重な資料で、考古資料の重文指定は市内初、県内でも五件目となる。</p>
+          <p>鉄剣は復元長約七十三センチ。刃の持ち手寄りの部分に、Ｘ線写真で金象眼の銘文が発見された。片面に「王賜□□敬□（安）」、もう片面に「此廷□□□□」と読める。「王からこのすばらしい鉄剣を授けるので、謹んで持っていなさい」といった趣旨で、ヤマト王権の「王」といちはらのつながりを示す。</p>
+          <p>墳丘直径二十六メートルの円墳の埋葬施設から、短甲・剣・鉄鏃・刀子・大刀・胡籙などとともに発見された。須恵器の特徴から古墳の構築は五世紀中葉から後葉の早い段階とされる。国内の発掘で出土した銘文刀剣類は他に七例あるが、「王賜」銘鉄剣はわが国で製作された最古の例で、実用的な量産品ではなく特注品であることが分かってきた。</p>
+          <p>昭和五十一年・五十二年の調査で出土し、昭和六十二年に銘を発見。国立歴史民俗博物館で常設展示されたのち、市原歴史博物館の目玉となってきた。一緒に出土した金属製品や土器が「附」として指定対象に含まれ、年代と王権との関係を読む鍵になる。東国の有力武人が畿内王権に仕え、功績で剣を下賜された——権力の贈与が文字と金で刻まれた物語だ。</p>
+          </div>
+          <p class="continue"><a href="https://prtimes.jp/main/html/rd/p/000000190.000127749.html" target="_blank" rel="noopener">続きを読む · 市原市／市原歴史博物館</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p3">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip">香坂山遺跡</span><span class="chip">旧石器</span><span class="chip">サピエンス</span><span class="chip">石刃</span>
+            <span class="chip interest">★★★★★</span>
+            <span class="chip mins">~7 min</span>
+          </div>
+          <h2 lang="ja">三万六千八百年前——香坂山の石刃がホモ・サピエンスの列島到来を示す</h2>
+          <p class="why">NatGeo: Kosakayama (Saku) ~36.800 BP — grandes lâminas, microlâminas e lascas pontiagudas iguais ao IUP eurasiático; sapiens no Japão.</p>
+          <div class="source">
+            <span>佐久市／文化庁「発掘された日本列島2026」</span>
+            <a href="https://www.city.saku.nagano.jp/bunka/bunkazai/bunkazaijimusyo/kousakayama_shiseki.html" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <div class="ja" lang="ja">
+          <p>長野県佐久市香坂、八風山西南麓・標高千百四十メートルの尾根上にある香坂山遺跡。大型石刃・小石刃・尖頭形剥片という、ユーラシア大陸の初期後期旧石器時代（ＩＵＰ）と共通する石器組成が、約三万六千八百年前の地層から出土した。日本列島における石刃石器群としては最古級だ。</p>
+          <p>一九九七年、上信越道の換気塔建設に伴う調査で姶良Ｔｎ火山灰（約三万年前）より下位から石刃が見つかったが、当時の編年に当てはめにくく評価は保留された。二〇二〇年、奈良文化財研究所の国武貞克氏が再調査し、大陸初期後期旧石器と共通する組成を確認。二〇二二年からは佐久市が範囲確認調査を進め、尾根上約二千二百五十平方メートルが遺跡範囲と判明した。</p>
+          <p>これまで列島の石刃は、大陸からの技術伝播か列島内の自生かが不明だった。香坂山で大陸と同型の石器群が揃ったことで、起源がユーラシア大陸にあったことが分かった。ホモ・サピエンスの日本到来ルートを示す重要資料として、令和七年九月に国史跡指定。文化庁主催「発掘された日本列島二〇二六」でも新発見考古速報として巡回展示中だ。</p>
+          <p>ガラス質黒色安山岩が採れる八風山周辺には、旧石器から縄文にかけての石器製作遺跡群が広がる。尾根の風と石——三万年以上前の人々が大陸と同じ技術で道具を作り、列島に足を踏み入れた痕跡が、いま佐久の高台で読める。</p>
+          </div>
+          <p class="continue"><a href="https://www.city.saku.nagano.jp/bunka/bunkazai/bunkazaijimusyo/kousakayama_shiseki.html" target="_blank" rel="noopener">続きを読む · 佐久市／文化庁「発掘された日本列島2026」</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p4">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip">宮本武蔵</span><span class="chip">歴史探偵</span><span class="chip">小次郎</span><span class="chip">剣術</span>
+            <span class="chip interest">★★★★★</span>
+            <span class="chip mins">~7 min</span>
+          </div>
+          <h2 lang="ja">宮本武蔵——史料は薄い、「最強伝説」を作家・古武術・スポーツ解析で測る</h2>
+          <p class="why">Musashi: quase sem fontes — Rekishi Tantei testa a lenda com escritor, kobudo e análise esportiva; tsubame-gaeshi é reproduzível?</p>
+          <div class="source">
+            <span>MANTANWEB／NHK歴史探偵</span>
+            <a href="https://mantan-web.jp/article/20260714dog00m200027000a.html" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <div class="ja" lang="ja">
+          <p>「史上最強の男」と語られる宮本武蔵だが、同時代の確実な史料はほとんどなく、その実像は謎に包まれている。ＮＨＫ「歴史探偵」は二〇二六年七月十五日放送回で「宮本武蔵　最強伝説の真実」を特集し、作家・古武術家・スポーツ解析など複数の角度から武蔵の強さに迫った。</p>
+          <p>ゲストは武蔵の激闘を描いた小説『チャンバラ』の著者・佐藤賢一さん。佐藤さんの推理を交えつつ、専門家の知見を総動員して検証する。ライバル・佐々木小次郎の必殺技とされる「つばめ返し」は再現可能か。それを打ち破ったとされる武蔵の秘策とは何か——物語と身体技法のあいだを、実験でつなぐ試みだ。</p>
+          <p>武蔵のイメージは後世の軍記や小説、映画で増幅されてきた。二天一流の開祖、巌流島の決闘、五輪書——有名なエピソードほど史料との距離が大きい。番組は「最強」というラベルを一度外し、残された記述と武術・運動科学の知見で、何が検証可能かを切り分ける。</p>
+          <p>伝説を否定するためではなく、どこまでが物語でどこからが身体の論理かを測ることに意味がある。武蔵を「読む」とは、強さの神話をそのまま飲むことではなく、史料の薄さと想像の厚さを同時に見ることだ。</p>
+          </div>
+          <p class="continue"><a href="https://mantan-web.jp/article/20260714dog00m200027000a.html" target="_blank" rel="noopener">続きを読む · MANTANWEB／NHK歴史探偵</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p5">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip">祇園祭</span><span class="chip">清め</span><span class="chip">京都</span><span class="chip">疫病</span>
+            <span class="chip interest">★★★★☆</span>
+            <span class="chip mins">~6 min</span>
+          </div>
+          <h2 lang="ja">妖しの京都、清めの夏——祇園祭は疫病退散の祈りから始まった</h2>
+          <p class="why">Gion e chinowa: limpeza de kegare e exorcismo de epidemia — matsuri como história social, sem carpintaria de hoko.</p>
+          <div class="source">
+            <span>新日本風土記（NHK）／解説まとめ</span>
+            <a href="https://terukosan.com/shin-nihon-fudoki-ayashi-kyoto-kiyome-meaning-20260904/" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <div class="ja" lang="ja">
+          <p>ＮＨＫ「新日本風土記　妖しの京都　清めの夏」（二〇二四年制作、二〇二六年九月再放送）は、観光都市の華やかさではなく、疫病・飢饉・戦禍が繰り返された都で「死」と「穢れ」をどう鎮めてきたかをたどる。語りは松たか子。タイトルの「妖し」は怪談紹介ではなく、見えないものへの畏れが暮らしに残る感覚を指す。</p>
+          <p>夏になると人々は茅の輪をくぐり、半年の穢れを清める。厄を祓う和菓子・水無月も同じ季節に並ぶ。旅行者の目には「神社の大きな輪」と「三角形の和菓子」が別々に映るが、番組の軸で見ると、どちらも身体と暮らしにたまった穢れを祓い、次の半年の安寧を願う行為としてつながる。</p>
+          <p>祇園祭は豪華な山鉾巡行で知られるが、原点は荒ぶる神を祀り、疫病を退散させたいという祈りにある。華やかな表舞台だけでなく、町内で受け継がれる準備まで含めて「災厄を鎮める営み」として夏の祭りを読み直すのがこの回のポイントだ。</p>
+          <p>死や穢れを排除するのではなく、受け入れ、畏れ、祈りと祭りで鎮める——京都の「清め」は、華美な祭りの裏側にある社会の記憶でもある。建築の仕組みではなく、人々が何を恐れて何を願ったかを読む入口になる。</p>
+          </div>
+          <p class="continue"><a href="https://terukosan.com/shin-nihon-fudoki-ayashi-kyoto-kiyome-meaning-20260904/" target="_blank" rel="noopener">続きを読む · 新日本風土記（NHK）／解説まとめ</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p6">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip">L'Arc-en-Ciel</span><span class="chip">tetsuya</span><span class="chip">35周年</span><span class="chip">サマソニ</span>
+            <span class="chip interest">★★★★☆</span>
+            <span class="chip mins">~6 min</span>
+          </div>
+          <h2 lang="ja">結成三十五周年——tetsuyaが語るＬ’Ａｒｃ－ｅｎ－Ｃｉｅｌの現在地とサマソニ</h2>
+          <p class="why">L'Arc 35 anos: tetsuya sobre UNDERGROUND (raridades), Summersonic headliner e o equilíbrio hyde/produtor.</p>
+          <div class="source">
+            <span>Rolling Stone Japan</span>
+            <a href="https://rollingstonejapan.com/articles/detail/44851" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <div class="ja" lang="ja">
+          <p>二〇二六年、結成三十五周年を迎えたＬ’Ａｒｃ－ｅｎ－Ｃｉｅｌ。サマーソニック二〇二六では八月十四日大阪・十六日東京でヘッドライナーを務め、十月九日から全国七カ所十六公演の「３５ｔｈ　Ｌ’Ａｎｎｉｖｅｒｓａｒｙ　ＴＯＵＲ」が始まる。Ｒｏｌｌｉｎｇ　Ｓｔｏｎｅ　Ｊａｐａｎがリーダー・ｔｅｔｓｕｙａに現在地を聞いた。</p>
+          <p>直前の「ＡＲＥＮＡ　ＴＯＵＲ　２０２４　ＵＮＤＥＲＧＲＯＵＮＤ」は、あまり演奏してこなかったレア曲に光を当てる挑戦だった。タイトルとコンセプトはｈｙｄｅの発案。ｔｅｔｓｕｙａは「マニアックに振り切るだけでなく、初めて観る人にも届くバランス」を求め、演出の中心を任されたと振り返る。</p>
+          <p>これまでライブの演出はｈｙｄｅ中心で、「ヴォーカルがやりやすいように」と任せてきた。ＵＮＤＥＲＧＲＯＵＮＤではプロデューサー気質が前面に出た。「自分が何をやりたいか」だけでなく、「ファンがどこで喜ぶか」を先に考える、と語る。レア曲中心でもシングルをゼロにはせず、三部構成と映像・照明で門戸を狭め過ぎない形にまとめた。</p>
+          <p>サマソニのヘッドライナーは通例洋楽アーティストだが、三十五年の楽曲群と没入型のコンサート表現がアジアのロック・レジェンドとして説得力を持つ。九〇年代と二〇二〇年代が同じセットで混ざる——周年は「昔話」ではなく、いまのバランス感覚を試す場でもある。</p>
+          </div>
+          <p class="continue"><a href="https://rollingstonejapan.com/articles/detail/44851" target="_blank" rel="noopener">続きを読む · Rolling Stone Japan</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p7">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip">Claude Code</span><span class="chip">Cursor</span><span class="chip">React</span><span class="chip">AI開発</span>
+            <span class="chip interest">★★★★☆</span>
+            <span class="chip mins">~6 min</span>
+          </div>
+          <h2 lang="ja">視覚はＣｕｒｓｏｒ、構造はＣｌａｕｄｅ　Ｃｏｄｅ——役割分担で手が止まらない開発</h2>
+          <p class="why">Guia 2026: UI fina no Cursor Composer; scaffold, testes e git no Claude Code CLI — CLAUDE.md + stack React/FastAPI.</p>
+          <div class="source">
+            <span>Negi AI Lab</span>
+            <a href="https://ai.negi-lab.com/posts/claude-code-cursor-ai-coding-workflow-guide/" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <div class="ja" lang="ja">
+          <p>Ｃｕｒｓｏｒだけで完結させる人も多いが、実務ではＣｌａｕｄｅ　Ｃｏｄｅ（ＣＬＩ）との併用が効く、と二〇二六年八月のガイドは説く。Ｃｕｒｓｏｒはエディタ上の編集と差分確認に強く、ターミナル操作や複数ディレクトリを跨ぐ調査・依存解決には弱い面がある。Ｃｌａｕｄｅ　Ｃｏｄｅはテスト実行・パッケージ導入・Ｇｉｔまで対話で任せられるエージェントだ。</p>
+          <p>役割の切り方は明快だ。「視覚的な微調整はＣｕｒｓｏｒ」「構造設計・環境構築・デバッグはＣｌａｕｄｅ　Ｃｏｄｅ」。記事ではＦａｓｔＡＰＩ＋Ｒｅａｃｔ（Ｖｉｔｅ）の要約アプリを例に、まずＣＬＡＵＤＥ．ｍｄでスタックとルールを固定し、Ｃｌａｕｄｅ　Ｃｏｄｅに雛形作成を投げ、ＵＩの仕上げをＣｕｒｓｏｒのＣｏｍｐｏｓｅｒに渡す流れを示す。</p>
+          <p>落とし穴も具体的だ。ｎｏｄｅ＿ｍｏｄｕｌｅｓをインデックスさせるとＣｌａｕｄｅ　Ｃｏｄｅが止まる。ＡＰＩキーは．ｅｎｖと．ｇｉｔｉｇｎｏｒｅを明示指示しないと漏洩リスクがある。権限はｓｕｄｏではなくｎｖｍ配下に置く——ＡＩがファイル保存ループに入る原因になりやすい。</p>
+          <p>片方でも動くが、Ｃｕｒｓｏｒのターミナルに自律エージェントはなく、Ｃｌａｕｄｅ　Ｃｏｄｅ単体では微調整の視覚確認がしづらい。競合ではなく組み合わせ——Ｄｅｌｉｔｏｎの日常スタックにもそのまま刺さる、短い運用メモだ。</p>
+          </div>
+          <p class="continue"><a href="https://ai.negi-lab.com/posts/claude-code-cursor-ai-coding-workflow-guide/" target="_blank" rel="noopener">続きを読む · Negi AI Lab</a></p>
+        </div>
+      </article>
+
+      <footer class="site">読解幕 · 2026-09-24 · ~48 min · 3951字程度の本文抜粋</footer>
+    </main>
+  </div>
+</body>
+</html>

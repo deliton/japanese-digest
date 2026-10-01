@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>読解幕 · 2026-09-25 · Japanese Digest</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Noto+Serif+JP:wght@400;600;700&family=Shippori+Mincho:wght@500;700&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --bg: #0a0a0a;
+      --bg-2: #121212;
+      --bg-card: #161616;
+      --ink: #f5f5f5;
+      --ink-dim: #a8a29a;
+      --ink-mute: #6b6560;
+      --shu: #c41e3a;
+      --shu-hot: #e11d48;
+      --shu-deep: #8b1228;
+      --gold: #d4a017;
+      --gold-soft: #c9a227;
+      --white: #fafafa;
+      --line: #2a2a2a;
+      --line-hot: rgba(196, 30, 58, 0.45);
+      --measure: 42rem;
+      --radius: 4px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: "Noto Sans JP", "Hiragino Sans", "Yu Gothic", system-ui, sans-serif;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .stage-bar {
+      height: 6px;
+      background: repeating-linear-gradient(
+        90deg,
+        var(--shu) 0 48px,
+        var(--white) 48px 56px,
+        #111 56px 64px,
+        var(--gold) 64px 72px,
+        #111 72px 88px
+      );
+    }
+
+    .wrap {
+      width: min(100% - 2rem, 74rem);
+      margin: 0 auto;
+      padding: 2rem 0 4.5rem;
+      display: grid;
+      grid-template-columns: 15.5rem 1fr;
+      gap: 2.75rem;
+      align-items: start;
+    }
+
+    @media (max-width: 900px) {
+      .wrap { grid-template-columns: 1fr; gap: 1.5rem; padding-top: 1.25rem; }
+      .sidebar { position: static !important; }
+    }
+
+    .sidebar { position: sticky; top: 1.25rem; }
+
+    .brand {
+      display: flex;
+      align-items: baseline;
+      gap: 0.55rem;
+      margin: 0 0 0.35rem;
+    }
+    .brand-mark {
+      font-family: "Shippori Mincho", "Noto Serif JP", serif;
+      font-size: 1.85rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      color: var(--white);
+      line-height: 1;
+    }
+    .brand-mark em {
+      font-style: normal;
+      color: var(--shu);
+    }
+    .brand-sub {
+      font-size: 0.65rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-weight: 700;
+    }
+
+    .meta {
+      color: var(--ink-mute);
+      font-size: 0.8rem;
+      margin: 0 0 1.25rem;
+    }
+
+    .stat-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-bottom: 1.35rem;
+    }
+    .stat {
+      border: 1px solid var(--line);
+      background: var(--bg-2);
+      padding: 0.32rem 0.65rem;
+      font-size: 0.72rem;
+      color: var(--ink-dim);
+      border-radius: var(--radius);
+    }
+    .stat strong { color: var(--white); font-weight: 700; }
+    .stat.hot {
+      border-color: var(--line-hot);
+      color: var(--shu-hot);
+    }
+    .stat.hot strong { color: var(--shu-hot); }
+
+    .toc {
+      background: var(--bg-card);
+      border: 1px solid var(--line);
+      border-left: 3px solid var(--shu);
+      padding: 1rem 0.85rem 0.85rem;
+    }
+    .toc h2 {
+      margin: 0 0 0.85rem 0.35rem;
+      font-size: 0.68rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-weight: 700;
+    }
+    .toc ol {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      counter-reset: toc;
+    }
+    .toc li { margin: 0 0 0.2rem; }
+    .toc a {
+      display: grid;
+      grid-template-columns: 1.5rem 1fr auto;
+      gap: 0.45rem;
+      align-items: start;
+      text-decoration: none;
+      color: inherit;
+      padding: 0.5rem 0.4rem;
+      border-radius: var(--radius);
+      transition: background 0.15s ease, color 0.15s ease;
+    }
+    .toc a:hover { background: #1f1f1f; }
+    .toc a:hover .t-title { color: var(--white); }
+    .toc a::before {
+      counter-increment: toc;
+      content: counter(toc, decimal-leading-zero);
+      font-family: "Shippori Mincho", serif;
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--shu);
+      line-height: 1.35;
+    }
+    .t-title {
+      font-size: 0.84rem;
+      line-height: 1.35;
+      color: var(--ink-dim);
+      transition: color 0.15s ease;
+    }
+    .t-min {
+      font-size: 0.68rem;
+      color: var(--ink-mute);
+      padding-top: 0.12rem;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .note {
+      margin-top: 1rem;
+      font-size: 0.74rem;
+      color: var(--ink-mute);
+      line-height: 1.5;
+    }
+
+    main { max-width: var(--measure); }
+
+    .digest-banner {
+      display: flex;
+      gap: 0.75rem;
+      align-items: flex-start;
+      background: linear-gradient(90deg, rgba(196,30,58,0.18), rgba(212,160,23,0.08));
+      border: 1px solid var(--line-hot);
+      padding: 0.85rem 1rem;
+      margin-bottom: 1.5rem;
+      font-size: 0.86rem;
+      color: var(--ink-dim);
+    }
+    .digest-banner .tag {
+      flex-shrink: 0;
+      background: var(--shu);
+      color: #fff;
+      font-size: 0.65rem;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      padding: 0.28rem 0.5rem;
+      border-radius: var(--radius);
+    }
+
+    .hero {
+      margin-bottom: 2rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid var(--line);
+      position: relative;
+    }
+    .hero::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -1px;
+      width: 4.5rem;
+      height: 2px;
+      background: var(--shu);
+    }
+    .kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.7rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--shu-hot);
+      font-weight: 800;
+      margin-bottom: 0.85rem;
+    }
+    .kicker::before {
+      content: "◆";
+      font-size: 0.55rem;
+      color: var(--gold);
+    }
+    .hero h1 {
+      font-family: "Shippori Mincho", "Noto Serif JP", serif;
+      font-size: clamp(1.85rem, 4vw, 2.55rem);
+      font-weight: 700;
+      line-height: 1.2;
+      margin: 0 0 0.75rem;
+      color: var(--white);
+      letter-spacing: 0.02em;
+    }
+    .hero p {
+      margin: 0;
+      color: var(--ink-dim);
+      font-size: 0.98rem;
+      max-width: 36rem;
+    }
+
+    article.piece {
+      background: var(--bg-card);
+      border: 1px solid var(--line);
+      margin-bottom: 1.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+    article.piece::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: linear-gradient(90deg, var(--shu) 0%, var(--shu) 35%, var(--gold) 35%, var(--gold) 42%, transparent 42%);
+    }
+
+    .piece-inner { padding: 1.6rem 1.55rem 1.35rem; }
+
+    .piece-head {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-bottom: 0.85rem;
+    }
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      border: 1px solid var(--line);
+      background: #111;
+      color: var(--ink-dim);
+      padding: 0.22rem 0.6rem;
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      border-radius: var(--radius);
+    }
+    .chip.interest {
+      border-color: var(--shu);
+      color: var(--shu-hot);
+      background: rgba(196, 30, 58, 0.12);
+    }
+    .chip.mins {
+      border-color: var(--gold);
+      color: var(--gold);
+      background: transparent;
+    }
+
+    .piece h2 {
+      font-family: "Noto Serif JP", "Shippori Mincho", "Yu Mincho", serif;
+      font-size: 1.38rem;
+      font-weight: 700;
+      line-height: 1.5;
+      margin: 0 0 0.6rem;
+      color: var(--white);
+      letter-spacing: 0.02em;
+    }
+
+    .why {
+      margin: 0 0 1rem;
+      color: var(--ink-dim);
+      font-size: 0.9rem;
+      border-left: 2px solid var(--gold);
+      padding-left: 0.85rem;
+    }
+
+    .source {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.65rem 1.1rem;
+      font-size: 0.76rem;
+      color: var(--ink-mute);
+      margin-bottom: 1.25rem;
+    }
+    .source a {
+      color: var(--shu-hot);
+      text-decoration: none;
+      font-weight: 600;
+    }
+    .source a:hover { color: var(--gold); }
+
+    .ja {
+      font-family: "Noto Serif JP", "Hiragino Mincho ProN", "Yu Mincho", serif;
+      font-size: 1.08rem;
+      line-height: 2;
+      letter-spacing: 0.03em;
+      color: #ebe7e1;
+    }
+    .ja p { margin: 0 0 1.15em; }
+    .ja p:last-child { margin-bottom: 0; }
+
+    .continue {
+      margin-top: 1.25rem;
+      padding-top: 1rem;
+      border-top: 1px solid var(--line);
+      font-size: 0.86rem;
+    }
+    .continue a {
+      color: var(--white);
+      text-decoration: none;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      border-bottom: 2px solid var(--shu);
+      padding-bottom: 0.1rem;
+    }
+    .continue a:hover {
+      color: var(--shu-hot);
+      border-bottom-color: var(--gold);
+    }
+
+    footer.site {
+      max-width: var(--measure);
+      margin-top: 1.75rem;
+      color: var(--ink-mute);
+      font-size: 0.72rem;
+      letter-spacing: 0.06em;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+    footer.site::before {
+      content: "";
+      width: 1.25rem;
+      height: 2px;
+      background: var(--shu);
+    }
+  </style>
+</head>
+<body>
+  <div class="stage-bar" aria-hidden="true"></div>
+
+  <div class="wrap">
+    <aside class="sidebar">
+      <div class="brand">
+        <span class="brand-mark">読解<em>幕</em></span>
+      </div>
+      <p class="brand-sub">Kabuki Digest · <a href="../../history/" style="color:#d4a017;text-decoration:none;">History</a></p>
+      <p class="meta">2026-09-25 · America/Sao_Paulo</p>
+      <div class="stat-row">
+        <div class="stat hot"><strong>~49</strong> min</div>
+        <div class="stat"><strong>7</strong> peças</div>
+        <div class="stat">N2–N1</div>
+      </div>
+
+      <nav class="toc" aria-label="Índice">
+        <h2>本日の演目</h2>
+        <ol>
+          <li>
+            <a href="#p1">
+              <span class="t-title">明応の政変</span>
+              <span class="t-min">9′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p2">
+              <span class="t-title">冠遺跡・尖頭器</span>
+              <span class="t-min">8′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p3">
+              <span class="t-title">イイハコ鎌倉</span>
+              <span class="t-min">7′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p4">
+              <span class="t-title">深大寺・白鳳仏</span>
+              <span class="t-min">8′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p5">
+              <span class="t-title">BABYMETALキュレ</span>
+              <span class="t-min">7′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p6">
+              <span class="t-title">南京町・中秋節</span>
+              <span class="t-min">5′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p7">
+              <span class="t-title">DIR EN GREY30年</span>
+              <span class="t-min">5′</span>
+            </a>
+          </li>
+        </ol>
+      </nav>
+      <p class="note">Triage: sem fofoca, sem política eleitoral, sem manual de construção. Mix: Muromachi/Sengoku · paleolítico · Kamakura · Hakuhō mystery · BABYMETAL · Kobe matsuri · DIR EN GREY.</p>
+    </aside>
+
+    <main>
+      <div class="digest-banner">
+        <span class="tag">今日</span>
+        <span>2026-09-25 — Meio (Hosokawa Masamoto: Muromachi→Sengoku), Kanmuri ~42.300a (ponta + ética pós-fraude), Kamakura 1185 vs 1192, Jindai-ji Hakuhō mystery, BABYMETAL curates Sonic Metal, Nankinmachi Zhongqiu (hoje), DIR EN GREY 30th. Zero fofoca, zero manual de construção.</span>
+      </div>
+
+      <header class="hero">
+        <div class="kicker">Daily Japanese Digest</div>
+        <h1 lang="ja">政変と尖頭器、イイハコと白鳳仏をほどく、ひと朝の読解</h1>
+        <p lang="ja">細川政元の明応の政変が室町を戦国へ押し出す。広島・冠の尖頭器が四万二千年前の列島到達を揺さぶる。鎌倉幕府はイイクニかイイハコか。深大寺の白鳳仏はなぜ関東にあるのか。ＢＡＢＹＭＥＴＡＬがサマソニのメタルを定義し、南京町では中秋節が始まる。ＤＩＲ　ＥＮ　ＧＲＥＹは列島三十周年。推定合計 ~49 分。</p>
+      </header>
+
+      <article class="piece" id="p1">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip">明応の政変</span><span class="chip">細川政元</span><span class="chip">室町</span><span class="chip">戦国</span>
+            <span class="chip interest">★★★★★</span>
+            <span class="chip mins">~9 min</span>
+          </div>
+          <h2 lang="ja">室町から戦国へ——細川政元の明応の政変が「ルール破壊」の起点になった理由</h2>
+          <p class="why">Quando começa o Sengoku? Não Onin sozinho — o golpe Meio (1493) de Hosokawa Masamoto quebra o tabu e esvazia a autoridade do shogun.</p>
+          <div class="source">
+            <span>AERA Books／朝日新聞出版</span>
+            <a href="https://dot.asahi.com/books/articles/-/257226" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <div class="ja" lang="ja">
+          <p>教科書では、応仁の乱の終結から織田信長の上洛までの約百年が薄い。室町は終わり、いきなり戦国が始まる——そのあいだに何が起きたのか。室町末期に詳しい古野貢教授は、著書『オカルト武将・細川政元』で、一四九三年の明応の政変こそが戦国始動の大きな起点だと説く。</p>
+          <p>応仁の乱後もしばらく、将軍と幕府の影響力には実効性が残っていた。京都を中心に西は岡山・広島、東は富山・名古屋あたり、さらに関東の鎌倉府まで、足利将軍の権威と機能は存続していた。地方で自力解決が始まっても、決着がつかなければ現代の最高裁のように幕府へ持ち込む動きがあった。</p>
+          <p>しかし政元が起こした明応の政変で将軍と幕府の権威は著しく下落し、地方の諸勢力は「将軍の決裁は役に立たない」と見なす時代に入る。一番大きいのは、百数十年維持されてきた政治的ルールを壊し、「タブーを乗り越えてよい」という前例を作ったことだ。三管領家や守護という序列社会の前提を、政元が踏み越えてしまった。</p>
+          <p>その結果、各地に戦国大名が現れ、今川氏のように「今川仮名目録」で独自法度を宣言する。中央の幕府法を無視して統治する——それが戦国のあり方だ。将軍追放のフォーマット自体は残した中途半端さへの批判もあるが、嘉吉の乱や応仁の乱と違い、政権構想と実現可能性のある計画に基づいて動いた点が、変化の起点として評価される。</p>
+          </div>
+          <p class="continue"><a href="https://dot.asahi.com/books/articles/-/257226" target="_blank" rel="noopener">続きを読む · AERA Books／朝日新聞出版</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p2">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip">冠遺跡群</span><span class="chip">旧石器</span><span class="chip">尖頭器</span><span class="chip">サピエンス</span>
+            <span class="chip interest">★★★★★</span>
+            <span class="chip mins">~8 min</span>
+          </div>
+          <h2 lang="ja">四万二千三百年前——広島・冠遺跡群の尖頭器が列島到達の年代を揺さぶる</h2>
+          <p class="why">NatGeo: Kanmuri (Hatsukaichi) — ponta ~42.300 BP; se confirmado, sapiens no arquipélago ~5 mil anos antes. O arqueólogo insiste em certeza, não em "quanto mais antigo melhor" (lição do escândalo de falsificação).</p>
+          <div class="source">
+            <span>時事通信</span>
+            <a href="https://www.jiji.com/jc/article?g=soc&k=2026092200335" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <div class="ja" lang="ja">
+          <p>広島県廿日市市吉和の冠遺跡群で二〇二四年、日本最古とみられる石器が見つかり、発掘はいまも続く。主導する奈良文化財研究所の国武貞克主任研究員は「世界とつながる日本随一の遺跡。日本列島における人類の歴史を探りたい」と語る。一般公開には市民が集まり、関連商品も生まれ、地域おこしにもつながっている。</p>
+          <p>現生人類は三十万〜二十万年前にアフリカで出現し、ユーラシアを経て世界へ広がった。国武さんは国内外の石器発掘で列島進出の足跡をたどる。二〇二三年に冠で調査を始め、翌年「尖頭器」が出土。放射性炭素年代測定で約四万二千三百年前と判明した。従来、人類の列島到達は約三万八千年前ごろとされてきたが、確定すれば五千年近くさかのぼる。</p>
+          <p>大きな発見だが、国武さんは「古ければ良いという価値観は大きな間違い」と釘を刺す。念頭にあるのは二〇〇〇年に発覚した旧石器捏造問題だ。「大事なのは確かさ。国内で古さを競うのではなく、世界地図の中に位置付けることで列島の歴史を知りたい」と力を込める。</p>
+          <p>今月の一般公開には二週間で延べ約六百五十人が訪れた。小学四年の児童は「四万年前は想像できないけどロマンチック」と目を輝かせ、地元商店では石器キャラクターのどら焼きも登場した。松本太郎市長は教育・観光資源としての活用を目指すという。年代の数字だけでなく、「確かさ」という方法論が物語の芯にある。</p>
+          </div>
+          <p class="continue"><a href="https://www.jiji.com/jc/article?g=soc&k=2026092200335" target="_blank" rel="noopener">続きを読む · 時事通信</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p3">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip">鎌倉幕府</span><span class="chip">頼朝</span><span class="chip">イイハコ</span><span class="chip">教科書</span>
+            <span class="chip interest">★★★★★</span>
+            <span class="chip mins">~7 min</span>
+          </div>
+          <h2 lang="ja">「イイクニ」から「イイハコ」へ——鎌倉幕府の成立年が教科書で揺れる理由</h2>
+          <p class="why">1192 ou 1185? O ano de fundação do bakufu de Kamakura muda nos livros — porque "bakufu" e o poder de Yoritomo são conceitos, não um dia de inauguração.</p>
+          <div class="source">
+            <span>AERA Books／河合敦</span>
+            <a href="https://dot.asahi.com/books/articles/-/203737" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <div class="ja" lang="ja">
+          <p>伊豆の流人だった源頼朝は、治承・寿永の乱で平氏を破り、さらに奥州藤原氏を滅ぼして朝廷をしのぐ日本初の武家政権を樹立した。これが鎌倉幕府だ。もともと「幕府」は中国で遠征中の将軍の陣営を意味し、平安期の日本では近衛大将の居館を指した。武家政権の意味に転じたのは頼朝以降である。</p>
+          <p>しかも「鎌倉幕府」という語句は同時代どころか江戸時代でもほとんど登場せず、歴史用語として一般化するのは明治中期だ。当時は「関東」などと呼ぶのが普通だった。成立年の語呂合わせ「イイクニ（一一九二年）つくろう鎌倉幕府」は有名だが、近年は「イイハコ（一一八五年）」と教える言説も広がり、中学と高校で年号が違う事態も起きているという。</p>
+          <p>高校日本史でシェアの大きい『詳説日本史Ｂ』（山川出版社）は、一一八五年、平氏滅亡後に後白河法皇が義経に頼朝追討を命じると、頼朝が軍勢を京都に送って法皇に迫り、諸国の守護・荘園公領の地頭任命権、兵糧米徴収権、国衙在庁官人の支配権を獲得したと書く。東国中心の支配権が西国にも及び、武家政権としての幕府が確立した、という位置づけだ。</p>
+          <p>つまり「幕府が開いた日」ではなく、頼朝の支配権がどこまで制度として固まったか——その評価の置きどころが年号を動かす。語呂合わせの入れ替えは、権力の定義そのものが歴史学の問いであることを示している。</p>
+          </div>
+          <p class="continue"><a href="https://dot.asahi.com/books/articles/-/203737" target="_blank" rel="noopener">続きを読む · AERA Books／河合敦</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p4">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip">深大寺</span><span class="chip">白鳳仏</span><span class="chip">高倉福信</span><span class="chip">武蔵</span>
+            <span class="chip interest">★★★★★</span>
+            <span class="chip mins">~8 min</span>
+          </div>
+          <h2 lang="ja">なぜ関東に国宝仏があるのか——深大寺の白鳳仏と高倉福信の伝来ミステリー</h2>
+          <p class="why">Mistério NatGeo: o Buddha Hakuhō (tesouro nacional) em Jindai-ji, Chofu — por que está no Kantō? Trilha liga Takakura Fukushin (imigrante Goguryeo → aristocrata) e romance de fundação.</p>
+          <div class="source">
+            <span>じんぶん堂／春秋社</span>
+            <a href="https://book.asahi.com/jinbun/article/14385662" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <div class="ja" lang="ja">
+          <p>二〇一七年に国宝指定された東日本最古の国宝仏——東京・調布市の深大寺・釈迦如来像。製作は飛鳥後期、美術様式では白鳳時代。奈良にあってもおかしくない名品が、なぜ関東にあるのか。ノンフィクション作家・貴田正子『深大寺の白鳳仏』は、その伝来の謎を追う。</p>
+          <p>飛鳥の仏像は杏仁形の目やアルカイック・スマイルの厳粛な姿だったが、大化の改新以降、半眼・丸みのある小鼻の若々しい「かわいい」造形へと日本化する。著者はこれを「うつくし（愛し）」——現代語の「かわいい」に近い感性の起源とみなし、枕草子の「うつくしきもの」よりも数百年前に白鳳仏として形になっていたと説く。</p>
+          <p>謎は二つ。地方で作られたとは思えないこの像は誰の持ち物だったのか。そして誰がどう深大寺へ運んだのか。当時の武蔵には高句麗系の移住民がおり、中央で従三位まで出世した高倉福信がいる。相撲を聖武天皇に評価され、政変をうまくかわした人物だ。福信なら奈良から武蔵へ仏を運んでも不思議はない。開基と伝わる満功上人との関係を系図と縁起から読み解き、福信から満功へ渡ったと結論づける。</p>
+          <p>所有の謎では、聖武の念持仏説が再考を求められ、朝廷・深大寺・福信一族の年表を並べ直す推理小説的手法で別の人物にたどり着く。政変に翻弄される兄妹の情愛と奇跡的な縁——白鳳仏は美しいだけでなく、十三世紀前の人の絆の物語でもある。</p>
+          </div>
+          <p class="continue"><a href="https://book.asahi.com/jinbun/article/14385662" target="_blank" rel="noopener">続きを読む · じんぶん堂／春秋社</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p5">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip">BABYMETAL</span><span class="chip">サマソニ</span><span class="chip">メタル</span><span class="chip">キュレーション</span>
+            <span class="chip interest">★★★★★</span>
+            <span class="chip mins">~7 min</span>
+          </div>
+          <h2 lang="ja">サマソニ初——BABYMETALがキュレートした「SONIC “METAL” STAGE」の地図</h2>
+          <p class="why">BABYMETAL curates Sonic Metal Stage (Summersonic 25 anos): mgk, Pendulum, The Warning, METALVERSE — o que conta como "metal" no eixo delas.</p>
+          <div class="source">
+            <span>Rolling Stone Japan</span>
+            <a href="https://rollingstonejapan.com/articles/detail/45259" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <div class="ja" lang="ja">
+          <p>サマーソニック二〇二六（八月十四〜十六日）で話題を集めたのが、十四日大阪・十六日東京の「ＳＯＮＩＣ　“ＭＥＴＡＬ”　ＳＴＡＧＥ　Ｃｕｒａｔｅｄ　ｂｙ　ＢＡＢＹＭＥＴＡＬ」。開催二十五周年の節目で、ＳＯＮＩＣ　ＳＴＡＧＥをアーティストがキュレートするのは初めての試みだ。Ｒｏｌｌｉｎｇ　Ｓｔｏｎｅ　Ｊａｐａｎが十六日・東京の模様を総括した。</p>
+          <p>ラインナップはキュレーターのＢＡＢＹＭＥＴＡＬに加え、ｍｇｋ、ペンデュラム、Ａｖｅ　Ｍｕｊｉｃａ、ザ・ウォーニング、サウス・アーケイド、ＭＥＴＡＬＶＥＲＳＥ。すべてをメタルと括ることに違和感を覚える人もいるだろうが、ＢＡＢＹＭＥＴＡＬ起点で見れば共通点がある——とライターは書く。</p>
+          <p>トップバッターのＭＥＴＡＬＶＥＲＳＥは三〇ぶりのサマソニ。シャッフルビートの「Ｃｒａｚｙ　Ｊ」から入り、ポップでキャッチーなメロディをヘヴィな音像で包む姿はＢＡＢＹＭＥＴＡＬと通じつつ、よりモダンなダンス寄り。十一時半スタートでもフロア後方まで埋まった。続くサウス・アーケイドは初来日とは思えないモッシュを生み、ザ・ウォーニング（メキシコの三姉妹）はハードロックの爆音と存在感でアピールした。</p>
+          <p>サマソニはＢＡＢＹＭＥＴＡＬにとって成長を日本の観客に示す場だった。二〇二六年は出演者から「何をメタルと呼ぶか」を定義する側へ回った。カテゴリーの境界を自分たちの軸で引き直す——それがこのステージの本質だ。</p>
+          </div>
+          <p class="continue"><a href="https://rollingstonejapan.com/articles/detail/45259" target="_blank" rel="noopener">続きを読む · Rolling Stone Japan</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p6">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip">神戸</span><span class="chip">南京町</span><span class="chip">中秋節</span><span class="chip">まつり</span>
+            <span class="chip interest">★★★★☆</span>
+            <span class="chip mins">~5 min</span>
+          </div>
+          <h2 lang="ja">きょうから三日間——神戸・南京町の中秋節で月と収穫を祝う</h2>
+          <p class="why">Hoje em Kobe: 29º Zhongqiu (Chushu) em Nankinmachi — lua de outono, lua cakes, palco de artes chinesas. Vida urbana Hyogo, não fofoca.</p>
+          <div class="source">
+            <span>Feel KOBE／神戸観光局</span>
+            <a href="https://www.feel-kobe.jp/event/" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <div class="ja" lang="ja">
+          <p>神戸・南京町で、春節に次ぐ規模の伝統行事「中秋節」が二〇二六年九月二十五日（金）から二十七日（日）まで三日間開かれる。第二十九回。中秋節は旧暦八月十五日（十五夜）に中秋の名月を愛で、秋の収穫を祝う節句だ。</p>
+          <p>二十五日は食のイベント「月光厨房」、二十六・二十七日は中国伝統芸能のステージ。三日間通してハズレなしのガラポン「福球」、参加店舗の「中秋特別感謝祭」、祭壇参拝、伝統菓子・月餅の販売もある。</p>
+          <p>港町の中華街が、暦と食と芸能で秋の節目を共有する——観光の華やかさの奥に、収穫と月をめでる東アジア共通の季節感がある。神戸の暮らしのカレンダーを読む短い演目として。</p>
+          </div>
+          <p class="continue"><a href="https://www.feel-kobe.jp/event/" target="_blank" rel="noopener">続きを読む · Feel KOBE／神戸観光局</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p7">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip">DIR EN GREY</span><span class="chip">30周年</span><span class="chip">ツアー</span><span class="chip">ヴィジュアル系</span>
+            <span class="chip interest">★★★★☆</span>
+            <span class="chip mins">~5 min</span>
+          </div>
+          <h2 lang="ja">三十周年「列島激震行脚」——DIR EN GREYが十一月から全国十二公演</h2>
+          <p class="why">DIR EN GREY 30 anos: tour Nothing XXX Ugly (nov–dez), 9 cidades / 12 shows — aniversário como mapa do arquipélago, não fofoca.</p>
+          <div class="source">
+            <span>Gekirock</span>
+            <a href="https://en.gekirock.com/news/2026/07/dir_en_grey_30th_anniversary_nothing_xxx_ugly.php" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <div class="ja" lang="ja">
+          <p>ＤＩＲ　ＥＮ　ＧＲＥＹが、三十周年を冠した国内ツアー「ＤＩＲ　ＥＮ　ＧＲＥＹ　３０ｔｈ　Ａｎｎｉｖｅｒｓａｒｙ　列島激震行脚２０２６　Ｎｏｔｈｉｎｇ　ＸＸＸ　Ｕｇｌｙ」を十一月より開催する。十一月十二日・神奈川ＣＬＵＢ　ＣＩＴＴＡ’のファンクラブ限定公演を皮切りに、全国九都市十二公演だ。</p>
+          <p>日程は金沢、大阪（南海浪切ホール／なんばＨａｔｃｈ）、札幌、仙台、横浜、愛知、羽田と列島を縦断する。十二枚目アルバム『ＭＯＲＴＡＬ　ＤＯＷＮＥＲ』も発売中で、周年は過去の回顧だけでなく、いまの音圧を各地で更新する行程でもある。</p>
+          <p>「列島激震」というタイトル通り、首都圏だけで閉じない三十周年——関西・北陸・北海道・東北を含む地図そのものが演目になる。</p>
+          </div>
+          <p class="continue"><a href="https://en.gekirock.com/news/2026/07/dir_en_grey_30th_anniversary_nothing_xxx_ugly.php" target="_blank" rel="noopener">続きを読む · Gekirock</a></p>
+        </div>
+      </article>
+
+      <footer class="site">読解幕 · 2026-09-25 · ~49 min · N2–N1</footer>
+    </main>
+  </div>
+</body>
+</html>

@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>読解幕 · 2026-09-22 · Japanese Digest</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Noto+Serif+JP:wght@400;600;700&family=Shippori+Mincho:wght@500;700&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --bg: #0a0a0a;
+      --bg-2: #121212;
+      --bg-card: #161616;
+      --ink: #f5f5f5;
+      --ink-dim: #a8a29a;
+      --ink-mute: #6b6560;
+      --shu: #c41e3a;
+      --shu-hot: #e11d48;
+      --shu-deep: #8b1228;
+      --gold: #d4a017;
+      --gold-soft: #c9a227;
+      --white: #fafafa;
+      --line: #2a2a2a;
+      --line-hot: rgba(196, 30, 58, 0.45);
+      --measure: 42rem;
+      --radius: 4px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: "Noto Sans JP", "Hiragino Sans", "Yu Gothic", system-ui, sans-serif;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .stage-bar {
+      height: 6px;
+      background: repeating-linear-gradient(
+        90deg,
+        var(--shu) 0 48px,
+        var(--white) 48px 56px,
+        #111 56px 64px,
+        var(--gold) 64px 72px,
+        #111 72px 88px
+      );
+    }
+
+    .wrap {
+      width: min(100% - 2rem, 74rem);
+      margin: 0 auto;
+      padding: 2rem 0 4.5rem;
+      display: grid;
+      grid-template-columns: 15.5rem 1fr;
+      gap: 2.75rem;
+      align-items: start;
+    }
+
+    @media (max-width: 900px) {
+      .wrap { grid-template-columns: 1fr; gap: 1.5rem; padding-top: 1.25rem; }
+      .sidebar { position: static !important; }
+    }
+
+    .sidebar { position: sticky; top: 1.25rem; }
+
+    .brand {
+      display: flex;
+      align-items: baseline;
+      gap: 0.55rem;
+      margin: 0 0 0.35rem;
+    }
+    .brand-mark {
+      font-family: "Shippori Mincho", "Noto Serif JP", serif;
+      font-size: 1.85rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      color: var(--white);
+      line-height: 1;
+    }
+    .brand-mark em {
+      font-style: normal;
+      color: var(--shu);
+    }
+    .brand-sub {
+      font-size: 0.65rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-weight: 700;
+    }
+
+    .meta {
+      color: var(--ink-mute);
+      font-size: 0.8rem;
+      margin: 0 0 1.25rem;
+    }
+
+    .stat-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-bottom: 1.35rem;
+    }
+    .stat {
+      border: 1px solid var(--line);
+      background: var(--bg-2);
+      padding: 0.32rem 0.65rem;
+      font-size: 0.72rem;
+      color: var(--ink-dim);
+      border-radius: var(--radius);
+    }
+    .stat strong { color: var(--white); font-weight: 700; }
+    .stat.hot {
+      border-color: var(--line-hot);
+      color: var(--shu-hot);
+    }
+    .stat.hot strong { color: var(--shu-hot); }
+
+    .toc {
+      background: var(--bg-card);
+      border: 1px solid var(--line);
+      border-left: 3px solid var(--shu);
+      padding: 1rem 0.85rem 0.85rem;
+    }
+    .toc h2 {
+      margin: 0 0 0.85rem 0.35rem;
+      font-size: 0.68rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-weight: 700;
+    }
+    .toc ol {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      counter-reset: toc;
+    }
+    .toc li { margin: 0 0 0.2rem; }
+    .toc a {
+      display: grid;
+      grid-template-columns: 1.5rem 1fr auto;
+      gap: 0.45rem;
+      align-items: start;
+      text-decoration: none;
+      color: inherit;
+      padding: 0.5rem 0.4rem;
+      border-radius: var(--radius);
+      transition: background 0.15s ease, color 0.15s ease;
+    }
+    .toc a:hover { background: #1f1f1f; }
+    .toc a:hover .t-title { color: var(--white); }
+    .toc a::before {
+      counter-increment: toc;
+      content: counter(toc, decimal-leading-zero);
+      font-family: "Shippori Mincho", serif;
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--shu);
+      line-height: 1.35;
+    }
+    .t-title {
+      font-size: 0.84rem;
+      line-height: 1.35;
+      color: var(--ink-dim);
+      transition: color 0.15s ease;
+    }
+    .t-min {
+      font-size: 0.68rem;
+      color: var(--ink-mute);
+      padding-top: 0.12rem;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .note {
+      margin-top: 1rem;
+      font-size: 0.74rem;
+      color: var(--ink-mute);
+      line-height: 1.5;
+    }
+
+    main { max-width: var(--measure); }
+
+    .digest-banner {
+      display: flex;
+      gap: 0.75rem;
+      align-items: flex-start;
+      background: linear-gradient(90deg, rgba(196,30,58,0.18), rgba(212,160,23,0.08));
+      border: 1px solid var(--line-hot);
+      padding: 0.85rem 1rem;
+      margin-bottom: 1.5rem;
+      font-size: 0.86rem;
+      color: var(--ink-dim);
+    }
+    .digest-banner .tag {
+      flex-shrink: 0;
+      background: var(--shu);
+      color: #fff;
+      font-size: 0.65rem;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      padding: 0.28rem 0.5rem;
+      border-radius: var(--radius);
+    }
+
+    .hero {
+      margin-bottom: 2rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid var(--line);
+      position: relative;
+    }
+    .hero::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -1px;
+      width: 4.5rem;
+      height: 2px;
+      background: var(--shu);
+    }
+    .kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.7rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--shu-hot);
+      font-weight: 800;
+      margin-bottom: 0.85rem;
+    }
+    .kicker::before {
+      content: "◆";
+      font-size: 0.55rem;
+      color: var(--gold);
+    }
+    .hero h1 {
+      font-family: "Shippori Mincho", "Noto Serif JP", serif;
+      font-size: clamp(1.85rem, 4vw, 2.55rem);
+      font-weight: 700;
+      line-height: 1.2;
+      margin: 0 0 0.75rem;
+      color: var(--white);
+      letter-spacing: 0.02em;
+    }
+    .hero p {
+      margin: 0;
+      color: var(--ink-dim);
+      font-size: 0.98rem;
+      max-width: 36rem;
+    }
+
+    article.piece {
+      background: var(--bg-card);
+      border: 1px solid var(--line);
+      margin-bottom: 1.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+    article.piece::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: linear-gradient(90deg, var(--shu) 0%, var(--shu) 35%, var(--gold) 35%, var(--gold) 42%, transparent 42%);
+    }
+
+    .piece-inner { padding: 1.6rem 1.55rem 1.35rem; }
+
+    .piece-head {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-bottom: 0.85rem;
+    }
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      border: 1px solid var(--line);
+      background: #111;
+      color: var(--ink-dim);
+      padding: 0.22rem 0.6rem;
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      border-radius: var(--radius);
+    }
+    .chip.interest {
+      border-color: var(--shu);
+      color: var(--shu-hot);
+      background: rgba(196, 30, 58, 0.12);
+    }
+    .chip.mins {
+      border-color: var(--gold);
+      color: var(--gold);
+      background: transparent;
+    }
+
+    .piece h2 {
+      font-family: "Noto Serif JP", "Shippori Mincho", "Yu Mincho", serif;
+      font-size: 1.38rem;
+      font-weight: 700;
+      line-height: 1.5;
+      margin: 0 0 0.6rem;
+      color: var(--white);
+      letter-spacing: 0.02em;
+    }
+
+    .why {
+      margin: 0 0 1rem;
+      color: var(--ink-dim);
+      font-size: 0.9rem;
+      border-left: 2px solid var(--gold);
+      padding-left: 0.85rem;
+    }
+
+    .source {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.65rem 1.1rem;
+      font-size: 0.76rem;
+      color: var(--ink-mute);
+      margin-bottom: 1.25rem;
+    }
+    .source a {
+      color: var(--shu-hot);
+      text-decoration: none;
+      font-weight: 600;
+    }
+    .source a:hover { color: var(--gold); }
+
+    .ja {
+      font-family: "Noto Serif JP", "Hiragino Mincho ProN", "Yu Mincho", serif;
+      font-size: 1.08rem;
+      line-height: 2;
+      letter-spacing: 0.03em;
+      color: #ebe7e1;
+    }
+    .ja p { margin: 0 0 1.15em; }
+    .ja p:last-child { margin-bottom: 0; }
+
+    .continue {
+      margin-top: 1.25rem;
+      padding-top: 1rem;
+      border-top: 1px solid var(--line);
+      font-size: 0.86rem;
+    }
+    .continue a {
+      color: var(--white);
+      text-decoration: none;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      border-bottom: 2px solid var(--shu);
+      padding-bottom: 0.1rem;
+    }
+    .continue a:hover {
+      color: var(--shu-hot);
+      border-bottom-color: var(--gold);
+    }
+
+    footer.site {
+      max-width: var(--measure);
+      margin-top: 1.75rem;
+      color: var(--ink-mute);
+      font-size: 0.72rem;
+      letter-spacing: 0.06em;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+    footer.site::before {
+      content: "";
+      width: 1.25rem;
+      height: 2px;
+      background: var(--shu);
+    }
+  </style>
+</head>
+<body>
+  <div class="stage-bar" aria-hidden="true"></div>
+
+  <div class="wrap">
+    <aside class="sidebar">
+      <div class="brand">
+        <span class="brand-mark">読解<em>幕</em></span>
+      </div>
+      <p class="brand-sub">Kabuki Digest · <a href="../../history/" style="color:#d4a017;text-decoration:none;">History</a></p>
+      <p class="meta">2026-09-22 · America/Sao_Paulo</p>
+      <div class="stat-row">
+        <div class="stat hot"><strong>~50</strong> min</div>
+        <div class="stat"><strong>7</strong> peças</div>
+        <div class="stat">N2–N1</div>
+      </div>
+
+      <nav class="toc" aria-label="Índice">
+        <h2>本日の演目</h2>
+        <ol>
+          <li>
+            <a href="#p1">
+              <span class="t-title">鞆幕府・追放の将軍</span>
+              <span class="t-min">8′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p2">
+              <span class="t-title">伊都国・糸島の港</span>
+              <span class="t-min">8′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p3">
+              <span class="t-title">石見神楽・大蛇</span>
+              <span class="t-min">7′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p4">
+              <span class="t-title">兵庫津・港のはじまり</span>
+              <span class="t-min">7′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p5">
+              <span class="t-title">HAGANE・METAL QUEST</span>
+              <span class="t-min">7′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p6">
+              <span class="t-title">島秀雄・ムカデ式</span>
+              <span class="t-min">7′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p7">
+              <span class="t-title">Next.js・エージェント設計</span>
+              <span class="t-min">6′</span>
+            </a>
+          </li>
+        </ol>
+      </nav>
+      <p class="note">Abra no Chrome/Firefox com Yomitan. Clique no japonês pra lookup. Trechos + link para o original.</p>
+    </aside>
+
+    <main>
+      <div class="digest-banner">
+        <span class="tag">DIGEST</span>
+        <span>2026-09-22 — Tomo-bakufu (Yoshiaki exilado), Ito-koku/Itoshima (pente Han + navio), Iwami Kagura Orochi, Hyogo-tsu Museu (porto de Kobe), HAGANE METAL QUEST, Shim Hideo/Shinkansen &#x27;mukade&#x27;, Next.js 16.3 para agentes. Zero fofoca, zero manual de construção.</span>
+      </div>
+
+      <header class="hero">
+        <div class="kicker">本日の幕 · 2026-09-22</div>
+        <h1 lang="ja">亡命の将軍と西の玄関口をほどく、ひと朝の読解</h1>
+        <p lang="ja">備後・鞆の浦で足利義昭が紡いだ幻の幕府。糸島の港から出土した漢の櫛と準構造船。石見神楽が舞う八岐大蛇。兵庫津ミュージアムが語る神戸のはじまり。ＨＡＧＡＮＥが完遂したメタルのクエスト。島秀雄のムカデ式が結ぶＤ５１と新幹線。Ｎｅｘｔ．ｊｓがエージェントに渡す設計。推定合計 ~49 分。</p>
+      </header>
+
+      <article class="piece" id="p1">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★★</span>
+            <span class="chip mins">~8 min</span>
+            <span class="chip">足利義昭</span><span class="chip">鞆幕府</span><span class="chip">室町</span><span class="chip">毛利</span>
+          </div>
+          <h2 lang="ja">幻の「鞆幕府」——追放された将軍・足利義昭が瀬戸内で紡いだ最後の公儀</h2>
+          <p class="why">Yoshiaki exilado em Tomo: corte com 100+ pessoas, Mori vira fuku-shogun, piratas do Seto — autoridade sem exército próprio.</p>
+          <div class="source">
+            <span>サライ.jp／藤田達生</span>
+            <a href="https://serai.jp/tour/20872" target="_blank" rel="noopener">原文を読む →</a>
+          </div>
+          <div class="ja" lang="ja">
+          <p>天正元年（１５７３）、織田信長に敗れた足利義昭は京都を追われ、河内・和泉・紀伊を流浪したのち、天正４年に備後国・鞆の浦へ移る。毛利輝元の庇護のもとで将軍として御内書を発し続けた亡命政権は、のちに「鞆幕府」と呼ばれる。義昭は征夷大将軍を解任されたわけではなく、名目上の幕府は秀吉の天下統一直前の１５８８年まで続いたとも言える。</p>
+          <p>鞆の浦を選んだ理由には、瀬戸内の海賊衆とのつながりがある。紀伊亡命時に熊野勢力と接触した義昭は、那智山御師の檀所だった鞆一円に目を付け、村上水軍をはじめとする水軍の力を借りて移座したとされる。城山に御所を構え「鞆公方」と呼ばれ、近臣・奉公衆・同朋衆・侍医ら総勢１００人以上が周辺で暮らした。側室や乳母も従い、紀伊時代とは違う本格的な幕府の体裁を整えていた。</p>
+          <p>当初、毛利氏は中央政局への関与を避けようと庇護に難色を示したが、天正４年５月までに上洛戦への協力を決める。輝元は副将軍に任じられ、義昭の御内書に添状を付けて上杉など反信長派や自らの家臣団へ取り次いだ。出自が守護でも奉公衆でもなかった毛利にとって、副将軍就任は権威の急上昇だった。小早川隆景も、義昭動座のあと遠国から音信が来るようになり「大変名誉」と述懐している。</p>
+          <p>義昭の外交は、波多野・別所・荒木らを反信長包囲網に引き込み、摂津以西から北四国・北九州に及ぶ毛利の勢力圏を一時的に押し広げた。鞆幕府の評価は分かれるが、守護系大名から高価な進物が届き続けた事実は、権力なき将軍でも「公儀」の象徴として機能したことを示す。</p>
+          </div>
+          <p class="continue"><a href="https://serai.jp/tour/20872" target="_blank" rel="noopener">続きは原文で</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p2">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★★</span>
+            <span class="chip mins">~8 min</span>
+            <span class="chip">伊都国</span><span class="chip">考古学</span><span class="chip">弥生</span><span class="chip">糸島</span>
+          </div>
+          <h2 lang="ja">伊都国の港で見つかった漢の櫛と準構造船——糸島が「西の玄関口」だった証拠</h2>
+          <p class="why">Descoberta fresca (2026-09-19): pente Han, mesa &#x27;an&#x27;, navio semi-estruturado — Ito-koku como porta do continente.</p>
+          <div class="source">
+            <span>読売新聞</span>
+            <a href="https://www.yomiuri.co.jp/local/kyushu/news/20260919-GYS1T00034/" target="_blank" rel="noopener">原文を読む →</a>
+          </div>
+          <div class="ja" lang="ja">
+          <p>福岡県糸島市深江地区の弥生遺跡群で近年、中国や朝鮮半島との交流を裏付ける木製品の出土が相次いでいる。糸島は『魏志倭人伝』に記された伊都国の所在地とされ、深江一帯が海外の先進文化を受け入れる窓口だった様子が具体的に浮かび上がってきた。</p>
+          <p>唐津湾に面する深江には、弥生中期後半から古墳初頭にかけて港湾集落があったと考えられてきた。１９９０年代初頭、深江井牟田遺跡から中国式銅剣や楽浪郡の多様な土器が出土し、大陸交流の一端がうかがわれた。２０２５年、東隣の深江城崎遺跡では弥生後期初頭〜前半（１世紀頃）の遺構から、木製の台「案」が初めて完全な形で出土した。天板は幅約６５センチ、脚高約１９センチ。指物技術で組み立てられ、漢製の案を国内で模倣したとみられる。天板の刃物傷からまな板説もあり、儀礼や供宴の可能性も指摘される。</p>
+          <p>案の近くでは船の部材や背負子など港機能を示す遺物も見つかった。特に注目されるのは、準構造船の内部を仕切る幅１・４メートルの隔壁だ。準構造船は丸木舟の側面を板でかさ上げした大型船で、調査担当の江崎靖隆さんは「朝鮮半島・中国など遠方まで航海可能な規模」とみる。同遺跡ではクジラを描いた弥生土器も出土しており、壱岐・原の辻遺跡に続く国内２例目として一支国との交流も示唆される。</p>
+          <p>隣接する深江石町遺跡では２０２４年度、漢で作られた木製の櫛「箆」が国内で初めて出土した。長さ７・１センチ、歯は細かく本数が多い。伊都国が「西の玄関口」だった役割が、港・船・舶来品の三点で裏付けられつつある。</p>
+          </div>
+          <p class="continue"><a href="https://www.yomiuri.co.jp/local/kyushu/news/20260919-GYS1T00034/" target="_blank" rel="noopener">続きは原文で</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p3">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★☆</span>
+            <span class="chip mins">~7 min</span>
+            <span class="chip">石見神楽</span><span class="chip">まつり</span><span class="chip">出雲神話</span><span class="chip">大蛇</span>
+          </div>
+          <h2 lang="ja">八岐大蛇を酔わせて斬る——石見神楽『大蛇』が運ぶ神話の劇薬</h2>
+          <p class="why">Matsuri com enredo: Susanoo, sake tóxico, Yamata no Orochi e a espada na cauda — sem carpintaria de santuário.</p>
+          <div class="source">
+            <span>石見神楽公式／浜田市観光協会</span>
+            <a href="https://iwamikagura.jp/enmoku/orochi/" target="_blank" rel="noopener">原文を読む →</a>
+          </div>
+          <div class="ja" lang="ja">
+          <p>島根・石見地方に伝わる石見神楽の代名詞が演目『大蛇（おろち）』だ。須佐之男命が出雲の斐の川で、娘を大蛇に食べられる老夫婦・足名椎と手名椎に出会い、奇稲田姫を救う物語である。命は八塩折りの毒酒を醸させ、八つの門に酒を盛って待つ。酒好きの大蛇が酔い伏したところを十束の剣で斬り、稲田姫と結ばれる。</p>
+          <p>台本の口上では、須佐之男が天照大御神の弟として自らを名乗り、天岩戸を閉じて高天原を追放された経緯を語る。新羅を経て本つ国に渡った末に鳥上の地へ至り、泣き声を怪しんで尋ねる。翁は「身一つに頭が八つ、尾が八つ、伏したる丈は百丈に余り、背には檜や杉が生え、腹は血であえただれる」と大蛇の異様さを訴えるが、命は酒で酔わせて斬ると宣言する。</p>
+          <p>斬った尾で刃が欠け、割いてみると一振りの剣が出る。常に雲がたなびいていたのはこの剣の徳だとして「天の村雲の剣」と名付け、のちに草薙の剣として三種の神器の一つとなり熱田神宮に祀られる——神話のクライマックスが舞台上で一気に畳みかけられる。</p>
+          <p>舞台では大蛇が大きな胴をうごめかせ火を噴く演出が圧巻で、通常は４頭、会場が大きいと８頭以上になることもある。国内だけでなく海外公演でも好評を博す演目で、秋の夜神楽の季節に合わせて神話を「物語」として体感できる入口になっている。</p>
+          </div>
+          <p class="continue"><a href="https://iwamikagura.jp/enmoku/orochi/" target="_blank" rel="noopener">続きは原文で</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p4">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★☆</span>
+            <span class="chip mins">~7 min</span>
+            <span class="chip">神戸</span><span class="chip">兵庫津</span><span class="chip">港</span><span class="chip">北前船</span>
+          </div>
+          <h2 lang="ja">大輪田泊から北前船へ——兵庫津ミュージアムが語る神戸のはじまり</h2>
+          <p class="why">Kobe antes do porto moderno: Ōwada-no-tomari, Kiyomori, Ashikaga Yoshimitsu, Kitamae — narrativa urbana sem rehash de Nagata.</p>
+          <div class="source">
+            <span>Feel KOBE／神戸観光局</span>
+            <a href="https://www.feel-kobe.jp/column/hyogotsu_museum/" target="_blank" rel="noopener">原文を読む →</a>
+          </div>
+          <div class="ja" lang="ja">
+          <p>開港から約１５０年、国際港として知られる神戸の原点は、いまの兵庫区にあった兵庫津にある。奈良時代に僧・行基が修築した大輪田泊に始まり、平安期には平清盛が人工島・経ヶ島を築いて日宋貿易の拠点とした。室町の三代将軍・足利義満も日明勘合貿易の窓口としてたびたび訪れ、江戸時代には北前船の交易地として幕府直轄の一大商業地へ育った。</p>
+          <p>２０１８年に「北前船寄港地・兵庫津」として日本遺産認定。２０２２年１１月には県立兵庫津ミュージアムがグランドオープンし、「ひょうごはじまり館」と復元施設「初代県庁館」が一体となった複合ミュージアムになった。展示は古代の地形から五国の特色までをたどり、日明貿易の交易品ウォールや、江戸時代の兵庫生洲を模したタッチ展示など体験型が目立つ。</p>
+          <p>歴史好き向けのフックも多い。工楽松右衛門が発明した新型帆布・松右衛門帆は航海術の進歩に寄与し、雨乞い祭りでは１万人の大行列ができたとも伝わる。源平合戦や湊川、応仁の乱、戦災、震災と、要衝ゆえに何度も失われ、そのたびに蘇ってきた港町の記憶が層になっている。</p>
+          <p>隣の初代県庁館は慶応４年（１８６８）の旧大坂町奉行所兵庫勤番所を忠実に復元。伊藤博文の執務室やお白州、同心屋敷、船見番小屋が並び、ＭＲ体験で幕末維新の場面も追える。ミュージアム周辺の運河沿いには石椋や清盛塚が点在し、「港町のはじまり」を歩いて確かめられる。</p>
+          </div>
+          <p class="continue"><a href="https://www.feel-kobe.jp/column/hyogotsu_museum/" target="_blank" rel="noopener">続きは原文で</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p5">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★★</span>
+            <span class="chip mins">~7 min</span>
+            <span class="chip">HAGANE</span><span class="chip">メタル</span><span class="chip">ライブ</span><span class="chip">METAL QUEST</span>
+          </div>
+          <h2 lang="ja">ＨＡＧＡＮＥ『ＭＥＴＡＬ ＱＵＥＳＴ』最終公演——幕の内弁当のメタルと四つの決意</h2>
+          <p class="why">Fresh (2026-08-29): EP tour final no EX THEATER, &#x27;bento de metal&#x27;, Through the Night anunciado — Kansai-adjacent metal girls.</p>
+          <div class="source">
+            <span>激ロック</span>
+            <a href="https://gekirock.com/livereport/2026/09/hagane/" target="_blank" rel="noopener">原文を読む →</a>
+          </div>
+          <div class="ja" lang="ja">
+          <p>２０２６年８月２９日、ＨＡＧＡＮＥはＥＸ ＴＨＥＡＴＥＲ ＲＯＰＰＯＮＧＩでＥＰリリースツアー『ＭＥＴＡＬ ＱＵＥＳＴ』の最終公演を行った。７月には四人それぞれが作詞した最新ＥＰとシングル『Ａｍｏｕｒ Ｃｈａｉｎ』を同時リリースし、ドイツやスペインでもライブを行うなど飛躍の夏だった。バンド史上最大規模の会場で、巨大な剣のオブジェが上昇する演出とともに『Ｅｍｂａｒｋ ｏｎ ａ Ｑｕｅｓｔ』が開幕する。</p>
+          <p>ドラマーＪＵＮＮＡはＥＰを「いろんなジャンルのメタルが１枚になった」と評し、「一言で例えるなら、メタル幕の内弁当」と宣言した。凪希作詞の和メタル『月光−ＴＳＵＫＩＫＡＧＥ−』からＬＡメタル調の『Ｂｌａｃｋ Ｄｉａｍｏｎｄ』、メロデス寄りの『Ｈｅｒｏ Ｔｉｍｅ』まで、剣士（ファン）のシンガロングを巻き込みながら詰め込まれていく。</p>
+          <p>本編ＭＣではＳａｙａｋａが、この会場を客席から見て「プロを目指すバンドに入ろう」と決意したエピソードを語る。当日朝にその記憶で目が覚め、「バンドマンでいたいわけではない。ＨＡＧＡＮＥをやりたい」と気づいたと言い切ると万雷の拍手が起きた。Ｓａｋｕｒａも軽音部時代の夢を見て成長の不安を吐露しつつ、「本当に素敵な人生だと思います」とステージからの景色を噛みしめた。</p>
+          <p>アンコールでは『Ａｍｏｕｒ Ｃｈａｉｎ』オーケストラ版の独唱、『天下五剣』、ラスト『Ｌｉｆｅ ｇｏｅｓ ｏｎ！』で大合唱。終演後にはニューアルバム『Ｔｈｒｏｕｇｈ ｔｈｅ Ｎｉｇｈｔ』のリリースとツアーが発表され、クエスト完遂の先に次の物語が続いた。</p>
+          </div>
+          <p class="continue"><a href="https://gekirock.com/livereport/2026/09/hagane/" target="_blank" rel="noopener">続きは原文で</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p6">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★★</span>
+            <span class="chip mins">~7 min</span>
+            <span class="chip">島秀雄</span><span class="chip">新幹線</span><span class="chip">鉄道</span><span class="chip">D51</span>
+          </div>
+          <h2 lang="ja">島秀雄の「ムカデ式」——Ｄ５１と新幹線を同じ頭で設計した男</h2>
+          <p class="why">Personagem: mesmo engenheiro do D51 e do Shinkansen; tração distribuída &#x27;mukade&#x27; + ATC — narrativa de infraestrutura.</p>
+          <div class="source">
+            <span>PHPオンライン／レイルラボ</span>
+            <a href="https://shuchi.php.co.jp/article/476" target="_blank" rel="noopener">原文を読む →</a>
+          </div>
+          <div class="ja" lang="ja">
+          <p>真っ黒な蒸気機関車Ｄ５１と、白と青の０系新幹線。一見まるで別物に見える両者を、同じ人物が設計思想の中心で担った——その名は島秀雄。ノンフィクションライター高橋団吉は、戦前と戦後を股にかけ国鉄という大組織の中で傑作を生み続けたエンジニアとして彼を描く。</p>
+          <p>東海道新幹線開業の政治的推進力は十河信二総裁の粘りだが、システムとしての新しさを決めたのは技師長・島秀雄の設計ビジョンだったとされる。車内信号、自動列車制御装置（ＡＴＣ）、踏切のない全線閉鎖軌道。なかでも画期的だったのが、駆動を各車両の台車に分散させる「分散動力方式」だ。島自身はこれをわかりやすく「ムカデ式」と呼んだ。</p>
+          <p>利点は多い。大型機関車が不要で車両が軽くなり、軌道や橋梁の建設費も抑えられる。一部モーターが不調でも他が補い、加減速に優れ通勤並みの過密ダイヤが組める。発想自体はシンプルで、都市の近距離電車を長距離高速化したに等しい。だが誰もやらなかった——島の独創といってよい、と高橋は書く。</p>
+          <p>戦前、島は斬新なＳＬ設計で現場と摩擦しつつも意見を改良に取り込み、耐久性と量産性に優れたＤ５１を完成させた。早くから電車の時代を見据え、高速と安全の両立に挑み続けた姿勢が高速鉄道の礎になる。信念は鉄道にとどまらず、のちの宇宙開発事業団でも生きた。ＮＨＫ『知恵泉』も２０２６年に島秀雄特集を組み、現場の声を力に変える発想を今に問い直している。</p>
+          </div>
+          <p class="continue"><a href="https://shuchi.php.co.jp/article/476" target="_blank" rel="noopener">続きは原文で</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p7">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★☆</span>
+            <span class="chip mins">~6 min</span>
+            <span class="chip">Next.js</span><span class="chip">AI</span><span class="chip">MCP</span><span class="chip">React</span>
+          </div>
+          <h2 lang="ja">Ｎｅｘｔ．ｊｓ １６．３はＡＩエージェントに何を渡すか——同梱docsからＭＣＰまで</h2>
+          <p class="why">Ângulo fresco (não Cursor-vs-Claude): o framework empacota docs, AGENTS.md, DevTools MCP e Skills pro agente.</p>
+          <div class="source">
+            <span>TECHSCORE BLOG</span>
+            <a href="https://blog.techscore.com/entry/2026/09/17/080000" target="_blank" rel="noopener">原文を読む →</a>
+          </div>
+          <div class="ja" lang="ja">
+          <p>Ｎｅｘｔ．ｊｓ １６．３（２０２６年８月安定版）は、公式が「エージェント駆動開発のために設計されていたら」と自問するリリースだ。目玉のＩｎｓｔａｎｔ Ｎａｖｉｇａｔｉｏｎｓとは別に、Ｃｌａｕｄｅ ＣｏｄｅやＣｕｒｓｏｒが読むルールと、インストール版に合ったドキュメントをフレームワーク側が用意する仕組みが整った。</p>
+          <p>公式ガイドは四ステップで整理する。（１）同梱ドキュメントの場所を教える（２）ランタイムを見せる（３）エラーを修正の起点にする（４）複数ステップの作業をＳｋｉｌｌｓに渡す。ｎｏｄｅ＿ｍｏｄｕｌｅｓ／ｎｅｘｔ／ｄｉｓｔ／ｄｏｃｓ／には公式サイトと同じ構造のＭａｒｋｄｏｗｎが数百本同梱され、ｎｅｘｔ ｄｅｖ起動時にＡＧＥＮＴＳ．ｍｄ／ＣＬＡＵＤＥ．ｍｄが生成される。中身の要点は「学習データと違う版だ、コードを書く前に同梱docsを読め」という一点だ。</p>
+          <p>ランタイム側では、ｄｅｖサーバー内の／＿ｎｅｘｔ／ｍｃｐがルート一覧やコンパイル状況を返し、ａｇｅｎｔ−ｂｒｏｗｓｅｒがＤＯＭやＲｅａｃｔツリーをテキスト化する。Ｃａｃｈｅ Ｃｏｍｐｏｎｅｎｔｓのエラーには［ｓｔｒｅａｍ］［ｃａｃｈｅ］［ｂｌｏｃｋ］の三択が必ず付き、ｄｅｖ ｏｖｅｒｌａｙのＣｏｐｙ ｐｒｏｍｐｔが検証手順までまとめたプロンプトを渡す。</p>
+          <p>知識系Ｓｋｉｌｌｓは廃止され、ｎｅｘｔ−ｄｅｖ−ｌｏｏｐなど手順固定の四つのｆｉｒｓｔ−ｐａｒｔｙ Ｓｋｉｌｌｓへ置き換わった。「フレームワークの癖を人間が教え込む」から「フレームワーク自身がエージェント向け情報を担う」流れが、ここに見える。</p>
+          </div>
+          <p class="continue"><a href="https://blog.techscore.com/entry/2026/09/17/080000" target="_blank" rel="noopener">続きは原文で</a></p>
+        </div>
+      </article>
+
+      <footer class="site">読解幕 · fair-use excerpts · 4335 JP chars · ~50 min</footer>
+    </main>
+  </div>
+</body>
+</html>

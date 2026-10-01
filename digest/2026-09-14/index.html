@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>読解幕 · 2026-09-14 · Japanese Digest</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Noto+Serif+JP:wght@400;600;700&family=Shippori+Mincho:wght@500;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #0a0a0a;
+      --bg-2: #121212;
+      --bg-card: #161616;
+      --ink: #f5f5f5;
+      --ink-dim: #a8a29a;
+      --ink-mute: #6b6560;
+      --shu: #c41e3a;
+      --shu-hot: #e11d48;
+      --shu-deep: #8b1228;
+      --gold: #d4a017;
+      --gold-soft: #c9a227;
+      --white: #fafafa;
+      --line: #2a2a2a;
+      --line-hot: rgba(196, 30, 58, 0.45);
+      --measure: 42rem;
+      --radius: 4px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: "Noto Sans JP", "Hiragino Sans", "Yu Gothic", system-ui, sans-serif;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .stage-bar {
+      height: 6px;
+      background: repeating-linear-gradient(
+        90deg,
+        var(--shu) 0 48px,
+        var(--white) 48px 56px,
+        #111 56px 64px,
+        var(--gold) 64px 72px,
+        #111 72px 88px
+      );
+    }
+
+    .wrap {
+      width: min(100% - 2rem, 74rem);
+      margin: 0 auto;
+      padding: 2rem 0 4.5rem;
+      display: grid;
+      grid-template-columns: 15.5rem 1fr;
+      gap: 2.75rem;
+      align-items: start;
+    }
+
+    @media (max-width: 900px) {
+      .wrap { grid-template-columns: 1fr; gap: 1.5rem; padding-top: 1.25rem; }
+      .sidebar { position: static !important; }
+    }
+
+    .sidebar { position: sticky; top: 1.25rem; }
+
+    .brand {
+      display: flex;
+      align-items: baseline;
+      gap: 0.55rem;
+      margin: 0 0 0.35rem;
+    }
+    .brand-mark {
+      font-family: "Shippori Mincho", "Noto Serif JP", serif;
+      font-size: 1.85rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      color: var(--white);
+      line-height: 1;
+    }
+    .brand-mark em {
+      font-style: normal;
+      color: var(--shu);
+    }
+    .brand-sub {
+      font-size: 0.65rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-weight: 700;
+    }
+
+    .meta {
+      color: var(--ink-mute);
+      font-size: 0.8rem;
+      margin: 0 0 1.25rem;
+    }
+
+    .stat-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-bottom: 1.35rem;
+    }
+    .stat {
+      border: 1px solid var(--line);
+      background: var(--bg-2);
+      padding: 0.32rem 0.65rem;
+      font-size: 0.72rem;
+      color: var(--ink-dim);
+      border-radius: var(--radius);
+    }
+    .stat strong { color: var(--white); font-weight: 700; }
+    .stat.hot {
+      border-color: var(--line-hot);
+      color: var(--shu-hot);
+    }
+    .stat.hot strong { color: var(--shu-hot); }
+
+    .toc {
+      background: var(--bg-card);
+      border: 1px solid var(--line);
+      border-left: 3px solid var(--shu);
+      padding: 1rem 0.85rem 0.85rem;
+    }
+    .toc h2 {
+      margin: 0 0 0.85rem 0.35rem;
+      font-size: 0.68rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-weight: 700;
+    }
+    .toc ol {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      counter-reset: toc;
+    }
+    .toc li { margin: 0 0 0.2rem; }
+    .toc a {
+      display: grid;
+      grid-template-columns: 1.5rem 1fr auto;
+      gap: 0.45rem;
+      align-items: start;
+      text-decoration: none;
+      color: inherit;
+      padding: 0.5rem 0.4rem;
+      border-radius: var(--radius);
+      transition: background 0.15s ease, color 0.15s ease;
+    }
+    .toc a:hover { background: #1f1f1f; }
+    .toc a:hover .t-title { color: var(--white); }
+    .toc a::before {
+      counter-increment: toc;
+      content: counter(toc, decimal-leading-zero);
+      font-family: "Shippori Mincho", serif;
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--shu);
+      line-height: 1.35;
+    }
+    .t-title {
+      font-size: 0.84rem;
+      line-height: 1.35;
+      color: var(--ink-dim);
+      transition: color 0.15s ease;
+    }
+    .t-min {
+      font-size: 0.68rem;
+      color: var(--ink-mute);
+      padding-top: 0.12rem;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .note {
+      margin-top: 1rem;
+      font-size: 0.74rem;
+      color: var(--ink-mute);
+      line-height: 1.5;
+    }
+
+    main { max-width: var(--measure); }
+
+    .digest-banner {
+      display: flex;
+      gap: 0.75rem;
+      align-items: flex-start;
+      background: linear-gradient(90deg, rgba(196,30,58,0.18), rgba(212,160,23,0.08));
+      border: 1px solid var(--line-hot);
+      padding: 0.85rem 1rem;
+      margin-bottom: 1.5rem;
+      font-size: 0.86rem;
+      color: var(--ink-dim);
+    }
+    .digest-banner .tag {
+      flex-shrink: 0;
+      background: var(--shu);
+      color: #fff;
+      font-size: 0.65rem;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      padding: 0.28rem 0.5rem;
+      border-radius: var(--radius);
+    }
+
+    .hero {
+      margin-bottom: 2rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid var(--line);
+      position: relative;
+    }
+    .hero::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -1px;
+      width: 4.5rem;
+      height: 2px;
+      background: var(--shu);
+    }
+    .kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.7rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--shu-hot);
+      font-weight: 800;
+      margin-bottom: 0.85rem;
+    }
+    .kicker::before {
+      content: "◆";
+      font-size: 0.55rem;
+      color: var(--gold);
+    }
+    .hero h1 {
+      font-family: "Shippori Mincho", "Noto Serif JP", serif;
+      font-size: clamp(1.85rem, 4vw, 2.55rem);
+      font-weight: 700;
+      line-height: 1.2;
+      margin: 0 0 0.75rem;
+      color: var(--white);
+      letter-spacing: 0.02em;
+    }
+    .hero p {
+      margin: 0;
+      color: var(--ink-dim);
+      font-size: 0.98rem;
+      max-width: 36rem;
+    }
+
+    article.piece {
+      background: var(--bg-card);
+      border: 1px solid var(--line);
+      margin-bottom: 1.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+    article.piece::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: linear-gradient(90deg, var(--shu) 0%, var(--shu) 35%, var(--gold) 35%, var(--gold) 42%, transparent 42%);
+    }
+
+    .piece-inner { padding: 1.6rem 1.55rem 1.35rem; }
+
+    .piece-head {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-bottom: 0.85rem;
+    }
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      border: 1px solid var(--line);
+      background: #111;
+      color: var(--ink-dim);
+      padding: 0.22rem 0.6rem;
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      border-radius: var(--radius);
+    }
+    .chip.interest {
+      border-color: var(--shu);
+      color: var(--shu-hot);
+      background: rgba(196, 30, 58, 0.12);
+    }
+    .chip.mins {
+      border-color: var(--gold);
+      color: var(--gold);
+      background: transparent;
+    }
+
+    .piece h2 {
+      font-family: "Noto Serif JP", "Shippori Mincho", "Yu Mincho", serif;
+      font-size: 1.38rem;
+      font-weight: 700;
+      line-height: 1.5;
+      margin: 0 0 0.6rem;
+      color: var(--white);
+      letter-spacing: 0.02em;
+    }
+
+    .why {
+      margin: 0 0 1rem;
+      color: var(--ink-dim);
+      font-size: 0.9rem;
+      border-left: 2px solid var(--gold);
+      padding-left: 0.85rem;
+    }
+
+    .source {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.65rem 1.1rem;
+      font-size: 0.76rem;
+      color: var(--ink-mute);
+      margin-bottom: 1.25rem;
+    }
+    .source a {
+      color: var(--shu-hot);
+      text-decoration: none;
+      font-weight: 600;
+    }
+    .source a:hover { color: var(--gold); }
+
+    .ja {
+      font-family: "Noto Serif JP", "Hiragino Mincho ProN", "Yu Mincho", serif;
+      font-size: 1.08rem;
+      line-height: 2;
+      letter-spacing: 0.03em;
+      color: #ebe7e1;
+    }
+    .ja p { margin: 0 0 1.15em; }
+    .ja p:last-child { margin-bottom: 0; }
+
+    .continue {
+      margin-top: 1.25rem;
+      padding-top: 1rem;
+      border-top: 1px solid var(--line);
+      font-size: 0.86rem;
+    }
+    .continue a {
+      color: var(--white);
+      text-decoration: none;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      border-bottom: 2px solid var(--shu);
+      padding-bottom: 0.1rem;
+    }
+    .continue a:hover {
+      color: var(--shu-hot);
+      border-bottom-color: var(--gold);
+    }
+
+    footer.site {
+      max-width: var(--measure);
+      margin-top: 1.75rem;
+      color: var(--ink-mute);
+      font-size: 0.72rem;
+      letter-spacing: 0.06em;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+    footer.site::before {
+      content: "";
+      width: 1.25rem;
+      height: 2px;
+      background: var(--shu);
+    }
+  </style>
+</head>
+<body>
+  <div class="stage-bar" aria-hidden="true"></div>
+
+  <div class="wrap">
+    <aside class="sidebar">
+      <div class="brand">
+        <p class="brand-mark">読解<em>幕</em></p>
+      </div>
+      <p class="brand-sub">Kabuki Digest · <a href="../../history/" style="color:#d4a017;text-decoration:none;">History</a></p>
+      <p class="meta">14 set 2026 · dia #4</p>
+
+      <div class="stat-row">
+        <div class="stat hot"><strong>~48</strong> min</div>
+        <div class="stat"><strong>5</strong> peças</div>
+        <div class="stat">N2–N1</div>
+      </div>
+
+      <nav class="toc" aria-label="Índice">
+        <h2>本日の演目</h2>
+        <ol>
+          <li>
+            <a href="#p1">
+              <span class="t-title">邪馬台国論争・最前線</span>
+              <span class="t-min">10′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p2">
+              <span class="t-title">巌流島・武蔵の真実</span>
+              <span class="t-min">12′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p3">
+              <span class="t-title">青谷・海の鉄斧</span>
+              <span class="t-min">8′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p4">
+              <span class="t-title">HYDE・静と更新</span>
+              <span class="t-min">10′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p5">
+              <span class="t-title">Cursor・AI指揮へ</span>
+              <span class="t-min">8′</span>
+            </a>
+          </li>
+        </ol>
+      </nav>
+      <p class="note">Abra no Chrome/Firefox com Yomitan. Clique no japonês pra lookup. Trechos + link para o original.</p>
+    </aside>
+
+    <main>
+      <div class="digest-banner">
+        <span class="tag">DIGEST</span>
+        <span>2026-09-14 — mistério Yamatai, verdade de Ganryūjima, ferro Yayoi do mar, HYDE em modo quieto, Cursor em wartime. Zero arquitetura-manual, zero fofoca.</span>
+      </div>
+
+      <header class="hero">
+        <div class="kicker">Daily Japanese Digest</div>
+        <h1>論争と伝説をほどく、ひと朝の読解</h1>
+        <p>300年の邪馬台国論争、巌流島の史料の裂け目、日本海の鉄斧、静のHYDE、そしてCursorの「戦時体制」。好奇心の軸は古代ミステリーと剣豪、海の交流、音、AI。推定合計 ~48 分。</p>
+      </header>
+
+      <article class="piece" id="p1">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★★</span>
+            <span class="chip">古代史</span>
+            <span class="chip">邪馬台国</span>
+            <span class="chip">卑弥呼</span>
+            <span class="chip mins">~10 min</span>
+          </div>
+          <h2 lang="ja">江戸時代から続く「邪馬台国論争」最前線——最新研究で見えてきた「卑弥呼の国」</h2>
+          <p class="why">Por quê: o mistério nº1 da história antiga — Kyūshū vs Kinki, short-li vs mapa coreano, Yoshinogari e Hashihaka; stakes reais, sem carpintaria.</p>
+          <div class="source">
+            <span>AERA Books · 朝日新聞出版</span>
+            <a href="https://dot.asahi.com/books/articles/-/287866" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <div class="ja" lang="ja">
+            <p>卑弥呼が治めた邪馬台国は「近畿地方」にあったのか、それとも「九州地方」にあったのか。江戸時代から続くこの論争は、古代史最大のミステリーとして常に注目されてきた。近年は考古学調査や科学的分析の進展によって新たな発見が相次ぐが、果たして邪馬台国論争に決着はついたのか。</p>
+            <p>『魏志』倭人伝には帯方郡（朝鮮半島）から邪馬台国へ向かうルートが書かれているのだが、記述どおりに進むと邪馬台国は九州の南方海上に位置してしまう。しかし史書では距離が誇張されることも多く、さらに同じ１里でもこの時代の１里は現代より短い可能性がある。この短里説と方位から見ると九州になる、というのが九州説の根拠の一つだ。佐賀県から、集落の規模が大きい吉野ヶ里遺跡が発掘されたことも、九州説の根拠としてあげられる。</p>
+            <p>一方、近畿説は史書に書かれた方位が誤っている可能性を指摘する。１５世紀に李氏朝鮮でつくられた「混一疆理歴代国都之図」では日本列島が南北に描かれている。この地理観を『魏志』倭人伝に当てはめれば、近畿に行き着くというのだ。さらに奈良県の黒塚古墳から三角縁神獣鏡が出土し、同じく奈良県桜井市の纒向遺跡から、築造時期が卑弥呼の没年と重なる「箸墓古墳」が発掘されたことも近畿説の後押しになった。</p>
+            <p>この２つの説以外にも、九州にあった邪馬台国が近畿に移ってヤマト政権になった説や神話とのつながりから出雲説など多くの説がある。邪馬台国をめぐる論争は、江戸時代、近畿説支持から九州説へと自説を変更した新井白石を皮切りに、近畿説をとる本居宣長、小林行雄、九州説をとる久米邦武、松本清張など、そうそうたる専門家や文化人の間で続けられてきた。約３００年たった現在でも邪馬台国の場所の解明には至っていないが、近年、多く提唱されるのは近畿説とされる。</p>
+          </div>
+          <p class="continue"><a href="https://dot.asahi.com/books/articles/-/287866" target="_blank" rel="noopener">続きを原文で読む →</a></p>
+        </div>
+      </article>
+
+      <article class="piece" id="p2">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★★</span>
+            <span class="chip">武蔵</span>
+            <span class="chip">剣豪</span>
+            <span class="chip">史料批判</span>
+            <span class="chip mins">~12 min</span>
+          </div>
+          <h2 lang="ja">巌流島の決闘の真相——武蔵は「佐々木小次郎」と戦っていなかった？</h2>
+          <p class="why">Por quê: destrói o mito Yoshikawa — Kokura Hibun sem “Sasaki”, Kojiro talvez 60+, duelo privado, não oficial Hosokawa; história com dentes.</p>
+          <div class="source">
+            <span>草の実堂</span>
+            <a href="https://kusanomido.com/study/history/japan/edo/59796/" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <div class="ja" lang="ja">
+            <p>巌流島の決闘とは、慶長１７年（１６１２年）４月１３日、現在の山口県の通称「巌流島」で、宮本武蔵と佐々木小次郎が戦ったとされる決闘である。しかし、この日本一有名な決闘の通説には、真相と違う点が幾つかある。本州と九州を隔てる関門海峡に浮かぶ周囲わずか１〜２キロの小さな無人島が巌流島で、正式名称は「船島」。彦島からわずか４００メートルほどの、本土からすぐ近くの島だった。</p>
+            <p>広く知られる物語の多くは、昭和１０年から朝日新聞で連載された吉川英治の小説『宮本武蔵』によって刷り込まれたものだ。二天記をベースに書かれたが、二天記は決闘から１５０年以上後に武蔵贔屓で編まれた伝記で、信憑性は低い。通説では２９歳の武蔵が１８歳の美剣士・小次郎に挑み、藩公認の試合でわざと遅刻し、櫂を削った木刀で勝つ——だが疑問は五つある。</p>
+            <p>武蔵の養子・宮本伊織が建立した『小倉碑文』には「佐々木小次郎」の名はなく、「兵法の達人・岩流」とだけ記される。『沼田家記』には「小次郎と申す者、岩流の兵法を使い」とあり、岩流は流派名、使い手が小次郎だと分かる。だが「佐々木」姓が登場するのは１００年以上後の歌舞伎『敵討巌流島』から。もし冨田勢源の弟子なら決闘時は６０〜７０歳前後——１８歳イケメン通説とは大きく異なる。</p>
+            <p>細川家の公式記録にも小次郎の記述はなく、船島は小倉藩ではなく長府藩の領国だった。史料的には藩公認試合ではなく私的な決闘だった可能性が高い。『沼田家記』は弟子同士の優劣争いが発端とし、『武州伝来記』では相手を長門の「小田小次郎」とし、父・新免無二斎への挑戦を息子が引き受けたと記す。巌流島は、私たちが知る通説とはすでに大きく違う。</p>
+          </div>
+          <p class="continue"><a href="https://kusanomido.com/study/history/japan/edo/59796/" target="_blank" rel="noopener">続きを原文で読む →</a></p>
+        </div>
+      </article>
+
+      <article class="piece" id="p3">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★★</span>
+            <span class="chip">弥生</span>
+            <span class="chip">海の交流</span>
+            <span class="chip">鳥取</span>
+            <span class="chip mins">~8 min</span>
+          </div>
+          <h2 lang="ja">弥生時代の鉄の斧、海の交流の証し——青谷上寺地で初公開の重文</h2>
+          <p class="why">Por quê: machado dentro de machado — cast + forged do continente; porto do Mar do Japão, setas em ossos humanos, comércio com stakes.</p>
+          <div class="source">
+            <span>朝日新聞 · 富田祥広</span>
+            <a href="https://www.asahi.com/articles/ASV934468V93PUUB00BM.html" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <div class="ja" lang="ja">
+            <p>鳥取市青谷町の大規模集落遺跡「青谷上寺地遺跡」の出土物を展示する鳥取県立青谷かみじち史跡公園で、国の重要文化財３６点が初公開されている。中国大陸か朝鮮半島でつくられた鉄製のおのは、海運による活動的な交流を示す貴重な資料だ。</p>
+            <p>弥生時代後期（紀元１〜２世紀頃）の「鉄斧」は、溶かした鉄を鋳型に流し込んでつくられた「鋳造鉄斧」の内側に、熱した鉄をたたいて成形された鍛造の「板状鉄斧」が入った状態で出土した。鋳造の鉄器は硬いがもろく、鍛造の鉄器は粘りがあり、強度や耐久性に優れているという。取っ手と脚台がある杯は、ヤマグワの１本の木をくりぬいてつくられ、装飾性に富んだ取っ手や、スカートのように外に広がる脚台がついている。</p>
+            <p>このほか、石やシカの角、針葉樹、青銅、鉄といった様々な素材のやじりが並べられている。青谷上寺地遺跡では銅製のやじりが突き刺さった人骨が見つかっており、縄文時代までは狩猟の道具だった弓矢が、弥生時代に戦いの道具としても使われたことがわかるという。</p>
+            <p>青谷上寺地遺跡は日本海側の交易拠点としてにぎわった港湾集落で、２００８年に国の史跡に指定された。２４年３月にオープンした史跡公園は１３５３点の国の重要文化財を収蔵。現在は初公開の３６点を含む４２点を展示している。１１月２３日まで、展示ガイダンス施設（ＹＡＹＯＩＮＥ）で。</p>
+          </div>
+          <p class="continue"><a href="https://www.asahi.com/articles/ASV934468V93PUUB00BM.html" target="_blank" rel="noopener">続きを原文で読む →</a></p>
+        </div>
+      </article>
+
+      <article class="piece" id="p4">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★☆</span>
+            <span class="chip">ロック</span>
+            <span class="chip">HYDE</span>
+            <span class="chip">JEKYLL</span>
+            <span class="chip mins">~10 min</span>
+          </div>
+          <h2 lang="ja">３５周年・HYDEの現在地——「昔から変わってない部分は、ひとつもないかも」</h2>
+          <p class="why">Por quê: teu artista — “動”↔“静”, JEKYLL, orquestra, recusa do “não mudar”; estética prática, não fluff de celebridade.</p>
+          <div class="source">
+            <span>GOETHE</span>
+            <a href="https://goetheweb.jp/person/article/20260415-hyde" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <div class="ja" lang="ja">
+            <p>ロックミュージシャンに求められる資質として、「ブレないこと」を語られることがある。だがHYDEは、その言葉にあまり魅力を感じていないという。３５年のキャリアを重ねた今も、彼は自らを“完成形”だとは捉えていない。「カッコよさって、時代とともに更新されていくものだと思うんです」——そう語った彼の現在地は、今なお変化の真っ只中にある。</p>
+            <p>２０２５年は「動」を象徴する激しいステージを限界までやりきった一年。２０２６年は年明けから「静」の表現へと舵を切り、５年ぶりとなるオーケストラツアーを始動した。「ソロのライヴではずっと、“自由な場所”としてのオールスタンディングにこだわってきました。……ステージにいる自分が、観客を“自由に”するにはどうすればいいかを、ずっと考えてきた数年間でもありました」</p>
+            <p>「やはり、僕のことを好きでいてくれるファンがいるから、品質を落とせないという思いがあるので、自分自身を更新し続けていかざるを得ないんです。……今はまだ、ロックミュージシャンとしてのカッコよさや、理想像の高みを毎年目指して、高跳びをしては壁をバンッと叩き、『ここまでイケた』と確認しながら、さらに上を目指している感覚です」</p>
+            <p>「自分自身を顧みると、昔から変わってない部分なんて、もしかしたらひとつもないかもしれない。……『ブレない』ことがいいという価値観もいいと思うけれど、僕の場合は、『ケース・バイ・ケースで最善を選んでいくのが最もスマート』という結論にいたっているだけなんです」。ニューアルバム『ＪＥＫＹＬＬ』は歌に集中しつつジャジーなムードも盛り込む。「７０歳、８０歳になってこれまでのような激しいライヴができるとは到底思えない（笑）。最終的には、ピアニストと一緒に小さなクラブにいて、酒を飲みながらしっとりと聴いてもらうようなことができたらいいな」——その布石としての静のフェーズだ。</p>
+          </div>
+          <p class="continue"><a href="https://goetheweb.jp/person/article/20260415-hyde" target="_blank" rel="noopener">続きを原文で読む →</a></p>
+        </div>
+      </article>
+
+      <article class="piece" id="p5">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★☆</span>
+            <span class="chip">AI</span>
+            <span class="chip">Cursor</span>
+            <span class="chip">開発</span>
+            <span class="chip mins">~8 min</span>
+          </div>
+          <h2 lang="ja">コードの編集から「AIの指揮」へ——バイブコーディングの「次」を目指すCursor</h2>
+          <p class="why">Por quê: tua ferramenta no fio da navalha — Opus 4.5 muda o jogo, “wartime”, Cursor treina modelo próprio; leitura densa pra quem usa Claude/Cursor.</p>
+          <div class="source">
+            <span>Forbes JAPAN · Anna Tong</span>
+            <a href="https://forbesjapan.com/articles/detail/93198" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <div class="ja" lang="ja">
+            <p>人工知能（ＡＩ）搭載のコードエディター「Ｃｕｒｓｏｒ」。自然な言葉でアプリを構築する「バイブコーディング」の流行に乗り、つい最近まで驚異的な急成長企業と見られていた。直近の資金調達ラウンドでは評価額が約３００億ドルに達し、共同創業者４人はビリオネアとなった。しかし現在、同社は岐路に立たされている。</p>
+            <p>これまでのＣｕｒｓｏｒは、視覚的な操作画面（ＧＵＩ）を重視したＡＩツールだった。Ｖｉｓｕａｌ Ｓｔｕｄｉｏ Ｃｏｄｅのオープンソース版からフォークした上で、ＡｎｔｈｒｏｐｉｃやＯｐｅｎＡＩといった他社製の強力なＡＩモデルを使いやすくしたのだ。だが今、頭脳の提供元であるＡｎｔｈｒｏｐｉｃ自身が、ＧＵＩすら必要とせず、ターミナルから直接ＡＩエージェントを動かす自律型ツールを投入し始めた。他社の頭脳に依存してきたＣｕｒｓｏｒは、淘汰の脅威に直面した。</p>
+            <p>この事態を受け、Ｃｕｒｓｏｒは社内で「戦時体制」を宣言した。２０２６年１月５日、年末年始の休暇明けに出社した社員は、「ウォー・タイム」と題したスライド資料が掲げられた全社会議に集められた。休暇中、Ｃｌａｕｄｅ Ｏｐｕｓ ４．５を試していた社員は、ある不都合な事実に気づいていた。モデルのコーディング能力が大きく進化した結果、開発者が出力されたコードを１行ずつ確認する必要がなくなりつつあったのだ。</p>
+            <p>Ｃｕｒｓｏｒはそもそも、人間とＡＩが「共同でコードを書く」という前提で作られている。もしコードを１行ずつ書き、編集する作業がプログラマーの仕事の中心でなくなれば、製品コンセプト自体が揺らぐ。経営陣は新たな最重要ミッション「Ｐ０ ＃１」を掲げた——「最高のコーディングモデルを作ること」。他社モデルのラッパーではなく、最高のモデル自体を作ることだ。人間がＧＵＩ上で細かく編集する時代から、自律的に働くＡＩエージェントを指揮する時代へ、Ｃｕｒｓｏｒ自体が突き進んでいる。</p>
+          </div>
+          <p class="continue"><a href="https://forbesjapan.com/articles/detail/93198" target="_blank" rel="noopener">続きを原文で読む →</a></p>
+        </div>
+      </article>
+
+      <footer class="site">読解幕 · JLPBOT · kabuki theme · 2026-09-14</footer>
+    </main>
+  </div>
+</body>
+</html>

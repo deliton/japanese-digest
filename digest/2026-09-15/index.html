@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>読解幕 · 2026-09-15 · Japanese Digest</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Noto+Serif+JP:wght@400;600;700&family=Shippori+Mincho:wght@500;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #0a0a0a;
+      --bg-2: #121212;
+      --bg-card: #161616;
+      --ink: #f5f5f5;
+      --ink-dim: #a8a29a;
+      --ink-mute: #6b6560;
+      --shu: #c41e3a;
+      --shu-hot: #e11d48;
+      --shu-deep: #8b1228;
+      --gold: #d4a017;
+      --gold-soft: #c9a227;
+      --white: #fafafa;
+      --line: #2a2a2a;
+      --line-hot: rgba(196, 30, 58, 0.45);
+      --measure: 42rem;
+      --radius: 4px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: "Noto Sans JP", "Hiragino Sans", "Yu Gothic", system-ui, sans-serif;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .stage-bar {
+      height: 6px;
+      background: repeating-linear-gradient(
+        90deg,
+        var(--shu) 0 48px,
+        var(--white) 48px 56px,
+        #111 56px 64px,
+        var(--gold) 64px 72px,
+        #111 72px 88px
+      );
+    }
+
+    .wrap {
+      width: min(100% - 2rem, 74rem);
+      margin: 0 auto;
+      padding: 2rem 0 4.5rem;
+      display: grid;
+      grid-template-columns: 15.5rem 1fr;
+      gap: 2.75rem;
+      align-items: start;
+    }
+
+    @media (max-width: 900px) {
+      .wrap { grid-template-columns: 1fr; gap: 1.5rem; padding-top: 1.25rem; }
+      .sidebar { position: static !important; }
+    }
+
+    .sidebar { position: sticky; top: 1.25rem; }
+
+    .brand {
+      display: flex;
+      align-items: baseline;
+      gap: 0.55rem;
+      margin: 0 0 0.35rem;
+    }
+    .brand-mark {
+      font-family: "Shippori Mincho", "Noto Serif JP", serif;
+      font-size: 1.85rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      color: var(--white);
+      line-height: 1;
+    }
+    .brand-mark em {
+      font-style: normal;
+      color: var(--shu);
+    }
+    .brand-sub {
+      font-size: 0.65rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-weight: 700;
+    }
+
+    .meta {
+      color: var(--ink-mute);
+      font-size: 0.8rem;
+      margin: 0 0 1.25rem;
+    }
+
+    .stat-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-bottom: 1.35rem;
+    }
+    .stat {
+      border: 1px solid var(--line);
+      background: var(--bg-2);
+      padding: 0.32rem 0.65rem;
+      font-size: 0.72rem;
+      color: var(--ink-dim);
+      border-radius: var(--radius);
+    }
+    .stat strong { color: var(--white); font-weight: 700; }
+    .stat.hot {
+      border-color: var(--line-hot);
+      color: var(--shu-hot);
+    }
+    .stat.hot strong { color: var(--shu-hot); }
+
+    .toc {
+      background: var(--bg-card);
+      border: 1px solid var(--line);
+      border-left: 3px solid var(--shu);
+      padding: 1rem 0.85rem 0.85rem;
+    }
+    .toc h2 {
+      margin: 0 0 0.85rem 0.35rem;
+      font-size: 0.68rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-weight: 700;
+    }
+    .toc ol {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      counter-reset: toc;
+    }
+    .toc li { margin: 0 0 0.2rem; }
+    .toc a {
+      display: grid;
+      grid-template-columns: 1.5rem 1fr auto;
+      gap: 0.45rem;
+      align-items: start;
+      text-decoration: none;
+      color: inherit;
+      padding: 0.5rem 0.4rem;
+      border-radius: var(--radius);
+      transition: background 0.15s ease, color 0.15s ease;
+    }
+    .toc a:hover { background: #1f1f1f; }
+    .toc a:hover .t-title { color: var(--white); }
+    .toc a::before {
+      counter-increment: toc;
+      content: counter(toc, decimal-leading-zero);
+      font-family: "Shippori Mincho", serif;
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--shu);
+      line-height: 1.35;
+    }
+    .t-title {
+      font-size: 0.84rem;
+      line-height: 1.35;
+      color: var(--ink-dim);
+      transition: color 0.15s ease;
+    }
+    .t-min {
+      font-size: 0.68rem;
+      color: var(--ink-mute);
+      padding-top: 0.12rem;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .note {
+      margin-top: 1rem;
+      font-size: 0.74rem;
+      color: var(--ink-mute);
+      line-height: 1.5;
+    }
+
+    main { max-width: var(--measure); }
+
+    .digest-banner {
+      display: flex;
+      gap: 0.75rem;
+      align-items: flex-start;
+      background: linear-gradient(90deg, rgba(196,30,58,0.18), rgba(212,160,23,0.08));
+      border: 1px solid var(--line-hot);
+      padding: 0.85rem 1rem;
+      margin-bottom: 1.5rem;
+      font-size: 0.86rem;
+      color: var(--ink-dim);
+    }
+    .digest-banner .tag {
+      flex-shrink: 0;
+      background: var(--shu);
+      color: #fff;
+      font-size: 0.65rem;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      padding: 0.28rem 0.5rem;
+      border-radius: var(--radius);
+    }
+
+    .hero {
+      margin-bottom: 2rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid var(--line);
+      position: relative;
+    }
+    .hero::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -1px;
+      width: 4.5rem;
+      height: 2px;
+      background: var(--shu);
+    }
+    .kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.7rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--shu-hot);
+      font-weight: 800;
+      margin-bottom: 0.85rem;
+    }
+    .kicker::before {
+      content: "◆";
+      font-size: 0.55rem;
+      color: var(--gold);
+    }
+    .hero h1 {
+      font-family: "Shippori Mincho", "Noto Serif JP", serif;
+      font-size: clamp(1.85rem, 4vw, 2.55rem);
+      font-weight: 700;
+      line-height: 1.2;
+      margin: 0 0 0.75rem;
+      color: var(--white);
+      letter-spacing: 0.02em;
+    }
+    .hero p {
+      margin: 0;
+      color: var(--ink-dim);
+      font-size: 0.98rem;
+      max-width: 36rem;
+    }
+
+    article.piece {
+      background: var(--bg-card);
+      border: 1px solid var(--line);
+      margin-bottom: 1.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+    article.piece::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: linear-gradient(90deg, var(--shu) 0%, var(--shu) 35%, var(--gold) 35%, var(--gold) 42%, transparent 42%);
+    }
+
+    .piece-inner { padding: 1.6rem 1.55rem 1.35rem; }
+
+    .piece-head {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-bottom: 0.85rem;
+    }
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      border: 1px solid var(--line);
+      background: #111;
+      color: var(--ink-dim);
+      padding: 0.22rem 0.6rem;
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      border-radius: var(--radius);
+    }
+    .chip.interest {
+      border-color: var(--shu);
+      color: var(--shu-hot);
+      background: rgba(196, 30, 58, 0.12);
+    }
+    .chip.mins {
+      border-color: var(--gold);
+      color: var(--gold);
+      background: transparent;
+    }
+
+    .piece h2 {
+      font-family: "Noto Serif JP", "Shippori Mincho", "Yu Mincho", serif;
+      font-size: 1.38rem;
+      font-weight: 700;
+      line-height: 1.5;
+      margin: 0 0 0.6rem;
+      color: var(--white);
+      letter-spacing: 0.02em;
+    }
+
+    .why {
+      margin: 0 0 1rem;
+      color: var(--ink-dim);
+      font-size: 0.9rem;
+      border-left: 2px solid var(--gold);
+      padding-left: 0.85rem;
+    }
+
+    .source {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.65rem 1.1rem;
+      font-size: 0.76rem;
+      color: var(--ink-mute);
+      margin-bottom: 1.25rem;
+    }
+    .source a {
+      color: var(--shu-hot);
+      text-decoration: none;
+      font-weight: 600;
+    }
+    .source a:hover { color: var(--gold); }
+
+    .ja {
+      font-family: "Noto Serif JP", "Hiragino Mincho ProN", "Yu Mincho", serif;
+      font-size: 1.08rem;
+      line-height: 2;
+      letter-spacing: 0.03em;
+      color: #ebe7e1;
+    }
+    .ja p { margin: 0 0 1.15em; }
+    .ja p:last-child { margin-bottom: 0; }
+
+    .continue {
+      margin-top: 1.25rem;
+      padding-top: 1rem;
+      border-top: 1px solid var(--line);
+      font-size: 0.86rem;
+    }
+    .continue a {
+      color: var(--white);
+      text-decoration: none;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      border-bottom: 2px solid var(--shu);
+      padding-bottom: 0.1rem;
+    }
+    .continue a:hover {
+      color: var(--shu-hot);
+      border-bottom-color: var(--gold);
+    }
+
+    footer.site {
+      max-width: var(--measure);
+      margin-top: 1.75rem;
+      color: var(--ink-mute);
+      font-size: 0.72rem;
+      letter-spacing: 0.06em;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+    footer.site::before {
+      content: "";
+      width: 1.25rem;
+      height: 2px;
+      background: var(--shu);
+    }
+  </style>
+</head>
+<body>
+  <div class="stage-bar" aria-hidden="true"></div>
+
+  <div class="wrap">
+    <aside class="sidebar">
+      <div class="brand">
+        <p class="brand-mark">読解<em>幕</em></p>
+      </div>
+      <p class="brand-sub">Kabuki Digest · <a href="../../history/" style="color:#d4a017;text-decoration:none;">History</a></p>
+      <p class="meta">15 set 2026 · dia #5</p>
+
+      <div class="stat-row">
+        <div class="stat hot"><strong>~49</strong> min</div>
+        <div class="stat"><strong>5</strong> peças</div>
+        <div class="stat">N2–N1</div>
+      </div>
+
+      <nav class="toc" aria-label="Índice">
+        <h2>本日の演目</h2>
+        <ol>
+          <li>
+            <a href="#p1">
+              <span class="t-title">秀吉書状・通説見直し</span>
+              <span class="t-min">11′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p2">
+              <span class="t-title">弘法山・日本最古級</span>
+              <span class="t-min">10′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p3">
+              <span class="t-title">まつりの起源・天石窟</span>
+              <span class="t-min">9′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p4">
+              <span class="t-title">DIR EN GREY・闇の核</span>
+              <span class="t-min">11′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p5">
+              <span class="t-title">CursorとClaude Code</span>
+              <span class="t-min">8′</span>
+            </a>
+          </li>
+        </ol>
+      </nav>
+      <p class="note">Abra no Chrome/Firefox com Yomitan. Clique no japonês pra lookup. Trechos + link para o original.</p>
+    </aside>
+
+    <main>
+      <div class="digest-banner">
+        <span class="tag">DIGEST</span>
+        <span>2026-09-15 — carta de Hideyoshi vira Komaki-Nagakute, tumulus contemporâneo de Himiko, origem do matsuri, Die no abismo do DIR EN GREY, Cursor↔Claude. Zero arquitetura-manual, zero fofoca.</span>
+      </div>
+
+      <header class="hero">
+        <div class="kicker">Daily Japanese Digest</div>
+        <h1>通説と起源をほどく、ひと朝の読解</h1>
+        <p>たつのの秀吉書状が小牧・長久手の勝敗イメージを揺らし、松本の古墳が卑弥呼の時代までさかのぼり、天石窟からまつりの原型へ、Ｄｉｅの闇、そしてＣｕｒｓｏｒとＣｌａｕｄｅ　Ｃｏｄｅの棲み分け。推定合計 ~49 分。</p>
+      </header>
+
+      <article class="piece" id="p1">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★★</span>
+            <span class="chip">戦国</span>
+            <span class="chip">秀吉</span>
+            <span class="chip">家康</span>
+            <span class="chip">兵庫</span>
+            <span class="chip mins">~11 min</span>
+          </div>
+          <h2 lang="ja">小牧・長久手の戦い「家康が優位」の通説見直し？——秀吉書状に「家康から和議申し込み」</h2>
+          <p class="why">Por quê: carta nova em Tatsuno (Hyogo!) vira a mesa — Ieyasu pediu paz; Komaki-Nagakute não foi vitória clara do lado Tokugawa.</p>
+          <div class="source">
+            <span>読売新聞</span>
+            <a href="https://www.yomiuri.co.jp/culture/20260807-GYT1T00142/" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <div class="ja" lang="ja">
+            <p>羽柴（豊臣）秀吉が、徳川家康と織田信長の次男・信雄と争った小牧・長久手の戦い（１５８４年）のさなかに、家臣の脇坂安治らに送った書状が２通見つかった。家康側から和議が申し込まれたとの内容で、専門家は「小牧・長久手の戦いは家康側が優位だったとする通説が見直され、秀吉側を優勢とする最近の研究を補強する史料」としている。</p>
+            <p>安治は、羽柴秀吉と柴田勝家が争った「賤ヶ岳の戦い」で活躍した「七本槍」の一人。書状はいずれも秀吉の朱印があり、脇坂家が藩主を務めた龍野藩があった兵庫県たつの市の旧家から、今年５月に見つかった。１通目は天正１２年（１５８４年）４月２１日付で、秀吉側の武将だった池田恒興と森長可が討ち死にしたことに触れ、「陣地の普請を固めているので心配するな」と記述。伊賀で後方支援をしていた安治に「材木は河端まで出しておけ」などと指示している。</p>
+            <p>もう１通は同年９月６日付で、「小牧の西へ押し廻り、国中に放火し、砦を数か所作らせて、さらに戦おうと思っていたら、信雄・家康から人質を出すのでと和議が申し込まれた」と伝達。和議に同意しないでいたところ、信長の弟や家康の家臣まで人質に出すと言ってきたとつづっている。東京大史料編纂所の村井祐樹准教授（日本中世史）は「秀吉側は局地戦では負けたものの、動揺していないことがわかる。家康側から和議を申し入れたこともはっきりした」と話す。書状は１０月２４日から、たつの市立龍野歴史文化資料館で開かれる企画展で公開される。</p>
+            <p>同じ合戦の局地戦「蟹江合戦」では、敗退直後に秀吉が配下へ状況を知らせた「幻の書状」も再発見されている。滝川一益父子の退却を記し、伊勢方面の守備を厳重にするよう命じる文面には、歴史家の平山優氏が言う「諦めきれないが、いまさらなにもできない無念さ」がにじむ。通説の勝敗イメージを、一次史料が少しずつ書き換えている。</p>
+          </div>
+          <p class="continue"><a href="https://www.yomiuri.co.jp/culture/20260807-GYT1T00142/" target="_blank" rel="noopener">続きを原文で読む →</a></p>
+        </div>
+      </article>
+
+      <article class="piece" id="p2">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★★</span>
+            <span class="chip">古墳</span>
+            <span class="chip">卑弥呼</span>
+            <span class="chip">松本</span>
+            <span class="chip">考古学</span>
+            <span class="chip mins">~10 min</span>
+          </div>
+          <h2 lang="ja">卑弥呼の時代に——再調査で判明「弘法山古墳は日本最古級か」</h2>
+          <p class="why">Por quê: timeline shake — tumulus ~50 anos mais antigo, contemporâneo de Himiko, anterior a Hashihaka; chefe vindo do Tōkai?</p>
+          <div class="source">
+            <span>日テレNEWS NNN · 市民タイムス</span>
+            <a href="https://news.ntv.co.jp/category/society/tsd6bc81425df84d43a86a0c449e495494" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <div class="ja" lang="ja">
+            <p>松本市の国史跡・弘法山古墳（神田・並柳境）が、日本最古級ともいえる３世紀前半～半ばの前方後方墳と推定できることが、市の昨年度までの再調査で分かった。「東日本最古級」とされていた従来よりも、５０年近く時代をさかのぼる。市文化財課は「大和政権が広めた前方後円墳の文化とは異なる東日本独自の特色を持つ古墳で、位置付けが従来と違ってくる」としている。</p>
+            <p>昭和４９（１９７４）年の発掘調査で出土した土器や銅鏡などの年代を再検討したほか、古墳のくびれ部分の形状などから推定した。古墳時代の始まりとされる前方後円墳・箸墓古墳（奈良県桜井市）よりも古いホケノ山古墳（同市）と、遺物の年代や石室の造りなどに共通点があるという。史跡の数カ所を発掘して正確な形や大きさも計測し、墳丘の長さは６１．７メートルと分かった。</p>
+            <p>松本市文化財課の田多井用章課長は「時代としては教科書にも載る卑弥呼の邪馬台国の時代。古墳時代は箸墓古墳ができてからあとの時代を言う場合が多い。ところが弘法山古墳は箸墓古墳よりも一段階古い古墳だということが分かった」と説明する。出土した土器の全てが東海地方の様式で、被葬者は松本に入植した集団の初代首長で、副葬品の組み合わせから男性であった可能性が高いという。</p>
+            <p>標高６５２メートルの尾根上にあり、松本市街地や北アルプスが一望できる立地だ。市は古墳の保存活用と再整備のため、来年度に保存活用計画を策定する。臥雲市長は「松本城は戦国から江戸初期の国宝だが、古墳時代にさかのぼった歴史の面でも興味・関心を持ってもらうチャンスにしたい」と話している。史跡指定５０周年を記念したシンポジウムは１２月に開催予定だ。</p>
+          </div>
+          <p class="continue"><a href="https://news.ntv.co.jp/category/society/tsd6bc81425df84d43a86a0c449e495494" target="_blank" rel="noopener">続きを原文で読む →</a></p>
+        </div>
+      </article>
+
+      <article class="piece" id="p3">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★☆</span>
+            <span class="chip">神道</span>
+            <span class="chip">神話</span>
+            <span class="chip">大嘗祭</span>
+            <span class="chip">古代</span>
+            <span class="chip mins">~9 min</span>
+          </div>
+          <h2 lang="ja">千数百年続く「まつり」はどう生まれたのか——天石窟神話と大嘗祭の原型</h2>
+          <p class="why">Por quê: mito + arqueologia do rito — por que o sol se esconde, e por que o Tennō monta um palácio só para desmontá-lo em dias.</p>
+          <div class="source">
+            <span>國學院大學 · 笹生衛</span>
+            <a href="https://www.kokugakuin.ac.jp/article/138733" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <div class="ja" lang="ja">
+            <p>四季折々、日本各地で行われる「祭祀」。長きにわたり継承されたものも多く、現在でも地域の人々が支える行事であり、お互いの絆を深める場となっている。このような祭祀は、いかに日本列島で生まれ、伝統文化となったのだろうか。祭祀の意味や成り立ちを知る上で、参考となるものがある。『日本書紀』に伝わる「天石窟（あめのいわや）」の神話だ（『古事記』では「天石屋戸」神話）。</p>
+            <p>「神話では、〈太陽の女神〉である天照大御神が天石窟に籠もり、世界が暗闇に閉ざされることに。そこで天石窟からのお出ましを願い、貴重な鏡と勾玉をサカキ（常緑樹）に下げ、天石窟の前に捧げました。この話は、神祭りの起源や原型を表しているのです」——こう語るのは、古代の遺跡をもとに歴史を研究する國學院大學・笹生衛教授（國學院大學博物館長）だ。「この神話で注目すべきは、太陽という自然の働きに神を感じ、祭っていること。これが日本の神祭りの一つの原型となります」と話す。</p>
+            <p>神話の中では、祭祀に先立つ準備として機織りや鍛冶の記述がある。「機織りや金属加工技術は古墳時代（５世紀）に日本列島にもたらされた、当時の最新技術でした。５世紀の祭祀ではそうした最上の品々を捧げていた痕跡が発見されています」という。祭祀の中でもきわめて重要と言えるのが「大嘗祭」である。古代以来、天皇は毎年１１月、その年の収穫を感謝し、神に新穀等の神饌を捧げる〈新嘗祭〉を行う。</p>
+            <p>大嘗祭の特徴は〈大嘗宮〉という特別な祭祀の施設を設けること。古代の大嘗宮は、祭の７日前に着工し５日間で仕上げ、祭が終わるとすぐに解体された。笹生氏は「祭は心身を清める〈潔斎〉が重要で、祭祀の場や使われる道具が清浄であることが求められたからです」と解説する。平城宮跡では７５８年斎行の淳仁天皇の大嘗宮遺構などが見つかっている。天皇自ら国内の平安を願う——その意義は、環境変動により自然災害が頻発する現代においてこそ一層重要な意味を持ってこよう。</p>
+          </div>
+          <p class="continue"><a href="https://www.kokugakuin.ac.jp/article/138733" target="_blank" rel="noopener">続きを原文で読む →</a></p>
+        </div>
+      </article>
+
+      <article class="piece" id="p4">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★★</span>
+            <span class="chip">ロック</span>
+            <span class="chip">DIR EN GREY</span>
+            <span class="chip">Die</span>
+            <span class="chip">アルバム</span>
+            <span class="chip mins">~11 min</span>
+          </div>
+          <h2 lang="ja">DIR EN GREYみたいなバンドは世界にいない——Dieが語る『MORTAL DOWNER』と「振り切る」決意</h2>
+          <p class="why">Por quê: teu metal — atraso deliberado pra achar o núcleo, som vivo vs metal pós-produzido, 30 anos sem freio; zero fofoca.</p>
+          <div class="source">
+            <span>激ロック / wacoca（Dieインタビュー）</span>
+            <a href="https://gekirock.com/interview/2026/04/dir_en_grey.php" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <div class="ja" lang="ja">
+            <p>１２枚目のフル・アルバム『ＭＯＲＴＡＬ　ＤＯＷＮＥＲ』は、最も深い闇へ沈み込む一枚となった。これまでバンドが一貫して表現してきた「痛み」が、本作では細部への刺激ではなく全身を包み込む憂鬱となって立ち現れる。ギタリストのＤｉｅは、制作の背景をこう振り返る。「本来リリースするべき時期を過ぎている状態だったから、切り替えがどうとか言ってられなかった。曲作りとライヴに同じ空気が流れていて。もしツアーが終わってから『さぁ曲作りをしましょう』という流れだったら、何か違ったかもしれない。本当に、ライヴのムードが織り込まれているアルバムだと思います」。</p>
+            <p>「結成して２９年目の音がこんなふうになってるなんて、デビュー当時は思ってもみなかった（笑）。もし仮にどこかで一度活動を止めていたら、こういう作品は生まれなかったかもしれない。バンドを繋げているテンションが一度切れてしまうと、どうしても音の説得力が違ってくる」。「ファンも新しい作品が出るっていう感動によってハードルが下がっちゃう。僕たちはずっと途切れずに続けてるからどんどんハードルが上がってる。だからこそ、相当悩みに悩むんだけど」。『ＭＯＲＴＡＬ　ＤＯＷＮＥＲ』も、そのハードルを超えるために本来の予定を延期させて完成に漕ぎ着けた。「ギリギリまで、アルバムの核を探していました」。</p>
+            <p>「『ＰＨＡＬＡＲＩＳ』や『Ｔｈｅ　Ｉｎｓｕｌａｔｅｄ　Ｗｏｒｌｄ』のミックスはいわゆるメタル的な音で、当然インパクトも派手さもあったんだけど、そこには行きたくないなと。もっと生っぽいサウンドを作りたかったし、聴きたかった。レコーディングされたものに極端なコンプをかけてバキバキにするのではなく、作った音を上手くミキシングして返してほしい」。アタックの強いキックはもういいかな、とも。「ライヴにおいても音源においても、ＤＩＲ　ＥＮ　ＧＲＥＹみたいなバンドは世界にいないと思う。だからこそこれからも振り切ってやっていくこと。それだけかな」。</p>
+            <p>「２０年を超えたあたりからは特にそういう考えになって。『これでいいのか？』って悩んだこともあったけど、もうここからは戻れないよねって。いろんなものを背負うようにもなったけど、だからこそ先を見ても仕方がなくて、目の前のことをやっていかないと次が見えてこない」。結成３０周年を前に、長く続けること自体が目的ではない——どのアルバムもどのステージも、最後になったって悔いがないように、と語る。</p>
+          </div>
+          <p class="continue"><a href="https://gekirock.com/interview/2026/04/dir_en_grey.php" target="_blank" rel="noopener">続きを原文で読む →</a></p>
+        </div>
+      </article>
+
+      <article class="piece" id="p5">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★☆</span>
+            <span class="chip">AI</span>
+            <span class="chip">Cursor</span>
+            <span class="chip">Claude</span>
+            <span class="chip">開発</span>
+            <span class="chip mins">~8 min</span>
+          </div>
+          <h2 lang="ja">Cursor vs Claude Code——「どちらが優れるか」ではなく「何を任せるか」</h2>
+          <p class="why">Por quê: tua stack — IDE interativo vs agente CLI; Background Agents vs repo-wide; escolha prática, não hype.</p>
+          <div class="source">
+            <span>Qiita · AI Maker Lab</span>
+            <a href="https://qiita.com/aimakerlab/items/73978089bc457f5158dd" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <div class="ja" lang="ja">
+            <p>２０２６年８月時点で、個人開発者の現場ではＣｕｒｓｏｒとＣｌａｕｄｅ　Ｃｏｄｅの使い分けが現実的なテーマになっている。ＣｕｒｓｏｒはＶＳＣｏｄｅベースのＩＤＥ内蔵型で、今開いているファイルを対話的に差分編集する用途が速い。Ｃｌａｕｄｅ　Ｃｏｄｅはターミナルで動くＣＬＩエージェント型で、複数ファイルにまたがる調査・リファクタ・自動化を一括で任せる用途が速い。設計思想が根本的に異なるので、「どちらか一方」ではなく「何を任せるか」で選ぶ、というのがこの比較の結論だ。</p>
+            <p>Ｃｕｒｓｏｒは「コードを書く人をＡＩが補助する」モデル。動作の核はエディタ内での対話と差分編集で、得意な粒度はファイル単位・関数単位。コンテキストは開いているファイルやタブだ。一方Ｃｌａｕｄｅ　Ｃｏｄｅは「タスクを渡すとＡＩが調査→実装→確認まで一連を処理する」エージェントモデル。指定ディレクトリ全体を眺めながら、リポジトリ横断の一括変更に強い。</p>
+            <p>料金の目安（同記事時点）では、Ｃｕｒｓｏｒ　Ｐｒｏが月２０ドル前後、Ａｎｔｈｒｏｐｉｃ　Ｐｒｏ（Ｃｌａｕｄｅ　Ｃｏｄｅ同梱）が月２２ドル前後。シナリオ別では、新規ファイルを書きながら仕様を固めるならＣｕｒｓｏｒ、既存リポジトリの全体像を把握して一括変更するならＣｌａｕｄｅ　Ｃｏｄｅ、自動化スクリプトを生成して実行確認まで任せるならＣｌａｕｄｅ　Ｃｏｄｅ、が向くとされる。</p>
+            <p>２０２６年８月の変更点として、Ｃｕｒｓｏｒでは背景エージェント機能（Ｂａｃｋｇｒｏｕｎｄ　Ａｇｅｎｔｓ）が一般公開され、複数ファイルを非同期で処理する機能が強化された。Ｃｌａｕｄｅ　Ｃｏｄｅ側はＡｎｔｈｒｏｐｉｃ　Ｐｒｏ統合が完了し、Ｍａｘプランで長時間エージェント実行の上限が引き上げられている。月４０ドルの予算があれば両方使い分けが現実的な最適解——対話的な編集はＣｕｒｓｏｒ、横断の自律実行はＣｌａｕｄｅ　Ｃｏｄｅ、という棲み分けだ。</p>
+          </div>
+          <p class="continue"><a href="https://qiita.com/aimakerlab/items/73978089bc457f5158dd" target="_blank" rel="noopener">続きを原文で読む →</a></p>
+        </div>
+      </article>
+
+      <footer class="site">読解幕 · JLPBOT · kabuki theme · 2026-09-15</footer>
+    </main>
+  </div>
+</body>
+</html>

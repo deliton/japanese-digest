@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>読解幕 · 2026-09-26 · Japanese Digest</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Noto+Serif+JP:wght@400;600;700&family=Shippori+Mincho:wght@500;700&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --bg: #0a0a0a;
+      --bg-2: #121212;
+      --bg-card: #161616;
+      --ink: #f5f5f5;
+      --ink-dim: #a8a29a;
+      --ink-mute: #6b6560;
+      --shu: #c41e3a;
+      --shu-hot: #e11d48;
+      --shu-deep: #8b1228;
+      --gold: #d4a017;
+      --gold-soft: #c9a227;
+      --white: #fafafa;
+      --line: #2a2a2a;
+      --line-hot: rgba(196, 30, 58, 0.45);
+      --measure: 42rem;
+      --radius: 4px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: "Noto Sans JP", "Hiragino Sans", "Yu Gothic", system-ui, sans-serif;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .stage-bar {
+      height: 6px;
+      background: repeating-linear-gradient(
+        90deg,
+        var(--shu) 0 48px,
+        var(--white) 48px 56px,
+        #111 56px 64px,
+        var(--gold) 64px 72px,
+        #111 72px 88px
+      );
+    }
+
+    .wrap {
+      width: min(100% - 2rem, 74rem);
+      margin: 0 auto;
+      padding: 2rem 0 4.5rem;
+      display: grid;
+      grid-template-columns: 15.5rem 1fr;
+      gap: 2.75rem;
+      align-items: start;
+    }
+
+    @media (max-width: 900px) {
+      .wrap { grid-template-columns: 1fr; gap: 1.5rem; padding-top: 1.25rem; }
+      .sidebar { position: static !important; }
+    }
+
+    .sidebar { position: sticky; top: 1.25rem; }
+
+    .brand {
+      display: flex;
+      align-items: baseline;
+      gap: 0.55rem;
+      margin: 0 0 0.35rem;
+    }
+    .brand-mark {
+      font-family: "Shippori Mincho", "Noto Serif JP", serif;
+      font-size: 1.85rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      color: var(--white);
+      line-height: 1;
+    }
+    .brand-mark em {
+      font-style: normal;
+      color: var(--shu);
+    }
+    .brand-sub {
+      font-size: 0.65rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-weight: 700;
+    }
+
+    .meta {
+      color: var(--ink-mute);
+      font-size: 0.8rem;
+      margin: 0 0 1.25rem;
+    }
+
+    .stat-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-bottom: 1.35rem;
+    }
+    .stat {
+      border: 1px solid var(--line);
+      background: var(--bg-2);
+      padding: 0.32rem 0.65rem;
+      font-size: 0.72rem;
+      color: var(--ink-dim);
+      border-radius: var(--radius);
+    }
+    .stat strong { color: var(--white); font-weight: 700; }
+    .stat.hot {
+      border-color: var(--line-hot);
+      color: var(--shu-hot);
+    }
+    .stat.hot strong { color: var(--shu-hot); }
+
+    .toc {
+      background: var(--bg-card);
+      border: 1px solid var(--line);
+      border-left: 3px solid var(--shu);
+      padding: 1rem 0.85rem 0.85rem;
+    }
+    .toc h2 {
+      margin: 0 0 0.85rem 0.35rem;
+      font-size: 0.68rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-weight: 700;
+    }
+    .toc ol {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      counter-reset: toc;
+    }
+    .toc li { margin: 0 0 0.2rem; }
+    .toc a {
+      display: grid;
+      grid-template-columns: 1.5rem 1fr auto;
+      gap: 0.45rem;
+      align-items: start;
+      text-decoration: none;
+      color: inherit;
+      padding: 0.5rem 0.4rem;
+      border-radius: var(--radius);
+      transition: background 0.15s ease, color 0.15s ease;
+    }
+    .toc a:hover { background: #1f1f1f; }
+    .toc a:hover .t-title { color: var(--white); }
+    .toc a::before {
+      counter-increment: toc;
+      content: counter(toc, decimal-leading-zero);
+      font-family: "Shippori Mincho", serif;
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--shu);
+      line-height: 1.35;
+    }
+    .t-title {
+      font-size: 0.84rem;
+      line-height: 1.35;
+      color: var(--ink-dim);
+      transition: color 0.15s ease;
+    }
+    .t-min {
+      font-size: 0.68rem;
+      color: var(--ink-mute);
+      padding-top: 0.12rem;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .note {
+      margin-top: 1rem;
+      font-size: 0.74rem;
+      color: var(--ink-mute);
+      line-height: 1.5;
+    }
+
+    main { max-width: var(--measure); }
+
+    .digest-banner {
+      display: flex;
+      gap: 0.75rem;
+      align-items: flex-start;
+      background: linear-gradient(90deg, rgba(196,30,58,0.18), rgba(212,160,23,0.08));
+      border: 1px solid var(--line-hot);
+      padding: 0.85rem 1rem;
+      margin-bottom: 1.5rem;
+      font-size: 0.86rem;
+      color: var(--ink-dim);
+    }
+    .digest-banner .tag {
+      flex-shrink: 0;
+      background: var(--shu);
+      color: #fff;
+      font-size: 0.65rem;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      padding: 0.28rem 0.5rem;
+      border-radius: var(--radius);
+    }
+
+    .hero {
+      margin-bottom: 2rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid var(--line);
+      position: relative;
+    }
+    .hero::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -1px;
+      width: 4.5rem;
+      height: 2px;
+      background: var(--shu);
+    }
+    .kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.7rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--shu-hot);
+      font-weight: 800;
+      margin-bottom: 0.85rem;
+    }
+    .kicker::before {
+      content: "◆";
+      font-size: 0.55rem;
+      color: var(--gold);
+    }
+    .hero h1 {
+      font-family: "Shippori Mincho", "Noto Serif JP", serif;
+      font-size: clamp(1.85rem, 4vw, 2.55rem);
+      font-weight: 700;
+      line-height: 1.2;
+      margin: 0 0 0.75rem;
+      color: var(--white);
+      letter-spacing: 0.02em;
+    }
+    .hero p {
+      margin: 0;
+      color: var(--ink-dim);
+      font-size: 0.98rem;
+      max-width: 36rem;
+    }
+
+    article.piece {
+      background: var(--bg-card);
+      border: 1px solid var(--line);
+      margin-bottom: 1.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+    article.piece::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: linear-gradient(90deg, var(--shu) 0%, var(--shu) 35%, var(--gold) 35%, var(--gold) 42%, transparent 42%);
+    }
+
+    .piece-inner { padding: 1.6rem 1.55rem 1.35rem; }
+
+    .piece-head {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-bottom: 0.85rem;
+    }
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      border: 1px solid var(--line);
+      background: #111;
+      color: var(--ink-dim);
+      padding: 0.22rem 0.6rem;
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      border-radius: var(--radius);
+    }
+    .chip.interest {
+      border-color: var(--shu);
+      color: var(--shu-hot);
+      background: rgba(196, 30, 58, 0.12);
+    }
+    .chip.mins {
+      border-color: var(--gold);
+      color: var(--gold);
+      background: transparent;
+    }
+
+    .piece h2 {
+      font-family: "Noto Serif JP", "Shippori Mincho", "Yu Mincho", serif;
+      font-size: 1.38rem;
+      font-weight: 700;
+      line-height: 1.5;
+      margin: 0 0 0.6rem;
+      color: var(--white);
+      letter-spacing: 0.02em;
+    }
+
+    .why {
+      margin: 0 0 1rem;
+      color: var(--ink-dim);
+      font-size: 0.9rem;
+      border-left: 2px solid var(--gold);
+      padding-left: 0.85rem;
+    }
+
+    .source {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.65rem 1.1rem;
+      font-size: 0.76rem;
+      color: var(--ink-mute);
+      margin-bottom: 1.25rem;
+    }
+    .source a {
+      color: var(--shu-hot);
+      text-decoration: none;
+      font-weight: 600;
+    }
+    .source a:hover { color: var(--gold); }
+
+    .ja {
+      font-family: "Noto Serif JP", "Hiragino Mincho ProN", "Yu Mincho", serif;
+      font-size: 1.08rem;
+      line-height: 2;
+      letter-spacing: 0.03em;
+      color: #ebe7e1;
+    }
+    .ja p { margin: 0 0 1.15em; }
+    .ja p:last-child { margin-bottom: 0; }
+
+    .continue {
+      margin-top: 1.25rem;
+      padding-top: 1rem;
+      border-top: 1px solid var(--line);
+      font-size: 0.86rem;
+    }
+    .continue a {
+      color: var(--white);
+      text-decoration: none;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      border-bottom: 2px solid var(--shu);
+      padding-bottom: 0.1rem;
+    }
+    .continue a:hover {
+      color: var(--shu-hot);
+      border-bottom-color: var(--gold);
+    }
+
+    footer.site {
+      max-width: var(--measure);
+      margin-top: 1.75rem;
+      color: var(--ink-mute);
+      font-size: 0.72rem;
+      letter-spacing: 0.06em;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+    footer.site::before {
+      content: "";
+      width: 1.25rem;
+      height: 2px;
+      background: var(--shu);
+    }
+  </style>
+</head>
+<body>
+  <div class="stage-bar" aria-hidden="true"></div>
+
+  <div class="wrap">
+    <aside class="sidebar">
+      <div class="brand">
+        <span class="brand-mark">読解<em>幕</em></span>
+      </div>
+      <p class="brand-sub">Kabuki Digest · <a href="../../history/" style="color:#d4a017;text-decoration:none;">History</a></p>
+      <p class="meta">2026-09-26 · America/Sao_Paulo</p>
+      <div class="stat-row">
+        <div class="stat hot"><strong>~51</strong> min</div>
+        <div class="stat"><strong>7</strong> peças</div>
+        <div class="stat">N2–N1</div>
+      </div>
+
+      <nav class="toc" aria-label="Índice">
+        <h2>本日の演目</h2>
+        <ol>
+          <li>
+            <a href="#p1">
+              <span class="t-title">三上山・門柱跡</span>
+              <span class="t-min">9′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p2">
+              <span class="t-title">武蔵像の地層</span>
+              <span class="t-min">9′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p3">
+              <span class="t-title">西岩田・木製仮面</span>
+              <span class="t-min">8′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p4">
+              <span class="t-title">BAND-MAID</span>
+              <span class="t-min">7′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p5">
+              <span class="t-title">新幹線・交通革命</span>
+              <span class="t-min">7′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p6">
+              <span class="t-title">FFレゾナンス</span>
+              <span class="t-min">6′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p7">
+              <span class="t-title">Cursor×カカクコム</span>
+              <span class="t-min">5′</span>
+            </a>
+          </li>
+        </ol>
+      </nav>
+      <p class="note">Triage: sem fofoca, sem política eleitoral, sem manual de construção. Mix: Yayoi/sagrado · Musashi historiografia · Yamatai/Kofun · BAND-MAID · Shinkansen · FF Resonance · Cursor AI. Ontem (Meio/Kanmuri/Kamakura/Jindai/BABYMETAL/Nankinmachi/DEG) evitados.</p>
+    </aside>
+
+    <main>
+      <div class="digest-banner">
+        <span class="tag">今日</span>
+        <span>2026-09-26 — Mikamiyama/Yayoi gate (torii-like sacred boundary, not carpentry), Musashi image layers (Yoshikawa→film→Vagabond), Nishiiwata wooden mask (Yamato port?), BAND-MAID ENERGETIC + okyuji pause, Shinkansen safety→lifestyle revolution, FF Resonance HD-2D, Kakaku Cursor ×500. Zero fofoca, zero manual de construção.</span>
+      </div>
+
+      <header class="hero">
+        <div class="kicker">Daily Japanese Digest</div>
+        <h1 lang="ja">神体山の結界と武蔵の地層、仮面と飛空艇をほどく、ひと朝の読解</h1>
+        <p lang="ja">滋賀・三上山のふもとで、弥生の聖域を画す国内最大の門柱跡が見つかった。宮本武蔵の顔は、史料より小説と映画の地層でできている。河内の木製仮面はヤマト王権の窓口を示唆する。ＢＡＮＤ－ＭＡＩＤは踊って先へ進み、新幹線は「絶対安全」で生活を変えた。ＦＦレゾナンスはクラシカル回帰、カカクコムは五百人にＣｕｒｓｏｒを配る。推定合計 ~51 分。</p>
+      </header>
+
+      <article class="piece" id="p1">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip">三上山</span><span class="chip">弥生</span><span class="chip">祭祀</span><span class="chip">考古学</span>
+            <span class="chip interest">★★★★★</span>
+            <span class="chip mins">~9 min</span>
+          </div>
+          <h2 lang="ja">神体山の結界——滋賀・中畑・古里遺跡で弥生期最大の門柱跡、鳥居のような役割か</h2>
+          <p class="why">NatGeo de ontem: em Yasu (Shiga), o maior portal Yayoi do país — limiar sagrado diante do monte Mikami (Ōmi-Fuji), papel de torii antes do torii. História ritual, não anatomia de telhado.</p>
+          <div class="source">
+            <span>産経ニュース</span>
+            <a href="https://www.sankei.com/article/20260925-B5Q4GCV2FJIF7PRLAICVBHTT3E/" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <div class="ja" lang="ja">
+          <p>弥生時代中期末（紀元前後）の巨大な掘立柱建物跡が出土した滋賀県野洲市の中畑・古里遺跡で、同時期の国内最大の門柱遺構が発見され、県文化財保護協会が二〇二六年九月二十五日に発表した。門柱は掘立柱建物と併存していたと推定され、「祭祀空間と外側を画す象徴的なモニュメント」として、神社の鳥居のような役割があったと想定されている。</p>
+          <p>遺跡は「近江富士」と呼ばれる三上山に近い。専門家は「神体山を含む弥生時代の聖域が立体的に解読できる全国初の貴重な実例だ」と話す。柱間の距離は八・三メートルに及び、環濠集落の出入り口でよく見られる二メートル前後の門柱とは規模がまるで違う。これまでの最大例は栗東市・下鈎遺跡の柱間三・九メートルで、そちらも聖域に立つ「鳥居状遺構」とされた唯一の先例だった。</p>
+          <p>現存最古とされる鳥居は山形市の石鳥居で、約千年前の平安後期。それ以前のルーツは不明で、約二千年前の今回の門柱が鳥居の祖形かは分からない。それでも、聖と俗を分ける「結界」としての発想が、すでにこの時代にあった可能性が浮かぶ。</p>
+          <p>中畑・古里遺跡は六月に近畿最大級の巨大建物跡が出土した場所でもあり、日本最大を含む二十四個の大岩山銅鐸の出土地に近い。祖霊や穀霊を祭る銅鐸祭祀の聖域だった可能性が浮上しており、門柱はその境界を可視化する装置だったのかもしれない。森岡秀人氏は「三上山に最も近い遺跡で近畿を代表する弥生の祭祀空間が出現した意義は極めて大きい」と述べ、国史跡指定を見据えた保存協議を望む。</p>
+          </div>
+          <p class="continue"><a href="https://www.sankei.com/article/20260925-B5Q4GCV2FJIF7PRLAICVBHTT3E/" target="_blank" rel="noopener">続きを読む · 産経ニュース</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p2">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip">宮本武蔵</span><span class="chip">五輪書</span><span class="chip">吉川英治</span><span class="chip">歴史像</span>
+            <span class="chip interest">★★★★★</span>
+            <span class="chip mins">~9 min</span>
+          </div>
+          <h2 lang="ja">お通は史料にいない——宮本武蔵の「顔」は四百年かけて積み上がった地層である</h2>
+          <p class="why">Musashi como geologia cultural: Gorinsho não é autobiografia; Otsuu/Takuan/Matahachi são Yoshikawa (1935–39); Mifune e Vagabond acrescentam camadas. Separar fato e lenda — vocabulario que vale a pena.</p>
+          <div class="source">
+            <span>宮本武蔵研究所／武蔵研究史</span>
+            <a href="https://miyamoto-musashi.org/ja/musashi/historiography/" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <div class="ja" lang="ja">
+          <p>宮本武蔵は日本史上もっとも有名な剣豪だが、私たちが抱く武蔵像のかなりの部分は、武蔵本人ではなく後世の著述家・小説家・映画監督・漫画家によって作られたものである。武蔵自身が書いた文章は『五輪書』と若干の書状しか残っていない。にもかかわらず私たちは恋愛や少年期の放浪、巌流島での遅刻の理由まで「知っている」つもりでいる。その大半は後世の創作だ。</p>
+          <p>『五輪書』（一六四五）は兵法の原理を説いた書であり自伝ではない。巌流島の決闘にも一切触れない。養子・宮本伊織が建立した小倉碑文（一六五四）は、武蔵を直接知る人物による最古の伝記的記録として重い。一次史料は実在と主要な武勲を証明するが、人生の大部分について沈黙している。この「空白」が、後世が自由に物語を紡ぐ余地を残した。</p>
+          <p>現代日本人が思い浮かべる武蔵の大半は、吉川英治の小説『宮本武蔵』（一九三五〜三九年、朝日新聞連載）に由来する。最大の創作は恋人・お通——史料に一切登場しない。沢庵を精神的師匠とする設定も、幼なじみ・本位田又八も創作だ。累計数千万部に読まれた結果、「日本人にとっての武蔵」は事実上、吉川が創り上げた武蔵になった。</p>
+          <p>稲垣浩・三船敏郎の三部作はアカデミー賞名誉賞を受け、視覚イメージを国際化した。井上雄彦『バガボンド』は内面描写を深化させつつ、小次郎を聾者とする完全な創作も加えた。海外では『五輪書』がビジネス戦略書として読まれ、文脈から切り離された「日本的戦略の象徴」が生まれた。層を区別できること——それが実像に近づく最良の道具である。</p>
+          </div>
+          <p class="continue"><a href="https://miyamoto-musashi.org/ja/musashi/historiography/" target="_blank" rel="noopener">続きを読む · 宮本武蔵研究所／武蔵研究史</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p3">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip">西岩田遺跡</span><span class="chip">木製仮面</span><span class="chip">ヤマト王権</span><span class="chip">邪馬台国</span>
+            <span class="chip interest">★★★★★</span>
+            <span class="chip mins">~8 min</span>
+          </div>
+          <h2 lang="ja">人格化した神——東大阪・西岩田の木製仮面はヤマト王権の対外窓口を示すか</h2>
+          <p class="why">Máscara de madeira do séc. III (3ª do país, após Makimuku) — ritual agrícola com fogo e água; possível porto do Yamato no lago Kawachi. Ângulo Yamatai/Kofun diferente de ontem.</p>
+          <div class="source">
+            <span>産経ニュース／歴史シアター</span>
+            <a href="https://www.sankei.com/article/20230527-HHWOKPF6LNM23AAPYL6LHFUEV4/" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <div class="ja" lang="ja">
+          <p>古墳時代の集落跡・西岩田遺跡（大阪府東大阪市）から出土した三世紀前半の木製仮面が注目を集めている。焼けた鍬などと一緒に見つかり、有力者による大規模な農耕祭祀に使われたとみられる。同時代の木製仮面は、邪馬台国の有力候補地・纒向遺跡（奈良県桜井市）など二カ所でも見つかっており、全国で三例目にあたる。</p>
+          <p>仮面はスギ材で、長さ約三十センチ、幅約十八センチ。両目と口をくり抜き、鼻をわずかに隆起させて表現する。約三百グラムと重く裏面が扁平で、顔に装着するには不向き——柱にくくりつけるか、手に持って用いたとみられる。洪水堆積層の地下約三メートルから、水を入れる容器や炭化した鍬とともに出土した。水と火を駆使し、豊作を祈る儀礼の痕跡だ。</p>
+          <p>人の顔をした仮面は「人格化した神」を表し、ヤマト王権の儀礼の影響を受けているとの指摘がある。纒向学研究センターの寺沢薫所長は、弥生のシャーマンの延長というより、穀霊と祖霊を併せ持つ首長霊（神）の姿とみる。ヤマト王権成立後の農耕儀礼を知る手がかりになる、という。</p>
+          <p>西岩田は古墳時代、河内湖岸の港としての機能を持つ集落とされる。河川で纒向と結ばれる位置にあり、ヤマト王権の対外的な窓口だった可能性が浮かぶ。仮面は単なる出土品ではなく、王権と地方をつなぐ儀礼ネットワークの証拠になりうる——二〇二六年の「発掘された日本列島」展でも西岩田の仮面は新発見考古速報の目玉の一つだ。</p>
+          </div>
+          <p class="continue"><a href="https://www.sankei.com/article/20230527-HHWOKPF6LNM23AAPYL6LHFUEV4/" target="_blank" rel="noopener">続きを読む · 産経ニュース／歴史シアター</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p4">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip">BAND-MAID</span><span class="chip">ENERGETIC</span><span class="chip">ワールドツアー</span><span class="chip">お給仕</span>
+            <span class="chip interest">★★★★★</span>
+            <span class="chip mins">~7 min</span>
+          </div>
+          <h2 lang="ja">踊りな Your life——BAND-MAID『ENERGETIC』と、お給仕小休止の先にある十五周年</h2>
+          <p class="why">BAND-MAID: single ENERGETIC (soca/latim), world tour, Budokan revenge nov/2026, pausa okyuji em 2027 para o 15º aniversário — atitude, não fofoca.</p>
+          <div class="source">
+            <span>rockinon.com</span>
+            <a href="https://rockinon.com/interview/detail/215456" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <div class="ja" lang="ja">
+          <p>ハードロックで「世界征服」に挑み続けるＢＡＮＤ－ＭＡＩＤの最新シングル表題曲「ＥＮＥＲＧＥＴＩＣ」は、ラテン系のリズムを取り入れた重量級のダンサブルな躍動感が特徴だ。《足掻きもがいて　楽しむんだ／踊りな　Ｙｏｕｒ　ｌｉｆｅ》というリリックとともに、闘いの日々をオーディエンスと踊り尽くそうとする意志が伝わる。二〇二七年はお給仕（ライブ）活動を小休止し、その先の結成十五周年を見据える。</p>
+          <p>ＫＡＮＡＭＩは「二〇二六年、武道館までみんなを巻き込んで踊らせたい。エネルギーを爆発させて、お給仕でより完成させていく楽曲にしたい」と語る。コロナ禍の二〇二一年に中止となった日本武道館ワンマンのリベンジを、十一月十三・十四日の二デイズでツアーファイナルに据え、ヨーロッパ／北米／アジアを股に掛けるワールドツアー真っ最中だ。</p>
+          <p>小鳩ミクは、お給仕小休止の発表を踏まえ「私たちは止まるわけじゃなくて、もっともっと先に進むんだよ」という意思表示を歌詞に込めたと話す。ＳＡＩＫＩはファンから「いつまで経っても止まらないから心配してた」「むしろ休んでほしかった」という労いの声が届いたと振り返る。「止まっちゃいけない」という矜持を抱えつつ、長く続けるための選択だ。</p>
+          <p>ＫＡＮＡＭＩは「今はインプットがあまりできてなくて、とにかくアウト。一旦吸収したうえで、十五周年に新しい方法でお給仕をやりたい」と展望を語る。制作は止まらず、目の前のお給仕だけが一時休む——『ＥＮＥＲＧＥＴＩＣ』はその宣言を踊れる形にした一枚だ。</p>
+          </div>
+          <p class="continue"><a href="https://rockinon.com/interview/detail/215456" target="_blank" rel="noopener">続きを読む · rockinon.com</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p5">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip">新幹線</span><span class="chip">ATC</span><span class="chip">インフラ</span><span class="chip">交通革命</span>
+            <span class="chip interest">★★★★★</span>
+            <span class="chip mins">~7 min</span>
+          </div>
+          <h2 lang="ja">乗客死亡ゼロが変えた日常——東海道新幹線「絶対安全」と交通革命の六十年</h2>
+          <p class="why">Shinkansen 60 anos: ATC + cruzamentos em desnível = zero mortes de passageiros; o "absoluto seguro" virou revolução do cotidiano — comedy, baseball, Expo 70. Infraestrutura com narrativa.</p>
+          <div class="source">
+            <span>nippon.com</span>
+            <a href="https://www.nippon.com/ja/in-depth/d01045/" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <div class="ja" lang="ja">
+          <p>東海道新幹線が開業した一九六四年十月一日から今日まで、フル規格の新幹線全線で列車の脱線や衝突による乗客の死亡事故は一件も起きていない。安全を守るシステムのなかで最も重要なのがＡＴＣ（自動列車制御装置）だ。前方の列車や停車駅に近づくと速度を自動で下げ、運転士は微調整するだけでよい。原理上、列車同士の衝突可能性はゼロになる。</p>
+          <p>フル規格の新幹線は営業線をすべて立体交差し、踏切事故の可能性を根絶した。欧米では高速車両にも厳格な衝突安全基準が求められるが、新幹線車両には衝突安全性の基準自体がない。ＡＴＣと全線立体交差により「衝突は起こり得ない」という設計思想だからだ。運行を一カ所で集中監視するＣＴＣも開業時から採用され、予算不足のなか十河信二総裁が他を削ってでも導入した逸話が残る。</p>
+          <p>安全が高まった結果、新幹線は大都市の通勤電車と同じ「日常性」を得た。シートベルトも緊急時説明もなく、首都圏と関西圏の移動は六時間半から開業翌年には三時間十分へ。日中の特急は七往復から三十往復へ増え、長距離移動の「垣根」が外れた。</p>
+          <p>変化は文化にも及ぶ。関西のお笑いが全国区になった一因は、新大阪と東京を一日二往復できる手軽さだ。プロ野球ではダブルヘッダーが減り、一九七〇年大阪万博では「動くもう一つの万博パビリオン」と呼ばれた。新幹線がもたらした交通革命は、日本人の暮らしそのものを変えた。</p>
+          </div>
+          <p class="continue"><a href="https://www.nippon.com/ja/in-depth/d01045/" target="_blank" rel="noopener">続きを読む · nippon.com</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p6">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip">FFレゾナンス</span><span class="chip">HD-2D</span><span class="chip">ターン制</span><span class="chip">JRPG</span>
+            <span class="chip interest">★★★★☆</span>
+            <span class="chip mins">~6 min</span>
+          </div>
+          <h2 lang="ja">クラシカル回帰——『ファイナルファンタジー レゾナンス』がターン制とＨＤ－２Ｄで狙うＦＦ像</h2>
+          <p class="why">FF Resonance (out/2026): primeiro FF em HD-2D, volta ao turn-based; produtor fala em 6–7 anos de concepção desde o amor por FFV/VI e o pedido de levar FFBE ao console.</p>
+          <div class="source">
+            <span>IGN Japan</span>
+            <a href="https://jp.ign.com/final-fantasy-resonance/83563/67ff" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <div class="ja" lang="ja">
+          <p>『ファイナルファンタジー　レゾナンス』はシリーズ初のＨＤ－２Ｄ作品であり、戦闘をターン制へ戻す一方、モバイル『ＦＦブレイブエクスヴィアス』の物語をコンソール向けに再構築したタイトルだ。二〇二六年十月二十二日発売。プロデューサー中島啓輔氏は構想から六〜七年かかったと語る。きっかけは「クラシックなＦＦがもっていた遊びをもう一度遊びたい」という欲求——自身の原体験は『ＦＦⅤ』で、ターンベースでじっくり腰を据えて遊べる体験や飛空艇での自由探索がとっかかりになった。</p>
+          <p>ディレクター古屋海斗氏は『ＦＦⅣ〜Ⅵ』を原体験とし、「星を救う」壮大さと重厚なドラマの二軸をど真ん中に据えたと説明する。「国家や誰かを助けるスケールではなく、星そのものを救うところがＦＦらしさ」だという。台詞とプロットは全面見直しで、スマホ版のステージクリア型からフィールド探索型へ体験ごと作り直した。</p>
+          <p>バトルではＦＦⅤのジョブ的カスタマイズとＦＦⅥのキャラクター個性の両立を掲げる。古屋氏はターン制ＲＰＧ復権の一因を、Ｎｉｎｔｅｎｄｏ　Ｓｗｉｔｃｈなどハンドヘルドの普及と、「昔ターン制を遊んだ世代がクリエイターになった」時代性に見る。クラシカル回帰は単なる懐古ではなく、技術と体験の再設計だ。</p>
+          </div>
+          <p class="continue"><a href="https://jp.ign.com/final-fantasy-resonance/83563/67ff" target="_blank" rel="noopener">続きを読む · IGN Japan</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p7">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip">Cursor</span><span class="chip">カカクコム</span><span class="chip">AI</span><span class="chip">開発文化</span>
+            <span class="chip interest">★★★★☆</span>
+            <span class="chip mins">~5 min</span>
+          </div>
+          <h2 lang="ja">「そろばんが電卓に変わる」——カカクコムが全エンジニア約五百人にＣｕｒｓｏｒを配る</h2>
+          <p class="why">Kakaku.com dá Cursor a ~500 engenheiros: CTO compara GenAI a "ábaco virando calculadora". Cultura AI-native, não hype vazio — encaixa no interesse Claude/Cursor.</p>
+          <div class="source">
+            <span>ASCII.jp／TECH.ASCII.jp</span>
+            <a href="https://ascii.jp/elem/000/004/261/4261481/" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <div class="ja" lang="ja">
+          <p>カカクコムは二〇二五年四月、開発体制の強化とサービス品質向上を目的に、ＡＩコードエディタ「Ｃｕｒｓｏｒ」を全エンジニア約五百人に導入したと発表した。食べログや価格．ｃｏｍを運営する同社にとって、実装速度と品質の両立は事業の根幹に関わる。Ｃｕｒｓｏｒは米Ａｎｙｓｐｈｅｒｅが開発するＶＳ　Ｃｏｄｅベースのエディタで、ＣｈａｔＧＰＴやＣｌａｕｄｅなどのモデルを統合し、生成・補完・デバッグ支援・対話型チャットを備える。</p>
+          <p>導入の狙いはコーディング・テスト・デバッグの自動化・効率化と、高精度なコード生成・レビュー支援による品質底上げだ。開発以外の業務でも複雑な課題解決やアイディア創出に集中できる環境を整え、全エンジニアが日常的にＡＩを使う「ＡＩネイティブな開発文化」を醸成する。上級執行役員ＣＴＯの京和崇行氏は「生成ＡＩの登場は、例えるなら『そろばんが電卓に変わる』ほどの技術革新」とコメントした。今後はプロダクトマネージャーやデザイナーへの展開も検討しているという。</p>
+          </div>
+          <p class="continue"><a href="https://ascii.jp/elem/000/004/261/4261481/" target="_blank" rel="noopener">続きを読む · ASCII.jp／TECH.ASCII.jp</a></p>
+        </div>
+      </article>
+
+      <footer class="site">読解幕 · 2026-09-26 · ~51 min · N2–N1</footer>
+    </main>
+  </div>
+</body>
+</html>

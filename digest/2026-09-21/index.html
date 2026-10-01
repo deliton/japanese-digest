@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>読解幕 · 2026-09-21 · Japanese Digest</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Noto+Serif+JP:wght@400;600;700&family=Shippori+Mincho:wght@500;700&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --bg: #0a0a0a;
+      --bg-2: #121212;
+      --bg-card: #161616;
+      --ink: #f5f5f5;
+      --ink-dim: #a8a29a;
+      --ink-mute: #6b6560;
+      --shu: #c41e3a;
+      --shu-hot: #e11d48;
+      --shu-deep: #8b1228;
+      --gold: #d4a017;
+      --gold-soft: #c9a227;
+      --white: #fafafa;
+      --line: #2a2a2a;
+      --line-hot: rgba(196, 30, 58, 0.45);
+      --measure: 42rem;
+      --radius: 4px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: "Noto Sans JP", "Hiragino Sans", "Yu Gothic", system-ui, sans-serif;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .stage-bar {
+      height: 6px;
+      background: repeating-linear-gradient(
+        90deg,
+        var(--shu) 0 48px,
+        var(--white) 48px 56px,
+        #111 56px 64px,
+        var(--gold) 64px 72px,
+        #111 72px 88px
+      );
+    }
+
+    .wrap {
+      width: min(100% - 2rem, 74rem);
+      margin: 0 auto;
+      padding: 2rem 0 4.5rem;
+      display: grid;
+      grid-template-columns: 15.5rem 1fr;
+      gap: 2.75rem;
+      align-items: start;
+    }
+
+    @media (max-width: 900px) {
+      .wrap { grid-template-columns: 1fr; gap: 1.5rem; padding-top: 1.25rem; }
+      .sidebar { position: static !important; }
+    }
+
+    .sidebar { position: sticky; top: 1.25rem; }
+
+    .brand {
+      display: flex;
+      align-items: baseline;
+      gap: 0.55rem;
+      margin: 0 0 0.35rem;
+    }
+    .brand-mark {
+      font-family: "Shippori Mincho", "Noto Serif JP", serif;
+      font-size: 1.85rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      color: var(--white);
+      line-height: 1;
+    }
+    .brand-mark em {
+      font-style: normal;
+      color: var(--shu);
+    }
+    .brand-sub {
+      font-size: 0.65rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-weight: 700;
+    }
+
+    .meta {
+      color: var(--ink-mute);
+      font-size: 0.8rem;
+      margin: 0 0 1.25rem;
+    }
+
+    .stat-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-bottom: 1.35rem;
+    }
+    .stat {
+      border: 1px solid var(--line);
+      background: var(--bg-2);
+      padding: 0.32rem 0.65rem;
+      font-size: 0.72rem;
+      color: var(--ink-dim);
+      border-radius: var(--radius);
+    }
+    .stat strong { color: var(--white); font-weight: 700; }
+    .stat.hot {
+      border-color: var(--line-hot);
+      color: var(--shu-hot);
+    }
+    .stat.hot strong { color: var(--shu-hot); }
+
+    .toc {
+      background: var(--bg-card);
+      border: 1px solid var(--line);
+      border-left: 3px solid var(--shu);
+      padding: 1rem 0.85rem 0.85rem;
+    }
+    .toc h2 {
+      margin: 0 0 0.85rem 0.35rem;
+      font-size: 0.68rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-weight: 700;
+    }
+    .toc ol {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      counter-reset: toc;
+    }
+    .toc li { margin: 0 0 0.2rem; }
+    .toc a {
+      display: grid;
+      grid-template-columns: 1.5rem 1fr auto;
+      gap: 0.45rem;
+      align-items: start;
+      text-decoration: none;
+      color: inherit;
+      padding: 0.5rem 0.4rem;
+      border-radius: var(--radius);
+      transition: background 0.15s ease, color 0.15s ease;
+    }
+    .toc a:hover { background: #1f1f1f; }
+    .toc a:hover .t-title { color: var(--white); }
+    .toc a::before {
+      counter-increment: toc;
+      content: counter(toc, decimal-leading-zero);
+      font-family: "Shippori Mincho", serif;
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--shu);
+      line-height: 1.35;
+    }
+    .t-title {
+      font-size: 0.84rem;
+      line-height: 1.35;
+      color: var(--ink-dim);
+      transition: color 0.15s ease;
+    }
+    .t-min {
+      font-size: 0.68rem;
+      color: var(--ink-mute);
+      padding-top: 0.12rem;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .note {
+      margin-top: 1rem;
+      font-size: 0.74rem;
+      color: var(--ink-mute);
+      line-height: 1.5;
+    }
+
+    main { max-width: var(--measure); }
+
+    .digest-banner {
+      display: flex;
+      gap: 0.75rem;
+      align-items: flex-start;
+      background: linear-gradient(90deg, rgba(196,30,58,0.18), rgba(212,160,23,0.08));
+      border: 1px solid var(--line-hot);
+      padding: 0.85rem 1rem;
+      margin-bottom: 1.5rem;
+      font-size: 0.86rem;
+      color: var(--ink-dim);
+    }
+    .digest-banner .tag {
+      flex-shrink: 0;
+      background: var(--shu);
+      color: #fff;
+      font-size: 0.65rem;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      padding: 0.28rem 0.5rem;
+      border-radius: var(--radius);
+    }
+
+    .hero {
+      margin-bottom: 2rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid var(--line);
+      position: relative;
+    }
+    .hero::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -1px;
+      width: 4.5rem;
+      height: 2px;
+      background: var(--shu);
+    }
+    .kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.7rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--shu-hot);
+      font-weight: 800;
+      margin-bottom: 0.85rem;
+    }
+    .kicker::before {
+      content: "◆";
+      font-size: 0.55rem;
+      color: var(--gold);
+    }
+    .hero h1 {
+      font-family: "Shippori Mincho", "Noto Serif JP", serif;
+      font-size: clamp(1.85rem, 4vw, 2.55rem);
+      font-weight: 700;
+      line-height: 1.2;
+      margin: 0 0 0.75rem;
+      color: var(--white);
+      letter-spacing: 0.02em;
+    }
+    .hero p {
+      margin: 0;
+      color: var(--ink-dim);
+      font-size: 0.98rem;
+      max-width: 36rem;
+    }
+
+    article.piece {
+      background: var(--bg-card);
+      border: 1px solid var(--line);
+      margin-bottom: 1.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+    article.piece::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: linear-gradient(90deg, var(--shu) 0%, var(--shu) 35%, var(--gold) 35%, var(--gold) 42%, transparent 42%);
+    }
+
+    .piece-inner { padding: 1.6rem 1.55rem 1.35rem; }
+
+    .piece-head {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-bottom: 0.85rem;
+    }
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      border: 1px solid var(--line);
+      background: #111;
+      color: var(--ink-dim);
+      padding: 0.22rem 0.6rem;
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      border-radius: var(--radius);
+    }
+    .chip.interest {
+      border-color: var(--shu);
+      color: var(--shu-hot);
+      background: rgba(196, 30, 58, 0.12);
+    }
+    .chip.mins {
+      border-color: var(--gold);
+      color: var(--gold);
+      background: transparent;
+    }
+
+    .piece h2 {
+      font-family: "Noto Serif JP", "Shippori Mincho", "Yu Mincho", serif;
+      font-size: 1.38rem;
+      font-weight: 700;
+      line-height: 1.5;
+      margin: 0 0 0.6rem;
+      color: var(--white);
+      letter-spacing: 0.02em;
+    }
+
+    .why {
+      margin: 0 0 1rem;
+      color: var(--ink-dim);
+      font-size: 0.9rem;
+      border-left: 2px solid var(--gold);
+      padding-left: 0.85rem;
+    }
+
+    .source {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.65rem 1.1rem;
+      font-size: 0.76rem;
+      color: var(--ink-mute);
+      margin-bottom: 1.25rem;
+    }
+    .source a {
+      color: var(--shu-hot);
+      text-decoration: none;
+      font-weight: 600;
+    }
+    .source a:hover { color: var(--gold); }
+
+    .ja {
+      font-family: "Noto Serif JP", "Hiragino Mincho ProN", "Yu Mincho", serif;
+      font-size: 1.08rem;
+      line-height: 2;
+      letter-spacing: 0.03em;
+      color: #ebe7e1;
+    }
+    .ja p { margin: 0 0 1.15em; }
+    .ja p:last-child { margin-bottom: 0; }
+
+    .continue {
+      margin-top: 1.25rem;
+      padding-top: 1rem;
+      border-top: 1px solid var(--line);
+      font-size: 0.86rem;
+    }
+    .continue a {
+      color: var(--white);
+      text-decoration: none;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      border-bottom: 2px solid var(--shu);
+      padding-bottom: 0.1rem;
+    }
+    .continue a:hover {
+      color: var(--shu-hot);
+      border-bottom-color: var(--gold);
+    }
+
+    footer.site {
+      max-width: var(--measure);
+      margin-top: 1.75rem;
+      color: var(--ink-mute);
+      font-size: 0.72rem;
+      letter-spacing: 0.06em;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+    footer.site::before {
+      content: "";
+      width: 1.25rem;
+      height: 2px;
+      background: var(--shu);
+    }
+  </style>
+</head>
+<body>
+  <div class="stage-bar" aria-hidden="true"></div>
+  <div class="wrap">
+    <aside class="sidebar">
+      <div class="brand">
+        <span class="brand-mark">読解<em>幕</em></span>
+      </div>
+      <p class="brand-sub">Kabuki Digest · <a href="../../history/" style="color:#d4a017;text-decoration:none;">History</a></p>
+      <p class="meta">2026-09-21 · America/Sao_Paulo</p>
+      <div class="stat-row">
+        <div class="stat hot"><strong>~49</strong> min</div>
+        <div class="stat"><strong>7</strong> peças</div>
+        <div class="stat">N2–N1</div>
+      </div>
+
+      <nav class="toc" aria-label="Índice">
+        <h2>本日の演目</h2>
+        <ol>
+          <li>
+            <a href="#p1">
+              <span class="t-title">上月城・尼子の最期</span>
+              <span class="t-min">8′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p2">
+              <span class="t-title">鎌倉・尼将軍の整地</span>
+              <span class="t-min">8′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p3">
+              <span class="t-title">神輿・隼人の鎮魂</span>
+              <span class="t-min">7′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p4">
+              <span class="t-title">新長田・謎解き散歩</span>
+              <span class="t-min">6′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p5">
+              <span class="t-title">SCANDAL・ECHO</span>
+              <span class="t-min">8′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p6">
+              <span class="t-title">DQ×FF・セブン対談</span>
+              <span class="t-min">8′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p7">
+              <span class="t-title">Cursor×Claude Code</span>
+              <span class="t-min">6′</span>
+            </a>
+          </li>
+        </ol>
+      </nav>
+      <p class="note">Abra no Chrome/Firefox com Yomitan. Clique no japonês pra lookup. Trechos + link para o original.</p>
+    </aside>
+
+    <main>
+      <div class="digest-banner">
+        <span class="tag">DIGEST</span>
+        <span>2026-09-21 — Kozuki-jo (Amago/Yamanaka vs Mori em Hyogo), escavação Kamakura (Masako?/Takatoki), origem do mikoshi (Hayato + Usa), nagata mystery em Kobe, SCANDAL『ECHO』20 anos, Horii×Kitase DQ/FF, Cursor vs Claude Code. Zero fofoca, zero manual de construção.</span>
+      </div>
+
+      <header class="hero">
+        <div class="kicker">本日の幕 · 2026-09-21</div>
+        <h1 lang="ja">播磨の籠城と鎌倉の整地をほどく、ひと朝の読解</h1>
+        <p lang="ja">播磨・上月城で尼子再興が潰えた籠城戦。鎌倉文学館下の整地は尼将軍ゆかりか。隼人の乱から読む神輿の起源。震災後の新長田を歩く謎解き。ＳＣＡＮＤＡＬが２０年で掴んだ『ＥＣＨＯ』。堀井雄二と北瀬佳範が語るセブンの裏側。ＣｕｒｓｏｒとＣｌａｕｄｅ Ｃｏｄｅの使い分け。推定合計 ~49 分。</p>
+      </header>
+
+      <article class="piece" id="p1">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★★</span>
+            <span class="chip mins">~8 min</span>
+            <span class="chip">上月城</span><span class="chip">戦国</span><span class="chip">山中鹿介</span><span class="chip">播磨</span>
+          </div>
+          <h2 lang="ja">上月城合戦——尼子再興の夢が潰えた、播磨の籠城戦</h2>
+          <p class="why">Hyogo no mapa Sengoku: Amago tenta voltar, Yamanaka luta até o fim, Hideyoshi abandona o resgate — drama militar, não planta da muralha.</p>
+          <div class="source">
+            <span>サライ.jp</span>
+            <a href="https://serai.jp/hobby/1269509" target="_blank" rel="noopener">原文を読む →</a>
+          </div>
+          <div class="ja" lang="ja">
+          <p>戦国時代、中国地方の覇権をめぐって激しく争った織田氏と毛利氏。その最前線となったのが、播磨国（現在の兵庫県南部）にあった「上月城（こうづきじょう）」だった。天正５年（１５７７）から翌６年（１５７８）にかけて行われた「上月城合戦」は、羽柴秀吉と毛利氏が真正面から激突した重要な戦いである。そしてこの戦いは単なる城の奪い合いではない。戦国大名・尼子氏再興を目指した尼子勝久と、忠義の臣と呼ばれる山中鹿介の運命を決定づけた戦いでもあった。</p>
+          <p>上月城は播磨・備前・美作の国境近くに位置する重要拠点だった。織田信長は中国攻めを秀吉に任せ、天正５年、秀吉は約１万５千の兵で上月城を包囲する。水の手を断たれた城は同年１２月３日に落城し、秀吉は降伏を許さなかったという残酷な記録も残る。その後秀吉は、攻略した上月城に尼子勝久・山中鹿介を入城させた。</p>
+          <p>ところが翌天正６年４月、吉川元春・小早川隆景ら毛利軍が大軍で上月城を包囲し、城は完全に孤立する。秀吉も高倉山に布陣して救援を試みるが、別所長治の三木城攻めなど戦局全体を考えた信長は、秀吉に撤退を命じた。援軍を失った上月城は約２か月以上の籠城の末に降伏。天正６年７月、尼子勝久は自刃し、尼子氏再興の夢は潰えた。山中鹿介は捕らえられ、備中へ護送される途中で殺害されたと伝わる。</p>
+          <p>上月城合戦は、織田と毛利の対立が本格化する転換点となった。援軍を送りながら救えなかった経験は秀吉にとっても苦いものだったが、その後の中国攻めの布石にもなる。忠義・再興への執念・悲劇の最期という要素を持つこの戦いは、軍記物や講談でも長く語り継がれてきた。</p>
+          </div>
+          <p class="continue"><a href="https://serai.jp/hobby/1269509" target="_blank" rel="noopener">続きは原文で</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p2">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★★</span>
+            <span class="chip mins">~8 min</span>
+            <span class="chip">鎌倉</span><span class="chip">北条政子</span><span class="chip">発掘</span><span class="chip">中世</span>
+          </div>
+          <h2 lang="ja">尼将軍ゆかりの遺構か——鎌倉で見つかった大規模整地と高時邸周辺の痕跡</h2>
+          <p class="why">Masako no mapa oral vs Azuma Kagami silencioso; meiping Song e paliçada — quem tinha poder pra aterrar assim em Hase?</p>
+          <div class="source">
+            <span>神奈川新聞／鎌倉市</span>
+            <a href="https://www.kanaloco.jp/news/life/article-1290527.html" target="_blank" rel="noopener">原文を読む →</a>
+          </div>
+          <div class="ja" lang="ja">
+          <p>開発に伴い鎌倉市内で発掘された出土品を展示する「発掘調査速報展」が、鎌倉歴史文化交流館で開かれた。調査では「尼将軍」北条政子にゆかりのある寺院跡とも伝えられる場所から大規模な遺構が見つかり、最後の得宗・北条高時の邸宅跡周辺でも有力者の邸宅の痕跡が発掘されるなど、歴史の謎をひもとく発見が紹介されている。</p>
+          <p>鎌倉文学館の敷地内にある長谷小路周辺遺跡は、文学館改修前に調査された。江戸時代の文献には、北条政子が夫の源頼朝を弔うため長楽寺を文学館周辺に建てたと記される。鎌倉幕府滅亡で焼失したとされるが、歴史書『吾妻鏡』には由緒の詳細な記述はない。調査では泥岩で整地された１３世紀中頃から１４世紀初頭の遺構を発見。整地層の上に柱の穴が等間隔に並び、寺院や武家屋敷の塀か柵の跡と考えられている。</p>
+          <p>出土品には中国・南宋から伝わったぜいたく品の青白磁梅瓶もあった。長楽寺や尼将軍との関連は断定できないが、同館の永井涼学芸員は「大規模に整地しており、財力や権力を持った人物によって造営されたのでは」と推測する。文学館の現地説明会では、控え柱を伴う強固な柵跡や、砕いた泥岩（土丹）を突き固めた整地の東西差も確認され、「なにか囲っておきたい何かがあった」との調査員の言葉が印象を残した。</p>
+          <p>速報展では北条高時邸跡や陣出遺跡など市内５カ所の約２００点も展示。かわらけや常滑・瀬戸の国産陶器に、青磁・白磁など舶来品が混ざる様子は、中世都市鎌倉の生活感を伝える。</p>
+          </div>
+          <p class="continue"><a href="https://www.kanaloco.jp/news/life/article-1290527.html" target="_blank" rel="noopener">続きは原文で</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p3">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★☆</span>
+            <span class="chip mins">~7 min</span>
+            <span class="chip">まつり</span><span class="chip">神輿</span><span class="chip">隼人</span><span class="chip">宇佐</span>
+          </div>
+          <h2 lang="ja">神輿の起源は隼人の乱に——宇佐神宮・仲秋祭が語る鎮魂のまつり</h2>
+          <p class="why">Mikoshi não nasce do turismo: Hachiman sobe no andor na guerra dos Hayato; depois peste e hōjōe — matsuri como expiação.</p>
+          <div class="source">
+            <span>国土交通省／宇佐神宮関連解説</span>
+            <a href="https://www.mlit.go.jp/tagengo-db/common/001558457.pdf" target="_blank" rel="noopener">原文を読む →</a>
+          </div>
+          <div class="ja" lang="ja">
+          <p>仲秋祭は、８世紀初頭に大和朝廷に討伐された南九州の民族・隼人への追悼を表して宇佐神宮が行う、大規模な３日間の祭りである。祭りの始まりとして、神輿に入った八幡神が大行列によって川岸の浮殿へ運ばれ、僧侶に迎えられる。最も重要な儀式は２日目の「放生会」——生き物を自由にする贖罪の儀式で、貝類が川に放流される。最終日、隼人の御霊を鎮める祈祷のあと、神輿は宇佐神宮へ帰る。</p>
+          <p>古代の記録によれば、隼人は８世紀初頭に大和朝廷への反乱を起こした。７２０年、九州北部から大和の軍が派遣されたとき、八幡神は神力による守護を与えるため神輿に乗って同行した。これがお祭りで神輿を使う起源となったと考えられている。戦いは隼人の敗北と征服で終わる。</p>
+          <p>しかし直後に疫病と飢饉が地域を襲い、人々は隼人の復讐心がその原因だと信じた。八幡神から、乱の際に犯された殺生を贖うため放生会を毎年行うべきだという神託が下り、最初の儀式では行列が和間浜へ向かい貝類が水中へ放たれた。これが日本で初めて神仏習合の施設によって行われた放生会だとも言われる。それでも悩みが続いたため、隼人の魂を祀る百体神社が立てられた。</p>
+          <p>宇佐神宮が神道と仏教の融合を実践していた千年ほどのあいだ、この儀式は単に「放生会」と呼ばれていた。１９世紀後半に政府が両宗教の分離を命じた後、神道の季節祭となり、仲秋祭と名付けられた。まつりの原型を天岩戸神話に求める話とは別筋で、ここには討伐・疫病・鎮魂という歴史の痛みが残っている。</p>
+          </div>
+          <p class="continue"><a href="https://www.mlit.go.jp/tagengo-db/common/001558457.pdf" target="_blank" rel="noopener">続きは原文で</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p4">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★☆</span>
+            <span class="chip mins">~6 min</span>
+            <span class="chip">神戸</span><span class="chip">長田</span><span class="chip">商店街</span><span class="chip">震災</span>
+          </div>
+          <h2 lang="ja">父の手帳を追いかけて——震災後の新長田商店街を歩く謎解き</h2>
+          <p class="why">Nagata depois do quake e do redev: Iron Man 28, wall gallery, six shotengai — misterio urbano pra voltar a caminhar.</p>
+          <div class="source">
+            <span>読売新聞</span>
+            <a href="https://www.yomiuri.co.jp/local/kansai/news/20260825-GYO1T00003/" target="_blank" rel="noopener">原文を読む →</a>
+          </div>
+          <div class="ja" lang="ja">
+          <p>神戸市長田区のＪＲ新長田駅周辺にある六つの商店街を巡る謎解きイベントが開かれている。商店街は阪神大震災で多くの建物が焼失した。再開発事業は２０２４年度に完了したが、かつてのにぎわいを取り戻すため、市と地元企業などが協働で活性化を図る。</p>
+          <p>実情を知った日本出版販売（日販）西日本支社が提案し、神戸市と連携した。同社の村田慎平さん（３２）は「近年は謎解きを楽しむため遠くから訪れる人も多い。長田の風情を感じながら魅力を知るきっかけになると考えた」と話す。タイトルは「新長田商店街謎解き～父が遺した１冊の手帳～」。主人公が、亡くなった父の残したメッセージを知るため商店街を散策してヒントを集めるストーリーだ。</p>
+          <p>ルートには新長田の歴史と魅力を知るスポットが多い。市出身の漫画家・横山光輝さんの代表作「鉄人２８号」の実物大モニュメントや「三国志」の石像近くを通るほか、震災資料が展示されている大橋地下道の「ウォールギャラリー」も訪れる。所要は３～４時間。冊子（税込み２２００円）には飲食店で使えるクーポンも付き、商店街の活性化につなげる。</p>
+          <p>３月の開始以降、約６００人が参加。「初めて訪れ、色々な店を知ることができた」「昔住んでいたが、久しぶりに来て変化を感じた」といった声が寄せられている。新長田まちづくり株式会社の園田文雄さん（６３）は「歩けば面白い発見が必ずある。謎解きを通じてそれを見つけてもらえたら」と期待を込める。</p>
+          </div>
+          <p class="continue"><a href="https://www.yomiuri.co.jp/local/kansai/news/20260825-GYO1T00003/" target="_blank" rel="noopener">続きは原文で</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p5">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★★</span>
+            <span class="chip mins">~8 min</span>
+            <span class="chip">SCANDAL</span><span class="chip">ECHO</span><span class="chip">ガールズロック</span><span class="chip">20周年</span>
+          </div>
+          <h2 lang="ja">ＳＣＡＮＤＡＬ『ＥＣＨＯ』——結成２０年、作家陣への反響と「今が天国」</h2>
+          <p class="why">20 anos sem troca de membro: entregam o songwriting, pedem eco dos escritores — e RINA escreve que o céu já está nas mãos.</p>
+          <div class="source">
+            <span>Billboard JAPAN</span>
+            <a href="https://www.billboard-japan.com/special/detail/5288" target="_blank" rel="noopener">原文を読む →</a>
+          </div>
+          <div class="ja" lang="ja">
+          <p>大阪のボーカル＆ダンススクールに通っていた少女たちがバンドを結成したのが２００６年８月２１日。以来、メンバーチェンジも活動休止もなく走り続け、２０２３年には「同一メンバーによる最長活動女性ロックバンド」としてギネス世界記録にも認定されたＳＣＡＮＤＡＬが、結成２０周年を迎える。１２作目のオリジナルアルバム『ＥＣＨＯ』では、４人に縁のある作家陣が揃い、今のＳＣＡＮＤＡＬにあらゆる角度から音楽を投げかけ、さまざまに反響（ＥＣＨＯ）させた一作となった。</p>
+          <p>ＨＡＲＵＮＡは「中学生や高校生からの２０年なので、ひたすら目まぐるしく過ぎていった感覚」と語る。ＭＡＭＩは『ＬＵＭＩＮＯＵＳ』まで積極的に作詞作曲をして「やり切った」と感じ、第三者の視点から今のＳＣＡＮＤＡＬに似合うものを知りたくなったという。ＴＯＭＯＭＩは「結成２０年を迎えるこのタイミングでＳＣＡＮＤＡＬにやらせてみたいと思う曲を」と作家にオーダーしたと振り返る。</p>
+          <p>ＲＩＮＡ作詞の「Ｈｅａｖｅｎ」には、バンドの今がそのまま綴られる。「ガールズバンドってお花だなって。一輪の花だけど、花びらは一枚一枚違うものが重なっていて……一輪として成立してるのって本当にミラクル」。これまで「もっといい未来へ」と前を見ていた感覚が強かったが、深呼吸して振り返ると「すでにもう両手いっぱいに宝物がある」と気づいたという。孤独な個々が、好きなものが少し重なった理由で同じ場所に集まり、そうしてできる天国がまさに今だ、と。</p>
+          <p>８月２１日には大阪城ホールで２０周年記念ライブ【ＣＨＡＰＴＥＲ２０】が控える。ＨＡＲＵＮＡは前回がコロナ禍だったことを思い、「今回はお客さんの声をしっかり聴ける。みんなで思う存分はじけられたら」と話す。ＲＩＮＡは「ちゃんと自分たちのライブに心から感動できる日にしたい」と意気込む。</p>
+          </div>
+          <p class="continue"><a href="https://www.billboard-japan.com/special/detail/5288" target="_blank" rel="noopener">続きは原文で</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p6">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★★</span>
+            <span class="chip mins">~8 min</span>
+            <span class="chip">ドラクエ</span><span class="chip">FF</span><span class="chip">JRPG</span><span class="chip">対談</span>
+          </div>
+          <h2 lang="ja">堀井雄二×北瀬佳範——“セブン”が語る棺桶と戦闘不能、結婚とマテリア</h2>
+          <p class="why">Horii admite inveja do status &#x27;incapacitado&#x27; do FF; Kitase muda de Bianca pra Flora com a idade — craft de JRPG sem spoiler vazio.</p>
+          <div class="source">
+            <span>ファミ通.com</span>
+            <a href="https://www.famitsu.com/article/202601/63451" target="_blank" rel="noopener">原文を読む →</a>
+          </div>
+          <div class="ja" lang="ja">
+          <p>『ドラゴンクエストⅦ Ｒｅｉｍａｇｉｎｅｄ』と『ファイナルファンタジーⅦ リメイク』の発売を記念し、『ドラゴンクエスト』の堀井雄二氏と『ＦＦⅦ』シリーズの北瀬佳範氏が対談した。接点は約３０年前、『クロノ・トリガー』準備のサンフランシスコ出張。当時カメラマンだった北瀬が撮った動画を堀井が見て、「あとでこの動画ください」と笑う場面から始まる。</p>
+          <p>堀井は『ウィザードリィ』と『ウルティマ』にハマり、北瀬は学生時代に『ドラクエⅢ』発売日の行列に並んだ側だ。ライバル意識について堀井は「ＦＦは主人公がガンガンしゃべる。ドラクエは自分が主人公になって体験するドラマ、ＦＦは主人公を観るドラマ」と整理する。印象的なのは制作コストの話だ。ドラクエではパーティが力尽きたら棺桶のままイベントが始まるため、いる／いないの分岐が増える。ＦＦは「戦闘不能」なのでイベントに出してよい——堀井は「おお！ そうか！」と感心したという。</p>
+          <p>北瀬が好きなドラクエは『Ⅴ』。「結婚」という売りが一撃で、当時はビアンカを選んだが「いまやったらたぶんフローラ」と笑う。堀井は「人生……年を経ていくと変わるんだ」を仕込んだ作品だと受け止め、「本気で悩んでもらおうと思って考えた」と振り返る。ＣＤ−ＲＯＭ化では、２Ｄの端っこ隠し階段が３Ｄでは使えなくなる問題を両者が議論したことも明かされた。</p>
+          <p>４０年近く続くＲＰＧの魅力について、堀井は「経験値で強くなること」と「主人公になって別の人生を楽しめること」、北瀬は「時代を超えても通用するストーリー」を挙げる。ゲームが目の敵にされた時代を経て、堀井が叙勲を受けたことにも触れ、若い世代への希望を語った。</p>
+          </div>
+          <p class="continue"><a href="https://www.famitsu.com/article/202601/63451" target="_blank" rel="noopener">続きは原文で</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p7">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★☆</span>
+            <span class="chip mins">~6 min</span>
+            <span class="chip">Cursor</span><span class="chip">Claude Code</span><span class="chip">AI</span><span class="chip">開発</span>
+          </div>
+          <h2 lang="ja">ＣｕｒｓｏｒとＣｌａｕｄｅ Ｃｏｄｅ——ＩＤＥ型とＣＬＩ型、２０２６年の使い分け</h2>
+          <p class="why">Não é RSC de novo: IDE com diff na tela vs agente no terminal — qual fase do seu workflow pede qual.</p>
+          <div class="source">
+            <span>masatoman.net</span>
+            <a href="https://www.masatoman.net/articles/cursor-vs-claude-code-comparison-2026" target="_blank" rel="noopener">原文を読む →</a>
+          </div>
+          <div class="ja" lang="ja">
+          <p>月２０ドル帯から始められるＣｕｒｓｏｒとＣｌａｕｄｅ Ｃｏｄｅ。「どちらを選ぶか」は作業スタイルと今のフェーズで決まる、と筆者は整理する。ＵＩを目で確認しながら書きたいならＣｕｒｓｏｒ、タスクを投げて非同期で進めたいならＣｌａｕｄｅ Ｃｏｄｅ。月３万以上の個人開発を本気で狙うなら両方、という判断チャートだ。</p>
+          <p>ＣｕｒｓｏｒはＶＳ ＣｏｄｅをフォークしたＡＩネイティブＩＤＥ。編集差分が常に画面に出る安心感、拡張機能の互換、Ｔａｂ補完の精度が強み。２０２６年のＣｕｒｓｏｒ ３では、複数ファイル編集を一括提示するＡｇｅｎｔｓ Ｗｉｎｄｏｗや、クラウド側で長時間タスクを回すＣｌｏｕｄ Ａｇｅｎｔｓが加わり、半自律エージェントへ進化した。</p>
+          <p>Ｃｌａｕｄｅ ＣｏｄｅはＡｎｔｈｒｏｐｉｃ公式のターミナル常駐型エージェント。自然言語の指示でファイル読み書き・テスト・ｇｉｔ操作まで自律的にこなす。ＧＵＩはないが、慣れると「タスクを投げて別作業に移る」非同期ワークフローが組める。Ｓｋｉｌｌｓ・ＭＣＰ・サブエージェント・Ｈｏｏｋｓを組み合わせれば、自作の自動化基盤にもなる。</p>
+          <p>迷ったらまずＣｕｒｓｏｒから始めるのが安全、というのが筆者の結論だ。学習・副業初期はＣｕｒｓｏｒ単独、自動化や複数プロダクト運用に入ったらＣｌａｕｄｅ Ｃｏｄｅ中心へ——「どちらが優れているか」ではなく「どのフェーズでどう組み合わせるか」で選ぶツールだとまとめている。</p>
+          </div>
+          <p class="continue"><a href="https://www.masatoman.net/articles/cursor-vs-claude-code-comparison-2026" target="_blank" rel="noopener">続きは原文で</a></p>
+        </div>
+      </article>
+
+      <footer class="site">読解幕 · fair-use excerpts · 4585 JP chars · ~49 min</footer>
+    </main>
+  </div>
+</body>
+</html>
