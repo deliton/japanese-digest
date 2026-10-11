@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>読解幕 · 2026-10-11 · Japanese Digest</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Noto+Serif+JP:wght@400;600;700&family=Shippori+Mincho:wght@500;700&display=swap" rel="stylesheet" />
+  <style>
+
+    :root {
+      --bg: #0a0a0a;
+      --bg-2: #121212;
+      --bg-card: #161616;
+      --ink: #f5f5f5;
+      --ink-dim: #a8a29a;
+      --ink-mute: #6b6560;
+      --shu: #c41e3a;
+      --shu-hot: #e11d48;
+      --shu-deep: #8b1228;
+      --gold: #d4a017;
+      --gold-soft: #c9a227;
+      --white: #fafafa;
+      --line: #2a2a2a;
+      --line-hot: rgba(196, 30, 58, 0.45);
+      --measure: 42rem;
+      --radius: 4px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: "Noto Sans JP", "Hiragino Sans", "Yu Gothic", system-ui, sans-serif;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .stage-bar {
+      height: 6px;
+      background: repeating-linear-gradient(
+        90deg,
+        var(--shu) 0 48px,
+        var(--white) 48px 56px,
+        #111 56px 64px,
+        var(--gold) 64px 72px,
+        #111 72px 88px
+      );
+    }
+
+    .wrap {
+      width: min(100% - 2rem, 74rem);
+      margin: 0 auto;
+      padding: 2rem 0 4.5rem;
+      display: grid;
+      grid-template-columns: 15.5rem 1fr;
+      gap: 2.75rem;
+      align-items: start;
+    }
+
+    @media (max-width: 900px) {
+      .wrap { grid-template-columns: 1fr; gap: 1.5rem; padding-top: 1.25rem; }
+      .sidebar { position: static !important; }
+    }
+
+    .sidebar { position: sticky; top: 1.25rem; }
+
+    .brand {
+      display: flex;
+      align-items: baseline;
+      gap: 0.55rem;
+      margin: 0 0 0.35rem;
+    }
+    .brand-mark {
+      font-family: "Shippori Mincho", "Noto Serif JP", serif;
+      font-size: 1.85rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      color: var(--white);
+      line-height: 1;
+    }
+    .brand-mark em {
+      font-style: normal;
+      color: var(--shu);
+    }
+    .brand-sub {
+      font-size: 0.65rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-weight: 700;
+    }
+
+    .meta {
+      color: var(--ink-mute);
+      font-size: 0.8rem;
+      margin: 0 0 1.25rem;
+    }
+
+    .stat-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-bottom: 1.35rem;
+    }
+    .stat {
+      border: 1px solid var(--line);
+      background: var(--bg-2);
+      padding: 0.32rem 0.65rem;
+      font-size: 0.72rem;
+      color: var(--ink-dim);
+      border-radius: var(--radius);
+    }
+    .stat strong { color: var(--white); font-weight: 700; }
+    .stat.hot {
+      border-color: var(--shu);
+      color: var(--shu-hot);
+      background: rgba(196, 30, 58, 0.1);
+    }
+
+    .toc {
+      border: 1px solid var(--line);
+      background: var(--bg-2);
+      padding: 0.85rem 0.9rem 0.95rem;
+      border-radius: var(--radius);
+    }
+    .toc h2 {
+      margin: 0 0 0.65rem;
+      font-size: 0.72rem;
+      letter-spacing: 0.16em;
+      color: var(--gold);
+      font-weight: 800;
+    }
+    .toc ol { list-style: none; margin: 0; padding: 0; }
+    .toc li { margin: 0; }
+    .toc a {
+      display: flex;
+      justify-content: space-between;
+      gap: 0.5rem;
+      text-decoration: none;
+      color: var(--ink-dim);
+      font-size: 0.82rem;
+      padding: 0.38rem 0.2rem;
+      border-bottom: 1px solid transparent;
+    }
+    .toc a:hover { color: var(--white); border-bottom-color: var(--line-hot); }
+    .toc .t-title { font-weight: 600; }
+    .toc .t-min { color: var(--gold); font-size: 0.72rem; font-weight: 700; flex-shrink: 0; }
+
+    .main { max-width: var(--measure); }
+
+    .digest-banner {
+      display: flex;
+      gap: 0.75rem;
+      align-items: flex-start;
+      background: #141014;
+      border: 1px solid var(--line);
+      border-left: 3px solid var(--shu);
+      padding: 0.85rem 1rem;
+      margin-bottom: 1.5rem;
+      font-size: 0.78rem;
+      color: var(--ink-dim);
+      line-height: 1.55;
+    }
+    .digest-banner .tag {
+      flex-shrink: 0;
+      background: var(--shu);
+      color: #fff;
+      font-size: 0.65rem;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      padding: 0.28rem 0.5rem;
+      border-radius: var(--radius);
+    }
+
+    .hero {
+      margin-bottom: 2rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid var(--line);
+      position: relative;
+    }
+    .hero::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -1px;
+      width: 4.5rem;
+      height: 2px;
+      background: var(--shu);
+    }
+    .kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.7rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--shu-hot);
+      font-weight: 800;
+      margin-bottom: 0.85rem;
+    }
+    .kicker::before {
+      content: "◆";
+      font-size: 0.55rem;
+      color: var(--gold);
+    }
+    .hero h1 {
+      font-family: "Shippori Mincho", "Noto Serif JP", serif;
+      font-size: clamp(1.85rem, 4vw, 2.55rem);
+      font-weight: 700;
+      line-height: 1.2;
+      margin: 0 0 0.75rem;
+      color: var(--white);
+      letter-spacing: 0.02em;
+    }
+    .hero p {
+      margin: 0;
+      color: var(--ink-dim);
+      font-size: 0.98rem;
+      max-width: 36rem;
+    }
+
+    article.piece {
+      background: var(--bg-card);
+      border: 1px solid var(--line);
+      margin-bottom: 1.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+    article.piece::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: linear-gradient(90deg, var(--shu) 0%, var(--shu) 35%, var(--gold) 35%, var(--gold) 42%, transparent 42%);
+    }
+
+    .piece-inner { padding: 1.6rem 1.55rem 1.35rem; }
+
+    .piece-head {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-bottom: 0.85rem;
+    }
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      border: 1px solid var(--line);
+      background: #111;
+      color: var(--ink-dim);
+      padding: 0.22rem 0.6rem;
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      border-radius: var(--radius);
+    }
+    .chip.interest {
+      border-color: var(--shu);
+      color: var(--shu-hot);
+      background: rgba(196, 30, 58, 0.12);
+    }
+    .chip.mins {
+      border-color: var(--gold);
+      color: var(--gold);
+      background: transparent;
+    }
+
+    .piece h2 {
+      font-family: "Noto Serif JP", "Shippori Mincho", "Yu Mincho", serif;
+      font-size: 1.38rem;
+      font-weight: 700;
+      line-height: 1.5;
+      margin: 0 0 0.6rem;
+      color: var(--white);
+      letter-spacing: 0.02em;
+    }
+
+    .why {
+      margin: 0 0 1rem;
+      color: var(--ink-dim);
+      font-size: 0.9rem;
+      border-left: 2px solid var(--gold);
+      padding-left: 0.85rem;
+    }
+
+    .source {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.65rem 1.1rem;
+      font-size: 0.76rem;
+      color: var(--ink-mute);
+      margin-bottom: 1.25rem;
+    }
+    .source a {
+      color: var(--shu-hot);
+      text-decoration: none;
+      font-weight: 600;
+    }
+    .source a:hover { color: var(--gold); }
+
+    .ja {
+      font-family: "Noto Serif JP", "Hiragino Mincho ProN", "Yu Mincho", serif;
+      font-size: 1.08rem;
+      line-height: 2;
+      letter-spacing: 0.03em;
+      color: #ebe7e1;
+    }
+    .ja p { margin: 0 0 1.15em; }
+    .ja p:last-child { margin-bottom: 0; }
+
+    .continue {
+      margin-top: 1.25rem;
+      padding-top: 1rem;
+      border-top: 1px solid var(--line);
+      font-size: 0.86rem;
+    }
+    .continue a {
+      color: var(--white);
+      text-decoration: none;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      border-bottom: 2px solid var(--shu);
+      padding-bottom: 0.1rem;
+    }
+    .continue a:hover {
+      color: var(--shu-hot);
+      border-bottom-color: var(--gold);
+    }
+
+    footer.site {
+      max-width: var(--measure);
+      margin-top: 1.75rem;
+      color: var(--ink-mute);
+      font-size: 0.72rem;
+      letter-spacing: 0.06em;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+    footer.site::before {
+      content: "";
+      width: 1.25rem;
+      height: 2px;
+      background: var(--shu);
+    }
+
+  
+    .excerpt-label { font-size: 0.66rem; letter-spacing: 0.18em; color: var(--gold); font-weight: 800; margin: 0 0 0.6rem; }
+    .brand-sub a, .stat a { color: var(--gold); text-decoration: none; }
+    .toc .t-min { font-variant-numeric: tabular-nums; }
+  </style>
+</head>
+<body>
+  <div class="stage-bar" aria-hidden="true"></div>
+
+  <div class="wrap">
+    <aside class="sidebar">
+      <div class="brand">
+        <span class="brand-mark" lang="ja">読解<em>幕</em></span>
+      </div>
+      <p class="brand-sub">Kabuki Digest · <a href="/japanese-digest/history/">History</a></p>
+      <p class="meta">2026-10-11 · America/Sao_Paulo</p>
+      <div class="stat-row">
+        <span class="stat"><strong>45</strong> min</span>
+        <span class="stat"><strong>9</strong> pieces</span>
+        <span class="stat"><strong>~4,700</strong> 字</span>
+        <span class="stat"><a href="/japanese-digest/history/">History</a></span>
+      </div>
+
+      <nav class="toc" aria-label="Índice">
+        <h2 lang="ja">本日の演目</h2>
+        <ol>
+          <li>
+            <a href="#p1">
+              <span class="t-title" lang="ja">秀吉が溺愛した豪姫</span>
+              <span class="t-min">6′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p2">
+              <span class="t-title" lang="ja">7県なのに「九州」</span>
+              <span class="t-min">5′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p3">
+              <span class="t-title" lang="ja">項羽、20万の秦兵を坑殺</span>
+              <span class="t-min">5′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p4">
+              <span class="t-title" lang="ja">食わず女房の正体</span>
+              <span class="t-min">5′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p5">
+              <span class="t-title" lang="ja">幻のインカ城塞都市</span>
+              <span class="t-min">6′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p6">
+              <span class="t-title" lang="ja">モヘンジョダロは平等社会？</span>
+              <span class="t-min">5′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p7">
+              <span class="t-title" lang="ja">三宮「初見殺し」のバス停</span>
+              <span class="t-min">5′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p8">
+              <span class="t-title" lang="ja">HAGANE、海外フェスへ</span>
+              <span class="t-min">4′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p9">
+              <span class="t-title" lang="ja">Claude Motionを試す</span>
+              <span class="t-min">4′</span>
+            </a>
+          </li>
+        </ol>
+      </nav>
+    </aside>
+
+    <main class="main">
+      <div class="digest-banner">
+        <span class="tag">TRIAGE</span>
+        <span>2026-10-11 — Toyotomi: Gōhime, a filha adotiva favorita de Hideyoshi; por que Kyūshū tem &quot;nove&quot;; Xiang Yu e os 200 mil Qin; o conto da esposa que não come; NatGeo: fortaleza inca perdida e Mohenjo-daro igualitária; Kobe: os ônibus de Sannomiya; HAGANE rumo à Europa; Claude Motion.</span>
+      </div>
+
+      <header class="hero">
+        <div class="kicker">Daily curated reading</div>
+        <h1 lang="ja">秀吉の秘蔵の姫と九つの国、項羽の夜と口を隠した女房をめぐる、ひと朝の読解</h1>
+        <p lang="ja">「男なら関白に」と秀吉に言わしめた豪姫。七県なのに「九州」と呼ばれる理由。一夜で二十万の降兵を葬った項羽。髪の下に口を隠した女房の民話。アンデスの断崖に眠る幻の城塞、王なき都モヘンジョダロ。そして三宮のバス停、HAGANEの海外進出、Claude Motion。推定合計 ~45 分。</p>
+      </header>
+
+      <article class="piece" id="p1">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★★</span> <span class="chip mins">6 min</span> <span class="chip" lang="ja">安土桃山</span> <span class="chip" lang="ja">豊臣</span> <span class="chip" lang="ja">前田家</span> <span class="chip" lang="ja">宇喜多秀家</span>
+          </div>
+          <h2 lang="ja">豊臣秀吉が「男なら関白にしたい」と溺愛した豪姫〜関ヶ原で夫と息子を奪われた「秘蔵の姫」の生涯</h2>
+          <p class="why">A filha de Maeda Toshiie que Hideyoshi adotou e dizia que, se fosse homem, faria kanpaku — e que perdeu marido e filhos para o exílio após Sekigahara.</p>
+          <div class="source">
+            <span lang="ja">草の実堂</span>
+            <a href="https://kusanomido.com/study/history/japan/azuchi/toyotomi/134325/" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>やがて宇喜多秀家に嫁ぎ、二男二女をもうけた豪姫でしたが、関ヶ原の戦いによって夫と息子たちと引き裂かれてしまいます。</p>
+            <p>1589年（天正17年）5月27日、淀殿（茶々）が山城の淀城で、秀吉の男子・鶴松を出産しました。</p>
+            <p>秀吉の実子については、長浜城主となった頃、側室の南殿との間に男子の石松丸と女子が生まれたものの、いずれも夭折したという説もあります。</p>
+            <p>その真偽はともかく秀吉は長く実子に恵まれなかったため、多くの養子や猶子、養女を迎えていました。</p>
+            <p>その中には、甥にあたる豊臣秀次や小早川秀秋、織田信長の四男・羽柴秀勝、宇喜多秀家、徳川家康の次男・結城秀康、さらには前田利家の娘・豪姫らがいました。</p>
+            <p>天下人となった秀吉は、豪姫について「男にて候はゞ、関白を持たせ申すべきに」（もし男であったなら、関白にしたいものだ）という趣旨の言葉を残したとされています。</p>
+            <p>また、1582年（天正10年）頃に秀吉が豪姫へ送った自筆書状では、豪姫を「五もし」と記し、「元気にして、しっかりご飯を食べていますか」「やがて必ず姫路へ呼びますから安心してください」という趣旨の言葉を送り、その健康や生活を細かく気遣っています。</p>
+            <p>別の書状でも、北政所や豪姫、小早川秀秋らに贈り物をどのように分けるか細かく指示していました。</p>
+            <p>こうした書状からも、秀吉が豪姫をいかに特別な存在として扱っていたのかがうかがえるのです。</p>
+            <p>豪姫は1574年（天正2年）、前田利家と正室・まつ（芳春院）の四女として生まれました。</p>
+          </div>
+          <p class="continue"><a href="https://kusanomido.com/study/history/japan/azuchi/toyotomi/134325/" target="_blank" rel="noopener" lang="ja">続きを読む · 草の実堂</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p2">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★☆</span> <span class="chip mins">5 min</span> <span class="chip" lang="ja">古代</span> <span class="chip" lang="ja">律令</span> <span class="chip" lang="ja">地名の謎</span>
+          </div>
+          <h2 lang="ja">7県しかないのになぜ「九州」？ 名前に残る古代の「九つの国」とは</h2>
+          <p class="why">Por que Kyūshū (&quot;nove províncias&quot;) tem só 7 prefeituras? O nome é um fóssil do sistema ritsuryō de mais de mil anos atrás.</p>
+          <div class="source">
+            <span lang="ja">草の実堂</span>
+            <a href="https://kusanomido.com/study/history/japan/134637/" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>実は、この「九」という数字は現在の県の数とはまったく関係がなく、その由来を辿っていくと現在の都道府県が生まれるより1000年以上も前の日本へと行き着く。</p>
+            <p>では、なぜ7県なのに「九州」であり、「九国」ではなく「州」という字が使われているのだろうか。</p>
+            <p>「九州」という名称の「九」は、古代の行政区分である国が九州本島に9つ存在したことに由来する。</p>
+            <p>7世紀末以降、律令国家の形成に伴って九州でも国の分割や新設が進み、「筑前（ちくぜん）」「筑後（ちくご）」「豊前（ぶぜん）」「豊後（ぶんご）」「肥前（ひぜん）」「肥後（ひご）」「日向（ひゅうが）」「薩摩（さつま）」「大隅（おおすみ）」という9つの国が置かれるようになった。</p>
+            <p>九州大学の丸山雍成氏は、古代国家の行政区画である五畿七道のうち、九州にあたる西海道について、この9か国と壱岐・対馬の二島からなり「九か国という意味から九州と呼ばれた」と説明している。</p>
+            <p>つまり「九州」の九は現在の県の数ではなく、千年以上前の国の数を今に伝えているのである。</p>
+            <p>しかしここで一つ疑問が生じる。西海道に壱岐と対馬も含まれていたのであれば、全部で11ではないのか。</p>
+            <p>実際、古代の西海道は九州本島の9国だけで構成されていたわけではなく、その北西に位置する壱岐国と対馬国も含んでいた。</p>
+          </div>
+          <p class="continue"><a href="https://kusanomido.com/study/history/japan/134637/" target="_blank" rel="noopener" lang="ja">続きを読む · 草の実堂</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p3">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★☆</span> <span class="chip mins">5 min</span> <span class="chip" lang="ja">世界史</span> <span class="chip" lang="ja">中国</span> <span class="chip" lang="ja">楚漢戦争</span>
+          </div>
+          <h2 lang="ja">降伏した20万人以上の秦兵を一夜で皆殺しに…項羽が下した恐ろしい命令</h2>
+          <p class="why">História mundial: de Julu (queimar os barcos, 3 dias de comida) à noite em Xin&#x27;an, quando Xiang Yu mandou enterrar 200 mil soldados Qin rendidos.</p>
+          <div class="source">
+            <span lang="ja">草の実堂</span>
+            <a href="https://kusanomido.com/study/history/chinese/sokan/134950/" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>この年、楚の武将・項羽（名は籍）は、秦の将軍・章邯（しょうかん）が率いる大軍を降伏させた。</p>
+            <p>項羽は降伏した秦兵を自軍に加え、秦の都・咸陽がある関中地方を目指して西へ進軍した。</p>
+            <p>ところが、軍が新安という土地に到着したとき、項羽は配下の将軍たちを呼び、恐ろしい命令を下したのである。</p>
+            <p>秦の将軍・章邯は反乱軍の鎮圧にあたり、楚の武将・項梁（こうりょう）を定陶（ていとう）の戦いで討ち取るなど、大きな戦果を挙げていた。</p>
+            <p>項梁は項羽の叔父であり、楚の反乱軍を率いていた中心人物だったが、その死によって楚軍は大きな打撃を受ける。</p>
+            <p>章邯は趙軍を破ると、秦の将軍・王離（おうり）らに鉅鹿（きょろく）の城を包囲させ、自らはその南方に陣を構えて食糧を送り込んだ。</p>
+            <p>趙の王や重臣たちは鉅鹿に追い詰められ、各地の反乱軍が救援に集まったものの、強大な秦軍を恐れて積極的に戦おうとはしなかった。</p>
+            <p>紀元前207年、項羽は兵を率いて黄河を渡ると、退路を断つために船を沈めて炊事用の釜を壊し、陣営の建物を焼き払った。</p>
+            <p>兵士たちには三日分の食糧だけを持たせ、勝つか死ぬかの覚悟で秦軍に挑ませたのである。</p>
+            <p>楚軍は秦軍と九度にわたって戦い、王離を捕らえて大勝利を収めた。</p>
+            <p>戦いを見守っていた諸侯の将軍たちは項羽の勢いに圧倒され、以後は彼の指揮に従うようになる。</p>
+          </div>
+          <p class="continue"><a href="https://kusanomido.com/study/history/chinese/sokan/134950/" target="_blank" rel="noopener" lang="ja">続きを読む · 草の実堂</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p4">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★☆</span> <span class="chip mins">5 min</span> <span class="chip" lang="ja">民話</span> <span class="chip" lang="ja">妖怪</span> <span class="chip" lang="ja">端午の節句</span>
+          </div>
+          <h2 lang="ja">「飯を食わない女房が欲しい」欲深い男のもとに現れた、恐ろしい妻の伝承</h2>
+          <p class="why">O conto Kuwazu-nyōbō: a esposa &quot;que não come&quot; com uma boca escondida no cabelo — e por que ele explica a artemísia e o shōbu do Tango no Sekku.</p>
+          <div class="source">
+            <span lang="ja">草の実堂</span>
+            <a href="https://kusanomido.com/study/fushigi/story/133681/" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>ケチな男が「食事をとらない妻」を所望したところ、その通り本当に飯を食わぬ女が現れ、結婚した。</p>
+            <p>ところが男一人しか飯を食っていないハズなのに、家の米がみるみるうちに減っていく。</p>
+            <p>男は「妻が密かに飯を食っているのだろう」と疑い、屋根裏からこっそり妻の様子をうかがうことにした。</p>
+            <p>すると、なんということであろうか。</p>
+            <p>妻がほどいた髪の中には巨大な口があり、そこへ握り飯を次から次へと放り込んでいたのである。</p>
+            <p>恐れをなした男が離縁を切り出すと、妻は化け物の本性を現し、男を桶に押し込んで山へと担いでいく。</p>
+            <p>男は途中で木の枝にしがみついて桶から抜け出したが、化け物はなおも追いかけてくる。</p>
+            <p>だが男は、ヨモギとショウブの茂みに隠れることで難を逃れた。</p>
+            <p>これ以来、端午の節句には魔除けとして、ヨモギとショウブを飾るようになったと語られている。</p>
+            <p>しかし一体どういった経緯で、この食わず女房という奇妙な物語は生まれたのであろうか。</p>
+            <p>一説には、こうした俗信や年中行事の由来を説明するため、古くからの信仰と後になって結び付けられた話ともいわれる。</p>
+            <p>実際、端午の節句にヨモギやショウブなどを用いて邪気を払う習俗には中国から伝来した要素があり、菖蒲や蓬には邪悪なものを追い払う力があるという信仰が、食わず女房の物語より先に存在していたと考えられている。</p>
+          </div>
+          <p class="continue"><a href="https://kusanomido.com/study/fushigi/story/133681/" target="_blank" rel="noopener" lang="ja">続きを読む · 草の実堂</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p5">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★★</span> <span class="chip mins">6 min</span> <span class="chip" lang="ja">NatGeo</span> <span class="chip" lang="ja">考古学</span> <span class="chip" lang="ja">インカ帝国</span>
+          </div>
+          <h2 lang="ja">姿を見せ始めたインカ帝国　幻の城塞都市「アンコカグア」か</h2>
+          <p class="why">Uma mesa cercada de penhascos no Peru, quatro vezes Machu Picchu: seria Ancocahua, a fortaleza perdida dos Incas?</p>
+          <div class="source">
+            <span lang="ja">ナショナル ジオグラフィック日本版</span>
+            <a href="https://natgeo.nikkeibp.co.jp/atcl/news/26/051900283/" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>インカ帝国の重要な城塞アンコカグア。研究者たちは長年、その場所を突きとめようと、ペルーの高地を探し回ってきた。そして、ある山の頂で神殿を含む集落の遺跡が発見された。果たして、追い求めていた聖地なのか。</p>
+            <p>メサとは、硬い岩層が侵食されて残ったテーブル状の台地だ。周囲は断崖絶壁で、100メートル下をアプリマク川が流れている。遺跡は、タクラチュロという集落跡で、広さはメサの麓の土地と合わせて17ヘクタールあり、その面積は約225キロ北西にあるマチュピチュのおよそ4倍に及ぶ。アンデス山脈には、ここと同じような低木に覆われた石組みの段々畑や建物の基礎が残る遺跡がいくつもある。それはケチュア語で「タワンティンスウユ」と呼ばれるインカ帝国が築いたものだ。この遺跡にも30年以上前から考古学者たちが訪れ、谷底から断崖に刻まれた急な石段を上って調査をしてきた。だが、これまでに見つかったのは、土器の破片やさびれた廃虚ばかりだった。</p>
+            <p>2022年9月のある朝、考古学者のダンテ・ワルパユンカは、そのタクラチュロ遺跡で、石囲いの中から表土を取り除く作業をしていた。すると、近くにいた助手の一人が大声を上げた。「ボス！　何かあります」。ワルパユンカは思わず笑った。つい最近、ここから宝物が出るわけはないと、仲間内で冗談を言っていたばかりだったからだ。だが、振り向いた彼の目に飛び込んできたのは、紛れもない黄金の輝きだった。</p>
+          </div>
+          <p class="continue"><a href="https://natgeo.nikkeibp.co.jp/atcl/news/26/051900283/" target="_blank" rel="noopener" lang="ja">続きを読む · ナショナル ジオグラフィック日本版</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p6">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★☆</span> <span class="chip mins">5 min</span> <span class="chip" lang="ja">NatGeo</span> <span class="chip" lang="ja">インダス文明</span> <span class="chip" lang="ja">世界史</span>
+          </div>
+          <h2 lang="ja">モヘンジョダロは支配者層なしで繁栄？　新たな研究めぐり論争</h2>
+          <p class="why">Uma metrópole de 5 mil anos sem palácios nem reis? Estudo diz que Mohenjo-daro ficou mais igualitária ao crescer — e gerou polêmica.</p>
+          <div class="source">
+            <span lang="ja">ナショナル ジオグラフィック日本版</span>
+            <a href="https://natgeo.nikkeibp.co.jp/atcl/news/26/060300318/" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>インダス文明（ハラッパー文明とも）の主要都市のひとつであるモヘンジョダロは、綿密な計画のもとに建造され、下水道施設や整然とした街路、規格化されたレンガでできた建造物などがあった。住宅はどれもほぼ同じ大きで、屋内の水道設備まで設けられていた。</p>
+            <p>しかし、文字の体系や社会組織など、この古代都市にまつわる多くの事柄は、依然として謎に包まれている。</p>
+            <p>モヘンジョダロの発掘調査は数十年にわたる中断を経て、最近になって再開された。研究者らは、この古代都市をめぐる特に重要な疑問について、改めて調査を進めている。（参考記事：「モヘンジョダロ、埋もれていた古代の大都市の姿　発掘調査が再開」）</p>
+            <p>そうした疑問のひとつが、この都市にはエリート層の支配者がいたかどうか、というものだ。</p>
+            <p>新たな研究によると、少なくとも現在の考古学的証拠に基づく限り、この国際都市は古代世界では珍しく、きわめて平等な社会だったと考えられるという。</p>
+            <p>1920年代に、インダス文明の諸都市で初めての発掘調査が行われた際、調査を監督した当時英領だったインドの考古調査局長のジョン・マーシャル卿は、宮殿や、王族の墓や像、エリート層に関連する記念建造物が見当たらないことを指摘していた。</p>
+          </div>
+          <p class="continue"><a href="https://natgeo.nikkeibp.co.jp/atcl/news/26/060300318/" target="_blank" rel="noopener" lang="ja">続きを読む · ナショナル ジオグラフィック日本版</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p7">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★☆☆</span> <span class="chip mins">5 min</span> <span class="chip" lang="ja">神戸</span> <span class="chip" lang="ja">三宮</span> <span class="chip" lang="ja">交通</span> <span class="chip" lang="ja">再開発</span>
+          </div>
+          <h2 lang="ja">神戸三宮｢複雑過ぎるバス停｣再開発でどう変わるか　実は高速バスの一大拠点､新宿に続く｢バスタ｣整備</h2>
+          <p class="why">Kobe: por que os pontos de ônibus de Sannomiya confundem até moradores, e como a Busta (2ª do Japão) vai mudar isso.</p>
+          <div class="source">
+            <span lang="ja">東洋経済オンライン（Infoseek）</span>
+            <a href="https://news.infoseek.co.jp/article/toyokeizai_20261008_960145/" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>再開発が進む神戸・三宮。画面奥には新バスターミナルが入る建物が姿を現している （編集部撮影）</p>
+            <p>神戸市は幕末の日米修好通商条約によって開港した5港のうちの1つ「神戸港」を中心に栄えたのが、近代都市としてのスタートだ。</p>
+            <p>海上物流の拠点であることは間違いないが、内陸部の産業団地が好調で陸上物流の拠点としても改めて注目されているのが現状だ。同じ道路を使うのだから、旅客輸送においても近畿に加えて中四国への好アクセスは同様だ。</p>
+            <p>三宮といえば鉄道ターミナルのイメージが強いかもしれないが、実は西日本で有数の高速バスの拠点になっている。</p>
+            <p>神戸・三宮から出発する中長距離のバス便には、実に多様な行き先がある。東京行きの夜行バスが出ているのは多くの都市と同様だが、明石海峡大橋を利用して四国方面に行く便が多いのも特徴の1つ。三宮のバスターミナルから四国4県の県庁所在地には、いずれも4時間以内に到着する。</p>
+            <p>兵庫県内の内陸や日本海側のほか鳥取、島根といった山陰方面など、鉄道でのアクセスには特急乗車が必須の地域でも、そう大きくは変わらない所要時間で安価に移動できる。神戸・三宮を発着する中長距離バスの便数は実に1日あたり約1700便にもおよぶ。</p>
+          </div>
+          <p class="continue"><a href="https://news.infoseek.co.jp/article/toyokeizai_20261008_960145/" target="_blank" rel="noopener" lang="ja">続きを読む · 東洋経済オンライン（Infoseek）</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p8">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★☆</span> <span class="chip mins">4 min</span> <span class="chip" lang="ja">JPメタル</span> <span class="chip" lang="ja">HAGANE</span> <span class="chip" lang="ja">KOIAI</span>
+          </div>
+          <h2 lang="ja">海外フェスへ向かうHAGANE、KOIAI、Zilqyら新たな動き</h2>
+          <p class="why">HAGANE assina com a Napalm Records após festivais na Europa; e o novo KOIAI (banda de apoio do METALVERSE) e Zilqy.</p>
+          <div class="source">
+            <span lang="ja">Real Sound</span>
+            <a href="https://realsound.jp/2026/10/post-2539331_2.html" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>このほかにも、ハードロック／メタル／ラウドロックを軸に、それぞれ異なるキャリアやスタイルで活動の場を広げている女性バンドは少なくない。</p>
+            <p>ゲームソフトの楽曲をアレンジするバンド・Falcom jdk BANDや『艦隊これくしょん -艦これ-』の公式ガールズバンドC2機関“1MYB”でも活躍するSakura（Gt）や、ガールズロックバンド革命なそどで活動してきたJUNNA（Dr）などがメンバーに名を連ねるHAGANE。Nintendo Switch『CRAZY CHA!N -エルピスの鎖-』のテーマ曲を手がけるほか、今年はデンマークやドイツ、スペインで開催された海外フェスにも出演。12月にはアルバム『Through the Night』をリリースする。さらに9月30日には、オーストリアのメタル専門レーベル Napalm Recordsとの契約を発表している。</p>
+          </div>
+          <p class="continue"><a href="https://realsound.jp/2026/10/post-2539331_2.html" target="_blank" rel="noopener" lang="ja">続きを読む · Real Sound</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p9">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★☆</span> <span class="chip mins">4 min</span> <span class="chip" lang="ja">AI</span> <span class="chip" lang="ja">Claude</span> <span class="chip" lang="ja">新機能</span>
+          </div>
+          <h2 lang="ja">【速報】Claude の新機能 Claude Motion 早速使ってみた</h2>
+          <p class="why">Claude Motion (beta 8/10): animações em MP4 geradas por código, não por modelo de vídeo — números e textos ficam exatos e editáveis.</p>
+          <div class="source">
+            <span lang="ja">Zenn（Atsuki02）</span>
+            <a href="https://zenn.dev/branbran/articles/047821d64590f0" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>はじめに</p>
+            <p>2026年10月8日、Anthropic が Claude の新機能 Claude Motion をベータで公開しました。同じ日に Claude Dashboards も出ています。</p>
+            <p>Claude Motion は、プロンプトや手元のレポート・グラフ・画像から、短いアニメーション動画を作る機能です。さっそく触ってみたので、機能の概要・使い方・使ってみた所感をまとめます。</p>
+            <p>いちばん大事なポイントはここだと思います。Claude Motion は動画生成モデルを使っていません。</p>
+            <p>という性質があります。「それっぽい映像」ではなく「正確な説明動画」を作るためのツール、という位置づけです。</p>
+            <p>書き出した動画は Adobe、Descript、HeyGen、Higgsfield、invideo、Luma AI、Runway で開いて続きを編集できます。Canva と Captions は今後対応予定とのことです。</p>
+          </div>
+          <p class="continue"><a href="https://zenn.dev/branbran/articles/047821d64590f0" target="_blank" rel="noopener" lang="ja">続きを読む · Zenn（Atsuki02）</a></p>
+        </div>
+      </article>
+
+      <footer class="site">読解幕 · 2026-10-11 · ~45 min · <a href="/japanese-digest/history/" style="color:inherit">History</a> · deliton.github.io/japanese-digest</footer>
+    </main>
+  </div>
+</body>
+</html>
