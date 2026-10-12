@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>読解幕 · 2026-10-12 · Japanese Digest</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Noto+Serif+JP:wght@400;600;700&family=Shippori+Mincho:wght@500;700&display=swap" rel="stylesheet" />
+  <style>
+
+    :root {
+      --bg: #0a0a0a;
+      --bg-2: #121212;
+      --bg-card: #161616;
+      --ink: #f5f5f5;
+      --ink-dim: #a8a29a;
+      --ink-mute: #6b6560;
+      --shu: #c41e3a;
+      --shu-hot: #e11d48;
+      --shu-deep: #8b1228;
+      --gold: #d4a017;
+      --gold-soft: #c9a227;
+      --white: #fafafa;
+      --line: #2a2a2a;
+      --line-hot: rgba(196, 30, 58, 0.45);
+      --measure: 42rem;
+      --radius: 4px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: "Noto Sans JP", "Hiragino Sans", "Yu Gothic", system-ui, sans-serif;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .stage-bar {
+      height: 6px;
+      background: repeating-linear-gradient(
+        90deg,
+        var(--shu) 0 48px,
+        var(--white) 48px 56px,
+        #111 56px 64px,
+        var(--gold) 64px 72px,
+        #111 72px 88px
+      );
+    }
+
+    .wrap {
+      width: min(100% - 2rem, 74rem);
+      margin: 0 auto;
+      padding: 2rem 0 4.5rem;
+      display: grid;
+      grid-template-columns: 15.5rem 1fr;
+      gap: 2.75rem;
+      align-items: start;
+    }
+
+    @media (max-width: 900px) {
+      .wrap { grid-template-columns: 1fr; gap: 1.5rem; padding-top: 1.25rem; }
+      .sidebar { position: static !important; }
+    }
+
+    .sidebar { position: sticky; top: 1.25rem; }
+
+    .brand {
+      display: flex;
+      align-items: baseline;
+      gap: 0.55rem;
+      margin: 0 0 0.35rem;
+    }
+    .brand-mark {
+      font-family: "Shippori Mincho", "Noto Serif JP", serif;
+      font-size: 1.85rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      color: var(--white);
+      line-height: 1;
+    }
+    .brand-mark em {
+      font-style: normal;
+      color: var(--shu);
+    }
+    .brand-sub {
+      font-size: 0.65rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-weight: 700;
+    }
+
+    .meta {
+      color: var(--ink-mute);
+      font-size: 0.8rem;
+      margin: 0 0 1.25rem;
+    }
+
+    .stat-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-bottom: 1.35rem;
+    }
+    .stat {
+      border: 1px solid var(--line);
+      background: var(--bg-2);
+      padding: 0.32rem 0.65rem;
+      font-size: 0.72rem;
+      color: var(--ink-dim);
+      border-radius: var(--radius);
+    }
+    .stat strong { color: var(--white); font-weight: 700; }
+    .stat.hot {
+      border-color: var(--shu);
+      color: var(--shu-hot);
+      background: rgba(196, 30, 58, 0.1);
+    }
+
+    .toc {
+      border: 1px solid var(--line);
+      background: var(--bg-2);
+      padding: 0.85rem 0.9rem 0.95rem;
+      border-radius: var(--radius);
+    }
+    .toc h2 {
+      margin: 0 0 0.65rem;
+      font-size: 0.72rem;
+      letter-spacing: 0.16em;
+      color: var(--gold);
+      font-weight: 800;
+    }
+    .toc ol { list-style: none; margin: 0; padding: 0; }
+    .toc li { margin: 0; }
+    .toc a {
+      display: flex;
+      justify-content: space-between;
+      gap: 0.5rem;
+      text-decoration: none;
+      color: var(--ink-dim);
+      font-size: 0.82rem;
+      padding: 0.38rem 0.2rem;
+      border-bottom: 1px solid transparent;
+    }
+    .toc a:hover { color: var(--white); border-bottom-color: var(--line-hot); }
+    .toc .t-title { font-weight: 600; }
+    .toc .t-min { color: var(--gold); font-size: 0.72rem; font-weight: 700; flex-shrink: 0; }
+
+    .main { max-width: var(--measure); }
+
+    .digest-banner {
+      display: flex;
+      gap: 0.75rem;
+      align-items: flex-start;
+      background: #141014;
+      border: 1px solid var(--line);
+      border-left: 3px solid var(--shu);
+      padding: 0.85rem 1rem;
+      margin-bottom: 1.5rem;
+      font-size: 0.78rem;
+      color: var(--ink-dim);
+      line-height: 1.55;
+    }
+    .digest-banner .tag {
+      flex-shrink: 0;
+      background: var(--shu);
+      color: #fff;
+      font-size: 0.65rem;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      padding: 0.28rem 0.5rem;
+      border-radius: var(--radius);
+    }
+
+    .hero {
+      margin-bottom: 2rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid var(--line);
+      position: relative;
+    }
+    .hero::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -1px;
+      width: 4.5rem;
+      height: 2px;
+      background: var(--shu);
+    }
+    .kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.7rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--shu-hot);
+      font-weight: 800;
+      margin-bottom: 0.85rem;
+    }
+    .kicker::before {
+      content: "◆";
+      font-size: 0.55rem;
+      color: var(--gold);
+    }
+    .hero h1 {
+      font-family: "Shippori Mincho", "Noto Serif JP", serif;
+      font-size: clamp(1.85rem, 4vw, 2.55rem);
+      font-weight: 700;
+      line-height: 1.2;
+      margin: 0 0 0.75rem;
+      color: var(--white);
+      letter-spacing: 0.02em;
+    }
+    .hero p {
+      margin: 0;
+      color: var(--ink-dim);
+      font-size: 0.98rem;
+      max-width: 36rem;
+    }
+
+    article.piece {
+      background: var(--bg-card);
+      border: 1px solid var(--line);
+      margin-bottom: 1.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+    article.piece::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: linear-gradient(90deg, var(--shu) 0%, var(--shu) 35%, var(--gold) 35%, var(--gold) 42%, transparent 42%);
+    }
+
+    .piece-inner { padding: 1.6rem 1.55rem 1.35rem; }
+
+    .piece-head {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-bottom: 0.85rem;
+    }
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      border: 1px solid var(--line);
+      background: #111;
+      color: var(--ink-dim);
+      padding: 0.22rem 0.6rem;
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      border-radius: var(--radius);
+    }
+    .chip.interest {
+      border-color: var(--shu);
+      color: var(--shu-hot);
+      background: rgba(196, 30, 58, 0.12);
+    }
+    .chip.mins {
+      border-color: var(--gold);
+      color: var(--gold);
+      background: transparent;
+    }
+
+    .piece h2 {
+      font-family: "Noto Serif JP", "Shippori Mincho", "Yu Mincho", serif;
+      font-size: 1.38rem;
+      font-weight: 700;
+      line-height: 1.5;
+      margin: 0 0 0.6rem;
+      color: var(--white);
+      letter-spacing: 0.02em;
+    }
+
+    .why {
+      margin: 0 0 1rem;
+      color: var(--ink-dim);
+      font-size: 0.9rem;
+      border-left: 2px solid var(--gold);
+      padding-left: 0.85rem;
+    }
+
+    .source {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.65rem 1.1rem;
+      font-size: 0.76rem;
+      color: var(--ink-mute);
+      margin-bottom: 1.25rem;
+    }
+    .source a {
+      color: var(--shu-hot);
+      text-decoration: none;
+      font-weight: 600;
+    }
+    .source a:hover { color: var(--gold); }
+
+    .ja {
+      font-family: "Noto Serif JP", "Hiragino Mincho ProN", "Yu Mincho", serif;
+      font-size: 1.08rem;
+      line-height: 2;
+      letter-spacing: 0.03em;
+      color: #ebe7e1;
+    }
+    .ja p { margin: 0 0 1.15em; }
+    .ja p:last-child { margin-bottom: 0; }
+
+    .continue {
+      margin-top: 1.25rem;
+      padding-top: 1rem;
+      border-top: 1px solid var(--line);
+      font-size: 0.86rem;
+    }
+    .continue a {
+      color: var(--white);
+      text-decoration: none;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      border-bottom: 2px solid var(--shu);
+      padding-bottom: 0.1rem;
+    }
+    .continue a:hover {
+      color: var(--shu-hot);
+      border-bottom-color: var(--gold);
+    }
+
+    footer.site {
+      max-width: var(--measure);
+      margin-top: 1.75rem;
+      color: var(--ink-mute);
+      font-size: 0.72rem;
+      letter-spacing: 0.06em;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+    footer.site::before {
+      content: "";
+      width: 1.25rem;
+      height: 2px;
+      background: var(--shu);
+    }
+
+  
+    .excerpt-label { font-size: 0.66rem; letter-spacing: 0.18em; color: var(--gold); font-weight: 800; margin: 0 0 0.6rem; }
+    .brand-sub a, .stat a { color: var(--gold); text-decoration: none; }
+    .toc .t-min { font-variant-numeric: tabular-nums; }
+  </style>
+</head>
+<body>
+  <div class="stage-bar" aria-hidden="true"></div>
+
+  <div class="wrap">
+    <aside class="sidebar">
+      <div class="brand">
+        <span class="brand-mark" lang="ja">読解<em>幕</em></span>
+      </div>
+      <p class="brand-sub">Kabuki Digest · <a href="/japanese-digest/history/">History</a></p>
+      <p class="meta">2026-10-12 · America/Sao_Paulo</p>
+      <div class="stat-row">
+        <span class="stat"><strong>41</strong> min</span>
+        <span class="stat"><strong>7</strong> pieces</span>
+        <span class="stat"><strong>~6,200</strong> 字</span>
+        <span class="stat"><a href="/japanese-digest/history/">History</a></span>
+      </div>
+
+      <nav class="toc" aria-label="Índice">
+        <h2 lang="ja">本日の演目</h2>
+        <ol>
+          <li>
+            <a href="#p1">
+              <span class="t-title" lang="ja">秀長と紀州征伐</span>
+              <span class="t-min">7′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p2">
+              <span class="t-title" lang="ja">1000年前の「謎の星」</span>
+              <span class="t-min">6′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p3">
+              <span class="t-title" lang="ja">無策王と聖ブリスの虐殺</span>
+              <span class="t-min">6′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p4">
+              <span class="t-title" lang="ja">マヤ天文学者「白い胸の狐」</span>
+              <span class="t-min">5′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p5">
+              <span class="t-title" lang="ja">馬かけ神事と神功皇后</span>
+              <span class="t-min">6′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p6">
+              <span class="t-title" lang="ja">SCANDAL、最後の47都道府県</span>
+              <span class="t-min">5′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p7">
+              <span class="t-title" lang="ja">Claude Code週報：Projectsと穴塞ぎ</span>
+              <span class="t-min">6′</span>
+            </a>
+          </li>
+        </ol>
+      </nav>
+    </aside>
+
+    <main class="main">
+      <div class="digest-banner">
+        <span class="tag">TRIAGE</span>
+        <span>2026-10-12 — Hidenaga e a campanha de Kii (Saika/Ōta); SN 1006 e o Meigetsuki; Æthelred o Unready e St. Brice; NatGeo: astrônomo maia &quot;raposa de peito branco&quot;; matsuri uma-kake hoje em Kawachinagano; SCANDAL encerra com 47 prefeituras; Claude Code Projects + onFailure.</span>
+      </div>
+
+      <header class="hero">
+        <div class="kicker">Daily curated reading</div>
+        <h1 lang="ja">紀州の水攻めと客星の夜、無策王の虐殺と白い胸の狐、馬と人が駆けるスポーツの日をめぐる、ひと朝の読解</h1>
+        <p lang="ja">秀長が大和へ入る前の紀州征伐。1006年の客星と定家の『明月記』。銀で買った平和が虐殺を呼び、王国を失った無策王。マヤの「白い胸の狐」。今日スポーツの日の馬かけ神事。SCANDAL最後の47都道府県。Claude Code Projectsと権限の穴塞ぎ。推定合計 ~46 分。</p>
+      </header>
+
+      <article class="piece" id="p1">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★★</span> <span class="chip mins">7 min</span> <span class="chip" lang="ja">安土桃山</span> <span class="chip" lang="ja">豊臣秀長</span> <span class="chip" lang="ja">雑賀衆</span> <span class="chip" lang="ja">紀州</span>
+          </div>
+          <h2 lang="ja">秀長が「大和の国主」となる半年前、紀州で何が起きていたのか？豊臣兄弟の「紀州征伐」</h2>
+          <p class="why">Antes de governar Yamato, Hidenaga foi vice no ataque a Kii: Saika não era um exército único, e Hideyoshi usou inundação em Ōta — e o selo que desarma os camponeses.</p>
+          <div class="source">
+            <span lang="ja">草の実堂</span>
+            <a href="https://kusanomido.com/study/history/japan/azuchi/toyotomi/134591/" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>大河ドラマ『豊臣兄弟！』。第37回「秀長の国」からは、いよいよ羽柴小一郎秀長（仲野太賀）の大和統治が始まりました。</p>
+            <p>秀長が大和郡山城に入ったのは、天正13年（1585年）9月3日のことです。その前の3月、秀吉は秀長を副将として「紀州征伐」を開始し、怒涛の勢いで紀伊の主要勢力を制圧しました。</p>
+            <p>「雑賀衆」というと、鉄砲を大量に装備した強力な武装集団というイメージを浮かべる人もいるでしょう。石山本願寺を支援して信長を苦しめた有力な軍事勢力ではありますが、実は「雑賀衆」は一つの軍団ではありませんでした。</p>
+            <p>紀の川下流域の雑賀荘・十ヶ郷・中郷・南郷・宮郷という五つの地域を中心に、地侍や住民たちが必要に応じて結びついた共同体でした。そのため「一枚岩」というわけにはいかず、内部には宗派や利害の違いもあったのです。</p>
+            <p>天正12年（1584年）の「小牧・長久手の戦い」で、秀吉が徳川家康・織田信雄軍と戦っていたとき、雑賀衆や根来衆などは、秀吉方の岸和田城を攻撃するなど、その背後を脅かしました。</p>
+            <p>天正13年（1585年）3月、秀吉は大軍を率いて紀州へ進攻。千石堀城や積善寺城などを次々と攻め、根来寺も制圧しました。さらに雑賀衆らが立てこもった太田城を包囲し、水攻めを行いました。</p>
+            <p>鉄砲を得意とする相手に対し、秀吉は水を利用して城を孤立させ、降伏へと追い込んだのです。</p>
+            <p>太田城の開城に際して出された羽柴秀吉の朱印状には、命を助けることに加え、百姓たちに武器を捨てて耕作に専念するよう命じた次の一節があります。「一、在々百姓等、自今以後、弓箭・鑓・鉄炮・腰刀等令停止訖、然上者、鋤・鍬等農具を嗜、可専耕作者也」</p>
+            <p>『宇野主水日記』には、根来寺攻略後、秀長が降伏する者の命を助け、還俗して仕官する者も、僧のまま他所へ移る者も認めるという趣旨の対応を示したことが記されています。</p>
+            <p>天正15年（1587年）、秀長は従二位・権大納言に昇進し、「大和大納言」と呼ばれるようになります。その後も紀伊・大和の統治に力を注ぎましたが、天正19年（1591年）、大和入りからわずか6年ほどでこの世を去りました。</p>
+          </div>
+          <p class="continue"><a href="https://kusanomido.com/study/history/japan/azuchi/toyotomi/134591/" target="_blank" rel="noopener" lang="ja">続きを読む · 草の実堂</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p2">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★★</span> <span class="chip mins">6 min</span> <span class="chip" lang="ja">宇宙</span> <span class="chip" lang="ja">超新星</span> <span class="chip" lang="ja">明月記</span> <span class="chip" lang="ja">世界史</span>
+          </div>
+          <h2 lang="ja">1000年前の夜空に突如現れた「謎の星」その正体は史上最大級の超新星爆発だった！</h2>
+          <p class="why">SN 1006 brilhou ~−7,5 mag (a mais luminosa registrada); SN 1054 virou a Nebulosa do Caranguejo — e Teika guardou o registro no Meigetsuki.</p>
+          <div class="source">
+            <span lang="ja">草の実堂</span>
+            <a href="https://kusanomido.com/study/fushigi/space/134052/" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>天文学において、自ら光を放つ星のことを「恒星」と称する。恒星の中でも特に質量の大きいものは、寿命の終わりに中心部が崩壊し、大爆発を起こすことがある。このような爆発は「超新星爆発」と呼ばれ、膨大なエネルギーを放出する。</p>
+            <p>古代中国において、天空に突如現れる星は客星（かくせい）と呼ばれた。5世紀に編纂された歴史書『後漢書』には、185年12月、南門星官（現在のケンタウルス座付近）に客星が現れたとの記録が残っている。</p>
+            <p>記録に残る超新星の中でも、ひときわ強い輝きを放ったのが「SN 1006」だ。その最大光度は推定で約マイナス7.5等に達したともいわれ、記録の残る超新星としては最も明るかったと考えられている。ちなみに太陽の見かけの等級は約マイナス26.7等、満月は約マイナス12.7等である。</p>
+            <p>『宋史』によると、1006年5月1日、現在のてんびん座付近に客星が現れ、その後も約3年間にわたって観測されたことがうかがえる。天文学者の周克明は、時の皇帝・真宗に、この星は吉兆とされる「周伯星」であると進言したという。</p>
+            <p>最も有名な超新星の一つが「SN 1054」である。その残骸は、カニを思わせる形から「かに星雲」と呼ばれ、現在も天文学の重要な研究対象となっている。当時の超新星は昼間でも見えるほど明るかったと記録されており、最大光度は推定でマイナス6等前後に達したと考えられている。</p>
+            <p>日本においては、公家の藤原定家（1162～1241年）の日記『明月記』に、SN 1054に相当する客星の記録が残されている。1230年、彗星の出現に関心を持った定家は、過去の客星について陰陽師・安倍泰俊に問い合わせた。泰俊が調べた過去の天文記録には、1054年に現れた客星の記述も含まれており、その内容が『明月記』に書き留められた。</p>
+            <p>つまり、定家自身がSN 1054を目撃したわけではないが、この記録は平安時代の天文観測を伝える貴重な史料となっている。</p>
+            <p>古代の人々が不吉な兆しとも考えた天空の光は、現在では星の最期を知るための重要な手掛かりとなっているのである。</p>
+          </div>
+          <p class="continue"><a href="https://kusanomido.com/study/fushigi/space/134052/" target="_blank" rel="noopener" lang="ja">続きを読む · 草の実堂</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p3">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★★</span> <span class="chip mins">6 min</span> <span class="chip" lang="ja">世界史</span> <span class="chip" lang="ja">ヴァイキング</span> <span class="chip" lang="ja">イングランド</span> <span class="chip" lang="ja">航海</span>
+          </div>
+          <h2 lang="ja">ヴァイキングに媚びた中世イングランドのあまりに痛い結末…「無策王」が下した最悪の命令</h2>
+          <p class="why">Æthelred pagou Danegeld, depois mandou matar os dinamarqueses em St. Brice&#x27;s Day (1002) — e a vingança de Sven engoliu o reino.</p>
+          <div class="source">
+            <span lang="ja">草の実堂</span>
+            <a href="https://kusanomido.com/study/history/western/133838/" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>今から1000年ほど前のイングランドは、北欧からのヴァイキングの脅威にさらされていました。当時、この国を治めていたのが、エゼルレッド2世という王です。しかし、彼は後世「無策王」という不名誉なあだ名で呼ばれることになります。</p>
+            <p>10世紀末から11世紀初頭にかけて、イングランドには、デンマークからヴァイキング（デーン人）がたびたび船で押し寄せていました。エゼルレッド2世は、978年、異母兄エドワードが暗殺された後に、10歳前後の若さで王座に就いた人物です。</p>
+            <p>そこで王が選んだのが、銀を払って敵を退けるという苦肉の策でした。991年、大司教の進言によって初めて銀1万ポンドが支払われ、この貢納金はのちに「デーンゲルド」と呼ばれるようになります。</p>
+            <p>銀を払えば一時的な平穏は訪れますが、それは敵に「イングランドは金で解決するしかない国だ」と教えるようなものでした。結果としてデーン人の欲望をいっそう刺激し、さらなる要求を招くことになったのです。</p>
+            <p>そして1002年、王の耳にある話が入ります。「国内のデーン人たちが王の命を奪い、重臣たちも殺して、王国を奪おうとしている」というのです。この話を信じたエゼルレッド2世は、イングランドにいるすべてのデーン人を殺すよう命じ、11月13日、聖人ブリスの祝日に、その命令は各地で実行に移されました。</p>
+            <p>12世紀の歴史家マームズベリのウィリアムが記した『イングランド諸王の事績』によれば、犠牲者の中には、デンマーク王スヴェン1世の妹グンヒルダもいました。彼女は目の前で夫と息子を殺され、首をはねられる直前に「私の血が流されれば、この国全体に大きな災いが降りかかるでしょう」と言い残したといいます。</p>
+            <p>翌1003年、デンマーク王スヴェン1世は、自ら軍を率いてイングランドへ押し寄せました。これは、妹を殺された復讐だったとも伝えられています。</p>
+            <p>1013年、スヴェン1世はついにイングランドの征服に乗り出します。追い詰められたエゼルレッド2世は、王妃と息子たちを先に海の向こうへ逃がし、自らも王妃の実家であるノルマンディーへと落ち延びました。</p>
+            <p>エゼルレッドという名は、古い英語で「高貴な助言」を意味します。後世の人々はこの名をもじり「助言なき者」つまり「無策王」と呼びました。</p>
+          </div>
+          <p class="continue"><a href="https://kusanomido.com/study/history/western/133838/" target="_blank" rel="noopener" lang="ja">続きを読む · 草の実堂</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p4">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★★</span> <span class="chip mins">5 min</span> <span class="chip" lang="ja">NatGeo</span> <span class="chip" lang="ja">マヤ</span> <span class="chip" lang="ja">考古学</span> <span class="chip" lang="ja">天文学</span>
+          </div>
+          <h2 lang="ja">古代マヤ天文学者の名前を初解読、その名も「白い胸の狐」</h2>
+          <p class="why">Primeiro nome de astrônomo maia decifrado: Sak Tahn Waax, &quot;raposa de peito branco&quot; — e fórmulas de Vênus/Marte no &quot;quadro branco&quot; da sala.</p>
+          <div class="source">
+            <span lang="ja">ナショナル ジオグラフィック日本版</span>
+            <a href="https://natgeo.nikkeibp.co.jp/atcl/news/26/071600399/" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>中米グアテマラのシュルトゥンにあるマヤ遺跡を調査していた考古学者たちが、史上初めて、古代マヤ文明の天文学者であり数学者でもあった人物の名前の解読に成功した。その名前は「白い胸の狐」を意味する「サク・ターン・ワーシュ（Sak Tahn Waax）」だった。</p>
+            <p>マヤの天文学者たちは長い間、その科学的功績が認められることなく、歴史の陰に埋もれた存在だった、とナショナル ジオグラフィックのエクスプローラーでもあるデイビッド・スチュアート氏は説明する。「ついに、その名前が分かったのです」と、スチュアート氏は言う。</p>
+            <p>名前が見つかったのは、シュルトゥン遺跡内の「建造物10K-2」と呼ばれる小さな長方形の部屋だ。部屋の壁には、数学に関する50点以上の小さな書き込み「マイクロテキスト」が、うっすらと描かれたり刻まれたりしていた。</p>
+            <p>そのうちの一点、11個の象形文字からなる書き込みに名前が含まれていた。それだけでなく、この人物が関与したとみられる金星と火星の惑星運動に関する数式も見つかった。</p>
+            <p>「まさに、誰かが使っていた研究室の古い『ホワイトボード』を見ているようなものです」と、スチュアート氏は語る。「しかも、それを書いた人物の名前まで残っていたんですよ。おかげで、マヤの科学がこれまでよりずっと人間味のあるものに感じられます」</p>
+            <p>「たった一人の人物によって、この伝統全体が生き生きと蘇るのです」と、サンバルトロ＝シュルトゥン・プロジェクトの責任者を務めるヘザー・ハースト氏は言う。</p>
+          </div>
+          <p class="continue"><a href="https://natgeo.nikkeibp.co.jp/atcl/news/26/071600399/" target="_blank" rel="noopener" lang="ja">続きを読む · ナショナル ジオグラフィック日本版</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p5">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★☆</span> <span class="chip mins">6 min</span> <span class="chip" lang="ja">祭り</span> <span class="chip" lang="ja">神功皇后</span> <span class="chip" lang="ja">河内長野</span> <span class="chip" lang="ja">記紀</span>
+          </div>
+          <h2 lang="ja">大阪・河内長野「馬かけ神事」の謎 〜なぜ神功皇后が関係しているのか</h2>
+          <p class="why">Hoje (12/10, Dia do Esporte): cavalos sem sela e pessoas correm o caminho em Sumiyoshi — lenda de Jingū Empress e o truque da corda de arco de Takeuchi.</p>
+          <div class="source">
+            <span lang="ja">草の実堂</span>
+            <a href="https://kusanomido.com/visited/shiro/134353/" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>神功皇后は『日本書紀』や『古事記』に登場する古代日本の皇后です。夫の仲哀天皇が亡くなった後、神託に従って海を渡り、朝鮮半島へ兵を進めたと伝えられています。そして大阪府河内長野市には、そんな神功皇后の「凱旋」に由来すると伝えられる祭礼が今も残っています。小山田・住吉神社の「馬かけ神事」です。</p>
+            <p>『日本書紀』には出産を遅らせることを祈って石を腰に挟み、そのまま海を渡ったという伝説的な場面が描かれています。皇后の軍勢が新羅へ到達すると、新羅王は戦わずして降伏し、さらに高句麗・百済も朝貢を約束したとされます。</p>
+            <p>しかし、皇后を待っていたのは平穏な帰還ではありませんでした。仲哀天皇の先妃の子である麛坂王と忍熊王が、幼い皇子の存在を警戒して兵を挙げたのです。</p>
+            <p>ここで武内宿禰は、敵を油断させるため大胆な策に出ました。まず兵士たちに予備の弓弦を髪の中へ隠させると、忍熊王に争う意思はないと呼びかけ、自軍の弓の弦を切らせ、刀も川へ投げ捨ててみせたのです。これを信じた忍熊王も自軍の武器を捨てさせ、弓の弦を切らせました。すると武内宿禰の軍勢は髪に隠していた弦を取り出して弓を張り直し、用意していた本物の刀を手に川を渡って攻撃を開始します。</p>
+            <p>住吉神社の伝承では、神功皇后が凱旋後にこの地を訪れ、10月の卯の日に裸馬を走らせ、その競走を住吉大神へ奉納したことが馬かけ神事の始まりとされています。</p>
+            <p>河内長野市の記録によると、2024年の神事には10頭以上の馬が集まり、神事を終えた後、馬と人が一緒に長い参道を駆け抜けました。祭礼では裃姿の総代らが参列し、神事を終えると法被姿の氏子たちが鞍を付けていない馬の手綱を取り、馬とともに走ります。</p>
+            <p>2026年は10月12日のスポーツの日に開催が予定されています。神功皇后の凱旋を祝ったという物語は、現在も馬と人が参道を駆ける祭礼として小山田の地に受け継がれているのです。</p>
+          </div>
+          <p class="continue"><a href="https://kusanomido.com/visited/shiro/134353/" target="_blank" rel="noopener" lang="ja">続きを読む · 草の実堂</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p6">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★★</span> <span class="chip mins">5 min</span> <span class="chip" lang="ja">JPロック</span> <span class="chip" lang="ja">SCANDAL</span> <span class="chip" lang="ja">関西</span> <span class="chip" lang="ja">ツアー</span>
+          </div>
+          <h2 lang="ja">SCANDAL、来年8/21をもって活動終了。最後の旅として今年10月から日本全国47都道府県回るツアー開催</h2>
+          <p class="why">Após 20 anos e o castelo de Osaka, o quarteto encerra em 21/8/2027 — última viagem: 47 prefeituras (Hyogo em Kakogawa, 21/3/2027).</p>
+          <div class="source">
+            <span lang="ja">Skream!</span>
+            <a href="https://skream.jp/news/2026/08/scandal_final_tour_last_oneman.php" target="_blank" rel="noopener">原文を開く ↗</a> · <a href="https://www.scandal-4.com/media/web/finaltour47/" target="_blank" rel="noopener" lang="ja">公式ツアー日程 ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>結成20周年を迎えたSCANDALが、来年2027年8月21日をもって活動終了することを発表した。これまでSCANDALに出会ってくれた全ての人への感謝と、「活動終了までの1年間、1本1本のライブ、1日1日を大切にしながら最後の瞬間まで4人の音を鳴らす」という想いを込め、最後の旅として今年の10月から日本全国47都道府県を回るツアーを開催。</p>
+            <p>2026年8月21日、SCANDALは結成20周年を迎え、「SCANDAL 20th Anniversary Live &quot;Chapter 20&quot; at 大阪城ホール」を開催することが出来ました。大阪城ホールは結成したばかりの私たち4人が初めて掲げた夢の舞台です。これまで何度も大切な日を大阪城ホールのステージで迎えてきました。バンドとして20周年という大きな節目の日に、あの日から変わらないメンバーで再びここに立てたことを誇りに思います。</p>
+            <p>このステージを終えて、私たち4人から皆様にお伝えしたいことがあります。SCANDALは来年2027年8月21日をもって活動を終了します。20年の活動の中で、日本中、世界中を旅し、訪れることができた場所、出会えた人々、SCANDALとして生きてこなければ味わえなかった様々な経験を通して、4人で出来ることの全てを「やり切った」と実感しています。</p>
+            <p>これだけ長く続けてきたバンドの締めくくりを決めるのは本当に難しい決断でしたが、4人で何度も話し合い、この答えに辿りつきました。そして、私たちの最後の旅として今年の10月からは日本全国47都道府県を回るツアーを、結成21周年の記念日8月21日には横浜アリーナでのワンマンライブを開催します。</p>
+            <p>活動終了までの1年間、1本1本のライブ、1日1日を大切にしながら最後の瞬間まで4人の音を鳴らします。</p>
+            <p>SCANDAL FINAL TOUR 2026-2027「SCANDALの47都道府県ツアー」公演期間：2026年10月22日（木）〜2027年5月1日（土）全52公演。うち兵庫公演は2027年3月21日、加古川市民会館大ホール。</p>
+          </div>
+          <p class="continue"><a href="https://skream.jp/news/2026/08/scandal_final_tour_last_oneman.php" target="_blank" rel="noopener" lang="ja">続きを読む · Skream!</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p7">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★☆</span> <span class="chip mins">6 min</span> <span class="chip" lang="ja">AI</span> <span class="chip" lang="ja">Claude Code</span> <span class="chip" lang="ja">セキュリティ</span> <span class="chip" lang="ja">開発</span>
+          </div>
+          <h2 lang="ja">Claude Code 週間ニュース（10/4〜10/10）：Projects 開放・権限の穴塞ぎ・onFailure・Haiku 5.5</h2>
+          <p class="why">Projects liberado no Pro/Max, Haiku 5.5 barato, onFailure:block nos hooks, e patches de permissão 2.1.289–296 — checklist da semana.</p>
+          <div class="source">
+            <span lang="ja">Zenn（ずんだもんツールズ）</span>
+            <a href="https://zenn.dev/zundamon_tools/articles/claude-news-weekly-2026-10-11" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>2026年10月4日〜10日の Claude と Claude Code の更新を、Claude Code を使う開発者向けにまとめた記事です。今週の主な出来事は3つです。Claude Code Projects の Pro・Max への開放、Haiku 5.5 の公開、権限ルールの穴塞ぎです。</p>
+            <p>今週やることは次の3つです。(1) `claude update` で最新版に上げる。2.1.289〜2.1.296 で、権限ルール（deny／ask）や hooks が効かない穴の修正が続きました。(2) hooks を安全装置に使っているなら `&quot;onFailure&quot;: &quot;block&quot;` を足す。(3) Usage Policy が11月12日に変わる。</p>
+            <p>10月7日に Claude Haiku 5.5 が出ました。文脈は 1M トークン、最大出力は 128k です。プロンプト10万トークン以下なら単価は Haiku 4.5 の10分の1。公式は、複雑なエージェント型のコーディングには Sonnet 5.5 と Opus 5.5 が引き続きよい選択だと書いています。</p>
+            <p>Claude の公式アカウント @ClaudeDevs が、10月10日に投稿しました。Claude Code Projects のウェイトリストにいた Pro と Max の利用者を、全員入れたという内容です。プロジェクトは、Claude が作業を調整する続く1つの会話です。用事を伝えるとタスクごとにスレッドが立ち、並列で進みます。使える場所は claude.ai/code・デスクトップアプリ・スマホアプリです。CLI・VS Code・JetBrains からは使えません。</p>
+            <p>ほとんどのイベントで、hook が失敗・タイムアウトしても Claude Code は操作を実行します。代わりに止めるなら、`command` か `http` の hook に `&quot;onFailure&quot;: &quot;block&quot;` を置く。既定は `&quot;continue&quot;`。Requires Claude Code v2.1.295 or later。</p>
+            <p>2.1.292 の1件だけは、CHANGELOG に「Security」と明記されています。「Security: Fixed PreToolUse hook approvals and auto mode bypassing the permission prompt for file reads from network (UNC) paths」</p>
+            <p>Anthropic は 10月8日に Usage Policy の改定を発表しました。改定後のポリシーは11月12日に発効する。今回の改定の多くは、既存のルールを明確にするためのもの。利用者は、自分が作る・展開するエージェントが、ツール・ブラウザ・接続したシステムを通じて取る行動も含めて、この Usage Policy に従うようにする責任を負う。</p>
+          </div>
+          <p class="continue"><a href="https://zenn.dev/zundamon_tools/articles/claude-news-weekly-2026-10-11" target="_blank" rel="noopener" lang="ja">続きを読む · Zenn（ずんだもんツールズ）</a></p>
+        </div>
+      </article>
+
+      <footer class="site">読解幕 · 2026-10-12 · ~41 min · <a href="/japanese-digest/history/" style="color:inherit">History</a> · deliton.github.io/japanese-digest</footer>
+    </main>
+  </div>
+</body>
+</html>
