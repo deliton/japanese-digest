@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>読解幕 · 2026-10-14 · Japanese Digest</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Noto+Serif+JP:wght@400;600;700&family=Shippori+Mincho:wght@500;700&display=swap" rel="stylesheet" />
+  <style>
+
+    :root {
+      --bg: #0a0a0a;
+      --bg-2: #121212;
+      --bg-card: #161616;
+      --ink: #f5f5f5;
+      --ink-dim: #a8a29a;
+      --ink-mute: #6b6560;
+      --shu: #c41e3a;
+      --shu-hot: #e11d48;
+      --shu-deep: #8b1228;
+      --gold: #d4a017;
+      --gold-soft: #c9a227;
+      --white: #fafafa;
+      --line: #2a2a2a;
+      --line-hot: rgba(196, 30, 58, 0.45);
+      --measure: 42rem;
+      --radius: 4px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: "Noto Sans JP", "Hiragino Sans", "Yu Gothic", system-ui, sans-serif;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .stage-bar {
+      height: 6px;
+      background: repeating-linear-gradient(
+        90deg,
+        var(--shu) 0 48px,
+        var(--white) 48px 56px,
+        #111 56px 64px,
+        var(--gold) 64px 72px,
+        #111 72px 88px
+      );
+    }
+
+    .wrap {
+      width: min(100% - 2rem, 74rem);
+      margin: 0 auto;
+      padding: 2rem 0 4.5rem;
+      display: grid;
+      grid-template-columns: 15.5rem 1fr;
+      gap: 2.75rem;
+      align-items: start;
+    }
+
+    @media (max-width: 900px) {
+      .wrap { grid-template-columns: 1fr; gap: 1.5rem; padding-top: 1.25rem; }
+      .sidebar { position: static !important; }
+    }
+
+    .sidebar { position: sticky; top: 1.25rem; }
+
+    .brand {
+      display: flex;
+      align-items: baseline;
+      gap: 0.55rem;
+      margin: 0 0 0.35rem;
+    }
+    .brand-mark {
+      font-family: "Shippori Mincho", "Noto Serif JP", serif;
+      font-size: 1.85rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      color: var(--white);
+      line-height: 1;
+    }
+    .brand-mark em {
+      font-style: normal;
+      color: var(--shu);
+    }
+    .brand-sub {
+      font-size: 0.65rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-weight: 700;
+    }
+
+    .meta {
+      color: var(--ink-mute);
+      font-size: 0.8rem;
+      margin: 0 0 1.25rem;
+    }
+
+    .stat-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-bottom: 1.35rem;
+    }
+    .stat {
+      border: 1px solid var(--line);
+      background: var(--bg-2);
+      padding: 0.32rem 0.65rem;
+      font-size: 0.72rem;
+      color: var(--ink-dim);
+      border-radius: var(--radius);
+    }
+    .stat strong { color: var(--white); font-weight: 700; }
+    .stat.hot {
+      border-color: var(--shu);
+      color: var(--shu-hot);
+      background: rgba(196, 30, 58, 0.1);
+    }
+
+    .toc {
+      border: 1px solid var(--line);
+      background: var(--bg-2);
+      padding: 0.85rem 0.9rem 0.95rem;
+      border-radius: var(--radius);
+    }
+    .toc h2 {
+      margin: 0 0 0.65rem;
+      font-size: 0.72rem;
+      letter-spacing: 0.16em;
+      color: var(--gold);
+      font-weight: 800;
+    }
+    .toc ol { list-style: none; margin: 0; padding: 0; }
+    .toc li { margin: 0; }
+    .toc a {
+      display: flex;
+      justify-content: space-between;
+      gap: 0.5rem;
+      text-decoration: none;
+      color: var(--ink-dim);
+      font-size: 0.82rem;
+      padding: 0.38rem 0.2rem;
+      border-bottom: 1px solid transparent;
+    }
+    .toc a:hover { color: var(--white); border-bottom-color: var(--line-hot); }
+    .toc .t-title { font-weight: 600; }
+    .toc .t-min { color: var(--gold); font-size: 0.72rem; font-weight: 700; flex-shrink: 0; }
+
+    .main { max-width: var(--measure); }
+
+    .digest-banner {
+      display: flex;
+      gap: 0.75rem;
+      align-items: flex-start;
+      background: #141014;
+      border: 1px solid var(--line);
+      border-left: 3px solid var(--shu);
+      padding: 0.85rem 1rem;
+      margin-bottom: 1.5rem;
+      font-size: 0.78rem;
+      color: var(--ink-dim);
+      line-height: 1.55;
+    }
+    .digest-banner .tag {
+      flex-shrink: 0;
+      background: var(--shu);
+      color: #fff;
+      font-size: 0.65rem;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      padding: 0.28rem 0.5rem;
+      border-radius: var(--radius);
+    }
+
+    .hero {
+      margin-bottom: 2rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid var(--line);
+      position: relative;
+    }
+    .hero::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -1px;
+      width: 4.5rem;
+      height: 2px;
+      background: var(--shu);
+    }
+    .kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.7rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--shu-hot);
+      font-weight: 800;
+      margin-bottom: 0.85rem;
+    }
+    .kicker::before {
+      content: "◆";
+      font-size: 0.55rem;
+      color: var(--gold);
+    }
+    .hero h1 {
+      font-family: "Shippori Mincho", "Noto Serif JP", serif;
+      font-size: clamp(1.85rem, 4vw, 2.55rem);
+      font-weight: 700;
+      line-height: 1.2;
+      margin: 0 0 0.75rem;
+      color: var(--white);
+      letter-spacing: 0.02em;
+    }
+    .hero p {
+      margin: 0;
+      color: var(--ink-dim);
+      font-size: 0.98rem;
+      max-width: 36rem;
+    }
+
+    article.piece {
+      background: var(--bg-card);
+      border: 1px solid var(--line);
+      margin-bottom: 1.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+    article.piece::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: linear-gradient(90deg, var(--shu) 0%, var(--shu) 35%, var(--gold) 35%, var(--gold) 42%, transparent 42%);
+    }
+
+    .piece-inner { padding: 1.6rem 1.55rem 1.35rem; }
+
+    .piece-head {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-bottom: 0.85rem;
+    }
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      border: 1px solid var(--line);
+      background: #111;
+      color: var(--ink-dim);
+      padding: 0.22rem 0.6rem;
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      border-radius: var(--radius);
+    }
+    .chip.interest {
+      border-color: var(--shu);
+      color: var(--shu-hot);
+      background: rgba(196, 30, 58, 0.12);
+    }
+    .chip.mins {
+      border-color: var(--gold);
+      color: var(--gold);
+      background: transparent;
+    }
+
+    .piece h2 {
+      font-family: "Noto Serif JP", "Shippori Mincho", "Yu Mincho", serif;
+      font-size: 1.38rem;
+      font-weight: 700;
+      line-height: 1.5;
+      margin: 0 0 0.6rem;
+      color: var(--white);
+      letter-spacing: 0.02em;
+    }
+
+    .why {
+      margin: 0 0 1rem;
+      color: var(--ink-dim);
+      font-size: 0.9rem;
+      border-left: 2px solid var(--gold);
+      padding-left: 0.85rem;
+    }
+
+    .source {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.65rem 1.1rem;
+      font-size: 0.76rem;
+      color: var(--ink-mute);
+      margin-bottom: 1.25rem;
+    }
+    .source a {
+      color: var(--shu-hot);
+      text-decoration: none;
+      font-weight: 600;
+    }
+    .source a:hover { color: var(--gold); }
+
+    .ja {
+      font-family: "Noto Serif JP", "Hiragino Mincho ProN", "Yu Mincho", serif;
+      font-size: 1.08rem;
+      line-height: 2;
+      letter-spacing: 0.03em;
+      color: #ebe7e1;
+    }
+    .ja p { margin: 0 0 1.15em; }
+    .ja p:last-child { margin-bottom: 0; }
+
+    .continue {
+      margin-top: 1.25rem;
+      padding-top: 1rem;
+      border-top: 1px solid var(--line);
+      font-size: 0.86rem;
+    }
+    .continue a {
+      color: var(--white);
+      text-decoration: none;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      border-bottom: 2px solid var(--shu);
+      padding-bottom: 0.1rem;
+    }
+    .continue a:hover {
+      color: var(--shu-hot);
+      border-bottom-color: var(--gold);
+    }
+
+    footer.site {
+      max-width: var(--measure);
+      margin-top: 1.75rem;
+      color: var(--ink-mute);
+      font-size: 0.72rem;
+      letter-spacing: 0.06em;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+    footer.site::before {
+      content: "";
+      width: 1.25rem;
+      height: 2px;
+      background: var(--shu);
+    }
+
+  
+    .excerpt-label { font-size: 0.66rem; letter-spacing: 0.18em; color: var(--gold); font-weight: 800; margin: 0 0 0.6rem; }
+    .brand-sub a, .stat a { color: var(--gold); text-decoration: none; }
+    .toc .t-min { font-variant-numeric: tabular-nums; }
+  </style>
+</head>
+<body>
+  <div class="stage-bar" aria-hidden="true"></div>
+
+  <div class="wrap">
+    <aside class="sidebar">
+      <div class="brand">
+        <span class="brand-mark" lang="ja">読解<em>幕</em></span>
+      </div>
+      <p class="brand-sub">Kabuki Digest · <a href="/japanese-digest/history/">History</a></p>
+      <p class="meta">2026-10-14 · America/Sao_Paulo</p>
+      <div class="stat-row">
+        <span class="stat"><strong>49</strong> min</span>
+        <span class="stat"><strong>8</strong> pieces</span>
+        <span class="stat"><strong>~7,300</strong> 字</span>
+        <span class="stat"><a href="/japanese-digest/history/">History</a></span>
+      </div>
+
+      <nav class="toc" aria-label="Índice">
+        <h2 lang="ja">本日の演目</h2>
+        <ol>
+          <li>
+            <a href="#p1">
+              <span class="t-title" lang="ja">前野長康、静かな決別</span>
+              <span class="t-min">7′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p2">
+              <span class="t-title" lang="ja">チンギス・ハーンの訓戒、樹皮から</span>
+              <span class="t-min">7′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p3">
+              <span class="t-title" lang="ja">卑弥呼の時代の弔いの場</span>
+              <span class="t-min">4′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p4">
+              <span class="t-title" lang="ja">百歳が多すぎる村</span>
+              <span class="t-min">6′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p5">
+              <span class="t-title" lang="ja">坂越の船祭と秦河勝</span>
+              <span class="t-min">5′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p6">
+              <span class="t-title" lang="ja">南京町はなぜそこに？</span>
+              <span class="t-min">6′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p7">
+              <span class="t-title" lang="ja">LiSA、ロンドンの夜</span>
+              <span class="t-min">8′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p8">
+              <span class="t-title" lang="ja">Claude Code「アイドル圧縮」</span>
+              <span class="t-min">6′</span>
+            </a>
+          </li>
+        </ol>
+      </nav>
+    </aside>
+
+    <main class="main">
+      <div class="digest-banner">
+        <span class="tag">TRIAGE</span>
+        <span>2026-10-14 — Maeno Nagayasu e o seppuku no caso Hidetsugu; manuscritos em casca de bétula com conselho de Gêngis Khan (equipe da Otani); espaço funerário da era de Himiko (Shiga); NatGeo: a vila sarda dos centenários; Sakoshi Funamatsuri (Ako) e Hata no Kawakatsu; por que Nankinmachi fica onde fica; LiSA em Londres; Claude Code v2.1.299 e a ‘compactação ociosa’.</span>
+      </div>
+
+      <header class="hero">
+        <div class="kicker">Daily curated reading</div>
+        <h1 lang="ja">秀吉に背を向けた盟友の辞世と、白樺の皮に残ったチンギス・ハーンの教え、卑弥呼の時代の弔いと百歳の村、船で渡る神とロンドンの合唱をめぐる、ひと朝の読解</h1>
+        <p lang="ja">若き日の秀吉を知る男が、なぜ黙って腹を切ったのか。草原の寺の床から現れた「知恵がなければ獲物は獲れぬ」。卑弥呼の時代、死者はどこで待ったのか。百歳の写真が全員分そろう村。漂着した秦河勝を十一隻の和船が送る坂越の海。鯉川一本が分けた神戸の二つの町。ロンドンが日本語で歌った「炎」。放置したセッションを自動で畳むClaude Code。推定合計 ~49 分。</p>
+      </header>
+
+      <article class="piece" id="p1">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★★</span> <span class="chip mins">7 min</span> <span class="chip" lang="ja">豊臣</span> <span class="chip" lang="ja">秀次事件</span> <span class="chip" lang="ja">戦国</span> <span class="chip" lang="ja">辞世</span>
+          </div>
+          <h2 lang="ja">秀吉の盟友だった前野長康は、なぜ最後に命を絶ったのか？ 辞世に込められた「静かな決別」</h2>
+          <p class="why">Um dos “quatro estrategistas” de Hideyoshi, amigo desde antes da fama, é empurrado ao seppuku no caso Hidetsugu (1595). O poema de despedida pode ser uma flecha apontada ao próprio Hideyoshi.</p>
+          <div class="source">
+            <span lang="ja">草の実堂（高野晃彰）</span>
+            <a href="https://kusanomido.com/study/history/japan/azuchi/toyotomi/134751/" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>しかし半兵衛はすでに世を去っており、残る三人のうち、正勝が1586年（天正14年）5月に、秀長も1591年（天正19年）1月に亡くなると、長康一人が残されました。</p>
+            <p>そして長康も、その4年後に自害という非業の死を遂げてしまうのです。</p>
+            <p>長康の死は、豊臣秀次事件に巻き込まれたことによるものでした。</p>
+            <p>秀吉の甥で関白の座を譲られていた豊臣秀次が、1595年（文禄4年）に謀反の疑いをかけられて切腹し、その妻子や家臣までもが処罰された事件です。</p>
+            <p>そして秀次の宿老として後見人を務めていた長康も、秀次を庇ったとして、秀次の切腹の後に自害へと追い込まれるのです。</p>
+            <p>……</p>
+            <p>『武功夜話』には、死期が近い秀長を長康が見舞った際の話が残されています。</p>
+            <p>秀長は病身ゆえに自ら秀吉に諫言できない無念さを述べ、長康もまた「殿下は鶴松君（秀吉と淀殿の子）の誕生以来、古参の者を軽んじられ、淀殿側近の意見ばかり聞くようになってしまった」と嘆いたといいます。</p>
+            <p>『武功夜話』によれば、長康は文禄の役から帰国した後、老齢を理由に隠居を願い出ますが秀吉はこれを許さず、秀次の後見人として宿老を務めるよう命じました。 この役目が災いとなり、長康は破滅へと突き進んでいくのです。</p>
+            <p>……</p>
+            <p>長康は確かに関白秀次の宿老でしたが、それ以上に秀吉の盟友であり、股肱の臣でした。 いかに長康が秀次を庇ったとしても、その長康を死に追い込んだ秀吉の対応は、理不尽極まりないものといわざるをえないでしょう。</p>
+            <p>それでも長康は抗弁することなく、景定の後を追って腹を切りました。</p>
+            <p>まだ頭角を現す前、自分や正勝を頼ってきた秀吉を知っているからこそ、そのすべてに迎合し続けることも難しかったのでしょう。</p>
+            <p>そこにあったのは、秀吉に対する静かな決別であったとも考えられるのです。</p>
+            <p>……</p>
+            <p>「限りある 身にぞあづさの 弓はりて とどけ参らす 前の山々」</p>
+            <p>「人の命は限りあるものだ。この限りある我が身ではあるが、武士としての最後の意地にかけて梓弓を力の限り引き絞って、目の前にある山々に向かって、届け申し上げようではないか」というような意味でしょう。</p>
+            <p>しかし一方で、その山々とは、秀吉と新たにその側近となった人々を指しているようにも思えるのです。</p>
+            <p>この辞世に、あからさまな秀吉への抗議は感じられません。 それでも、もはや届かぬ諫言を胸に抱いたまま、その想いを込めた弓を引き絞り、秀吉のもとへ矢を放つ長康の姿が、この一首からは浮かんできます。</p>
+          </div>
+          <p class="continue"><a href="https://kusanomido.com/study/history/japan/azuchi/toyotomi/134751/" target="_blank" rel="noopener" lang="ja">続きを読む · 草の実堂（高野晃彰）</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p2">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★★</span> <span class="chip mins">7 min</span> <span class="chip" lang="ja">世界史</span> <span class="chip" lang="ja">モンゴル</span> <span class="chip" lang="ja">考古学</span> <span class="chip" lang="ja">発見</span> <span class="chip" lang="ja">写本</span>
+          </div>
+          <h2 lang="ja">モンゴル仏教史の「空白期」を埋める大発見 「チンギス・ハーンの訓戒」を記した白樺樹皮写本が出土</h2>
+          <p class="why">No chão de um templo budista “que não existe em nenhum registro”, 21 manuscritos em casca de bétula — um deles com o nome de Gêngis Khan e um conselho dele sobre caçar argali. Quem escavou foi uma equipe japonesa (Otani, Kyoto).</p>
+          <div class="source">
+            <span lang="ja">大谷大学（PR TIMES）</span>
+            <a href="https://prtimes.jp/main/html/rd/p/000000049.000101612.html" target="_blank" rel="noopener">原文を開く ↗</a> · <a href="https://www.otani.ac.jp/news/2026/ijsil1000006tvlm.html" target="_blank" rel="noopener" lang="ja">大谷大学ニュース ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>大谷大学（所在：京都市北区 学長：木越 康）の三宅伸一郎教授（研究代表者）および松川節名誉教授（調査指導）らが参加するモンゴル・日本共同調査隊は、2026年夏、モンゴル国ウブルハンガイ県オヤンガ郡にある未記録の仏教寺院跡「オロン・スム寺院址」において本格的な発掘調査を実施し、建物の床面から白樺の樹皮にモンゴル文字で書かれた写本21点を発見しました。そのうち解読が進む1点の冒頭には「チンギス・ハーン」の名が明記されており、後世の歴史書や諸写本に伝わる「チンギス・ハーンの訓戒」と酷似した文章が記されていることが判明しました。</p>
+            <p>……</p>
+            <p>モンゴルといえば草原や遊牧の暮らしのイメージが強く、「仏教」を思い浮かべる方は多くないかもしれません。しかし、モンゴルの人々と仏教の関わりは深く、13～14世紀のモンゴル帝国・元朝の時代には仏教が広く信仰されました。帝国の崩壊とともに一度は下火になりますが、16世紀後半にチベット仏教が広まり、今日のモンゴルに根づく仏教の信仰へとつながっていきます。</p>
+            <p>しかし、その間にあたる15世紀～17世紀前半は文献資料が極めて乏しく、研究者の間では史料の“暗黒期”とも呼ばれてきました。エルデネ・ゾー寺院など中心的な寺院の研究は進んでいる一方、地方の寺院がどのような姿で、どのような役割を担っていたのかは、謎に包まれたままでした。今回調査したオロン・スム寺院址は、まさにこの空白期（16世紀後半〜17世紀前半）に建立・運営されていたとみられる貴重な未記録寺院です。</p>
+            <p>……</p>
+            <p>遺跡からは約21断片の白樺樹皮写本が発見されました。松川名誉教授の解読により、保存状態のよい写本の冒頭にモンゴル文字で「チンギス・ハーン」と明記されていることが判明しました。記述内容は「知恵・方策」の重要性を説くもので、「知恵や方策がなければ身近な獲物を捕らえることも難しいが、知恵や方策があれば山にいるアルガリ（野生羊）の子を捕らえて食べることもできる」という趣旨の教えが記されています。これは17世紀の年代記『アルタン・トブチ』や、ヴィリニュス大学（リトアニア）などに所蔵される後世の写本群に伝承されてきた訓戒と極めてよく似ています。つまり、これまで後世の文献上の伝承であった訓戒が、実際の仏教寺院の床面から出土した当時の写本によって考古学的に裏付けられた点に大きな意義があります。</p>
+            <p>また、既知の文献とは用語表現に若干の違い（異文）が見られることから、新たなテキスト伝統の可能性や、なぜ仏教寺院でチンギス・ハーンの教えが伝えられていたのかなど、今後の研究進展が注目されます。</p>
+          </div>
+          <p class="continue"><a href="https://prtimes.jp/main/html/rd/p/000000049.000101612.html" target="_blank" rel="noopener" lang="ja">続きを読む · 大谷大学（PR TIMES）</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p3">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★☆</span> <span class="chip mins">4 min</span> <span class="chip" lang="ja">邪馬台国</span> <span class="chip" lang="ja">弥生</span> <span class="chip" lang="ja">考古学</span> <span class="chip" lang="ja">モガリ</span>
+          </div>
+          <h2 lang="ja">卑弥呼の時代　死者をどう弔っていたか　滋賀・笠原南遺跡で見つかった葬祭空間の謎</h2>
+          <p class="why">Época de Himiko: um espaço funerário cercado de túmulos, com poço e caixões de bebês ainda com madeira original. Pode ser um local de mogari — onde os mortos ‘esperavam’ antes do enterro.</p>
+          <div class="source">
+            <span lang="ja">産経ニュース（Infoseek）</span>
+            <a href="https://news.infoseek.co.jp/article/sankein__life_history_LNGCRWCWRVKLTKXWDCNW3VL6J4/" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>弥生人は死者をどう弔い、葬ったのか－。滋賀県守山市笠原町の笠原南遺跡で弥生時代の墓域に囲まれた独立棟持柱（むなもちばしら）付き建物跡や井戸跡が見つかり、県文化財保護協会が29日発表した。建物は遺体を安置して弔う施設だった可能性が想定でき、井戸は葬儀での大事な役割をうかがわせるという。付近からは、乳幼児の遺体を納めたと推測される木棺墓2基が当時の木材を残した状態で発見された。</p>
+            <p>……</p>
+            <p>調査では、弥生時代後期中葉～古墳時代前期の周溝墓12基（方形11基、円形1基）も見つかり、方形周溝墓4基は建物跡の三方を囲うように近接していた。</p>
+            <p>建物跡と周溝墓の間のスペースには井戸と考えられる長径3.5メートル、短径3.0メートルの掘り込みがあり、たまった湧き水を沼沢地に向けて流したとみられる幅1.2メートルの溝が延びていた。墓域に伴う井戸は遺体を清浄に保つ役割も指摘されているが、詳しいことはわかっていない。</p>
+            <p>……</p>
+            <p>調査した同協会の堀真人主幹は「前方後円墳が成立する直前の卑弥呼の時代の葬祭空間が、視覚的に明らかになった意義は大きい」と話している。</p>
+            <p>奈良県立橿原考古学研究所の森岡秀人特別指導研究員は、これらの建物では死者を長期間安置して弔う「モガリの場」や祭殿、墓域管理といった役割が複合して営まれた可能性があると指摘。「祭儀空間が墓域に接して設営され、生者と死者の関係性が貫かれていたことを示す大きな成果だ」と評価している。</p>
+            <p>……</p>
+            <p>乳幼児を埋葬したとみられる木棺墓は、独立棟持柱付き建物跡と方形周溝墓の間の狭いスペースに並んでいた。</p>
+          </div>
+          <p class="continue"><a href="https://news.infoseek.co.jp/article/sankein__life_history_LNGCRWCWRVKLTKXWDCNW3VL6J4/" target="_blank" rel="noopener" lang="ja">続きを読む · 産経ニュース（Infoseek）</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p4">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★☆</span> <span class="chip mins">6 min</span> <span class="chip" lang="ja">NatGeo</span> <span class="chip" lang="ja">長寿</span> <span class="chip" lang="ja">ブルーゾーン</span> <span class="chip" lang="ja">イタリア</span>
+          </div>
+          <h2 lang="ja">100歳まで生きる女性が異例に多い村を発見、長寿の秘訣は？</h2>
+          <p class="why">Bolotana, Sardenha: 2.300 habitantes, 6 centenários — 3x a taxa do Japão — e crescendo, enquanto outras ‘blue zones’ declinam. E dá pra verificar: a vila tem foto de cada centenário.</p>
+          <div class="source">
+            <span lang="ja">ナショナル ジオグラフィック日本版</span>
+            <a href="https://natgeo.nikkeibp.co.jp/atcl/news/26/100700548/" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>ベーコン、ブルーベリー、チョコレートをたっぷり食べること。いつも気楽に過ごし、前向きでいること。1日にたばこを40本吸うこと。100歳以上の人たちに長寿の秘訣を尋ねれば、それぞれに違った答えが返ってくる。（参考記事：「102歳、世界最高齢の現役医師が語る、長寿の秘訣のウソとホント」）</p>
+            <p>ブルーベリーが体に悪いことはなさそうだが（たばこは悪そうだ）、健康で長生きするにはどうすればよいのかという問いへの答えは、実はイタリア、サルデーニャ島のマルギネ山地の斜面にあるボロターナという小さな村に隠されているのかもしれない。</p>
+            <p>森に囲まれ、そこかしこで新鮮な水が湧き出るボロターナ。2024年の秋には人口約2300人のうち6人ほどが100歳以上だった。10万人あたりでは約260人となり、これは米国勢調査局が公表した2020年の米国の約11倍に相当する（編注：厚生労働省が2026年9月に発表した日本の100歳以上の高齢者数は10万人あたり87.51人）。</p>
+            <p>この数字に注目し、ボロターナに特別な関心を寄せているのが、ナショナル ジオグラフィックのエクスプローラー（探求者）で、長年にわたって長寿を研究してきたダン・ビュートナー氏だ。氏は、70歳以上の人が並外れて長生きする可能性が高い地域「ブルーゾーン」の研究でよく知られている。</p>
+            <p>「いくつかの指標で見ると、ボロターナは最も驚異的なブルーゾーンと言えます」とビュートナー氏は語る（編注：新たな研究論文では「ボロターナはブルーゾーンの候補とみなせる」としている）。「ほかのブルーゾーンが衰退しているのに対し、ここは勢いを増しています。つまり、100歳以上の人が毎年増えているのです」</p>
+            <p>……</p>
+            <p>「ボロターナの興味深い点は、100歳以上の人全員の写真が存在することです」とオルシャンスキー氏は言う。氏は驚くほど丁寧に管理されている村の記録をくまなく調べた。そして出生と死亡の日付を洗礼記録や婚姻記録と照合し、一人ひとりが実際に100歳に達していることを確認した。（参考記事：「長生きするならどう運動すべき？ 運動時間や強度より大切なこと」）</p>
+          </div>
+          <p class="continue"><a href="https://natgeo.nikkeibp.co.jp/atcl/news/26/100700548/" target="_blank" rel="noopener" lang="ja">続きを読む · ナショナル ジオグラフィック日本版</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p5">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★☆</span> <span class="chip mins">5 min</span> <span class="chip" lang="ja">祭り</span> <span class="chip" lang="ja">兵庫</span> <span class="chip" lang="ja">赤穂</span> <span class="chip" lang="ja">船</span> <span class="chip" lang="ja">秦氏</span>
+          </div>
+          <h2 lang="ja">坂越の船祭 — 漂着した秦河勝を鎮める、瀬戸内三大船祭り</h2>
+          <p class="why">Festival que acabou de acontecer (11/10) em Ako, Hyogo: 11 barcos de madeira levam o mikoshi ao ilhéu Ikishima, onde teria naufragado Hata no Kawakatsu, braço direito do Príncipe Shōtoku. Barcos, sal e marinheiros do século XVIII.</p>
+          <div class="source">
+            <span lang="ja">Wikipedia「坂越の船祭」／赤穂市</span>
+            <a href="https://ja.wikipedia.org/wiki/%E5%9D%82%E8%B6%8A%E3%81%AE%E8%88%B9%E7%A5%AD%E3%82%8A" target="_blank" rel="noopener">原文を開く ↗</a> · <a href="https://www.city.ako.lg.jp/sangyoshinko/kanko/hunamaturi.html" target="_blank" rel="noopener" lang="ja">赤穂市・坂越の船祭り ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>坂越の船祭（さこしのふなまつり）は、兵庫県赤穂市坂越に鎮座する大避神社の秋季例大祭で行われる船祭りである。大阪の天神祭、広島・宮島の管絃祭と並び、「瀬戸内三大船祭り」の一つに数えられる。</p>
+            <p>祭礼は毎年10月の第2日曜日（本宮）を中心に執り行われる。大避神社の祭神であり、生島に漂着したと伝わる秦河勝の霊を鎮めるための神事である。山麓にある大避神社から神輿を中心とした渡御行列が坂越の浜（海岸）まで進んだ後、行列全体が11隻の祭礼用和船に分乗して海上を渡る「船渡御」が行われるのが最大の特徴である。</p>
+            <p>江戸時代、塩の廻漕などで隆盛を極めた西播磨の廻船業者たちがこの祭礼を経済的に大きく支えた。また、船団を曳航する「櫂伝馬（かいでんま）」の漕ぎ手には、近世廻船業の発展とともに活躍した廻船の水主（かこ）たちが従事し、港町の繁栄の歴史と深く結びついて伝承されてきた歴史を持つ。</p>
+            <p>神輿が神社から海岸へ到着すると、ふんどし姿の氏子の男衆30人余りによって、長さ約7メートルの「バタ板」と呼ばれる細長い木板を担ぐ勇壮な練り回しが行われる。男衆がバタ板を持ち上げ、その上でアクロバティックに舞い踊る伝統芸能「バタカケ」が披露され、板の上からの餅まきや、まとい回し、先端でのくす玉割りなどで観衆を沸かせる。</p>
+            <p>……</p>
+            <p>日没を迎えると、船団の各船や周囲に一斉に提灯が灯される。夜の闇と坂越湾の海面に提灯の明かりが美しく浮かび上がる中、船団が浜へと還幸（帰還）する風景は非常に幻想的であるといわれる。</p>
+            <p>（赤穂市観光案内より）国の重要無形民俗文化財に指定されている坂越、大避（おおさけ）神社の祭礼「坂越の船祭（ふなまつり）」は、塩回船の港町として栄えた坂越の伝統行事。航海安全を司る大避神社で祭典が行われた後、浜辺までの参道を神輿や獅子舞が練り歩き、国の天然記念物の生島お旅所までの船渡御が開始されます。</p>
+          </div>
+          <p class="continue"><a href="https://ja.wikipedia.org/wiki/%E5%9D%82%E8%B6%8A%E3%81%AE%E8%88%B9%E7%A5%AD%E3%82%8A" target="_blank" rel="noopener" lang="ja">続きを読む · Wikipedia「坂越の船祭」／赤穂市</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p6">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★☆</span> <span class="chip mins">6 min</span> <span class="chip" lang="ja">神戸</span> <span class="chip" lang="ja">居留地</span> <span class="chip" lang="ja">南京町</span> <span class="chip" lang="ja">近代史</span>
+          </div>
+          <h2 lang="ja">【てくてく神戸】旧居留地編（５）南京町コミュニティーの形成　貿易、中国人が仲介役</h2>
+          <p class="why">Por que a Chinatown de Kobe fica exatamente ali? Chineses chegaram como intermediários dos ocidentais, mas o tratado os proibia de morar no assentamento — e o rio Koikawa virou fronteira.</p>
+          <div class="source">
+            <span lang="ja">神戸新聞NEXT（安福直剛）</span>
+            <a href="https://www.kobe-np.co.jp/news/kobe/202208/0015587552.shtml" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>旧居留地から鯉川筋を西に渡るとすぐ、南京町がある。安くておいしい中華料理を楽しめるスポットとして人気だが、欧米人が住んでいた区域のそばに中国人のコミュニティーが形成されたのは偶然ではなく、ごく自然なことなのだそう。</p>
+            <p>神戸大学名誉教授の神木哲男さんは言う。「神戸が開港し、欧米の人に雇われてお付きのような形でやって来る中国（当時は清）人が多かったんです」</p>
+            <p>列強と呼ばれる欧米諸国は１９世紀、インドや中国に次々と進出し、極東の日本にもやって来た。その過程で関わりができた中国人も一緒に日本へ。「三把刀（さんばとう）」と呼ばれる刃物を使用する職業（料理、散髪、洋服の仕立て）に就いたほか、英語が話せて漢字が書ける中国人は通訳としても重宝されたという。</p>
+            <p>「欧米人を知っているという意味では中国人の方が古い。中国は日本とも近い関係にありました。いわば仲介役のような存在ですね」</p>
+            <p>欧米の進出などで政治・経済的に厳しくなった祖国を逃れ、開港後の日本に多くの中国人がやって来た。ただ、開港当初の神戸居留地はほぼ未完成。そこで、雑居地として指定された場所に日本人と混じって欧米や中国の人が住むようになった。</p>
+            <p>やがて居留地の建物が完成すると、欧米人は居留地内で暮らしたり貿易を始めたりした。しかし中国人は条約上、居留地内に住むことを禁じられていたため、雑居地の中で最も居留地に近く、日本人もそれほど住んでいなかった現在の南京町エリアに拠点を置いたという。</p>
+            <p>「居留地に建てられた洋館の多くに使用人のための建物があったようです。そこの出入りを許された中国人は一部だと思いますが、家族や知人と共にコミュニティーをつくっていったのでしょう」</p>
+            <p>旧居留地で散策し、すぐそばの南京町で料理を楽しむ。今は当たり前にできることだが、当時、両地区の間にある鯉川（筋）は大きな境界だっただろう。</p>
+            <p>ところで現在、南京町はコミュニティーというより神戸の一大観光地になっている。なぜ形を変えたのだろうか。（安福直剛）</p>
+          </div>
+          <p class="continue"><a href="https://www.kobe-np.co.jp/news/kobe/202208/0015587552.shtml" target="_blank" rel="noopener" lang="ja">続きを読む · 神戸新聞NEXT（安福直剛）</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p7">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★☆</span> <span class="chip mins">8 min</span> <span class="chip" lang="ja">JPロック</span> <span class="chip" lang="ja">海外公演</span> <span class="chip" lang="ja">ロンドン</span> <span class="chip" lang="ja">アニソン</span>
+          </div>
+          <h2 lang="ja">LiSA、ロンドンの夜を揺るがす絶唱　夢を現実に変えたロックヒロインの矜持</h2>
+          <p class="why">Final da primeira turnê europeia de LiSA: fãs de happi e roadmen de agasalho no Troxy, cover de “Moonlight Densetsu”, e Londres cantando em coro “Homura” — em japonês.</p>
+          <div class="source">
+            <span lang="ja">Real Sound</span>
+            <a href="https://realsound.jp/2026/10/post-2552132.html" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>本稿で取り上げるのは、9月15日より全4都市を巡って開催された『LiSA LiVE is Smile Always～15～Europe &amp; UK Tour 2026』ファイナル公演の模様。どの土地も彼女の活動史上、初めてステージに立つ場所ばかり。イタリア・ミラノ、ドイツ・デュッセルドルフ、フランス・パリと順に旅するなかで、最後に訪れたのがこのイギリス・ロンドンだった。</p>
+            <p>……</p>
+            <p>この日の会場も、年代こそ20代前後を中心としながら、アニメ好きだと窺える法被を着た集団から、いかにもロンドナーらしく、上下トラックスーツのロードマンな見なりの者たちまで、本当にさまざまなファンを見かけることとなった。そもそもロンドンでは現在、日本がホットカルチャーとしてかなりのブーム。街中には抹茶カフェがそこそこ乱立しており、開演前の待機列でも東京や京都に旅行に行った話、どのアニメを観ているかなどが話題になっていたように思う。</p>
+            <p>……</p>
+            <p>まずは3曲を歌い終えてでのMCで「もぉ〜本当にロンドン？」から“Is this dream? Do you know me? wow…”（＝これって夢なの？ みんな、私のこと知ってるの？）と、日本語と英語を織り交ぜて感動をこぼすLiSA。そこから“I’ve got many song for you.”（＝あなたのために、たくさんの曲たちを用意してきました）と、イギリス英語の言い回しで期待感を膨らませてから、「ここに居るみんなで、最高に楽しんでいきましょう。ピース！」と、いつもの開幕宣言をした後、再びライブが続いていく。</p>
+            <p>本編で披露した全17曲のうち、特に記憶に色濃いのが6曲目「ムーンライト伝説」。言わずと知れたTVアニメ『美少女戦士セーラームーン』オープニングテーマだが、持ち曲豊富であるはずの彼女のワンマンライブで、まさかこんなカバーが聴けるなんて。海外公演の特別感というか、日本ではまずありえない光景すぎる。やはり、高まりは海外にある。</p>
+            <p>……</p>
+            <p>そして意外すぎたのが「炎」でシンガロングが起こったこと。本人からも“Sing together.”という煽りがあったほか、なんと前方スクリーンにローマ字表記での歌詞が投影されたのだ。正直、これにはかなり虚を突かれたというか、この楽曲には本来的に弔いの想いがこもっており、日本でのライブでは静かに聴き入るような時間を経験していた記憶がある。一方、海外ではあくまで純粋に楽曲として、全員がひとつになるために。結果、それぞれの土地で真逆のアプローチに楽曲の受け止め方が変わっていたのがとても新鮮だった。</p>
+            <p>……</p>
+            <p>「私が日本語以外のたくさんの言葉を話したいなって思うのは、あなたが日本語で歌を歌ってくれたり、“ありがとう”って伝えてくれるからです」</p>
+          </div>
+          <p class="continue"><a href="https://realsound.jp/2026/10/post-2552132.html" target="_blank" rel="noopener" lang="ja">続きを読む · Real Sound</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p8">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★☆☆</span> <span class="chip mins">6 min</span> <span class="chip" lang="ja">AI</span> <span class="chip" lang="ja">Claude Code</span> <span class="chip" lang="ja">開発</span>
+          </div>
+          <h2 lang="ja">Claude Code v2.1.299解説｜アイドル圧縮で放置キャッシュのコストを遮断</h2>
+          <p class="why">Lançado hoje: se você deixa uma sessão de 200K tokens parada ~54 min, o Claude Code compacta sozinho antes do cache expirar — evitando pagar o reprocessamento todo de manhã. E as versões 297/298 simplesmente não existem.</p>
+          <div class="source">
+            <span lang="ja">labmemo</span>
+            <a href="https://labmemo.com/claude-code-v21299-idle-compaction-wsl-sandbox-mcp-rules-2026-10/" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>Claude Codeのv2.1.299が2026年10月14日9時49分（日本時間、UTC同日0:49）にGitHub Releasesへ公開され、同17時23分（日本時間）にnpm latestタグへ配信されました（公式Release v2.1.299・当サイト確認2026-10-14）。追加16項目・修正80項目超の大型パッチで、中心はアイドル圧縮（idle compaction）の導入です。200Kトークン超の会話を約54分放置すると、1時間のプロンプトキャッシュが失効する前に自動圧縮が走り、次の1通が巨大な会話の全再処理を食わずに済みます。このほか、WSL2でサンドボックス起動が失敗する問題の修正、MCP許可ルールが類似名サーバーに波及する問題の修正、2.1.296で入ったリグレッション2件の修復など、実運用に効く変更が多数入りました。</p>
+            <p>なお、バージョン番号は296の次に297・298を飛ばして299です。npm・GitHub Releases・公式CHANGELOGのいずれにも2.1.297と2.1.298は存在せず（当サイト実測2026-10-14・タグ照会は404）、公開されたのはv2.1.296（10月9日）とv2.1.299（10月14日）の2本です。本稿では実在するv2.1.299の変更だけを扱います。</p>
+            <p>……</p>
+            <p>最大の追加はこれです。200Kトークンを超える会話を約54分間アイドル状態で放置すると、1時間で失効するプロンプトキャッシュが切れる前に自動圧縮が実行されます。従来は、朝来て前日のセッションに続けて1通送ると、キャッシュ失効後の giant な再処理（コンテキスト全体の再読み込み課金）が発生していました。アイドル圧縮は、この「放置して損をする」窓を塞ぎます。</p>
+            <p>長時間セッションを保持したまま翌日に持ち越す運用（日次ジョブの引き継ぎや、複数日がかるリファクタリング）では、圧縮のタイミングがコストに直結します。圧縮が入ると要約越しの作業になるため、コンテキスト全体を保持したい場合は無効化、コスト優先なら既定のまま、という選択になります。</p>
+          </div>
+          <p class="continue"><a href="https://labmemo.com/claude-code-v21299-idle-compaction-wsl-sandbox-mcp-rules-2026-10/" target="_blank" rel="noopener" lang="ja">続きを読む · labmemo</a></p>
+        </div>
+      </article>
+
+      <footer class="site">読解幕 · 2026-10-14 · ~49 min · <a href="/japanese-digest/history/" style="color:inherit">History</a> · deliton.github.io/japanese-digest</footer>
+    </main>
+  </div>
+</body>
+</html>
