@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>読解幕 · 2026-10-15 · Japanese Digest</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Noto+Serif+JP:wght@400;600;700&family=Shippori+Mincho:wght@500;700&display=swap" rel="stylesheet" />
+  <style>
+
+    :root {
+      --bg: #0a0a0a;
+      --bg-2: #121212;
+      --bg-card: #161616;
+      --ink: #f5f5f5;
+      --ink-dim: #a8a29a;
+      --ink-mute: #6b6560;
+      --shu: #c41e3a;
+      --shu-hot: #e11d48;
+      --shu-deep: #8b1228;
+      --gold: #d4a017;
+      --gold-soft: #c9a227;
+      --white: #fafafa;
+      --line: #2a2a2a;
+      --line-hot: rgba(196, 30, 58, 0.45);
+      --measure: 42rem;
+      --radius: 4px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: "Noto Sans JP", "Hiragino Sans", "Yu Gothic", system-ui, sans-serif;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .stage-bar {
+      height: 6px;
+      background: repeating-linear-gradient(
+        90deg,
+        var(--shu) 0 48px,
+        var(--white) 48px 56px,
+        #111 56px 64px,
+        var(--gold) 64px 72px,
+        #111 72px 88px
+      );
+    }
+
+    .wrap {
+      width: min(100% - 2rem, 74rem);
+      margin: 0 auto;
+      padding: 2rem 0 4.5rem;
+      display: grid;
+      grid-template-columns: 15.5rem 1fr;
+      gap: 2.75rem;
+      align-items: start;
+    }
+
+    @media (max-width: 900px) {
+      .wrap { grid-template-columns: 1fr; gap: 1.5rem; padding-top: 1.25rem; }
+      .sidebar { position: static !important; }
+    }
+
+    .sidebar { position: sticky; top: 1.25rem; }
+
+    .brand {
+      display: flex;
+      align-items: baseline;
+      gap: 0.55rem;
+      margin: 0 0 0.35rem;
+    }
+    .brand-mark {
+      font-family: "Shippori Mincho", "Noto Serif JP", serif;
+      font-size: 1.85rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      color: var(--white);
+      line-height: 1;
+    }
+    .brand-mark em {
+      font-style: normal;
+      color: var(--shu);
+    }
+    .brand-sub {
+      font-size: 0.65rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-weight: 700;
+    }
+
+    .meta {
+      color: var(--ink-mute);
+      font-size: 0.8rem;
+      margin: 0 0 1.25rem;
+    }
+
+    .stat-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-bottom: 1.35rem;
+    }
+    .stat {
+      border: 1px solid var(--line);
+      background: var(--bg-2);
+      padding: 0.32rem 0.65rem;
+      font-size: 0.72rem;
+      color: var(--ink-dim);
+      border-radius: var(--radius);
+    }
+    .stat strong { color: var(--white); font-weight: 700; }
+    .stat.hot {
+      border-color: var(--shu);
+      color: var(--shu-hot);
+      background: rgba(196, 30, 58, 0.1);
+    }
+
+    .toc {
+      border: 1px solid var(--line);
+      background: var(--bg-2);
+      padding: 0.85rem 0.9rem 0.95rem;
+      border-radius: var(--radius);
+    }
+    .toc h2 {
+      margin: 0 0 0.65rem;
+      font-size: 0.72rem;
+      letter-spacing: 0.16em;
+      color: var(--gold);
+      font-weight: 800;
+    }
+    .toc ol { list-style: none; margin: 0; padding: 0; }
+    .toc li { margin: 0; }
+    .toc a {
+      display: flex;
+      justify-content: space-between;
+      gap: 0.5rem;
+      text-decoration: none;
+      color: var(--ink-dim);
+      font-size: 0.82rem;
+      padding: 0.38rem 0.2rem;
+      border-bottom: 1px solid transparent;
+    }
+    .toc a:hover { color: var(--white); border-bottom-color: var(--line-hot); }
+    .toc .t-title { font-weight: 600; }
+    .toc .t-min { color: var(--gold); font-size: 0.72rem; font-weight: 700; flex-shrink: 0; }
+
+    .main { max-width: var(--measure); }
+
+    .digest-banner {
+      display: flex;
+      gap: 0.75rem;
+      align-items: flex-start;
+      background: #141014;
+      border: 1px solid var(--line);
+      border-left: 3px solid var(--shu);
+      padding: 0.85rem 1rem;
+      margin-bottom: 1.5rem;
+      font-size: 0.78rem;
+      color: var(--ink-dim);
+      line-height: 1.55;
+    }
+    .digest-banner .tag {
+      flex-shrink: 0;
+      background: var(--shu);
+      color: #fff;
+      font-size: 0.65rem;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      padding: 0.28rem 0.5rem;
+      border-radius: var(--radius);
+    }
+
+    .hero {
+      margin-bottom: 2rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid var(--line);
+      position: relative;
+    }
+    .hero::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -1px;
+      width: 4.5rem;
+      height: 2px;
+      background: var(--shu);
+    }
+    .kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.7rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--shu-hot);
+      font-weight: 800;
+      margin-bottom: 0.85rem;
+    }
+    .kicker::before {
+      content: "◆";
+      font-size: 0.55rem;
+      color: var(--gold);
+    }
+    .hero h1 {
+      font-family: "Shippori Mincho", "Noto Serif JP", serif;
+      font-size: clamp(1.85rem, 4vw, 2.55rem);
+      font-weight: 700;
+      line-height: 1.2;
+      margin: 0 0 0.75rem;
+      color: var(--white);
+      letter-spacing: 0.02em;
+    }
+    .hero p {
+      margin: 0;
+      color: var(--ink-dim);
+      font-size: 0.98rem;
+      max-width: 36rem;
+    }
+
+    article.piece {
+      background: var(--bg-card);
+      border: 1px solid var(--line);
+      margin-bottom: 1.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+    article.piece::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: linear-gradient(90deg, var(--shu) 0%, var(--shu) 35%, var(--gold) 35%, var(--gold) 42%, transparent 42%);
+    }
+
+    .piece-inner { padding: 1.6rem 1.55rem 1.35rem; }
+
+    .piece-head {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-bottom: 0.85rem;
+    }
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      border: 1px solid var(--line);
+      background: #111;
+      color: var(--ink-dim);
+      padding: 0.22rem 0.6rem;
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      border-radius: var(--radius);
+    }
+    .chip.interest {
+      border-color: var(--shu);
+      color: var(--shu-hot);
+      background: rgba(196, 30, 58, 0.12);
+    }
+    .chip.mins {
+      border-color: var(--gold);
+      color: var(--gold);
+      background: transparent;
+    }
+
+    .piece h2 {
+      font-family: "Noto Serif JP", "Shippori Mincho", "Yu Mincho", serif;
+      font-size: 1.38rem;
+      font-weight: 700;
+      line-height: 1.5;
+      margin: 0 0 0.6rem;
+      color: var(--white);
+      letter-spacing: 0.02em;
+    }
+
+    .why {
+      margin: 0 0 1rem;
+      color: var(--ink-dim);
+      font-size: 0.9rem;
+      border-left: 2px solid var(--gold);
+      padding-left: 0.85rem;
+    }
+
+    .source {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.65rem 1.1rem;
+      font-size: 0.76rem;
+      color: var(--ink-mute);
+      margin-bottom: 1.25rem;
+    }
+    .source a {
+      color: var(--shu-hot);
+      text-decoration: none;
+      font-weight: 600;
+    }
+    .source a:hover { color: var(--gold); }
+
+    .ja {
+      font-family: "Noto Serif JP", "Hiragino Mincho ProN", "Yu Mincho", serif;
+      font-size: 1.08rem;
+      line-height: 2;
+      letter-spacing: 0.03em;
+      color: #ebe7e1;
+    }
+    .ja p { margin: 0 0 1.15em; }
+    .ja p:last-child { margin-bottom: 0; }
+
+    .continue {
+      margin-top: 1.25rem;
+      padding-top: 1rem;
+      border-top: 1px solid var(--line);
+      font-size: 0.86rem;
+    }
+    .continue a {
+      color: var(--white);
+      text-decoration: none;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      border-bottom: 2px solid var(--shu);
+      padding-bottom: 0.1rem;
+    }
+    .continue a:hover {
+      color: var(--shu-hot);
+      border-bottom-color: var(--gold);
+    }
+
+    footer.site {
+      max-width: var(--measure);
+      margin-top: 1.75rem;
+      color: var(--ink-mute);
+      font-size: 0.72rem;
+      letter-spacing: 0.06em;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+    footer.site::before {
+      content: "";
+      width: 1.25rem;
+      height: 2px;
+      background: var(--shu);
+    }
+
+  
+    .excerpt-label { font-size: 0.66rem; letter-spacing: 0.18em; color: var(--gold); font-weight: 800; margin: 0 0 0.6rem; }
+    .brand-sub a, .stat a { color: var(--gold); text-decoration: none; }
+    .toc .t-min { font-variant-numeric: tabular-nums; }
+  </style>
+</head>
+<body>
+  <div class="stage-bar" aria-hidden="true"></div>
+
+  <div class="wrap">
+    <aside class="sidebar">
+      <div class="brand">
+        <span class="brand-mark" lang="ja">読解<em>幕</em></span>
+      </div>
+      <p class="brand-sub">Kabuki Digest · <a href="/japanese-digest/history/">History</a></p>
+      <p class="meta">2026-10-15 · America/Sao_Paulo</p>
+      <div class="stat-row">
+        <span class="stat"><strong>46</strong> min</span>
+        <span class="stat"><strong>8</strong> pieces</span>
+        <span class="stat"><strong>~6,200</strong> 字</span>
+        <span class="stat"><a href="/japanese-digest/history/">History</a></span>
+      </div>
+
+      <nav class="toc" aria-label="Índice">
+        <h2 lang="ja">本日の演目</h2>
+        <ol>
+          <li>
+            <a href="#p1">
+              <span class="t-title" lang="ja">田峯城、一族96人の惨殺</span>
+              <span class="t-min">7′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p2">
+              <span class="t-title" lang="ja">消えたアレクサンドロスの墓</span>
+              <span class="t-min">7′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p3">
+              <span class="t-title" lang="ja">島流しは死刑より残酷か</span>
+              <span class="t-min">6′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p4">
+              <span class="t-title" lang="ja">近江富士を望む弥生の祭殿</span>
+              <span class="t-min">5′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p5">
+              <span class="t-title" lang="ja">ラオス「死の壺」に37人</span>
+              <span class="t-min">4′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p6">
+              <span class="t-title" lang="ja">明延・運賃1円の電車</span>
+              <span class="t-min">6′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p7">
+              <span class="t-title" lang="ja">DIR EN GREY、過去を塗り替える</span>
+              <span class="t-min">5′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p8">
+              <span class="t-title" lang="ja">エージェントへの守り3つ</span>
+              <span class="t-min">6′</span>
+            </a>
+          </li>
+        </ol>
+      </nav>
+    </aside>
+
+    <main class="main">
+      <div class="digest-banner">
+        <span class="tag">TRIAGE</span>
+        <span>2026-10-15 — Massacre do clã em Damine; túmulo perdido de Alexandre; Shunkan e o exílio em Kikaigashima; templo Yayoi em Mikamiyama (Shiga); NatGeo: &#x27;pote da morte&#x27; do Plain of Jars; trem de 1 iene da mina Akenobe (Hyogo); DIR EN GREY e o self-cover; três defesas antes de pedir ao agente (Zenn).</span>
+      </div>
+
+      <header class="hero">
+        <div class="kicker">Daily curated reading</div>
+        <h1 lang="ja">一族を斬った城主と消えた大王の墓、俊寛の島と弥生の祭殿、死の石壺と一円電車をめぐる、ひと朝の読解</h1>
+        <p lang="ja">長篠の翌年、当主が自らの一族96人を斬った奥三河の地獄。ローマ皇帝も詣でたアレクサンドロスの墓は、なぜ消えたのか。俊寛が船に取り残された鬼界ヶ島。近江富士を望む弥生の巨大建物は銅鐸の祭殿か。ラオスの石壺に眠る37人。運賃1円で鉱山町を結んだ電車。DIR EN GREYが過去の曲を「再構築」する理由。エージェントに任せる前の守り3つ。推定合計 ~46 分。</p>
+      </header>
+
+      <article class="piece" id="p1">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★★</span> <span class="chip mins">7 min</span> <span class="chip" lang="ja">戦国</span> <span class="chip" lang="ja">武田</span> <span class="chip" lang="ja">奥三河</span> <span class="chip" lang="ja">長篠</span>
+          </div>
+          <h2 lang="ja">「当主が自ら一族96人惨殺」戦国史上最悪級の内輪揉め〜田峯城内乱とは</h2>
+          <p class="why">Depois de Nagashino, o senhor de Damine é barrado no próprio castelo pelos tios — e volta para matar 96 parentes. Ódio familiar, lealdade Takeda/Tokugawa e uma vingança que ainda tem &#x27;túmulo de cabeças&#x27; no mapa.</p>
+          <div class="source">
+            <span lang="ja">草の実堂（北森詩乃）</span>
+            <a href="https://kusanomido.com/study/history/japan/sengoku/127427/" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>戦国時代後期、武田氏配下であった田峯菅沼氏当主・菅沼定忠（すがぬま さだただ）は、長篠の戦いの翌年に田峯城にいた自らの一族を96人、老若男女問わず惨殺したという。</p>
+            <p>定忠はなぜ武家の当主でありながら、自らの一族を斬るという凶行に及んでしまったのだろうか。</p>
+            <p>……</p>
+            <p>1575年、長篠の戦いで武田軍が織田・徳川連合軍に惨敗し、定忠の指揮官であった山県昌景は討死した。</p>
+            <p>定忠は自軍を引き上げて退路を開き、敗走した勝頼を伴って、自らの城である田峯城に入ろうとした。</p>
+            <p>しかし定忠が田峯城を空けている間に、留守を預かっていた叔父の定直や家老の今泉道善が謀反を起こし、城門を堅く閉ざして定忠ら一行の入城を拒否したのだ。</p>
+            <p>もともと定直と道善は、定忠が武田方に与することに反対していた。</p>
+            <p>わずか数騎で敗走してきた定忠と勝頼一行は身柄を拘束されそうになり、命からがら逃げて田峯城よりさらに北にある、すでに武田の城となっていた武節城に落ち延びた。</p>
+            <p>……</p>
+            <p>しかし定忠は、実父を死に追いやり、幼い自分を傀儡として当主の座に据えたばかりか、主君を連れて逃げ帰った城主である自分を閉め出して恥をかかせた定直と道善をはじめ、田峯城に残った一族郎党に深い怨恨を抱いた。</p>
+            <p>そして定忠は報復の鬼となった。</p>
+            <p>報復を成功させるために自分が自害したという噂を流布させ、田峯城の人々が油断するよう用意周到に仕組んだと伝わる。</p>
+            <p>……</p>
+            <p>天正4年7月14日（1576年8月18日）のまだ日も上がり切らない早朝、人々が寝静まっている時間に、定忠はかつて自らの城であった田峯城を急襲した。</p>
+            <p>その日の田峯城には、謀反に加担した田峯菅沼氏の一族郎党96名がいたが、定忠は老若男女を問わずに城内にいたすべての人々をなで斬りにしたという。</p>
+            <p>特に恨みが深かった叔父の定直や家老の今泉道善は、ただ斬殺するだけでは気が済まなかったのか、生け捕りにしたのちに鋸挽きの刑に処した。</p>
+            <p>定忠は処した一族96名を、作手街道の辻で晒し首にしたと伝わる。</p>
+            <p>田峯城址の近くには今でも、定忠が一族の首を晒した「田峯城内乱の首塚」と「道善処刑の地」が残されている。</p>
+          </div>
+          <p class="continue"><a href="https://kusanomido.com/study/history/japan/sengoku/127427/" target="_blank" rel="noopener" lang="ja">続きを読む · 草の実堂（北森詩乃）</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p2">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★★</span> <span class="chip mins">7 min</span> <span class="chip" lang="ja">世界史</span> <span class="chip" lang="ja">アレクサンドロス</span> <span class="chip" lang="ja">エジプト</span> <span class="chip" lang="ja">考古学</span>
+          </div>
+          <h2 lang="ja">アレクサンドロス大王の遺体はどこへ消えたのか…誰も墓を見つけられない理由</h2>
+          <p class="why">O corpo do conquistador era um troféu político: Ptolemeu o sequestrava. Augusto visitou o túmulo. Depois o traço some — e Alexandria moderna senta em cima do mistério.</p>
+          <div class="source">
+            <span lang="ja">草の実堂</span>
+            <a href="https://kusanomido.com/sekai/130933/" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>紀元前323年、わずか32歳で急逝したアレクサンドロス大王。</p>
+            <p>史上最大級の帝国を築いた英雄ですが、その墓は2000年以上たった現在も発見されていません。</p>
+            <p>しかし、最初から墓の場所が分からなかったわけではありません。</p>
+            <p>実は古代の歴史家たちは、アレクサンドロスの遺体がどこへ運ばれ、どこに葬られたのかを記録しており、ローマ皇帝アウグストゥスが実際に墓を訪れて敬意を表したという記録まで残されています。</p>
+            <p>……</p>
+            <p>本来、遺体は歴代マケドニア王が眠る王家の墓所へ運ばれる予定でしたが、その途中で思わぬ事態が起こります。</p>
+            <p>アレクサンドロスの側近プトレマイオスが、葬列を途中で迎え、遺体を自らが支配するエジプトへ導いたのです。</p>
+            <p>当時、アレクサンドロスの遺体は単なる亡骸ではありませんでした。大王を葬るという行為そのものが、「自分こそ正統な後継者である」と内外に示す強力な政治的意味を持っていたのです。</p>
+            <p>……</p>
+            <p>紀元前1世紀末にアレクサンドリアを訪れた地理学者ストラボンは、王宮地区の一角に「セーマ（ソーマ）」と呼ばれる施設があり、そこに歴代プトレマイオス朝の王たちとアレクサンドロスの墓が置かれていたと記しています。</p>
+            <p>その墓を訪れた人物の中でも、特に有名なのが初代ローマ皇帝アウグストゥスです。</p>
+            <p>紀元前30年、エジプトを征服したアウグストゥスは、アレクサンドロスの石棺と遺体を安置所から出させ、その姿を見たうえで、金の冠を載せ、花を手向けました。</p>
+            <p>……</p>
+            <p>3世紀初頭にはローマ皇帝カラカラが墓を訪れたという記録がありますが、それ以降、墓を実際に見たという信頼できる証言はほとんど残されていません。</p>
+            <p>当時の教父ヨハネス・クリュソストモスは説教の中で、「アレクサンドロスの墓は、いったいどこにあるのか。誰かその場所を示せる者はいるのか」と問いかけ、さらに「彼自身の民でさえ、その墓を知らない」と述べています。</p>
+            <p>……</p>
+            <p>最も有力視されてきたのは、エジプト・アレクサンドリア中心部にあるナビ・ダニエル・モスク周辺です。</p>
+            <p>しかしその後の発掘調査では、アレクサンドロスの墓を裏付ける決定的な証拠は発見されていません。</p>
+            <p>その最大の理由は、古代アレクサンドリアの中心部が、そのまま現代の大都市の地下に眠っていることです。</p>
+          </div>
+          <p class="continue"><a href="https://kusanomido.com/sekai/130933/" target="_blank" rel="noopener" lang="ja">続きを読む · 草の実堂</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p3">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★★</span> <span class="chip mins">6 min</span> <span class="chip" lang="ja">日本史</span> <span class="chip" lang="ja">平安</span> <span class="chip" lang="ja">平家物語</span> <span class="chip" lang="ja">刑罰</span>
+          </div>
+          <h2 lang="ja">実は死刑よりも残酷だった「島流しの刑」 〜流人たちの過酷すぎる生活</h2>
+          <p class="why">Exílio parece &#x27;mais leve que a morte&#x27; — até Shunkan ficar sozinho em Kikaigashima enquanto o barco de perdão parte sem ele. História do castigo que vira abandono.</p>
+          <div class="source">
+            <span lang="ja">草の実堂（小森涼子）</span>
+            <a href="https://kusanomido.com/study/history/japan/98892/" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>日本史上でよく知られる「島流しの刑」。</p>
+            <p>この刑罰は、現代でいえば終身刑や無期懲役に近い部分もあるが、禁錮刑や懲役刑とは違い「追放刑」という特徴を持っている。</p>
+            <p>罪人は、それまで暮らしていた土地や生活基盤から強制的に離れさせられ、見知らぬ土地へ移住させられた。形式上はただの追放にも見えるが、実際には生易しいものではなかった。</p>
+            <p>……</p>
+            <p>平安時代の僧侶であり、後白河法皇の側近でもあった俊寛は、平氏打倒を企図した「鹿ヶ谷の陰謀」に加担したとして捕らえられ、藤原成経、平康頼とともに薩摩国の鬼界ヶ島に流された。</p>
+            <p>どうしても都に帰りたかった成経と康頼は、千本の卒塔婆に望郷の思いを込めた歌を書き記し、海へ流した。俊寛は、高僧としてのプライドもあったのか、これには参加しなかった。</p>
+            <p>やがて、その卒塔婆が安芸国厳島に流れ着き、これを目にした平清盛は恩赦を決めた。しかし、俊寛はこの恩赦の対象には含まれていなかった。</p>
+            <p>成経と康頼を迎えに来た船が鬼界ヶ島に到着すると、俊寛は自分だけが赦されていないことを知る。</p>
+            <p>彼は「せめて九州まででも」と懇願するが、船に乗ることは許されなかった。</p>
+            <p>俊寛は船が出航しても諦めず、腰まで海に浸かりながら「乗せてくれ！」としつこく頼んだ。</p>
+            <p>……</p>
+            <p>その後の俊寛の生活は凄惨を極めた。食糧を得るのもやっとで、地元の漁師に魚をわけてもらったり、海岸で海藻を拾ったりしながらなんとか食いつないだ。というのも、鬼界ヶ島では主食となる米がなかったのである。</p>
+            <p>打ちひしがれた俊寛は、深い絶望の末に断食を決意し、その後、二十三日目に餓死したのである。</p>
+            <p>……</p>
+            <p>刑罰としては「死罪より軽い」と位置付けられていた流罪であるが、実際には過酷な環境での孤独や苦痛を伴い、生きながらえること自体が試練であった。</p>
+          </div>
+          <p class="continue"><a href="https://kusanomido.com/study/history/japan/98892/" target="_blank" rel="noopener" lang="ja">続きを読む · 草の実堂（小森涼子）</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p4">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★★</span> <span class="chip mins">5 min</span> <span class="chip" lang="ja">考古学</span> <span class="chip" lang="ja">弥生</span> <span class="chip" lang="ja">銅鐸</span> <span class="chip" lang="ja">滋賀</span>
+          </div>
+          <h2 lang="ja">三上山を遥拝する銅鐸祭祀の祭殿か　滋賀・野洲の中畑・古里遺跡で近畿最大級の建物跡発見</h2>
+          <p class="why">Prédio Yayoi do tamanho de um templo, sozinho longe da aldeia, de frente para o &#x27;Fuji de Ōmi&#x27; — e a poucos passos do maior dōtaku do Japão. Candidato a santuário de bronze.</p>
+          <div class="source">
+            <span lang="ja">産経ニュース</span>
+            <a href="https://www.sankei.com/article/20260604-3OMEPZQEGBJUZEEYJG2VUN2JIY/" target="_blank" rel="noopener">原文を開く ↗</a> · <a href="https://www.asahi.com/articles/ASV641R0FV64PTJB007M.html" target="_blank" rel="noopener" lang="ja">朝日新聞 ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>近江富士と呼ばれる円錐形の三上山を間近に望む滋賀県野洲市の中畑・古里（ふるさと）遺跡で、弥生時代中期末（紀元前後）の巨大な掘っ立て柱建物跡が出土し、県文化財保護協会が4日発表した。</p>
+            <p>弥生時代の掘っ立て柱建物としては、池上曽根遺跡（大阪府和泉市）の「いずみの高殿」と並び、近畿最大級の大きさ。計24個の銅鐸が埋納された「大岩山銅鐸」の発見地に近く、三上山を拝む銅鐸祭祀の祭殿であった可能性があるという。</p>
+            <p>……</p>
+            <p>発見された建物跡は梁行7・0メートル、桁行18・0メートルで、床面積は近畿最大のいずみの高殿（133平方メートル）に匹敵する126平方メートル。</p>
+            <p>弥生時代の建物はほとんどが10～60平方メートルに収まり、100平方メートルを超えるのは吉野ケ里遺跡の「主祭殿」（156平方メートル）など全国でも約10棟のみ。</p>
+            <p>……</p>
+            <p>今回発見された建物跡では、屋根の最高所に横たわる棟木を支える棟持柱とみられる柱穴が確認された。</p>
+            <p>柱穴はいずれも楕円形で内側に向けて傾斜している。こうした柱穴は、十数棟の大型棟持柱建物によって円形祭祀空間を形成した弥生後期の伊勢遺跡（滋賀県守山市）の建物群の特徴で、「伊勢型」と呼ばれる。今回の発見はその起源を示すものとしても注目される。</p>
+            <p>……</p>
+            <p>同協会の小林裕季調査員は「建物跡の周辺では水辺の祭祀を示唆する池や土器が見つかっており、大岩山銅鐸との関連も示唆する聖域的な祭祀空間であったと想定できる」と話している。</p>
+            <p>禰冝田佳男・大阪府立弥生文化博物館長の話：「今回の建物の時期は気候の悪化などによる社会変動期にあたり、この種の建物はないと考えられてきたので、空白を埋める資料になる。三上山周辺は銅鐸の一大製作地と推定され、近畿の弥生社会を知る非常に重要な発見だ」</p>
+          </div>
+          <p class="continue"><a href="https://www.sankei.com/article/20260604-3OMEPZQEGBJUZEEYJG2VUN2JIY/" target="_blank" rel="noopener" lang="ja">続きを読む · 産経ニュース</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p5">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★★</span> <span class="chip mins">4 min</span> <span class="chip" lang="ja">NatGeo</span> <span class="chip" lang="ja">考古学</span> <span class="chip" lang="ja">ラオス</span> <span class="chip" lang="ja">葬儀</span>
+          </div>
+          <h2 lang="ja">37人の骨が入った巨大な「死の壺」、謎の石壺群の遺跡で発見</h2>
+          <p class="why">Há um século o Plain of Jars é enigma. Agora um pote de pedra guarda pelo menos 37 pessoas — ossos não cremados, organizados na borda. (Trecho JP gratuito; resto paywall.)</p>
+          <div class="source">
+            <span lang="ja">ナショナル ジオグラフィック日本版</span>
+            <a href="https://natgeo.nikkeibp.co.jp/atcl/news/26/080600433/" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>ラオス北部の高地シェンクワーン県には、世界屈指の謎に包まれた遺跡「ジャール平原の巨大石壺群」がある。</p>
+            <p>「ジャール」という名前は、この地域に点在する数百もの石の「壺（jar）」に由来する。100年近くにわたり、考古学者たちはその用途について考え続けてきた。焼かれた人骨や灰が見つかっていたことから、骨壺ではないかという説もあった。</p>
+            <p>そして今回、遺跡を調査していた研究チームが、1000年以上前のものとみられる、ひときわ巨大な石壺を発見した。中には、幼児から大人まで少なくとも37人分の人骨が入っていた。</p>
+            <p>「焼かれていない人骨が壺の中から見つかったのはこれが初めてでしたので、とても驚きました」と語るのは、オーストラリア、ジェームズクック大学の考古学者で、発見を報告した論文の筆頭著者であるニコラス・スコパル氏だ。</p>
+            <p>氏によれば、人骨は無造作に壺の中に放り込まれたものではないという。大きな骨や頭蓋骨は縁に近いところに置かれていたからだ。</p>
+            <p>……</p>
+            <p>（続きはナショナル ジオグラフィック日本版の有料ページ。原文リンクから。）</p>
+          </div>
+          <p class="continue"><a href="https://natgeo.nikkeibp.co.jp/atcl/news/26/080600433/" target="_blank" rel="noopener" lang="ja">続きを読む · ナショナル ジオグラフィック日本版</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p6">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★☆</span> <span class="chip mins">6 min</span> <span class="chip" lang="ja">兵庫</span> <span class="chip" lang="ja">鉄道</span> <span class="chip" lang="ja">鉱山</span> <span class="chip" lang="ja">産業遺産</span>
+          </div>
+          <h2 lang="ja">近代化産業遺産 明延一円電車</h2>
+          <p class="why">A maior mina de estanho da Ásia ligava Akenobe a Mikobata por um elétrico de 1 iene — 33 anos a 1¥. O túnel de 1930 ainda é o mais longo do Tajima. O &#x27;kurogane&#x27; original ainda anda.</p>
+          <div class="source">
+            <span lang="ja">養父市</span>
+            <a href="https://www.city.yabu.hyogo.jp/soshiki/sangyokankyo/shoko/1_1/2703.html" target="_blank" rel="noopener">原文を開く ↗</a> · <a href="https://www.kobe-np.co.jp/news/odekake-plus/news/detail.shtml?url=news%2Fodekake-plus%2Fnews%2Fexperience%2F202604%2F20219245" target="_blank" rel="noopener" lang="ja">神戸新聞おでかけプラス ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>明延（あけのべ）鉱山は、天平勝宝4年（西暦752年）に開眼した奈良の東大寺大仏を鋳造するための銅を献上したという伝承がある古い鉱山です。</p>
+            <p>明治42年、明延鉱山で錫の鉱脈が発見されたことから、三菱による近代鉱山としての開発が始まりました。その規模は日本一にとどまらず、アジア地域を代表する錫鉱山として大きく発展しました。昭和62年閉山時においても、なお日本の国内で産出する錫の90％を産出していました。</p>
+            <p>……</p>
+            <p>明延鉱山で採掘した鉱石は、神子畑選鉱場に輸送しました。明延鉱山では鉱石を堀り、神子畑では鉱石を細かく砕いて銅・銀・錫などの金属を分離しました。明延鉱山と神子畑選鉱場は約6kmも離れていますが、明神電車で結ばれた一つの鉱山でした。</p>
+            <p>昭和4年、全長3,937mの明神隧道（第3隧道）というトンネルが完成し、明延の出合地区と神子畑がつながりました。電車による鉱石の鉄道輸送が始まりました。</p>
+            <p>今から80年以上も昔に作られた明神電車のトンネルが、現在でも但馬地域で最も長いトンネルとなっています。</p>
+            <p>……</p>
+            <p>昭和20年になると鉱石だけではなく、人を運ぶ客車の運行が始まりました。昭和27年に一円電車切符の発行が始まり、昭和60年までの33年間、料金1円で人々を運びました。これが一円電車です。</p>
+            <p>片道30分、客車2両で定員は約40人です。料金が1円の一円電車は、明延鉱山のシンボルとして全国的に有名になりました。しかし、昭和60年11月、明延鉱山の合理化のため、一円電車の運行は終了しました。</p>
+            <p>……</p>
+            <p>平成22年10月、明延振興館前に長さ70mの一円電車の線路「一円電車明延線」が完成し、一円電車が復活しました。蓄電池機関車で客車くろがね号を牽引しています。この客車くろがね号は、明延鉱山で最後まで使われた本物の一円電車です。</p>
+          </div>
+          <p class="continue"><a href="https://www.city.yabu.hyogo.jp/soshiki/sangyokankyo/shoko/1_1/2703.html" target="_blank" rel="noopener" lang="ja">続きを読む · 養父市</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p7">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★☆</span> <span class="chip mins">5 min</span> <span class="chip" lang="ja">JPメタル</span> <span class="chip" lang="ja">DIR EN GREY</span> <span class="chip" lang="ja">ヴィジュアル系</span> <span class="chip" lang="ja">再録</span>
+          </div>
+          <h2 lang="ja">黒夢、LUNA SEA、DIR EN GREY……“セルフカバー”で向き合い、塗り替える過去の自分たち</h2>
+          <p class="why">Não é nostalgia: DIR EN GREY destrói e reconstrói as próprias músicas. De &#x27;ZAN&#x27; deathcore (2009) de volta à loucura original (2024) — o texto explica o que muda quando o passado é reescrito.</p>
+          <div class="source">
+            <span lang="ja">Real Sound（後藤寛子）</span>
+            <a href="https://realsound.jp/2026/07/post-2471724.html" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>近年、キャリアを重ねたバンドによる初期の音源を再録した作品のリリースが続いている。</p>
+            <p>再録は、アーティスト自身が過去の自分たちと向き合う作業にほかならない。そうして生み出されたものにはどんな表現が宿るのか。黒夢、LUNA SEA、DIR EN GREYの楽曲から、“再録”の奥深さを紐解く。</p>
+            <p>……</p>
+            <p>独自のスタンスで再録に向き合っているのが、DIR EN GREYだ。再録というより、彼らの手法は“再構築”と呼んだほうがいいかもしれない。</p>
+            <p>曲によってアプローチはさまざまだが、オリジナルのテーマや個性は残しつつ、曲構成そのものを一度破壊し、メロディや歌詞、フレーズから展開まで変わったものもある。自分たちの作品を自ら塗り替えてしまう大胆さは、さすがDIR EN GREYと言ったところだ。</p>
+            <p>……</p>
+            <p>2024年、メジャーデビューから25周年を記念して発表されたシングル『19900120』では、1999年に3枚同時リリースで話題を集めた「ゆらめき」「残 -ZAN-」「アクロの丘」が再録された。</p>
+            <p>特に興味深いのは「残 -ZAN-」。この曲は、2009年のシングル『激しさと、この胸の中で絡み付いた灼熱の闇』のカップリングとして再構築された際、ダウンチューニングや京（Vo）のグロウルにより、エクストリームメタル／デスコアに近い緻密さと極悪さをもって一度生まれ変わった。</p>
+            <p>2024年版は、むしろ原曲に回帰。メンバーそれぞれが鍛え上げた音の重みや説得力でアプローチした結果、原曲の変態的な個性をあらためて味わえるのが面白い。</p>
+            <p>2009年より柔軟かつ多彩になった京のボーカルは、初期の荒々しさも取り込んでさらに鬼気迫る仕上がりに。叙情的な歌唱力を堪能できる「ゆらめき」「アクロの丘」と合わせて聴くと、その表現の幅広さに驚かされるはずだ。</p>
+          </div>
+          <p class="continue"><a href="https://realsound.jp/2026/07/post-2471724.html" target="_blank" rel="noopener" lang="ja">続きを読む · Real Sound（後藤寛子）</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p8">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★☆</span> <span class="chip mins">6 min</span> <span class="chip" lang="ja">AI</span> <span class="chip" lang="ja">Claude Code</span> <span class="chip" lang="ja">Cursor</span> <span class="chip" lang="ja">セキュリティ</span>
+          </div>
+          <h2 lang="ja">エージェントに任せる前の守り3つ｜読ませない・戻せる・入れる前に見る</h2>
+          <p class="why">Escrever &#x27;não leia o .env&#x27; no prompt não basta. Deny no Claude, .cursorignore no Cursor, /rewind e um pipe de git diff — o que para e o que ainda fura.</p>
+          <div class="source">
+            <span lang="ja">Zenn（masafumi_ai）</span>
+            <a href="https://zenn.dev/masafumi_ai/articles/00005-agent-guards-before-request" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>依頼の3行を書いても、エージェントが `.env` を開けるなら、禁止は気持ちのままだ。壊れた変更を戻す手と、入れる前に見る手も、依頼の前に決めておく。ここでは、その設定側の守りを3つに絞る。</p>
+            <p>……</p>
+            <p>守りは3つで足りる。</p>
+            <p>読ませない: Claude Code は `permissions.deny`、Cursor は `.cursorignore`</p>
+            <p>戻せる: Claude Code の `/rewind` → Restore code</p>
+            <p>入れる前に見る: `git diff HEAD | claude -p` の1行</p>
+            <p>どれも「全部を止める」設定ではない。止まるものと止まらないものが決まっている。</p>
+            <p>……</p>
+            <p>Claude Code の公式ドキュメントも、プロンプトや `CLAUDE.md` の指示は Claude が何をしようとするかを形づくるだけで、許可されることは変えない、と書いている。止めるのは設定のほうだ。</p>
+            <p>……</p>
+            <p>Claude Code では、作業ディレクトリ内のファイル読み取りは、既定で確認なしに通る。調査を頼むと、組み込みの Read ツールで `.env` が開くことがある。</p>
+            <p>`.claude/settings.json` に deny を足す。deny は allow より先に評価されるので、ほかの allow ルールで穴は開かない。</p>
+            <p>止まるもの：組み込みの Read ツールで `./.env` を開く、Bash の `cat .env`、`head`、`tail`、`sed`、`&lt; .env` の入力リダイレクト。</p>
+            <p>止まらないもの：ファイル名を書かない `grep -r`、自分でファイルを開くスクリプト。</p>
+            <p>……</p>
+            <p>Cursor は、`.env*` と `.gitignore` に入れたファイルを自動で無視する。逆に言うと、gitignore していない `secrets/` のようなフォルダは対象外だ。</p>
+            <p>ターミナルと MCP が止まらないのは、公式ドキュメントに明記されている。本物のシークレットは、そもそもリポジトリに置かない。</p>
+            <p>……</p>
+            <p>今日やるなら、いま開いているリポジトリに deny の2行を足す。Cursor を使うなら、gitignore していない秘密フォルダを `.cursorignore` に1行書く。次のコミットの前に、`git diff HEAD | claude -p` を1回だけ流す。</p>
+          </div>
+          <p class="continue"><a href="https://zenn.dev/masafumi_ai/articles/00005-agent-guards-before-request" target="_blank" rel="noopener" lang="ja">続きを読む · Zenn（masafumi_ai）</a></p>
+        </div>
+      </article>
+
+      <footer class="site">読解幕 · 2026-10-15 · ~46 min · <a href="/japanese-digest/history/" style="color:inherit">History</a> · deliton.github.io/japanese-digest</footer>
+    </main>
+  </div>
+</body>
+</html>
