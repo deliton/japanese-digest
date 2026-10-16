@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>読解幕 · 2026-10-16 · Japanese Digest</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Noto+Serif+JP:wght@400;600;700&family=Shippori+Mincho:wght@500;700&display=swap" rel="stylesheet" />
+  <style>
+
+    :root {
+      --bg: #0a0a0a;
+      --bg-2: #121212;
+      --bg-card: #161616;
+      --ink: #f5f5f5;
+      --ink-dim: #a8a29a;
+      --ink-mute: #6b6560;
+      --shu: #c41e3a;
+      --shu-hot: #e11d48;
+      --shu-deep: #8b1228;
+      --gold: #d4a017;
+      --gold-soft: #c9a227;
+      --white: #fafafa;
+      --line: #2a2a2a;
+      --line-hot: rgba(196, 30, 58, 0.45);
+      --measure: 42rem;
+      --radius: 4px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: "Noto Sans JP", "Hiragino Sans", "Yu Gothic", system-ui, sans-serif;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .stage-bar {
+      height: 6px;
+      background: repeating-linear-gradient(
+        90deg,
+        var(--shu) 0 48px,
+        var(--white) 48px 56px,
+        #111 56px 64px,
+        var(--gold) 64px 72px,
+        #111 72px 88px
+      );
+    }
+
+    .wrap {
+      width: min(100% - 2rem, 74rem);
+      margin: 0 auto;
+      padding: 2rem 0 4.5rem;
+      display: grid;
+      grid-template-columns: 15.5rem 1fr;
+      gap: 2.75rem;
+      align-items: start;
+    }
+
+    @media (max-width: 900px) {
+      .wrap { grid-template-columns: 1fr; gap: 1.5rem; padding-top: 1.25rem; }
+      .sidebar { position: static !important; }
+    }
+
+    .sidebar { position: sticky; top: 1.25rem; }
+
+    .brand {
+      display: flex;
+      align-items: baseline;
+      gap: 0.55rem;
+      margin: 0 0 0.35rem;
+    }
+    .brand-mark {
+      font-family: "Shippori Mincho", "Noto Serif JP", serif;
+      font-size: 1.85rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      color: var(--white);
+      line-height: 1;
+    }
+    .brand-mark em {
+      font-style: normal;
+      color: var(--shu);
+    }
+    .brand-sub {
+      font-size: 0.65rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-weight: 700;
+    }
+
+    .meta {
+      color: var(--ink-mute);
+      font-size: 0.8rem;
+      margin: 0 0 1.25rem;
+    }
+
+    .stat-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-bottom: 1.35rem;
+    }
+    .stat {
+      border: 1px solid var(--line);
+      background: var(--bg-2);
+      padding: 0.32rem 0.65rem;
+      font-size: 0.72rem;
+      color: var(--ink-dim);
+      border-radius: var(--radius);
+    }
+    .stat strong { color: var(--white); font-weight: 700; }
+    .stat.hot {
+      border-color: var(--shu);
+      color: var(--shu-hot);
+      background: rgba(196, 30, 58, 0.1);
+    }
+
+    .toc {
+      border: 1px solid var(--line);
+      background: var(--bg-2);
+      padding: 0.85rem 0.9rem 0.95rem;
+      border-radius: var(--radius);
+    }
+    .toc h2 {
+      margin: 0 0 0.65rem;
+      font-size: 0.72rem;
+      letter-spacing: 0.16em;
+      color: var(--gold);
+      font-weight: 800;
+    }
+    .toc ol { list-style: none; margin: 0; padding: 0; }
+    .toc li { margin: 0; }
+    .toc a {
+      display: flex;
+      justify-content: space-between;
+      gap: 0.5rem;
+      text-decoration: none;
+      color: var(--ink-dim);
+      font-size: 0.82rem;
+      padding: 0.38rem 0.2rem;
+      border-bottom: 1px solid transparent;
+    }
+    .toc a:hover { color: var(--white); border-bottom-color: var(--line-hot); }
+    .toc .t-title { font-weight: 600; }
+    .toc .t-min { color: var(--gold); font-size: 0.72rem; font-weight: 700; flex-shrink: 0; }
+
+    .main { max-width: var(--measure); }
+
+    .digest-banner {
+      display: flex;
+      gap: 0.75rem;
+      align-items: flex-start;
+      background: #141014;
+      border: 1px solid var(--line);
+      border-left: 3px solid var(--shu);
+      padding: 0.85rem 1rem;
+      margin-bottom: 1.5rem;
+      font-size: 0.78rem;
+      color: var(--ink-dim);
+      line-height: 1.55;
+    }
+    .digest-banner .tag {
+      flex-shrink: 0;
+      background: var(--shu);
+      color: #fff;
+      font-size: 0.65rem;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      padding: 0.28rem 0.5rem;
+      border-radius: var(--radius);
+    }
+
+    .hero {
+      margin-bottom: 2rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid var(--line);
+      position: relative;
+    }
+    .hero::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -1px;
+      width: 4.5rem;
+      height: 2px;
+      background: var(--shu);
+    }
+    .kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.7rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--shu-hot);
+      font-weight: 800;
+      margin-bottom: 0.85rem;
+    }
+    .kicker::before {
+      content: "◆";
+      font-size: 0.55rem;
+      color: var(--gold);
+    }
+    .hero h1 {
+      font-family: "Shippori Mincho", "Noto Serif JP", serif;
+      font-size: clamp(1.85rem, 4vw, 2.55rem);
+      font-weight: 700;
+      line-height: 1.2;
+      margin: 0 0 0.75rem;
+      color: var(--white);
+      letter-spacing: 0.02em;
+    }
+    .hero p {
+      margin: 0;
+      color: var(--ink-dim);
+      font-size: 0.98rem;
+      max-width: 36rem;
+    }
+
+    article.piece {
+      background: var(--bg-card);
+      border: 1px solid var(--line);
+      margin-bottom: 1.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+    article.piece::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: linear-gradient(90deg, var(--shu) 0%, var(--shu) 35%, var(--gold) 35%, var(--gold) 42%, transparent 42%);
+    }
+
+    .piece-inner { padding: 1.6rem 1.55rem 1.35rem; }
+
+    .piece-head {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-bottom: 0.85rem;
+    }
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      border: 1px solid var(--line);
+      background: #111;
+      color: var(--ink-dim);
+      padding: 0.22rem 0.6rem;
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      border-radius: var(--radius);
+    }
+    .chip.interest {
+      border-color: var(--shu);
+      color: var(--shu-hot);
+      background: rgba(196, 30, 58, 0.12);
+    }
+    .chip.mins {
+      border-color: var(--gold);
+      color: var(--gold);
+      background: transparent;
+    }
+
+    .piece h2 {
+      font-family: "Noto Serif JP", "Shippori Mincho", "Yu Mincho", serif;
+      font-size: 1.38rem;
+      font-weight: 700;
+      line-height: 1.5;
+      margin: 0 0 0.6rem;
+      color: var(--white);
+      letter-spacing: 0.02em;
+    }
+
+    .why {
+      margin: 0 0 1rem;
+      color: var(--ink-dim);
+      font-size: 0.9rem;
+      border-left: 2px solid var(--gold);
+      padding-left: 0.85rem;
+    }
+
+    .source {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.65rem 1.1rem;
+      font-size: 0.76rem;
+      color: var(--ink-mute);
+      margin-bottom: 1.25rem;
+    }
+    .source a {
+      color: var(--shu-hot);
+      text-decoration: none;
+      font-weight: 600;
+    }
+    .source a:hover { color: var(--gold); }
+
+    .ja {
+      font-family: "Noto Serif JP", "Hiragino Mincho ProN", "Yu Mincho", serif;
+      font-size: 1.08rem;
+      line-height: 2;
+      letter-spacing: 0.03em;
+      color: #ebe7e1;
+    }
+    .ja p { margin: 0 0 1.15em; }
+    .ja p:last-child { margin-bottom: 0; }
+
+    .continue {
+      margin-top: 1.25rem;
+      padding-top: 1rem;
+      border-top: 1px solid var(--line);
+      font-size: 0.86rem;
+    }
+    .continue a {
+      color: var(--white);
+      text-decoration: none;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      border-bottom: 2px solid var(--shu);
+      padding-bottom: 0.1rem;
+    }
+    .continue a:hover {
+      color: var(--shu-hot);
+      border-bottom-color: var(--gold);
+    }
+
+    footer.site {
+      max-width: var(--measure);
+      margin-top: 1.75rem;
+      color: var(--ink-mute);
+      font-size: 0.72rem;
+      letter-spacing: 0.06em;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+    footer.site::before {
+      content: "";
+      width: 1.25rem;
+      height: 2px;
+      background: var(--shu);
+    }
+
+  
+    .excerpt-label { font-size: 0.66rem; letter-spacing: 0.18em; color: var(--gold); font-weight: 800; margin: 0 0 0.6rem; }
+    .brand-sub a, .stat a { color: var(--gold); text-decoration: none; }
+    .toc .t-min { font-variant-numeric: tabular-nums; }
+  </style>
+</head>
+<body>
+  <div class="stage-bar" aria-hidden="true"></div>
+
+  <div class="wrap">
+    <aside class="sidebar">
+      <div class="brand">
+        <span class="brand-mark" lang="ja">読解<em>幕</em></span>
+      </div>
+      <p class="brand-sub">Kabuki Digest · <a href="/japanese-digest/history/">History</a></p>
+      <p class="meta">2026-10-16 · America/Sao_Paulo</p>
+      <div class="stat-row">
+        <span class="stat"><strong>44</strong> min</span>
+        <span class="stat"><strong>8</strong> pieces</span>
+        <span class="stat"><strong>~7,900</strong> 字</span>
+        <span class="stat"><a href="/japanese-digest/history/">History</a></span>
+      </div>
+
+      <nav class="toc" aria-label="Índice">
+        <h2 lang="ja">本日の演目</h2>
+        <ol>
+          <li>
+            <a href="#p1">
+              <span class="t-title" lang="ja">鳥取城、史上最悪の渇え殺し</span>
+              <span class="t-min">7′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p2">
+              <span class="t-title" lang="ja">福島正則、なぜ家康に付いたか</span>
+              <span class="t-min">6′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p3">
+              <span class="t-title" lang="ja">弁慶は実在したのか</span>
+              <span class="t-min">5′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p4">
+              <span class="t-title" lang="ja">ヴァルダロの恋人たち</span>
+              <span class="t-min">6′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p5">
+              <span class="t-title" lang="ja">消えたヒッタイト帝国</span>
+              <span class="t-min">6′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p6">
+              <span class="t-title" lang="ja">神鉄デ101、100周年へ復元</span>
+              <span class="t-min">4′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p7">
+              <span class="t-title" lang="ja">BAND-MAID、『ENERGETIC』と小休止</span>
+              <span class="t-min">5′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p8">
+              <span class="t-title" lang="ja">MCPがCursorで壊れる理由</span>
+              <span class="t-min">5′</span>
+            </a>
+          </li>
+        </ol>
+      </nav>
+    </aside>
+
+    <main class="main">
+      <div class="digest-banner">
+        <span class="tag">TRIAGE</span>
+        <span>2026-10-16 — Cerco da fome em Tottori; Fukushima Masanori e o cálculo de Sekigahara; Benkei mito vs Heike; amantes de Valdaro (6 mil anos); NatGeo: império hitita que sumiu; restauração do De101 da Shintetsu (Kobe); BAND-MAID ENERGETIC e pausa; MCP quebra no Cursor por excesso de tools (Zenn).</span>
+      </div>
+
+      <header class="hero">
+        <div class="kicker">Daily curated reading</div>
+        <h1 lang="ja">鳥取の渇え殺しと関ヶ原の計算、弁慶の実像と抱擁の骨、消えたヒッタイトと神鉄の古車、BAND-MAIDとMCPツール数をめぐる、ひと朝の読解</h1>
+        <p lang="ja">秀吉が米を買い占め、城兵が備蓄を売った鳥取の渇え殺し。豊臣子飼いが東軍の先陣を切った関ヶ原の冷徹な計算。平家物語では「パシリ」、勧進帳は義経記の産物——弁慶の実像。抱き合う6000年前の骨。ラメセスと互角だったヒッタイトが消えた理由。鈴蘭台でよみがえる神鉄デ101。踊って進むBAND-MAIDと、MCPがCursorで壊れる「ツール数」の話。推定合計 ~44 分。</p>
+      </header>
+
+      <article class="piece" id="p1">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★★</span> <span class="chip mins">7 min</span> <span class="chip" lang="ja">戦国</span> <span class="chip" lang="ja">秀吉</span> <span class="chip" lang="ja">鳥取城</span> <span class="chip" lang="ja">毛利</span>
+          </div>
+          <h2 lang="ja">【戦国史上最悪の籠城戦】 秀吉の鳥取城渇え殺し 〜「死肉を奪い合う城兵たち」</h2>
+          <p class="why">Hideyoshi compra o arroz da região antes do cerco — e a guarnição vende a própria reserva. Depois, fome, carne humana e morte por &#x27;refeeding&#x27; quando chega o mingau. Cerco mais cruel do Sengoku.</p>
+          <div class="source">
+            <span lang="ja">草の実堂（figaro）</span>
+            <a href="https://kusanomido.com/study/history/japan/sengoku/67994/" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>戦国一の出世頭といえば豊臣秀吉ですが、彼は城攻めに長けており生涯多くの敵城を攻め落としています。</p>
+            <p>その中で有名なものと言えば「備中高松城の水攻め」、「播磨三木城の干し殺し」、そして今回紹介する「因幡鳥取城の渇え殺し（かつえごろし）」です。</p>
+            <p>上記の3つの城攻めは「秀吉三大城攻め」と呼ばれており、3つ全て敵方を包囲して長期戦に持ち込む戦い方なのですが、当然包囲された側は物資が尽きると食うや食わずの状況となり、城内は地獄絵図と変貌してしまいます。</p>
+            <p>……</p>
+            <p>こうして援軍の総大将を任せられた経家でしたが、籠城側劣勢の情報は伝わっており、経家は出陣の際に自らの首桶を持参して鳥取城に向かったとされています。</p>
+            <p>1581年（天正9年）2月（3月か？）、無事に鳥取城に入城した経家でしたが、鳥取城の兵力は援軍を合わせて約4000人ほど。さっそく経家は鳥取城の防備に取り掛かるのですが、ここで思いもよらぬ事態が発覚します。</p>
+            <p>食料である兵糧の蓄えが残り僅か3カ月ほどしかなかったのです…。</p>
+            <p>……</p>
+            <p>秀吉は安定しない因幡の情勢を鑑みて、吉川経家らが入城する前年の年末から因幡国中の米を高額な値で買い集めていたのです。さらに、この値段につられて鳥取城の兵士らが密かに備蓄米を秀吉軍に売却していたというので、たまったものではありません。</p>
+            <p>1581年（天正9年）6月、経家の予想を上回る速さで秀吉率いる2万の軍勢が到着。</p>
+            <p>秀吉はさっそく鳥取城を包囲すると陸路から海路に至る全ての道を封鎖し、毛利の援軍を寄せ付けません。</p>
+            <p>……</p>
+            <p>餓鬼のように痩せ衰えた男女たちは、柵際へ寄ってもだえ苦しみながら「ここから助けてくれ」「出してくれ」と叫んだ。その悲しみと哀れなる様子は、目も当てられなかった。秀吉の軍は柵に寄せる者をことごとく鉄砲で撃ち殺した。</p>
+            <p>鉄砲で傷を負った者の周りに飢えた者たちが群がり、ナタなどの刃物を手にして手足の関節をバラしその肉を剥がして喰い始めた。特に頭部が美味と見られ、餓鬼どもは首を奪い合い、取った者は首を抱えてその場から逃げ出した。</p>
+            <p>……</p>
+            <p>鳥取城を攻略した秀吉は飢餓に陥った城内の者たちに大釜で粥を炊いて、彼らに振る舞いました。それを見た生き残った城内の者たちは粥に群がり、今までの空腹を満たすため一気に粥を口に流し込みました。</p>
+            <p>すると、どうしたことか粥を食べていた者たちは一斉に苦しみ始め、ほとんどが息絶えてしまったのです。</p>
+            <p>この症状は「リフィーディング症候群」と呼ばれるもので飢餓状態にある低栄養患者が，栄養を急に摂取することで水，電解質分布の異常を引き起こす病態の総称であり，心停止を含む重篤な致命的合併症を起こす症状です。</p>
+          </div>
+          <p class="continue"><a href="https://kusanomido.com/study/history/japan/sengoku/67994/" target="_blank" rel="noopener" lang="ja">続きを読む · 草の実堂（figaro）</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p2">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★★</span> <span class="chip mins">6 min</span> <span class="chip" lang="ja">安土桃山</span> <span class="chip" lang="ja">関ヶ原</span> <span class="chip" lang="ja">豊臣</span> <span class="chip" lang="ja">徳川</span>
+          </div>
+          <h2 lang="ja">福島正則はなぜ家康に付いたのか？ 関ヶ原の裏にあった冷徹な計算とは</h2>
+          <p class="why">Filhote de Hideyoshi que abre o caminho do Exército Leste — não só ódio a Mitsunari. Casamento com a casa Tokugawa, fúria por vanguarda, e o cálculo frio de quem sobrevive ao fim do regime.</p>
+          <div class="source">
+            <span lang="ja">草の実堂</span>
+            <a href="https://kusanomido.com/study/history/japan/azuchi/107828/" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>天下の行方を決した「関ヶ原の戦い」。</p>
+            <p>この決戦の渦中にあって、ひと際激しく槍を振るい、東軍の先陣を切った武将がいた。</p>
+            <p>福島正則である。</p>
+            <p>豊臣秀吉に若くして見出された「子飼い」の将でありながら、彼は豊臣家に背を向け、徳川家康の旗のもとに立った。</p>
+            <p>その決断は、単なる感情論では片づけられない。なぜ、正則は東軍についたのか。</p>
+            <p>そこには、時代の裂け目を生き抜く武将としての、冷徹な計算と覚悟があった。</p>
+            <p>……</p>
+            <p>特に天正11年（1583年）の賤ヶ岳の戦いでは、一番槍・一番首の戦功を立て、賤ヶ岳七本槍の筆頭格として名を馳せる。 ここで他の七本槍が三千石の加増にとどまったのに対し、正則には五千石が与えられたことからも、その戦功の厚遇ぶりがうかがえる。</p>
+            <p>……</p>
+            <p>まず知られるのが、いわゆる「石田三成襲撃事件」である。</p>
+            <p>これは慶長4年（1599年）、福島正則・加藤清正・黒田長政ら武断派の有力大名が、石田三成に対して武力行使に出た事件であった。</p>
+            <p>背景には朝鮮出兵中の補給や指揮を巡る積年の不満があったとされ、とくに蔚山城の戦いに関わった加藤清正・黒田長政らの怒りが火種となったとされる。</p>
+            <p>この後、正則は自らの養子・福島正之を徳川家康の養女と婚姻させている。 豊臣政権下では大名間の私的な婚姻は禁じられていたが、この縁組は家康の後押しによるものであり、ここに至って正則は家康寄りの立場を明確にしていくことになる。</p>
+            <p>……</p>
+            <p>よく知られるのは、家康が「大坂に残してきた妻子のもとに帰るのも構わぬ」と諸将に告げると、正則が真っ先に立ち上がり「内府殿にお味方いたす」と宣言し、これに他の武将も次々と続いた、という逸話である。</p>
+            <p>これが「東軍」形成の契機となったとされ、ドラマなどでも繰り返し描かれてきた。 しかし実のところ、この劇的な場面は一次史料には確認できず、後世の創作の可能性が高いとみられている。</p>
+            <p>……</p>
+            <p>正則は行政手腕にも優れ、領国経営でも成果を挙げた実績を持つ。 性格は直情的な面が知られるものの、決して思慮に欠ける武断一辺倒の人物ではなかった。 豊臣政権内で三成の政治手腕を間近に見ていたからこそ、家康の方が今後の安定した政権運営を担えると判断していた可能性もある。</p>
+            <p>福島正則は勇猛果敢な武将として語られることが多いが、その決断の裏には、家の存続と政局を見据えた冷静な計算があったと言えるだろう。</p>
+          </div>
+          <p class="continue"><a href="https://kusanomido.com/study/history/japan/azuchi/107828/" target="_blank" rel="noopener" lang="ja">続きを読む · 草の実堂</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p3">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★☆</span> <span class="chip mins">5 min</span> <span class="chip" lang="ja">平安</span> <span class="chip" lang="ja">義経</span> <span class="chip" lang="ja">平家物語</span> <span class="chip" lang="ja">伝説</span>
+          </div>
+          <h2 lang="ja">武蔵坊弁慶は実在したのかどうか調べてみた</h2>
+          <p class="why">No Heike Monogatari Benkei é só mais um nome na tropa; a ponte de Gojō, o &#x27;standing death&#x27; e o Kanjinchō vêm do Gikeiki. Demyth: o monge gigante que conhecemos é literatura.</p>
+          <div class="source">
+            <span lang="ja">草の実堂（武蔵大納言）</span>
+            <a href="https://kusanomido.com/study/history/japan/heian/18426/" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>源義経の相棒といえば武蔵坊弁慶と決まっている。だが、当の義経についてのイメージの多くが伝説に依拠した部分も多いという。ならば、この弁慶の存在自体も虚構なのではないかという疑念が湧く。果たして、武蔵坊弁慶は実在の人物であったかのかどうか、調査を行った。</p>
+            <p>……</p>
+            <p>武蔵坊弁慶の名が「平家物語」の標準的テキストである「覚一本」に初めて登場するのは、巻九「三草勢揃」である。</p>
+            <p>一の谷の合戦に向かう義経勢の中のひとりとして名前が確認できる。</p>
+            <p>また行動をともなった一人物として描かれるのは巻九「老馬」が最初である。</p>
+            <p>この地の道案内のできる老人を探して出して連れて来るという役割を担っている。</p>
+            <p>ただしこの部分は「平家物語」の最古態を残すといわれている「延慶本」では弁慶は登場せず、義経の陣の前を通りかかった五十歳ほどの男を「枝ノ源三」（えだのげんぞう）に呼び止めさせるという記述になっている。</p>
+            <p>……</p>
+            <p>「平家物語」における弁慶は「軍勢の中のひとり」の扱いであり、役割を与えられとしても「呼び出し係（パシリ？）」程度のものに過ぎないのである。</p>
+            <p>とはいえ、「平家物語」が歴史的事実に立脚して作成された物語である以上、ここに名が記されている限りは、「武蔵坊弁慶という人物の実在が、ある程度保証される」とはいえるだろう。</p>
+            <p>……</p>
+            <p>実は現代の日本人の描く弁慶のイメージの多くは「義経記」の記述に依拠したものである。</p>
+            <p>この「義経記」の中に、義経と弁慶が五条大橋で出会う場面の原型がみられる。</p>
+            <p>「義経記」では五条大橋ではなく、五条天神となっているが、まさにこれは五条大橋での戦いの原型である。なお、決戦場所を五条大橋とする作品に、御伽草子「弁慶物語」がある。</p>
+            <p>……</p>
+            <p>また世にいう「立ち往生」についても「義経記」で見ることができる。仁王立ちになっている弁慶が既に息絶えていたことが、馬に当たって倒れてしまうことで判明する場面である。</p>
+            <p>さらに「如意の渡り」の場面。これは、「渡し守に同行の者が義経であると見破られそうになり、弁慶が扇で義経を殴り倒す」という場面である。</p>
+            <p>これこそが、のちに謡曲「安宅」、歌舞伎「勧進帳」の原型となる場面である。</p>
+          </div>
+          <p class="continue"><a href="https://kusanomido.com/study/history/japan/heian/18426/" target="_blank" rel="noopener" lang="ja">続きを読む · 草の実堂（武蔵大納言）</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p4">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★★</span> <span class="chip mins">6 min</span> <span class="chip" lang="ja">世界史</span> <span class="chip" lang="ja">考古学</span> <span class="chip" lang="ja">新石器</span> <span class="chip" lang="ja">イタリア</span>
+          </div>
+          <h2 lang="ja">約6000年前、抱き合うように埋葬された男女「ヴァルダロの恋人たち」とは</h2>
+          <p class="why">Casal neolítico abraçado há 6000 anos, achado às vésperas do Dia dos Namorados. Sem feridas fatais, só oferendas de sílex — e a pergunta: amor, ritual, ou só flexão funerária?</p>
+          <div class="source">
+            <span lang="ja">草の実堂（北森詩乃）</span>
+            <a href="https://kusanomido.com/sekai/131060/" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>およそ6000年前、新石器時代に埋葬されたと考えられる「ヴァルダロの恋人たち」は、互いに抱き合うように腕と足を絡め合う状態のまま白骨化した、男女一組の遺骨だ。</p>
+            <p>……</p>
+            <p>2007年2月、間もなくバレンタインデーを迎えるという時期に、イタリアの考古学者エレナ・マリア・メノッティが指揮するチームの手によって「ヴァルダロの恋人たち」は発掘された。</p>
+            <p>発掘された場所は、イタリア・ロンバルディア州マントヴァ郊外、現在のサン・ジョルジョ・ビガレッロ市にあるヴァルダロ地区の墓地遺跡だ。</p>
+            <p>発見された2体の遺骨は触れ合うほどの近さで顔を向かい合わせ、腕はお互いを抱き合うように、脚は折り曲げられ絡ませるような形で埋葬されていた。</p>
+            <p>詳しい調査の結果、2体の遺骨は約6000年前の男女のもので、女性は16～20歳、男性は18～22歳ほど、身長はいずれも約157cmだったと推定された。</p>
+            <p>男性の首の辺りにあった燧石(すいせき、火打石)製の矢じり、女性の大腿部あたりに1本、骨盤の下にあった2本の燧石製のナイフは、2体の遺骨に致命的な傷や骨折の痕跡が見つからなかったため、副葬品の可能性が高いとされた。</p>
+            <p>……</p>
+            <p>新石器時代や日本の縄文時代では、遺体は手足を折り曲げた状態の「屈葬」という形式で埋葬されることが多かった。</p>
+            <p>屈葬が行われた理由には諸説あるが、その1つとして胎児と同じ体勢を取らせることにより、魂の再生や死者の生まれ変わりを願ったともいわれる。</p>
+            <p>……</p>
+            <p>「ヴァルダロの恋人たち」の姿勢は、2体一組として見れば脚を絡ませ合っているように見えるが、1体ずつを見れば屈葬のようにも見える。</p>
+            <p>6000年前に死んだ「ヴァルダロの恋人たち」が、本来はどのような関係で、どのような理由で命を落とし、2人一組で埋葬されたのかはわからない。</p>
+            <p>だが少なくとも2人を埋葬した人々は、2人の死後の安寧を願っていたのではないだろうか。</p>
+            <p>……</p>
+            <p>6000年の時を経て再び人々の目に触れることになった「ヴァルダロの恋人たち」は、2011年9月、マントヴァ国立考古学博物館で初めて一般公開された。</p>
+            <p>その後、2014年4月11日からは、世界遺産に登録されたマントヴァのドゥカーレ宮殿複合施設内にあるマントヴァ国立考古学博物館で、ガラスケースに収められて常設展示されるようになった。</p>
+          </div>
+          <p class="continue"><a href="https://kusanomido.com/sekai/131060/" target="_blank" rel="noopener" lang="ja">続きを読む · 草の実堂（北森詩乃）</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p5">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★★</span> <span class="chip mins">6 min</span> <span class="chip" lang="ja">NatGeo</span> <span class="chip" lang="ja">世界史</span> <span class="chip" lang="ja">アナトリア</span> <span class="chip" lang="ja">考古学</span>
+          </div>
+          <h2 lang="ja">ヒッタイト　突然姿を消して忘れられた謎多き古代帝国</h2>
+          <p class="why">Império que empatou com Ramsés em Kadesh e sumiu por completo por volta de 1180 a.C. Egito e Assíria ficaram; os hititas viraram mistério até as tábuas de Hattusa.</p>
+          <div class="source">
+            <span lang="ja">ナショナル ジオグラフィック日本版</span>
+            <a href="https://natgeo.nikkeibp.co.jp/atcl/news/25/041600203/" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>現在のトルコとその周辺に洗練された都市群を築いたヒッタイト帝国。あるとき歴史から姿を消し、数千年にわたって忘れ去られていた。しかし近年、新たな発見が相次ぎ、謎めいた古代帝国の伝説がよみがえろうとしている。</p>
+            <p>現在のトルコ中部に位置する険しい丘陵地帯に築かれた、ヒッタイト帝国の都ハットゥシャ。この都市を最盛期に見た人々は、深い畏敬の念を抱いたに違いない。日干しれんがの高い壁に囲まれ、7000人の人口を擁し、広大な神殿群や、数キロ先からも見える立派な石造りの城壁を備えていた。だが今、この丘は謎に包まれている。</p>
+            <p>宮殿や神殿の跡を示す柱や高い壁は残っておらず、枯れ草に半分覆われた石の土台が残るのみだ。都市への入り口となる門はいくつか現存し、ライオンやスフィンクス、斧（おの）を持った神の像によって守られている。だが都を囲っていた日干しれんがの壁は、数百年のうちに崩れ去った。そして洪水や雪解け水による浸食が進むと、大量の粘土板を収めた建物は斜面の下へ押し流されてしまった。権勢を誇ったヒッタイトの人々に何が起きたのか。それを知る手がかりはさらに乏しい。それでもこの失われた帝国については、以前よりもはるかに多くのことが明らかになりつつある。</p>
+            <p>……</p>
+            <p>ヒッタイト人は紀元前1180年頃、こつぜんと姿を消した。このような消え方は歴史上、ほとんど例がない。彼らは少なくとも450年間にわたり、現在のトルコとその周辺に領土をもち、その勢力範囲は黒海の沿岸近くから、メソポタミアや地中海まで及んでいた。彼らはアナトリア半島の険しい土地に洗練された都市を築き、見事な神殿や宮殿を建設した。そして楔（くさび）形文字で書き記した膨大な数の粘土板を残した。そのなかには数多くの古代語や、神聖な儀式に関する記述が含まれている。ヒッタイトの王たちは、自国から遠く離れた土地につながる交易路の恩恵を受けていた。その軍隊はメソポタミアの奥深くまで侵攻したこともある。そして「カデシュの戦い」においてエジプトのラメセス2世と戦い、世界で初めて平和条約を結んだ。</p>
+            <p>「ヒッタイト人はエジプト人と互角に戦い、バビロニア人やアッシリア人からは対等な相手として扱われていました」と、ハットゥシャの遺跡で100年近く発掘を続けるドイツ考古学研究所に在籍するアンドレアス・シャハナーは話す。それなのに「エジプト人やアッシリア人は歴史に残りましたが、ヒッタイト人は完全に消えてしまったのです」。</p>
+            <p>……</p>
+            <p>ヒッタイトの存在が認識されたのは、それから3000年後、古代エジプトの神殿でレリーフや粘土板に書かれた外交文書が発見されたときのことだ。そこから各国の研究者によるヒッタイトの都探しが始まった。ハットゥシャは当初から注目されていたが、20世紀初頭に楔形文字で書かれた大量の粘土板が発見され、ハットゥシャが都であるという説が裏づけられた。</p>
+            <p>続々と発見される遺物から、研究者はこの帝国で営まれていた生活に関する豊かな記録を集めていった。王室内のもめ事や宗教儀式、さらには犬を殺した場合の適切な処罰など、ありとあらゆる事柄に関する詳しい知識が蓄積されてきた。だが、帝国崩壊の原因については、今も謎のままだ。強大な力を誇ったヒッタイトはいったいどのようにして跡形もなく消えたのか。</p>
+          </div>
+          <p class="continue"><a href="https://natgeo.nikkeibp.co.jp/atcl/news/25/041600203/" target="_blank" rel="noopener" lang="ja">続きを読む · ナショナル ジオグラフィック日本版</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p6">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★☆</span> <span class="chip mins">4 min</span> <span class="chip" lang="ja">神戸</span> <span class="chip" lang="ja">兵庫</span> <span class="chip" lang="ja">鉄道</span> <span class="chip" lang="ja">神鉄</span>
+          </div>
+          <h2 lang="ja">神戸電鉄草創期の車両「デ101」、開業100周年へ復元着々　兵庫の愛好家らがネットで資金調達「完全な姿に」</h2>
+          <p class="why">Carro de 1929 que ia para sucata; fãs de Hyogo crowdfundam portas de madeira, janelas de queda e farol traseiro. Metade pronta — meta: 100 anos da Shintetsu em 2028.</p>
+          <div class="source">
+            <span lang="ja">神戸新聞NEXT</span>
+            <a href="https://www.kobe-np.co.jp/news/economy/202507/0019173785.shtml" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>２０２８年の神戸電鉄（神戸市兵庫区）開業１００周年に向け、同社の草創期を支えた車両の復元作業が進んでいる。兵庫県内の鉄道愛好家グループが、昭和初期から残る全国でも貴重な存在として保存を働きかけ、インターネットで資金を調達。茶色の輝きを取り戻した４年前に続き、今春、側面などの木製の窓や乗降扉を復元し、９６年前の外観がよみがえった。関係者は「１００周年には完全な姿に戻したい」と意気込んでいる。</p>
+            <p>神鉄が神戸有馬電気鉄道として開業した翌年の１９２９（昭和４）年に造られた車両「デ１０１」。７１年まで沿線住民らの足として活躍した後、鈴蘭台車庫（同市北区）で検査車両を出し入れするけん引車として２０１６年まで役目を果たした。老朽化で解体予定だったが、社内外から保存を求める声が上がり、愛好家らが神鉄に協力を申し出た。</p>
+            <p>……</p>
+            <p>愛好家らは１８年に「デ１０１まもり隊」を結成。クラウドファンディング（ＣＦ）で資金を集め、神鉄に修繕を託すプロジェクトを始めた。２１年に穴が開いていた外装を補修し、製造当時と同じ茶色で全面的に再塗装を実施。２３～２４年にもＣＦを行ったほか、追加の寄付も加わり、今年３月に２度目の工事が完了した。</p>
+            <p>今回は正面と側面の片方ずつを修繕し、けん引車となる際に鉄板で埋められた乗客用の扉を復元。ホームとの隙間を解消するために設けられたステップもよみがえらせた。上から下に開く木製の「落とし窓」や、車両後部を赤い光で示すテールライトも復元した。</p>
+            <p>「やっと半分。写真でしか見たことのなかった現役時代の姿に、全国の皆さんの力で復元でき感無量」と同隊の事務局代表、米倉裕一郎さん（５９）＝神戸市兵庫区。今後車両の見学会を開く予定で、「戦争や震災、解体を乗り越えてきた車両。残る部分の復元に向け、さらに動きを進めたい」と話す。</p>
+          </div>
+          <p class="continue"><a href="https://www.kobe-np.co.jp/news/economy/202507/0019173785.shtml" target="_blank" rel="noopener" lang="ja">続きを読む · 神戸新聞NEXT</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p7">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★★</span> <span class="chip mins">5 min</span> <span class="chip" lang="ja">JPロック</span> <span class="chip" lang="ja">BAND-MAID</span> <span class="chip" lang="ja">武道館</span> <span class="chip" lang="ja">ハードロック</span>
+          </div>
+          <h2 lang="ja">いざ、闘いの日々を踊り尽くせ！ BAND-MAID、最新シングル『ENERGETIC』と「その先」への想いをすべて語る</h2>
+          <p class="why">Antes da pausa de okyuji em 2027 e do Budokan 2-days: single dançante com soca, snare afinado baixo, e a mensagem &#x27;não paramos — avançamos&#x27;. Banda preferida, ângulo fresco.</p>
+          <div class="source">
+            <span lang="ja">rockinon.com</span>
+            <a href="https://rockinon.com/interview/detail/215456" target="_blank" rel="noopener">原文を開く ↗</a> · <a href="https://www.billboard-japan.com/special/detail/5367" target="_blank" rel="noopener" lang="ja">Billboard JAPAN ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>ハードロックで「世界征服」を、という超弩級の闘いに真っ向勝負で挑み続ける BAND-MAIDのひたむきな姿勢は、そのままタフでソリッドなビートの疾走感に直結してきたし、それ自体がバンドの揺るぎないアティチュードの証明でもあった。が、最新シングル表題曲“ENERGETIC”は、5人がより大局的な視線で自分たちの「その先」を見据えていることを克明に伝えている。</p>
+            <p>ラテン系のリズムを取り入れた重量級のリズムで描き出す、大地ごと揺さぶるようなダンサブルな躍動感。《足掻きもがいて 楽しむんだ／踊りな Your life》というリリックとともに、闘いの日々を丸ごとリスナー／オーディエンスとともに踊り尽くそうとする強靭な意志──。2027年度はお給仕（ライブ）活動を小休止することを発表しているBAND-MAIDだが、その先に控えている結成15周年のアニバーサリーイヤーを見据えた5人の覚悟が、“ENERGETIC”はもちろんのこと、カップリング曲“Days”“CAGE”も含め今作の3曲からダイレクトに伝わってくる。</p>
+            <p>……</p>
+            <p>KANAMI（G） この曲はもう、踊らせたい！と思って。2026年、武道館までみんなを巻き込んで、踊らせていきたいって──エネルギーを爆発させて、お給仕でより完成させていくような楽曲にしたいなと思って。</p>
+            <p>……</p>
+            <p>小鳩 そうですっぽね。最初から「踊れる曲を」っていうイメージを聞いていたので、《踊りな》とか、一緒にテンションが上がるような歌詞にしようと思って書き始めましたっぽね。私たちはこの曲を持ってツアーを回るっていうのと、来年はお給仕活動が少し──みなさんと会う機会がお休みっていうことも発表していたので、「私たちは止まるわけじゃなくて、もっともっと先に進むんだよ」って意思表示を歌詞に入れたいなと。</p>
+            <p>……</p>
+            <p>SAIKI（Vo） 「いつまで経っても止まらないから、ちょっと心配してた」って（笑）。</p>
+            <p>小鳩 「むしろちょっと休んでほしかった」みたいな声もあったっぽね。</p>
+            <p>SAIKI 結成15周年を控えているし、そういうことを考えた時に、より長くBAND-MAIDを続けるために、今この選択を取らせてもらった、っていうことですね。</p>
+            <p>……</p>
+            <p>KANAMI 今はインプットがあまりできてなくて、とにかくアウト、アウト、アウト！だから。一旦吸収をさせてもらったうえで、15周年に新しい方法でお給仕をやりたいなって。</p>
+            <p>小鳩 制作が止まることは、私たちの中ではないし、直接目の前でお給仕っていう機会がちょこっとだけないっていうだけで、他は何も変わらずやっていくつもりですっぽ。</p>
+          </div>
+          <p class="continue"><a href="https://rockinon.com/interview/detail/215456" target="_blank" rel="noopener" lang="ja">続きを読む · rockinon.com</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p8">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★☆</span> <span class="chip mins">5 min</span> <span class="chip" lang="ja">AI</span> <span class="chip" lang="ja">Cursor</span> <span class="chip" lang="ja">MCP</span> <span class="chip" lang="ja">Claude</span>
+          </div>
+          <h2 lang="ja">Claude Code で動く MCP が Cursor で動かない原因は「ツール数」だった</h2>
+          <p class="why">Mesmo MCP: Claude Code ok, Cursor confunde. Causa não era &#x27;Cursor ruim&#x27; — eram 8 tools. Uniu em 3 (≤5, sem nomes parecidos) e estabilizou em todos os clientes. Ângulo novo vs. posts Claude recentes.</p>
+          <div class="source">
+            <span lang="ja">Zenn（kanseilink）</span>
+            <a href="https://zenn.dev/kanseilink/articles/linksee-memory-v07-3tool-unification-20260529" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>自作の MCP サーバーを Claude Code に入れて、快適に使っていた。ところが同じサーバーを Cursor に入れた途端、挙動がおかしくなる。</p>
+            <p>ツールを呼んでくれない／間違ったツールを使う／パラメータの渡し方がおかしい</p>
+            <p>同じ MCP サーバー、同じ設定ファイル。なのに Claude Code では動くのに Cursor で不安定。「Cursor の MCP 対応がまだ甘いのか？」と思って放置していた。</p>
+            <p>3 ヶ月追いかけて分かった原因は、もっとシンプルだった。ツールが多すぎた。</p>
+            <p>……</p>
+            <p>LLM がツールを使うとき、内部で「どのツールを、どのパラメータで呼ぶか」を推論している。この推論精度は、選択肢の数が増えるほど下がる。</p>
+            <p>Claude Code (Opus) の場合、SKILL.md でツールの使い方を詳しく教え込める。8 ツールあっても、各ツールの使い分けルールを書いておけば正しく選べる。</p>
+            <p>でも Cursor (Sonnet) や Codex ではそこまでのガイダンスを注入できない。</p>
+            <p>……</p>
+            <p>v0.6 まで 8 つのツールがあった：remember / update_memory / forget / recall / recall_file / list_entities / consolidate / read_smart</p>
+            <p>v0.7 で 3 ツールに統合したら、全クライアントで安定した。</p>
+            <p>……</p>
+            <p>自分の MCP にも使える設計原則：①ツールは 5 個以下を目指す ②似た名前のツールを作らない（recall と recall_file は LLM には曖昧）③「Claude Code で動く」≠「どこでも動く」——SKILL.md 依存は Claude Code 専用になってしまう。</p>
+            <p>MCP が Claude Code で動くのに Cursor で不安定なら、ツール数を疑う。LLM の tool selection 精度はツール数に反比例する。</p>
+          </div>
+          <p class="continue"><a href="https://zenn.dev/kanseilink/articles/linksee-memory-v07-3tool-unification-20260529" target="_blank" rel="noopener" lang="ja">続きを読む · Zenn（kanseilink）</a></p>
+        </div>
+      </article>
+
+      <footer class="site">読解幕 · 2026-10-16 · ~44 min · <a href="/japanese-digest/history/" style="color:inherit">History</a> · deliton.github.io/japanese-digest</footer>
+    </main>
+  </div>
+</body>
+</html>
