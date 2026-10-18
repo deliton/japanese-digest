@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>読解幕 · 2026-10-18 · Japanese Digest</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Noto+Serif+JP:wght@400;600;700&family=Shippori+Mincho:wght@500;700&display=swap" rel="stylesheet" />
+  <style>
+
+    :root {
+      --bg: #0a0a0a;
+      --bg-2: #121212;
+      --bg-card: #161616;
+      --ink: #f5f5f5;
+      --ink-dim: #a8a29a;
+      --ink-mute: #6b6560;
+      --shu: #c41e3a;
+      --shu-hot: #e11d48;
+      --shu-deep: #8b1228;
+      --gold: #d4a017;
+      --gold-soft: #c9a227;
+      --white: #fafafa;
+      --line: #2a2a2a;
+      --line-hot: rgba(196, 30, 58, 0.45);
+      --measure: 42rem;
+      --radius: 4px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: "Noto Sans JP", "Hiragino Sans", "Yu Gothic", system-ui, sans-serif;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .stage-bar {
+      height: 6px;
+      background: repeating-linear-gradient(
+        90deg,
+        var(--shu) 0 48px,
+        var(--white) 48px 56px,
+        #111 56px 64px,
+        var(--gold) 64px 72px,
+        #111 72px 88px
+      );
+    }
+
+    .wrap {
+      width: min(100% - 2rem, 74rem);
+      margin: 0 auto;
+      padding: 2rem 0 4.5rem;
+      display: grid;
+      grid-template-columns: 15.5rem 1fr;
+      gap: 2.75rem;
+      align-items: start;
+    }
+
+    @media (max-width: 900px) {
+      .wrap { grid-template-columns: 1fr; gap: 1.5rem; padding-top: 1.25rem; }
+      .sidebar { position: static !important; }
+    }
+
+    .sidebar { position: sticky; top: 1.25rem; }
+
+    .brand {
+      display: flex;
+      align-items: baseline;
+      gap: 0.55rem;
+      margin: 0 0 0.35rem;
+    }
+    .brand-mark {
+      font-family: "Shippori Mincho", "Noto Serif JP", serif;
+      font-size: 1.85rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      color: var(--white);
+      line-height: 1;
+    }
+    .brand-mark em {
+      font-style: normal;
+      color: var(--shu);
+    }
+    .brand-sub {
+      font-size: 0.65rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-weight: 700;
+    }
+
+    .meta {
+      color: var(--ink-mute);
+      font-size: 0.8rem;
+      margin: 0 0 1.25rem;
+    }
+
+    .stat-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-bottom: 1.35rem;
+    }
+    .stat {
+      border: 1px solid var(--line);
+      background: var(--bg-2);
+      padding: 0.32rem 0.65rem;
+      font-size: 0.72rem;
+      color: var(--ink-dim);
+      border-radius: var(--radius);
+    }
+    .stat strong { color: var(--white); font-weight: 700; }
+    .stat.hot {
+      border-color: var(--shu);
+      color: var(--shu-hot);
+      background: rgba(196, 30, 58, 0.1);
+    }
+
+    .toc {
+      border: 1px solid var(--line);
+      background: var(--bg-2);
+      padding: 0.85rem 0.9rem 0.95rem;
+      border-radius: var(--radius);
+    }
+    .toc h2 {
+      margin: 0 0 0.65rem;
+      font-size: 0.72rem;
+      letter-spacing: 0.16em;
+      color: var(--gold);
+      font-weight: 800;
+    }
+    .toc ol { list-style: none; margin: 0; padding: 0; }
+    .toc li { margin: 0; }
+    .toc a {
+      display: flex;
+      justify-content: space-between;
+      gap: 0.5rem;
+      text-decoration: none;
+      color: var(--ink-dim);
+      font-size: 0.82rem;
+      padding: 0.38rem 0.2rem;
+      border-bottom: 1px solid transparent;
+    }
+    .toc a:hover { color: var(--white); border-bottom-color: var(--line-hot); }
+    .toc .t-title { font-weight: 600; }
+    .toc .t-min { color: var(--gold); font-size: 0.72rem; font-weight: 700; flex-shrink: 0; }
+
+    .main { max-width: var(--measure); }
+
+    .digest-banner {
+      display: flex;
+      gap: 0.75rem;
+      align-items: flex-start;
+      background: #141014;
+      border: 1px solid var(--line);
+      border-left: 3px solid var(--shu);
+      padding: 0.85rem 1rem;
+      margin-bottom: 1.5rem;
+      font-size: 0.78rem;
+      color: var(--ink-dim);
+      line-height: 1.55;
+    }
+    .digest-banner .tag {
+      flex-shrink: 0;
+      background: var(--shu);
+      color: #fff;
+      font-size: 0.65rem;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      padding: 0.28rem 0.5rem;
+      border-radius: var(--radius);
+    }
+
+    .hero {
+      margin-bottom: 2rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid var(--line);
+      position: relative;
+    }
+    .hero::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -1px;
+      width: 4.5rem;
+      height: 2px;
+      background: var(--shu);
+    }
+    .kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.7rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--shu-hot);
+      font-weight: 800;
+      margin-bottom: 0.85rem;
+    }
+    .kicker::before {
+      content: "◆";
+      font-size: 0.55rem;
+      color: var(--gold);
+    }
+    .hero h1 {
+      font-family: "Shippori Mincho", "Noto Serif JP", serif;
+      font-size: clamp(1.85rem, 4vw, 2.55rem);
+      font-weight: 700;
+      line-height: 1.2;
+      margin: 0 0 0.75rem;
+      color: var(--white);
+      letter-spacing: 0.02em;
+    }
+    .hero p {
+      margin: 0;
+      color: var(--ink-dim);
+      font-size: 0.98rem;
+      max-width: 36rem;
+    }
+
+    article.piece {
+      background: var(--bg-card);
+      border: 1px solid var(--line);
+      margin-bottom: 1.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+    article.piece::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: linear-gradient(90deg, var(--shu) 0%, var(--shu) 35%, var(--gold) 35%, var(--gold) 42%, transparent 42%);
+    }
+
+    .piece-inner { padding: 1.6rem 1.55rem 1.35rem; }
+
+    .piece-head {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-bottom: 0.85rem;
+    }
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      border: 1px solid var(--line);
+      background: #111;
+      color: var(--ink-dim);
+      padding: 0.22rem 0.6rem;
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      border-radius: var(--radius);
+    }
+    .chip.interest {
+      border-color: var(--shu);
+      color: var(--shu-hot);
+      background: rgba(196, 30, 58, 0.12);
+    }
+    .chip.mins {
+      border-color: var(--gold);
+      color: var(--gold);
+      background: transparent;
+    }
+
+    .piece h2 {
+      font-family: "Noto Serif JP", "Shippori Mincho", "Yu Mincho", serif;
+      font-size: 1.38rem;
+      font-weight: 700;
+      line-height: 1.5;
+      margin: 0 0 0.6rem;
+      color: var(--white);
+      letter-spacing: 0.02em;
+    }
+
+    .why {
+      margin: 0 0 1rem;
+      color: var(--ink-dim);
+      font-size: 0.9rem;
+      border-left: 2px solid var(--gold);
+      padding-left: 0.85rem;
+    }
+
+    .source {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.65rem 1.1rem;
+      font-size: 0.76rem;
+      color: var(--ink-mute);
+      margin-bottom: 1.25rem;
+    }
+    .source a {
+      color: var(--shu-hot);
+      text-decoration: none;
+      font-weight: 600;
+    }
+    .source a:hover { color: var(--gold); }
+
+    .ja {
+      font-family: "Noto Serif JP", "Hiragino Mincho ProN", "Yu Mincho", serif;
+      font-size: 1.08rem;
+      line-height: 2;
+      letter-spacing: 0.03em;
+      color: #ebe7e1;
+    }
+    .ja p { margin: 0 0 1.15em; }
+    .ja p:last-child { margin-bottom: 0; }
+
+    .continue {
+      margin-top: 1.25rem;
+      padding-top: 1rem;
+      border-top: 1px solid var(--line);
+      font-size: 0.86rem;
+    }
+    .continue a {
+      color: var(--white);
+      text-decoration: none;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      border-bottom: 2px solid var(--shu);
+      padding-bottom: 0.1rem;
+    }
+    .continue a:hover {
+      color: var(--shu-hot);
+      border-bottom-color: var(--gold);
+    }
+
+    footer.site {
+      max-width: var(--measure);
+      margin-top: 1.75rem;
+      color: var(--ink-mute);
+      font-size: 0.72rem;
+      letter-spacing: 0.06em;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+    footer.site::before {
+      content: "";
+      width: 1.25rem;
+      height: 2px;
+      background: var(--shu);
+    }
+
+  
+    .excerpt-label { font-size: 0.66rem; letter-spacing: 0.18em; color: var(--gold); font-weight: 800; margin: 0 0 0.6rem; }
+    .brand-sub a, .stat a { color: var(--gold); text-decoration: none; }
+    .toc .t-min { font-variant-numeric: tabular-nums; }
+  </style>
+</head>
+<body>
+  <div class="stage-bar" aria-hidden="true"></div>
+
+  <div class="wrap">
+    <aside class="sidebar">
+      <div class="brand">
+        <span class="brand-mark" lang="ja">読解<em>幕</em></span>
+      </div>
+      <p class="brand-sub">Kabuki Digest · <a href="/japanese-digest/history/">History</a></p>
+      <p class="meta">2026-10-18 · America/Sao_Paulo</p>
+      <div class="stat-row">
+        <span class="stat"><strong>46</strong> min</span>
+        <span class="stat"><strong>10</strong> pieces</span>
+        <span class="stat"><strong>~6,400</strong> 字</span>
+        <span class="stat"><a href="/japanese-digest/history/">History</a></span>
+      </div>
+
+      <nav class="toc" aria-label="Índice">
+        <h2 lang="ja">本日の演目</h2>
+        <ol>
+          <li>
+            <a href="#p1">
+              <span class="t-title" lang="ja">畠山重忠、四時間の最期</span>
+              <span class="t-min">7′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p2">
+              <span class="t-title" lang="ja">日本人傭兵とアンボイナ事件</span>
+              <span class="t-min">7′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p3">
+              <span class="t-title" lang="ja">飛行場に追われた古墳、80年ぶりの開封</span>
+              <span class="t-min">4′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p4">
+              <span class="t-title" lang="ja">「鼻削ぎ刑」、初めての人骨</span>
+              <span class="t-min">6′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p5">
+              <span class="t-title" lang="ja">嘘の科学——プリンストンの偽学生</span>
+              <span class="t-min">4′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p6">
+              <span class="t-title" lang="ja">死んだ子ゾウを運ぶ母</span>
+              <span class="t-min">4′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p7">
+              <span class="t-title" lang="ja">白川郷、雪の中で仕込む神の酒</span>
+              <span class="t-min">4′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p8">
+              <span class="t-title" lang="ja">神鉄有馬線を掘った人々</span>
+              <span class="t-min">3′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p9">
+              <span class="t-title" lang="ja">レディクレ、SCANDALとAimerが年末の大阪へ</span>
+              <span class="t-min">2′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p10">
+              <span class="t-title" lang="ja">APIのないサービスをClaude Codeに触らせる</span>
+              <span class="t-min">5′</span>
+            </a>
+          </li>
+        </ol>
+      </nav>
+    </aside>
+
+    <main class="main">
+      <div class="digest-banner">
+        <span class="tag">TRIAGE</span>
+        <span>2026-10-18 — Hatakeyama Shigetada e as 4 horas finais; mercenários japoneses em Amboina (1623); kofun “mudados” em miniatura por causa de um aeródromo (Saga); 1º esqueleto com o castigo do nariz cortado (China); NatGeo: ciência da mentira e a elefanta que carrega filhotes mortos; doburoku de Shirakawa-gō; os coreanos que abriram a linha Arima do Shintetsu; RADIO CRAZY com SCANDAL/Aimer; Claude Code operando sites sem API.</span>
+      </div>
+
+      <header class="hero">
+        <div class="kicker">Daily curated reading</div>
+        <h1 lang="ja">濡れ衣の名将と海を渡った浪人、飛行場に追われた古墳と鼻を削がれた女、嘘つきの新入生と子ゾウを運ぶ母、雪の中の神酒と有馬線のつるはし——ひと朝の読解</h1>
+        <p lang="ja">謀叛の濡れ衣を晴らすため、134騎で北条の大軍に挑んだ畠山重忠の四時間。家康の平和で職を失った浪人は、香辛料戦争の傭兵として海を渡った。戦時中、飛行場のために七分の一に縮めて移された古墳の箱が80年ぶりに開き、元代の墓からは鼻を削がれた女性がうつ伏せで現れる。プリンストンの偽学生と、我が子を失ったゾウ。雪の中で仕込む白川郷の神酒、有馬線を掘った人々の碑、年末の大阪のロック、APIのない画面をClaudeに触らせる流儀——推定合計 ~46 分。</p>
+      </header>
+
+      <article class="piece" id="p1">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★★</span> <span class="chip mins">7 min</span> <span class="chip" lang="ja">鎌倉</span> <span class="chip" lang="ja">北条氏</span> <span class="chip" lang="ja">吾妻鏡</span> <span class="chip" lang="ja">謀殺</span>
+          </div>
+          <h2 lang="ja">【鎌倉武士の鑑】畠山重忠の最期はなぶり殺しだった？『吾妻鏡』に書かれない死闘4時間の実態を考察</h2>
+          <p class="why">1205: Hatakeyama Shigetada, o samurai-modelo de Kamakura, é acusado falsamente de traição por Hōjō Tokimasa. Com só 134 cavaleiros, recusa fugir para “não confirmar a mentira” — e resiste 4 horas a um exército enorme. Por quê tanto tempo? Uma caçada, não uma batalha.</p>
+          <div class="source">
+            <span lang="ja">草の実堂（角田晶生）</span>
+            <a href="https://kusanomido.com/study/history/japan/kamakura/134991/" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>時は元久2年（1205年）6月22日、畠山重忠は謀叛の濡れ衣を着せられ、北条義時らが率いる大軍によって攻め滅ぼされました。</p>
+            <p>畠山重忠が率いていたのはわずかに134騎、これではとうてい勝ち目はありません。重臣の本田近常や榛沢成清らは「一度、本拠地の菅谷へ引き返して態勢を立て直すべき」と進言しました。</p>
+            <p>しかし重忠は「そのようなことをすれば、謀叛の濡れ衣が既成事実化されてしまう。かくなる上はありのまま全力で戦い、身の潔白を証明するつもりだ」と聞かず、そのまま決戦に臨みます。</p>
+            <p>この戦闘は午剋（うまのこく。正午ごろ）から申斜（さるのななめ。夕方4：00過ぎ）まで続きました。……ゲリラ戦や籠城戦でもなかったのに、なぜここまで戦闘が長引いたのでしょうか。</p>
+            <p>昔からよく指摘されてきたのが、北条方に戦意が乏しかったのではないかという点です。……最初から勝ち戦とわかっているなら、生き残って恩賞にあずかりたいのが人情というものでしょう。</p>
+            <p>第二に、畠山討伐に大義がなかった点も大きいでしょう。……実際に追討軍の総大将を務めた義時、そして副将を務めた北条時房は、揃って父を諫めたと『吾妻鏡』には記されています。</p>
+            <p>そこで義時らは、無理に正面から攻めかかるのではなく、重忠の軍勢を遠巻きに取り囲み、疲弊するまで翻弄した可能性も考えられます。</p>
+            <p>遠巻きに矢を射かけられ、一人また一人と斃れていく。どれほど必死に戦おうと手ごたえが得られず、じわじわと追い詰められていったのかもしれません。……もしそうした戦い方が行われたなら、もはや戦さというより「狩り」に近かったのかもしれません。</p>
+            <p>やがて申斜に及び、愛甲季隆が射放った矢が重忠に命中。ここに智仁勇を兼ね備えた名将・畠山重忠は命を落としたのです。享年42。</p>
+            <p>重忠の死後、義時はその潔白を確信して涙を流したと『吾妻鏡』に記されています。やがて同年閏7月、時政と牧の方が将軍・源実朝を排除し、平賀朝雅を擁立しようとする事件（牧氏の変）が発生。義時は姉の北条政子とともにこれに対抗し、時政を失脚させました。</p>
+          </div>
+          <p class="continue"><a href="https://kusanomido.com/study/history/japan/kamakura/134991/" target="_blank" rel="noopener" lang="ja">続きを読む · 草の実堂（角田晶生）</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p2">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★★</span> <span class="chip mins">7 min</span> <span class="chip" lang="ja">江戸初期</span> <span class="chip" lang="ja">朱印船</span> <span class="chip" lang="ja">世界史</span> <span class="chip" lang="ja">傭兵</span>
+          </div>
+          <h2 lang="ja">東南アジアで暴れた日本人傭兵たち ～17世紀に起きた「アンボイナ事件」とは？</h2>
+          <p class="why">Quando a paz de Ieyasu deixou milhares de rōnin desempregados, eles viraram “produto de exportação”: mercenários nas guerras das especiarias. Em Amboina (1623), japoneses lutaram dos dois lados — e um deles, Shichizō, foi a faísca que tirou a Inglaterra do Sudeste Asiático.</p>
+          <div class="source">
+            <span lang="ja">草の実堂</span>
+            <a href="https://kusanomido.com/study/history/japan/edo/69562/" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>家康による天下統一のあと、国内では武器の需要が激減したため、余っている日本製の刀剣や鉄砲が海外へ輸出され、代わりに東南アジア産の香木などが輸入されました。</p>
+            <p>武器に加えてもう1つ、17世紀の日本から「輸出品」となったものがあります。天下統一が実現し、平和が訪れたことは素晴らしいですが、見方を変えると戦を専門とした兵士たちは「流浪の身」となりました。つまり失業状態、いわゆる「浪人」です。</p>
+            <p>信長の「兵農分離」は、戦しかできない人々を大量に生み出してしまいました。家康がもたらした「平和」は、彼らから就労機会を奪ってしまったのです。</p>
+            <p>しかし海外ではいつでも、どこかで戦があります。朱印船に乗れば海外渡航は簡単でした。激しい戦いにも慣れ、最新の鉄砲を扱える日本人傭兵。彼らが東南アジア諸国に流出したことは、現地の政治状況をも一変させます。</p>
+            <p>東南アジアで香辛料貿易に従事していた、オランダ東インド会社の総督・ピーテルスゾーンが「日本人傭兵なしに東南アジアで戦争はできない」と言うほどです。</p>
+            <p>当時のオランダとイギリスは、香辛料の利権をめぐって対立関係にありました。……両国ともに日本人傭兵を引き連れており、にらみ合いが続く状態でした。</p>
+            <p>1623年、ある夜にオランダの要塞を下見していた日本人傭兵の七蔵が捕らえられました。オランダは彼を拷問にかけて、イギリス側の襲撃計画を自白させます。</p>
+            <p>襲撃情報を得たオランダはイギリス商館を急襲。このとき30余名が捕らえられて激しい拷問を受け、イギリス人10人、日本人9人らが処刑されています。</p>
+            <p>しかし、本当にイギリスが襲撃計画を立てていたのか疑わしいという説もあります。……この出来事が「アンボイナ事件」ですが、オランダ側も日本人傭兵を雇っていたため、実際には日本人同士が戦っていました。</p>
+            <p>まだ弱小国家であったイギリスは「アンボイナ事件」をきっかけとして、東南アジアから撤収し、インドの経営に専念します。また平戸にあったイギリス商館も閉鎖され、オランダが日本との貿易を独占することになりました。</p>
+          </div>
+          <p class="continue"><a href="https://kusanomido.com/study/history/japan/edo/69562/" target="_blank" rel="noopener" lang="ja">続きを読む · 草の実堂</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p3">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★★</span> <span class="chip mins">4 min</span> <span class="chip" lang="ja">考古学</span> <span class="chip" lang="ja">古墳</span> <span class="chip" lang="ja">戦時中</span> <span class="chip" lang="ja">佐賀</span>
+          </div>
+          <h2 lang="ja">【動画】目達原古墳群で発掘調査　戦時中に改葬、築造時期など解明へ　上峰町教育委員会</h2>
+          <p class="why">Em 1942 o Exército precisava de um aeródromo — e havia cinco kofun no caminho. Solução inédita: escavá-los e “mudá-los” em miniatura (1/7 da planta, 1/3 da altura). Agora abriram as caixas de concreto seladas há 80 anos e acharam cerâmica, ferro e uma caixinha com a terra do túmulo como “corpo” do espírito.</p>
+          <div class="source">
+            <span lang="ja">佐賀新聞（古賀真理子）</span>
+            <a href="https://www.saga-s.co.jp/articles/-/1811254" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>戦時中、目達原飛行場（現陸上自衛隊目達原駐屯地）の建設に伴って改葬された目達原古墳群について、上峰町教育委員会が発掘調査を進めている。15日には、改葬地から須恵器や鉄製とみられる遺物が見つかった。町教委によると、古墳が改葬された事例は全国的にも少ないといい、遺物や残りの改葬地の調査を通じて古墳群の築造時期などの解明が期待される。</p>
+            <p>目達原古墳群は、宮内庁が管理する「陵墓」の都紀女加（つきめか）王墓（上のびゅう塚古墳）を含め、古墳時代の有力者のものとみられる前方後円墳や円墳で構成する。目達原飛行場の建設で取り壊されることになって1942（昭和17）年から調査が始まり、五つの古墳を翌43（昭和18）年にかけて改葬した。</p>
+            <p>現在の吉野ヶ里町にあった瓢箪（ひょうたん）塚、塚山、上峰町の古稲荷塚、稲荷塚、大塚の各古墳が、都紀女加王墓の北側に改葬された。縮尺が7分の1、高さは3分の1に縮小して再現された。</p>
+            <p>改葬前の時点で5古墳とも盗掘被害に遭っていたとみられるが、1950年の史料「佐賀縣史蹟名勝天然紀念物調査報告」によると、残る遺物から御霊の代わりとなる御霊代や副葬品が納められたとされる。</p>
+            <p>9月17日に瓢箪塚古墳の改葬地で見つかっていた木箱も開けられ、御霊代とみられる木箱の中の小箱に土を確認した。同史料に、御霊代として古墳の土を納めた記述がある。</p>
+            <p>町教委文化課の吉岡暁さんは「史料にあるように、御霊代や副葬品が納められていることが分かった」と話した。……目達原古墳群の再調査の必要性を提唱していた七田忠昭・佐賀城本丸歴史館館長は「改葬されているため金属製の遺物の保護が望まれる。遺物の調査で古墳群の築造時期の判明が期待できる」としている。</p>
+          </div>
+          <p class="continue"><a href="https://www.saga-s.co.jp/articles/-/1811254" target="_blank" rel="noopener" lang="ja">続きを読む · 佐賀新聞（古賀真理子）</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p4">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★☆</span> <span class="chip mins">6 min</span> <span class="chip" lang="ja">考古学</span> <span class="chip" lang="ja">中国史</span> <span class="chip" lang="ja">元・明</span> <span class="chip" lang="ja">刑罰</span>
+          </div>
+          <h2 lang="ja">古代中国の恐ろしい刑罰「鼻削ぎ」は本当にあったのか？約700年前の女性遺骨で初の痕跡</h2>
+          <p class="why">Os textos chineses falam há 2 mil anos do corte do nariz como castigo, mas ninguém tinha achado um esqueleto. Agora, em Henan: uma mulher de 40 e poucos anos (1298–1404), nariz cortado e cicatrizado, e a única de 213 enterros sepultada de bruços — com um grampo de bronze ao lado.</p>
+          <div class="source">
+            <span lang="ja">草の実堂（角田晶生）</span>
+            <a href="https://kusanomido.com/study/history/chinese/135215/" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>古代中国では、罪人に対する刑罰として「鼻削ぎ」が行われていたといいます。この刑罰は古い文献に繰り返し登場しますが、実際に刑を受けたことを示す人骨は、これまで確認されていませんでした。</p>
+            <p>中国の考古学者チームは、2018年に河南省三門峡市の三支園墓地を調査しました。この墓地では多くの人骨が発掘されましたが、その中に他の人骨とは異なる特徴を持つ女性の遺骨があったのです。</p>
+            <p>女性が埋葬された墓の年代は元王朝から明王朝初期にかけての1298～1404年で、亡くなった年齢は40～44歳と推定されています。埋葬では遺体を仰向けに安置するのが一般的ですが、彼女はうつ伏せに埋葬されていました。</p>
+            <p>これだけでも異様な雰囲気を感じますが、彼女の顔面（頭蓋骨の前面部）には、鼻の周辺に損傷痕と治癒痕が残っていたのです。これは生前に彼女が鼻に大きな傷を負い、その後、傷が治るまで生きていたことを意味します。</p>
+            <p>「鼻削ぎ刑」は、古代中国で用いられた「五刑」の一つで……窃盗などに対して科された記録があり、元代末期には家畜を盗んだ者への刑罰として用いられたことも記されています。</p>
+            <p>彼女の墓には青銅製の簪（かんざし）1本が副葬され、先述したように遺体はうつ伏せの状態で埋葬されていました。この簪が生前の愛用品だったのか、あるいは死後に近親者などが手向けたものだったのかは、明らかになっていません。</p>
+            <p>また、調査された同墓地の歴史時代の埋葬213例のうち、うつ伏せで埋葬されていたのは彼女だけだったのです。……ただし墓には彼女の身元や罪状を伝える文字記録が残されておらず、詳しい経緯は不明です。</p>
+          </div>
+          <p class="continue"><a href="https://kusanomido.com/study/history/chinese/135215/" target="_blank" rel="noopener" lang="ja">続きを読む · 草の実堂（角田晶生）</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p5">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★☆</span> <span class="chip mins">4 min</span> <span class="chip" lang="ja">NatGeo</span> <span class="chip" lang="ja">心理学</span> <span class="chip" lang="ja">詐欺</span> <span class="chip" lang="ja">人間の本性</span>
+          </div>
+          <h2 lang="ja">なぜ人は嘘をつく？ そしてなぜだまされる？ 虚実の科学</h2>
+          <p class="why">Um feature clássico da NatGeo: Princeton, 1989, um calouro autodidata que cuidava de gado no deserto de Utah e lia filosofia… e cuja biografia era toda inventada. Ponto de partida para “por que mentimos e por que caímos”. (O resto é só para assinantes; o trecho grátis já vale.)</p>
+          <div class="source">
+            <span lang="ja">ナショナル ジオグラフィック日本版</span>
+            <a href="https://natgeo.nikkeibp.co.jp/atcl/news/26/101500564/" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>偽ニュース、詐欺、政治家の嘘……。正直は一生の宝といわれるが、嘘をつく行為は人間の特徴でもある。</p>
+            <p>1989年秋、米国の名門プリンストン大学が迎えた新入生のなかに、驚くべき経歴の持ち主がいた。その名はアレクシー・サンタナ。彼の生い立ちに入学審査を担当した委員たちは強い感銘を受けた。</p>
+            <p>本人の話では、彼は正規の学校教育をほとんど受けていなかった。10代の半ばにはほぼ自立して、米国ユタ州で牛や羊の世話をしながら野外生活をし、哲学書を読みふけった。……</p>
+            <p>そんな特異な過去をもつサンタナは、たちまち学生たちの尊敬を集めた。成績は全科目とも最高の評価だったが、本人はいたって控えめで、それがまた謎めいた魅力になった。……</p>
+            <p>しかし、彼の経歴はすべて嘘だった。入学から1年半ほどして、彼をたまたま見かけた女性が、6年前にカリフォルニア州のパロアルト高校にいたジェイ・ハンツマンだと気づいたのだ。実はそれも本名ではなく……</p>
+          </div>
+          <p class="continue"><a href="https://natgeo.nikkeibp.co.jp/atcl/news/26/101500564/" target="_blank" rel="noopener" lang="ja">続きを読む · ナショナル ジオグラフィック日本版</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p6">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★☆</span> <span class="chip mins">4 min</span> <span class="chip" lang="ja">NatGeo</span> <span class="chip" lang="ja">動物の心</span> <span class="chip" lang="ja">写真</span> <span class="chip" lang="ja">ナミビア</span>
+          </div>
+          <h2 lang="ja">死んだ子ゾウを運ぶそのメスは数年前に子を失っていた　野生生物写真賞2026最優秀賞ほか</h2>
+          <p class="why">A foto vencedora do Wildlife Photographer of the Year 2026: uma elefanta carregando um filhote morto pelo leito seco de um rio na Namíbia. O detalhe que arrepia: ela perdeu o próprio filhote anos atrás e, desde então, recolhe filhotes mortos de outras.</p>
+          <div class="source">
+            <span lang="ja">ナショナル ジオグラフィック日本版</span>
+            <a href="https://natgeo.nikkeibp.co.jp/atcl/photo/stories/26/101600030/" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>ある朝、フェデリコ・ベロネージ氏はナミビアのフアブ川流域で、前日にサファリのガイドをしていたときに見たゾウの群れを追うことにした。ベロネージ氏は足跡をたどって干上がった川床にたどり着くと、砂の上に奇妙な跡が……</p>
+            <p>しかし、その群れに追いついたとき、ベロネージ氏は真相を目の当たりにした。メスのゾウが死んだ子ゾウを運んでいたのだ。子ゾウの脚はメスの鼻と牙の間に挟まっていた。</p>
+            <p>「本当にそっとしておくべき場面だったため、写真を撮るべきではないと思いかけたほどでした」とベロネージ氏は振り返る。「しかし、気付いたのです。これこそが、こうした生きものの魂を垣間見るための、深遠で魅力的な……」</p>
+            <p>アフリカゾウもアジアゾウも、死に対して複雑な行動を示す。血のつながりがあるかどうかにかかわらず、死体を守り、運び、調べる姿が記録されており、科学者もこうした行動は追悼の儀式ではないかと考えをめぐらせて……</p>
+            <p>メスが出産したばかりには見えなかったことが気になり、ベロネージ氏は地元のゾウ研究プロジェクトに詳細を問い合わせた。研究者たちによれば、このメスは数年前に子を失っており、それ以来、ほかの死んだ子ゾウを拾い……</p>
+            <p>「おそらく、彼女はあのときの経験と何らかの形で再びつながろうとしているのでしょう」とベロネージ氏は言う。「これは、ゾウの感情や反応のさらに高度な複雑さを示しています」</p>
+          </div>
+          <p class="continue"><a href="https://natgeo.nikkeibp.co.jp/atcl/photo/stories/26/101600030/" target="_blank" rel="noopener" lang="ja">続きを読む · ナショナル ジオグラフィック日本版</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p7">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★☆</span> <span class="chip mins">4 min</span> <span class="chip" lang="ja">祭り</span> <span class="chip" lang="ja">白川郷</span> <span class="chip" lang="ja">神事</span> <span class="chip" lang="ja">民謡</span>
+          </div>
+          <h2 lang="ja">どぶろく祭（白川郷）——豊饒の秋、「どぶろく」が神に捧げられ、人にも振る舞われる</h2>
+          <p class="why">Hoje e amanhã é a vez do santuário de Iijima: o saquê turvo é fermentado em janeiro, sob a neve, numa adega do próprio santuário — tradição de ~1300 anos. Senhoras de avental servem cada visitante, e a canção “kodaijin” seria uma corruptela de “kodaiji” (cuidar bem dos filhos).</p>
+          <div class="source">
+            <span lang="ja">白川村役場</span>
+            <a href="https://www.vill.shirakawa.lg.jp/2223.htm" target="_blank" rel="noopener">原文を開く ↗</a> · <a href="https://newsdig.tbs.co.jp/articles/-/3020027" target="_blank" rel="noopener" lang="ja">TBS NEWS DIG：18・19日は飯島八幡神社で ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>白川郷では毎年、9月の終わりから10月にかけて、五穀豊穰・家内安全・里の平和を山の神様に祈願する「どぶろく祭」が盛大に行われます。</p>
+            <p>白川村の各地区の神社で、御神幸、獅子舞、歴史と民話にまつわる民謡や舞踊などの神事が繰り広げられる、歴史と伝統ある白川郷ならではの祭り。その名のとおり、祭礼に神酒として「どぶろく」が用いられ、人々にも振る舞われるのが最大の特徴です。</p>
+            <p>「どぶろく」は、古くから受け継がれてきた独特の技法をもって、雪に埋もれた1月下旬に神社酒蔵で造りこまれます。</p>
+            <p>午後3時頃、神社に奉納する「どぶろくの儀」を終え、大きな酒樽から「きったて」と呼ばれるお酌用の容器に「どぶろく」が移されると、割烹着のおかみさんたちがいっせいに来客一人ひとりに「どぶろく」を盃についで回り、会場は芳醇な香りに包まれます。</p>
+            <p>「どぶろく」は、和銅年間（約1300年前）頃から、すでに祭礼用として用いられていたと伝えられています。</p>
+            <p>奉芸殿では、子供大事（子大事）が転訛したものと言われている「こだいじん」をはじめ、「白川おけさ」「しょっしょ節」「白川わじま」など長い歴史とともに育まれてきた民謡が披露され、「どぶろく祭」は最高潮に達します。唄は各集落共通ですが、踊りがそれぞれ異なるのも見どころです。</p>
+            <p>神社指定の盃以外にはお注ぎしません。盃の注がれたどぶろくを他の容器に移すなどして持ち帰ることはできません。発見した場合は神社から退場いただきます。</p>
+          </div>
+          <p class="continue"><a href="https://www.vill.shirakawa.lg.jp/2223.htm" target="_blank" rel="noopener" lang="ja">続きを読む · 白川村役場</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p8">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★☆</span> <span class="chip mins">3 min</span> <span class="chip" lang="ja">神戸</span> <span class="chip" lang="ja">神戸電鉄</span> <span class="chip" lang="ja">近代史</span> <span class="chip" lang="ja">鉄道</span>
+          </div>
+          <h2 lang="ja">戦前の朝鮮人労働者追悼、神戸　鉄道工事犠牲、碑設置30年</h2>
+          <p class="why">O lado escondido do Shintetsu que você usa: a linha Arima foi aberta nos anos 1920–30 com 1.200–1.800 trabalhadores coreanos. Um grupo de cidadãos achou 13 mortos em jornais da época e ergueu em 1996 a estátua do homem com a picareta, em Egeyama (Hyōgo-ku). Hoje teve cerimônia dos 30 anos.</p>
+          <div class="source">
+            <span lang="ja">共同通信（dメニューニュース）</span>
+            <a href="https://topics.smt.docomo.ne.jp/article/kyodo_nor/nation/kyodo_nor-2026101801000763" target="_blank" rel="noopener">原文を開く ↗</a> · <a href="https://chosonsinbo.com/jp/2025/04/11-198/" target="_blank" rel="noopener" lang="ja">朝鮮新報：神戸電鉄敷設工事朝鮮人労働者の像 ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>戦前に神戸市内の鉄道工事現場の崩落事故などで亡くなった朝鮮人労働者13人の追悼式典が18日、同市兵庫区の慰霊碑前で開かれた。碑は、被害実態を調査した市民団体が1996年に設置してから今年11月で30年となる。団体の徐根植代表（75）は「過去の歴史の真実を忘れずに伝えていく」とあいさつした。</p>
+            <p>式典には市民ら約30人が参加。つるはしを振る男性の銅像に花を手向け、黙とうをささげた。</p>
+            <p>事故が起きたのは神戸電鉄（旧神戸有馬電気鉄道、三木電気鉄道）の敷設工事。団体によると、市中心部から山間部の有馬を結ぶ有馬線を中心に、多数の朝鮮人が雇用された。団体は当時の新聞記事を調べるなどし、27〜36年に死亡した13人を特定した。</p>
+            <p>（朝鮮新報より）神戸市の北および北西郊に路線をもつ現・神戸電鉄は、神戸有馬電鉄と三木電鉄が1947年に合併。1920年代から30年代に展開された敷設工事には、朝鮮人労働者1200～1800人が従事していたという。</p>
+          </div>
+          <p class="continue"><a href="https://topics.smt.docomo.ne.jp/article/kyodo_nor/nation/kyodo_nor-2026101801000763" target="_blank" rel="noopener" lang="ja">続きを読む · 共同通信（dメニューニュース）</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p9">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★☆☆</span> <span class="chip mins">2 min</span> <span class="chip" lang="ja">JPロック</span> <span class="chip" lang="ja">関西</span> <span class="chip" lang="ja">フェス</span> <span class="chip" lang="ja">インテックス大阪</span>
+          </div>
+          <h2 lang="ja">FM802が送るロック大忘年会「FM802 RADIO CRAZY」出演アーティスト第2弾発表！</h2>
+          <p class="why">Plano de fim de ano em Kansai: o “bōnenkai do rock” da FM802 na INTEX Osaka (26–28/12). SCANDAL toca no dia 26 (com luta especial da New Japan Pro-Wrestling!), Aimer no dia 28, ao lado de Maximum the Hormone, SiM e 10-FEET. Ingresso de 1 dia: ¥13.500.</p>
+          <div class="source">
+            <span lang="ja">FM802（PR TIMES）</span>
+            <a href="https://prtimes.jp/main/html/rd/p/000000485.000088611.html" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>今年は12月26日(土)～28日(月)の3日間インテックス大阪にて開催、FM802が毎年年末にお送りするロック大忘年会「FM802 RADIO CRAZY」。本日10月15日(木)のFM802「EVENING TAP」にて、第2弾出演アーティストが発表となりました。</p>
+            <p>今回発表になったのは、indigo la End／打首獄門同好会／ウルフルズ／……Aimer／キュウソネコカミ／Creepy Nuts／……SiM／……SCANDAL／sumika／……10-FEET／……UNICORN／緑黄色社会 の24組。</p>
+            <p>そして今年もFM802 RADIO CRAZYに闘いのゴングが鳴る！初日12月26日(土)、インテックス大阪で新日本プロレスの強者（ツワモノ）たちのスペシャルマッチが開催決定！対戦カードなど、詳細は後日発表…乞うご期待！</p>
+            <p>17周年となる今年のレディクレももちろんCRAZY！！皆様のご来場をお待ちしています！</p>
+            <p>12月26日(土)……SCANDAL／sumika／東京スカパラダイスオーケストラ……新日本プロレススペシャルマッチ　12月28日(月) 打首獄門同好会／Aimer／KANA-BOON／……SiM／……10-FEET／……マキシマム ザ ホルモン／milet ほか</p>
+          </div>
+          <p class="continue"><a href="https://prtimes.jp/main/html/rd/p/000000485.000088611.html" target="_blank" rel="noopener" lang="ja">続きを読む · FM802（PR TIMES）</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p10">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★☆</span> <span class="chip mins">5 min</span> <span class="chip" lang="ja">AI</span> <span class="chip" lang="ja">Claude Code</span> <span class="chip" lang="ja">ブラウザ自動化</span> <span class="chip" lang="ja">安全設計</span>
+          </div>
+          <h2 lang="ja">コネクタも API も無いサービスを、Claude Code に操作させる</h2>
+          <p class="why">Três meses deixando o Claude Code operar, via extensão do Chrome, um console low-code sem API: criar, salvar, testar e ler o console/rede. O valioso é a divisão de responsabilidades — credenciais nunca entram no contexto, staging/prod ficam com humanos, e diálogos nativos exigem um clique humano.</p>
+          <div class="source">
+            <span lang="ja">Zenn（e-dash Tech Blog・じょーじ）</span>
+            <a href="https://zenn.dev/edash_tech_blog/articles/6250fc61ccf009" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>Claude Code から外部サービスを操作するときは、MCP のコネクタを使います。……自動化を進めていくと、コネクタも API も無いサービスがどうしても残ります。業務に合わせて選んだ小さな SaaS や、社内向けの管理コンソールです。</p>
+            <p>Claude Code に Chrome 拡張をつなぐと、ここに入口ができます。画面をそのまま読ませて、クリックや入力を任せられます。</p>
+            <p>3 か月ほど、ローコードで作られた管理コンソールの運用に使ってきました。画面でしか作れない設定の作成から、保存、テスト実行、結果の確認までを任せています。人が手を出したのは、保存を確定するダイアログで 1 回クリックするところだけでした。</p>
+            <p>Claude は画面を読んで複製元を探し、フォームに条件を足し、保存して、実行結果の件数まで返します。……見た目だけでなく、コンソールのエラーとネットワークリクエストも読めるからです。「表示は出ているのに API が 500 を返している」の切り分けまで届きます。</p>
+            <p>渡しているのは認証済みの状態だけです。ID とパスワードは Claude Code のコンテキストに入りません。ログイン画面や CAPTCHA では Claude が止まり、人に操作を求めます。</p>
+            <p>ここまで挙げた操作は、すべて開発環境での話です。ステージングと本番は、人がやります。これは筆者の方針です。本番で動くものの責任は、人が持つべきだと考えています。</p>
+            <p>外部オリジンの iframe を埋め込んだ画面では、中の文字を取れません。……操作はできるのに、結果が正しいかを Claude に判定させられません。</p>
+            <p>同じ作業を何度か通すと、落とし穴の場所が決まってきます。そこでスキルに書いて固定しました。……スキルには、手順のほかに人と Claude の分担表を書いています。毎回の合意が要らなくなるので、ここが一番効きました。</p>
+          </div>
+          <p class="continue"><a href="https://zenn.dev/edash_tech_blog/articles/6250fc61ccf009" target="_blank" rel="noopener" lang="ja">続きを読む · Zenn（e-dash Tech Blog・じょーじ）</a></p>
+        </div>
+      </article>
+
+      <footer class="site">読解幕 · 2026-10-18 · ~46 min · <a href="/japanese-digest/history/" style="color:inherit">History</a> · deliton.github.io/japanese-digest</footer>
+    </main>
+  </div>
+</body>
+</html>
