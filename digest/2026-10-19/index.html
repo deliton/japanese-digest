@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>読解幕 · 2026-10-19 · Japanese Digest</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Noto+Serif+JP:wght@400;600;700&family=Shippori+Mincho:wght@500;700&display=swap" rel="stylesheet" />
+  <style>
+
+    :root {
+      --bg: #0a0a0a;
+      --bg-2: #121212;
+      --bg-card: #161616;
+      --ink: #f5f5f5;
+      --ink-dim: #a8a29a;
+      --ink-mute: #6b6560;
+      --shu: #c41e3a;
+      --shu-hot: #e11d48;
+      --shu-deep: #8b1228;
+      --gold: #d4a017;
+      --gold-soft: #c9a227;
+      --white: #fafafa;
+      --line: #2a2a2a;
+      --line-hot: rgba(196, 30, 58, 0.45);
+      --measure: 42rem;
+      --radius: 4px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: "Noto Sans JP", "Hiragino Sans", "Yu Gothic", system-ui, sans-serif;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .stage-bar {
+      height: 6px;
+      background: repeating-linear-gradient(
+        90deg,
+        var(--shu) 0 48px,
+        var(--white) 48px 56px,
+        #111 56px 64px,
+        var(--gold) 64px 72px,
+        #111 72px 88px
+      );
+    }
+
+    .wrap {
+      width: min(100% - 2rem, 74rem);
+      margin: 0 auto;
+      padding: 2rem 0 4.5rem;
+      display: grid;
+      grid-template-columns: 15.5rem 1fr;
+      gap: 2.75rem;
+      align-items: start;
+    }
+
+    @media (max-width: 900px) {
+      .wrap { grid-template-columns: 1fr; gap: 1.5rem; padding-top: 1.25rem; }
+      .sidebar { position: static !important; }
+    }
+
+    .sidebar { position: sticky; top: 1.25rem; }
+
+    .brand {
+      display: flex;
+      align-items: baseline;
+      gap: 0.55rem;
+      margin: 0 0 0.35rem;
+    }
+    .brand-mark {
+      font-family: "Shippori Mincho", "Noto Serif JP", serif;
+      font-size: 1.85rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      color: var(--white);
+      line-height: 1;
+    }
+    .brand-mark em {
+      font-style: normal;
+      color: var(--shu);
+    }
+    .brand-sub {
+      font-size: 0.65rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-weight: 700;
+    }
+
+    .meta {
+      color: var(--ink-mute);
+      font-size: 0.8rem;
+      margin: 0 0 1.25rem;
+    }
+
+    .stat-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-bottom: 1.35rem;
+    }
+    .stat {
+      border: 1px solid var(--line);
+      background: var(--bg-2);
+      padding: 0.32rem 0.65rem;
+      font-size: 0.72rem;
+      color: var(--ink-dim);
+      border-radius: var(--radius);
+    }
+    .stat strong { color: var(--white); font-weight: 700; }
+    .stat.hot {
+      border-color: var(--shu);
+      color: var(--shu-hot);
+      background: rgba(196, 30, 58, 0.1);
+    }
+
+    .toc {
+      border: 1px solid var(--line);
+      background: var(--bg-2);
+      padding: 0.85rem 0.9rem 0.95rem;
+      border-radius: var(--radius);
+    }
+    .toc h2 {
+      margin: 0 0 0.65rem;
+      font-size: 0.72rem;
+      letter-spacing: 0.16em;
+      color: var(--gold);
+      font-weight: 800;
+    }
+    .toc ol { list-style: none; margin: 0; padding: 0; }
+    .toc li { margin: 0; }
+    .toc a {
+      display: flex;
+      justify-content: space-between;
+      gap: 0.5rem;
+      text-decoration: none;
+      color: var(--ink-dim);
+      font-size: 0.82rem;
+      padding: 0.38rem 0.2rem;
+      border-bottom: 1px solid transparent;
+    }
+    .toc a:hover { color: var(--white); border-bottom-color: var(--line-hot); }
+    .toc .t-title { font-weight: 600; }
+    .toc .t-min { color: var(--gold); font-size: 0.72rem; font-weight: 700; flex-shrink: 0; }
+
+    .main { max-width: var(--measure); }
+
+    .digest-banner {
+      display: flex;
+      gap: 0.75rem;
+      align-items: flex-start;
+      background: #141014;
+      border: 1px solid var(--line);
+      border-left: 3px solid var(--shu);
+      padding: 0.85rem 1rem;
+      margin-bottom: 1.5rem;
+      font-size: 0.78rem;
+      color: var(--ink-dim);
+      line-height: 1.55;
+    }
+    .digest-banner .tag {
+      flex-shrink: 0;
+      background: var(--shu);
+      color: #fff;
+      font-size: 0.65rem;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      padding: 0.28rem 0.5rem;
+      border-radius: var(--radius);
+    }
+
+    .hero {
+      margin-bottom: 2rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid var(--line);
+      position: relative;
+    }
+    .hero::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -1px;
+      width: 4.5rem;
+      height: 2px;
+      background: var(--shu);
+    }
+    .kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.7rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--shu-hot);
+      font-weight: 800;
+      margin-bottom: 0.85rem;
+    }
+    .kicker::before {
+      content: "◆";
+      font-size: 0.55rem;
+      color: var(--gold);
+    }
+    .hero h1 {
+      font-family: "Shippori Mincho", "Noto Serif JP", serif;
+      font-size: clamp(1.85rem, 4vw, 2.55rem);
+      font-weight: 700;
+      line-height: 1.2;
+      margin: 0 0 0.75rem;
+      color: var(--white);
+      letter-spacing: 0.02em;
+    }
+    .hero p {
+      margin: 0;
+      color: var(--ink-dim);
+      font-size: 0.98rem;
+      max-width: 36rem;
+    }
+
+    article.piece {
+      background: var(--bg-card);
+      border: 1px solid var(--line);
+      margin-bottom: 1.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+    article.piece::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: linear-gradient(90deg, var(--shu) 0%, var(--shu) 35%, var(--gold) 35%, var(--gold) 42%, transparent 42%);
+    }
+
+    .piece-inner { padding: 1.6rem 1.55rem 1.35rem; }
+
+    .piece-head {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-bottom: 0.85rem;
+    }
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      border: 1px solid var(--line);
+      background: #111;
+      color: var(--ink-dim);
+      padding: 0.22rem 0.6rem;
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      border-radius: var(--radius);
+    }
+    .chip.interest {
+      border-color: var(--shu);
+      color: var(--shu-hot);
+      background: rgba(196, 30, 58, 0.12);
+    }
+    .chip.mins {
+      border-color: var(--gold);
+      color: var(--gold);
+      background: transparent;
+    }
+
+    .piece h2 {
+      font-family: "Noto Serif JP", "Shippori Mincho", "Yu Mincho", serif;
+      font-size: 1.38rem;
+      font-weight: 700;
+      line-height: 1.5;
+      margin: 0 0 0.6rem;
+      color: var(--white);
+      letter-spacing: 0.02em;
+    }
+
+    .why {
+      margin: 0 0 1rem;
+      color: var(--ink-dim);
+      font-size: 0.9rem;
+      border-left: 2px solid var(--gold);
+      padding-left: 0.85rem;
+    }
+
+    .source {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.65rem 1.1rem;
+      font-size: 0.76rem;
+      color: var(--ink-mute);
+      margin-bottom: 1.25rem;
+    }
+    .source a {
+      color: var(--shu-hot);
+      text-decoration: none;
+      font-weight: 600;
+    }
+    .source a:hover { color: var(--gold); }
+
+    .ja {
+      font-family: "Noto Serif JP", "Hiragino Mincho ProN", "Yu Mincho", serif;
+      font-size: 1.08rem;
+      line-height: 2;
+      letter-spacing: 0.03em;
+      color: #ebe7e1;
+    }
+    .ja p { margin: 0 0 1.15em; }
+    .ja p:last-child { margin-bottom: 0; }
+
+    .continue {
+      margin-top: 1.25rem;
+      padding-top: 1rem;
+      border-top: 1px solid var(--line);
+      font-size: 0.86rem;
+    }
+    .continue a {
+      color: var(--white);
+      text-decoration: none;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      border-bottom: 2px solid var(--shu);
+      padding-bottom: 0.1rem;
+    }
+    .continue a:hover {
+      color: var(--shu-hot);
+      border-bottom-color: var(--gold);
+    }
+
+    footer.site {
+      max-width: var(--measure);
+      margin-top: 1.75rem;
+      color: var(--ink-mute);
+      font-size: 0.72rem;
+      letter-spacing: 0.06em;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+    footer.site::before {
+      content: "";
+      width: 1.25rem;
+      height: 2px;
+      background: var(--shu);
+    }
+
+  
+    .excerpt-label { font-size: 0.66rem; letter-spacing: 0.18em; color: var(--gold); font-weight: 800; margin: 0 0 0.6rem; }
+    .brand-sub a, .stat a { color: var(--gold); text-decoration: none; }
+    .toc .t-min { font-variant-numeric: tabular-nums; }
+  </style>
+</head>
+<body>
+  <div class="stage-bar" aria-hidden="true"></div>
+
+  <div class="wrap">
+    <aside class="sidebar">
+      <div class="brand">
+        <span class="brand-mark" lang="ja">読解<em>幕</em></span>
+      </div>
+      <p class="brand-sub">Kabuki Digest · <a href="../../history/">History</a></p>
+      <p class="meta">2026-10-19 · America/Sao_Paulo</p>
+      <div class="stat-row">
+        <span class="stat"><strong>49</strong> min</span>
+        <span class="stat"><strong>9</strong> pieces</span>
+        <span class="stat"><strong>~5,800</strong> 字</span>
+        <span class="stat"><a href="../../history/">History</a></span>
+      </div>
+
+      <nav class="toc" aria-label="Índice">
+        <h2 lang="ja">本日の演目</h2>
+        <ol>
+          <li>
+            <a href="#p1">
+              <span class="t-title" lang="ja">江戸の下級武士、副業の現実</span>
+              <span class="t-min">7′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p2">
+              <span class="t-title" lang="ja">焼けた大仏と河内の鋳物師14人</span>
+              <span class="t-min">6′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p3">
+              <span class="t-title" lang="ja">豚飼いから皇帝へ——「キャベツ王」</span>
+              <span class="t-min">7′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p4">
+              <span class="t-title" lang="ja">4700年前、世界最古の沈没船</span>
+              <span class="t-min">4′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p5">
+              <span class="t-title" lang="ja">クローンのクローン、58世代目の終わり</span>
+              <span class="t-min">6′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p6">
+              <span class="t-title" lang="ja">火を祀る京都——鞍馬の火祭は22日</span>
+              <span class="t-min">7′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p7">
+              <span class="t-title" lang="ja">兵庫こぼれ話：250万年前のチョウと赤胴車</span>
+              <span class="t-min">4′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p8">
+              <span class="t-title" lang="ja">SU-METAL、バンコクの「matsuri」へ</span>
+              <span class="t-min">2′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p9">
+              <span class="t-title" lang="ja">有名OSSがPRを閉じはじめた</span>
+              <span class="t-min">6′</span>
+            </a>
+          </li>
+        </ol>
+      </nav>
+    </aside>
+
+    <main class="main">
+      <div class="digest-banner">
+        <span class="tag">TRIAGE</span>
+        <span>2026-10-19 — Bicos dos samurais pobres de Edo; os 14 fundidores de Kawachi que refizeram o Buda de Nara; Ivaylo, o porqueiro que virou czar; o naufrágio mais antigo do mundo (4.700 anos, Turquia); NatGeo: 58 gerações de clones de clones; o culto ao fogo em Kyoto às vésperas do Kurama no Himatsuri; borboleta fóssil de Shin’onsen e o Akadō-sha do Hanshin; SU-METAL em Bangkok; por que os grandes OSS estão fechando PRs.</span>
+      </div>
+
+      <header class="hero">
+        <div class="kicker">Daily curated reading</div>
+        <h1 lang="ja">傘を張る武士と大仏を鋳る職人、豚飼いの皇帝と最古の沈没船、58代目のクローンと京の火祭、250万年前のチョウとPRを閉じるOSS——ひと朝の読解</h1>
+        <p lang="ja">三十俵二人扶持では食べていけず、傘を張り朝顔を育てた江戸の御家人。焼け落ちた大仏を前に、宋の工人に「不快之色」を見せられながら加わった河内の鋳物師。モンゴルを破り、皇帝の未亡人と結婚した豚飼いの男。ピラミッドの時代に地中海で沈んだ船には、ヤギの乳でチーズを作った痕跡が残る。コピーのコピーは58世代で途絶え、京都では火を恐れ、火を祀る季節がやってくる。蹴つまずいた石から出てきたチョウの羽、団地に住みついた赤胴車、バンコクへ向かうSU-METAL、そして「コードは見せるな。口を動かせ」——推定合計 ~49 分。</p>
+      </header>
+
+      <article class="piece" id="p1">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★★</span> <span class="chip mins">7 min</span> <span class="chip" lang="ja">江戸</span> <span class="chip" lang="ja">御家人</span> <span class="chip" lang="ja">暮らし</span> <span class="chip" lang="ja">内職</span>
+          </div>
+          <h2 lang="ja">江戸の下級武士が手を出した「意外な副業」とは 〜「武士は食わねど高楊枝」の現実</h2>
+          <p class="why">“Samurai não come, mas palita os dentes com orgulho” — na prática, os gokenin de baixo escalão pintavam biombos, colavam guarda-chuvas, criavam peixinhos-dourados e ipomeias para fechar as contas. E um deles foi além: transformou o alojamento da própria casa num bordel clandestino. Vocabulário ótimo de economia Edo (扶持, 内職, 札差, 改易).</p>
+          <div class="source">
+            <span lang="ja">草の実堂（ニコ・トスカーニ）</span>
+            <a href="https://kusanomido.com/study/history/japan/edo/133863/" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>幕末の忍藩士・尾崎石城（おざき せきじょう）は、自らの日常を絵日記として書き残した。</p>
+            <p>もともと石城は御馬廻役を務める百石取りの武士だったが、藩政について意見を述べたことで蟄居を命じられ、十人扶持の身分へと落とされた。</p>
+            <p>日記を見ると、石城は得意の絵を生かし、屏風や掛け軸、行灯などに絵を描く仕事をたびたび請け負っている。 十人扶持だけでは生活が立ちゆかず、こうした内職によって生活の足しにしていたのである。</p>
+            <p>江戸幕府に仕えた御家人の中には「30俵2人扶持」といった禄を受け取る者がいた。……2人扶持を合わせれば年間およそ14石ほどの米が支給された計算になる。</p>
+            <p>幕末の御先手同心について記した記録には、数人の家族を30俵2人扶持だけで養うのは難しく、本高以外の収入がない者は「平日非番の日にはそれぞれ内職をして家計を助けた」という趣旨の記述が残されている。</p>
+            <p>下谷御徒町では朝顔、大久保・百人町ではツツジの栽培が盛んになり、とりわけ大久保のツツジは多くの見物人が訪れるほど有名になった。</p>
+            <p>中でも青山周辺の傘張りは有名で、御家人たちが仲買から骨や紙などの材料を受け取り、家族ぐるみで作業する例もあった。</p>
+            <p>中には生活の足しを得ようとして、現代でいう非合法な「闇バイト」のようなものに手を出す武士もいた。……当時の記録『きゝのまにまに』には、波之丞の屋敷長屋に4、5人の売女を抱えていたことが露見し、波之丞が「改易」になったと記されている。</p>
+            <p>武士たちの副業を見ていくと、私たちが抱きがちな「武士らしい暮らし」と、江戸で生きていくための現実との間には、意外な隔たりがあったのである。</p>
+          </div>
+          <p class="continue"><a href="https://kusanomido.com/study/history/japan/edo/133863/" target="_blank" rel="noopener" lang="ja">続きを読む · 草の実堂（ニコ・トスカーニ）</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p2">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★☆</span> <span class="chip mins">6 min</span> <span class="chip" lang="ja">源平合戦</span> <span class="chip" lang="ja">東大寺</span> <span class="chip" lang="ja">職人</span> <span class="chip" lang="ja">南河内</span>
+          </div>
+          <h2 lang="ja">焼け落ちた東大寺大仏をどう復活させた？「河内鋳物師」14人が挑んだ巨大プロジェクト</h2>
+          <p class="why">1180: o Grande Buda de Nara é queimado na guerra Genpei — e o Japão já não sabe fundir algo tão grande. Chamam artesãos chineses Song; 14 fundidores de Kawachi entram no meio da obra e os chineses fazem “cara de desagrado” (registrado num diário da corte!). Uma história de transferência de tecnologia com ciúmes profissionais.</p>
+          <div class="source">
+            <span lang="ja">草の実堂（奥河内から情報発信）</span>
+            <a href="https://kusanomido.com/visited/134029/" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>源平の争乱が続く治承4年（1180年）、平重衡（たいらの しげひら）による南都焼討で奈良・東大寺は炎上し、大仏も大きく焼損しました。</p>
+            <p>この大仏をよみがえらせるために集められた技術者の中に、河内を拠点とする鋳物師（いものし）たちがいました。</p>
+            <p>ところが、大仏を再び造ろうとした重源たちは大きな問題に直面しました。当時の日本では鍋や釜などの小型品は造られていたものの、大仏のような巨大な金銅仏を鋳造する技術や経験が衰えていたのです。</p>
+            <p>養和元年（1181年）、大仏の破損状況を調査した鋳物師10余人も、再鋳造は自分たちの力では及ばないと判断しました。そこで重源が招いたのが、宋から九州へ渡来していた工人・陳和卿（ちんなけい）です。</p>
+            <p>寿永2年（1183年）4月、大仏の頭部を鋳造する段階から、草部是助（くさかべのこれすけ）が率いる河内鋳物師14人が加わりました。</p>
+            <p>公家・九条兼実の日記『玉葉』には、河内の鋳物師が加わったことに対し、宋の工人が「不快之色」を示したものの、重源の説得によって納得したことまで記されています。</p>
+            <p>この大事業を通じて、河内鋳物師は宋の進んだ鋳造法を学び、大型鋳造品を造るための技術と知識を身につけました。</p>
+          </div>
+          <p class="continue"><a href="https://kusanomido.com/visited/134029/" target="_blank" rel="noopener" lang="ja">続きを読む · 草の実堂（奥河内から情報発信）</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p3">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★★</span> <span class="chip mins">7 min</span> <span class="chip" lang="ja">世界史</span> <span class="chip" lang="ja">ブルガリア</span> <span class="chip" lang="ja">モンゴル</span> <span class="chip" lang="ja">農民反乱</span>
+          </div>
+          <h2 lang="ja">豚飼いの農民が皇帝を倒し、その妻と結婚して皇帝に「キャベツ王」イヴァイロの壮絶な生涯</h2>
+          <p class="why">Bulgária, 1277: um porqueiro que vivia de pão e ervas derrota os mongóis, mata o czar em batalha e… a viúva do czar lhe propõe casamento para salvar o trono do filho. Reina cerca de um ano, vence Bizâncio duas vezes e morre assassinado num banquete do khan Nogai. Enredo de série.</p>
+          <div class="source">
+            <span lang="ja">草の実堂（編集部）</span>
+            <a href="https://kusanomido.com/study/history/western/133119/" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>当時のブルガリアは1240年代以降、モンゴル勢による侵攻や略奪に繰り返しさらされていました。 さらに国内では皇帝と貴族の対立が続き、南からは東ローマ帝国も介入の機会をうかがっていました。</p>
+            <p>同時代の東ローマ史家パキメレスによれば、彼は雇われて豚を飼っていた農民でした。</p>
+            <p>そんな中、イヴァイロは「国を救えという神の啓示を受けた」と訴え、次第に人々を集めるようになります。 そして1277年、民衆を率いて立ち上がると、ブルガリア北部に侵入していたモンゴル勢を相次いで撃破したのです。</p>
+            <p>彼によれば、イヴァイロは身なりにも食事にも無頓着で、パンと野草などで暮らす質素な人物でした。 そのためギリシア語で野菜や青菜を意味する「ラハノン」にちなみ「ラハナス」と呼ばれるようになったと伝えています。</p>
+            <p>そこで彼女は幼い息子ミハイルの帝位継承権を守り抜くため、驚くべき政治的駆け引きに出ます。 なんとイヴァイロに使者を送り、自分との結婚と新皇帝への即位を提案したのです。</p>
+            <p>当初、イヴァイロはこの申し出に対し「そんなものを差し出されなくとも、自分は力づくで手に入れる」と尊大な態度をとっていましたが、内乱による無用な流血を避けるため、最終的にはその条件を受け入れました。</p>
+            <p>1280年、イヴァイロは形勢を立て直すため、かつて戦ったモンゴルのノガイのもとを訪れ、支援を求めます。 しかしそこにはイヴァン・アセン3世も現れ、同じようにノガイの後ろ盾を得ようとしていました。</p>
+            <p>ノガイはしばらく二人に支援を期待させましたが、最終的にはイヴァイロの殺害を命じ、イヴァイロは宴席の最中にその場で殺されてしまったのです。</p>
+          </div>
+          <p class="continue"><a href="https://kusanomido.com/study/history/western/133119/" target="_blank" rel="noopener" lang="ja">続きを読む · 草の実堂（編集部）</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p4">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★★</span> <span class="chip mins">4 min</span> <span class="chip" lang="ja">水中考古学</span> <span class="chip" lang="ja">航海</span> <span class="chip" lang="ja">青銅器時代</span> <span class="chip" lang="ja">地中海</span>
+          </div>
+          <h2 lang="ja">トルコ沖で見つかった沈没船、世界最古の沈没船と判明　船内の遺物の年代から</h2>
+          <p class="why">Arqueologia + vela: a 30 m de profundidade, perto da ilha de Kekova (Turquia), um navio de ~4.700 anos — da época das pirâmides de Gizé — vira o naufrágio mais antigo do mundo. Uma ânfora furada sugere que os marinheiros levavam cabras a bordo para fazer queijo. A pista veio de um artigo sobre ânforas de Gizé.</p>
+          <div class="source">
+            <span lang="ja">CNN.co.jp</span>
+            <a href="https://www.cnn.co.jp/fringe/35253565.html" target="_blank" rel="noopener">原文を開く ↗</a> · <a href="https://www.sankei.com/article/20261016-R5AJMOSLGJHEDNC35R2AJA55XA/" target="_blank" rel="noopener" lang="ja">産経ニュース版 ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>（CNN） トルコ沖で見つかった沈没船について、調査を行っていた考古学者たちが約4700年前の船だったことを突き止めた。世界で最古の沈没船になるという。</p>
+            <p>沈没船はトルコ南部沿岸のケコバ島付近、水深約30メートルの海底で見つかった。調査の結果、アンフォラと呼ばれる古代の貯蔵容器が多数回収された。</p>
+            <p>アンフォラは主にオリーブオイルやワインの運搬に使われていたと考えられている。しかし、あるアンフォラには特徴的な刻印と二つの穴があり、チーズやバターの製造に使われていた可能性が示唆されている。</p>
+            <p>研究者らは当該のアンフォラの存在について、船乗りたちが航海にヤギを連れて行き、その乳で乳製品を作っていた可能性を示していると述べている。</p>
+            <p>当初、アンフォラはもっと新しい時代のものと考えられていた。だがオニズ氏がエジプトにあるギザのピラミッド付近で出土したアンフォラに関する論文を読んだところ、沈没船から見つかったアンフォラと似ていることが判明。研究チームは再度の潜水調査を行ったという。</p>
+            <p>研究者たちによれば当該の船は、北はトルコから南はエジプトまで続くレバント沿岸を出発した後、トロイまたはクレタ島へ向かう途中で難破した可能性があるという。</p>
+          </div>
+          <p class="continue"><a href="https://www.cnn.co.jp/fringe/35253565.html" target="_blank" rel="noopener" lang="ja">続きを読む · CNN.co.jp</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p5">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★★</span> <span class="chip mins">6 min</span> <span class="chip" lang="ja">NatGeo</span> <span class="chip" lang="ja">生命科学</span> <span class="chip" lang="ja">クローン</span> <span class="chip" lang="ja">日本の研究</span>
+          </div>
+          <h2 lang="ja">無限に作れるはずのクローンのクローン、58世代で絶えた　なぜ？</h2>
+          <p class="why">Um experimento de 20 anos digno de ficção: o japonês Teruhiko Wakayama clonou um camundongo, depois o clone do clone… 1.200 animais e 58 gerações. A taxa de sucesso subia — até que, na 27ª geração, virou. Como cópia de cópia numa xerox, as mutações se acumulam. Saiu hoje.</p>
+          <div class="source">
+            <span lang="ja">ナショナル ジオグラフィック日本版</span>
+            <a href="https://natgeo.nikkeibp.co.jp/atcl/news/26/101900574/" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>2005年、クローン技術の先駆者である若山照彦氏（現・山梨大学教授）が、1匹のメスのマウスからクローンを作成した。……しかし、若山氏はそこから驚くべきことを試みる。理論上、無限に続けられる再クローニングを、鎖のようにどこまでも続けてみることにしたのだ。</p>
+            <p>「コピー機で絵をコピーすると、わずかに絵の画質が悪くなります。そのコピーされた絵を再びコピーすると画質はさらに悪化します」と若山氏は言う。「われわれは、クローンマウスにも同じことが起こったらどうなるのかを調べようと思いました」</p>
+            <p>約20年にわたり、若山氏らは3万回を超えるクローン作成を試み、およそ1200匹のクローンマウスを作ることに成功した。マウスは毎年最大4世代が誕生し、その合計は58世代に達した。</p>
+            <p>当初、成功率（代理母に移植されたクローン胚の数に対して実際に生まれたマウスの割合）は世代を経るごとに上昇していくかに見えた。第1世代では7％だったものが、26世代では15.5％に達した。</p>
+            <p>しかし、ここで予想外のことが起こったと、若山氏は言う。27世代以降、成功率は下がり始め、58世代では0.6％にまで落ち込んだのだ。この世代に生まれた5匹がすべて翌日に死亡し、再クローニングは途絶えた。</p>
+            <p>成功率が急激に低下した理由を探るため、研究者らは異なる世代に属するマウスのゲノムを解析した。その結果、再クローニングを重ねるごとに有害な突然変異が蓄積していることを突き止めた。</p>
+            <p>「とても驚きました。クローンはもとの個体とまったく同じだと考えていたからです」と若山氏は述べている。実際のところ、クローンマウスには、自然交配で生まれるマウスの約3倍の頻度で突然変異（一塩基変異）が生じていたという。</p>
+            <p>有害な変異の蓄積を抑える働きがある有性生殖に対して、クローンではこうした変異は次世代に伝わりやすく、蓄積されてゆく。</p>
+          </div>
+          <p class="continue"><a href="https://natgeo.nikkeibp.co.jp/atcl/news/26/101900574/" target="_blank" rel="noopener" lang="ja">続きを読む · ナショナル ジオグラフィック日本版</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p6">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★☆</span> <span class="chip mins">7 min</span> <span class="chip" lang="ja">まつり</span> <span class="chip" lang="ja">京都</span> <span class="chip" lang="ja">鞍馬の火祭</span> <span class="chip" lang="ja">民俗信仰</span>
+          </div>
+          <h2 lang="ja">世代を越えて受け継がれる火の信仰と祭り</h2>
+          <p class="why">Na quinta (22/10) é o Kurama no Himatsuri. Este texto da prefeitura de Kyoto explica por que a cidade que mais queimou no Japão cultua o fogo: amuletos 火迺要慎 nas cozinhas, ascetas que “domavam” incêndios, a origem lendária do Kurama (que o próprio texto diz ser improvável) e o Ano-Novo em que se trocavam insultos no escuro.</p>
+          <div class="source">
+            <span lang="ja">京都市「京都の文化遺産」（まち・ひと・こころが織り成す京都遺産）</span>
+            <a href="https://kyoto-bunkaisan.city.kyoto.lg.jp/kyotoisan/nintei-theme/hinoshinkou.html" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>神社に参拝した時、火を灯してお祈りしたことはありませんか。家の台所や飲食店に貼られた「火迺要慎」の札。これが何を意味するのか知っていますか。</p>
+            <p>近世の京都では、宝永・享保・天明という3度の大火が発生しており、中でも天明8（1788）年におきた大火では、京都の市中のほとんどの家屋が焼き尽くされたと伝えられている。</p>
+            <p>しかし人並みはずれた修行を積み、特別な霊力を身につけた宗教者だけは、魔物と化した火をコントロールすることができると信じられていた。その宗教者とは、まさに山岳で修行を積む修験者たちであった。</p>
+            <p>愛宕神社に詣でた人々がいただいて帰るものは、「火迺要慎」と書かれた護符。家の台所や店の厨房に貼ることで火災除けのお守りにします。</p>
+            <p>鞍馬火祭は毎年10月22日に鞍馬の里で行われる由岐神社の例大祭で、鞍馬祭ともよばれている。……今日では松明だけが有名になったが、かつては神輿と剣鉾がこのまつりの主役であり、松明の存在はさほど重要ではなかったものと思われる。</p>
+            <p>松明の起源に関しては、朱雀天皇の天慶3年（940）9月9日夜に、それまで御所に祀られていた由岐大明神が鞍馬に勧請された時に、村人たちが地主神である八所明神を神輿に乗せ、無数の松明を持って出迎えたという故事に由来するといわれているが、これは伝承に過ぎず史実とは考えにくい。</p>
+            <p>石座神社で10月に行われる火祭は、昔、雄雌の大蛇が村人を苦しめており、困った村人たちが石座明神に祈願したところ、「神火をもって退治せよ」とのお告げがあり、大松明を燃やしたところ、見事に大蛇を退治することができたとする故事に因む。</p>
+            <p>おけら詣りは、江戸時代までは「暗闇詣り」と「悪態祭り」と合体した形で行われていた。真暗闇の中で悪態を言い合うという異様な様は、再生つまり「生まれかわり」を意味するものと考えられる。</p>
+          </div>
+          <p class="continue"><a href="https://kyoto-bunkaisan.city.kyoto.lg.jp/kyotoisan/nintei-theme/hinoshinkou.html" target="_blank" rel="noopener" lang="ja">続きを読む · 京都市「京都の文化遺産」（まち・ひと・こころが織り成す京都遺産）</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p7">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★☆</span> <span class="chip mins">4 min</span> <span class="chip" lang="ja">兵庫</span> <span class="chip" lang="ja">化石</span> <span class="chip" lang="ja">新温泉町</span> <span class="chip" lang="ja">阪神電車</span>
+          </div>
+          <h2 lang="ja">チョウの羽の化石は世界最古の現生種　新温泉で250万年前の地層から発見、展示　国際学術誌に発表</h2>
+          <p class="why">Duas pílulas de Hyogo: um funcionário de Shin’onsen tropeçou numa pedra em 1990, ela se partiu e revelou uma asa de borboleta — agora identificada como a espécie viva mais antiga do mundo (2,5 milhões de anos), que nem existe mais no Japão. E o clássico “Akadō-sha” do Hanshin (1958) virou sala de convivência num conjunto habitacional em Nishinomiya.</p>
+          <div class="source">
+            <span lang="ja">神戸新聞NEXT（伊藤颯真／風斗雅博）</span>
+            <a href="https://www.kobe-np.co.jp/news/society/202610/0020931522.shtml" target="_blank" rel="noopener">原文を開く ↗</a> · <a href="https://www.kobe-np.co.jp/news/society/202610/0020935201.shtml" target="_blank" rel="noopener" lang="ja">神戸新聞「赤胴車、武庫川団地で住民憩いの場に」 ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>兵庫県新温泉町の約２５０万年前の地層から発見され、同町千谷の「おもしろ昆虫化石館」に展示されていたチョウの羽の化石が、中国北部に生息するシロチョウ科のポターニンミヤマシロチョウと分かった。世界で最も古い現生種のチョウの化石となり、慶応義塾幼稚舎の高橋唯教諭らの研究チームが７月、国際的な古生物学会の学術誌のオンライン版に発表した。</p>
+            <p>化石は横幅４・２センチほどの前羽で、世界で確認されているミヤマシロチョウ属の現生種全４０種と比較した結果、外縁や翅脈などの特徴が一致した。チョウは化石に残ることが少なく、種まで同定できるものは極めて珍しいという。</p>
+            <p>ポターニン－は現在、日本にはいないとされており、かつて生息していた証拠ともなった。</p>
+            <p>馬場さんは「蹴つまずいた石が割れ、きれいな羽の化石が出てきた」と振り返り「価値を聞き、驚いている。さらに調査が進み、町の活性化につながればうれしい」と話している。</p>
+            <p>【赤胴車】クリーム色と朱色のツートンカラー。阪神沿線の住民が親しむ伝統車両の中や外で、子どもたちがにぎやかな声を響かせて駆け回っている。</p>
+            <p>１９５８年に登場し、「赤胴車」の愛称で知られる。一度、引退するも、多くの声を受けて復活となった人気の配色。阪神武庫川線沿いの、兵庫県西宮市の都市再生機構（ＵＲ）武庫川団地の一画に、引退車両の１両が保存されている。</p>
+          </div>
+          <p class="continue"><a href="https://www.kobe-np.co.jp/news/society/202610/0020931522.shtml" target="_blank" rel="noopener" lang="ja">続きを読む · 神戸新聞NEXT（伊藤颯真／風斗雅博）</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p8">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★☆☆</span> <span class="chip mins">2 min</span> <span class="chip" lang="ja">BABYMETAL</span> <span class="chip" lang="ja">SU-METAL</span> <span class="chip" lang="ja">海外公演</span> <span class="chip" lang="ja">JPロック</span>
+          </div>
+          <h2 lang="ja">海外ショーケースライブ「matsuri」バンコクで開催　アイナ・ジ・エンド、milet、LiSAが登場</h2>
+          <p class="why">Nota curta: SU-METAL vai sozinha como convidada especial no “matsuri ’27” em Bangkok (13/02/2027), vitrine da indústria japonesa para exportar música, ao lado de LiSA, milet e AiNA. E o single “My Queen” com Courtney LaPlante (Spiritbox) ganha 7 polegadas com a versão ao vivo do Intuit Dome.</p>
+          <div class="source">
+            <span lang="ja">OTOMO（CEIPA / MUSIC AWARDS JAPAN公式メディア）</span>
+            <a href="https://otomo.net/contents/1119577" target="_blank" rel="noopener">原文を開く ↗</a> · <a href="https://metalboost.net/news/2026-10/" target="_blank" rel="noopener" lang="ja">METAL BOOST 10月ニュース ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>日本の音楽を世界へ届ける海外ショーケースライブ「matsuri ‘27: Japanese Music Experience BANGKOK」が2027年2月13日にタイ・バンコクのUOB LIVEで開催される。</p>
+            <p>「matsuri」は一般社団法人日本音楽レーベル協会（CEIPA）とTOYOTA GROUPによる日本音楽のグローバル化と持続的成長を推進するプロジェクト「MUSIC WAY PROJECT」の一環として、2025年3月にアメリカ・ロサンゼルスで初開催されたイベント。今回は日本とタイが修好140周年の節目を迎える2027年に、バンコクを舞台に行われる。</p>
+            <p>出演アーティストにラインナップされたのはアイナ・ジ・エンド、LiSA、miletの3組。さらにスペシャルゲストとしてSU-METAL（BABYMETAL）と、現地タイで人気を誇るロックバンド・POTATOが登場する。</p>
+            <p>【METAL BOOSTより】BABYMETAL、Courtney LaPlante（SPIRITBOX）との7インチEP『My Queen: Intuit Dome Anniversary Edition』を12月18日に発売……A面はスタジオ版、B面は2025年11月1日の米イングルウッドIntuit Dome公演で両者が初めて同じステージで披露したライヴ版。</p>
+          </div>
+          <p class="continue"><a href="https://otomo.net/contents/1119577" target="_blank" rel="noopener" lang="ja">続きを読む · OTOMO（CEIPA / MUSIC AWARDS JAPAN公式メディア）</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p9">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★★</span> <span class="chip mins">6 min</span> <span class="chip" lang="ja">AI</span> <span class="chip" lang="ja">OSS</span> <span class="chip" lang="ja">GitHub</span> <span class="chip" lang="ja">開発文化</span>
+          </div>
+          <h2 lang="ja">有名 OSS が PR を閉じはじめた。何が起きていて、どう向き合うか</h2>
+          <p class="why">Hono, tldraw, Ladybird, Sindre Sorhus, Ghostty, Zig: em 2026 os grandes open source estão fechando PRs externos. Não é só “PR de IA é ruim” — um PR deixou de dizer quem é a pessoa que o enviou. O mantenedor do pdfme inverte Linus: “Não mostre o código. Converse.” Relevante para quem vive de Claude/Cursor.</p>
+          <div class="source">
+            <span lang="ja">Zenn（Kyohei Fukuda／pdfme）</span>
+            <a href="https://zenn.dev/hand_dot/articles/ecb391d4322330" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>2026年に入ってから、有名な OSS が次々と PR を閉じはじめているなぁと感じています。</p>
+            <p>たしかに。AI スロップ、PR を起点にした脆弱性のニュース、とりあえず有名 OSS にコントリビュートしたいだけの人など、メンテナーが疲弊する原因は AI が登場してから増え続けているように感じます。</p>
+            <p>PR 以外の入口でも同じことが起きています。curl は、2025年に入ってから本物の脆弱性だった報告が5%を下回り、1月末で報奨金つきのバグ報告の制度をやめました。</p>
+            <p>以前は、大きなパッチを送ってくること自体が「この人はちゃんと時間をかけた」という目印になっていました。AI でそれが安く作れるようになり、PR を見ても送った人のことがわからなくなった。PR は「誰を信用するか」を決める手段でもあったのに、それが使えなくなった、ということです。</p>
+            <p>Zig も近いことを言っています。PR をレビューするのは、コードを入れるためだけではなく、将来一緒にやれる人を育てるため。AI に書かせた PR を何本レビューしても、疲れるのはレビュワーだけで、書いた人は育たない。</p>
+            <p>今のところ OSS で有効なのは「根回し」だと思います。PR を送る前に Issue を立てる、Discussion で方針を固める、Discord でコミュニケーションを取る、といったことです。</p>
+            <p>コードは見せるな。口を動かせ。 — Kyohei Fukuda</p>
+            <p>これは OSS に限った話ではなく、仕事でも同じことが起きると思います。生産コストが劇的に下がった今、AI が書いたコードやドキュメントをやり取りするときは、「信頼」「検証する側のコスト」「根回し」について一度考え直してみるのも悪くないと思います。</p>
+          </div>
+          <p class="continue"><a href="https://zenn.dev/hand_dot/articles/ecb391d4322330" target="_blank" rel="noopener" lang="ja">続きを読む · Zenn（Kyohei Fukuda／pdfme）</a></p>
+        </div>
+      </article>
+
+      <footer class="site">読解幕 · 2026-10-19 · ~49 min · <a href="../../history/" style="color:inherit">History</a> · deliton.github.io/japanese-digest</footer>
+    </main>
+  </div>
+</body>
+</html>
