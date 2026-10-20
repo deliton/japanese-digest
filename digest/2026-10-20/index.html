@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>読解幕 · 2026-10-20 · Japanese Digest</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Noto+Serif+JP:wght@400;600;700&family=Shippori+Mincho:wght@500;700&display=swap" rel="stylesheet" />
+  <style>
+
+    :root {
+      --bg: #0a0a0a;
+      --bg-2: #121212;
+      --bg-card: #161616;
+      --ink: #f5f5f5;
+      --ink-dim: #a8a29a;
+      --ink-mute: #6b6560;
+      --shu: #c41e3a;
+      --shu-hot: #e11d48;
+      --shu-deep: #8b1228;
+      --gold: #d4a017;
+      --gold-soft: #c9a227;
+      --white: #fafafa;
+      --line: #2a2a2a;
+      --line-hot: rgba(196, 30, 58, 0.45);
+      --measure: 42rem;
+      --radius: 4px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: "Noto Sans JP", "Hiragino Sans", "Yu Gothic", system-ui, sans-serif;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .stage-bar {
+      height: 6px;
+      background: repeating-linear-gradient(
+        90deg,
+        var(--shu) 0 48px,
+        var(--white) 48px 56px,
+        #111 56px 64px,
+        var(--gold) 64px 72px,
+        #111 72px 88px
+      );
+    }
+
+    .wrap {
+      width: min(100% - 2rem, 74rem);
+      margin: 0 auto;
+      padding: 2rem 0 4.5rem;
+      display: grid;
+      grid-template-columns: 15.5rem 1fr;
+      gap: 2.75rem;
+      align-items: start;
+    }
+
+    @media (max-width: 900px) {
+      .wrap { grid-template-columns: 1fr; gap: 1.5rem; padding-top: 1.25rem; }
+      .sidebar { position: static !important; }
+    }
+
+    .sidebar { position: sticky; top: 1.25rem; }
+
+    .brand {
+      display: flex;
+      align-items: baseline;
+      gap: 0.55rem;
+      margin: 0 0 0.35rem;
+    }
+    .brand-mark {
+      font-family: "Shippori Mincho", "Noto Serif JP", serif;
+      font-size: 1.85rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      color: var(--white);
+      line-height: 1;
+    }
+    .brand-mark em {
+      font-style: normal;
+      color: var(--shu);
+    }
+    .brand-sub {
+      font-size: 0.65rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-weight: 700;
+    }
+
+    .meta {
+      color: var(--ink-mute);
+      font-size: 0.8rem;
+      margin: 0 0 1.25rem;
+    }
+
+    .stat-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-bottom: 1.35rem;
+    }
+    .stat {
+      border: 1px solid var(--line);
+      background: var(--bg-2);
+      padding: 0.32rem 0.65rem;
+      font-size: 0.72rem;
+      color: var(--ink-dim);
+      border-radius: var(--radius);
+    }
+    .stat strong { color: var(--white); font-weight: 700; }
+    .stat.hot {
+      border-color: var(--shu);
+      color: var(--shu-hot);
+      background: rgba(196, 30, 58, 0.1);
+    }
+
+    .toc {
+      border: 1px solid var(--line);
+      background: var(--bg-2);
+      padding: 0.85rem 0.9rem 0.95rem;
+      border-radius: var(--radius);
+    }
+    .toc h2 {
+      margin: 0 0 0.65rem;
+      font-size: 0.72rem;
+      letter-spacing: 0.16em;
+      color: var(--gold);
+      font-weight: 800;
+    }
+    .toc ol { list-style: none; margin: 0; padding: 0; }
+    .toc li { margin: 0; }
+    .toc a {
+      display: flex;
+      justify-content: space-between;
+      gap: 0.5rem;
+      text-decoration: none;
+      color: var(--ink-dim);
+      font-size: 0.82rem;
+      padding: 0.38rem 0.2rem;
+      border-bottom: 1px solid transparent;
+    }
+    .toc a:hover { color: var(--white); border-bottom-color: var(--line-hot); }
+    .toc .t-title { font-weight: 600; }
+    .toc .t-min { color: var(--gold); font-size: 0.72rem; font-weight: 700; flex-shrink: 0; }
+
+    .main { max-width: var(--measure); }
+
+    .digest-banner {
+      display: flex;
+      gap: 0.75rem;
+      align-items: flex-start;
+      background: #141014;
+      border: 1px solid var(--line);
+      border-left: 3px solid var(--shu);
+      padding: 0.85rem 1rem;
+      margin-bottom: 1.5rem;
+      font-size: 0.78rem;
+      color: var(--ink-dim);
+      line-height: 1.55;
+    }
+    .digest-banner .tag {
+      flex-shrink: 0;
+      background: var(--shu);
+      color: #fff;
+      font-size: 0.65rem;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      padding: 0.28rem 0.5rem;
+      border-radius: var(--radius);
+    }
+
+    .hero {
+      margin-bottom: 2rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid var(--line);
+      position: relative;
+    }
+    .hero::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -1px;
+      width: 4.5rem;
+      height: 2px;
+      background: var(--shu);
+    }
+    .kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.7rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--shu-hot);
+      font-weight: 800;
+      margin-bottom: 0.85rem;
+    }
+    .kicker::before {
+      content: "◆";
+      font-size: 0.55rem;
+      color: var(--gold);
+    }
+    .hero h1 {
+      font-family: "Shippori Mincho", "Noto Serif JP", serif;
+      font-size: clamp(1.85rem, 4vw, 2.55rem);
+      font-weight: 700;
+      line-height: 1.2;
+      margin: 0 0 0.75rem;
+      color: var(--white);
+      letter-spacing: 0.02em;
+    }
+    .hero p {
+      margin: 0;
+      color: var(--ink-dim);
+      font-size: 0.98rem;
+      max-width: 36rem;
+    }
+
+    article.piece {
+      background: var(--bg-card);
+      border: 1px solid var(--line);
+      margin-bottom: 1.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+    article.piece::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: linear-gradient(90deg, var(--shu) 0%, var(--shu) 35%, var(--gold) 35%, var(--gold) 42%, transparent 42%);
+    }
+
+    .piece-inner { padding: 1.6rem 1.55rem 1.35rem; }
+
+    .piece-head {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-bottom: 0.85rem;
+    }
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      border: 1px solid var(--line);
+      background: #111;
+      color: var(--ink-dim);
+      padding: 0.22rem 0.6rem;
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      border-radius: var(--radius);
+    }
+    .chip.interest {
+      border-color: var(--shu);
+      color: var(--shu-hot);
+      background: rgba(196, 30, 58, 0.12);
+    }
+    .chip.mins {
+      border-color: var(--gold);
+      color: var(--gold);
+      background: transparent;
+    }
+
+    .piece h2 {
+      font-family: "Noto Serif JP", "Shippori Mincho", "Yu Mincho", serif;
+      font-size: 1.38rem;
+      font-weight: 700;
+      line-height: 1.5;
+      margin: 0 0 0.6rem;
+      color: var(--white);
+      letter-spacing: 0.02em;
+    }
+
+    .why {
+      margin: 0 0 1rem;
+      color: var(--ink-dim);
+      font-size: 0.9rem;
+      border-left: 2px solid var(--gold);
+      padding-left: 0.85rem;
+    }
+
+    .source {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.65rem 1.1rem;
+      font-size: 0.76rem;
+      color: var(--ink-mute);
+      margin-bottom: 1.25rem;
+    }
+    .source a {
+      color: var(--shu-hot);
+      text-decoration: none;
+      font-weight: 600;
+    }
+    .source a:hover { color: var(--gold); }
+
+    .ja {
+      font-family: "Noto Serif JP", "Hiragino Mincho ProN", "Yu Mincho", serif;
+      font-size: 1.08rem;
+      line-height: 2;
+      letter-spacing: 0.03em;
+      color: #ebe7e1;
+    }
+    .ja p { margin: 0 0 1.15em; }
+    .ja p:last-child { margin-bottom: 0; }
+
+    .continue {
+      margin-top: 1.25rem;
+      padding-top: 1rem;
+      border-top: 1px solid var(--line);
+      font-size: 0.86rem;
+    }
+    .continue a {
+      color: var(--white);
+      text-decoration: none;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      border-bottom: 2px solid var(--shu);
+      padding-bottom: 0.1rem;
+    }
+    .continue a:hover {
+      color: var(--shu-hot);
+      border-bottom-color: var(--gold);
+    }
+
+    footer.site {
+      max-width: var(--measure);
+      margin-top: 1.75rem;
+      color: var(--ink-mute);
+      font-size: 0.72rem;
+      letter-spacing: 0.06em;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+    footer.site::before {
+      content: "";
+      width: 1.25rem;
+      height: 2px;
+      background: var(--shu);
+    }
+
+  
+    .excerpt-label { font-size: 0.66rem; letter-spacing: 0.18em; color: var(--gold); font-weight: 800; margin: 0 0 0.6rem; }
+    .brand-sub a, .stat a { color: var(--gold); text-decoration: none; }
+    .toc .t-min { font-variant-numeric: tabular-nums; }
+  </style>
+</head>
+<body>
+  <div class="stage-bar" aria-hidden="true"></div>
+
+  <div class="wrap">
+    <aside class="sidebar">
+      <div class="brand">
+        <span class="brand-mark" lang="ja">読解<em>幕</em></span>
+      </div>
+      <p class="brand-sub">Kabuki Digest · <a href="../../history/">History</a></p>
+      <p class="meta">2026-10-20 · America/Sao_Paulo</p>
+      <div class="stat-row">
+        <span class="stat"><strong>48</strong> min</span>
+        <span class="stat"><strong>9</strong> pieces</span>
+        <span class="stat"><strong>~5,900</strong> 字</span>
+        <span class="stat"><a href="../../history/">History</a></span>
+      </div>
+
+      <nav class="toc" aria-label="Índice">
+        <h2 lang="ja">本日の演目</h2>
+        <ol>
+          <li>
+            <a href="#p1">
+              <span class="t-title" lang="ja">道明寺合戦——又兵衛、霧の中の6時間</span>
+              <span class="t-min">7′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p2">
+              <span class="t-title" lang="ja">安倍晴明はどこで生まれた？</span>
+              <span class="t-min">5′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p3">
+              <span class="t-title" lang="ja">定説を覆す考古学：弥生の「戦争」と岩宿の赤土</span>
+              <span class="t-min">6′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p4">
+              <span class="t-title" lang="ja">銀の馬車道、「真の設計者」はフランスにいた</span>
+              <span class="t-min">6′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p5">
+              <span class="t-title" lang="ja">時代祭、「朝敵」の時代が行列に加わるまで</span>
+              <span class="t-min">4′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p6">
+              <span class="t-title" lang="ja">新種ネコ「ティルカヨ」バズの光と影</span>
+              <span class="t-min">5′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p7">
+              <span class="t-title" lang="ja">ハワイの移民が生んだ麺「サイミン」</span>
+              <span class="t-min">4′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p8">
+              <span class="t-title" lang="ja">ラルク35年：『HEART』から『REAL』へ</span>
+              <span class="t-min">4′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p9">
+              <span class="t-title" lang="ja">改めて考える、AIエンジニアリングの今</span>
+              <span class="t-min">7′</span>
+            </a>
+          </li>
+        </ol>
+      </nav>
+    </aside>
+
+    <main class="main">
+      <div class="digest-banner">
+        <span class="tag">TRIAGE</span>
+        <span>2026-10-20 — Dōmyōji 1615: Gotō Matabei, o nevoeiro e seis horas contra 23 mil; as (muitas) cidades natais de Abe no Seimei; arqueologia que derruba dogmas — a “guerra Yayoi” reexaminada e Aizawa na terra vermelha de Iwajuku; a estrada da prata Ikuno–Shikama tem um novo projetista francês; o Jidai Matsuri e o período Muromachi “banido”; o gato Tilcayo e o lado B da viralização; saimin, o lámen dos imigrantes do Havaí; L’Arc-en-Ciel de HEART a REAL; e o estado da engenharia de IA em 2026.</span>
+      </div>
+
+      <header class="hero">
+        <div class="kicker">Daily curated reading</div>
+        <h1 lang="ja">霧の中の又兵衛と狐の母の晴明、弥生の戦と岩宿の赤土、銀の馬車道の真の設計者と「朝敵」の時代祭、バズった新種ネコと移民の麺、ラルクの箱舟とAIエンジニアリングの今——ひと朝の読解</h1>
+        <p lang="ja">援軍は霧に阻まれ、それでも小松山へ向かった後藤又兵衛。白狐を母とする伝説まで背負った安倍晴明の、いくつもの「生誕地」。弥生時代に戦争が始まったという定説は揺らぎ、赤土から石器を拾った在野の青年は日本の歴史を数万年さかのぼらせた。鉄道も舟運も諦めて造った明治の馬車道には、フランスに眠っていた「真の設計者」がいた。足利尊氏が朝敵とされたために110年行列から外れた室町、一夜で世界に知られたボリビアの小さな足のネコ、サトウキビ畑から生まれたハワイの麺、箱舟と光を名乗ったラルクの二枚、そして「職種ではなくスキル」になったAIエンジニアリング——推定合計 ~48 分。</p>
+      </header>
+
+      <article class="piece" id="p1">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★★</span> <span class="chip mins">7 min</span> <span class="chip" lang="ja">大坂夏の陣</span> <span class="chip" lang="ja">後藤又兵衛</span> <span class="chip" lang="ja">豊臣滅亡</span> <span class="chip" lang="ja">戦国</span>
+          </div>
+          <h2 lang="ja">豊臣家滅亡の2日前、後藤又兵衛軍2800人が徳川軍2万3000人と激突した「道明寺合戦」</h2>
+          <p class="why">6 de maio de 1615, dois dias antes do fim dos Toyotomi: Gotō Matabei, um rōnin “boicotado” pelo antigo senhor, marcha com 2.800 homens para um desfiladeiro onde Sanada e Mōri deveriam encontrá-lo — mas um nevoeiro denso atrasa todo mundo. Ele não espera e enfrenta 23 mil por seis horas. Bônus: a espada que Hideyoshi possuiu e que o xogum deu ao homem cujas tropas mataram Sanada está exposta em Kyoto até 15/11.</p>
+          <div class="source">
+            <span lang="ja">草の実堂（奥河内から情報発信）</span>
+            <a href="https://kusanomido.com/visited/134916/" target="_blank" rel="noopener">原文を開く ↗</a> · <a href="https://www.yomiuri.co.jp/local/kansai/news/20261019-GYO1T00023/" target="_blank" rel="noopener" lang="ja">読売：幸村を討った忠直に贈られた名刀「無銘貞宗」公開 ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>慶長20年（1615年）5月8日、大坂城で豊臣秀頼と母の淀殿が自害し、秀吉が築いた豊臣家は滅亡しました。その2日前、大坂城の南東に位置する道明寺付近では、豊臣方の武将・後藤又兵衛基次が徳川方の大軍と激突していました。</p>
+            <p>後藤又兵衛基次は、かつて黒田官兵衛（孝高）に見いだされ、その子・黒田長政にも仕えた武将です。……さらに、旧主が他家への仕官を妨げる奉公構（ほうこうかまい）を受けたことで、新たな仕官先を見つけられず、浪人生活を送ることになりました。</p>
+            <p>又兵衛は約2800人を率いて5日夜に平野を出発し、翌6日未明には藤井寺方面へ進みました。ところが一帯は濃霧に包まれ、真田隊や毛利隊などの後続部隊が予定どおりに到着しません。ここで後続を待てば味方の兵力は増やせますが、その間にも徳川軍は先へ進んでしまいます。</p>
+            <p>こうして又兵衛は後続の到着を待たず、先鋒に石川を渡らせて小松山を占領させ、自らも本隊を率いて山へ向かいました。この判断の理由を又兵衛自身が語った記録は確認できませんが、当初の作戦どおりに進もうとした結果、援軍のいないまま大軍と向き合うことになったと考えられます。</p>
+            <p>後藤隊は序盤こそ優勢に戦いましたが、次々と攻め寄せる徳川軍に押され、やがて三方から包囲される形になります。戦闘は約6時間に及び、午前10時ごろ、ついに又兵衛は命を落とし、後藤隊も壊滅したのです。</p>
+            <p>後藤又兵衛が小松山で徳川軍を迎え撃った5月6日から、豊臣家が滅亡した8日まで、わずか3日間。</p>
+            <p>【読売新聞より】重要文化財「刀 無銘貞宗」……細長い溝の「樋」が２本彫られているのが特徴で、豊臣秀吉の所持品だった。豊臣家が滅びた大坂夏の陣で真田信繁（幸村）を討つなど武功を挙げた松平忠直に、２代将軍徳川秀忠が与えたと伝わる。</p>
+          </div>
+          <p class="continue"><a href="https://kusanomido.com/visited/134916/" target="_blank" rel="noopener" lang="ja">続きを読む · 草の実堂（奥河内から情報発信）</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p2">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★☆</span> <span class="chip mins">5 min</span> <span class="chip" lang="ja">平安</span> <span class="chip" lang="ja">陰陽師</span> <span class="chip" lang="ja">伝説</span> <span class="chip" lang="ja">葛の葉</span>
+          </div>
+          <h2 lang="ja">陰陽師・安倍晴明はどこで生まれたのか？ 奈良と大阪に残る「二つの生誕地」の謎</h2>
+          <p class="why">O onmyōji mais famoso do Japão tem pelo menos quatro “cidades natais”: Sakurai (Nara), Abeno (Osaka) — onde a lenda diz que a mãe era uma raposa branca, Kuzunoha —, Ibaraki e Kagawa. Os próprios descendentes Tsuchimikado, em 1754, já separavam “berço do clã” de “berço de Seimei”. Mistério curto, vocabulário de lenda e linhagem.</p>
+          <div class="source">
+            <span lang="ja">草の実堂（編集部）</span>
+            <a href="https://kusanomido.com/visited/shiro/133848/" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>その名は現在も広く知られていますが、実は生まれた場所については、今なお謎が残されています。奈良県と大阪府には、それぞれ晴明の生誕地と伝わる場所があり、現在もゆかりの寺院や神社が残されています。</p>
+            <p>安倍氏の系譜には、奈良時代に遣唐使として唐へ渡った阿倍仲麻呂などが知られ、安倍文殊院では陰陽師・安倍晴明もその子孫であり、延喜21年（921年）にこの地で生まれたと伝えられています。</p>
+            <p>神社の社伝『晴明宮御社伝書』によると、晴明は天慶7年（944年）3月に阿倍野の地で生まれ「安倍童子」と呼ばれたとされています。</p>
+            <p>また、晴明の父を安倍保名（やすな）、母を和泉国・信太の森に住む白狐「葛の葉姫」とする「葛の葉子別れ」の伝説もあります。この伝説では、白狐が人間の女性に姿を変え、保名との間に晴明をもうけたというのです。</p>
+            <p>ここで注目したいのが、晴明の子孫である土御門家が宝暦4年（1754年）にまとめたとされる『晴明霊社旧地之次第』です。……奈良の安倍文殊院は「安倍家の発祥地」、大阪の安倍晴明神社は「晴明の生誕地」と、それぞれ区別されています。</p>
+            <p>さらに晴明の生誕地については、茨城県筑西市の猫島や香川県にも伝承があります。……こうした各地の伝承を比較すると、晴明の生誕地をめぐる謎は、単に「奈良か大阪か」という二択でもないのです。</p>
+          </div>
+          <p class="continue"><a href="https://kusanomido.com/visited/shiro/133848/" target="_blank" rel="noopener" lang="ja">続きを読む · 草の実堂（編集部）</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p3">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★★</span> <span class="chip mins">6 min</span> <span class="chip" lang="ja">考古学</span> <span class="chip" lang="ja">弥生</span> <span class="chip" lang="ja">倭国大乱</span> <span class="chip" lang="ja">旧石器</span> <span class="chip" lang="ja">岩宿</span>
+          </div>
+          <h2 lang="ja">考古学的事実から戦争の「起源」問う　大阪・弥生文化博物館で特別展開幕</h2>
+          <p class="why">Dois “dogmas” derrubados: (1) a guerra no Japão começou mesmo no período Yayoi? A datação dos pilares de Ikegami-Sone desencontrou o “grande tumulto de Wa” das aldeias fortificadas, e a exposição em Izumi (até 13/12) reexamina as seis provas. (2) Em 1946 um amador, Aizawa Tadahiro, achou ferramentas de pedra na terra vermelha de Iwajuku e provou que o Japão teve Paleolítico — agora vira filme; o ator pedalou 200 km para “cumprimentá-lo”.</p>
+          <div class="source">
+            <span lang="ja">産経ニュース</span>
+            <a href="https://www.sankei.com/article/20261019-QXUPTU5FKNMLRL5T6ZAOQDK4Z4/" target="_blank" rel="noopener">原文を開く ↗</a> · <a href="https://yayoi-bunka.com/exhibition/2316/" target="_blank" rel="noopener" lang="ja">弥生文化博物館「ヒト・戦い」 ↗</a> · <a href="https://eiga.com/news/20261020/14/" target="_blank" rel="noopener" lang="ja">映画.com「赤土に眠る」相澤忠洋 ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>弥生時代は日本列島で「戦争」が始まった時代とされてきた。中国の歴史書に「倭国大乱」と記された年代、防御集落が築かれた時期が一致すると考えられたことなどが根拠とされてきたが、同市・泉大津市の池上曽根遺跡から出土した柱の年代測定から、両者の時期がずれることが判明するなど、近年は戦争の証拠とされる事実を問い直す研究が多数発表されている。</p>
+            <p>同展では、武器や受傷人骨など最新の研究資料とともに、「戦争」存在の指標とされる防御集落、武器、殺傷人骨、武器型祭器など6つの考古学的事実をそれぞれ検証、弥生時代の戦争を再検討している。</p>
+            <p>【博物館の解説より】「倭国大いに乱れ、更相攻伐す」。『後漢書』東夷伝は２世紀後半の倭国についてこのように伝えています。……「多数の殺傷をともない得る集団間の武力衝突」、すなわち「戦争」は弥生時代に始まったとする理解が定説となっていました。しかし、年代観の見直しや新たな視点および分析技術にもとづく検討などが進められた結果、現在その評価は大きく揺らいでいます。</p>
+            <p>【映画.comより】現在のみどり市である新田郡笠懸村岩宿の関東ローム層から、人によって作られたと思われる石器を1946年に発見し、「人類の歴史は日本では縄文時代から始まった」という当時の定説を覆し、日本列島に旧石器時代が存在したことを証明する礎となった人物・相澤忠洋の若き日の奮闘を描いたフィクション作品。</p>
+            <p>「せっかくいただいたご縁を何とか自分のもとに引き寄せて大切にしようと思い、相澤さんにご挨拶をするつもりで、自転車を往復200km漕いで東京から撮影現場まで向かった。あの時間は、どこかで天国の相澤さんが僕の姿を見て笑ってくれないかなという一心だった」</p>
+          </div>
+          <p class="continue"><a href="https://www.sankei.com/article/20261019-QXUPTU5FKNMLRL5T6ZAOQDK4Z4/" target="_blank" rel="noopener" lang="ja">続きを読む · 産経ニュース</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p4">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★★</span> <span class="chip mins">6 min</span> <span class="chip" lang="ja">兵庫</span> <span class="chip" lang="ja">姫路</span> <span class="chip" lang="ja">明治</span> <span class="chip" lang="ja">インフラ</span> <span class="chip" lang="ja">生野銀山</span>
+          </div>
+          <h2 lang="ja">銀の馬車道に「真の設計者」 仏に建築家・レスカスの計画図 姫路の研究者が定説覆す発見</h2>
+          <p class="why">Hyogo + infraestrutura + nova evidência: a “estrada de carruagens da prata” (Ikuno–Shikama, 49 km, 1876), a primeira “rodovia industrial” do Japão, sempre foi creditada ao engenheiro Léon Sisley. Uma pesquisadora de Himeji achou na França o plano do arquiteto Jules Lescasse — o verdadeiro projetista. E a parte boa da história: por que não fizeram ferrovia (cara demais) nem canal (o rio era do arroz).</p>
+          <div class="source">
+            <span lang="ja">神戸新聞NEXT（藤本賢市）</span>
+            <a href="https://www.kobe-np.co.jp/news/society/202610/0020947279.shtml" target="_blank" rel="noopener">原文を開く ↗</a> · <a href="https://wadachi73.jp/about/ghistory/" target="_blank" rel="noopener" lang="ja">日本遺産「銀の馬車道 鉱石の道」の歴史 ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>１５０年前に完成した日本初の産業高速道路「銀の馬車道」を整備するに当たって、事前に制作された道路計画図を、日仏文化交流史研究者の白井智子さん（姫路市）がフランスで発見し、レプリカを完成させた。計画図を制作したのはフランス人建築家のジュール・レスカスで、銀の馬車道の実質的な設計者であったことを裏付ける。これまでは仏人技師レオン・シスレーが設計したとされてきたが、定説を覆す史料になるという。</p>
+            <p>【日本遺産「銀の馬車道」公式サイトより】当時の生野から飾磨津までの道は、人が移動する需要も少なく、「但馬道」「生野街道」と呼ばれた道でも、その幅はわずか2m程度。雨が降れば泥に沈み、細く整備されていない道しか知らない当時の人々にとって、生野から飾磨津までの輸送ルートの構想〜実現は想像を絶する困難なものだったに違いありません。</p>
+            <p>鉱石の輸送手段として、最初に検討されたのは「鉄道」でしたが、明治五年（1872年）に日本で初めて開通した、新橋〜横浜間（約29km）の建設費が二百八十万円余りという巨額な費用であったため、……費用対効果は低いとされ断念されます。</p>
+            <p>続いて、市川を活用した舟運計画が検討されますが、新たな掘削と浚渫工事の難しさと費用、そして米作りに水が必要な時期には河川は利用できないという大きな欠点があり見送られました。最終的に昔からある街道を元にして馬車が通れる最新式の道路に改修する道路案が採用されました。</p>
+            <p>ちなみにシスレーの月給は300円で、こちらも現在の貨幣価値に換算すると1千200万円となり、お雇い外国人がいかに厚遇されていたかが想像できます。また、馬車道によって削減された運搬コストは、物資1トンあたり「人夫を使って凸凹道で十七円二十九銭、道をつくれば僅か二円。」と、約88％ものコストダウンが実現されたことが伝えられています。</p>
+          </div>
+          <p class="continue"><a href="https://www.kobe-np.co.jp/news/society/202610/0020947279.shtml" target="_blank" rel="noopener" lang="ja">続きを読む · 神戸新聞NEXT（藤本賢市）</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p5">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★☆</span> <span class="chip mins">4 min</span> <span class="chip" lang="ja">まつり</span> <span class="chip" lang="ja">京都</span> <span class="chip" lang="ja">時代祭</span> <span class="chip" lang="ja">室町</span> <span class="chip" lang="ja">風流踊り</span>
+          </div>
+          <h2 lang="ja">時代祭の行列で一番新しく、華やかな〈室町洛中風俗列〉も20年目…風流を体現するため稽古重ね</h2>
+          <p class="why">Quinta (22/10) é o Jidai Matsuri, o desfile de 2.000 pessoas que vai do período Heian à Restauração Meiji. Detalhe saboroso: o período Muromachi ficou de fora por 110 anos porque Ashikaga Takauji era visto como “inimigo da corte”. Só em 2005 criaram a fila do furyū odori (ancestral do bon odori) — e um bairro de Fushimi teve de aprender música e dança do zero.</p>
+          <div class="source">
+            <span lang="ja">読売新聞（京都）</span>
+            <a href="https://www.yomiuri.co.jp/local/hashtag-kyoto/20261018-GYO1T00116/" target="_blank" rel="noopener">原文を開く ↗</a> · <a href="https://www.yomiuri.co.jp/local/hashtag-kyoto/20261016-GYO1T00112/" target="_blank" rel="noopener" lang="ja">読売「時代祭つなぐプロジェクト」装束の継承 ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>室町洛中風俗列は室町時代、京の町衆によって盛んに催された「風流踊り」を再現したもので、江戸時代以降の盆踊りの原型になったと伝わる。</p>
+            <p>平安から明治維新までの様子を再現する時代祭では、室町幕府を開いた足利尊氏を朝敵とする見方があったことなどから、室町時代は長らく除かれていた。時代考証を担う専門家から「当時の武士や町衆の姿を示す必要がある」という意見が上がり、祭り開始から１１０年を迎えた２００５年に新設に向け動き出した。</p>
+            <p>「引き受け手がいない。何とかしてくれないか」。時代祭を運営する市民組織・平安講社の副理事長（当時）が藤森神社の氏子総代を務めていた縁から、神社の太鼓保存会会長だった前田さんに声がかかった。</p>
+            <p>狂言師が踊りを、音楽の専門家が曲をそれぞれ監修。同年夏頃から練習が始まったが、歌や踊りを新たに習得するという試みは、戸惑いの連続だった。曲と踊りの息を合わせることに苦心したほか、楽譜を一から作ったり、動きやすい動作を工夫したりしながら手探りで練習を重ねた。</p>
+            <p>時代祭に風俗列が加わって２０年目。「一番新しい行列として、継続することが新たな伝統につながっていく。次代に託すためにも、ここでやめるわけにはいかない」。</p>
+          </div>
+          <p class="continue"><a href="https://www.yomiuri.co.jp/local/hashtag-kyoto/20261018-GYO1T00116/" target="_blank" rel="noopener" lang="ja">続きを読む · 読売新聞（京都）</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p6">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★☆</span> <span class="chip mins">5 min</span> <span class="chip" lang="ja">NatGeo</span> <span class="chip" lang="ja">新種</span> <span class="chip" lang="ja">ボリビア</span> <span class="chip" lang="ja">ネットとAI</span>
+          </div>
+          <h2 lang="ja">【動画】新種ネコ「ティルカヨ」熱狂の裏側、名前の意味が判明か</h2>
+          <p class="why">O primeiro gato novo em 100 anos (só existe um indivíduo conhecido, num santuário na Bolívia) viralizou: US$ 150 mil em cripto de doação, 137 tentativas de invasão do site, alguém de Seattle querendo comprar o bicho — e matérias geradas por IA que transformaram a bióloga boliviana em loira branca. E o nome? Aimará: “pé pequeno”.</p>
+          <div class="source">
+            <span lang="ja">ナショナル ジオグラフィック日本版</span>
+            <a href="https://natgeo.nikkeibp.co.jp/atcl/news/26/101600573/" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>そして、この経験の記憶がまだ鮮明に残っている9月に、あのニュースが報じられた。科学者たちが、センダ・ベルデ保護区にいる小型で斑点のあるネコ科動物が実は新種であることを確認し、「ティルカヨ（Leopardus tilcayo）」と名付けたのだ。遺伝子解析の結果、ボリビア原産のこのネコは、約140万年前にほかのタイガーキャットの仲間から分岐したことが明らかになった。</p>
+            <p>ただし、その顔は常にノガレス・アスカルンス氏自身のものだったわけではない。氏によれば、人工知能（AI）で生成されたティルカヨ関連の記事の多くで、ボリビア人研究者である氏の顔立ちは白人寄りに描かれていたという。「私は金髪の白人になっていました」と氏は言う。</p>
+            <p>オシオ氏によると、メディアの熱狂がピークに達したとき、保護区のウェブサイトには10分ごとに計137件もの不正アクセスの試みがあったという。……米国シアトルに住む人物からの電話では、ティルカヨを購入したいと言われた。</p>
+            <p>オシオ氏は、二つの事例はいずれも「マスコット化」の問題を浮き彫りにしていると考えている。つまり、野生動物が人気になりすぎると、野生の個体を探し出し、ペットとして飼育したり販売したりしようとする人々が増える現象だ。</p>
+            <p>研究者たちが論文中でこのネコに「ティルカヨ」と名づけたのは、現地の住民の一部がそう呼んでいたからだ。しかし、ノガレス・アスカルンス氏がこの言葉の意味を調べたところ、スペイン語にもケチュア語（現地の先住民が話す言語）にも語源は見つからなかった。</p>
+            <p>ところが最近、ある言語学者から連絡があり、「ティルカヨ」は南米の別の先住民言語であるアイマラ語に由来している可能性があると指摘されたという。「ティル（til）」は「小さい」、「カヨ（cayo）」は「足」を意味する単語に由来するらしい。</p>
+          </div>
+          <p class="continue"><a href="https://natgeo.nikkeibp.co.jp/atcl/news/26/101600573/" target="_blank" rel="noopener" lang="ja">続きを読む · ナショナル ジオグラフィック日本版</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p7">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★☆</span> <span class="chip mins">4 min</span> <span class="chip" lang="ja">NatGeo</span> <span class="chip" lang="ja">移民</span> <span class="chip" lang="ja">ハワイ</span> <span class="chip" lang="ja">食文化</span>
+          </div>
+          <h2 lang="ja">昔ながらの名店ですする、ハワイの移民が生んだ麺「サイミン」</h2>
+          <p class="why">Primo distante do lámen dos nikkeis brasileiros: o saimin nasceu nas plantações de cana do Havaí, improvisado por imigrantes japoneses e chineses com o que havia. Já esteve no cardápio do McDonald’s; hoje restam poucas barraquinhas familiares — como o Palace Saimin, 80 anos, oito mesas e dois maneki-neko. “Comer saimin é provar a história do Havaí.”</p>
+          <div class="source">
+            <span lang="ja">ナショナル ジオグラフィック日本版</span>
+            <a href="https://natgeo.nikkeibp.co.jp/atcl/news/26/100500546/" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>サイミンはほんのりと塩気のある熱々のスープに麺と具材を入れたハワイ発祥の料理。かつては街のいたるところにあった家族経営のサイミン店（ハワイ版の昔ながらのダイナー）は、急速に姿を消し、州全体でも一握りの店が残っているだけだ。</p>
+            <p>ハワイの人々には、誰もがひいきのサイミン店がある。以前はマクドナルドでも注文できたが、今は地元で愛される飲食店チェーンの「ジッピーズ」のメニューに載っている。</p>
+            <p>こうした家族経営の店は、サイミンの慎ましやかな起源を反映している。サイミンは、サトウキビ農園などで働いていた日系や中国系移民が、手に入るわずかな食材で工夫を凝らして作った料理だ。「サイミンは祖先と深いつながりを持った料理です。私たちの物語そのものなのです」と、ホノルルの著名なシェフ……マーク・ノグチ氏は言う。</p>
+            <p>地元の人々にとってサイミンは雨の日の夜や風邪を引いた時、失恋で落ち込んだ時に癒やしてくれる食べ物だ。……この80年間、オアフ島のパレス・サイミンは2体の招き猫が見守る中、テーブルが8つあるだけの店でサイミンを出し続けてきた。</p>
+            <p>「サイミンを食べることはハワイの歴史を味わうことです」と、ノグチ氏は言う。</p>
+          </div>
+          <p class="continue"><a href="https://natgeo.nikkeibp.co.jp/atcl/news/26/100500546/" target="_blank" rel="noopener" lang="ja">続きを読む · ナショナル ジオグラフィック日本版</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p8">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★☆</span> <span class="chip mins">4 min</span> <span class="chip" lang="ja">L’Arc-en-Ciel</span> <span class="chip" lang="ja">hyde</span> <span class="chip" lang="ja">JPロック</span> <span class="chip" lang="ja">音楽批評</span>
+          </div>
+          <h2 lang="ja">L’Arc-en-Cielの35年をオリジナルアルバムで振り返る Vol. 2　4人の音楽的挑戦が刻まれた『HEART』から『REAL』までをレビュー</h2>
+          <p class="why">Música com substância (não nota de lineup): com a turnê de 35 anos em andamento e hoje o anúncio de live viewing em cinemas (inclusive Osaka, 17/12), críticos revisitam a fase áurea — a entrada de yukihiro, “虹”, e o par ark/ray, onde Bristol sound, acid techno e gótico convivem com kayō-rock. Ótimo vocabulário de crítica musical (音像, 耽美, 歌メロ).</p>
+          <div class="source">
+            <span lang="ja">Mikiki by TOWER RECORDS（森 朋之／和田信一郎 ほか）</span>
+            <a href="https://mikiki.tokyo.jp/articles/-/44955" target="_blank" rel="noopener">原文を開く ↗</a> · <a href="https://realsound.jp/2026/10/post-2558896.html" target="_blank" rel="noopener" lang="ja">Real Sound：35周年ツアー4公演ライブビューイング決定 ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>初めてオリコン1位となった前作『True』のリリース後、メンバーの脱退を受け、ドラムスにyukihiroが加入。大きな試練と変化の時期を経て、新たなL’Arc-en-Ciel像を提示した記念碑的なアルバムだ。……ストリングスやホーン、打ち込みの音源を大胆に取り入れたことで、幅広い音像を体感できる。</p>
+            <p>特に壮大かつロマンティックなバラードナンバー“虹”は、フランス語で虹を意味するバンド名と重なり、〈終わらない未来を捧げよう〉という決意表明にも似た歌詞を含め、彼らの代表曲の一つとして浸透している。</p>
+            <p>個人的なベストラックは1曲目の“LORELEY”。耽美な世界観と重厚なサウンド、中世ヨーロッパを想起させるリリックが一つになったこの曲は、この時期のL’Arc-en-Cielを象徴していると思う。</p>
+            <p>〈『HEART』以降に出したシングル8曲を1枚にまとめたら単なるベストアルバムになってしまう〉〈アルバムが2枚あればバランスよく振り分けられる〉というアイデアから『ray』と同時進行的に制作され、当時の世紀末感も意識した〈箱舟（ark）に乗って光（ray）のある方へ向かう〉というテーマのもとタイトルが決められた。</p>
+            <p>圧倒的に強い歌メロと、ニューロマンティックとメタルの間に位置するようなコシのある柔らかさ（これこそがラルクの比類なき個性だと思う）もたまらない。聴くほどに味が増す逸品だ。</p>
+          </div>
+          <p class="continue"><a href="https://mikiki.tokyo.jp/articles/-/44955" target="_blank" rel="noopener" lang="ja">続きを読む · Mikiki by TOWER RECORDS（森 朋之／和田信一郎 ほか）</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p9">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★★</span> <span class="chip mins">7 min</span> <span class="chip" lang="ja">AI</span> <span class="chip" lang="ja">Claude Code</span> <span class="chip" lang="ja">Cursor</span> <span class="chip" lang="ja">評価（evals）</span> <span class="chip" lang="ja">開発文化</span>
+          </div>
+          <h2 lang="ja">改めて考える、AIエンジニアリングの今</h2>
+          <p class="why">O tradutor japonês de “AI Engineering” (Chip Huyen) faz o balanço do ano: “engenheiro de IA” virou conjunto de habilidades, não cargo; tudo começa por evals; agentes trabalham enquanto você dorme, então o design passa a ser “como delegar, como verificar e quem responde” (o Linear não deixa agente ser assignee). E o Cursor treinando o Composer com RL a partir do uso real, várias vezes por dia. Termina com um roteiro para avaliar suas próprias skills do Claude Code.</p>
+          <div class="source">
+            <span lang="ja">Zenn（r_kaga／『AIエンジニアリング』訳者）</span>
+            <a href="https://zenn.dev/r_kaga/articles/2fd185c50cea7c" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>私もこの捉え方がしっくりきています。エンジニアにとって、AIエンジニアリングは転職先の職種というより、手持ちのスキルに足していくものになってきました。</p>
+            <p>Webアプリなら、同じ入力には同じ出力が返ってきて、テストが通れば動いていると言えます。AIの出力は毎回少しずつ違い、正解も一つに決まりません。だから「これは良い出力か」を判定する仕組みを、機能より先に用意する必要があります。</p>
+            <p>以前の私は、コーディングエージェントでソフトウェアを作ることは、AIエンジニアリングに含めない立場でした。……今は、そう言い切れなくなっています。</p>
+            <p>コーディングエージェントに何を見せるか（コンテキスト）、どのツールと権限を渡すか、出力が正しいかをどう確かめるか（評価）、どこで人が判断するか。これはAIをプロダクトに組み込むときに考えることと、構造がほとんど同じです。</p>
+            <p>そのため、Linearでは課題の担当者（assignee）になれるのは人だけで、エージェントには委任（delegate）しかできません。エージェントが作業しても、結果に責任を持つ人が画面の上で必ず見えるようになっています。</p>
+            <p>Cursorは、自社モデルComposerを、本番のユーザーの反応で強化学習しています。本番に出したチェックポイントへの反応を報酬にまとめ、約5時間で1周させて、1日に何度もモデルを入れ替えています。</p>
+            <p>自分が使っているコーディングエージェントのスキルを1つ選んで評価してみるのが、いちばん手っ取り早いと思っています。……出力を読み、ダメだったものを「何がダメか」で分類する。いちばん多い失敗を、自動で判定できる形にする。lintやテスト、正規表現でできるものはそれで、できないものだけLLM-as-a-Judgeにする。</p>
+          </div>
+          <p class="continue"><a href="https://zenn.dev/r_kaga/articles/2fd185c50cea7c" target="_blank" rel="noopener" lang="ja">続きを読む · Zenn（r_kaga／『AIエンジニアリング』訳者）</a></p>
+        </div>
+      </article>
+
+      <footer class="site">読解幕 · 2026-10-20 · ~48 min · <a href="../../history/" style="color:inherit">History</a> · deliton.github.io/japanese-digest</footer>
+    </main>
+  </div>
+</body>
+</html>
