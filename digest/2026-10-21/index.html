@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>読解幕 · 2026-10-21 · Japanese Digest</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Noto+Serif+JP:wght@400;600;700&family=Shippori+Mincho:wght@500;700&display=swap" rel="stylesheet" />
+  <style>
+
+    :root {
+      --bg: #0a0a0a;
+      --bg-2: #121212;
+      --bg-card: #161616;
+      --ink: #f5f5f5;
+      --ink-dim: #a8a29a;
+      --ink-mute: #6b6560;
+      --shu: #c41e3a;
+      --shu-hot: #e11d48;
+      --shu-deep: #8b1228;
+      --gold: #d4a017;
+      --gold-soft: #c9a227;
+      --white: #fafafa;
+      --line: #2a2a2a;
+      --line-hot: rgba(196, 30, 58, 0.45);
+      --measure: 42rem;
+      --radius: 4px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: "Noto Sans JP", "Hiragino Sans", "Yu Gothic", system-ui, sans-serif;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .stage-bar {
+      height: 6px;
+      background: repeating-linear-gradient(
+        90deg,
+        var(--shu) 0 48px,
+        var(--white) 48px 56px,
+        #111 56px 64px,
+        var(--gold) 64px 72px,
+        #111 72px 88px
+      );
+    }
+
+    .wrap {
+      width: min(100% - 2rem, 74rem);
+      margin: 0 auto;
+      padding: 2rem 0 4.5rem;
+      display: grid;
+      grid-template-columns: 15.5rem 1fr;
+      gap: 2.75rem;
+      align-items: start;
+    }
+
+    @media (max-width: 900px) {
+      .wrap { grid-template-columns: 1fr; gap: 1.5rem; padding-top: 1.25rem; }
+      .sidebar { position: static !important; }
+    }
+
+    .sidebar { position: sticky; top: 1.25rem; }
+
+    .brand {
+      display: flex;
+      align-items: baseline;
+      gap: 0.55rem;
+      margin: 0 0 0.35rem;
+    }
+    .brand-mark {
+      font-family: "Shippori Mincho", "Noto Serif JP", serif;
+      font-size: 1.85rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      color: var(--white);
+      line-height: 1;
+    }
+    .brand-mark em {
+      font-style: normal;
+      color: var(--shu);
+    }
+    .brand-sub {
+      font-size: 0.65rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-weight: 700;
+    }
+
+    .meta {
+      color: var(--ink-mute);
+      font-size: 0.8rem;
+      margin: 0 0 1.25rem;
+    }
+
+    .stat-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-bottom: 1.35rem;
+    }
+    .stat {
+      border: 1px solid var(--line);
+      background: var(--bg-2);
+      padding: 0.32rem 0.65rem;
+      font-size: 0.72rem;
+      color: var(--ink-dim);
+      border-radius: var(--radius);
+    }
+    .stat strong { color: var(--white); font-weight: 700; }
+    .stat.hot {
+      border-color: var(--shu);
+      color: var(--shu-hot);
+      background: rgba(196, 30, 58, 0.1);
+    }
+
+    .toc {
+      border: 1px solid var(--line);
+      background: var(--bg-2);
+      padding: 0.85rem 0.9rem 0.95rem;
+      border-radius: var(--radius);
+    }
+    .toc h2 {
+      margin: 0 0 0.65rem;
+      font-size: 0.72rem;
+      letter-spacing: 0.16em;
+      color: var(--gold);
+      font-weight: 800;
+    }
+    .toc ol { list-style: none; margin: 0; padding: 0; }
+    .toc li { margin: 0; }
+    .toc a {
+      display: flex;
+      justify-content: space-between;
+      gap: 0.5rem;
+      text-decoration: none;
+      color: var(--ink-dim);
+      font-size: 0.82rem;
+      padding: 0.38rem 0.2rem;
+      border-bottom: 1px solid transparent;
+    }
+    .toc a:hover { color: var(--white); border-bottom-color: var(--line-hot); }
+    .toc .t-title { font-weight: 600; }
+    .toc .t-min { color: var(--gold); font-size: 0.72rem; font-weight: 700; flex-shrink: 0; }
+
+    .main { max-width: var(--measure); }
+
+    .digest-banner {
+      display: flex;
+      gap: 0.75rem;
+      align-items: flex-start;
+      background: #141014;
+      border: 1px solid var(--line);
+      border-left: 3px solid var(--shu);
+      padding: 0.85rem 1rem;
+      margin-bottom: 1.5rem;
+      font-size: 0.78rem;
+      color: var(--ink-dim);
+      line-height: 1.55;
+    }
+    .digest-banner .tag {
+      flex-shrink: 0;
+      background: var(--shu);
+      color: #fff;
+      font-size: 0.65rem;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      padding: 0.28rem 0.5rem;
+      border-radius: var(--radius);
+    }
+
+    .hero {
+      margin-bottom: 2rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid var(--line);
+      position: relative;
+    }
+    .hero::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -1px;
+      width: 4.5rem;
+      height: 2px;
+      background: var(--shu);
+    }
+    .kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.7rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--shu-hot);
+      font-weight: 800;
+      margin-bottom: 0.85rem;
+    }
+    .kicker::before {
+      content: "◆";
+      font-size: 0.55rem;
+      color: var(--gold);
+    }
+    .hero h1 {
+      font-family: "Shippori Mincho", "Noto Serif JP", serif;
+      font-size: clamp(1.85rem, 4vw, 2.55rem);
+      font-weight: 700;
+      line-height: 1.2;
+      margin: 0 0 0.75rem;
+      color: var(--white);
+      letter-spacing: 0.02em;
+    }
+    .hero p {
+      margin: 0;
+      color: var(--ink-dim);
+      font-size: 0.98rem;
+      max-width: 36rem;
+    }
+
+    article.piece {
+      background: var(--bg-card);
+      border: 1px solid var(--line);
+      margin-bottom: 1.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+    article.piece::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: linear-gradient(90deg, var(--shu) 0%, var(--shu) 35%, var(--gold) 35%, var(--gold) 42%, transparent 42%);
+    }
+
+    .piece-inner { padding: 1.6rem 1.55rem 1.35rem; }
+
+    .piece-head {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-bottom: 0.85rem;
+    }
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      border: 1px solid var(--line);
+      background: #111;
+      color: var(--ink-dim);
+      padding: 0.22rem 0.6rem;
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      border-radius: var(--radius);
+    }
+    .chip.interest {
+      border-color: var(--shu);
+      color: var(--shu-hot);
+      background: rgba(196, 30, 58, 0.12);
+    }
+    .chip.mins {
+      border-color: var(--gold);
+      color: var(--gold);
+      background: transparent;
+    }
+
+    .piece h2 {
+      font-family: "Noto Serif JP", "Shippori Mincho", "Yu Mincho", serif;
+      font-size: 1.38rem;
+      font-weight: 700;
+      line-height: 1.5;
+      margin: 0 0 0.6rem;
+      color: var(--white);
+      letter-spacing: 0.02em;
+    }
+
+    .why {
+      margin: 0 0 1rem;
+      color: var(--ink-dim);
+      font-size: 0.9rem;
+      border-left: 2px solid var(--gold);
+      padding-left: 0.85rem;
+    }
+
+    .source {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.65rem 1.1rem;
+      font-size: 0.76rem;
+      color: var(--ink-mute);
+      margin-bottom: 1.25rem;
+    }
+    .source a {
+      color: var(--shu-hot);
+      text-decoration: none;
+      font-weight: 600;
+    }
+    .source a:hover { color: var(--gold); }
+
+    .ja {
+      font-family: "Noto Serif JP", "Hiragino Mincho ProN", "Yu Mincho", serif;
+      font-size: 1.08rem;
+      line-height: 2;
+      letter-spacing: 0.03em;
+      color: #ebe7e1;
+    }
+    .ja p { margin: 0 0 1.15em; }
+    .ja p:last-child { margin-bottom: 0; }
+
+    .continue {
+      margin-top: 1.25rem;
+      padding-top: 1rem;
+      border-top: 1px solid var(--line);
+      font-size: 0.86rem;
+    }
+    .continue a {
+      color: var(--white);
+      text-decoration: none;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      border-bottom: 2px solid var(--shu);
+      padding-bottom: 0.1rem;
+    }
+    .continue a:hover {
+      color: var(--shu-hot);
+      border-bottom-color: var(--gold);
+    }
+
+    footer.site {
+      max-width: var(--measure);
+      margin-top: 1.75rem;
+      color: var(--ink-mute);
+      font-size: 0.72rem;
+      letter-spacing: 0.06em;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+    footer.site::before {
+      content: "";
+      width: 1.25rem;
+      height: 2px;
+      background: var(--shu);
+    }
+
+  
+    .excerpt-label { font-size: 0.66rem; letter-spacing: 0.18em; color: var(--gold); font-weight: 800; margin: 0 0 0.6rem; }
+    .brand-sub a, .stat a { color: var(--gold); text-decoration: none; }
+    .toc .t-min { font-variant-numeric: tabular-nums; }
+  </style>
+</head>
+<body>
+  <div class="stage-bar" aria-hidden="true"></div>
+
+  <div class="wrap">
+    <aside class="sidebar">
+      <div class="brand">
+        <span class="brand-mark" lang="ja">読解<em>幕</em></span>
+      </div>
+      <p class="brand-sub">Kabuki Digest · <a href="../../history/">History</a></p>
+      <p class="meta">2026-10-21 · America/Sao_Paulo</p>
+      <div class="stat-row">
+        <span class="stat"><strong>48</strong> min</span>
+        <span class="stat"><strong>9</strong> pieces</span>
+        <span class="stat"><strong>~5,300</strong> 字</span>
+        <span class="stat"><a href="../../history/">History</a></span>
+      </div>
+
+      <nav class="toc" aria-label="Índice">
+        <h2 lang="ja">本日の演目</h2>
+        <ol>
+          <li>
+            <a href="#p1">
+              <span class="t-title" lang="ja">長連龍、信長に二度止められた仇討ち</span>
+              <span class="t-min">7′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p2">
+              <span class="t-title" lang="ja">空海が唐から持ち帰った「曜日」</span>
+              <span class="t-min">6′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p3">
+              <span class="t-title" lang="ja">ヒッタイト王室文書131枚、熱病と援軍要請</span>
+              <span class="t-min">5′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p4">
+              <span class="t-title" lang="ja">最古のペスト流行とシベリアのマーモット</span>
+              <span class="t-min">6′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p5">
+              <span class="t-title" lang="ja">「幽霊を見た」の脳科学</span>
+              <span class="t-min">5′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p6">
+              <span class="t-title" lang="ja">鞘ごと埋められた鉄剣——卑弥呼の時代の丹後</span>
+              <span class="t-min">3′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p7">
+              <span class="t-title" lang="ja">新開地のパン屋、100年の最後の日</span>
+              <span class="t-min">5′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p8">
+              <span class="t-title" lang="ja">ラルク35周年ツアー開幕、360度の代々木</span>
+              <span class="t-min">5′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p9">
+              <span class="t-title" lang="ja">Claude CodeでCIを18分→4分台に</span>
+              <span class="t-min">6′</span>
+            </a>
+          </li>
+        </ol>
+      </nav>
+    </aside>
+
+    <main class="main">
+      <div class="digest-banner">
+        <span class="tag">TRIAGE</span>
+        <span>2026-10-21 — Chō Tsuratatsu, o monge que perdeu a família em Nanao e vingou-se apesar de Nobunaga; o que Kūkai trouxe da China (inclusive os dias da semana); 131 tabuletas hititas com epidemia e pedido de reforços; a peste mais antiga e as marmotas do Baikal; a neurologia dos fantasmas; espadas de ferro enterradas na bainha em Tango; o fim de uma padaria centenária em Shinkaichi; L’Arc abre a turnê dos 35 anos (Osaka 16–17/12); e Claude Code cortando a CI de 18 para 4 min.</span>
+      </div>
+
+      <header class="hero">
+        <div class="kicker">Daily curated reading</div>
+        <h1 lang="ja">能登の仇討ちと空海の曜日、ヒッタイトの熱病とマーモットのペスト、幽霊の脳科学と鞘ごとの鉄剣、新開地のパン屋とラルクの360度、CIの14%——ひと朝の読解</h1>
+        <p lang="ja">使者に出ている間に一族百人を失い、信長に二度たしなめられても仇を追い続けた元僧侶。空海が唐から運んだ瑠璃の箸、インドの巻貝、そして千年途切れない曜日。3400年前の王女を奪った熱病と援軍を乞う将軍の粘土板、5500年前のバイカル湖でマーモットから始まったペスト。患者が見た「幽霊」を脳から読み解く医師、卑弥呼の時代に鞘ごと葬られた丹後の鉄剣。震災の朝もパンを売った新開地の百年の店、35周年の幕を開けたラルク、そしてClaude Codeに「まず測らせた」CI改善——推定合計 ~48 分。</p>
+      </header>
+
+      <article class="piece" id="p1">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★★</span> <span class="chip mins">7 min</span> <span class="chip" lang="ja">戦国</span> <span class="chip" lang="ja">能登</span> <span class="chip" lang="ja">七尾城</span> <span class="chip" lang="ja">仇討ち</span> <span class="chip" lang="ja">織田信長</span>
+          </div>
+          <h2 lang="ja">信長に止められても仇討ちを強行した長連龍｜一族を殺された元僧侶の復讐劇</h2>
+          <p class="why">Thriller de vingança com documentos reais: em 1577 um monge sai do castelo de Nanao para pedir socorro a Nobunaga — e enquanto está fora, um traidor abre os portões para Uesugi Kenshin e mais de cem membros da sua família são mortos. Ele larga o hábito e passa cinco anos caçando os culpados, mesmo com Nobunaga mandando “não guardar rancor” por escrito, duas vezes. Final irônico: o próprio Nobunaga acaba parabenizando a vingança.</p>
+          <div class="source">
+            <span lang="ja">BUSHOO!JAPAN（武将ジャパン）</span>
+            <a href="https://bushoojapan.com/bushoo/others/2026/10/21/222424" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>「恨みを残すな」と織田信長に二度もたしなめられながら、決して引かず、ついに仇を討ったのですが、なぜそんなことができたのか。</p>
+            <p>天正五年（1577年）9月15日、重臣の遊佐盛光（ゆさ もりみつ）が上杉軍に寝返り、自分の守る曲輪に敵を引き入れたのです。父の続連、兄の綱連ら長一族百人余りは討ち取られ、七尾城はその日のうちに落ちました。</p>
+            <p>いずれにせよ安土へ使いに出ていた連龍は、この惨事を免れました。助けを呼びに行っている間に、帰る家そのものが消えてしまったのです。</p>
+            <p>……もはや謙信はおらず、温井ら七尾城の畠山旧臣は上杉の城代を追い出し、信長に降参を申し出てきたのです。……なんせ長連龍にとっては、親兄弟を殺した相手が、いきなり味方になったわけです。</p>
+            <p>天正七年（1579年）5月17日、信長は連龍に宛てた黒印状で、温井らの内通を認めたことを伝え、「意趣を残さないように」と命じています。</p>
+            <p>【意訳】遊佐のことは、悪逆のゆえに殺害を申し付けた。そなたが本意を遂げたことは、めでたく思う……かつて「意趣を残すな」と言っていた信長が、仇討ちの成就を祝っているのです。</p>
+            <p>七尾城で一族を失ってから5年が経ち、元僧侶の仇討ちは、ここでようやく終わったのです。……前田利家の遺言状には、連龍について「世間付き合いもせず、私一人を守って律儀に仕えてくれた」と書かれています。</p>
+          </div>
+          <p class="continue"><a href="https://bushoojapan.com/bushoo/others/2026/10/21/222424" target="_blank" rel="noopener" lang="ja">続きを読む · BUSHOO!JAPAN（武将ジャパン）</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p2">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★★</span> <span class="chip mins">6 min</span> <span class="chip" lang="ja">平安</span> <span class="chip" lang="ja">空海</span> <span class="chip" lang="ja">遣唐使</span> <span class="chip" lang="ja">曜日</span> <span class="chip" lang="ja">インド</span>
+          </div>
+          <h2 lang="ja">空海が唐から持ち帰った意外なものとは？瑠璃の箸・白い巻貝・曜日まで</h2>
+          <p class="why">Amanhã (22/10) faz 1.220 anos que Kūkai entregou à corte a lista do que trouxe da China. Além de sutras: hashi de vidro, uma concha-sagrada (shankha) do sul da Índia que ainda está no Tō-ji — e os dias da semana. O “domingo” aparece no diário de Fujiwara no Michinaga em 1004 e nunca mais saiu do lugar: mil anos sem pular um dia. E ainda lendas de senbei e udon.</p>
+          <div class="source">
+            <span lang="ja">BUSHOO!JAPAN（武将ジャパン）</span>
+            <a href="https://bushoojapan.com/jphistory/kodai/2026/10/21/222433" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>空海は大同元年（806年）10月22日付で朝廷に『御請来目録（ごしょうらいもくろく）』を提出。唐から持ち帰ったものとして、経典や仏画だけでなく瑠璃（るり）の箸や琥珀の器、白い巻貝といった品まで報告しました。</p>
+            <p>香川県綾川町の滝宮（たきのみや）には、空海が唐で学んだうどんの作り方を弟子の智泉（ちせん）に教え、智泉が滝宮に住む父に振る舞った、という言い伝えがあります。</p>
+            <p>空海が持ち帰った経典のひとつに『宿曜経（すくようきょう）』があります。……インドの占星術の初歩をまとめたもので、生まれた日の曜日によって、その人の性格や運勢を占う方法が書かれていました。こうして日・月・火・水・木・金・土という一週間の曜日が、日本に入ってきたのです。</p>
+            <p>藤原道長の日記『御堂関白記』の長保六年（1004年）2月19日の欄に「日」と記されています。つまり平安時代から現在まで、千年以上もズレることなく曜日が続いてきたことになります。</p>
+            <p>京都の東寺に伝わる白螺貝は、研究によってインド西岸やスリランカに生息する巻貝「シャンクガイ」であることが判明し、目録に記された品そのものだと指摘されています。……南インドから唐へ、唐から日本へ――貝までが、海を渡ってきたのです。</p>
+            <p>目録の中で空海は、密教の教えは奥深く、言葉や文字では伝えにくいが、図画にすれば人々にもわかってもらえる、と書いています。</p>
+          </div>
+          <p class="continue"><a href="https://bushoojapan.com/jphistory/kodai/2026/10/21/222433" target="_blank" rel="noopener" lang="ja">続きを読む · BUSHOO!JAPAN（武将ジャパン）</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p3">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★★</span> <span class="chip mins">5 min</span> <span class="chip" lang="ja">世界史</span> <span class="chip" lang="ja">考古学</span> <span class="chip" lang="ja">ヒッタイト</span> <span class="chip" lang="ja">楔形文字</span> <span class="chip" lang="ja">疫病</span>
+          </div>
+          <h2 lang="ja">ヒッタイト王国の粘土板文書131枚がトルコで発掘される、3400年前の流行病や当時の兵站などが明らかに</h2>
+          <p class="why">Arquivo real hitita de 3.400 anos achado em Kayalıpınar (antiga Šamuḫa): 131 tabuletas novas, o maior arquivo hitita do século 21. Dentro, uma princesa bebê que morre de febre numa epidemia que passava de cidade em cidade; um general avisando ao rei que, sem soldados, cavalos e carros de guerra, o exército será aniquilado — “e não me responsabilizo”; e o diário de viagem de áugures que liam o voo dos pássaros.</p>
+          <div class="source">
+            <span lang="ja">GIGAZINE</span>
+            <a href="https://gigazine.net/news/20261021-hittite-royal-archive-tablets-turkiye/" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>トルコ文化観光省が、紀元前17～13世紀に栄えたヒッタイト王国の遺跡で行われた2026年の発掘調査で、王室の粘土板文書および断片が131枚も発掘されたと報告しました。</p>
+            <p>発見された粘土板はヒッタイト語とフリル語で記されており、紀元前1375～1355年頃に在位したとされるトゥドハリヤ2世の時代にさかのぼります。……これらの文書は、21世紀に発見されたヒッタイト語文書として最も包括的なアーカイブだとのこと。</p>
+            <p>一部の粘土板文書には、都市から都市へと広がって特に子どもや乳幼児に影響したとみられる熱病についての記録があります。ある文書には、まだ母親の乳を飲んでいた幼い王女が熱病にかかり、急速に容体が悪化して亡くなったことが記されていました。</p>
+            <p>ヒッタイト王国では、病気は神の意志の表れとして考えられていたため、宗教指導者は王や官僚の子どもたちの健康状態を綿密に観察していたそうです。</p>
+            <p>また、中にはアナトリア半島西部に駐屯していたヒッタイト王国の将軍から王に宛てて、敵軍を撃退するために兵士・馬・戦車(チャリオット)を要求する書簡もありました。将軍たちは要請した援軍が届かなければヒッタイト軍が壊滅する可能性があり、支援がなかった場合はその結果について責任を負わないとまで伝えていました。</p>
+            <p>他には、ヒッタイト人が鳥を使って吉凶を占っていたことを示す粘土板もありました。この粘土板には、サムハを出発してさまざまな地域を旅した鳥占い師の移動経路や滞在した都市、観察した鳥の種類などが日記のような形式で記されていました。</p>
+          </div>
+          <p class="continue"><a href="https://gigazine.net/news/20261021-hittite-royal-archive-tablets-turkiye/" target="_blank" rel="noopener" lang="ja">続きを読む · GIGAZINE</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p4">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★★</span> <span class="chip mins">6 min</span> <span class="chip" lang="ja">NatGeo</span> <span class="chip" lang="ja">疫病史</span> <span class="chip" lang="ja">古代DNA</span> <span class="chip" lang="ja">シベリア</span> <span class="chip" lang="ja">ソ連</span>
+          </div>
+          <h2 lang="ja">人類最古のペスト流行は5500年前、鍵はシベリアのマーモット</h2>
+          <p class="why">A primeira epidemia de peste conhecida: caçadores-coletores do lago Baikal, há 5.500 anos, que usavam dentes de marmota como enfeite funerário. A marmota sobrevive à bactéria e a guarda em tocas por mais de 400 dias; um gene que a pulga “aprendeu” depois virou o motor das grandes pestes; e a URSS passou o século 20 tentando exterminar a doença — e perdeu para o bicho.</p>
+          <div class="source">
+            <span lang="ja">ナショナル ジオグラフィック日本版</span>
+            <a href="https://natgeo.nikkeibp.co.jp/atcl/news/26/101400559/" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>知られている限り、人類で最古のペスト流行は、ロシア、シベリア南東部のバイカル湖の近くで起きていた。……約5500年前にこの地域の墓地に埋葬された狩猟採集民に、ペスト菌の存在を示す証拠を発見したという論文を2026年6月17日付けで学術誌「ネイチャー」に発表した。</p>
+            <p>バイカル湖周辺で起きたペスト流行と同じ地域の墓地から、マーモットの門歯（前歯）が数百個見つかっているのだ。その長く湾曲した門歯は装飾品として珍重され、副葬品として埋葬されたとみられる。</p>
+            <p>実際、シベリアマーモットはペスト菌に感染しても50％から80％が生き延びる。……ロシアの研究チームは、ペスト菌がげっ歯類の巣の敷き材で400日以上生存することを確認している。</p>
+            <p>ペスト菌は粘液の栓でノミの腸を塞ぐことが知られている。するとノミは飢餓状態になり、温かいものなら何でも、手当たり次第に何度も咬むようになる。こうして動物の病気がヒトに広がってゆく。</p>
+            <p>やがて干ばつが起き、げっ歯類が激減すると、ノミの数が宿主に対して過剰になる。「ノミは過密状態になると落ち着きがなくなります」。</p>
+            <p>ところが、ソ連の計画立案者たちは、土地は人間の思いどおりにできると考えていた。……マーモットも、そしてペストもそうした試みを生き延びた。1990年までにはペスト撲滅計画は終了した。</p>
+          </div>
+          <p class="continue"><a href="https://natgeo.nikkeibp.co.jp/atcl/news/26/101400559/" target="_blank" rel="noopener" lang="ja">続きを読む · ナショナル ジオグラフィック日本版</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p5">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★☆</span> <span class="chip mins">5 min</span> <span class="chip" lang="ja">脳科学</span> <span class="chip" lang="ja">怪談</span> <span class="chip" lang="ja">睡眠</span> <span class="chip" lang="ja">ハロウィン前</span>
+          </div>
+          <h2 lang="ja">「幽霊を見た」脳科学が明かす〝心霊現象の正体〟　脳神経内科医が語るメカニズム</h2>
+          <p class="why">Clima de Halloween com ciência: um neurologista de Kurume coleciona “fantasmas” de pacientes. Seis desconhecidos que somem ao serem tocados; homens montando um altar funerário com a foto do próprio paciente (síndrome de Bálint); o taxista que viu “pernas de mulher sem tronco” cruzando a pista (alucinação hipnagógica, sono REM instantâneo). Vocabulário médico útil e nada sensacionalista.</p>
+          <div class="source">
+            <span lang="ja">産経ニュース（鈴木源也）</span>
+            <a href="https://www.sankei.com/article/20261021-WNLQPPEKUNKJTJYD4BX3VLX644/" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>人はなぜ「幽霊」を見るのか―。脳神経内科の医師が脳科学を基に心霊体験を解明を目指している。……古谷さんは「心霊体験の多くは脳の機能障害や睡眠障害が深く関係している」と説明する。</p>
+            <p>ある日の昼、男性の自宅の居間に突如、6人の見知らぬ男女が上がり込んできた。男性が「誰だ！」と叫び、相手の肩に手を伸ばした瞬間、全員がフッと姿を消した。</p>
+            <p>さらに別の日には5人の男たちが室内に現れ、黙々と葬式用の祭壇を組み立て始めた。そして祭壇の上に飾られていたのは、男性本人の遺影だった。</p>
+            <p>診察の結果、男性は「バリント症候群」という高次脳機能障害を患っていることが判明した。見えているものの実際の位置と脳が認識する位置感覚にズレが生じる疾患で、「男性が過去に見たことのある男女や祭壇が、現実の空間に投映された可能性が高い」（古谷さん）。</p>
+            <p>夜間にタクシーを運転中、「上半身のない女性の足だけが車の前を横切り、消えていった」というタクシードライバーの男性から相談を受けたこともある。</p>
+            <p>古谷さんによると「夢を見る状態を『レム睡眠』と言うが、睡眠不足が続くと突然の眠気とともに、一瞬でレム睡眠状態に陥るケースがある」という。</p>
+          </div>
+          <p class="continue"><a href="https://www.sankei.com/article/20261021-WNLQPPEKUNKJTJYD4BX3VLX644/" target="_blank" rel="noopener" lang="ja">続きを読む · 産経ニュース（鈴木源也）</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p6">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★☆</span> <span class="chip mins">3 min</span> <span class="chip" lang="ja">考古学</span> <span class="chip" lang="ja">弥生</span> <span class="chip" lang="ja">丹後</span> <span class="chip" lang="ja">邪馬台国時代</span> <span class="chip" lang="ja">鉄</span>
+          </div>
+          <h2 lang="ja">鞘が残った鉄剣見つかる　交易力象徴か　京都・京丹後の堀北古墳群で出土の弥生時代墳墓で</h2>
+          <p class="why">Achado fresquinho (anunciado hoje): numa tumba Yayoi da época de Himiko em Kyōtango, duas espadas de ferro foram enterradas ainda dentro da bainha, “vestidas” no morto. Ferro vinha do continente — e Tango, fora o norte de Kyūshū, é a região que mais enterrava ferro com os mortos. Sinal de uma sociedade rica em comércio exterior, até entre os não-reis.</p>
+          <div class="source">
+            <span lang="ja">産経ニュース</span>
+            <a href="https://www.sankei.com/article/20261021-Z74VTMIK6ZLP5PLFBQIHDM4FMI/" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>京都府京丹後市大宮町河辺の堀北古墳群で弥生時代後期末の墳墓が出土し、府埋蔵文化財調査研究センターが発表した。墳墓には11基の埋葬施設があり、鉄剣などの副葬品が見つかった。</p>
+            <p>倭国女王・卑弥呼が生きた邪馬台国時代と重なる弥生時代後期末～古墳時代初頭（2世紀後半～3世紀初頭）にかけ、埋葬施設は継続的に造られたと推定される。</p>
+            <p>鉄剣は木棺規模が大きく中心的な位置にある2基の埋葬施設で見つかった。ともに鞘が残っており、着装した状態で副葬されたとみられる。</p>
+            <p>当時の日本列島は鉄製品の素材を大陸からの輸入に頼り、鉄製品は交易の力の象徴でもあった。鉄製品を埋葬した弥生時代の墓は外交の窓口であった九州北部で多く、本州では丹後地域が突出して多いという。</p>
+            <p>「この時期の弥生王墓として赤坂今井墳墓（京丹後市峰山町赤坂）が築造されたが、その下位集団においても広く鉄製武器が保有されていたことを示している」</p>
+          </div>
+          <p class="continue"><a href="https://www.sankei.com/article/20261021-Z74VTMIK6ZLP5PLFBQIHDM4FMI/" target="_blank" rel="noopener" lang="ja">続きを読む · 産経ニュース</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p7">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★★</span> <span class="chip mins">5 min</span> <span class="chip" lang="ja">神戸</span> <span class="chip" lang="ja">新開地</span> <span class="chip" lang="ja">下町</span> <span class="chip" lang="ja">震災</span> <span class="chip" lang="ja">老舗</span>
+          </div>
+          <h2 lang="ja">戦争、震災、コロナ禍乗り越え、神戸で愛され100年　下町のパン屋さん「大和家ベーカリー」閉店</h2>
+          <p class="why">Kobe de verdade: a padaria Yamatoya, em Shinkaichi, abriu em 1926 vendendo anpan a 50 sen, fechou quando o avô foi para a guerra, abria até as 2h da manhã nos anos de ouro do bairro, vendeu pão no próprio dia do terremoto de 1995 e não parou na pandemia. Agora o neto, aos 60, apaga a luz: “quero ver uma vida que não seja de padeiro”. Kansai-ben de graça.</p>
+          <div class="source">
+            <span lang="ja">神戸新聞NEXT（尾仲由莉）</span>
+            <a href="https://www.kobe-np.co.jp/news/society/202610/0020951609.shtml" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>神戸・新開地で１００年にわたって営業を続けてきた「大和家ベーカリー」がこの夏、ひっそりと閉店した。繁華街を訪れる人たちや住民、労働者らに愛され、阪神・淡路大震災では、発生当日にパンを提供。</p>
+            <p>１９２６年、仁さんの祖父、山口楢松（ならまつ）さんが現在のＪＲ神戸線の高架付近で開店した。神戸のパン店で修行を積み、屋号の大和は出身地の奈良県から採ったという。</p>
+            <p>楢松さんが亡くなると、仁さんの父、孝行さんが継いだ。当時は、飲食店などが深夜まで営業しており、日付が変わった午前２時ごろまで店を開けていた。</p>
+            <p>９５年１月１７日の阪神・淡路大震災では、倒壊を免れた店舗で、前日に仕込んだパンを販売。だが、ガスが使えず、その後は４０日ほど休業した。「片付けも済んで食材も調達できたのに、パンを焼けないのがもどかしかった」と仁さんは振り返る。</p>
+            <p>コロナ禍では、周辺の映画館や劇場が閉まる中で、休まずにパンを焼き続けた。「せっかく来てもらって、パンなかったら申し訳ないやん」が孝行さんの口癖だった。</p>
+            <p>「自分自身も寂しいし、お客さんに申し訳ない気持ちもある。ただ、６０歳になって、パン職人以外の人生を見てみたくなったのもあるんです」</p>
+            <p>最後の客は、近所に住むパート女性（５９）で、袋いっぱいの「ソフトフランス」を購入。……「油っぽくないから、いくらでも食べられる。他に代えられへんのに、どうしたらえんやろ」と残念がった。</p>
+          </div>
+          <p class="continue"><a href="https://www.kobe-np.co.jp/news/society/202610/0020951609.shtml" target="_blank" rel="noopener" lang="ja">続きを読む · 神戸新聞NEXT（尾仲由莉）</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p8">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★☆</span> <span class="chip mins">5 min</span> <span class="chip" lang="ja">L’Arc-en-Ciel</span> <span class="chip" lang="ja">hyde</span> <span class="chip" lang="ja">ライヴレポ</span> <span class="chip" lang="ja">JPロック</span> <span class="chip" lang="ja">大阪城ホール</span>
+          </div>
+          <h2 lang="ja">【ライヴレポート】L’Arc-en-Ciel、アリーナツアー＜35th L’Anniversary TOUR＞開幕「35年経っても、やっぱり皆さんはとてもかわいい」</h2>
+          <p class="why">Ontem foi a crítica dos discos; hoje é o palco: a turnê de 35 anos abriu no Yoyogi com palco giratório no centro da arena, raridades no setlist e a nova “総天然色” em versão completa. Coincidência deliciosa: o 3º show foi a 35ª apresentação da banda naquele ginásio. hyde: “Sem a L’Arc eu seria só um tiozão comum.” Kansai: Osaka-jo Hall em 16–17/12. Bônus no link: BABYMETAL solta o vídeo ao vivo de “My Queen” com Courtney LaPlante.</p>
+          <div class="source">
+            <span lang="ja">BARKS</span>
+            <a href="https://barks.jp/news/1094380" target="_blank" rel="noopener">原文を開く ↗</a> · <a href="https://gekirock.com/news/2026/10/babymetal_my_queen_intuit_dome.php" target="_blank" rel="noopener" lang="ja">激ロック：BABYMETAL「My Queen」feat. Spiritbox ライヴ映像公開 ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>会場に足を踏み入れて真っ先に目に飛び込んできたのはアリーナ中央に置かれ、全方位をぐるりと客席に囲まれた円形のステージだった。……東西南北の方向にはそれぞれに通称“デベソ”と呼ばれる短めの花道も設けられており、手を伸ばせば届いてしまいそうな距離感に興奮はいや増すばかりだ。</p>
+            <p>「L’Arc-en-Ciel、来たぜ！ 今日も360度、かわいがってやるからな。元気な声を聴かせてくれよ。やれるのか、東京！」──hyde</p>
+            <p>アニバーサリーらしい王道のヒットチューンはもちろん用意されているものの、アルバム収録曲やシングルのカップリング曲など長らくライヴで披露されていないレア曲も目白押し。</p>
+            <p>（国立代々木競技場第一体育館3Days最終日の10月12日公演をもって、L’Arc-en-Cielの同会場での通算公演数が“35回目”に到達。“35周年の幕開け”に“通算35回目公演”が重なるという奇跡的なシンクロが実現した）</p>
+            <p>「35歳になりました。いい歳ですよ、我々も。でも素晴らしくないですか？ ラルクをやってなかったら、本当に普通のおっさんですからね。皆さんのおかげで保たれています」──hyde</p>
+            <p>図太いグルーヴに貫かれたロックンロールサウンドに乗せて、生きづらさに支配された令和の時代に会心の一撃を喰らわすタフでアッパーなニューアンセムに客席も《Woo! hoo!》とステージと一緒になって声を上げる。</p>
+            <p>全国7ヵ所16公演を巡る今ツアー、ファイナルは12月27日の東京 有明アリーナだ。</p>
+          </div>
+          <p class="continue"><a href="https://barks.jp/news/1094380" target="_blank" rel="noopener" lang="ja">続きを読む · BARKS</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p9">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★★</span> <span class="chip mins">6 min</span> <span class="chip" lang="ja">Claude Code</span> <span class="chip" lang="ja">CI</span> <span class="chip" lang="ja">GitHub Actions</span> <span class="chip" lang="ja">Vitest</span> <span class="chip" lang="ja">Next.js</span>
+          </div>
+          <h2 lang="ja">Claude Code で CI 待ち時間を 18 分から 4 分台に短縮する【GitHub Actions】</h2>
+          <p class="why">Direto do seu dia a dia (Next.js + Vitest + GitHub Actions): os agentes escrevem testes, a CI dobra em dois meses. A lição principal: mandar o Claude Code medir primeiro — só 14% do tempo era teste; o resto era overhead. Projects do Vitest (.ts em node, .tsx em jsdom), dump do Postgres em cache, shards com cobertura mesclada — e a armadilha do limite de 10 GB de cache do GitHub.</p>
+          <div class="source">
+            <span lang="ja">Zenn（iakito／e-dash）</span>
+            <a href="https://zenn.dev/edash_tech_blog/articles/5b90aa33bd8d49" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>AI コーディングエージェントを使って開発していると、実装と一緒にテストも増えていき、気づいたときには膨大な量になっていることがあります。私が担当しているプロダクトも例外ではなく、PR CI の待ち時間は長いときで 18 分を超え、日々の開発で地味なストレスになっていました。</p>
+            <p>まず、Claude Code に実行時間の内訳を計測させました。CI と同じ 2 CPU の環境で Vitest を計測すると、400 秒のうちテスト本体は 57 秒で、全体の 14% 程度でした。残りの大部分は、テストファイルごとの環境の起動など、テスト実行前のオーバーヘッドだと判明しました。</p>
+            <p>対策 : Vitest の projects （1 つの設定の中で、テストの種類ごとに異なる設定を定義できる機能）でユニットテストを分割しました。.ts は node 環境、.tsx は jsdom 環境で実行します。</p>
+            <p>対策 : マイグレーション適用後の DB を pg_dump （PostgreSQL のバックアップ用コマンド）でダンプし、Actions キャッシュに保存しました。……PR ブランチで保存したキャッシュは、その PR の再実行からしか参照できません。他の PR と共有するには main ブランチで保存する必要があるため、キャッシュを作成するワークフローを別途用意しています。</p>
+            <p>分割すると問題になるのがテストカバレッジです。分割したジョブ単体では、カバレッジがしきい値を下回ります。そこで、各ジョブの結果を blob レポート……として保存し、最後のジョブで合算してからしきい値を判定するようにしました。</p>
+            <p>キャッシュを増やした結果、想定していなかった問題が起きました。Actions キャッシュの合計サイズが 11.9 GB に達し、リポジトリの上限（デフォルトで 10 GB）を超えていました。</p>
+            <p>いちばん効いたのは、施策を考える前に実行時間の内訳を計測したことです。テスト本体は全体の 14% にすぎず、ボトルネックはテスト実行前のオーバーヘッドにありました。</p>
+          </div>
+          <p class="continue"><a href="https://zenn.dev/edash_tech_blog/articles/5b90aa33bd8d49" target="_blank" rel="noopener" lang="ja">続きを読む · Zenn（iakito／e-dash）</a></p>
+        </div>
+      </article>
+
+      <footer class="site">読解幕 · 2026-10-21 · ~48 min · <a href="../../history/" style="color:inherit">History</a> · deliton.github.io/japanese-digest</footer>
+    </main>
+  </div>
+</body>
+</html>
