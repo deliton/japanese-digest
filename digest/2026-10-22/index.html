@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>読解幕 · 2026-10-22 · Japanese Digest</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Noto+Serif+JP:wght@400;600;700&family=Shippori+Mincho:wght@500;700&display=swap" rel="stylesheet" />
+  <style>
+
+    :root {
+      --bg: #0a0a0a;
+      --bg-2: #121212;
+      --bg-card: #161616;
+      --ink: #f5f5f5;
+      --ink-dim: #a8a29a;
+      --ink-mute: #6b6560;
+      --shu: #c41e3a;
+      --shu-hot: #e11d48;
+      --shu-deep: #8b1228;
+      --gold: #d4a017;
+      --gold-soft: #c9a227;
+      --white: #fafafa;
+      --line: #2a2a2a;
+      --line-hot: rgba(196, 30, 58, 0.45);
+      --measure: 42rem;
+      --radius: 4px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: "Noto Sans JP", "Hiragino Sans", "Yu Gothic", system-ui, sans-serif;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .stage-bar {
+      height: 6px;
+      background: repeating-linear-gradient(
+        90deg,
+        var(--shu) 0 48px,
+        var(--white) 48px 56px,
+        #111 56px 64px,
+        var(--gold) 64px 72px,
+        #111 72px 88px
+      );
+    }
+
+    .wrap {
+      width: min(100% - 2rem, 74rem);
+      margin: 0 auto;
+      padding: 2rem 0 4.5rem;
+      display: grid;
+      grid-template-columns: 15.5rem 1fr;
+      gap: 2.75rem;
+      align-items: start;
+    }
+
+    @media (max-width: 900px) {
+      .wrap { grid-template-columns: 1fr; gap: 1.5rem; padding-top: 1.25rem; }
+      .sidebar { position: static !important; }
+    }
+
+    .sidebar { position: sticky; top: 1.25rem; }
+
+    .brand {
+      display: flex;
+      align-items: baseline;
+      gap: 0.55rem;
+      margin: 0 0 0.35rem;
+    }
+    .brand-mark {
+      font-family: "Shippori Mincho", "Noto Serif JP", serif;
+      font-size: 1.85rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      color: var(--white);
+      line-height: 1;
+    }
+    .brand-mark em {
+      font-style: normal;
+      color: var(--shu);
+    }
+    .brand-sub {
+      font-size: 0.65rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-weight: 700;
+    }
+
+    .meta {
+      color: var(--ink-mute);
+      font-size: 0.8rem;
+      margin: 0 0 1.25rem;
+    }
+
+    .stat-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-bottom: 1.35rem;
+    }
+    .stat {
+      border: 1px solid var(--line);
+      background: var(--bg-2);
+      padding: 0.32rem 0.65rem;
+      font-size: 0.72rem;
+      color: var(--ink-dim);
+      border-radius: var(--radius);
+    }
+    .stat strong { color: var(--white); font-weight: 700; }
+    .stat.hot {
+      border-color: var(--shu);
+      color: var(--shu-hot);
+      background: rgba(196, 30, 58, 0.1);
+    }
+
+    .toc {
+      border: 1px solid var(--line);
+      background: var(--bg-2);
+      padding: 0.85rem 0.9rem 0.95rem;
+      border-radius: var(--radius);
+    }
+    .toc h2 {
+      margin: 0 0 0.65rem;
+      font-size: 0.72rem;
+      letter-spacing: 0.16em;
+      color: var(--gold);
+      font-weight: 800;
+    }
+    .toc ol { list-style: none; margin: 0; padding: 0; }
+    .toc li { margin: 0; }
+    .toc a {
+      display: flex;
+      justify-content: space-between;
+      gap: 0.5rem;
+      text-decoration: none;
+      color: var(--ink-dim);
+      font-size: 0.82rem;
+      padding: 0.38rem 0.2rem;
+      border-bottom: 1px solid transparent;
+    }
+    .toc a:hover { color: var(--white); border-bottom-color: var(--line-hot); }
+    .toc .t-title { font-weight: 600; }
+    .toc .t-min { color: var(--gold); font-size: 0.72rem; font-weight: 700; flex-shrink: 0; }
+
+    .main { max-width: var(--measure); }
+
+    .digest-banner {
+      display: flex;
+      gap: 0.75rem;
+      align-items: flex-start;
+      background: #141014;
+      border: 1px solid var(--line);
+      border-left: 3px solid var(--shu);
+      padding: 0.85rem 1rem;
+      margin-bottom: 1.5rem;
+      font-size: 0.78rem;
+      color: var(--ink-dim);
+      line-height: 1.55;
+    }
+    .digest-banner .tag {
+      flex-shrink: 0;
+      background: var(--shu);
+      color: #fff;
+      font-size: 0.65rem;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      padding: 0.28rem 0.5rem;
+      border-radius: var(--radius);
+    }
+
+    .hero {
+      margin-bottom: 2rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid var(--line);
+      position: relative;
+    }
+    .hero::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -1px;
+      width: 4.5rem;
+      height: 2px;
+      background: var(--shu);
+    }
+    .kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.7rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--shu-hot);
+      font-weight: 800;
+      margin-bottom: 0.85rem;
+    }
+    .kicker::before {
+      content: "◆";
+      font-size: 0.55rem;
+      color: var(--gold);
+    }
+    .hero h1 {
+      font-family: "Shippori Mincho", "Noto Serif JP", serif;
+      font-size: clamp(1.85rem, 4vw, 2.55rem);
+      font-weight: 700;
+      line-height: 1.2;
+      margin: 0 0 0.75rem;
+      color: var(--white);
+      letter-spacing: 0.02em;
+    }
+    .hero p {
+      margin: 0;
+      color: var(--ink-dim);
+      font-size: 0.98rem;
+      max-width: 36rem;
+    }
+
+    article.piece {
+      background: var(--bg-card);
+      border: 1px solid var(--line);
+      margin-bottom: 1.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+    article.piece::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: linear-gradient(90deg, var(--shu) 0%, var(--shu) 35%, var(--gold) 35%, var(--gold) 42%, transparent 42%);
+    }
+
+    .piece-inner { padding: 1.6rem 1.55rem 1.35rem; }
+
+    .piece-head {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-bottom: 0.85rem;
+    }
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      border: 1px solid var(--line);
+      background: #111;
+      color: var(--ink-dim);
+      padding: 0.22rem 0.6rem;
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      border-radius: var(--radius);
+    }
+    .chip.interest {
+      border-color: var(--shu);
+      color: var(--shu-hot);
+      background: rgba(196, 30, 58, 0.12);
+    }
+    .chip.mins {
+      border-color: var(--gold);
+      color: var(--gold);
+      background: transparent;
+    }
+
+    .piece h2 {
+      font-family: "Noto Serif JP", "Shippori Mincho", "Yu Mincho", serif;
+      font-size: 1.38rem;
+      font-weight: 700;
+      line-height: 1.5;
+      margin: 0 0 0.6rem;
+      color: var(--white);
+      letter-spacing: 0.02em;
+    }
+
+    .why {
+      margin: 0 0 1rem;
+      color: var(--ink-dim);
+      font-size: 0.9rem;
+      border-left: 2px solid var(--gold);
+      padding-left: 0.85rem;
+    }
+
+    .source {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.65rem 1.1rem;
+      font-size: 0.76rem;
+      color: var(--ink-mute);
+      margin-bottom: 1.25rem;
+    }
+    .source a {
+      color: var(--shu-hot);
+      text-decoration: none;
+      font-weight: 600;
+    }
+    .source a:hover { color: var(--gold); }
+
+    .ja {
+      font-family: "Noto Serif JP", "Hiragino Mincho ProN", "Yu Mincho", serif;
+      font-size: 1.08rem;
+      line-height: 2;
+      letter-spacing: 0.03em;
+      color: #ebe7e1;
+    }
+    .ja p { margin: 0 0 1.15em; }
+    .ja p:last-child { margin-bottom: 0; }
+
+    .continue {
+      margin-top: 1.25rem;
+      padding-top: 1rem;
+      border-top: 1px solid var(--line);
+      font-size: 0.86rem;
+    }
+    .continue a {
+      color: var(--white);
+      text-decoration: none;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      border-bottom: 2px solid var(--shu);
+      padding-bottom: 0.1rem;
+    }
+    .continue a:hover {
+      color: var(--shu-hot);
+      border-bottom-color: var(--gold);
+    }
+
+    footer.site {
+      max-width: var(--measure);
+      margin-top: 1.75rem;
+      color: var(--ink-mute);
+      font-size: 0.72rem;
+      letter-spacing: 0.06em;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+    footer.site::before {
+      content: "";
+      width: 1.25rem;
+      height: 2px;
+      background: var(--shu);
+    }
+
+  
+    .excerpt-label { font-size: 0.66rem; letter-spacing: 0.18em; color: var(--gold); font-weight: 800; margin: 0 0 0.6rem; }
+    .brand-sub a, .stat a { color: var(--gold); text-decoration: none; }
+    .toc .t-min { font-variant-numeric: tabular-nums; }
+  </style>
+</head>
+<body>
+  <div class="stage-bar" aria-hidden="true"></div>
+
+  <div class="wrap">
+    <aside class="sidebar">
+      <div class="brand">
+        <span class="brand-mark" lang="ja">読解<em>幕</em></span>
+      </div>
+      <p class="brand-sub">Kabuki Digest · <a href="../../history/">History</a></p>
+      <p class="meta">2026-10-22 · America/Sao_Paulo</p>
+      <div class="stat-row">
+        <span class="stat"><strong>44</strong> min</span>
+        <span class="stat"><strong>10</strong> pieces</span>
+        <span class="stat"><strong>~5,600</strong> 字</span>
+        <span class="stat"><a href="../../history/">History</a></span>
+      </div>
+
+      <nav class="toc" aria-label="Índice">
+        <h2 lang="ja">本日の演目</h2>
+        <ol>
+          <li>
+            <a href="#p1">
+              <span class="t-title" lang="ja">吉川広家は毛利の裏切り者か、救世主か</span>
+              <span class="t-min">8′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p2">
+              <span class="t-title" lang="ja">なぜロシアはここまで巨大になったのか</span>
+              <span class="t-min">5′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p3">
+              <span class="t-title" lang="ja">日本最大のジュラ紀の恐竜足跡、南相馬で</span>
+              <span class="t-min">3′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p4">
+              <span class="t-title" lang="ja">「前世の記憶」1000件超に現れた奇妙なパターン</span>
+              <span class="t-min">5′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p5">
+              <span class="t-title" lang="ja">釣られる大きなオス、早すぎる性転換</span>
+              <span class="t-min">4′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p6">
+              <span class="t-title" lang="ja">播磨・魚吹八幡の秋祭り——提灯練りとチョーサ</span>
+              <span class="t-min">3′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p7">
+              <span class="t-title" lang="ja">走ると歌う道「音響道路」</span>
+              <span class="t-min">3′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p8">
+              <span class="t-title" lang="ja">「ヘビメタの女王」浜田麻里、10年の再編</span>
+              <span class="t-min">5′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p9">
+              <span class="t-title" lang="ja">なぜAIは「日本文化」ばかり選ぶのか</span>
+              <span class="t-min">4′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p10">
+              <span class="t-title" lang="ja">Claude Codeに「仕組みの解説動画」を作らせる</span>
+              <span class="t-min">4′</span>
+            </a>
+          </li>
+        </ol>
+      </nav>
+    </aside>
+
+    <main class="main">
+      <div class="digest-banner">
+        <span class="tag">TRIAGE</span>
+        <span>2026-10-22 — Kikkawa Hiroie (401 anos de sua morte) e o mito de Sekigahara desmontado; por que a Rússia ficou tão grande; a maior pegada jurássica do Japão (70 cm, saurópode); 1.300 casos de “vidas passadas” e o intervalo de 16 meses; o peixe que muda de sexo cedo demais por causa da pesca; lanternas se chocando no matsuri de Aboshi (Himeji); estradas musicais; Hamada Mari, a rainha do metal japonês; por que as IAs adoram a cultura japonesa; e uma skill do Claude Code que gera vídeos explicativos com Playwright + ffmpeg.</span>
+      </div>
+
+      <header class="hero">
+        <div class="kicker">Daily curated reading</div>
+        <h1 lang="ja">報われなかった吉川広家とロシアの毛皮の道、ジュラ紀の巨大な足跡と前世の16カ月、釣られるオスと網干の火の粉、歌う道路とヘビメタの女王、日本好きのAIと解説動画を撮るClaude——ひと朝の読解</h1>
+        <p lang="ja">関ヶ原で毛利勢を止め、主家を救ったはずが誰にも礼を言われなかった男。クロテンの毛皮を追って太平洋まで駆けたコサック。南相馬の地層に残った70センチの竜脚類の足跡と、前世を語る子どもたちのデータに潜む奇妙な規則。真っ先に釣り針に食いつく地中海のオス、姫路・網干で砕け散る提灯、溝の間隔で歌う道路。「変わらないために変わり続ける」浜田麻里、なぜか日本ばかり選ぶAI、そしてClaude Codeに1コマずつ撮らせる解説動画——推定合計 ~44 分。</p>
+      </header>
+
+      <article class="piece" id="p1">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★★</span> <span class="chip mins">8 min</span> <span class="chip" lang="ja">関ヶ原</span> <span class="chip" lang="ja">毛利輝元</span> <span class="chip" lang="ja">吉川広家</span> <span class="chip" lang="ja">徳川家康</span> <span class="chip" lang="ja">偽文書</span>
+          </div>
+          <h2 lang="ja">毛利家の裏切り者・吉川広家は本当に功労者？関ヶ原で主家を救った美談の真相</h2>
+          <p class="why">Hoje (22/10) faz 401 anos da morte de Kikkawa Hiroie, o homem que “segurou” o exército Mōri em Sekigahara. A história clássica: traiu o lado oeste, mas abriu mão do próprio feudo para salvar a casa Mōri. O artigo desmonta tudo: a desculpa do “estamos almoçando” é invenção posterior, Ieyasu prometeu manter as terras só até Terumoto sair do castelo de Osaka — e as cartas heroicas de Hiroie podem ser falsificações do próprio clã Kikkawa para subir de status. Ninguém nunca lhe agradeceu.</p>
+          <div class="source">
+            <span lang="ja">BUSHOO!JAPAN（武将ジャパン）</span>
+            <a href="https://bushoojapan.com/bushoo/mouri/2026/10/22/222485" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>1625年10月22日（寛永二年9月21日）、中国地方の戦国武将・吉川広家が65歳で亡くなりました。……広家には「毛利家の裏切り者」というレッテルがつきまといます。</p>
+            <p>戦後、家康から自分に与えられるはずだった領地を辞退し、その代わりに毛利家を残してほしいと願い出た――。それが本当なら、広家は裏切り者どころか、主家を救った功労者でしょう。</p>
+            <p>よく知られた話では、南宮山の最前列に陣取った吉川広家が道をふさいだため、後ろにいた毛利秀元の軍勢は出撃できなかったとされます。そのため長宗我部盛親らから参戦を催促されても、秀元は「いま兵に弁当を食べさせている」と言い逃れた――。</p>
+            <p>研究者の中脇聖氏は『関ヶ原大乱、本当の勝者』の中で、同時代の史料はもちろん、秀元の死の直前にまとめられた一代記にも出てこず、後世の創作であるという見解を示しています。</p>
+            <p>西軍が勝ちそうなら山を下りて東軍を叩き、負けそうなら密約で身を守る――輝元は、西軍が敗れたときの保険として広家ルートを使い、南宮山の陣は解かずにおいた、というわけです。</p>
+            <p>領国安泰の言葉を得て、輝元が大坂城をでてからわずか2週間。約束は反故にされ、約119万石の大大名がわずか2か国約30万石へと押し込められてしまいました。</p>
+            <p>美談の出どころは、吉川家の岩国藩がまとめた『吉川家譜』の3通の文書です。……しかし同書によれば、この3通は、後世に作られた偽文書の可能性があるといいます。</p>
+            <p>一方で、輝元が広家本人に礼を述べた書状は見つかっていません。……岩国の吉川家が、正式な藩として認められたのは、広家の死から240年以上たった明治元年（1868年）のことでした。</p>
+            <p>主家からも世間からも報われなかった不運の現実派というのが実像に近いのかもしれません。</p>
+          </div>
+          <p class="continue"><a href="https://bushoojapan.com/bushoo/mouri/2026/10/22/222485" target="_blank" rel="noopener" lang="ja">続きを読む · BUSHOO!JAPAN（武将ジャパン）</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p2">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★☆</span> <span class="chip mins">5 min</span> <span class="chip" lang="ja">世界史</span> <span class="chip" lang="ja">ロシア</span> <span class="chip" lang="ja">シベリア</span> <span class="chip" lang="ja">毛皮</span> <span class="chip" lang="ja">地政学</span>
+          </div>
+          <h2 lang="ja">なぜロシアはここまで巨大になったのか？世界最大の領土を獲得できた3つの理由</h2>
+          <p class="why">Como um principado em volta de Moscou virou 1/9 das terras do planeta? Três motores: planície sem muralhas naturais (empurrar a fronteira para longe), a corrida das peles de zibelina que levou cossacos do Ural ao Pacífico em poucas décadas pelos rios, e a obsessão por um porto que não congele. Vocabulário de geopolítica (緩衝地帯, 縦深防御, 貢納) muito reaproveitável.</p>
+          <div class="source">
+            <span lang="ja">草の実堂</span>
+            <a href="https://kusanomido.com/sekai/135380/" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>地球上の陸地面積の約9分の1を占め、ヨーロッパからアジアの果てまでまたがる世界最大の国土を持つロシア。なぜ、この国はこれほどの広大な領土を獲得し、維持することができたのだろうか。</p>
+            <p>ロシアの中心部が位置する東ヨーロッパ大平原には、外敵の侵入を阻む険しい山脈などの自然の防壁が少ない。こうした開けた地形は、13世紀のモンゴル軍によるルーシ諸公国の征服や、1812年のナポレオン軍、1941年のナチス・ドイツ軍による侵攻の舞台にもなった。</p>
+            <p>敵が攻めてくる前にこちらから版図を押し広げ、境界線を遠くへ遠くへと押し出していく。この防衛的動機に基づく拡大の連鎖も、ロシアが広大な領土を獲得するに至った大きな原動力の一つである。</p>
+            <p>当時のロシアにとって、毛皮は国家財政を支える貴重な収入源であり、毛皮などで納める貢納税「ヤサク」の徴収を求めて、コサック（武装した集団）や商人が先陣を切ってシベリアの森と大河を東へ東へと進んだ。</p>
+            <p>オビ川、エニセイ川、レナ川などの大河川の水系を巧みに利用しながら、16世紀末の本格的な進出から数十年で太平洋岸（オホーツク海）にまで到達した。</p>
+            <p>ロシアは北極海やバルト海、黒海、太平洋に面しているものの、冬には多くの港が凍結し、外洋へ出るには他国が押さえる海峡を通らなければならないという地理的な制約を抱えていた。</p>
+            <p>こうして広がった国土の圧倒的な「広さ」自体が、近代以降のロシアにとって強力な防衛上の武器（縦深防御）となった。侵攻軍が奥深くまで進めば進むほど、補給線が長くなり、兵力や物資の維持が難しくなるからだ。</p>
+          </div>
+          <p class="continue"><a href="https://kusanomido.com/sekai/135380/" target="_blank" rel="noopener" lang="ja">続きを読む · 草の実堂</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p3">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★☆</span> <span class="chip mins">3 min</span> <span class="chip" lang="ja">古生物学</span> <span class="chip" lang="ja">恐竜</span> <span class="chip" lang="ja">ジュラ紀</span> <span class="chip" lang="ja">福島</span> <span class="chip" lang="ja">発見</span>
+          </div>
+          <h2 lang="ja">国内最大のジュラ紀の恐竜足跡70cm、竜脚類か　福島で化石発見</h2>
+          <p class="why">Anunciado hoje: uma pegada de 70 cm, de um saurópode tipo braquiossauro, em rochas de 160 milhões de anos em Minamisoma — o dobro do recorde jurássico japonês (33 cm, Shimonoseki, 1993). Quase todo dinossauro do Japão é do Cretáceo; achar o Jurássico é raro, e saiu no 5º dia de escavação.</p>
+          <div class="source">
+            <span lang="ja">朝日新聞（大月規義）</span>
+            <a href="https://www.asahi.com/articles/ASVBP31X9VBPUGTB001M.html" target="_blank" rel="noopener">原文を開く ↗</a> · <a href="https://prtimes.jp/main/html/rd/p/000000039.000116976.html" target="_blank" rel="noopener" lang="ja">南相馬市プレスリリース（発掘5日目の発見） ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>福島県南相馬市は22日、市内にある約1億6千万年前のジュラ紀後期の地層から、恐竜の足跡とみられる約70センチの化石を見つけたと発表した。同紀の竜脚類の足跡が国内で見つかるのは初めてで、他の種類を含め同紀で国内最大だという。ブラキオサウルスのような長い首をもった竜脚類の恐竜が残した可能性があるという。</p>
+            <p>市によると、国内で見つかったジュラ紀の恐竜足跡でこれまでもっとも大きかったのは、山口県下関市で1993年に見つかった33センチ。今回はその約2倍あり、指の跡などから左の後ろ脚と見られる。恐竜は腰の高さが3メートルほどあったと推定される。</p>
+            <p>化石は今年7月、南相馬市の北中部を南北に走る地層「栃窪層」で発掘された。足跡は7～8メートルの範囲に12個見つかり、このうち5個が竜脚類の可能性がある。</p>
+            <p>そもそも、国内の恐竜化石は白亜紀のものがほとんどで、より古いジュラ紀の化石は希少だ。</p>
+          </div>
+          <p class="continue"><a href="https://www.asahi.com/articles/ASVBP31X9VBPUGTB001M.html" target="_blank" rel="noopener" lang="ja">続きを読む · 朝日新聞（大月規義）</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p4">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★☆</span> <span class="chip mins">5 min</span> <span class="chip" lang="ja">心理学</span> <span class="chip" lang="ja">輪廻転生</span> <span class="chip" lang="ja">バージニア大学</span> <span class="chip" lang="ja">データ分析</span>
+          </div>
+          <h2 lang="ja">「前世の記憶」を持つ人の事例を1000件以上調べてわかった奇妙なパターンとは？</h2>
+          <p class="why">Sem misticismo barato: a Univ. da Virgínia guarda desde os anos 60 um arquivo de crianças que “lembram vidas passadas”. Analisando 1.319 casos, o intervalo entre a morte da “vida anterior” e o nascimento é de 16 meses na mediana — 12 se a morte foi súbita/violenta, 21 se foi doença longa. E o efeito é mais forte justamente em famílias que NÃO acreditam em reencarnação. Os autores não sabem explicar.</p>
+          <div class="source">
+            <span lang="ja">GIGAZINE</span>
+            <a href="https://gigazine.net/news/20261022-bizarre-pattern-human-reincarnation/" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>世の中にはまれに「前世の記憶がある」と主張する人々が存在し、すでに死んでいる人の人生や記憶について事細かに語ることがあります。</p>
+            <p>1960年代以降、アメリカ・バージニア大学医学部で超常的な現象について研究を行っている知覚研究部門は、輪廻転生に関する数千件もの事例についてデータ収集を行ってきました。輪廻転生事例の多くは子どもが当時者であり、すでに死んでいる人の思い出や細かな事柄を報告するとのこと。</p>
+            <p>前世に当たる故人が亡くなった時期と記憶を引き継いだとされる子どもが生まれた時期がわかる1319件の事例について分析した結果、死亡から転生までの中断期間の中央値は16カ月であることが判明。</p>
+            <p>前世に当たる人が突然の事故や意図的な暴力などのまったく予期できない死因によって亡くなった場合、中断期間の中央値は12カ月とかなり短い傾向がありました。一方、長年の病気といった最も予期されていた死因によって亡くなった場合、中断期間の中央値は21カ月と長い傾向がみられました。</p>
+            <p>驚くべき点が、「輪廻転生を信じていない家族」において、最も死因と中断期間の関連性が強かったことです。</p>
+            <p>もちろん、分析対象となった事例で本当に輪廻転生が起きたことを示す科学的証拠はありません。しかし、データに特定のパターンがみられたという事実を説明することは、既存の社会心理学的メカニズムでは難しいとのこと。</p>
+            <p>サーデギー氏は、「これは何かしらの形而上学的な事柄の証拠なのでしょうか。データは観察に基づくものであり、私たちはメカニズムについては慎重になって判断を保留しています。……だからこそ私たちは目を背けるのではなく、引き続き調査を続けるべきなのです」と述べました。</p>
+          </div>
+          <p class="continue"><a href="https://gigazine.net/news/20261022-bizarre-pattern-human-reincarnation/" target="_blank" rel="noopener" lang="ja">続きを読む · GIGAZINE</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p5">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★☆</span> <span class="chip mins">4 min</span> <span class="chip" lang="ja">NatGeo</span> <span class="chip" lang="ja">海洋生物</span> <span class="chip" lang="ja">性転換</span> <span class="chip" lang="ja">地中海</span> <span class="chip" lang="ja">漁業</span>
+          </div>
+          <h2 lang="ja">大きなオスから釣られる魚、残されたメスに早すぎる性転換</h2>
+          <p class="why">Um peixe do Mediterrâneo (a “raor”, Xyrichtys novacula) nasce sempre fêmea e vira macho quando fica grande. Problema: o macho dominante é curioso e morde a isca primeiro — então os pescadores de Maiorca levam justamente os chefes, e as fêmeas jovens são forçadas a virar macho cedo demais. Resultado: peixes menores, mais jovens e com menos ovos. Ótimo vocabulário de biologia (性転換, 縄張り, 繁殖期, 海洋保護区).</p>
+          <div class="source">
+            <span lang="ja">ナショナル ジオグラフィック日本版</span>
+            <a href="https://natgeo.nikkeibp.co.jp/atcl/news/26/072900420/" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>大西洋や地中海に生息するパーリー・レイザーフィッシュ（Xyrichtys novacula）というベラ科の魚は、すべての個体がメスとして生まれ、十分長く生き延びるとオスへ性転換し、複数のメスを繁殖相手として縄張りを守るようになる。</p>
+            <p>「漁期が始まると、漁師や釣り人たちが押し寄せます」と、スペイン、マヨルカ島にある地中海高等研究所のマルガリーダ・バルセロ・セラ氏は言う。「家族連れも釣りに来て、誰もがこの魚を食べたがるのです」</p>
+            <p>しかし、9月1日以降は漁獲が許される。ロブスター並みの高価格になることもあり、海域によっては、わずか数日でパーリー・レイザーフィッシュの最大60％が漁獲されてしまうこともある。</p>
+            <p>この魚には、たいていの動くものに近寄る習性がある。餌のついた釣り針が現れるや、しばしば優位オス（その周辺で最大の個体）が真っ先に食いつき、メスたちの群れを守るどころか甲板のバケツに収まってしまう。すると残されたメスは、まだ若く比較的小さいうちにオスへと性転換せざるをえなくなることが多い。</p>
+            <p>漁獲が一切行われていない海洋保護区のパーリー・レイザーフィッシュの全長は平均17.4cm、年齢は平均約4歳だが、漁獲が激しい海域では平均約14.9cm、平均約2歳であることが明らかになった。</p>
+            <p>「1匹のメスが十分に大きく成長して、あと1年メスとして長く生きることは、自分の子孫を大幅に増やすことにつながります。早く性転換してオスになることは好ましくありません」</p>
+          </div>
+          <p class="continue"><a href="https://natgeo.nikkeibp.co.jp/atcl/news/26/072900420/" target="_blank" rel="noopener" lang="ja">続きを読む · ナショナル ジオグラフィック日本版</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p6">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★☆</span> <span class="chip mins">3 min</span> <span class="chip" lang="ja">祭り</span> <span class="chip" lang="ja">姫路</span> <span class="chip" lang="ja">網干</span> <span class="chip" lang="ja">播磨の秋祭り</span> <span class="chip" lang="ja">兵庫</span>
+          </div>
+          <h2 lang="ja">姫路・魚吹八幡神社で提灯練り激しく　風に舞う火の粉にどよめき</h2>
+          <p class="why">Matsuri de Hyōgo acontecendo agora (21–22/10) em Aboshi, Himeji: na noite do yoimiya, homens de fundoshi batem lanternas de papel na ponta de varas de bambu de 3 m umas contra as outras até sobrar só o esqueleto, faíscas voando; no dia seguinte, jogam o yatai inteiro para o alto (“chōsa”). Origem: as lanternas iluminavam o caminho do mikoshi. Curtinho, vocabulário de festa (宵宮, 練り子, お旅所). Bônus Kobe: o porto vai receber superiates a partir da primavera de 2027 (link).</p>
+          <div class="source">
+            <span lang="ja">神戸新聞NEXT（船田翔太）／dメニューニュース</span>
+            <a href="https://topics.smt.docomo.ne.jp/article/kobe/nation/kobe-20261021012" target="_blank" rel="noopener">原文を開く ↗</a> · <a href="https://www.kobe-np.co.jp/news/himeji/202610/0020956116.shtml" target="_blank" rel="noopener" lang="ja">神戸新聞：昼宮の荒技「チョーサ」 ↗</a> · <a href="https://www.kobe-np.co.jp/news/economy/202610/0020956053.shtml" target="_blank" rel="noopener" lang="ja">神戸新聞：神戸港のマリーナにスーパーヨット、27年春から ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>魚吹八幡神社（兵庫県姫路市網干区宮内）の秋季例祭が２１日、宵宮を迎え、伝統の「提灯練り」が披露された。氏子たちは長さ約３メートルの竹ざおの先に付けた提灯を激しくぶつけ合った。</p>
+            <p>提灯練りは、神社からお旅所に向かうみこしを提灯で照らし、道案内をしたのが始まりとされる。現在は浜手の７地区が受け継ぐ。</p>
+            <p>午後７時ごろ、提灯を掲げた締め込み姿の男衆らが楼門前に集まった。地面を青竹で突き鳴らし、かけ声とともに一斉に提灯をぶつけ合った。「バシッ」という音が響き、破れた和紙や火の粉が風に舞い、骨組みがあらわに。周辺を埋め尽くした観衆からどよめきの声が上がった。</p>
+            <p>【22日・昼宮】県内最大規模の氏子数を誇る魚吹八幡神社（姫路市網干区宮内）の秋季例祭が２２日、本宮にあたる「昼宮」を迎えた。お旅所では練り子たちが屋台を宙に放り上げる荒技「チョーサ」のほか、獅子舞や日本舞踊が繰り広げられ、観衆を魅了した。</p>
+          </div>
+          <p class="continue"><a href="https://topics.smt.docomo.ne.jp/article/kobe/nation/kobe-20261021012" target="_blank" rel="noopener" lang="ja">続きを読む · 神戸新聞NEXT（船田翔太）／dメニューニュース</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p7">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★☆</span> <span class="chip mins">3 min</span> <span class="chip" lang="ja">インフラ</span> <span class="chip" lang="ja">道路</span> <span class="chip" lang="ja">群馬</span> <span class="chip" lang="ja">音</span> <span class="chip" lang="ja">ご当地</span>
+          </div>
+          <h2 lang="ja">草津節にモンキー・マジック…ドライブすると聞こえる「音響道路」、地域PRに音質向上へ</h2>
+          <p class="why">Estradas que tocam música quando você passa na velocidade certa: sulcos no asfalto, mais juntos = nota mais aguda. São ~50 no Japão, quase todas de uma construtora de Maebashi; a primeira (2007) tocava “Natsu no Omoide” a caminho de Oze — até o asfalto derreter e a melodia sumir. Engenharia curiosa em japonês simples.</p>
+          <div class="source">
+            <span lang="ja">産経ニュース</span>
+            <a href="https://www.sankei.com/article/20261022-CYEPZTYMZFNCFCWUSVSCSJW73A/" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>車を走らせると、地面からメロディーが聞こえてくる。そんな不思議な仕掛けの「音響道路」は全国に約50カ所あるとされ、多くを前橋市の総合建設会社「末広産業」が手がける。事故防止がメインの目的だったが、近年は観光PRや話題づくりも期待され、施工依頼も増加。</p>
+            <p>音響道路は末広産業の技術で、1988年に特許を出願し、その後取得した。道路に小さな溝を連続して刻み、車両が走ると溝の中で走行音が反響して音が鳴る仕組み。溝の間隔が狭いと高い音、広いと低い音が出る。法定速度で通った場合にメロディーが最も美しく聞こえるよう設計されている。</p>
+            <p>同社は2007年、群馬県の依頼で同県沼田市に第1号を設置した。曲は近くの観光名所、尾瀬を歌った童謡「夏の思い出」。舗装が溶けて溝がなくなったため現在は廃止されているが、音響道路自体は県やJRと連携した観光戦略で設置箇所を増やしていった。</p>
+          </div>
+          <p class="continue"><a href="https://www.sankei.com/article/20261022-CYEPZTYMZFNCFCWUSVSCSJW73A/" target="_blank" rel="noopener" lang="ja">続きを読む · 産経ニュース</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p8">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★☆</span> <span class="chip mins">5 min</span> <span class="chip" lang="ja">JPメタル</span> <span class="chip" lang="ja">浜田麻里</span> <span class="chip" lang="ja">インタビュー</span> <span class="chip" lang="ja">ライブ盤</span> <span class="chip" lang="ja">ハイトーン</span>
+          </div>
+          <h2 lang="ja">「ヘビメタの女王」浜田麻里、ニューアルバムは「１０年の軌跡を現在につなぎ直して再編する作品」</h2>
+          <p class="why">A rainha original do metal japonês (estreia em 1983 — bem antes de BABYMETAL/BAND-MAID) lança “INCLINATION 4”, série que sai a cada ~10 anos, com disco ao vivo pela 1ª vez em 41 anos. A frase-chave: “para não mudar, preciso continuar mudando” — e a música dela fica mais pesada a cada década. Entrevista curta com vocabulário de crítica musical (造語, 葛藤, 意思表明, 自選集).</p>
+          <div class="source">
+            <span lang="ja">読売新聞オンライン（鶴田裕介）</span>
+            <a href="https://www.yomiuri.co.jp/culture/music/20261022-GYT1T00075/" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>「ヘビーメタルの女王」の異名を持つロック歌手、浜田麻里が、アルバム「ＩＮＣＬＩＮＡＴＩＯＮ　４」（ビクター）を出した。２０１６年以降に発表したアルバムからの選曲に加え、新曲も３曲収録。ベスト盤というより、作家の自選集に近い位置づけのようだ。</p>
+            <p>「１０年の自分の軌跡を、現在の自分につなぎ直して再編する作品です」。１９９４年からほぼ１０年おきに２枚組みでリリースした「ＩＮＣＬＩＮＡＴＩＯＮ」シリーズの第４作にあたる。</p>
+            <p>ディスク７の１曲目「Ｒｈａｐｓｏｄｉａｒｉｓ」は新曲。「まずは現在の自分を聴いていただく」という思いを込めている。冒頭から重く激しいバンドサウンド、昇天しそうなハイトーンで、聴き手にカタルシスを与える。ラプソディー（狂詩曲）に由来する造語のタイトルは「生きる中でたまってきた怒り、抑圧されたものから、表現を使って抜け出したいという葛藤であり、意思表明」と言う。</p>
+            <p>浜田の音楽はキャリアを重ねるごとに激しさを増してきた。「自分の軸をしっかり持って、変わらないために変わり続けなければならないという気持ちがある。特にこの１０年はそんな思いが強かったんです」</p>
+            <p>デビューは１９８３年。その当初はアルバム名も自分で付けられなかったが、３作目以降はセルフプロデュースを貫いてきた。</p>
+            <p>「人生は呼吸だと、最近よく言うんです。ボーカリストとして、吸うにも限界があるし、吐くのにも限界がくる。その繰り返しが人生だな、と思うようになりました」。</p>
+          </div>
+          <p class="continue"><a href="https://www.yomiuri.co.jp/culture/music/20261022-GYT1T00075/" target="_blank" rel="noopener" lang="ja">続きを読む · 読売新聞オンライン（鶴田裕介）</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p9">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★☆</span> <span class="chip mins">4 min</span> <span class="chip" lang="ja">AI</span> <span class="chip" lang="ja">LLM</span> <span class="chip" lang="ja">バイアス</span> <span class="chip" lang="ja">Claude</span> <span class="chip" lang="ja">研究</span>
+          </div>
+          <h2 lang="ja">文化についてAIに質問すると日本が選ばれやすい傾向がある、8モデル・24言語で回答の偏りを調査</h2>
+          <p class="why">Paper com título ótimo: “Why are all LLMs obsessed with Japanese culture?”. 31.680 perguntas sem país definido, 8 modelos (Claude incluído), 24 línguas: tirando o país da própria língua, o Japão é o mais citado em 5 dos 8 modelos — em comida, arte, educação, vida social. O viés cresce no fine-tuning supervisionado, e o Japão nem aparece tanto nos dados. Ninguém sabe por quê.</p>
+          <div class="source">
+            <span lang="ja">GIGAZINE</span>
+            <a href="https://gigazine.net/news/20261022-llms-japanese-culture/" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>大規模言語モデル(LLM)に国や地域を指定せず文化について質問すると日本やアメリカを取り上げた回答に偏る傾向があることを、バスク大学とカーディフ大学の研究チームが報告しました。</p>
+            <p>研究チームが着目したのは「AIが文化について正しく答えられるか」ではなく、「複数の国を取り上げられる質問に対してどの国を選んで説明するか」という点です。そこで食事や芸術、歴史、社会生活など11分野にわたる1320問の質問を作り、24言語で計3万1680問を用意しました。</p>
+            <p>まず目立ったのは、質問に使った言語を公用語とする国を選ぶ傾向です。……さらに、それらの国への言及を除いて比較すると、日本とアメリカへの集中が見られました。8モデルのうち5モデルでは日本が最多で、2モデルではアメリカが最多となり、残る1モデルでは両国が同数でした。</p>
+            <p>英語で比較したところ、事前学習を終えた基本モデルよりも、利用者の指示に沿って答えるための追加学習を受けたモデルの方が日本やアメリカへの集中が強くなりました。</p>
+            <p>ただし、なぜ日本が選ばれやすいのかは研究でも解明されていません。……たとえば、中国はデータに最も多く登場していたモデルでも回答にはほとんど現れないのに対し、日本は登場回数が多くないのに回答で目立っていたとのこと。</p>
+          </div>
+          <p class="continue"><a href="https://gigazine.net/news/20261022-llms-japanese-culture/" target="_blank" rel="noopener" lang="ja">続きを読む · GIGAZINE</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p10">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★★</span> <span class="chip mins">4 min</span> <span class="chip" lang="ja">Claude Code</span> <span class="chip" lang="ja">Skills</span> <span class="chip" lang="ja">Playwright</span> <span class="chip" lang="ja">ffmpeg</span> <span class="chip" lang="ja">動画</span>
+          </div>
+          <h2 lang="ja">仕組みを理解する動画を、Claude Codeに作らせると便利すぎる</h2>
+          <p class="why">Direto para os seus vídeos de demo de PR: uma skill do Claude Code que gera vídeos explicativos alternando a tela do app com o diagrama do que acontece por trás. O truque: não grava a tela — cria uma página que “desenha o quadro no tempo t”, o Playwright fotografa quadro a quadro e o ffmpeg junta (44 s = 1.314 quadros, ~45 s no Mac). Determinístico: corrigiu o app, renderiza de novo e as legendas mudam junto. Dá para pensar em zoom/câmera lenta exatamente onde está a mudança.</p>
+          <div class="source">
+            <span lang="ja">Zenn（explaza）</span>
+            <a href="https://zenn.dev/explaza/articles/c749042ecbe232" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>最近はjavascriptを用いて、Claudeで動画を生成しやすくなったので、アプリの操作と、その裏で起きている処理を交互に見せる解説動画を作って説明に使っています。</p>
+            <p>スキルは上のリポジトリの animated-arch-diagram フォルダを、 ~/.claude/skills/ にコピーすれば使えます。</p>
+            <p>2.の記録は、送った質問、途中の結果（区切った語、10冊の点数）、返事を JSON にしたものです。動画に出す数字は、全部ここから取ります。</p>
+            <p>広がった文が9語に区切られ、名詞の「猫」「小説」だけが強調される。……操作の合間に、いま通った処理だけを強調した構成図を挟んで説明。</p>
+            <p>動画は画面を録画していません。「時刻を渡すと、その瞬間の絵を描く Web ページ」を作って 1コマずつ撮ってつないでいます。撮るのは Playwright（ブラウザを自動で動かす道具）で、ffmpeg（動画を作る）で撮ったものを動画にしています。何度書き出しても同じ動画になる点が良いです。</p>
+            <p>※44秒の動画は1314コマあり、だいたい書き出しは手元の Mac で45秒ほどでした。</p>
+            <p>場面ごとに「何秒目に何をするか」を並べて書きます。……※アプリを直して流し直せば、字幕の数字も一緒に変わります。</p>
+          </div>
+          <p class="continue"><a href="https://zenn.dev/explaza/articles/c749042ecbe232" target="_blank" rel="noopener" lang="ja">続きを読む · Zenn（explaza）</a></p>
+        </div>
+      </article>
+
+      <footer class="site">読解幕 · 2026-10-22 · ~44 min · <a href="../../history/" style="color:inherit">History</a> · deliton.github.io/japanese-digest</footer>
+    </main>
+  </div>
+</body>
+</html>
