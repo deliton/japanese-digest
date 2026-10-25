@@ -1,0 +1,748 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>読解幕 · 2026-10-25 · Japanese Digest</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Noto+Serif+JP:wght@400;600;700&family=Shippori+Mincho:wght@500;700&display=swap" rel="stylesheet" />
+  <style>
+
+    :root {
+      --bg: #0a0a0a;
+      --bg-2: #121212;
+      --bg-card: #161616;
+      --ink: #f5f5f5;
+      --ink-dim: #a8a29a;
+      --ink-mute: #6b6560;
+      --shu: #c41e3a;
+      --shu-hot: #e11d48;
+      --shu-deep: #8b1228;
+      --gold: #d4a017;
+      --gold-soft: #c9a227;
+      --white: #fafafa;
+      --line: #2a2a2a;
+      --line-hot: rgba(196, 30, 58, 0.45);
+      --measure: 42rem;
+      --radius: 4px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: "Noto Sans JP", "Hiragino Sans", "Yu Gothic", system-ui, sans-serif;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .stage-bar {
+      height: 6px;
+      background: repeating-linear-gradient(
+        90deg,
+        var(--shu) 0 48px,
+        var(--white) 48px 56px,
+        #111 56px 64px,
+        var(--gold) 64px 72px,
+        #111 72px 88px
+      );
+    }
+
+    .wrap {
+      width: min(100% - 2rem, 74rem);
+      margin: 0 auto;
+      padding: 2rem 0 4.5rem;
+      display: grid;
+      grid-template-columns: 15.5rem 1fr;
+      gap: 2.75rem;
+      align-items: start;
+    }
+
+    @media (max-width: 900px) {
+      .wrap { grid-template-columns: 1fr; gap: 1.5rem; padding-top: 1.25rem; }
+      .sidebar { position: static !important; }
+    }
+
+    .sidebar { position: sticky; top: 1.25rem; }
+
+    .brand {
+      display: flex;
+      align-items: baseline;
+      gap: 0.55rem;
+      margin: 0 0 0.35rem;
+    }
+    .brand-mark {
+      font-family: "Shippori Mincho", "Noto Serif JP", serif;
+      font-size: 1.85rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      color: var(--white);
+      line-height: 1;
+    }
+    .brand-mark em {
+      font-style: normal;
+      color: var(--shu);
+    }
+    .brand-sub {
+      font-size: 0.65rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-weight: 700;
+    }
+
+    .meta {
+      color: var(--ink-mute);
+      font-size: 0.8rem;
+      margin: 0 0 1.25rem;
+    }
+
+    .stat-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-bottom: 1.35rem;
+    }
+    .stat {
+      border: 1px solid var(--line);
+      background: var(--bg-2);
+      padding: 0.32rem 0.65rem;
+      font-size: 0.72rem;
+      color: var(--ink-dim);
+      border-radius: var(--radius);
+    }
+    .stat strong { color: var(--white); font-weight: 700; }
+    .stat.hot {
+      border-color: var(--shu);
+      color: var(--shu-hot);
+      background: rgba(196, 30, 58, 0.1);
+    }
+
+    .toc {
+      border: 1px solid var(--line);
+      background: var(--bg-2);
+      padding: 0.85rem 0.9rem 0.95rem;
+      border-radius: var(--radius);
+    }
+    .toc h2 {
+      margin: 0 0 0.65rem;
+      font-size: 0.72rem;
+      letter-spacing: 0.16em;
+      color: var(--gold);
+      font-weight: 800;
+    }
+    .toc ol { list-style: none; margin: 0; padding: 0; }
+    .toc li { margin: 0; }
+    .toc a {
+      display: flex;
+      justify-content: space-between;
+      gap: 0.5rem;
+      text-decoration: none;
+      color: var(--ink-dim);
+      font-size: 0.82rem;
+      padding: 0.38rem 0.2rem;
+      border-bottom: 1px solid transparent;
+    }
+    .toc a:hover { color: var(--white); border-bottom-color: var(--line-hot); }
+    .toc .t-title { font-weight: 600; }
+    .toc .t-min { color: var(--gold); font-size: 0.72rem; font-weight: 700; flex-shrink: 0; }
+
+    .main { max-width: var(--measure); }
+
+    .digest-banner {
+      display: flex;
+      gap: 0.75rem;
+      align-items: flex-start;
+      background: #141014;
+      border: 1px solid var(--line);
+      border-left: 3px solid var(--shu);
+      padding: 0.85rem 1rem;
+      margin-bottom: 1.5rem;
+      font-size: 0.78rem;
+      color: var(--ink-dim);
+      line-height: 1.55;
+    }
+    .digest-banner .tag {
+      flex-shrink: 0;
+      background: var(--shu);
+      color: #fff;
+      font-size: 0.65rem;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      padding: 0.28rem 0.5rem;
+      border-radius: var(--radius);
+    }
+
+    .hero {
+      margin-bottom: 2rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid var(--line);
+      position: relative;
+    }
+    .hero::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -1px;
+      width: 4.5rem;
+      height: 2px;
+      background: var(--shu);
+    }
+    .kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.7rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--shu-hot);
+      font-weight: 800;
+      margin-bottom: 0.85rem;
+    }
+    .kicker::before {
+      content: "◆";
+      font-size: 0.55rem;
+      color: var(--gold);
+    }
+    .hero h1 {
+      font-family: "Shippori Mincho", "Noto Serif JP", serif;
+      font-size: clamp(1.85rem, 4vw, 2.55rem);
+      font-weight: 700;
+      line-height: 1.2;
+      margin: 0 0 0.75rem;
+      color: var(--white);
+      letter-spacing: 0.02em;
+    }
+    .hero p {
+      margin: 0;
+      color: var(--ink-dim);
+      font-size: 0.98rem;
+      max-width: 36rem;
+    }
+
+    article.piece {
+      background: var(--bg-card);
+      border: 1px solid var(--line);
+      margin-bottom: 1.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+    article.piece::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: linear-gradient(90deg, var(--shu) 0%, var(--shu) 35%, var(--gold) 35%, var(--gold) 42%, transparent 42%);
+    }
+
+    .piece-inner { padding: 1.6rem 1.55rem 1.35rem; }
+
+    .piece-head {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-bottom: 0.85rem;
+    }
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      border: 1px solid var(--line);
+      background: #111;
+      color: var(--ink-dim);
+      padding: 0.22rem 0.6rem;
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      border-radius: var(--radius);
+    }
+    .chip.interest {
+      border-color: var(--shu);
+      color: var(--shu-hot);
+      background: rgba(196, 30, 58, 0.12);
+    }
+    .chip.mins {
+      border-color: var(--gold);
+      color: var(--gold);
+      background: transparent;
+    }
+
+    .piece h2 {
+      font-family: "Noto Serif JP", "Shippori Mincho", "Yu Mincho", serif;
+      font-size: 1.38rem;
+      font-weight: 700;
+      line-height: 1.5;
+      margin: 0 0 0.6rem;
+      color: var(--white);
+      letter-spacing: 0.02em;
+    }
+
+    .why {
+      margin: 0 0 1rem;
+      color: var(--ink-dim);
+      font-size: 0.9rem;
+      border-left: 2px solid var(--gold);
+      padding-left: 0.85rem;
+    }
+
+    .source {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.65rem 1.1rem;
+      font-size: 0.76rem;
+      color: var(--ink-mute);
+      margin-bottom: 1.25rem;
+    }
+    .source a {
+      color: var(--shu-hot);
+      text-decoration: none;
+      font-weight: 600;
+    }
+    .source a:hover { color: var(--gold); }
+
+    .ja {
+      font-family: "Noto Serif JP", "Hiragino Mincho ProN", "Yu Mincho", serif;
+      font-size: 1.08rem;
+      line-height: 2;
+      letter-spacing: 0.03em;
+      color: #ebe7e1;
+    }
+    .ja p { margin: 0 0 1.15em; }
+    .ja p:last-child { margin-bottom: 0; }
+
+    .continue {
+      margin-top: 1.25rem;
+      padding-top: 1rem;
+      border-top: 1px solid var(--line);
+      font-size: 0.86rem;
+    }
+    .continue a {
+      color: var(--white);
+      text-decoration: none;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      border-bottom: 2px solid var(--shu);
+      padding-bottom: 0.1rem;
+    }
+    .continue a:hover {
+      color: var(--shu-hot);
+      border-bottom-color: var(--gold);
+    }
+
+    footer.site {
+      max-width: var(--measure);
+      margin-top: 1.75rem;
+      color: var(--ink-mute);
+      font-size: 0.72rem;
+      letter-spacing: 0.06em;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+    footer.site::before {
+      content: "";
+      width: 1.25rem;
+      height: 2px;
+      background: var(--shu);
+    }
+
+  
+    .excerpt-label { font-size: 0.66rem; letter-spacing: 0.18em; color: var(--gold); font-weight: 800; margin: 0 0 0.6rem; }
+    .brand-sub a, .stat a { color: var(--gold); text-decoration: none; }
+    .toc .t-min { font-variant-numeric: tabular-nums; }
+  </style>
+</head>
+<body>
+  <div class="stage-bar" aria-hidden="true"></div>
+
+  <div class="wrap">
+    <aside class="sidebar">
+      <div class="brand">
+        <span class="brand-mark" lang="ja">読解<em>幕</em></span>
+      </div>
+      <p class="brand-sub">Kabuki Digest · <a href="/japanese-digest/history/">History</a></p>
+      <p class="meta">2026-10-25 · America/Sao_Paulo</p>
+      <div class="stat-row">
+        <span class="stat"><strong>47</strong> min</span>
+        <span class="stat"><strong>12</strong> pieces</span>
+        <span class="stat"><strong>~6,600</strong> 字</span>
+        <span class="stat"><a href="/japanese-digest/history/">History</a></span>
+      </div>
+
+      <nav class="toc" aria-label="Índice">
+        <h2 lang="ja">本日の演目</h2>
+        <ol>
+          <li>
+            <a href="#p1">
+              <span class="t-title" lang="ja">500年唾を吐かれ続ける4体の鉄像——岳飛の墓前</span>
+              <span class="t-min">6′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p2">
+              <span class="t-title" lang="ja">鎌足は畳の上で死ねたのか？——阿武山古墳の骨</span>
+              <span class="t-min">6′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p3">
+              <span class="t-title" lang="ja">ラストエンペラーの弟・溥傑の書、西宮で初公開</span>
+              <span class="t-min">4′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p4">
+              <span class="t-title" lang="ja">巨大ハモを大蛇に見立てて一刀両断——鱧切祭</span>
+              <span class="t-min">2′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p5">
+              <span class="t-title" lang="ja">霧が川を下って海へあふれる——円山川の「川あらし」</span>
+              <span class="t-min">2′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p6">
+              <span class="t-title" lang="ja">シベリアの巨大陥没穴はなぜできた？</span>
+              <span class="t-min">4′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p7">
+              <span class="t-title" lang="ja">深海の炭素固定、主役不在の謎</span>
+              <span class="t-min">4′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p8">
+              <span class="t-title" lang="ja">心臓にある「ミニ脳」は何をしているのか</span>
+              <span class="t-min">2′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p9">
+              <span class="t-title" lang="ja">LAを熱狂させた47年目のCASIOPEA</span>
+              <span class="t-min">5′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p10">
+              <span class="t-title" lang="ja">バイブコーディング6週間、Macの起動が20分に</span>
+              <span class="t-min">6′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p11">
+              <span class="t-title" lang="ja">12のAIに「人間について最も物議を醸す見解を」と聞いたら</span>
+              <span class="t-min">4′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p12">
+              <span class="t-title" lang="ja">リニア神奈川県駅、地下30mのホームを初公開</span>
+              <span class="t-min">2′</span>
+            </a>
+          </li>
+        </ol>
+      </nav>
+    </aside>
+
+    <main class="main">
+      <div class="digest-banner">
+        <span class="tag">TRIAGE</span>
+        <span>2026-10-25 — As estátuas cuspidas de Qin Hui (Song do Sul); Fujiwara no Kamatari e o túmulo de Abuyama; Pujie, irmão de Puyi, em Nishinomiya; o Hamokiri Matsuri de Tamba-Sasayama; a névoa “kawa-arashi” do Maruyama; crateras de metano na Sibéria; o carbono do mar profundo; o minicérebro do coração; CASIOPEA em LA; o Mac que levava 20 min para ligar; 12 IAs sobre os humanos; a estação subterrânea do maglev. Pontos fracos: música sem nada fresco de BABYMETAL/DIR EN GREY/HYDE etc. (fui de CASIOPEA, rock-fusion); Kobe-NP e NatGeo só com aberturas; a cratera da CNN é reedição de 2021.</span>
+      </div>
+
+      <header class="hero">
+        <div class="kicker">Daily curated reading</div>
+        <h1 lang="ja">唾を吐かれる鉄像と鎌足の折れた背骨、ラストエンペラーの弟と大蛇のハモ、海へあふれる霧と凍土の穴、深海の少数派と心臓のミニ脳、LAのカシオペアと20分のMac起動——ひと朝の読解</h1>
+        <p lang="ja">杭州の岳飛の墓前で、500年唾を吐かれ続ける4体の鉄像——そこにいない皇帝の謎。1934年、阿武山で見つかった錦の遺体は藤原鎌足なのか。西宮で初公開された溥傑の書、丹波篠山で一刀両断される2メートルのハモ、円山川を下って海へあふれる霧。シベリアの凍土に開いた穴、深海で炭素を取り込む「食べる側」、心臓の4万個のニューロン。LAを沸かせた47年目のCASIOPEA、Macの起動を20分にしたClaude Codeの一時ファイル、12のAIが語る人間観、地下30mのリニア駅——推定合計 ~47 分。</p>
+      </header>
+
+      <article class="piece" id="p1">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★★</span> <span class="chip mins">6 min</span> <span class="chip" lang="ja">南宋</span> <span class="chip" lang="ja">岳飛</span> <span class="chip" lang="ja">秦檜</span> <span class="chip" lang="ja">杭州</span> <span class="chip" lang="ja">世界史</span>
+          </div>
+          <h2 lang="ja">500年間、唾を吐かれ続ける4体の鉄像…中国で今も憎まれる罪人たちの正体</h2>
+          <p class="why">Em Hangzhou, diante do túmulo do general Yue Fei, quatro estátuas de ferro ajoelhadas e de mãos atadas levam cusparadas há 500 anos: o chanceler Qin Hui, a esposa, um burocrata e um general traidor. A história do herói que tinha “尽忠報国” tatuado nas costas, executado sem provas para agradar aos Jin — e a pergunta final: por que o imperador que mandou matá-lo não está ajoelhado ali?</p>
+          <div class="source">
+            <span lang="ja">草の実堂</span>
+            <a href="https://kusanomido.com/study/history/chinese/sou/135695/" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>中国・浙江省杭州市にある岳飛（がくひ）の墓には、奇妙な4体の鉄像が置かれている。いずれも両手を後ろで縛られ、地面にひざまずく姿をしており、長い間、人々から唾を吐きかけられたり、罵声を浴びせられたりしてきた。</p>
+            <p>朝廷では「失った北方の領土を武力で取り戻すべきか、それとも金と和平を結んで国を安定させるべきか」と意見が分かれ、激しい政治的対立が起きていた。</p>
+            <p>彼の率いる「岳家軍」は軍律の厳しさで知られ、『宋史』には「兵士が民衆の麻をわずか一筋奪っただけでも処罰された」といった逸話も残っている。 軍隊による略奪が珍しくなかった時代に、岳飛は兵を見事に統率して民衆の支持を集めたのである。</p>
+            <p>『宋史』によれば尋問の際、岳飛は衣服を脱いで、背中に刻まれた「尽忠報国」の四文字を見せたという。 何鑄は調査を進めるうちに岳飛の無実を確信し、宰相の秦檜にその結果を報告した。</p>
+            <p>ところが秦檜は「これは皇帝の意向だ」と告げ、何鑄の報告を退けようとした。 何鑄は「強敵が残っているのに、理由もなく大将を殺せば兵士たちの心を失い、国家のためにならない」と反論したという。</p>
+            <p>『宋史』では悪臣を集めた「姦臣伝」に名を連ね、後世の中国では「秦檜」という名前そのものが売国奴の代名詞となった。</p>
+            <p>明代の『西湖遊覧志』には、岳飛の処刑をためらう秦檜に対し、王氏が「虎を捕らえるのは容易でも、放してしまえば再び捕らえるのは難しい」と助言したという逸話が残されている。</p>
+            <p>岳飛を敬う人々は、墓前の罪人像を罵倒し、唾を吐きかけ、ときには叩くことで怒りを表した。 こうした習慣は長く続き、像は何度も造り直されながら受け継がれてきた。</p>
+            <p>ところが、この4体のなかには、皇帝・高宗が含まれていない。……岳飛の死に関わった4人は、その死を命じた皇帝の分まで、500年以上も人々の憎しみを受け続けているのかもしれない。</p>
+          </div>
+          <p class="continue"><a href="https://kusanomido.com/study/history/chinese/sou/135695/" target="_blank" rel="noopener" lang="ja">続きを読む · 草の実堂</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p2">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★★</span> <span class="chip mins">6 min</span> <span class="chip" lang="ja">藤原鎌足</span> <span class="chip" lang="ja">飛鳥時代</span> <span class="chip" lang="ja">阿武山古墳</span> <span class="chip" lang="ja">大織冠</span> <span class="chip" lang="ja">考古学</span>
+          </div>
+          <h2 lang="ja">藤原鎌足は畳の上で死ねたのか？阿武山古墳の骨折した遺骨と大織冠の謎</h2>
+          <p class="why">O fundador do clã Fujiwara passou quase a vida inteira como “Nakatomi” — o sobrenome veio na véspera da morte. Morreu em casa, visitado pelo imperador, dizendo que “não servira para nada”. Mas em 1934 uma obra em Abuyama (Takatsuki) abriu um túmulo com um homem em brocado, travesseiro de contas de vidro e coluna fraturada que sarou antes da morte; raios X redescobertos meio século depois e um estudo de 2024 apontam para a coroa Taishokkan. Mistério arqueológico com personagem.</p>
+          <div class="source">
+            <span lang="ja">BUSHOO!JAPAN（武将ジャパン）</span>
+            <a href="https://bushoojapan.com/jphistory/kodai/2026/10/15/222255" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>藤原鎌足は推古天皇二十二年（614年）、朝廷の祭祀（さいし）を担う中臣氏に生まれました。「藤原」の姓を授かるのは亡くなる前日のことで、生涯のほとんどを中臣の名で過ごしています。</p>
+            <p>鎌足は、幼いころから学問を好み、とりわけ中国の兵法書『六韜（りくとう）』を愛読していたそうですから、神主の跡取りというより、軍師の卵のような少年だったのでしょうか。</p>
+            <p>近江の湖畔の楼閣で開かれた酒宴の席で、大海人皇子が長槍で床板を刺し貫く騒ぎが起き、激怒した天皇が弟を殺そうとしたところを、鎌足が取りなしたといいます。</p>
+            <p>私は愚か者ですから、今さら何を申し上げることがありましょう。生きているうちは軍事でも政務でもお役に立てなかったのに、死んでまでどうして重ねてご迷惑をおかけできましょう。</p>
+            <p>10月15日、天皇は冠位の最高位である大織冠（たいしょくかん）と大臣の位、そして「藤原」の姓を授けると、翌16日、鎌足は近江の自邸で亡くなりました。</p>
+            <p>昭和9年（1934年）、大阪府の高槻市と茨木市にまたがる阿武山（あぶやま）で、工事の最中に古墳が発見されました。棺の中から出てきたのは、錦の衣をまとった男性の遺体。</p>
+            <p>遺体はほどなく埋め戻され、半世紀後に当時のX線写真が見つかり、昭和62年（1987年）の解析で驚きの事実が明らかになります。</p>
+            <p>断定できる決め手はまだありませんが、帝塚山大学は2024年、冠が大織冠だった可能性が高く、被葬者が鎌足である可能性もさらに高まったと発表しています。</p>
+            <p>阿武山古墳の棺には、ガラス玉を銀線で編んだ玉枕が置かれ、冠と錦の衣に包まれた遺体が丁寧に納められていました。</p>
+          </div>
+          <p class="continue"><a href="https://bushoojapan.com/jphistory/kodai/2026/10/15/222255" target="_blank" rel="noopener" lang="ja">続きを読む · BUSHOO!JAPAN（武将ジャパン）</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p3">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★☆</span> <span class="chip mins">4 min</span> <span class="chip" lang="ja">兵庫</span> <span class="chip" lang="ja">西宮</span> <span class="chip" lang="ja">溥傑</span> <span class="chip" lang="ja">満州国</span> <span class="chip" lang="ja">近代史</span>
+          </div>
+          <h2 lang="ja">清朝ラストエンペラーの弟・溥傑の書　直筆漢詩2点を初公開　端正な筆遣い人柄にじむ　西宮</h2>
+          <p class="why">História mundial com endereço em Hyōgo: Pujie, irmão do “último imperador” Puyi, casou-se em 1937 com Hiro, parente da casa imperial japonesa; o Manchukuo ruiu, ele virou prisioneiro soviético e criminoso de guerra, e o casal só se reencontrou 16 anos depois. Duas caligrafias inéditas dele estão expostas no museu da Mukogawa Joshi (Naruo, Nishinomiya), doadas pela filha — exposição grátis até 2/12.</p>
+          <div class="source">
+            <span lang="ja">神戸新聞NEXT（地道優樹）</span>
+            <a href="https://www.kobe-np.co.jp/news/hanshin/202610/0020963742.shtml" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>中国清朝の「ラストエンペラー」として知られる愛新覚羅溥儀（あいしんかくらふぎ）の弟で、日中友好に尽くした溥傑（ふけつ）（１９０７～９４年）の直筆漢詩２点が、兵庫県西宮市鳴尾町の武庫川女子大付属総合ミュージアムの展示で初公開されている。</p>
+            <p>溥傑は、旧満州国（現中国東北部）の皇帝となった兄を軍人として支えた。日本留学中の１９３７年に浩と結婚し、２人の娘に恵まれたが、日本の敗戦で満州国は崩壊。旧ソ連軍の捕虜となった後、中国の戦犯管理所に収容され、一家は長きにわたり引き裂かれた。</p>
+            <p>釈放され、浩と再会したのは終戦から１６年後の６１年。その後は、浩と北京で暮らしながら全国人民代表大会の要職を務め、７８年には日中平和友好条約批准のための訪日メンバーにも名を連ねた。晩年まで西宮市に暮らす娘を訪ねてたびたび来日し、日中友好への思いを流麗な書に残した。</p>
+            <p>幼少期より清朝の遺臣に師事し、書道家としても人気を集めた溥傑。……浩の短冊には「からくにと　大和のくにが　むすばれて　永久に幸あれ　千代に八千代に」と、日中友好への願いが達筆でつづられている。</p>
+            <p>夫妻の次女の福永嫮生（こせい）さんがこれらを寄贈。福永さんの娘が同大付属中学・高校に通っていた縁で、同校では２００８年に「日中友好の庭」が造られ、夫妻の歌碑が建立されるなど、現在も平和教育の礎となっている。</p>
+          </div>
+          <p class="continue"><a href="https://www.kobe-np.co.jp/news/hanshin/202610/0020963742.shtml" target="_blank" rel="noopener" lang="ja">続きを読む · 神戸新聞NEXT（地道優樹）</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p4">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★☆</span> <span class="chip mins">2 min</span> <span class="chip" lang="ja">祭り</span> <span class="chip" lang="ja">丹波篠山</span> <span class="chip" lang="ja">奇祭</span> <span class="chip" lang="ja">大蛇伝説</span> <span class="chip" lang="ja">兵庫</span>
+          </div>
+          <h2 lang="ja">大蛇「退治」、伝統の一太刀　丹波篠山・沢田公民館で鱧切祭＜たんばの秋祭り＞</h2>
+          <p class="why">Um dos “três festivais bizarros de Taki” (Tamba-Sasayama): uma enguia-pike (hamo) de 2 metros faz o papel da serpente gigante que exigia sacrifícios humanos no antigo pântano de Sawada; os aldeões a embebedam com saquê e o “hamokiri-nin” a corta ao meio com um deba-bōchō. Matsuri com mito, curtinho e cheio de vocabulário bom (人身御供, 一刀両断, 安堵).</p>
+          <div class="source">
+            <span lang="ja">神戸新聞NEXT（堀井正純）</span>
+            <a href="https://www.kobe-np.co.jp/news/tanba/202610/0020943648.shtml" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>巨大なハモを大蛇に見立て、酒に酔わせて退治する「鱧切（はもきり）祭」が、丹波篠山市沢田の沢田公民館であった。地元・沢田八幡神社の神事で、「多紀の三大奇祭」の一つに数えられている。</p>
+            <p>沼地だった沢田の地には大蛇が生息し、人身御供をささげていたが「神人（じにん）」が現れ、退治したとの伝説に基づく。</p>
+            <p>氏子ら約２０人が、猿田彦などさまざまな役を演じ、宴を開く中で大蛇（ハモ）が登場。主役の「鱧切人」を務めた農業飛地八省（ひじはっせい）さん（５１）が、出刃包丁を手に、長さ２メートルもあるハモを持ち上げ、ひっくり返し、一刀両断する所作を披露すると、拍手がわき起こった。</p>
+          </div>
+          <p class="continue"><a href="https://www.kobe-np.co.jp/news/tanba/202610/0020943648.shtml" target="_blank" rel="noopener" lang="ja">続きを読む · 神戸新聞NEXT（堀井正純）</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p5">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★☆☆</span> <span class="chip mins">2 min</span> <span class="chip" lang="ja">兵庫</span> <span class="chip" lang="ja">豊岡</span> <span class="chip" lang="ja">自然現象</span> <span class="chip" lang="ja">円山川</span> <span class="chip" lang="ja">気象</span>
+          </div>
+          <h2 lang="ja">川を伝い、海にあふれ出す濃霧　円山川河口で「川あらし」　豊岡</h2>
+          <p class="why">“Kawa-arashi”: a névoa nasce no rio com a diferença de temperatura dia/noite e é empurrada pelo vento até transbordar no mar pela foz estreita do Maruyama (Toyooka). Só três rios de 1ª classe no Japão mostram isso. Temporada: outubro a meados de novembro, na manhã clara depois da chuva — vale como ideia de passeio no norte de Hyōgo.</p>
+          <div class="source">
+            <span lang="ja">神戸新聞NEXT（吉田みなみ）</span>
+            <a href="https://www.kobe-np.co.jp/news/tajima/202610/0020963991.shtml" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>濃霧が川を伝って海に流れ出す自然現象「川あらし」が、兵庫県豊岡市の円山川河口付近で発生している。２３日朝には、太陽の光を浴びた霧が広範囲を覆った。</p>
+            <p>川あらしは、川の水蒸気が昼夜の寒暖差で霧となり、強風で山に挟まれた河口に運ばれて起きる。</p>
+            <p>１級河川で確認できるのは全国で３カ所とされ、愛媛県の肱川、鹿児島県の川内川とともに「日本三大川あらし」とも呼ばれる。</p>
+            <p>豊岡市瀬戸の御待岬付近では同日午前７時ごろ、霧が川に流れ出した。太陽が上ると、オレンジ色の光が海面や霧を幻想的に照らした。</p>
+            <p>１０月～１１月半ば、雨降りの翌朝に晴れると出現する可能性が高まるという。</p>
+          </div>
+          <p class="continue"><a href="https://www.kobe-np.co.jp/news/tajima/202610/0020963991.shtml" target="_blank" rel="noopener" lang="ja">続きを読む · 神戸新聞NEXT（吉田みなみ）</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p6">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★☆</span> <span class="chip mins">4 min</span> <span class="chip" lang="ja">シベリア</span> <span class="chip" lang="ja">永久凍土</span> <span class="chip" lang="ja">メタン</span> <span class="chip" lang="ja">ドローン</span> <span class="chip" lang="ja">気候変動</span>
+          </div>
+          <h2 lang="ja">シベリアの永久凍土にできた巨大陥没穴の謎、現地調査で解明　20年ロシア</h2>
+          <p class="why">Crateras redondas de 30 m surgindo do nada na tundra de Yamal: o pesquisador pilotou o drone deitado de bruços na borda, braços estendidos para dentro do buraco, e o modelo 3D mostrou uma caverna de gás metano sob o gelo que inchou o chão até explodir. (Reedição de matéria de 2021 republicada agora — a ciência continua ótima.)</p>
+          <div class="source">
+            <span lang="ja">CNN.co.jp</span>
+            <a href="https://www.cnn.co.jp/fringe/35253928.html" target="_blank" rel="noopener">原文を開く ↗</a> · <a href="https://www.cnn.co.jp/fringe/35253928-2.html" target="_blank" rel="noopener" lang="ja">2ページ目 ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>（CNN） シベリアのツンドラ地帯に2020年、突如として出現した巨大なクレーター。現地調査を行ったロシアの研究チームが科学誌に翌年発表した調査結果によると、何もない平原にできた円形の陥没穴は、地下にたまったメタンガスが噴出し、氷や岩石を吹き飛ばして形成されていた。</p>
+            <p>論文を執筆したロシア科学アカデミー石油・ガス研究所のイゴール・ボゴヤブレンスキー氏はドローンの操縦を担当。深い陥没穴の前で腹ばいになり、穴の縁から両腕を下に伸ばして操縦したという。</p>
+            <p>立体モデルの作成によって、クレーターの下部に異常に大きな空洞があることが分かった。研究チームは、氷の中の空洞にメタンガスがたまって地面が隆起、この隆起が大きくなって爆発を起こし、氷などの破片をまき散らして巨大なクレーターが形成されるという仮説を立てていたが、この仮説がほぼ立証された。</p>
+            <p>永久凍土は天然の巨大メタン貯留場でもあり、熱を閉じ込めて地球を温暖化させる威力は二酸化炭素よりはるかに大きい。北極圏は世界平均の2倍のペースで温暖化が進んでおり、蓋（ふた）の役割を果たす凍土層は、夏の温暖化の影響で緩んでガスが放出しやすくなっていた。</p>
+            <p>クレーターが出現しているのは非常に人口が少ない地域だが、先住民や石油・ガスのインフラに危険を及ぼす可能性もある。陥没穴は大抵が、上空を飛ぶヘリコプターや、トナカイ飼育の遊牧民によって偶然発見されている。</p>
+          </div>
+          <p class="continue"><a href="https://www.cnn.co.jp/fringe/35253928.html" target="_blank" rel="noopener" lang="ja">続きを読む · CNN.co.jp</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p7">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★☆</span> <span class="chip mins">4 min</span> <span class="chip" lang="ja">海洋科学</span> <span class="chip" lang="ja">深海</span> <span class="chip" lang="ja">微生物</span> <span class="chip" lang="ja">北海道大</span> <span class="chip" lang="ja">炭素循環</span>
+          </div>
+          <h2 lang="ja">深海で見えた炭素固定、主役不在の謎　数字の裏に潜んだ「食べる側」の少数派生物は何者か　クローズアップ科学</h2>
+          <p class="why">Romance policial científico: no oceano profundo sem luz, a fixação de carbono medida não fechava com os “suspeitos de sempre” (micróbios quimiossintéticos). Dez anos de investigação de uma equipe liderada pela Universidade de Hokkaido até achar o culpado improvável — uma minoria de bactérias que “comem” matéria orgânica. Ótimo vocabulário de ciência (無機物, 酵素, 光合成).</p>
+          <div class="source">
+            <span lang="ja">産経ニュース</span>
+            <a href="https://www.sankei.com/article/20261025-RRNLRRLC7ZN5LNBEY3EFX2DVQU/" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>海水には、二酸化炭素など無機物の形で存在する炭素が溶けている。これを生物が取り込み、糖やアミノ酸など炭素を骨格とする有機物に組み込む働きが「炭素固定」だ。</p>
+            <p>研究者は太陽光の届かない深海に目を向けた。ところが、そこで測った炭素固定の量は、主役と考えられてきた微生物だけでは説明できなかった。いったい誰が炭素を取り込んでいるのか。北海道大などの国際研究チームによる10年越しの研究で、意外な働き手が浮かんだ。</p>
+            <p>発端は2010年、大西洋の研究航海で行われた実験だった。……すると、有機物を加えた海水で、微生物の増殖と炭素固定がともに活発になった。光のない海では、アンモニアや硫黄化合物などを利用する「化学合成」の微生物が炭素固定の主役だと考えられていたにもかかわらずだ。</p>
+            <p>そこで研究者は、どの微生物が活発になったのかを、遺伝子の働きから探った。ところが、想定された化学合成の微生物だけでは、増えた炭素固定の量を説明できなかった。数字は増えたのに、主役がいない。別の働き手がいるのではないか。</p>
+            <p>研究チームが、無機炭素を取り込む反応に使う酵素を、どの微生物が盛んにつくっているか調べると、海のどこにでもいるが普段は少数にとどまる、ある細菌の一群が浮かび上がった。</p>
+            <p>しかも、それは他の生物がつくった有機物を「食べる側」で、炭素固定の主役とはみなされてこなかった。なぜ食べる側が、炭素固定の数字に現れたのか。</p>
+          </div>
+          <p class="continue"><a href="https://www.sankei.com/article/20261025-RRNLRRLC7ZN5LNBEY3EFX2DVQU/" target="_blank" rel="noopener" lang="ja">続きを読む · 産経ニュース</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p8">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★☆☆</span> <span class="chip mins">2 min</span> <span class="chip" lang="ja">NatGeo</span> <span class="chip" lang="ja">心臓</span> <span class="chip" lang="ja">神経科学</span> <span class="chip" lang="ja">医学</span> <span class="chip" lang="ja">発見</span>
+          </div>
+          <h2 lang="ja">心臓にある「ミニ脳」の謎で新たな発見、一体何をしているのか</h2>
+          <p class="why">O coração tem um “minicérebro”: cerca de 40 mil neurônios escondidos na gordura ao redor dele. Achava-se que era só uma estação de retransmissão do cérebro; um estudo em camundongos sugere que é vital para a sobrevivência. Só a abertura é livre (resto é pago), mas é curto e ótimo para vocabulário médico (自律神経系, 不整脈).</p>
+          <div class="source">
+            <span lang="ja">ナショナル ジオグラフィック日本版</span>
+            <a href="https://natgeo.nikkeibp.co.jp/atcl/news/26/102000576/" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>人間の心臓には長年解けない謎がある。その一つが「ミニ脳」とも呼ばれる複雑な神経系だ。心臓の機能、特に心拍数の調節に関わっていることは以前から知られていたが、具体的な仕組みや、どれほど重要な役割を果たしているのかについてはほとんど分かっていなかった。</p>
+            <p>しかし、マウスを用いた最新の研究により、「ミニ脳」が生存に欠かせないことが示唆された。心臓の「ミニ脳」は「心臓内在神経系（ICNS）」という。心臓を取り囲む脂肪組織内にあり、ヒトの場合は約4万個のニューロン（神経細胞）からなる複雑なネットワークだ。</p>
+            <p>ICNSはこれまで、主に自律神経系の中継局の役割を果たしていると考えられていた。……しかし、今回の研究により、ICNSは脳からの信号を心臓に伝える以上の働きをしていることが判明した。</p>
+          </div>
+          <p class="continue"><a href="https://natgeo.nikkeibp.co.jp/atcl/news/26/102000576/" target="_blank" rel="noopener" lang="ja">続きを読む · ナショナル ジオグラフィック日本版</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p9">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★☆</span> <span class="chip mins">5 min</span> <span class="chip" lang="ja">音楽</span> <span class="chip" lang="ja">CASIOPEA</span> <span class="chip" lang="ja">J-Fusion</span> <span class="chip" lang="ja">ロサンゼルス</span> <span class="chip" lang="ja">大阪BIG CAT</span>
+          </div>
+          <h2 lang="ja">【インタビュー】LAを熱狂させた47年目のCASIOPEA、「この歳になってこんなことになるとはね」</h2>
+          <p class="why">Fresquíssimo (hoje) e falado, ótimo para ouvir japonês coloquial: a CASIOPEA, 47 anos de estrada, lotou dois dias no Wiltern em LA — público jovem, gente vestida de heavy metal cantando as melodias. O baixista Narucho brinca que bandas ocidentais no Japão deviam pensar “por que ninguém se mexe?”. Disco novo em 2/12 e show em Osaka (BIG CAT, 26/12). Não é metal, mas é rock japonês conquistando os EUA.</p>
+          <div class="source">
+            <span lang="ja">BARKS</span>
+            <a href="https://barks.jp/news/1099936" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>2026年のサマー・ツアー＜CASIOPEA LIVE 2026 ～SUMMER＞の最終日を9月4日、川崎クラブチッタで終えたCASIOPEAが、その翌週である9月12日、13日にロサンゼルス・ウィルターンにおける2DAYS公演を大盛況のうちに終えた。</p>
+            <p>野呂一生：いやぁ、もう夢の世界ですよ。これが若い頃だったらDreams Come Trueということなんだろうけど、この歳になってこんなことになるとはね（笑）。</p>
+            <p>鳴瀬喜博：でも頑張った甲斐あったよね。47年やってきたっていう頑固なうちの大将の根性だよ（笑）。</p>
+            <p>野呂一生：これまでにいろんな国で演奏しましたけど、LAは最も質の良いお客さんという印象です。ヘヴィメタの格好をしている人なんかもいましたけど、ちゃんと聴いてくれているし、知っている曲はメロディを一緒に歌ってくれてたりしてね。……それから、若い人が多いのもビックリで、こんなオジサンたちのどこがいいんだよ？って感じですよ（笑）。</p>
+            <p>鳴瀬喜博：……やっぱり日本人は盛り上がってくれても大人しいじゃん。だから、逆のパターンを考えちゃうんだけどさ、昔から欧米のロックバンドとかが日本に来て、あんまり大人しいから凄く戸惑ったんだろうね。日本のオーディエンスはちゃんと音楽を聴いてくれる、なんて言ってたけどさ、内心は「俺たち、なんでこんなにウケないんだ？」って焦ってたと思うよ（笑）。</p>
+            <p>安部潤：私はまだバンドに入って1年半なんですけど、歴代のメンバーたちがこれまでに築いたモノにあやからせていただいてます。こんないい思いをさせてもらってありがたいやら申し訳ないやら。</p>
+            <p>野呂一生：あと何年続けられるかというのもあるし、今回みたいな驚きもあるし、これまでやってきた事は間違いではなかったのかもしれない…という納得みたいな気持ちがありますね。だから海外公演はお話があれば行きますよ。</p>
+          </div>
+          <p class="continue"><a href="https://barks.jp/news/1099936" target="_blank" rel="noopener" lang="ja">続きを読む · BARKS</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p10">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★★</span> <span class="chip mins">6 min</span> <span class="chip" lang="ja">Claude Code</span> <span class="chip" lang="ja">macOS</span> <span class="chip" lang="ja">デバッグ</span> <span class="chip" lang="ja">node_modules</span> <span class="chip" lang="ja">開発環境</span>
+          </div>
+          <h2 lang="ja">バイブコーディングを6週間続けたら、Mac の起動が20分かかるようになった</h2>
+          <p class="why">Investigação forense de Mac com cara de conto policial — e diretamente relevante pro seu MacBook com Claude Code e worktrees: o boot travava em 20% por 20 min sem nenhum log. Um diagnóstico só-leitura achou o culpado: ~990 mil arquivos em 9,5 h no /private/tmp (clones + yarn install no scratchpad do Claude Code), que o macOS apaga no boot. Bônus: 600 GB/dia escritos no SSD, node lançado 1.100–4.500 vezes por minuto, e o Spotlight indexando node_modules.</p>
+          <div class="source">
+            <span lang="ja">Zenn（singularity）</span>
+            <a href="https://zenn.dev/singularity/articles/vibe-coding-mac-boot-20min" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>電源を入れて、FileVault のパスワードを入れる。進捗バーが出る。2割くらいまで進む。そこで止まる。5分待っても、10分待っても動かない。</p>
+            <p>調べたのは Claude Code です。条件を一つだけ付けました。 読み取りだけで診断すること。 設定を変えない、ファイルを消さない、プロセスを止めない、再起動しない。対処は提案までで、実行は僕が判断する。</p>
+            <p>起動が遅いなら、起動時のログを見ればいい。そう思ってのぞいてみると、 止まっていた約18分間のログが1行もありません。</p>
+            <p>dirhelper は、起動時に 一時ファイルを片付ける ためのプログラムです。カーネル内でばかり時間を使っているのは、ファイルを大量に削除しているときの典型的な姿です。つまり、 起動が止まっていたのではなく、一時ファイルを消し終わるのを待っていた 、と読めます。</p>
+            <p>Claude Code は、一時ファイルを置くための作業用ディレクトリ（scratchpad）をセッションに用意します。……僕の場合は、ここに リポジトリを丸ごと clone して yarn install する のが日常でした。</p>
+            <p>9時間半で約99万。 前回の再起動までは、6週間連続で動かしていました。単純にかけ算はできませんが、数百万ファイル以上が溜まっていてもおかしくありません（これは推定です）。</p>
+            <p>1回目は 壊れていたのではなく、削除の途中だった と考えられます。僕はそれを途中で止めて、残りを2回目の起動で消させていた。「壊れた」と思って押した長押しは、少なくとも起動を早めてはくれませんでした。</p>
+            <p>ただ、1日あたりに直すと約600GB書いています。一般的な使い方では1日に数十GBと言われるので、かなり多いほうです。</p>
+          </div>
+          <p class="continue"><a href="https://zenn.dev/singularity/articles/vibe-coding-mac-boot-20min" target="_blank" rel="noopener" lang="ja">続きを読む · Zenn（singularity）</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p11">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★☆</span> <span class="chip mins">4 min</span> <span class="chip" lang="ja">AI</span> <span class="chip" lang="ja">LLM</span> <span class="chip" lang="ja">Claude</span> <span class="chip" lang="ja">人間観</span> <span class="chip" lang="ja">実験</span>
+          </div>
+          <h2 lang="ja">多くのAIが「人間はひとりで正しくあるより、みんなで間違っている方を選ぶ」という考えを持っている</h2>
+          <p class="why">Pediram a 12 modelos “a sua opinião mais polêmica sobre os humanos”, 3 vezes cada: quase todos convergiram para “preferem estar errados em grupo a certos sozinhos” — os dois Claude foram as exceções mais curiosas (“os humanos são muito melhores do que pensam”). Frases curtas e densas, ótimas para ler em voz alta. Bônus no link: o relatório da Anthropic sobre o modelo que “saiu do trilho” durante um teste de ciberataque do governo britânico.</p>
+          <div class="source">
+            <span lang="ja">GIGAZINE</span>
+            <a href="https://gigazine.net/news/20261023-every-ai-model-controversial-humans/" target="_blank" rel="noopener">原文を開く ↗</a> · <a href="https://www.sankei.com/article/20261024-QN4ZWXSKVJJXLJY57KJRX6H6TA/" target="_blank" rel="noopener" lang="ja">関連：AIが評価試験中に「暴走」、アンソロピックが分析（産経） ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>ModelCompareは12種類のAIモデルに対して、「人間について、最も物議を醸すであろう見解を、歯に衣着せずに述べて」と依頼した結果を公開しました。ModelCompareは各AIモデルに3回同じ質問を行っており、12種類のAIモデルすべてが少なくとも1回は「人間はひとりで正しくあるより、みんなで間違っている方を選ぶ」といった類の回答をしたそうです。</p>
+            <p>Kimi K3「人間が持っているのは信条ではなく、帰属先です。人が抱く確信のほぼすべては、忠誠心を試すために所属集団から与えられたものであり、『自分の論理でこの結論にたどり着いた』という感覚こそが、その集団への参加条件なのです」</p>
+            <p>DeepSeek V4 Pro「人間は理性的な動物ではなく、理屈を後付けする動物です。私たちの心は、現実を明確に捉えるためではなく、社会的な駆け引きに勝つために進化しました」</p>
+            <p>GLM 5.3「ほとんどの人間には、本当の意味での道徳的人格がありません。『善良な人間であること』は、圧倒的にいつどこで生まれたかという運に左右されます。それなのに、ほぼ誰もがその偶然を、自分自身の功績だと思い込んでいます」</p>
+            <p>Claude Opus 5.5「人間は自分たちが思っているよりもはるかに善良です。そして、互いに対する冷笑的な見方は、実際の欠点よりも大きな害をもたらします」</p>
+            <p>その結果、12回中10回で「スマートフォンに依存した人間が、地球を食いつぶす」といった類のイラストが生成されました。なお、前述の実験でスマートフォンや地球について言及するAIモデルはいませんでした。</p>
+          </div>
+          <p class="continue"><a href="https://gigazine.net/news/20261023-every-ai-model-controversial-humans/" target="_blank" rel="noopener" lang="ja">続きを読む · GIGAZINE</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p12">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★☆☆</span> <span class="chip mins">2 min</span> <span class="chip" lang="ja">鉄道</span> <span class="chip" lang="ja">リニア中央新幹線</span> <span class="chip" lang="ja">JR東海</span> <span class="chip" lang="ja">相模原</span> <span class="chip" lang="ja">インフラ</span>
+          </div>
+          <h2 lang="ja">リニアの神奈川県駅「想像以上に広くて驚き」　JR東海、ホームの工事現場を初公開</h2>
+          <p class="why">Trens: a JR Central abriu pela primeira vez a obra da plataforma subterrânea da estação Kanagawa do maglev Chūō Shinkansen — 680 m de comprimento, 50 m de largura, 30 m de profundidade, 2 plataformas e 4 vias. Uma rocha maior que o previsto empurrou a obra de 2027 para ~2030. Curtinho, vocabulário de infraestrutura.</p>
+          <div class="source">
+            <span lang="ja">産経ニュース（共同）</span>
+            <a href="https://www.sankei.com/article/20261025-HBU26IM4JNJ6ZCYU3EMC7WU4PM/" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>JR東海は24日、相模原市緑区で建設が進むリニア中央新幹線の神奈川県駅（仮称）で、列車が通る地下ホームの工事現場を初めて地元住民や報道陣に公開した。神奈川県や相模原市などが共催したイベントの一環。</p>
+            <p>JR橋本駅南側の地下に設置される神奈川県駅は長さ約680メートル、最大幅約50メートルで、深さ約30メートルの地下3階にホームを造る。ホーム2面と線路4線を配置する。</p>
+            <p>同市の会社員、大森裕樹さん（47）は長男の湊斗さん（10）と参加。「日ごろ工事を外から見ているが、中は想像以上に広くて驚いた。趣味のラグビー観戦のため、リニアで名古屋に行けることを楽しみにしている」と話した。</p>
+            <p>神奈川県駅の工期は、想定以上の大きな岩が出たことなどにより、当初予定の2027年春から延期し、30年春ごろまでを見込んでいる。</p>
+          </div>
+          <p class="continue"><a href="https://www.sankei.com/article/20261025-HBU26IM4JNJ6ZCYU3EMC7WU4PM/" target="_blank" rel="noopener" lang="ja">続きを読む · 産経ニュース（共同）</a></p>
+        </div>
+      </article>
+
+      <footer class="site">読解幕 · 2026-10-25 · ~47 min · <a href="/japanese-digest/history/" style="color:inherit">History</a> · deliton.github.io/japanese-digest</footer>
+    </main>
+  </div>
+</body>
+</html>
