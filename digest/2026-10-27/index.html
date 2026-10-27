@@ -1,0 +1,765 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>読解幕 · 2026-10-27 · Japanese Digest</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Noto+Serif+JP:wght@400;600;700&family=Shippori+Mincho:wght@500;700&display=swap" rel="stylesheet" />
+  <style>
+
+    :root {
+      --bg: #0a0a0a;
+      --bg-2: #121212;
+      --bg-card: #161616;
+      --ink: #f5f5f5;
+      --ink-dim: #a8a29a;
+      --ink-mute: #6b6560;
+      --shu: #c41e3a;
+      --shu-hot: #e11d48;
+      --shu-deep: #8b1228;
+      --gold: #d4a017;
+      --gold-soft: #c9a227;
+      --white: #fafafa;
+      --line: #2a2a2a;
+      --line-hot: rgba(196, 30, 58, 0.45);
+      --measure: 42rem;
+      --radius: 4px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: "Noto Sans JP", "Hiragino Sans", "Yu Gothic", system-ui, sans-serif;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .stage-bar {
+      height: 6px;
+      background: repeating-linear-gradient(
+        90deg,
+        var(--shu) 0 48px,
+        var(--white) 48px 56px,
+        #111 56px 64px,
+        var(--gold) 64px 72px,
+        #111 72px 88px
+      );
+    }
+
+    .wrap {
+      width: min(100% - 2rem, 74rem);
+      margin: 0 auto;
+      padding: 2rem 0 4.5rem;
+      display: grid;
+      grid-template-columns: 15.5rem 1fr;
+      gap: 2.75rem;
+      align-items: start;
+    }
+
+    @media (max-width: 900px) {
+      .wrap { grid-template-columns: 1fr; gap: 1.5rem; padding-top: 1.25rem; }
+      .sidebar { position: static !important; }
+    }
+
+    .sidebar { position: sticky; top: 1.25rem; }
+
+    .brand {
+      display: flex;
+      align-items: baseline;
+      gap: 0.55rem;
+      margin: 0 0 0.35rem;
+    }
+    .brand-mark {
+      font-family: "Shippori Mincho", "Noto Serif JP", serif;
+      font-size: 1.85rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      color: var(--white);
+      line-height: 1;
+    }
+    .brand-mark em {
+      font-style: normal;
+      color: var(--shu);
+    }
+    .brand-sub {
+      font-size: 0.65rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-weight: 700;
+    }
+
+    .meta {
+      color: var(--ink-mute);
+      font-size: 0.8rem;
+      margin: 0 0 1.25rem;
+    }
+
+    .stat-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-bottom: 1.35rem;
+    }
+    .stat {
+      border: 1px solid var(--line);
+      background: var(--bg-2);
+      padding: 0.32rem 0.65rem;
+      font-size: 0.72rem;
+      color: var(--ink-dim);
+      border-radius: var(--radius);
+    }
+    .stat strong { color: var(--white); font-weight: 700; }
+    .stat.hot {
+      border-color: var(--shu);
+      color: var(--shu-hot);
+      background: rgba(196, 30, 58, 0.1);
+    }
+
+    .toc {
+      border: 1px solid var(--line);
+      background: var(--bg-2);
+      padding: 0.85rem 0.9rem 0.95rem;
+      border-radius: var(--radius);
+    }
+    .toc h2 {
+      margin: 0 0 0.65rem;
+      font-size: 0.72rem;
+      letter-spacing: 0.16em;
+      color: var(--gold);
+      font-weight: 800;
+    }
+    .toc ol { list-style: none; margin: 0; padding: 0; }
+    .toc li { margin: 0; }
+    .toc a {
+      display: flex;
+      justify-content: space-between;
+      gap: 0.5rem;
+      text-decoration: none;
+      color: var(--ink-dim);
+      font-size: 0.82rem;
+      padding: 0.38rem 0.2rem;
+      border-bottom: 1px solid transparent;
+    }
+    .toc a:hover { color: var(--white); border-bottom-color: var(--line-hot); }
+    .toc .t-title { font-weight: 600; }
+    .toc .t-min { color: var(--gold); font-size: 0.72rem; font-weight: 700; flex-shrink: 0; }
+
+    .main { max-width: var(--measure); }
+
+    .digest-banner {
+      display: flex;
+      gap: 0.75rem;
+      align-items: flex-start;
+      background: #141014;
+      border: 1px solid var(--line);
+      border-left: 3px solid var(--shu);
+      padding: 0.85rem 1rem;
+      margin-bottom: 1.5rem;
+      font-size: 0.78rem;
+      color: var(--ink-dim);
+      line-height: 1.55;
+    }
+    .digest-banner .tag {
+      flex-shrink: 0;
+      background: var(--shu);
+      color: #fff;
+      font-size: 0.65rem;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      padding: 0.28rem 0.5rem;
+      border-radius: var(--radius);
+    }
+
+    .hero {
+      margin-bottom: 2rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid var(--line);
+      position: relative;
+    }
+    .hero::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -1px;
+      width: 4.5rem;
+      height: 2px;
+      background: var(--shu);
+    }
+    .kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.7rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--shu-hot);
+      font-weight: 800;
+      margin-bottom: 0.85rem;
+    }
+    .kicker::before {
+      content: "◆";
+      font-size: 0.55rem;
+      color: var(--gold);
+    }
+    .hero h1 {
+      font-family: "Shippori Mincho", "Noto Serif JP", serif;
+      font-size: clamp(1.85rem, 4vw, 2.55rem);
+      font-weight: 700;
+      line-height: 1.2;
+      margin: 0 0 0.75rem;
+      color: var(--white);
+      letter-spacing: 0.02em;
+    }
+    .hero p {
+      margin: 0;
+      color: var(--ink-dim);
+      font-size: 0.98rem;
+      max-width: 36rem;
+    }
+
+    article.piece {
+      background: var(--bg-card);
+      border: 1px solid var(--line);
+      margin-bottom: 1.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+    article.piece::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: linear-gradient(90deg, var(--shu) 0%, var(--shu) 35%, var(--gold) 35%, var(--gold) 42%, transparent 42%);
+    }
+
+    .piece-inner { padding: 1.6rem 1.55rem 1.35rem; }
+
+    .piece-head {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-bottom: 0.85rem;
+    }
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      border: 1px solid var(--line);
+      background: #111;
+      color: var(--ink-dim);
+      padding: 0.22rem 0.6rem;
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      border-radius: var(--radius);
+    }
+    .chip.interest {
+      border-color: var(--shu);
+      color: var(--shu-hot);
+      background: rgba(196, 30, 58, 0.12);
+    }
+    .chip.mins {
+      border-color: var(--gold);
+      color: var(--gold);
+      background: transparent;
+    }
+
+    .piece h2 {
+      font-family: "Noto Serif JP", "Shippori Mincho", "Yu Mincho", serif;
+      font-size: 1.38rem;
+      font-weight: 700;
+      line-height: 1.5;
+      margin: 0 0 0.6rem;
+      color: var(--white);
+      letter-spacing: 0.02em;
+    }
+
+    .why {
+      margin: 0 0 1rem;
+      color: var(--ink-dim);
+      font-size: 0.9rem;
+      border-left: 2px solid var(--gold);
+      padding-left: 0.85rem;
+    }
+
+    .source {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.65rem 1.1rem;
+      font-size: 0.76rem;
+      color: var(--ink-mute);
+      margin-bottom: 1.25rem;
+    }
+    .source a {
+      color: var(--shu-hot);
+      text-decoration: none;
+      font-weight: 600;
+    }
+    .source a:hover { color: var(--gold); }
+
+    .ja {
+      font-family: "Noto Serif JP", "Hiragino Mincho ProN", "Yu Mincho", serif;
+      font-size: 1.08rem;
+      line-height: 2;
+      letter-spacing: 0.03em;
+      color: #ebe7e1;
+    }
+    .ja p { margin: 0 0 1.15em; }
+    .ja p:last-child { margin-bottom: 0; }
+
+    .continue {
+      margin-top: 1.25rem;
+      padding-top: 1rem;
+      border-top: 1px solid var(--line);
+      font-size: 0.86rem;
+    }
+    .continue a {
+      color: var(--white);
+      text-decoration: none;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      border-bottom: 2px solid var(--shu);
+      padding-bottom: 0.1rem;
+    }
+    .continue a:hover {
+      color: var(--shu-hot);
+      border-bottom-color: var(--gold);
+    }
+
+    footer.site {
+      max-width: var(--measure);
+      margin-top: 1.75rem;
+      color: var(--ink-mute);
+      font-size: 0.72rem;
+      letter-spacing: 0.06em;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+    footer.site::before {
+      content: "";
+      width: 1.25rem;
+      height: 2px;
+      background: var(--shu);
+    }
+
+  
+    .excerpt-label { font-size: 0.66rem; letter-spacing: 0.18em; color: var(--gold); font-weight: 800; margin: 0 0 0.6rem; }
+    .brand-sub a, .stat a { color: var(--gold); text-decoration: none; }
+    .toc .t-min { font-variant-numeric: tabular-nums; }
+  </style>
+</head>
+<body>
+  <div class="stage-bar" aria-hidden="true"></div>
+
+  <div class="wrap">
+    <aside class="sidebar">
+      <div class="brand">
+        <span class="brand-mark" lang="ja">読解<em>幕</em></span>
+      </div>
+      <p class="brand-sub">Kabuki Digest · <a href="/japanese-digest/history/">History</a></p>
+      <p class="meta">2026-10-27 · America/Sao_Paulo</p>
+      <div class="stat-row">
+        <span class="stat"><strong>46</strong> min</span>
+        <span class="stat"><strong>13</strong> pieces</span>
+        <span class="stat"><strong>~6,700</strong> 字</span>
+        <span class="stat"><a href="/japanese-digest/history/">History</a></span>
+      </div>
+
+      <nav class="toc" aria-label="Índice">
+        <h2 lang="ja">本日の演目</h2>
+        <ol>
+          <li>
+            <a href="#p1">
+              <span class="t-title" lang="ja">家康の上洛は本当に「6万騎」だったのか</span>
+              <span class="t-min">6′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p2">
+              <span class="t-title" lang="ja">「偽りの懐妊」と言われたスペイン王妃</span>
+              <span class="t-min">6′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p3">
+              <span class="t-title" lang="ja">宇野千代を育てた17歳の継母</span>
+              <span class="t-min">5′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p4">
+              <span class="t-title" lang="ja">飛鳥は「のどかな田園」ではなかった</span>
+              <span class="t-min">3′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p5">
+              <span class="t-title" lang="ja">クモも「寝不足」になる？——レム睡眠の反跳</span>
+              <span class="t-min">4′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p6">
+              <span class="t-title" lang="ja">モリンガの種がマイクロプラを98％除去</span>
+              <span class="t-min">3′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p7">
+              <span class="t-title" lang="ja">「トークナイザー税」——英語以外はAIが高い</span>
+              <span class="t-min">3′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p8">
+              <span class="t-title" lang="ja">兵庫こばなし：神戸の壁・坑道の酒・海を越えた銅鐸</span>
+              <span class="t-min">2′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p9">
+              <span class="t-title" lang="ja">大阪―和倉温泉、直通特急が復活へ</span>
+              <span class="t-min">2′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p10">
+              <span class="t-title" lang="ja">JASRACの「武闘派」と坂本龍一の問い</span>
+              <span class="t-min">3′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p11">
+              <span class="t-title" lang="ja">キャリアカー運転手がClaude Codeでゲームを作る</span>
+              <span class="t-min">4′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p12">
+              <span class="t-title" lang="ja">E2Eは「書かない」から網羅できる</span>
+              <span class="t-min">3′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p13">
+              <span class="t-title" lang="ja">the GazettE・RUKI、「回復に向かっている」</span>
+              <span class="t-min">2′</span>
+            </a>
+          </li>
+        </ol>
+      </nav>
+    </aside>
+
+    <main class="main">
+      <div class="digest-banner">
+        <span class="tag">TRIAGE</span>
+        <span>2026-10-27 — Ieyasu sobe a Osaka com “60 mil” (eram ~3.000) e bebe com Hideyoshi na véspera; a rainha da Espanha exilada 32 anos por não dar herdeiro; a madrasta de 17 anos de Uno Chiyo; Asuka não era bucólica (e um kofun achado no mapa); aranhas com débito de REM; semente de moringa da USP contra microplástico; o “imposto do tokenizador”; Kobe: o Muro, saquê na mina, dōtaku; trem direto Osaka–Wakura; os “linha-dura” da JASRAC; um caminhoneiro programando com Claude Code; E2E com ledger no CI; RUKI se recuperando. Pontos fracos: música sem nada fresco de BABYMETAL/HYDE/DIR EN GREY (BAND-MAID lança “SPIN” em 28/10, sem entrevista ainda); Kobe-NP e Asahi só com aberturas gratuitas; matéria da moringa é republicação (original de maio); nada de matsuri hoje.</span>
+      </div>
+
+      <header class="hero">
+        <div class="kicker">Daily curated reading</div>
+        <h1 lang="ja">6万騎と3000人の上洛、追放された王妃と17歳の継母、田園ではなかった飛鳥、夢を見るクモとモリンガの種、トークナイザー税と神戸の壁、和倉への直通特急とJASRACの武闘派、キャリアカーのClaude CodeとE2Eの台帳——ひと朝の読解</h1>
+        <p lang="ja">「六万騎」と噂された家康の上洛と、前夜に待ちきれず酒を酌み交わした秀吉。世継ぎを産めず32年追放されたスペイン王妃マリア・アンナ、宇野千代を育てた17歳の継母リュウ。蘇我氏が三輪山の見えない地を選んだ飛鳥。寝不足を取り返すクモ、マイクロプラスチックを集めるモリンガの種、英語以外に課される「トークナイザー税」。神戸の壁と坑道の酒、和倉温泉への直通特急、JASRACの「武闘派」、キャリアカー運転手のClaude Code、書かずに網羅するE2E、そしてRUKIの近況——推定合計 ~46 分。</p>
+      </header>
+
+      <article class="piece" id="p1">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★★</span> <span class="chip mins">6 min</span> <span class="chip" lang="ja">徳川家康</span> <span class="chip" lang="ja">豊臣秀吉</span> <span class="chip" lang="ja">上洛</span> <span class="chip" lang="ja">本多忠勝</span> <span class="chip" lang="ja">井伊直政</span> <span class="chip" lang="ja">戦国</span>
+          </div>
+          <h2 lang="ja">家康は本当に6万騎もの徳川軍で上洛したのか｜大坂へ進んだのは約3000人</h2>
+          <p class="why">Outubro de 1586: um monge de Nara anota no diário que Ieyasu marchou para Osaka com “uns 60 mil cavaleiros”. A conta real? Uns 3.000 — mas armados, entrando na casa do homem a quem iam se submeter. Na véspera da audiência oficial, Hideyoshi não aguenta esperar: aparece de noite na residência de Hidenaga, pega Ieyasu pela mão e os dois trocam saquê até tarde. Enquanto isso, em Okazaki, a mãe de Hideyoshi fica de refém — e a lenda diz que Honda Shigetsugu empilhou lenha em volta da casa dela, pronto para atear fogo.</p>
+          <div class="source">
+            <span lang="ja">BUSHOO!JAPAN（武将ジャパン）</span>
+            <a href="https://bushoojapan.com/bushoo/tokugawa/2026/10/27/222619" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>大河ドラマ『豊臣兄弟』第41回では終盤クライマックスの一つである天下人二人の臣従シーンが描かれましたが、このとき非常に気になる描写がありました。</p>
+            <p>事前に家康から秀吉へ送られた書状の中で「六万の徳川軍を引き連れて大坂まで進む」と記されていたことです。</p>
+            <p>このときの人数が「六万騎程」だったと『多聞院日記』に書かれています。……しかし研究者の藤井讓治氏は著書『 徳川家康 人物叢書 』の中で、この数字は「かなり過大」だと指摘しています。</p>
+            <p>『多聞院日記』は三河から遠く離れた奈良興福寺の僧侶による記録ですから、家康の勢いが実数以上に大きく伝わった可能性があるのでしょう。 ただし、デタラメと切り捨てるのも早計であり、少なくとも奈良では「六万」と受け取られるほどの規模だという噂が広まっていたのです。</p>
+            <p>藤井氏によれば、26日に京都から大坂へ下ったときの人数は3000ほど。……ただし3000人規模でも挨拶回りとはまるで違う状況。 武装した軍勢で秀吉の本拠へ乗り込んだことに変わりはありません。</p>
+            <p>・本多重次は大政所の屋敷のまわりに柴や薪を積み上げ、家康に万一のことがあれば、すぐに火を放つと脅した ・井伊直政は、たびたび大政所のご機嫌うかがいに訪れ、果物や菓子を届けた</p>
+            <p>秀吉は家康の手を取って奥の座敷へ招き、思うところを存分に語ったあと、酒盛りとなりました。 秀吉がまず酌をして家康に盃を勧め、今度は家康が酌をして秀吉に返す。</p>
+            <p>そして翌27日、家康は大坂城に登って正式に秀吉と対面し、馬10疋、金子100枚、太刀などを献上して臣従を示しました。……たとえ豊臣に屈するとしても、徳川の武威を見せる必要があった。</p>
+          </div>
+          <p class="continue"><a href="https://bushoojapan.com/bushoo/tokugawa/2026/10/27/222619" target="_blank" rel="noopener" lang="ja">続きを読む · BUSHOO!JAPAN（武将ジャパン）</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p2">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★☆</span> <span class="chip mins">6 min</span> <span class="chip" lang="ja">スペイン・ハプスブルク家</span> <span class="chip" lang="ja">カルロス2世</span> <span class="chip" lang="ja">スペイン継承戦争</span> <span class="chip" lang="ja">世界史</span> <span class="chip" lang="ja">王妃</span>
+          </div>
+          <h2 lang="ja">「偽りの懐妊」を疑われた王妃はなぜ32年も国を追われたのか？スペイン王妃マリア・アンナの悲劇</h2>
+          <p class="why">Fim da Espanha dos Habsburgo: Carlos II, com coeficiente de endogamia 0,254 (o mesmo de filho de irmãos), não anda sozinho até os 4 anos. Para gerar herdeiro trazem Maria Ana, filha de uma mãe com 17 filhos. Nada de bebê — e a culpa cai nela: “gravidez fingida”, exorcistas apontando-a como quem enfeitiçou o rei, aposta no candidato austríaco… e, quando o Bourbon Filipe V vence, 32 anos de exílio em Bayonne. Ótimo vocabulário de corte e sucessão (世継ぎ, 摂政, 遺言, 追放).</p>
+          <div class="source">
+            <span lang="ja">草の実堂</span>
+            <a href="https://kusanomido.com/study/history/western/134827/" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>17世紀の終わり、かつて世界に植民地を広げたスペインは、度重なる戦争と財政難で力を失いつつありました。 その王座にいたのが、スペイン・ハプスブルク家最後の王となるカルロス2世です。</p>
+            <p>宮廷中が世継ぎの誕生を待ち望みましたが、懐妊の知らせは何度も流れながら一度も実を結ばず、王妃はついに「妊娠を装って王を欺いている」とまで陰口を叩かれるようになります。</p>
+            <p>スペイン・ハプスブルク家は代々こうした近親婚を重ねており、2009年に発表された研究では、カルロス2世の近交係数（両親の血のつながりの濃さを示す値）は0.254と推定されています。</p>
+            <p>この縁組を進めたのは、同じオーストリア・ハプスブルク家から嫁いできたカルロス2世の母マリアナで、もう一つの決め手は一族の多産でした。 マリア・アンナの母は、なんと17人もの子を産んでいたのです。</p>
+            <p>のちに王の遺体を解剖した記録からは、王の側にも子をもうけにくい体の異常があったことがうかがえます。 それでも、世継ぎを産めない責めを負わされたのは王妃だったのです。</p>
+            <p>そのころ宮廷では、病弱で子どもに恵まれないカルロス2世が、何者かに呪いをかけられているという噂が広まっていました。 王の告解師（罪の告白を聞く聖職者）らは、その真相を探ろうと悪魔払いを行っていたのです。</p>
+            <p>同年8月、マドリードを奪い返したフェリペ5世は、王妃をフランス南西部のバイヨンヌへ追放しました。 王妃はその後32年間をバイヨンヌで過ごし、1739年にようやくスペインへの帰国を許されてインファンタード宮殿に迎えられたものの、翌1740年7月、72歳で亡くなりました。</p>
+          </div>
+          <p class="continue"><a href="https://kusanomido.com/study/history/western/134827/" target="_blank" rel="noopener" lang="ja">続きを読む · 草の実堂</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p3">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★☆</span> <span class="chip mins">5 min</span> <span class="chip" lang="ja">宇野千代</span> <span class="chip" lang="ja">朝ドラ</span> <span class="chip" lang="ja">岩国</span> <span class="chip" lang="ja">明治・大正</span> <span class="chip" lang="ja">女性史</span>
+          </div>
+          <h2 lang="ja">「ブラッサム」葉野珠のモデル・宇野千代を育てた17歳の継母・リュウの生涯</h2>
+          <p class="why">Iwakuni, 1900: a escritora Uno Chiyo perde a mãe e ganha uma madrasta de 17 anos, Ryū — que, ao contrário de toda madrasta de kabuki, dá à enteada o melhor prato e o primeiro banho. Quando Ryū foge do marido farrista, é a menina chorando que vai buscá-la (“se você não tivesse vindo, eu não voltava”). Anos depois, a madrasta manda Chiyo sair da cidade de navio, não de trem, para ninguém ver o “escândalo”. Japonês narrativo, com citações das memórias da autora.</p>
+          <div class="source">
+            <span lang="ja">草の実堂</span>
+            <a href="https://kusanomido.com/study/history/japan/shouwa/blossom/135653/" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>NHK連続テレビ小説「ブラッサム」のヒロイン・葉野珠のモデルとなった作家、宇野千代（うの ちよ）は、幼いころに実母のトモを結核で亡くした。 その後、父・俊次の後妻となったのが、まだ17歳だったリュウである。</p>
+            <p>色の白い、きれいな女であったから、母と言うよりは、姉のように見えた。このりゅうが、私の小説の「おはん」や「風の音」の女主人公の実際のモデルである。私にとって母と言うものは、このりゅうのほかにいない。</p>
+            <p>私の第二の母は・・・私と実子との間に、誰の眼にも分かる間隔を、はっきり置いていた・・・一番旨（うま）いものを食べ、一番さきに風呂へもはいった・・・昔から芝居や浄瑠璃に語られている継母子の物語とは、全く反対の現象である。</p>
+            <p>千代の父・俊次は放蕩を重ね、家では家族に厳しく接していた。 若くして後妻となったリュウは、そんな夫との生活に苦しみ、夜中に泣くこともあった。 その声を幼い千代も聞いていたが、あるとき、とうとうリュウは「ここにはいられない」と実家へ帰ってしまう。</p>
+            <p>母がいなくなったことに気づいた千代は、泣きながらリュウを捜し回り、家の女中に連れられて実家まで会いに行った。 リュウは後年、このときのことを千代にこう語ったという。 あのときわしを追って来なかったら、この家には戻らなかったかもしれん。</p>
+            <p>その際、リュウは汽車ではなく汽船で向かうよう勧めた。 千代は後年、リュウが人目を避けて旅立たせようとしてくれたのだと振り返っている。 汽船で出て行けば、この不幸な娘の出奔は、誰の眼にも触れることはないだろう。</p>
+            <p>旅立つ千代に、リュウは「風邪をお引きなよ」と何度も声をかけたという。恋愛騒動によって故郷を離れる娘を、最後まで気遣っていたのである。</p>
+          </div>
+          <p class="continue"><a href="https://kusanomido.com/study/history/japan/shouwa/blossom/135653/" target="_blank" rel="noopener" lang="ja">続きを読む · 草の実堂</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p4">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★☆</span> <span class="chip mins">3 min</span> <span class="chip" lang="ja">飛鳥</span> <span class="chip" lang="ja">蘇我氏</span> <span class="chip" lang="ja">三輪山</span> <span class="chip" lang="ja">風水</span> <span class="chip" lang="ja">世界遺産</span> <span class="chip" lang="ja">古代</span>
+          </div>
+          <h2 lang="ja">「飛鳥はのどかな田園風景ではなかった」　奈良芸術短大特任教授が世界遺産テーマに講演</h2>
+          <p class="why">A Asuka bucólica de arrozais que se visita hoje é uma ilusão: no século VII havia fortificações dos Soga no monte Amakashi, oficinas de metal em Asukaike — uma capital “moderna”. E a tese saborosa: os Soga escolheram Asuka justamente porque de lá não se vê o sagrado monte Miwa. Bônus no link extra: um arqueólogo da Universidade de Tóquio achou, só olhando o mapa digital do GSI, um possível kofun keyhole de 70 m ainda desconhecido em Gose (Nara).</p>
+          <div class="source">
+            <span lang="ja">産経ニュース</span>
+            <a href="https://www.sankei.com/article/20261027-Z6FHGXKBLZJRXLWAW5PAX7LZRM/" target="_blank" rel="noopener">原文を開く ↗</a> · <a href="https://www.nara-np.co.jp/news/20261023211219.html" target="_blank" rel="noopener" lang="ja">奈良新聞：基盤地図で未知の前方後円墳か（御所市） ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>世界文化遺産に登録された「飛鳥・藤原の宮都（きゅうと）」をテーマにした公開講座が奈良県橿原市の奈良芸術短大で開かれた。前園実知雄・特任教授は「飛鳥はのどかな田園風景で知られるが、飛鳥時代は防御施設などに囲まれ、現在とは異なる人工的な光景が広がっていた」と語った。</p>
+            <p>「飛鳥の原形と遺跡」と題して講演し、飛鳥時代は宮殿を取り囲むように西方の甘樫丘（あまかしのおか）には蘇我氏の邸宅や防御施設、東方には金工品などの生産工場だった飛鳥池遺跡があったと説明。「1300年前の天武天皇らが見た風景がそのまま残るといわれるが、実は近代的な都だった」と話した。</p>
+            <p>また、飛鳥の地に6世紀末に都が置かれた背景にも言及。「推古天皇以前の王宮は、神の山とあがめられた奈良盆地東南部の三輪山（みわやま）近辺に築かれたが、絶大な権力を誇った蘇我氏が、三輪山が見えない飛鳥の地を選んだ」とし、権力構造の変化に迫った。</p>
+            <p>一方で、斉明天皇の墓とされる牽牛子塚（けんごしづか）古墳など飛鳥の古墳は、谷がある丘陵の先端に築かれた点を指摘。「谷奥から気がわいて、左右の山がその気を逃さないという中国の風水思想を反映している」とし、中国との関係を考古学的に考察する重要さを説いた。</p>
+          </div>
+          <p class="continue"><a href="https://www.sankei.com/article/20261027-Z6FHGXKBLZJRXLWAW5PAX7LZRM/" target="_blank" rel="noopener" lang="ja">続きを読む · 産経ニュース</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p5">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★★</span> <span class="chip mins">4 min</span> <span class="chip" lang="ja">睡眠</span> <span class="chip" lang="ja">レム睡眠</span> <span class="chip" lang="ja">ハエトリグモ</span> <span class="chip" lang="ja">進化</span> <span class="chip" lang="ja">PNAS</span>
+          </div>
+          <h2 lang="ja">クモにも「寝不足」がある可能性、人間と同様にレム睡眠を経験しており睡眠が短いと睡眠負債が蓄積か</h2>
+          <p class="why">Uma aranha-saltadora (Portia fimbriata) dorme de noite, mexe as patinhas e gira a retina como quem sonha. Os pesquisadores de Bonn soltaram 25 moscas na caixa para atrapalhar o sono dela — e na noite seguinte o “REM” aumentou 80%: a mesma compensação de débito de sono que nós temos. Primeira prova de rebote de REM num invertebrado, sugerindo que o sono em estágios é muito mais antigo do que o cérebro dos vertebrados.</p>
+          <div class="source">
+            <span lang="ja">GIGAZINE</span>
+            <a href="https://gigazine.net/news/20261027-spiders-sleep-debt-two-stage-sleep/" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>8本の脚を持ち網状の巣を作って獲物を待ち構えるクモは、一見すると人間や哺乳類とはほど遠い生物に思えます。ところが新たな研究により、クモの一種が人間のような レム睡眠 を経験しており、寝不足になると 睡眠負債 が蓄積される可能性があることが判明しました。</p>
+            <p>研究チームは赤外線カメラを使ってケアシハエトリの動きを監視したり、睡眠中のクモを妨害して反応を調べたり、睡眠を妨げてどうなるのかを調べたりしました。その結果、ケアシハエトリは主に日中に活動しており、夜になると睡眠に適した休息姿勢を取り、レム睡眠と思われる状態になると周囲の妨害に対する反応が鈍くなることが確認されました。</p>
+            <p>続いて、研究チームはケアシハエトリの睡眠を妨害するため、夜間に25匹の生きたショウジョウバエを飼育ケースの中に入れました。……睡眠を妨害した次の夜、ケアシハエトリは睡眠妨害前の夜と比べて、レム睡眠に似た行動を示す時間が約80％も増加しました。まるで不足したレム睡眠を補おうとするこの現象は レム睡眠反跳 と呼ばれ、クモが実際にレム睡眠のような睡眠状態を必要としている説得力のある証拠だと研究チームは主張しています。</p>
+          </div>
+          <p class="continue"><a href="https://gigazine.net/news/20261027-spiders-sleep-debt-two-stage-sleep/" target="_blank" rel="noopener" lang="ja">続きを読む · GIGAZINE</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p6">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★☆</span> <span class="chip mins">3 min</span> <span class="chip" lang="ja">モリンガ</span> <span class="chip" lang="ja">マイクロプラスチック</span> <span class="chip" lang="ja">水処理</span> <span class="chip" lang="ja">サンパウロ大学</span> <span class="chip" lang="ja">環境</span>
+          </div>
+          <h2 lang="ja">奇跡の木として知られる植物、水道水のマイクロプラスチックを98％除去する能力も判明</h2>
+          <p class="why">Ciência com sotaque brasileiro: uma equipe da USP (São Carlos) e do Reino Unido mostrou que o extrato da semente de moringa — usada para clarear água desde egípcios e romanos — remove 98,5% das micropartículas de PVC da água da torneira, quase igual ao sulfato de alumínio e sem a toxicidade. O porém: uma semente trata só ~10 litros. Bom para ler nomes brasileiros em katakana (ゴンサウベス・ドス・レイス!). Obs.: é republicação de uma matéria de maio, reeditada no dia 25.</p>
+          <div class="source">
+            <span lang="ja">CNN.co.jp</span>
+            <a href="https://www.cnn.co.jp/fringe/35253940.html" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>（CNN） 「奇跡の木」として知られるモリンガ（ワサビノキ）は、地球上で最も栄養密度の高い植物の部類に入り、その治癒効果が高く評価されている。今年4月に発表された研究では、このモリンガにもう一つの大きな利点があることが明らかになった。水からマイクロプラスチックを除去する能力が非常に高いというのだ。</p>
+            <p>平均的な大きさが18.8マイクロメートル（人間の髪の毛の平均的な太さの約4分の1）のマイクロプラスチックを対象に実験を行ったところ、種子の抽出物をろ過システムに使用した場合、水道水からマイクロプラスチックを98.5%除去できることが判明した。</p>
+            <p>これは、一般的に使用されている化学凝集剤である硫酸アルミニウム（ミョウバン）にほぼ匹敵する効率だ。よりアルカリ性の高い水ではモリンガの種子がミョウバンを上回る効果を示すことも明らかになった。</p>
+            <p>ただし、限界もある。研究者らによると、モリンガの種子1粒で処理できる水量は約10リットル。ゴンサウベス・ドス・レイス氏は「大量の水を扱う都市部の大規模処理施設には、非常に大量の種子が必要になる」とし、この技術は特に小規模なコミュニティーや、化学凝集剤の入手が難しい地域で活用できる可能性があるとの考えを示した。</p>
+          </div>
+          <p class="continue"><a href="https://www.cnn.co.jp/fringe/35253940.html" target="_blank" rel="noopener" lang="ja">続きを読む · CNN.co.jp</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p7">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★☆</span> <span class="chip mins">3 min</span> <span class="chip" lang="ja">LLM</span> <span class="chip" lang="ja">トークナイザー</span> <span class="chip" lang="ja">多言語</span> <span class="chip" lang="ja">AIの公平性</span>
+          </div>
+          <h2 lang="ja">英語以外の言語を使うとAIモデルのコストは高くなる</h2>
+          <p class="why">Por que a mesma frase custa 13 tokens em inglês e 78 em amárico? O “imposto do tokenizador”: idiomas com pouco dado de treino são picotados em pedaços menores e pagam até 17× mais pela mesma ideia — e nem a verbosidade explica. Interessa a quem usa Claude/Cursor em português e japonês todo dia (e paga por token).</p>
+          <div class="source">
+            <span lang="ja">GIGAZINE</span>
+            <a href="https://gigazine.net/news/20261027-tokenizer-tax/" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>大手企業のAIはたいていの場合、主に英語のデータセットを中心に学習しています。新たな研究で、英語であれば適切に処理できるAIが、データが少ない少数言語を処理するときにコストが高くなってしまう可能性があることが示されました。</p>
+            <p>昨今の生成AIの基盤となる大規模言語モデル(LLM)は、トークナイザーと呼ばれる処理により、文章を単語ごとや文字ごと、場合によってはバイト単位に分割して「トークン」と呼ばれる塊として扱います。大抵の有料型AIはこのトークンの数に応じて料金を課しています。</p>
+            <p>トークン数で見ると、同じ文章なのに英語は13、マラヤーラム語は26、そしてアムハラ語は78となり、アムハラ語は英語の6倍ものコストがかかってしまうことになります。</p>
+            <p>そもそも冗長な表現が多い言語もありますが、CLEARが参照したデータセットの中で最も冗長なミャンマーのシャン語でも、文字数で見ると英語より42％長いだけでした。CLEARは「冗長性だけで、トークン数が6倍にもなるのは説明できない」としています。</p>
+            <p>CLEARによると、インターネット上での使用割合が多いトップ20の言語の最小/最大トークン比率はほとんど1.5倍から3.1倍の間に収まっているものの、それ以外では差異が大きくなり、最大で17倍まで幅が広がることがあるそうです。</p>
+          </div>
+          <p class="continue"><a href="https://gigazine.net/news/20261027-tokenizer-tax/" target="_blank" rel="noopener" lang="ja">続きを読む · GIGAZINE</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p8">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★☆☆</span> <span class="chip mins">2 min</span> <span class="chip" lang="ja">神戸の壁</span> <span class="chip" lang="ja">長田区</span> <span class="chip" lang="ja">明延鉱山</span> <span class="chip" lang="ja">日本酒</span> <span class="chip" lang="ja">松帆銅鐸</span> <span class="chip" lang="ja">兵庫</span>
+          </div>
+          <h2 lang="ja">阪神・淡路大震災の遺構　「神戸の壁」の歴史紹介　来年で建設から100年　長田区でパネル展示（ほか2本）</h2>
+          <p class="why">Três notas de Hyōgo: o “Muro de Kobe” — parede de 1927 que sobreviveu à guerra e ao terremoto de 1995 e foi levada para Awaji — ganha mostra em Nagata no seu quase centenário; um junmai ginjō envelhecido dentro do túnel da mina de Akenobe (Yabu) sai “mais redondo”; e em Minami-Awaji os sinos de bronze Matsuho dialogam com dōtaku de Wakayama, do outro lado do mar. (Kobe-NP só abre o lide; links para continuar.)</p>
+          <div class="source">
+            <span lang="ja">神戸新聞NEXT</span>
+            <a href="https://www.kobe-np.co.jp/news/kobe/202610/0020967157.shtml" target="_blank" rel="noopener">原文を開く ↗</a> · <a href="https://www.kobe-np.co.jp/news/tajima/202610/0020967339.shtml" target="_blank" rel="noopener" lang="ja">坑道で熟成の酒（明延鉱山） ↗</a> · <a href="https://www.kobe-np.co.jp/news/awaji/202610/0020952936.shtml" target="_blank" rel="noopener" lang="ja">海を隔てた古代の銅鐸（南あわじ） ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>阪神・淡路大震災の遺構「神戸の壁」の保存継承活動を振り返る展示が、神戸市長田区腕塚町５の「ウォールギャラリー」で開かれている。震災前後の様子や北淡震災記念公園（淡路市）への移設経緯などを写真付きで解説するパネル約６０枚が並ぶ。１１月２３日まで。</p>
+            <p>養父市大屋町明延の明延鉱山探検坑道で熟成した純米吟醸酒「仙櫻」が２２日、蔵出しされた。醸造した宍粟市の山陽盃酒造と養父市の関係者が集まり、よりまろやかになったという味や香りを楽しんだ。</p>
+            <p>国重要文化財の松帆銅鐸（どうたく）を収蔵する滝川記念美術館「玉青館」（南あわじ市松帆西路）で、特別展「銅鐸礼賛」が開かれている。和歌山県で出土した銅鐸などを併せて展示し、弥生時代の地域性を浮かび上がらせている。</p>
+          </div>
+          <p class="continue"><a href="https://www.kobe-np.co.jp/news/kobe/202610/0020967157.shtml" target="_blank" rel="noopener" lang="ja">続きを読む · 神戸新聞NEXT</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p9">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★☆☆</span> <span class="chip mins">2 min</span> <span class="chip" lang="ja">JR西日本</span> <span class="chip" lang="ja">和倉温泉</span> <span class="chip" lang="ja">能登半島地震</span> <span class="chip" lang="ja">サンダーバード</span> <span class="chip" lang="ja">鉄道</span>
+          </div>
+          <h2 lang="ja">大阪―石川・和倉温泉結ぶ直通特急　JR西、団体向け来年3本運行へ　「復興の弾みに」</h2>
+          <p class="why">Desde que o Hokuriku Shinkansen chegou a Tsuruga (2024), o Thunderbird de Kansai para lá e quem ia de Osaka às termas de Wakura (Noto, devastada pelo terremoto de 1º/1/2024) tem de baldear. A JR West vai rodar em 2027 três trens diretos Osaka→Wakura, usando o pequeno “Noto Kagaribi” de 3 carros. Notícia curta, bom vocabulário ferroviário (直通, 臨時列車, 片道運行, 編成).</p>
+          <div class="source">
+            <span lang="ja">産経ニュース</span>
+            <a href="https://www.sankei.com/article/20261026-EFXBDGXKTBNZLAKLZ6ULXWT2VU/" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>JR西日本は26日、大阪と和倉温泉（石川県七尾市）を結ぶ直通特急を令和9年に3本運行する方針を明らかにした。団体旅行向けの臨時列車として、春、夏、秋の各シーズンに1本走らせる計画。年内に旅行商品の発表を目指している。</p>
+            <p>6年元日の能登半島地震の被災地から要望が出ていた。同年3月の北陸新幹線の敦賀延伸に伴って関西からの特急「サンダーバード」が敦賀止まりとなり、直通がなくなっていた。</p>
+            <p>JR西によると、臨時列車は大阪駅から和倉温泉駅の片道運行で、新大阪駅と京都駅でも乗車できる予定。現在、金沢―和倉温泉を走る3両編成の「能登かがり火」を使う。11年からは金沢―和倉温泉間の観光特急の運行も計画している。</p>
+          </div>
+          <p class="continue"><a href="https://www.sankei.com/article/20261026-EFXBDGXKTBNZLAKLZ6ULXWT2VU/" target="_blank" rel="noopener" lang="ja">続きを読む · 産経ニュース</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p10">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★☆</span> <span class="chip mins">3 min</span> <span class="chip" lang="ja">JASRAC</span> <span class="chip" lang="ja">音楽著作権</span> <span class="chip" lang="ja">坂本龍一</span> <span class="chip" lang="ja">ライブハウス</span> <span class="chip" lang="ja">音楽業界</span>
+          </div>
+          <h2 lang="ja">坂本龍一が問うたJASRACの独占体制　半世紀続いた牙城は崩れた</h2>
+          <p class="why">Os bastidores de quem cobra direito autoral de cada música tocada em bar e live house no Japão: o atual presidente da JASRAC se descreve como ex-“linha dura” que mandava oficial de justiça abrir a porta do snack com chaveiro e embrulhar o karaokê até o dono pagar. Abre uma série do Asahi sobre 25 anos de briga por um mercado de ¥170 bi — com Sakamoto Ryūichi questionando o monopólio. (Só a abertura é gratuita.)</p>
+          <div class="source">
+            <span lang="ja">朝日新聞デジタル</span>
+            <a href="https://www.asahi.com/articles/ASVBM1W64VBMPTIL014M.html" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>著作権使用料を集め、作詞家や作曲家らに分配する 日本音楽著作権協会 （ JASRAC ）は、国内で圧倒的なシェアを持ち、「巨象」ともいえる存在だ。そのJASRACには、「武闘派」と呼ばれた男たちがいる。</p>
+            <p>今年6月、理事長となった中戸川直史（66）はその一人だ。 いまでこそ柔らかい笑顔をみせるが、自身もこう振り返る。 「作曲家や作詞家のためになるなら、嫌われてもいい。そう考えていました」</p>
+            <p>現場で働いていた頃、著作権使用料の支払いを拒むスナックやライブハウスなどを相手に、JASRACが管理する楽曲の歌唱や演奏を禁じる法的措置を繰り返した。 「お金を払わない店は容赦しない。冷酷な武闘派だった」</p>
+            <p>執行官は開店前の店を訪ね、鍵業者に扉を開けさせる。店内に入り、カラオケ機器やスピーカー、楽器などを使えないように包み、使用禁止の表示をする。</p>
+            <p>すると、「音楽なんか使えなくても困らない」といっていた経営者が態度を変える。「すぐに満額を支払うから、音楽を使わせてくれ」と。</p>
+          </div>
+          <p class="continue"><a href="https://www.asahi.com/articles/ASVBM1W64VBMPTIL014M.html" target="_blank" rel="noopener" lang="ja">続きを読む · 朝日新聞デジタル</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p11">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★★</span> <span class="chip mins">4 min</span> <span class="chip" lang="ja">Claude Code</span> <span class="chip" lang="ja">CLAUDE.md</span> <span class="chip" lang="ja">Playwright</span> <span class="chip" lang="ja">ゲーム開発</span> <span class="chip" lang="ja">AIエージェント</span>
+          </div>
+          <h2 lang="ja">現役のキャリアカー運転手がClaude Codeでブラウザゲームを作っている話</h2>
+          <p class="why">Um motorista de cegonheira (o caminhão que carrega carros) faz, pelo celular, um jogo de browser sobre carregar carros — com quase todo o código escrito pelo Claude Code. As lições são de engenheiro: dividir papéis no CLAUDE.md, obrigar a IA a deixar nota de “o que fiz / o que vem” entre sessões, rodar verificação com Playwright headless em primeiro plano — e o bug sacana em que o script de teste definia window.fm e escondia que o jogo tinha esquecido de declarar fm. “Fórmula é da IA, a verdade do pátio é minha.”</p>
+          <div class="source">
+            <span lang="ja">Zenn（ワドメ堂）</span>
+            <a href="https://zenn.dev/wadome_do/articles/wadome-ai-game-dev-notes" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>キャリアカー(車両を何台も積んで運ぶトラック)のドライバーをしながら、ブラウザで遊べる積み込みゲーム「僕らは陸送屋」を個人で作っています。 コードはほぼ全部 Claude Code (Anthropic のAI開発ツール)に書いてもらっています。絵・効果音・BGM・声も、別の生成AIに作らせました。</p>
+            <p>AIは1つの会話で何でもやらせるとあちこちを書き換えて壊します。 そこで、リポジトリ直下の CLAUDE.md (AIが会話の最初に必ず読むメモ)に、 役割を3つに分けて書きました 。</p>
+            <p>開発用サーバーや長い検証を「裏で動かしてあとで結果を見る」ことができませんでした。AIが返事を終えるたびに、裏の処理が消えるためです。「サーバーがたまに落ちる」の正体がこれでした。 対策は、 検証を1コマンドにして、前面で最後まで実行する ことです。</p>
+            <p>車が輪止めに当たると、画面から車が消えるバグが出ました。原因は関数の中で fm (床の仕組みを持つオブジェクト)が未定義だったことです。 なぜ検証で気づけなかったか。 検証用のスクリプトが、グローバルに window.fm を置いていた からです。本体は fm を定義し忘れていても、グローバルを見つけて動いてしまい、エラーが隠れていました。</p>
+            <p>教訓は「検証の道具が本体の欠陥を隠すことがある」です。AIに検証まで任せていると、こういうズレに気づきにくいので、 CLAUDE.md に教訓として残しました。</p>
+          </div>
+          <p class="continue"><a href="https://zenn.dev/wadome_do/articles/wadome-ai-game-dev-notes" target="_blank" rel="noopener" lang="ja">続きを読む · Zenn（ワドメ堂）</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p12">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★☆</span> <span class="chip mins">3 min</span> <span class="chip" lang="ja">E2E</span> <span class="chip" lang="ja">テスト戦略</span> <span class="chip" lang="ja">AIエージェント</span> <span class="chip" lang="ja">CI</span> <span class="chip" lang="ja">TypeScript</span>
+          </div>
+          <h2 lang="ja">最近の E2E 戦略（2026 年 10 月現在）</h2>
+          <p class="why">Direto do seu dia a dia de PRs: se a IA escreve e conserta os testes, por que ficar só nos “cenários principais”? O autor monta um razão (ledger) em JSON ligando cada tela/rota/API ao cenário E2E que a cobre, e o CI quebra quando a implementação, o ledger e os testes divergem — inclusive impedindo novos “pending” de entrarem escondidos. Japonês técnico coloquial (しんどい, おわり, フレーキー).</p>
+          <div class="source">
+            <span lang="ja">Zenn（polyco）</span>
+            <a href="https://zenn.dev/polyco/articles/26624b38c951b5" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>シンプルに書くのしんどいしメンテもしんどかった。 ちゃんと書いてもフレーキーだし、ノーコード系のやつもなんかライブラリのバージョンが上がっただけで全部動かなくなったりするし、マジでしんどかった。</p>
+            <p>っていうネガティブな理由で主要シナリオに絞っていただけで、これらの負担が減ったなら、網羅的にやったほうがよくない？と思ったのが出発点。</p>
+            <p>まったくしんどくない。なぜなら書かないから。おわり。 フレーキー問題も、ネイティブアプリだと特にしんどかったけど、AI に伴走させることで失敗の原因調査やテストの修正はだいぶ楽になってきてる</p>
+            <p>既存のユニットテストなどと違って E2E ではより抽象度の高い &quot; シナリオ &quot; を扱う。 広く整備しようとすると、日々増えたり変わったり消えたりする機能に、シナリオも追従させる必要がある。主要シナリオだけと割り切っていたときにはなかっためんどくささが出てくる。</p>
+            <p>なので、「どの実装を、どのシナリオで確認するか」を対応表にした。</p>
+            <p>導入時の不足を baseline として保存し、通常の PR では新しい不足を追加できないようにした。 毎回「あとでやる」で通せてしまうのを防ぐため。</p>
+          </div>
+          <p class="continue"><a href="https://zenn.dev/polyco/articles/26624b38c951b5" target="_blank" rel="noopener" lang="ja">続きを読む · Zenn（polyco）</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p13">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★☆☆</span> <span class="chip mins">2 min</span> <span class="chip" lang="ja">the GazettE</span> <span class="chip" lang="ja">RUKI</span> <span class="chip" lang="ja">ヴィジュアル系</span> <span class="chip" lang="ja">バンド</span>
+          </div>
+          <h2 lang="ja">緊急入院したthe GazettE・RUKI、公式SNSで声明　病状は公表せず「回復に向かっておりますが」</h2>
+          <p class="why">Notícia que importa para fã do GazettE: um mês depois de RUKI desmaiar com perda de consciência (23/9), a banda diz que ele está se recuperando, mas segue internado em exames; diagnóstico não divulgado por privacidade. Texto curto e muito útil para o keigo de comunicado oficial (ご容赦ください, 賜りますよう). No resto da música, nada fresco de BABYMETAL/HYDE/DIR EN GREY; BAND-MAID lança “SPIN” amanhã (28/10).</p>
+          <div class="source">
+            <span lang="ja">ENCOUNT</span>
+            <a href="https://encount.press/archives/1088928/" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>9月24日、緊急入院したことが発表されたロックバンド・the GazettEのボーカル・RUKI（44＝ルキ）について、27日にバンドの公式SNSで声明が発表された。</p>
+            <p>その上で、「病名や詳しい病状につきまして、各所よりお問い合わせをいただいておりますが、個人のプライバシーを考慮し、公表を控えさせていただきますことをご容赦ください」と呼びかけた。</p>
+            <p>「RUKIの容態につきましては、回復に向かっておりますが、いまだ入院が続いており引き続き検査、療養を行なっております。ファンの皆様並びに関係者の皆様には、大変なご心配とご迷惑をおかけいたしましたことを、心よりお詫び申し上げます」と現状を説明した。</p>
+            <p>最後に、「皆今は何よりもRUKIの回復を第一に、メンバー、スタッフ一同、支え合いながら歩んでまいります。今後ともthe GazettEへの変わらぬご支援を賜りますよう、よろしくお願い申し上げます」と結んだ。</p>
+          </div>
+          <p class="continue"><a href="https://encount.press/archives/1088928/" target="_blank" rel="noopener" lang="ja">続きを読む · ENCOUNT</a></p>
+        </div>
+      </article>
+
+      <footer class="site">読解幕 · 2026-10-27 · ~46 min · <a href="/japanese-digest/history/" style="color:inherit">History</a> · deliton.github.io/japanese-digest</footer>
+    </main>
+  </div>
+</body>
+</html>
