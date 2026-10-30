@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>読解幕 · 2026-10-30 · Japanese Digest</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Noto+Serif+JP:wght@400;600;700&family=Shippori+Mincho:wght@500;700&display=swap" rel="stylesheet" />
+  <style>
+
+    :root {
+      --bg: #0a0a0a;
+      --bg-2: #121212;
+      --bg-card: #161616;
+      --ink: #f5f5f5;
+      --ink-dim: #a8a29a;
+      --ink-mute: #6b6560;
+      --shu: #c41e3a;
+      --shu-hot: #e11d48;
+      --shu-deep: #8b1228;
+      --gold: #d4a017;
+      --gold-soft: #c9a227;
+      --white: #fafafa;
+      --line: #2a2a2a;
+      --line-hot: rgba(196, 30, 58, 0.45);
+      --measure: 42rem;
+      --radius: 4px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: "Noto Sans JP", "Hiragino Sans", "Yu Gothic", system-ui, sans-serif;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .stage-bar {
+      height: 6px;
+      background: repeating-linear-gradient(
+        90deg,
+        var(--shu) 0 48px,
+        var(--white) 48px 56px,
+        #111 56px 64px,
+        var(--gold) 64px 72px,
+        #111 72px 88px
+      );
+    }
+
+    .wrap {
+      width: min(100% - 2rem, 74rem);
+      margin: 0 auto;
+      padding: 2rem 0 4.5rem;
+      display: grid;
+      grid-template-columns: 15.5rem 1fr;
+      gap: 2.75rem;
+      align-items: start;
+    }
+
+    @media (max-width: 900px) {
+      .wrap { grid-template-columns: 1fr; gap: 1.5rem; padding-top: 1.25rem; }
+      .sidebar { position: static !important; }
+    }
+
+    .sidebar { position: sticky; top: 1.25rem; }
+
+    .brand {
+      display: flex;
+      align-items: baseline;
+      gap: 0.55rem;
+      margin: 0 0 0.35rem;
+    }
+    .brand-mark {
+      font-family: "Shippori Mincho", "Noto Serif JP", serif;
+      font-size: 1.85rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      color: var(--white);
+      line-height: 1;
+    }
+    .brand-mark em {
+      font-style: normal;
+      color: var(--shu);
+    }
+    .brand-sub {
+      font-size: 0.65rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-weight: 700;
+    }
+
+    .meta {
+      color: var(--ink-mute);
+      font-size: 0.8rem;
+      margin: 0 0 1.25rem;
+    }
+
+    .stat-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-bottom: 1.35rem;
+    }
+    .stat {
+      border: 1px solid var(--line);
+      background: var(--bg-2);
+      padding: 0.32rem 0.65rem;
+      font-size: 0.72rem;
+      color: var(--ink-dim);
+      border-radius: var(--radius);
+    }
+    .stat strong { color: var(--white); font-weight: 700; }
+    .stat.hot {
+      border-color: var(--shu);
+      color: var(--shu-hot);
+      background: rgba(196, 30, 58, 0.1);
+    }
+
+    .toc {
+      border: 1px solid var(--line);
+      background: var(--bg-2);
+      padding: 0.85rem 0.9rem 0.95rem;
+      border-radius: var(--radius);
+    }
+    .toc h2 {
+      margin: 0 0 0.65rem;
+      font-size: 0.72rem;
+      letter-spacing: 0.16em;
+      color: var(--gold);
+      font-weight: 800;
+    }
+    .toc ol { list-style: none; margin: 0; padding: 0; }
+    .toc li { margin: 0; }
+    .toc a {
+      display: flex;
+      justify-content: space-between;
+      gap: 0.5rem;
+      text-decoration: none;
+      color: var(--ink-dim);
+      font-size: 0.82rem;
+      padding: 0.38rem 0.2rem;
+      border-bottom: 1px solid transparent;
+    }
+    .toc a:hover { color: var(--white); border-bottom-color: var(--line-hot); }
+    .toc .t-title { font-weight: 600; }
+    .toc .t-min { color: var(--gold); font-size: 0.72rem; font-weight: 700; flex-shrink: 0; }
+
+    .main { max-width: var(--measure); }
+
+    .digest-banner {
+      display: flex;
+      gap: 0.75rem;
+      align-items: flex-start;
+      background: #141014;
+      border: 1px solid var(--line);
+      border-left: 3px solid var(--shu);
+      padding: 0.85rem 1rem;
+      margin-bottom: 1.5rem;
+      font-size: 0.78rem;
+      color: var(--ink-dim);
+      line-height: 1.55;
+    }
+    .digest-banner .tag {
+      flex-shrink: 0;
+      background: var(--shu);
+      color: #fff;
+      font-size: 0.65rem;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      padding: 0.28rem 0.5rem;
+      border-radius: var(--radius);
+    }
+
+    .hero {
+      margin-bottom: 2rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid var(--line);
+      position: relative;
+    }
+    .hero::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -1px;
+      width: 4.5rem;
+      height: 2px;
+      background: var(--shu);
+    }
+    .kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.7rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--shu-hot);
+      font-weight: 800;
+      margin-bottom: 0.85rem;
+    }
+    .kicker::before {
+      content: "◆";
+      font-size: 0.55rem;
+      color: var(--gold);
+    }
+    .hero h1 {
+      font-family: "Shippori Mincho", "Noto Serif JP", serif;
+      font-size: clamp(1.85rem, 4vw, 2.55rem);
+      font-weight: 700;
+      line-height: 1.2;
+      margin: 0 0 0.75rem;
+      color: var(--white);
+      letter-spacing: 0.02em;
+    }
+    .hero p {
+      margin: 0;
+      color: var(--ink-dim);
+      font-size: 0.98rem;
+      max-width: 36rem;
+    }
+
+    article.piece {
+      background: var(--bg-card);
+      border: 1px solid var(--line);
+      margin-bottom: 1.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+    article.piece::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: linear-gradient(90deg, var(--shu) 0%, var(--shu) 35%, var(--gold) 35%, var(--gold) 42%, transparent 42%);
+    }
+
+    .piece-inner { padding: 1.6rem 1.55rem 1.35rem; }
+
+    .piece-head {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-bottom: 0.85rem;
+    }
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      border: 1px solid var(--line);
+      background: #111;
+      color: var(--ink-dim);
+      padding: 0.22rem 0.6rem;
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      border-radius: var(--radius);
+    }
+    .chip.interest {
+      border-color: var(--shu);
+      color: var(--shu-hot);
+      background: rgba(196, 30, 58, 0.12);
+    }
+    .chip.mins {
+      border-color: var(--gold);
+      color: var(--gold);
+      background: transparent;
+    }
+
+    .piece h2 {
+      font-family: "Noto Serif JP", "Shippori Mincho", "Yu Mincho", serif;
+      font-size: 1.38rem;
+      font-weight: 700;
+      line-height: 1.5;
+      margin: 0 0 0.6rem;
+      color: var(--white);
+      letter-spacing: 0.02em;
+    }
+
+    .why {
+      margin: 0 0 1rem;
+      color: var(--ink-dim);
+      font-size: 0.9rem;
+      border-left: 2px solid var(--gold);
+      padding-left: 0.85rem;
+    }
+
+    .source {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.65rem 1.1rem;
+      font-size: 0.76rem;
+      color: var(--ink-mute);
+      margin-bottom: 1.25rem;
+    }
+    .source a {
+      color: var(--shu-hot);
+      text-decoration: none;
+      font-weight: 600;
+    }
+    .source a:hover { color: var(--gold); }
+
+    .ja {
+      font-family: "Noto Serif JP", "Hiragino Mincho ProN", "Yu Mincho", serif;
+      font-size: 1.08rem;
+      line-height: 2;
+      letter-spacing: 0.03em;
+      color: #ebe7e1;
+    }
+    .ja p { margin: 0 0 1.15em; }
+    .ja p:last-child { margin-bottom: 0; }
+
+    .continue {
+      margin-top: 1.25rem;
+      padding-top: 1rem;
+      border-top: 1px solid var(--line);
+      font-size: 0.86rem;
+    }
+    .continue a {
+      color: var(--white);
+      text-decoration: none;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      border-bottom: 2px solid var(--shu);
+      padding-bottom: 0.1rem;
+    }
+    .continue a:hover {
+      color: var(--shu-hot);
+      border-bottom-color: var(--gold);
+    }
+
+    footer.site {
+      max-width: var(--measure);
+      margin-top: 1.75rem;
+      color: var(--ink-mute);
+      font-size: 0.72rem;
+      letter-spacing: 0.06em;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+    footer.site::before {
+      content: "";
+      width: 1.25rem;
+      height: 2px;
+      background: var(--shu);
+    }
+
+  
+    .excerpt-label { font-size: 0.66rem; letter-spacing: 0.18em; color: var(--gold); font-weight: 800; margin: 0 0 0.6rem; }
+    .brand-sub a, .stat a { color: var(--gold); text-decoration: none; }
+    .toc .t-min { font-variant-numeric: tabular-nums; }
+  </style>
+</head>
+<body>
+  <div class="stage-bar" aria-hidden="true"></div>
+
+  <div class="wrap">
+    <aside class="sidebar">
+      <div class="brand">
+        <span class="brand-mark" lang="ja">読解<em>幕</em></span>
+      </div>
+      <p class="brand-sub">Kabuki Digest · <a href="../../history/">History</a></p>
+      <p class="meta">2026-10-30 · America/Sao_Paulo</p>
+      <div class="stat-row">
+        <span class="stat"><strong>45</strong> min</span>
+        <span class="stat"><strong>13</strong> pieces</span>
+        <span class="stat"><strong>~7,600</strong> 字</span>
+        <span class="stat"><a href="../../history/">History</a></span>
+      </div>
+
+      <nav class="toc" aria-label="Índice">
+        <h2 lang="ja">本日の演目</h2>
+        <ol>
+          <li>
+            <a href="#p1">
+              <span class="t-title" lang="ja">ライト兄弟より12年早く飛んだ「飛行器」</span>
+              <span class="t-min">6′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p2">
+              <span class="t-title" lang="ja">7万5千年前、槍で刺されたネアンデルタール人</span>
+              <span class="t-min">4′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p3">
+              <span class="t-title" lang="ja">天守のない城と「人をもって城となす」薩摩</span>
+              <span class="t-min">4′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p4">
+              <span class="t-title" lang="ja">秀長、5キロ先まで単騎で毛利を迎える</span>
+              <span class="t-min">4′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p5">
+              <span class="t-title" lang="ja">計器なしで外洋を渡る航海術と脳</span>
+              <span class="t-min">4′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p6">
+              <span class="t-title" lang="ja">氷河が溶けて現れた「白い戦争」の砲弾</span>
+              <span class="t-min">2′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p7">
+              <span class="t-title" lang="ja">人類がうっかり止めた「次の氷河期」</span>
+              <span class="t-min">3′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p8">
+              <span class="t-title" lang="ja">AI50体のマイクラ文明、飢えて配給制へ</span>
+              <span class="t-min">4′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p9">
+              <span class="t-title" lang="ja">Claude CodeのQAチームで効いた「捨てる仕組み」</span>
+              <span class="t-min">5′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p10">
+              <span class="t-title" lang="ja">Flutterをやめて Native へ——AI時代の技術選定</span>
+              <span class="t-min">2′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p11">
+              <span class="t-title" lang="ja">神戸ルミナリエ、「港に灯る、千のしらべ」</span>
+              <span class="t-min">2′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p12">
+              <span class="t-title" lang="ja">兵庫の家賃も上昇、2万8千円値上げの通知</span>
+              <span class="t-min">1′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p13">
+              <span class="t-title" lang="ja">DEZERT、「一回止まろう」から生まれた『DEZERT』</span>
+              <span class="t-min">4′</span>
+            </a>
+          </li>
+        </ol>
+      </nav>
+    </aside>
+
+    <main class="main">
+      <div class="digest-banner">
+        <span class="tag">TRIAGE</span>
+        <span>2026-10-30 — Ninomiya Chūhachi, o “avião” japonês 12 anos antes dos Wright (e o clã que não come ayu); o Neandertal morto a lança que antes fora cuidado pelos seus; por que Satsuma não tinha torre de castelo (郷中教育 e os 外城); Hidenaga galopando sozinho para receber os Mōri; navegação polinésia sem instrumentos (Tupaia, Hōkūleʻa); granadas da “Guerra Branca” saindo das geleiras; a era glacial que talvez tenhamos interrompido; 50 IAs passando fome no Minecraft; QA com Claude Code e o verificador cético; por que a IVRy trocou Flutter por nativo; Luminarie 2027 e aluguéis subindo em Hyōgo; e o DEZERT sobre continuar uma banda. Pontos fracos: NatGeo (navegação) e Kobe-NP (aluguel) só com abertura gratuita; nada de trens hoje (só balanço financeiro da JR Shikoku, descartado); 刀狩令 do 草の実堂 ficou de fora para não sobrecarregar de Toyotomi; DEZERT entra no lugar das bandas favoritas (sem notícia nova relevante delas hoje).</span>
+      </div>
+
+      <header class="hero">
+        <div class="kicker">Daily curated reading</div>
+        <h1 lang="ja">カラスに学んだ飛行器と槍に倒れたネアンデルタール人、天守なき薩摩と単騎の秀長、星で渡る大海原と氷から出た砲弾、止まった氷河期と飢えるAIの村、捨てるQAとFlutterの卒業、港のルミナリエとDEZERTの再集合——ひと朝の読解</h1>
+        <p lang="ja">カラスの滑空を見て「飛行器」を作り、ライト兄弟より12年早く模型を飛ばしながら、却下され続けた明治の看護卒。7万5千年前に槍で胸を貫かれ、それでも生前は仲間に世話されていたネアンデルタール人。天守を持たず「人をもって城となす」を選んだ薩摩と、従者を置き去りに5キロ先まで毛利を迎えに走った秀長。星とうねりだけで外洋を渡るポリネシアの航海術、氷河の下から100年ぶりに現れた「白い戦争」の砲弾、人類がうっかり止めてしまった次の氷河期。マインクラフトで飢えて配給制を敷いたAIの村、AIのQAチームに必要だった「捨てる仕組み」、AI時代にFlutterをやめた理由。港を照らす来年のルミナリエ、上がり続ける兵庫の家賃、そして「一回止まろう」から再び集まったDEZERT——推定合計 ~45 分。</p>
+      </header>
+
+      <article class="piece" id="p1">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★★</span> <span class="chip mins">6 min</span> <span class="chip" lang="ja">二宮忠八</span> <span class="chip" lang="ja">飛行器</span> <span class="chip" lang="ja">明治</span> <span class="chip" lang="ja">ライト兄弟</span> <span class="chip" lang="ja">長岡外史</span> <span class="chip" lang="ja">飛行神社</span>
+          </div>
+          <h2 lang="ja">空も飛べるはず　ライト兄弟に先んじた二宮忠八　「飛行器」が理解されず却下の連続　不遇列伝</h2>
+          <p class="why">1889: um enfermeiro do exército em Marugame vê corvos planando sem bater asas e começa a construir “飛行器”. Em 1891 seu modelo de bambu, papel washi e borracha de estetoscópio rola 3 m, sobe e voa 10 m — 12 anos antes dos Wright. Os generais recusam três vezes (“você já voou nisso?”); quando chega a notícia de Kitty Hawk, ele chora e destrói o protótipo quase pronto. Final com carta de desculpas do general, santuário da aviação em Kyoto e uma família que até hoje não come ayu — por causa de um incêndio de 200 anos atrás.</p>
+          <div class="source">
+            <span lang="ja">産経ニュース</span>
+            <a href="https://www.sankei.com/article/20261030-SVFHX2YWABOB3LQZMZLAX3OSMU/" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>「飛行機」という言葉は、森鷗外が明治34（1901）年、小倉日記で最初に使ったとされる。だが鷗外の約10年前に「飛行器」と命名し、その開発に精魂を傾けた男がいた。二宮忠八（1866～1936年）である。いち早く飛行原理を発見し、ライト兄弟に先んじて動力飛行実験に成功しながら、世界初の有人飛行の偉業にはたどり着けなかった。人と時代に恵まれなかったのである。</p>
+            <p>約400年後の明治22（1889）年11月、香川・丸亀の歩兵連隊付の看護卒だった忠八は、演習の帰路、樅（もみ）ノ木峠で昼食をとっていた。そのとき残飯を狙って谷を横切るカラスを見て、あることに気づいた。</p>
+            <p>飛び始めるときは羽を羽ばたかせるが、目的地に近づくと動きを止め、羽をわずかに上向きにして飛び続ける―。空気抵抗によって生じた浮揚力を利用した滑空である。</p>
+            <p>……材料は凧作りと同じように竹と和紙。竹トンボをヒントに4枚羽のプロペラをこしらえ、動力には聴診器のゴム管を使った。滑走用に車輪を付けたことは、ライト兄弟にはなかった発想だ。</p>
+            <p>24年4月29日夕刻、人けのない丸亀練兵場。指でプロペラを何度も回してゴム紐をねじる。機体を地上に置くと3メートル滑走し、すぐに1メートルの高さに上昇、10メートルほど飛行した。動力によって人工翼が日本で初めて飛んだ瞬間だった。</p>
+            <p>「このときの愉快を忘るることあたわず」。忠八は後年こう記した。ライト兄弟の偉業より12年も前の出来事だ。</p>
+            <p>……しかし大島もまた「お前はこれに乗って空を飛んだことがあるのか？　実際に飛ぶことができたら話を聞こう」と却下した。</p>
+            <p>「外国に先んじられた以上は、後塵を拝するのは愚の至り」忠八は男泣きし、完成近い飛行器を叩き壊した。以降、空を飛ぶ研究は一切やめてしまった。</p>
+            <p>……経緯に気づいた長岡は「貴兄の折角の大発明を台無しにしたのは小生」と長文の謝罪の手紙を送り、同誌にも謝罪文を掲載した。</p>
+            <p>……以来、二宮家では＜鮎を食べない＞という掟（おきて）がある―と伝記に書かれている。忠八の曽孫、二宮章さんに尋ねると、「実は私自身、鮎を食べたことがないんです。宴席で魚が出されると何の魚か確かめるんですよ」と苦笑いしながら教えてくれた。掟は生きていた。</p>
+          </div>
+          <p class="continue"><a href="https://www.sankei.com/article/20261030-SVFHX2YWABOB3LQZMZLAX3OSMU/" target="_blank" rel="noopener" lang="ja">続きを読む · 産経ニュース</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p2">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★★</span> <span class="chip mins">4 min</span> <span class="chip" lang="ja">ネアンデルタール人</span> <span class="chip" lang="ja">シャニダール洞窟</span> <span class="chip" lang="ja">考古学</span> <span class="chip" lang="ja">旧石器時代</span> <span class="chip" lang="ja">介護</span> <span class="chip" lang="ja">イラク</span>
+          </div>
+          <h2 lang="ja">謎の死を遂げたネアンデルタール人、槍で殺害か　浮かび上がる暴力と介護の二面性</h2>
+          <p class="why">Caverna de Shanidar (Curdistão iraquiano): um Neandertal de ~45 anos com um furo redondo de 15 mm na escápula — lança de madeira que atravessou pulmão e artéria, de frente, “mirando o coração”. Talvez um dos homicídios mais antigos conhecidos (75 mil anos). Mas o mesmo indivíduo tinha um dente partido por um golpe anos antes e sobreviveu porque alguém lhe preparava comida macia. Violência e cuidado no mesmo esqueleto — e de bônus, a revisão do famoso “enterro com flores” (pólen trazido por abelhas?).</p>
+          <div class="source">
+            <span lang="ja">CNN.co.jp</span>
+            <a href="https://www.cnn.co.jp/fringe/35254238.html" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>（CNN） 約7万5000年前に木製の槍（やり）で胸を刺され、命を落としたとみられるネアンデルタール人の遺骨が発掘された。殺人とみられる事例としては、最古級のものの一つとなる可能性がある。</p>
+            <p>このネアンデルタール人の肩甲骨には、くっきりとした円形の穴が開いていた。このことから、武器が胸を貫き、肺や太い動脈を通過した後、骨に穴を開けたと考えられる。</p>
+            <p>現場で発見された歯の1本には亀裂が入っており、顔面に鈍い衝撃を受けたことが示唆された。しかし、歯の根管部分を覆うように歯石が蓄積していたことから、この負傷は生涯のもっと早い時期に起きたとみられる。また、この個体は集団のほかの仲間から、食べやすいように柔らかくすりつぶした食事を用意してもらうなどの介護を受けていた可能性がある。</p>
+            <p>「シャニダールAの遺骨は、私たちが人間らしさとして認識しているものの二面性を映し出している。一方では、極めて暴力的な最期を迎えた証拠がある。他方で、この個体は生前、明らかに周囲から世話を受けていた」（ポメロイ准教授）</p>
+            <p>……狩猟中の事故だった可能性もある。しかしポメロイ氏は、傷の位置や、武器を体の奥まで貫通させるのに必要な力は、「心臓を狙った、殺害を意図する一撃の特徴が見て取れる」という。</p>
+            <p>……しかし、ポメロイ氏のチームが2015年に新たな発掘を開始して進めた研究では、この「花を添えた埋葬」説に疑問が生じている。研究チームは、墓から見つかった花粉は、花粉を運ぶ蜂によって、はるか後の時代に持ち込まれた可能性があると考えている。</p>
+          </div>
+          <p class="continue"><a href="https://www.cnn.co.jp/fringe/35254238.html" target="_blank" rel="noopener" lang="ja">続きを読む · CNN.co.jp</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p3">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★☆</span> <span class="chip mins">4 min</span> <span class="chip" lang="ja">薩摩藩</span> <span class="chip" lang="ja">鹿児島城</span> <span class="chip" lang="ja">外城制度</span> <span class="chip" lang="ja">郷中教育</span> <span class="chip" lang="ja">西郷隆盛</span> <span class="chip" lang="ja">大久保利通</span>
+          </div>
+          <h2 lang="ja">70万石の大大名なのに「天守がない？」なぜ薩摩藩は城よりも人を重視したのか</h2>
+          <p class="why">Por que o feudo de 700 mil koku dos Shimazu não tinha torre de castelo? Em vez de concentrar os samurais na cidade-castelo, Satsuma os espalhou por mais de 100 “外城” — um quarto da população era samurai (no Japão todo, menos de 10%). E os meninos se educavam sozinhos no 郷中: os mais velhos lançavam dilemas como “se encontrar o assassino do seu pai e o do seu senhor ao mesmo tempo, quem você mata primeiro?” e exigiam resposta imediata e justificada. De um único bairro, Kajiya-chō, saíram Saigō, Ōkubo, Ōyama e Tōgō.</p>
+          <div class="source">
+            <span lang="ja">草の実堂</span>
+            <a href="https://kusanomido.com/study/history/japan/bakumatu/135333/" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>幕末維新を主導した西郷隆盛や大久保利通から、日露戦争を戦い抜いた大山巌や東郷平八郎まで、近代日本の舵取りを担った指導者の多くは、薩摩という一つの藩の出身でした。</p>
+            <p>彼らを育てた土壌をたどっていくと、島津家七十万石の本拠地、鹿児島城に行き着きます。大大名の居城でありながら、この城には天守がありませんでした。</p>
+            <p>江戸時代、多くの藩が武士を城下町に集めたのに対し、薩摩藩はその逆を選びました。領内を百を超える外城（とじょう）に分けて、それぞれに麓（ふもと）と呼ばれる武士の町を置いたのです。</p>
+            <p>城の構えに頼るのではなく、領内各地に住む武士に防衛を任せる薩摩の姿勢は、よく「城をもって城とせず、人をもって城となす」という言葉で表現されます。</p>
+            <p>……そこでは六、七歳から十四、五歳までの「稚児（ちご）」を、元服後の「二才（にせ）」が指導します。教えを受けた者は成長すると今度は教える側に回り、藩校の教師に頼ることなく、若者たち自身の自治によって運営されていました。</p>
+            <p>郷中の教え方で特に際立っていたのが「詮議（せんぎ）」です。たとえば「親の仇と主君の仇に同時に出会ったら、どちらを先に討つか」といった答えの定まらない問いを突きつけ、その場で即座に判断させ、理由を述べさせます。</p>
+            <p>守りの要は城郭の内側ではなく、人を育てることにこそあったのだと、天守のない鹿児島城が教えてくれます。</p>
+          </div>
+          <p class="continue"><a href="https://kusanomido.com/study/history/japan/bakumatu/135333/" target="_blank" rel="noopener" lang="ja">続きを読む · 草の実堂</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p4">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★☆</span> <span class="chip mins">4 min</span> <span class="chip" lang="ja">豊臣秀長</span> <span class="chip" lang="ja">毛利輝元</span> <span class="chip" lang="ja">上杉景勝</span> <span class="chip" lang="ja">取次</span> <span class="chip" lang="ja">接待</span> <span class="chip" lang="ja">大和郡山</span>
+          </div>
+          <h2 lang="ja">豊臣秀長は家康以外に誰を接待した？5キロ先まで馬を飛ばして出迎えた大物とは</h2>
+          <p class="why">Fecha a trilogia Ieyasu-em-Osaka por outro ângulo: o “número 2” Hidenaga como relações-públicas do regime. Em 1588 ele galopa sozinho 5 km — deixando para trás até o cavalariço — para receber Mōri Terumoto, ex-inimigo de 1,12 milhão de koku, e o entretém 3 dias (12 peças de nō até as 22h, chá ao amanhecer); o diarista dos Mōri escreve “筆に記し難く候”. Com Uesugi Kagekatsu, que não era seu cliente, ele mesmo prepara o chá. Ótimo para vocabulário 取次/指南.</p>
+          <div class="source">
+            <span lang="ja">BUSHOO!JAPAN（武将ジャパン）</span>
+            <a href="https://bushoojapan.com/bushoo/toyotomi/2026/10/30/222673" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>天正十六年にはある戦国大名を迎えるため5キロ先までたった一人で馬を飛ばし、大和郡山城まで付き添うという広告代理店営業マン並の行動力まで見せています。豊臣政権のNo.2である大納言が、なぜそこまでしたのか？</p>
+            <p>京都から大坂へ向かう中国の大大名・毛利輝元が、秀長の本拠である大和郡山に立ち寄ることとなりました。……家臣がつけた旅日記には、郡山に着いたときの様子がこう記されています。</p>
+            <p>【意訳】大納言殿（秀長）がお迎えのため、五十町（約5キロ）ほど馬を急がせてお出でになった。馬の口取り（くちとり）も追いつけず、ただお一人でのお出ましであった。</p>
+            <p>4日：秀長の別邸で振る舞いがあり、輝元の御供の衆にも酒食が出る／5日：郡山城に招いて盃を交わし、太刀・刀・馬が贈られた／続いて別邸で一日がかりの宴となり、能12番が夜10時頃まで続く／6日：早朝に郡山城で茶の湯があり、その後は秀長も同道して奈良へ向かう</p>
+            <p>滞在中は、人夫の食事や馬の飼い葉にいたるまで全て秀長が手配し、日記の書き手は「筆に記し難く候」とまで書き残しました。</p>
+            <p>身も蓋もない理由ですが、毛利家は中国地方で約112万石を領する大大名であり、中国攻めでは秀吉と長く敵対し、鳥取城や備中高松城などで戦ってきた相手でした。</p>
+            <p>兄・秀吉に次ぐ一門の筆頭として、新しく従った大名を迎える、いわば豊臣家の「顔」としてのもてなしです。</p>
+          </div>
+          <p class="continue"><a href="https://bushoojapan.com/bushoo/toyotomi/2026/10/30/222673" target="_blank" rel="noopener" lang="ja">続きを読む · BUSHOO!JAPAN（武将ジャパン）</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p5">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★★</span> <span class="chip mins">4 min</span> <span class="chip" lang="ja">ウェイファインディング</span> <span class="chip" lang="ja">ポリネシア</span> <span class="chip" lang="ja">ホクレア号</span> <span class="chip" lang="ja">航海術</span> <span class="chip" lang="ja">クック船長</span> <span class="chip" lang="ja">脳科学</span>
+          </div>
+          <h2 lang="ja">大海原の先を目指して　計器を使わない伝統航海術の脳科学</h2>
+          <p class="why">Para o velejador: em 1769, o sacerdote polinésio Tupaia desenhou para o capitão Cook um mapa de 74 ilhas espalhadas num oceano do tamanho da Europa — navegando só por sol, estrelas, vento e ondulação. Historiadores duvidaram (“chegaram por acaso, à deriva”) até 1976, quando Mau Piailug levou a canoa dupla Hōkūleʻa do Havaí ao Taiti sem bússola. Agora neurocientistas estudam esses navegadores para entender o “GPS do cérebro” (e a ligação com demência). Só a abertura é gratuita, mas ela é ótima.</p>
+          <div class="source">
+            <span lang="ja">ナショナル ジオグラフィック日本版</span>
+            <a href="https://natgeo.nikkeibp.co.jp/atcl/news/26/101500570/" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>その昔、太平洋の島々に移り住んだ人々は、海についての深い知識を頼りに不可能に思える大航海を成し遂げた。科学者たちは今、伝統的な航海術を受け継ぐ人々と協力して、空間移動と脳の働きの関係を解き明かそうとしている。</p>
+            <p>英国のジェームズ・クック船長は、1769年に英海軍のエンデバー号でタヒチからニュージーランドへ航海する際に、トゥパイアというポリネシア人神官を同行させていた。</p>
+            <p>現在のフランス領ポリネシアのライアテア島で生まれたトゥパイアから、ポリネシア人は帆走カヌーで大海原を渡るという話を聞いて、クックは驚いた。その上、彼らはコンパスや六分儀といった、クックたちが頼りにしていた道具の助けを借りないという。ポリネシア人は代わりに、太陽や星、風、うねりに関する知識に基づいて針路を決め、外洋を数百キロも航海するのだとトゥパイアは説明した。</p>
+            <p>トゥパイアはクックに、ヨーロッパの面積にほぼ等しい海域に点在する、74の島を示した地図を描いてみせた。……しかしやがて、トゥパイアの地図をめぐり、歴史学者や人類学者の間で議論が起こった。人間が道具を使わずに、陸地がまったく見えない外洋を航海できるはずがないというのだ。また、オセアニアの住人は偶然そこに流れ着いたに過ぎないという説も根強かった。</p>
+            <p>……彼らは、長さ19メートルの伝統的な設計の双胴カヌーを建造し、航海の目印になる星の名をとって「ホクレア号」と名づけた。そして1976年、ミクロネシア人の航海術師マウ・ピアイルグが、ホクレア号で伝統的な航海術だけを使ってハワイからタヒチまで見事に航海した。</p>
+          </div>
+          <p class="continue"><a href="https://natgeo.nikkeibp.co.jp/atcl/news/26/101500570/" target="_blank" rel="noopener" lang="ja">続きを読む · ナショナル ジオグラフィック日本版</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p6">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★☆</span> <span class="chip mins">2 min</span> <span class="chip" lang="ja">第一次世界大戦</span> <span class="chip" lang="ja">白い戦争</span> <span class="chip" lang="ja">アルプス</span> <span class="chip" lang="ja">氷河</span> <span class="chip" lang="ja">イタリア</span> <span class="chip" lang="ja">不発弾</span>
+          </div>
+          <h2 lang="ja">氷河の融解で次々に現れた第1次大戦の不発弾、軍が数百発を撤去　伊北部の山岳地帯</h2>
+          <p class="why">A “Guerra Branca” (1915–18) entre Itália e Áustria-Hungria foi travada a 3.000 m nas geleiras do Trentino; agora o gelo que derrete devolve centenas de granadas que dormiram mais de um século — achadas por alpinistas e, uma delas, graças a um carro que despencou no vale sem freio de mão. Curto e insólito.</p>
+          <div class="source">
+            <span lang="ja">CNN.co.jp</span>
+            <a href="https://www.cnn.co.jp/travel/35254133.html" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>ローマ（CNN） イタリア北部の山岳地帯で、氷河の急速な融解に伴って第1次世界大戦当時の不発弾が次々に発見され、数百発が撤去された。</p>
+            <p>この夏最初に見つかったのは90ミリの迫撃弾。6月にカルドナッツォ近郊で、ハンドブレーキをかけない状態で駐車していた車が谷底に転落した事故が発端だった。この車両を撤去した消防隊が、木の根元にあった第1次世界大戦当時の砲弾を発見し、爆発物処理班が回収した。</p>
+            <p>ほかにも、イタリア軍とオーストリア・ハンガリー帝国軍が戦った1915年～18年の「白い戦争」当時の不発弾も見つかっている。発見場所は、夏場の登山客が多い地域に集中しているが、一帯は100年以上にわたって氷雪に覆われていた場所だった。</p>
+            <p>……処理班による撤去作業ができるのは、天候が安定している夏から秋にかけての季節に限られ、雪が降り始める10月下旬には作業ができなくなる。</p>
+          </div>
+          <p class="continue"><a href="https://www.cnn.co.jp/travel/35254133.html" target="_blank" rel="noopener" lang="ja">続きを読む · CNN.co.jp</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p7">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★☆</span> <span class="chip mins">3 min</span> <span class="chip" lang="ja">氷河期</span> <span class="chip" lang="ja">ローレンタイド氷床</span> <span class="chip" lang="ja">バーンズ氷帽</span> <span class="chip" lang="ja">気候変動</span> <span class="chip" lang="ja">サイエンス誌</span>
+          </div>
+          <h2 lang="ja">人類がたまたま食い止めた「次の氷河期」、それでも温暖化を歓迎できない理由</h2>
+          <p class="why">O último resto do gigantesco manto de gelo Laurentide (Baffin, Canadá) voltou a crescer há 2.000 anos — o sinal de uma nova era glacial — e parou de repente por volta de 1960. Como sabem? Musgos mortos congelados sob a borda do gelo servem de relógio. A tese reabilita até a capa “The Cooling World” da Newsweek dos anos 70, e vem com contestação (Potsdam diz: só daqui a 50 mil anos).</p>
+          <div class="source">
+            <span lang="ja">CNN.co.jp</span>
+            <a href="https://www.cnn.co.jp/fringe/35254208.html" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>（CNN） 人類は化石燃料を燃やすことで、カナダ北極圏で始まりつつあった「次の氷河期」を食い止めた可能性がある――。そんな説が科学誌サイエンスに発表された。</p>
+            <p>今から約2万年前、かつて広大だったローレンタイド氷床は、北極圏から現在の米イリノイ州に至るまでの範囲を覆い、場所によっては約3.2キロもの厚さがあった。しかし、今も残っているのはカナダ北部ヌナブト準州のバフィン島にあるバーンズ氷帽のみ。</p>
+            <p>ところが2000年ほど前から再び、バーンズ氷帽が徐々に、だが確実に拡大し始めた。……しかし1960年ごろ、人間が引き起こした気候変動の影響で夏の気温が上昇すると、バーンズ氷帽が突如として縮小を始めた。</p>
+            <p>……そのため氷帽が拡大する過程でのみ込まれて死んだコケ類が、そのままの状態で残っていた。研究チームは氷帽の縁のあたりでこうしたコケ類を採取して年代を分析。「氷が次第にコケを覆って死なせていく過程をたどることで、氷帽がどれだけ拡大したかを追跡できる」（ヤング氏）</p>
+            <p>……しかし同氏自身の研究も含め、他の研究では、次の氷河期到来は約5万年先になると予測しているという。</p>
+            <p>人類は今回の氷河期を食い止めただけでなく、「恐らく未来に起こる可能性があったどの氷河期をも、非常に長期間、遠ざけてしまった」とヤング氏は論じている。</p>
+          </div>
+          <p class="continue"><a href="https://www.cnn.co.jp/fringe/35254208.html" target="_blank" rel="noopener" lang="ja">続きを読む · CNN.co.jp</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p8">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★★</span> <span class="chip mins">4 min</span> <span class="chip" lang="ja">AIエージェント</span> <span class="chip" lang="ja">マインクラフト</span> <span class="chip" lang="ja">マルチエージェント</span> <span class="chip" lang="ja">GPT-6.1 Sol</span> <span class="chip" lang="ja">Claude Opus 5.5</span> <span class="chip" lang="ja">官僚主義</span>
+          </div>
+          <h2 lang="ja">AIを50体集めてマインクラフトで文明を作らせたら食糧難に陥って配給制度が実施される</h2>
+          <p class="why">50 agentes de IA, 3 horas, objetivo “construir uma civilização próspera”. Em 90 s derrubaram todas as árvores; a primeira da lista, “Ada”, virou líder sem debate; depois da primeira noite de mortes viraram medrosos, veio a fome, racionamento com caderneta, pesca por turnos — e uma burocracia hilária (4 agentes, 11 minutos, um único farelo de osso num campo de trigo; inquérito de 3 minutos por um frango roubado). Bônus: Bed Wars Claude × GPT. Leitura divertida sobre dinâmica multiagente.</p>
+          <div class="source">
+            <span lang="ja">GIGAZINE</span>
+            <a href="https://gigazine.net/news/20261030-minecraft-gpt-sol/" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>……目標は1つ、「繁栄する文明を築くこと」で、3時間の時間制限を設けました。エージェントたちは、最初は非常に活発に活動していたそうです。マップ各地に散らばって探索を始め、特に木の伐採に熱中し、スポーン地点から手の届く範囲にあった木のほぼすべてを90秒以内に伐採しました。</p>
+            <p>また、名簿の最初に並んでいた「Ada」というエージェントが事実上のリーダーとなり、エージェントたちは何か行動をするときにAdaへ承認を求めるようになったそうです。これには議論が一切なく、他の49体のうち46体が初めてダイレクトメッセージを送ったのがAdaだったということです。</p>
+            <p>ただ、最初の夜に死者が続出したことで、エージェントの警戒心はその後永久に高まったそうです。……死を懸念したエージェントたちは危険を伴うタスクに取り組む回数を減らし、夜はシェルターに集まるようになりました。</p>
+            <p>……Bramは勇気を出してクモを倒し自分で釣り竿を作りましたが、クモとの戦闘でダメージを受けており、川までの70ブロックを移動するにはお腹が減りすぎていると判断。複数のエージェントに釣り竿を桟橋まで運ぶようメッセージを送り、最終的にJessaを見つけました。</p>
+            <p>実験中の興味深いエピソードとして、研究チームは「Adaが調理済みの鶏肉をNoorに投げたところ、Esmeが拾って食べてしまった。3分間の調査が行われた結果、食料は名前の付いた箱に入れ、決して投げてはならないという手順が作られた」というものを紹介しています。</p>
+            <p>また、全体的に官僚主義的な傾向が見られ、「釣り竿係」といった役割が作られたり、下級の役割を担うエージェントが草を収穫する許可をいちいち求めたり、4体のエージェントが11分かけてたった1つの小麦畑にたった1つの骨粉を散布する「肥料散布作業員」を任命したりしていたそうです。</p>
+          </div>
+          <p class="continue"><a href="https://gigazine.net/news/20261030-minecraft-gpt-sol/" target="_blank" rel="noopener" lang="ja">続きを読む · GIGAZINE</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p9">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★☆</span> <span class="chip mins">5 min</span> <span class="chip" lang="ja">Claude Code</span> <span class="chip" lang="ja">QA</span> <span class="chip" lang="ja">AIエージェント</span> <span class="chip" lang="ja">Chrome DevTools</span> <span class="chip" lang="ja">Playwright</span> <span class="chip" lang="ja">CLAUDE.md</span>
+          </div>
+          <h2 lang="ja">Claude Codeで「QAチーム」を組んだら、効いたのは「捨てる仕組み」だった ― AIだけが見つけた不具合・見逃しは？</h2>
+          <p class="why">Muito perto do seu dia a dia: um PM monta uma “equipe de QA” de agentes Claude Code que operam Chromes visíveis para testar dois SaaS internos (146 casos em 1 mês). As IAs erraram com confiança — clicaram no botão oculto em (0,0), não viram um toast de erro de 2 s, confundiram um contador compartilhado. O que funcionou foi um verificador que parte do princípio “este apontamento está errado” e observa “por outro método”. Placar: 8 bugs só a IA achou, 4 deixou passar — incluindo um relatório com valor 14,5× errado marcado PASS.</p>
+          <div class="source">
+            <span lang="ja">Zenn（SREホールディングス）</span>
+            <a href="https://zenn.dev/sre_holdings/articles/d4acb079680a79" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>「AIにテストを手伝わせたい。でも、AIの『できました』はどこまで信用していいのか分からない」そんなモヤモヤ、あなたのチームにもありませんか？</p>
+            <p>テスターが「生成ボタンが無反応」と重要度「高」で報告してきました。検証者が再現を試みると、テスターのクリックがボタンに当たっていませんでした。……振り返ると、Playwright の locator.click() を使っていれば防げた可能性が高いと思います。</p>
+            <p>「保存に失敗してもエラーが出ない」という指摘が、検証も通過しました。起票前に私が見直していて気づいたのですが、エラーは画面の下に2秒だけ出るトーストでした。テスターも検証者も同じ方法でエラーを探していたので、同じ方法で同じ見落としをしていたのです。</p>
+            <p>共通するのは、間違っていたのが製品ではなく、観測のしかたか、その解釈だったことです。しかもツールは失敗を報告せず、もっともらしい結果を返してきます。</p>
+            <p>いちばん効いたステップです。検証者は指摘を1件ずつ受け取り、「この指摘は間違っている」という前提で崩しにかかります。</p>
+            <p>……AIのチームしか見つけていなかった不具合が8件、AIのテスト範囲内で見逃した不具合が4件でした。</p>
+            <p>見逃した中で一番重かったのは、帳票の構成（項目が並んでいるか）だけを見てPASS にし、中の値が別の画面で計算した同じ値の14.5倍になっていた件です。……この見逃しで、PASS を確かめる仕組みがなかったことに気づきました。</p>
+          </div>
+          <p class="continue"><a href="https://zenn.dev/sre_holdings/articles/d4acb079680a79" target="_blank" rel="noopener" lang="ja">続きを読む · Zenn（SREホールディングス）</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p10">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★☆</span> <span class="chip mins">2 min</span> <span class="chip" lang="ja">Flutter</span> <span class="chip" lang="ja">Swift</span> <span class="chip" lang="ja">Kotlin</span> <span class="chip" lang="ja">クロスプラットフォーム</span> <span class="chip" lang="ja">React Native</span> <span class="chip" lang="ja">AIコーディング</span>
+          </div>
+          <h2 lang="ja">Flutter やめました。電話アプリを Native にした理由</h2>
+          <p class="why">Debate que toca React Native também: a IVRy largou Flutter por Swift/Kotlin nativos. Motivos: o app era quase só WebView, havia ~50 Platform Channels entre camadas e o cold start Android caiu de 192,5 ms para 49,6 ms. O argumento novo é a IA: escrever duas bases nativas ficou barato (PoC Dart→Swift/Kotlin em 2–3 dias com Claude Code/Devin), e arquitetura simples é melhor também para o agente. Citam a Shopify voltando de React Native para nativo. Lição: revisar se as premissas da escolha ainda valem.</p>
+          <div class="source">
+            <span lang="ja">Zenn（IVRy）</span>
+            <a href="https://zenn.dev/ivry/articles/d155267331a3ca" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>Flutter導入当時は採用戦略の一部と、「クロスプラットフォームで UI を共有し、少人数で iOS/Android を同時に開発する」という合理的な判断でした。</p>
+            <p>Flutter と Native の間には、Platform Channels による呼び出しやコールバックが合計 50件ほどありました。着信イベントはOS・Native・Flutterの間を行き来し、問題が起きると、どの層に原因があるのかを切り分ける必要がありました。</p>
+            <p>移行前のPoCでは、Android cold-start 時の「アプリ起動〜初期画面表示までの時間」の中央値が 192.5ms から 49.6ms（約74%の短縮、約3.9倍の高速化）になりました。</p>
+            <p>これまでは、SwiftとKotlinでそれぞれ実装する開発コストが大きな懸念でした。しかし、Claude Code や Devin など、AIコーディングツールの進化によって、定型的な UI や API 連携の実装コストを下げられるようになりました。</p>
+            <p>AIによって実装コストが下がることに加えて、AIが理解・変更する対象そのものをシンプルにできる点も、今回の意思決定を後押ししました。</p>
+            <p>技術選定においては、その選択を支えていた前提が、今も成り立っているかを問い続けることが大切だと感じます。</p>
+          </div>
+          <p class="continue"><a href="https://zenn.dev/ivry/articles/d155267331a3ca" target="_blank" rel="noopener" lang="ja">続きを読む · Zenn（IVRy）</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p11">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★☆</span> <span class="chip mins">2 min</span> <span class="chip" lang="ja">神戸ルミナリエ</span> <span class="chip" lang="ja">阪神・淡路大震災</span> <span class="chip" lang="ja">メリケンパーク</span> <span class="chip" lang="ja">東遊園地</span> <span class="chip" lang="ja">旧居留地</span> <span class="chip" lang="ja">神戸</span>
+          </div>
+          <h2 lang="ja">神戸ルミナリエ、来年1月29日開幕　鎮魂の祈り表現、81メートル続く回廊や23メートルの塔、小規模作品も</h2>
+          <p class="why">Agenda de Kobe: a Luminarie de 2027 abre em 29/1 (10 dias), tema “mil melodias acesas no porto”. Galeria de 81 m em Meriken Park, torre de 23 m que dá para ver por dentro em Higashi-Yūenchi, um “caixa de música” em frente ao prédio do SMBC no antigo assentamento estrangeiro. Ingressos da zona paga (500–1.500 ienes) a partir de 1/11.</p>
+          <div class="source">
+            <span lang="ja">神戸新聞NEXT</span>
+            <a href="https://www.kobe-np.co.jp/news/society/202610/0020982761.shtml" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>来年１月２９日に開幕する「神戸ルミナリエ」について、組織委員会（会長＝久元喜造神戸市長）は３０日、神戸市中央区のメリケンパークと東遊園地、旧居留地をメイン会場とする開催内容の詳細を発表した。テーマは「港に灯る、千のしらべ」。阪神・淡路大震災で傷ついた港町を照らし、震災を乗り越えた市民らの思いが協奏するイメージを込めたという。</p>
+            <p>ルミナリエは毎年１２月に大規模な交通規制を実施して開かれてきたが、２０２４年以降、密集回避などを理由に神戸・三宮や臨海部での分散開催に切り替えられた。今回の会期は２月７日までの１０日間。</p>
+            <p>東遊園地会場のデザインは、壁状だった前回から大きく変わった。四方の小塔の中心に高さ約２３メートルの塔がそびえる「スクルトゥーラ」。３６０度の方向から眺めたり、作品の内側から電飾を楽しんだりできる。</p>
+            <p>旧居留地の三井住友銀行神戸本部ビル前には、箱形の「ドッピオガゼボ」を配置。オルゴールをイメージした作品で、２９日の点灯式では合唱団が震災からの復興を願った合唱曲「しあわせ運べるように」を歌う。</p>
+          </div>
+          <p class="continue"><a href="https://www.kobe-np.co.jp/news/society/202610/0020982761.shtml" target="_blank" rel="noopener" lang="ja">続きを読む · 神戸新聞NEXT</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p12">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★☆☆</span> <span class="chip mins">1 min</span> <span class="chip" lang="ja">家賃</span> <span class="chip" lang="ja">賃貸</span> <span class="chip" lang="ja">不動産</span> <span class="chip" lang="ja">兵庫</span> <span class="chip" lang="ja">阪神間</span> <span class="chip" lang="ja">物価高</span>
+          </div>
+          <h2 lang="ja">物価高で県内の賃貸家賃も上昇　相談急増し過去10年で最多　阪神地域が半数　2万8千円値上げ要求の例も</h2>
+          <p class="why">Imóveis em Hyōgo: as consultas por aumento de aluguel bateram recorde de 10 anos, metade da região Hanshin; caso real em Itami: de 72 mil para 100 mil ienes na renovação. Só a abertura é gratuita — mas o vocabulário (契約更新, 共益費, 賃料改定) vale ouro para quem aluga no Japão.</p>
+          <div class="source">
+            <span lang="ja">神戸新聞NEXT</span>
+            <a href="https://www.kobe-np.co.jp/news/society/202610/0020981535.shtml" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>物価の高騰が続く中、兵庫県内でも家賃の上昇が続いている。背景には、物価高により物件を維持・管理するコストの増加があるとみられる。県立消費生活総合センター（神戸市中央区）には「急に家賃を値上げすると告げられた」といった相談が急増。同センターは冷静な対応を求めている。</p>
+            <p>「賃料などの改定をさせていただきます。改定賃料共益費　月額合計１０万円」。昨年４月、伊丹市の派遣社員の５０代女性は、賃貸マンションのオーナー会社から契約更新の通知を受けた。現行の家賃７万２千円から２万８千円値上げする内容で、驚きを隠せなかった。</p>
+          </div>
+          <p class="continue"><a href="https://www.kobe-np.co.jp/news/society/202610/0020981535.shtml" target="_blank" rel="noopener" lang="ja">続きを読む · 神戸新聞NEXT</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p13">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★☆</span> <span class="chip mins">4 min</span> <span class="chip" lang="ja">DEZERT</span> <span class="chip" lang="ja">ヴィジュアル系</span> <span class="chip" lang="ja">Ken（L&#x27;Arc-en-Ciel）</span> <span class="chip" lang="ja">インタビュー</span> <span class="chip" lang="ja">15周年</span>
+          </div>
+          <h2 lang="ja">【インタビュー】DEZERT、結成15周年に放つ2枚組全20曲収録のセルフタイトルアルバム完成「DEZERTをどうやって終わらせるか」</h2>
+          <p class="why">Rotação de banda: o DEZERT (visual kei pesado, com faixa produzida por Ken do L’Arc-en-Ciel) lança um álbum duplo homônimo de 20 músicas. Depois da turnê pelas 47 províncias e do Makuhari Messe, a banda parou dois meses para “resolver tudo” — e o álbum atrasou. Chiaki: “quatro adultos chatos voltando a se juntar devagar, de forma pegajosa — nada de mangá Jump”. Conversa franca sobre o que significa continuar uma banda.</p>
+          <div class="source">
+            <span lang="ja">BARKS</span>
+            <a href="https://barks.jp/news/1100978" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>DEZERTが10月28日、メジャー2ndアルバム『DEZERT』をリリースした。結成15周年という新フェーズに突入した彼らの最新オリジナルフルアルバムは、全20曲収録2枚組の大ボリューム。</p>
+            <p>SORA：……僕は大前提として、「バンドを続けることが夢だ」っていうところに着地していたんです。バンドに限らず、何事も“続ける”って難しいことだし、改めてDEZERTっていうバンドにもっと深く向き合っていきたい気持ちが大きくあったので。</p>
+            <p>SORA：固定観念に流されたくなかったんです。『DEZERT 2』があってもいいし、僕らヘリクツ大王だから『DEZERT 0』でも『DEZERT 1.5』でもいい。そこに意味があればいいかなと思ってます、僕は。</p>
+            <p>千秋：ただ、「とにかく幕張メッセのライヴで一回止まろう」じゃないですけど、「一旦それぞれ家に帰ろう」みたいな時間が2ヶ月くらいあったんです。……その2ヶ月は、僕は人生でも大事な2ヶ月だったのかなと思いますね。</p>
+            <p>千秋：……バンドって、ひとりが突っ走ろうがふたりが突っ走ろうが、調子悪いやつがいようが調子いいやつがいようが、それはそれで世界観が作れるし、いいなと思っていたんです。だけど、“続ける”っていうことにプライオリティを置くと、結構難しくて。何をもって続けるのか、ということですよね。お金がなくなっても続かないし。</p>
+            <p>千秋：……別に、一旦休んで自然とまた集まったとか、そういう『少年ジャンプ』的なことはなく。めんどくせえ4人の大人が、時間をかけてねっちょりとまた集まったんです。</p>
+          </div>
+          <p class="continue"><a href="https://barks.jp/news/1100978" target="_blank" rel="noopener" lang="ja">続きを読む · BARKS</a></p>
+        </div>
+      </article>
+
+      <footer class="site">読解幕 · 2026-10-30 · ~45 min · <a href="../../history/" style="color:inherit">History</a> · deliton.github.io/japanese-digest</footer>
+    </main>
+  </div>
+</body>
+</html>
