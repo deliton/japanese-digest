@@ -1,0 +1,872 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>読解幕 · 2026-11-03 · Japanese Digest</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Noto+Serif+JP:wght@400;600;700&family=Shippori+Mincho:wght@500;700&display=swap" rel="stylesheet" />
+  <style>
+
+    :root {
+      --bg: #0a0a0a;
+      --bg-2: #121212;
+      --bg-card: #161616;
+      --ink: #f5f5f5;
+      --ink-dim: #a8a29a;
+      --ink-mute: #6b6560;
+      --shu: #c41e3a;
+      --shu-hot: #e11d48;
+      --shu-deep: #8b1228;
+      --gold: #d4a017;
+      --gold-soft: #c9a227;
+      --white: #fafafa;
+      --line: #2a2a2a;
+      --line-hot: rgba(196, 30, 58, 0.45);
+      --measure: 42rem;
+      --radius: 4px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: "Noto Sans JP", "Hiragino Sans", "Yu Gothic", system-ui, sans-serif;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .stage-bar {
+      height: 6px;
+      background: repeating-linear-gradient(
+        90deg,
+        var(--shu) 0 48px,
+        var(--white) 48px 56px,
+        #111 56px 64px,
+        var(--gold) 64px 72px,
+        #111 72px 88px
+      );
+    }
+
+    .wrap {
+      width: min(100% - 2rem, 74rem);
+      margin: 0 auto;
+      padding: 2rem 0 4.5rem;
+      display: grid;
+      grid-template-columns: 15.5rem 1fr;
+      gap: 2.75rem;
+      align-items: start;
+    }
+
+    @media (max-width: 900px) {
+      .wrap { grid-template-columns: 1fr; gap: 1.5rem; padding-top: 1.25rem; }
+      .sidebar { position: static !important; }
+    }
+
+    .sidebar { position: sticky; top: 1.25rem; }
+
+    .brand {
+      display: flex;
+      align-items: baseline;
+      gap: 0.55rem;
+      margin: 0 0 0.35rem;
+    }
+    .brand-mark {
+      font-family: "Shippori Mincho", "Noto Serif JP", serif;
+      font-size: 1.85rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      color: var(--white);
+      line-height: 1;
+    }
+    .brand-mark em {
+      font-style: normal;
+      color: var(--shu);
+    }
+    .brand-sub {
+      font-size: 0.65rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-weight: 700;
+    }
+
+    .meta {
+      color: var(--ink-mute);
+      font-size: 0.8rem;
+      margin: 0 0 1.25rem;
+    }
+
+    .stat-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-bottom: 1.35rem;
+    }
+    .stat {
+      border: 1px solid var(--line);
+      background: var(--bg-2);
+      padding: 0.32rem 0.65rem;
+      font-size: 0.72rem;
+      color: var(--ink-dim);
+      border-radius: var(--radius);
+    }
+    .stat strong { color: var(--white); font-weight: 700; }
+    .stat.hot {
+      border-color: var(--shu);
+      color: var(--shu-hot);
+      background: rgba(196, 30, 58, 0.1);
+    }
+
+    .toc {
+      border: 1px solid var(--line);
+      background: var(--bg-2);
+      padding: 0.85rem 0.9rem 0.95rem;
+      border-radius: var(--radius);
+    }
+    .toc h2 {
+      margin: 0 0 0.65rem;
+      font-size: 0.72rem;
+      letter-spacing: 0.16em;
+      color: var(--gold);
+      font-weight: 800;
+    }
+    .toc ol { list-style: none; margin: 0; padding: 0; }
+    .toc li { margin: 0; }
+    .toc a {
+      display: flex;
+      justify-content: space-between;
+      gap: 0.5rem;
+      text-decoration: none;
+      color: var(--ink-dim);
+      font-size: 0.82rem;
+      padding: 0.38rem 0.2rem;
+      border-bottom: 1px solid transparent;
+    }
+    .toc a:hover { color: var(--white); border-bottom-color: var(--line-hot); }
+    .toc .t-title { font-weight: 600; }
+    .toc .t-min { color: var(--gold); font-size: 0.72rem; font-weight: 700; flex-shrink: 0; }
+
+    .main { max-width: var(--measure); }
+
+    .digest-banner {
+      display: flex;
+      gap: 0.75rem;
+      align-items: flex-start;
+      background: #141014;
+      border: 1px solid var(--line);
+      border-left: 3px solid var(--shu);
+      padding: 0.85rem 1rem;
+      margin-bottom: 1.5rem;
+      font-size: 0.78rem;
+      color: var(--ink-dim);
+      line-height: 1.55;
+    }
+    .digest-banner .tag {
+      flex-shrink: 0;
+      background: var(--shu);
+      color: #fff;
+      font-size: 0.65rem;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      padding: 0.28rem 0.5rem;
+      border-radius: var(--radius);
+    }
+
+    .hero {
+      margin-bottom: 2rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid var(--line);
+      position: relative;
+    }
+    .hero::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -1px;
+      width: 4.5rem;
+      height: 2px;
+      background: var(--shu);
+    }
+    .kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.7rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--shu-hot);
+      font-weight: 800;
+      margin-bottom: 0.85rem;
+    }
+    .kicker::before {
+      content: "◆";
+      font-size: 0.55rem;
+      color: var(--gold);
+    }
+    .hero h1 {
+      font-family: "Shippori Mincho", "Noto Serif JP", serif;
+      font-size: clamp(1.85rem, 4vw, 2.55rem);
+      font-weight: 700;
+      line-height: 1.2;
+      margin: 0 0 0.75rem;
+      color: var(--white);
+      letter-spacing: 0.02em;
+    }
+    .hero p {
+      margin: 0;
+      color: var(--ink-dim);
+      font-size: 0.98rem;
+      max-width: 36rem;
+    }
+
+    article.piece {
+      background: var(--bg-card);
+      border: 1px solid var(--line);
+      margin-bottom: 1.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+    article.piece::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: linear-gradient(90deg, var(--shu) 0%, var(--shu) 35%, var(--gold) 35%, var(--gold) 42%, transparent 42%);
+    }
+
+    .piece-inner { padding: 1.6rem 1.55rem 1.35rem; }
+
+    .piece-head {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-bottom: 0.85rem;
+    }
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      border: 1px solid var(--line);
+      background: #111;
+      color: var(--ink-dim);
+      padding: 0.22rem 0.6rem;
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      border-radius: var(--radius);
+    }
+    .chip.interest {
+      border-color: var(--shu);
+      color: var(--shu-hot);
+      background: rgba(196, 30, 58, 0.12);
+    }
+    .chip.mins {
+      border-color: var(--gold);
+      color: var(--gold);
+      background: transparent;
+    }
+
+    .piece h2 {
+      font-family: "Noto Serif JP", "Shippori Mincho", "Yu Mincho", serif;
+      font-size: 1.38rem;
+      font-weight: 700;
+      line-height: 1.5;
+      margin: 0 0 0.6rem;
+      color: var(--white);
+      letter-spacing: 0.02em;
+    }
+
+    .why {
+      margin: 0 0 1rem;
+      color: var(--ink-dim);
+      font-size: 0.9rem;
+      border-left: 2px solid var(--gold);
+      padding-left: 0.85rem;
+    }
+
+    .source {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.65rem 1.1rem;
+      font-size: 0.76rem;
+      color: var(--ink-mute);
+      margin-bottom: 1.25rem;
+    }
+    .source a {
+      color: var(--shu-hot);
+      text-decoration: none;
+      font-weight: 600;
+    }
+    .source a:hover { color: var(--gold); }
+
+    .ja {
+      font-family: "Noto Serif JP", "Hiragino Mincho ProN", "Yu Mincho", serif;
+      font-size: 1.08rem;
+      line-height: 2;
+      letter-spacing: 0.03em;
+      color: #ebe7e1;
+    }
+    .ja p { margin: 0 0 1.15em; }
+    .ja p:last-child { margin-bottom: 0; }
+
+    .continue {
+      margin-top: 1.25rem;
+      padding-top: 1rem;
+      border-top: 1px solid var(--line);
+      font-size: 0.86rem;
+    }
+    .continue a {
+      color: var(--white);
+      text-decoration: none;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      border-bottom: 2px solid var(--shu);
+      padding-bottom: 0.1rem;
+    }
+    .continue a:hover {
+      color: var(--shu-hot);
+      border-bottom-color: var(--gold);
+    }
+
+    footer.site {
+      max-width: var(--measure);
+      margin-top: 1.75rem;
+      color: var(--ink-mute);
+      font-size: 0.72rem;
+      letter-spacing: 0.06em;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+    footer.site::before {
+      content: "";
+      width: 1.25rem;
+      height: 2px;
+      background: var(--shu);
+    }
+
+  
+    .excerpt-label { font-size: 0.66rem; letter-spacing: 0.18em; color: var(--gold); font-weight: 800; margin: 0 0 0.6rem; }
+    .brand-sub a, .stat a { color: var(--gold); text-decoration: none; }
+    .toc .t-min { font-variant-numeric: tabular-nums; }
+  </style>
+</head>
+<body>
+  <div class="stage-bar" aria-hidden="true"></div>
+
+  <div class="wrap">
+    <aside class="sidebar">
+      <div class="brand">
+        <span class="brand-mark" lang="ja">読解<em>幕</em></span>
+      </div>
+      <p class="brand-sub">Kabuki Digest · <a href="/japanese-digest/history/">History</a></p>
+      <p class="meta">2026-11-03 · America/Sao_Paulo</p>
+      <div class="stat-row">
+        <span class="stat"><strong>46</strong> min</span>
+        <span class="stat"><strong>15</strong> pieces</span>
+        <span class="stat"><strong>~9,100</strong> 字</span>
+        <span class="stat"><a href="/japanese-digest/history/">History</a></span>
+      </div>
+
+      <nav class="toc" aria-label="Índice">
+        <h2 lang="ja">本日の演目</h2>
+        <ol>
+          <li>
+            <a href="#p1">
+              <span class="t-title" lang="ja">51の陣所と夜襲――根白坂で島津を止めた秀長</span>
+              <span class="t-min">4′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p2">
+              <span class="t-title" lang="ja">父が子を、兄が弟を――後趙・石虎一族の自滅</span>
+              <span class="t-min">5′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p3">
+              <span class="t-title" lang="ja">セイレーンは人魚ではなかった</span>
+              <span class="t-min">2′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p4">
+              <span class="t-title" lang="ja">アララト山麓の「船の形」――地下9mの焦げた木材</span>
+              <span class="t-min">4′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p5">
+              <span class="t-title" lang="ja">チェルノブイリの犬――40年・35世代の自然選択</span>
+              <span class="t-min">4′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p6">
+              <span class="t-title" lang="ja">時速113kmで海へ――カツオドリの首はなぜ折れない</span>
+              <span class="t-min">3′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p7">
+              <span class="t-title" lang="ja">「呼ばれないと行けない」神社――玉置神社と認知的不協和</span>
+              <span class="t-min">3′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p8">
+              <span class="t-title" lang="ja">「エンヤ」「ヨイサ」――唐津くんちの曳山</span>
+              <span class="t-min">2′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p9">
+              <span class="t-title" lang="ja">猛獣・へびは「要相談」――国鉄最後のダイヤ改正と荷物列車</span>
+              <span class="t-min">3′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p10">
+              <span class="t-title" lang="ja">京都から難波へ「遅いのに一番高い」特急あをによし</span>
+              <span class="t-min">4′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p11">
+              <span class="t-title" lang="ja">--allowedTools は道具を絞らない――claude -p の落とし穴</span>
+              <span class="t-min">4′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p12">
+              <span class="t-title" lang="ja">30秒ごとに「3〜5語で説明して」――Claude Codeの隠れトークン</span>
+              <span class="t-min">2′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p13">
+              <span class="t-title" lang="ja">鏡に映る観客――INORAN『ニライカナイ』最終章</span>
+              <span class="t-min">3′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p14">
+              <span class="t-title" lang="ja">近畿最古の芝居小屋で――出石・永楽館歌舞伎のまねき上げ</span>
+              <span class="t-min">1′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p15">
+              <span class="t-title" lang="ja">六甲山頂の冬――霜柱とこたつのSIKIガーデン</span>
+              <span class="t-min">2′</span>
+            </a>
+          </li>
+        </ol>
+      </nav>
+    </aside>
+
+    <main class="main">
+      <div class="digest-banner">
+        <span class="tag">TRIAGE</span>
+        <span>História (Hidenaga na campanha de Kyushu e a batalha de Nejirozaka; a dinastia Later Zhao e a família de Shi Hu); mito/arqueologia (as sereias que não eram meio-peixe; madeira queimada sob a “Arca de Noé” de Durupınar); ciência (cães de Chernobyl e seleção natural; o pescoço do atobá a 113 km/h); cultura/matsuri (santuário Tamaki “só para quem é chamado”; Karatsu Kunchi); trens (o fim dos trens de bagagem da JNR em 1986; o expresso Aoniyoshi Quioto→Namba via Nara); IA/dev (armadilha do --allowedTools no claude -p; tokens ocultos do agent_summary no Claude Code); rock (INORAN); Hyogo/Kobe (kabuki no Eirakukan de Izushi; inverno no Rokkō). Pontos fracos: NatGeo (sereias) e Sankei (trens de bagagem) só têm o trecho gratuito; Kobe-NP está atrás do paywall, então Kobe/Hyogo ficou com notas curtas; nada de JRPG, vistos ou imóveis hoje.</span>
+      </div>
+
+      <header class="hero">
+        <div class="kicker">Daily curated reading</div>
+        <h1 lang="ja">根白坂で島津を止めた秀長、自滅した後趙・石虎一族、人魚ではなかったセイレーン、アララト山麓の焦げた木材、チェルノブイリの犬、「呼ばれないと行けない」玉置神社、遅いのに一番高い特急</h1>
+        <p lang="ja">文化の日の幕開けは、大河ではナレーション数秒で終わった九州征伐――五十一の陣所で島津の夜襲を受け止めた秀長の大仕事から。続いて四世紀の中国、父が子を、兄が弟を討ち続けた後趙・石虎の一族。ギリシャ神話のセイレーンの本当の姿、ノアの方舟と噂される地形の地下九メートルから出た焦げた木材、四十年で三十五世代を重ねたチェルノブイリの犬、時速百十三キロで海に飛び込むカツオドリの首。中盤は「神に呼ばれないと行けない」玉置神社と唐津くんちの曳山、そして鉄道の幕――国鉄最後のダイヤ改正で消えた荷物列車と、京都から難波へあえて遠回りする紫の観光特急。開発者の幕ではclaude -pの権限の落とし穴とClaude Codeの隠れトークン。INORANの鏡のステージ、出石・永楽館の歌舞伎、雪の六甲山で締める約46分の読解です。</p>
+      </header>
+
+      <article class="piece" id="p1">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★★</span> <span class="chip mins">4 min</span> <span class="chip" lang="ja">九州征伐</span> <span class="chip" lang="ja">豊臣秀長</span> <span class="chip" lang="ja">島津義弘</span> <span class="chip" lang="ja">根白坂の戦い</span> <span class="chip" lang="ja">兵站</span>
+          </div>
+          <h2 lang="ja">九州征伐で豊臣秀長は何をした？勇将・島津義弘を退けた根白坂の戦い</h2>
+          <p class="why">O que o drama da NHK resolveu com alguns segundos de narração: em 1587 Hidenaga leva parte de um exército de ~200 mil de Nara até Kyushu (só atravessar o rio Yodo exigiu dias de barcos), cerca o castelo de Taka com 51 acampamentos que eram ao mesmo tempo muro e escudo, e aguenta o ataque noturno de Shimazu Yoshihiro em Nejirozaka — enquanto os irmãos Shimazu discordavam entre render-se ou lutar.</p>
+          <div class="source">
+            <span lang="ja">BUSHOO!JAPAN（武将ジャパン）</span>
+            <a href="https://bushoojapan.com/bushoo/toyotomi/2026/11/03/222785" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>大河ドラマ『豊臣兄弟』では数秒のナレーションで終わり、物議を醸した「九州征伐」。</p>
+            <p>破竹の勢いで大友家や龍造寺家の領地を奪い、九州の大部分を制していただけに、豊臣軍とてそう簡単な戦いとはいかないのでは？</p>
+            <p>……</p>
+            <p>天正十五年（1587年）2月10日、豊臣秀長は大和郡山城を出発します。</p>
+            <p>一言でそう済ますのは簡単ですが、実際は凄まじい大仕事です。</p>
+            <p>各地から動員された豊臣軍は総数20万規模とされており、秀長の軍勢が近所の淀川を渡ることですら一苦労でした。</p>
+            <p>……</p>
+            <p>城の中の兵と、駆けつけた援軍に挟まれれば、囲んでいる側が逆に危なくなってしまう――そこで秀長は、高城と財部城（宮崎県高鍋町）の間で実に51か所もの陣所を築きました。</p>
+            <p>城を閉じ込める壁であり、援軍を受け止める盾でもある。</p>
+            <p>……</p>
+            <p>そして4月17日、義弘率いる島津勢は高城を救うべく、南条元続や宮部継潤らの陣に夜襲をかけました。</p>
+            <p>「根白坂の戦い（ねじろざかのたたかい）」の始まりです。</p>
+            <p>結局、島津勢は豊臣の陣を破れず、島津歳久の養子・忠隣らを失って退いていきました。</p>
+            <p>高城を救い出す望みは、ここで絶たれたと言ってよいでしょう。</p>
+            <p>……</p>
+            <p>戦いに勝つだけでなく、勝ったあとの九州を形にするところまで。</p>
+          </div>
+          <p class="continue"><a href="https://bushoojapan.com/bushoo/toyotomi/2026/11/03/222785" target="_blank" rel="noopener" lang="ja">続きを読む · BUSHOO!JAPAN（武将ジャパン）</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p2">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★☆</span> <span class="chip mins">5 min</span> <span class="chip" lang="ja">五胡十六国</span> <span class="chip" lang="ja">後趙</span> <span class="chip" lang="ja">石虎</span> <span class="chip" lang="ja">石勒</span> <span class="chip" lang="ja">晋書</span>
+          </div>
+          <h2 lang="ja">『中国史屈指の狂った王朝』父が息子を処刑、兄弟が殺し合って滅びた後趙・石虎一族</h2>
+          <p class="why">Século IV, norte da China: Shi Hu, general brilhante e cruel, toma o trono dos filhos do seu benfeitor Shi Le — e depois vê os próprios filhos repetirem o roteiro. Um herdeiro planeja matar o pai, o seguinte manda assassinar o irmão (a briga começou por causa de uma viga de palácio mais comprida), e ele acaba escolhendo um menino de 10 anos “porque esse ainda não vai tentar me matar”. Dois anos após sua morte, a dinastia sumiu. (Algumas passagens do texto original são bem violentas; o trecho abaixo poupa o pior.)</p>
+          <div class="source">
+            <span lang="ja">草の実堂</span>
+            <a href="https://kusanomido.com/study/history/chinese/goko/136066/" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>4世紀の中国に、自分の息子を残酷な方法で処刑し、幼い孫まで殺させた権力者がいた。</p>
+            <p>五胡十六国時代、後趙（こうちょう）を支配した石虎（せきこ）である。</p>
+            <p>石虎は優れた軍事能力で権力の頂点に上り詰めた一方、敵対する者には容赦せず、身内であっても例外ではなかった。</p>
+            <p>……</p>
+            <p>やがて石虎は「後趙の建国に大きく貢献した自分こそが、石勒に次ぐ地位を得るべきだ」と考えるようになる。</p>
+            <p>ところが石勒は、実の息子である石弘（せきこう）を後継者に定めた。</p>
+            <p>これに石虎は激怒し「石勒の死後は、その子孫を生かしておかない！」とまで言い放ったという。</p>
+            <p>そして333年、石勒が死去すると、石虎はただちに軍事力を背景に実権を掌握する。</p>
+            <p>翌334年、石虎はついに石弘を廃位し、自ら後趙の君主となる。その後、石弘とその母、兄弟たちを幽閉し、間もなく殺害した。</p>
+            <p>……</p>
+            <p>そんな兄弟の対立を決定的にしたのが、宮殿の建築をめぐる争いだった。</p>
+            <p>石韜は自分の屋敷に宣光殿という建物を造り、長さ9丈（約20メートル以上）の梁を架けた。</p>
+            <p>これを知った石宣は、弟が皇太子である自分を差し置いて立派な建物を造ったことに腹を立てたのか、建築を担当した職人を斬り殺し、梁を切断して持ち去ってしまったという。</p>
+            <p>しかし石韜も黙っておらず、兄への対抗心から、今度は10丈の梁を架け直した。</p>
+            <p>この話を聞いた石宣は怒りを募らせ、ついに弟の暗殺を決意する。</p>
+            <p>……</p>
+            <p>二人の皇太子を相次いで処刑した石虎は、348年、新たな後継者として、まだ10歳ほどだった息子の石世（せきせい）を選んだ。</p>
+            <p>これまでの息子たちは成人すると父を殺そうとしたが、幼い石世なら当分はその心配もないと考えたのである。</p>
+            <p>しかし翌349年、石虎は病に倒れ、そのまま帰らぬ人となった。</p>
+            <p>石虎の一族では、まるで身内を殺すことが当たり前かのように血なまぐさい争いが繰り返され、石虎の死から、わずか2年ほどで王朝そのものが崩壊したのである。</p>
+          </div>
+          <p class="continue"><a href="https://kusanomido.com/study/history/chinese/goko/136066/" target="_blank" rel="noopener" lang="ja">続きを読む · 草の実堂</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p3">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★☆</span> <span class="chip mins">2 min</span> <span class="chip" lang="ja">ギリシャ神話</span> <span class="chip" lang="ja">セイレーン</span> <span class="chip" lang="ja">オデュッセイア</span> <span class="chip" lang="ja">人魚</span> <span class="chip" lang="ja">神話の変遷</span>
+          </div>
+          <h2 lang="ja">オデュッセウスを誘ったセイレーンは人魚ではなかった、その姿は</h2>
+          <p class="why">As sereias que tentaram Ulisses não eram meio-peixe: na Grécia antiga eram ligadas à morte, na Idade Média viraram símbolo do pecado, e só depois ganharam cauda — hoje até inspiram a moda “sirencore”. Trecho curto: só a abertura é gratuita, o resto é para assinantes.</p>
+          <div class="source">
+            <span lang="ja">ナショナル ジオグラフィック日本版</span>
+            <a href="https://natgeo.nikkeibp.co.jp/atcl/news/26/102700589/" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>ギリシャ神話の英雄オデュッセウスは、トロイア戦争後、故郷へ帰ろうとする旅路で数々の困難に直面した。人喰い巨人や謎の魔女といったさまざまな試練の中でも、とりわけ強烈な印象を残し、危険で、時代を超えて語り継がれる存在がいる。心を奪う歌声で、通りかかる船乗りたちを呼び寄せるセイレーンだ。ひとたび足を止めれば、確実に死が待っている。</p>
+            <p>ギリシャ神話には数々の怪物が登場するが、強力で神秘的なセイレーンは、今なお人々を惹きつけてやまない。（参考記事：「単眼の巨人、渦潮、魔女の薬…『オデュッセイア』の怪物の科学」）</p>
+            <p>紀元前8世紀、ホメロスとその叙事詩『オデュッセイア』の時代以来、セイレーンは西洋の創作に欠かせない存在であり続けてきた。大プリニウスやオウィディウスといった古代ローマの著述家の作品にも、ダンテの『神曲』にも登場する。（参考記事：「眠りこけ、妻に話を盛るオデュッセウス　それでもなぜ英雄なのか」）</p>
+            <p>19世紀には多くの画家たちを虜にし、近年ではテレビドラマのタイトルや、SNSのクリエイターたちが発信するファッショントレンド「sirencore（セイレーンコア）」のモチーフにもなっている。</p>
+            <p>しかし、この神話上の怪物は、何世紀にもわたって、社会と欲望との複雑で絶えず変化する関係を反映しながら、その姿を大きく変えてきた。</p>
+          </div>
+          <p class="continue"><a href="https://natgeo.nikkeibp.co.jp/atcl/news/26/102700589/" target="_blank" rel="noopener" lang="ja">続きを読む · ナショナル ジオグラフィック日本版</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p4">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★☆</span> <span class="chip mins">4 min</span> <span class="chip" lang="ja">ノアの方舟</span> <span class="chip" lang="ja">ドゥルピナール地層</span> <span class="chip" lang="ja">アララト山</span> <span class="chip" lang="ja">放射性炭素年代測定</span> <span class="chip" lang="ja">トルコ</span>
+          </div>
+          <h2 lang="ja">トルコでノアの方舟伝説に新展開。地層の地下から「黒焦げの木材」が発見される</h2>
+          <p class="why">Na formação de Durupınar, um morro em forma de navio de 164 m perto do Ararat, uma equipe americana achou madeira carbonizada a 9 m de profundidade. O próprio descobridor admite que pode ser só a fogueira de algum pastor de séculos atrás; a maioria dos geólogos diz que é formação natural. O bom do texto é mostrar como a datação por carbono vai decidir — e o que ela não consegue provar.</p>
+          <div class="source">
+            <span lang="ja">カラパイア</span>
+            <a href="https://karapaia.com/archives/636031.html" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>旧約聖書に登場する「ノアの方舟」が流れ着いた場所ではないかと、長年議論されてきたトルコ東部アララト山の南にある船の形をした地形から、新たな手がかりが見つかった。</p>
+            <p>アメリカの調査団体が2026年秋に行った掘削調査で、地下約9mから黒焦げになった木材と焦げていない木材が出てきたのだ。</p>
+            <p>ただし発見者自身も、方舟の残骸ではなく、羊飼いのたき火の跡かもしれないとしている。これから行われる木材の年代測定がカギを握っている。</p>
+            <p>……</p>
+            <p>トルコ東部、アララト山の南約29kmの場所に、長さ約164mの船の形をした「ドゥルピナール地層」と呼ばれる小高い地形がある。</p>
+            <p>……</p>
+            <p>一方でジョーンズ氏は同時に、数百年前の羊飼いが地形の中で雨風をしのいだ際にたいた、たき火の跡かもしれないとも述べている。</p>
+            <p>聖書の物語では、ノアは方舟の内側と外側に防水のためのタールを塗るよう命じられている。タールは水をはじく一方で、非常に燃えやすい物質だ。</p>
+            <p>研究チームは、火事で木材が炭になったことで土の中で腐りにくくなり、今日まで残ったと推測している。</p>
+            <p>……</p>
+            <p>一方、地質学者の多くは、ドゥルピナール地層を、地層が曲がり長い年月をかけて削られてできた自然の地形だと考えている。</p>
+            <p>今回の調査結果も、専門家の審査を受けた論文としてはまだ発表されていない。</p>
+            <p>……</p>
+            <p>それでも、年代が数百年前と出れば、羊飼いのたき火説が有力になる。</p>
+            <p>今回の調査を率いるトルコ・シヴァス・ジュムフリイェト大学のジェンケル・アティラ教授は、有機物の年代測定によって、ここに本当に船があったのかがわかると語っている。調査全体の結果は2027年前半にまとめられる予定だ。</p>
+          </div>
+          <p class="continue"><a href="https://karapaia.com/archives/636031.html" target="_blank" rel="noopener" lang="ja">続きを読む · カラパイア</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p5">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★★</span> <span class="chip mins">4 min</span> <span class="chip" lang="ja">チェルノブイリ</span> <span class="chip" lang="ja">犬</span> <span class="chip" lang="ja">自然選択</span> <span class="chip" lang="ja">進化</span> <span class="chip" lang="ja">遺伝子</span>
+          </div>
+          <h2 lang="ja">チェルノブイリ原発周辺の犬たちの遺伝子の違いは自然選択の結果だった</h2>
+          <p class="why">Os cães deixados para trás em Pripyat em 1986 tiveram descendentes, e os que vivem dentro da usina são geneticamente muito diferentes até dos cães da cidade a 16 km. Não foi mutação por radiação nem acaso: as diferenças estão concentradas em genes de câncer, reparo de DNA e imunidade. É seleção natural ao vivo — cerca de 35 gerações em 40 anos.</p>
+          <div class="source">
+            <span lang="ja">カラパイア</span>
+            <a href="https://karapaia.com/archives/635969.html" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>1986年、チェルノブイリで史上最悪の原子力発電所事故が起きた。住民が避難した後も、置き去りにされた一部の犬たちは生き延び、その子孫は今もここで暮らしている。</p>
+            <p>原発近くの敷地内で暮らす犬たちは、16km離れた市の犬と遺伝子が大きく異なっていることがわかっており、放射線の影響による突然変異が疑われてきた。</p>
+            <p>だが、米ノースカロライナ州立大学の研究チームの新たな分析によると、もともとがんや有害物質に強い遺伝子を持つ犬が生き残り、世代を重ねるごとにその遺伝子を持つ個体が増えていく「自然選択」が起きていた可能性が高いという。</p>
+            <p>自然選択が起きた結果、町の犬たちと遺伝子が異なっていたのだ。</p>
+            <p>……</p>
+            <p>ノースカロライナ州立大学の研究チームが 2024年に発表した調査では、放射線を浴びてDNAが書き換えられた証拠は見つからなかった。</p>
+            <p>偶然による変化なら遺伝情報の全体に散らばるはずだが、原発周辺の犬の違いは特定の場所に集中していた。</p>
+            <p>突然変異でも偶然でもないとすれば、残る理由は進化の基本原則である自然選択に行き着く。</p>
+            <p>……</p>
+            <p>研究チームが遺伝子の違いが集中していた場所を調べると、100か所以上で自然選択の痕跡が見つかり、その近くには、がんやDNAの修復、免疫に関わる遺伝子が多く見つかった。</p>
+            <p>……</p>
+            <p>犬は生後1年ほどで子を産めるようになるため、事故から約40年の間に、親から子へ約35世代にわたって命が受け継がれてきた。</p>
+            <p>1986年の事故からわずか40年の間に、厳しい環境に耐えられる強い遺伝子を持つ犬たちが数を増やし、環境に適応していったのだ。</p>
+          </div>
+          <p class="continue"><a href="https://karapaia.com/archives/635969.html" target="_blank" rel="noopener" lang="ja">続きを読む · カラパイア</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p6">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★☆</span> <span class="chip mins">3 min</span> <span class="chip" lang="ja">カツオドリ</span> <span class="chip" lang="ja">頸椎</span> <span class="chip" lang="ja">CTスキャン</span> <span class="chip" lang="ja">進化</span> <span class="chip" lang="ja">海鳥</span>
+          </div>
+          <h2 lang="ja">猛スピードで海面に突撃する鳥の背骨はなぜ折れないのか？</h2>
+          <p class="why">O atobá mergulha a 113 km/h de 30 m de altura e o pescoço longo e fino aguenta. Tomografias de museu mostram vértebras “atarracadas”, quase quadradas, e facetas extras que impedem o pescoço de dobrar para trás num impacto em ângulo. Bônus: isso pode permitir dizer se espécies fósseis também mergulhavam assim.</p>
+          <div class="source">
+            <span lang="ja">GIGAZINE</span>
+            <a href="https://gigazine.net/news/20261103-plunge-diving-seabirds-without-breaking-neck/" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>魚を狙って上空から海面に突撃する海鳥のスピードは時速100kmを超えることもあります。こんなに速いのにもかかわらず、なぜ海鳥の背骨は海に飛び込む際に折れないのかを、科学者らが調査しました。</p>
+            <p>……</p>
+            <p>ワシントン大学の研究チームは「カツオドリ」を対象に調査を行いました。カツオドリは全長約70cmほどの鳥で、上空30mから魚を探して海面を見渡し、魚の群れを見つけると急降下し時速113kmで海面に突入します。もちろん、首の骨を折ることはありません。</p>
+            <p>その結果、フクロウやハトのように頭を左右に回転させたり前後に動かしたりする鳥類と、カツオドリのように頭部を圧縮力にさらす鳥類では明確な違いが見られたとのこと。急降下して潜水する鳥類は頑丈な椎骨を持っていて、厚く、幅広く、さらに短くなっており、正方形に近い形状をしているそうです。このように「ずんぐりした形状」が、骨を支えていたといいます。</p>
+            <p>また、第2頸椎から第6頸椎には関節面と呼ばれる接触面が存在することも確認されました。研究チームは、この関節面が、鳥が斜めの角度で水面に衝突した際に首が後方に曲がるのを防いでいると考えています。</p>
+          </div>
+          <p class="continue"><a href="https://gigazine.net/news/20261103-plunge-diving-seabirds-without-breaking-neck/" target="_blank" rel="noopener" lang="ja">続きを読む · GIGAZINE</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p7">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★☆</span> <span class="chip mins">3 min</span> <span class="chip" lang="ja">玉置神社</span> <span class="chip" lang="ja">十津川村</span> <span class="chip" lang="ja">聖地</span> <span class="chip" lang="ja">国道425号</span> <span class="chip" lang="ja">認知的不協和</span>
+          </div>
+          <h2 lang="ja">険しい山道、悪天候に車の故障も…驚異の聖地「呼ばれないといけない」玉置神社の不思議</h2>
+          <p class="why">No alto de Totsukawa (o mesmo vale onde morreu Hideyasu, do digest de ontem), um santuário a 3–4 h de Nara por uma estrada famosa de tão ruim virou lenda nas redes: “só chega quem é chamado pelos deuses” — pneu estoura, chove, aparece imprevisto. Visitas saltaram de 30–50 mil para mais de 100 mil por ano. Um psicólogo explica por que a dificuldade aumenta o encanto.</p>
+          <div class="source">
+            <span lang="ja">産経新聞</span>
+            <a href="https://www.sankei.com/article/20261103-WPXTEJC5LBLUDHI63YR6SDDVPY/" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>奈良県十津川村の玉置山（標高1076メートル）山頂近くに鎮座する玉置神社がSNS上で「（神に）呼ばれないといけない神社」として話題を呼んでいる。目的地まで行けない理由は車の故障や悪天候、急用とさまざまだが、幸運にもたどり着けた参拝者は「ようやく神社から招かれた」と喜びもひとしおのようだ。ただ同神社の関係者は、道中は険しい山道だけに「無理をせず参拝してほしい」と注意を呼びかける。</p>
+            <p>……</p>
+            <p>同神社は、大峰山系の霊山の一つである玉置山の山頂直下の9合目に位置しており、神社までの道のりは険しい。車で奈良市内から3～4時間。道程にある国道425号は「酷道」として知られ、延々とカーブが続く上、道幅が狭く車がすれ違うのもやっとだ。</p>
+            <p>SNS上ではこうした道のりの険しさも相まって「呼ばれないといけない神社」として話題になっている。＜体調不良で断念した＞＜タイヤ点検したのにバースト。呼ばれてない？＞－などと多数の書き込みがつづられ、たどり着けること自体が霊験を授かった証のようになっているようだ。</p>
+            <p>……</p>
+            <p>奈良大社会学部の村上幸史教授（社会心理学）は、困難な条件を乗り越えた者ほど対象への魅力を高く感じるという過去の研究を引き合いに「ハードルの高さが神社への魅力を高めている」と分析。苦労し到達したからには価値があるはずだという「認知的不協和理論」が働き、道中の苦労や余計な労力を「神や霊力のような見えない不思議な力に結び付けている」と指摘する。さらに「『呼ばれないと行くことができない』というのは因果が逆であって『自分は行けたからこそ呼ばれた（ご縁があった）』と感じているのでは」と推測。到達が困難な場所だからこそ人はそこに「見えない力」を見いだすのだろうと解説した。（木村郁子）</p>
+          </div>
+          <p class="continue"><a href="https://www.sankei.com/article/20261103-WPXTEJC5LBLUDHI63YR6SDDVPY/" target="_blank" rel="noopener" lang="ja">続きを読む · 産経新聞</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p8">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★☆</span> <span class="chip mins">2 min</span> <span class="chip" lang="ja">唐津くんち</span> <span class="chip" lang="ja">曳山</span> <span class="chip" lang="ja">祭り</span> <span class="chip" lang="ja">ユネスコ無形文化遺産</span> <span class="chip" lang="ja">佐賀</span>
+          </div>
+          <h2 lang="ja">「エンヤ」「ヨイサ」の勇ましいかけ声　無形文化遺産「唐津くんち」が最大の見せ場迎える</h2>
+          <p class="why">Matsuri de hoje (3/11): 14 carros alegóricos gigantes — leão, pargo, elmos — feitos de papel washi e laca com folha de ouro (alguns com mais de 2 t e 6 m), arrastados por cem homens que os fazem girar na areia aos gritos de “Enya! Yoisa!”. Curtinho, mas vívido.</p>
+          <div class="source">
+            <span lang="ja">産経新聞</span>
+            <a href="https://www.sankei.com/article/20261103-EI4PWREVYVNGXPBL7X3ZXMS3XQ/" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>唐津神社（佐賀県唐津市）の秋祭りで、国連教育科学文化機関（ユネスコ）の無形文化遺産に登録されている「唐津くんち」が3日、最大の見せ場「御旅所神幸」を迎え、獅子や魚のタイなどをかたどった勇壮で華麗な曳山14台が旧城下町を巡行した。男衆らが2本の綱で勢いよく曳山を旋回させ、神事が行われる砂地・御旅所に引き込むと、その迫力に観衆が沸き立った。</p>
+            <p>この日午前に神社を出発した曳山は、正午ごろから続々と御旅所に到着。「エンヤ」「ヨイサ」の勇ましいかけ声は最高潮に達した。100人以上の法被姿の男衆らが引き込んだ曳山の台車の車輪が砂地にめり込み、時折砂煙が巻き上がった。</p>
+            <p>市や唐津観光協会によると、曳山は和紙を何重にも張り麻布を重ね、漆や金箔で仕上げた世界最大級の乾漆造りの美術工芸品。重さは2トン以上のものもあり、最も高い曳山は6メートルを超える。</p>
+          </div>
+          <p class="continue"><a href="https://www.sankei.com/article/20261103-EI4PWREVYVNGXPBL7X3ZXMS3XQ/" target="_blank" rel="noopener" lang="ja">続きを読む · 産経新聞</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p9">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★☆</span> <span class="chip mins">3 min</span> <span class="chip" lang="ja">国鉄</span> <span class="chip" lang="ja">荷物列車</span> <span class="chip" lang="ja">時刻表</span> <span class="chip" lang="ja">分割民営化</span> <span class="chip" lang="ja">鉄道史</span>
+          </div>
+          <h2 lang="ja">「国鉄最後のダイヤ改正」で消えた荷物列車　猛獣・へびの発送は「要相談」の衝撃　時刻表は読み物です</h2>
+          <p class="why">Há exatos 40 anos (nov/1986) a JNR fez sua última grande mudança de horários antes da privatização — e acabou com os trens de bagagem expressos, que só levavam carga e correio e apareciam no fim do horário oficial. Antes da entrega a domicílio, mandar algo pesado era levar à estação e buscar na outra ponta. Só a parte inicial é gratuita (a das cobras e feras “a combinar” é para assinantes).</p>
+          <div class="source">
+            <span lang="ja">産経新聞</span>
+            <a href="https://www.sankei.com/article/20261103-KOIH5724ZJJEBKFUGZA4ND5GMQ/" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>ちょうど40年前の昭和61年11月、「国鉄最後のダイヤ改正」が行われた。翌年春の分割民営化を見据え、新会社がスタートから鉄道の強みを発揮できるよう、東海道・山陽新幹線のスピードアップ、中距離の都市間を結ぶ特急の増発、地方都市近郊での普通列車のパターンダイヤ化などが図られた。一方で、新会社の負担になりそうな荷物・郵便輸送からは撤退した。</p>
+            <p>「国鉄監修　交通公社の時刻表1986年6月号」（現JTBパブリッシング刊）を開いてみよう。東海道・山陽線の最後の列に「急行荷物列車」と表示された列車が掲載されている。汐留（東京）や青森などから関西、九州方面に向かっている。荷物車や郵便車を機関車が引っ張っている列車で、旅客は乗車できなかった。全国の主要路線で走っていた。</p>
+            <p>鉄道による荷物輸送の歴史は古く、明治5（1872）年の新橋－横浜間開業と同時に始まった。旅客の荷物を運ぶ「手荷物」、荷物だけを送る「小荷物」で構成され、戦後になって輸送量は増加。それに伴い、荷物列車は増便された。</p>
+            <p>当時、荷物を送るすべは郵便小包か鉄道の小荷物しかなく、小包は重量制限があるため、重い物は鉄道を使った。基本的には送り主が駅に持ち込み、受け取りも駅に取りに行く形。時刻表に荷物列車のダイヤが載っているのは、おおよその所要時間や到着時刻を知らせるためだったといえる。</p>
+          </div>
+          <p class="continue"><a href="https://www.sankei.com/article/20261103-KOIH5724ZJJEBKFUGZA4ND5GMQ/" target="_blank" rel="noopener" lang="ja">続きを読む · 産経新聞</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p10">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★★</span> <span class="chip mins">4 min</span> <span class="chip" lang="ja">近鉄</span> <span class="chip" lang="ja">あをによし</span> <span class="chip" lang="ja">観光特急</span> <span class="chip" lang="ja">京都</span> <span class="chip" lang="ja">大阪難波</span>
+          </div>
+          <h2 lang="ja">京阪間を直通する「遅いのに一番高い列車」とは？ ウワサ通りの「満席」 でも地元の人はまず乗らない!?</h2>
+          <p class="why">Um jornalista de trens vai de Quioto a Namba pelo caminho mais lento e mais caro possível: o expresso turístico roxo e dourado “Aoniyoshi” do Kintetsu — 1h17, 2.270 ienes (2.840 se for sozinho, porque não há assento individual). Desvia por Nara, quase todo mundo desce, entram estrangeiros, e ainda há uma parada “fantasma” sem abrir portas. Ótima crônica de viagem no Kansai.</p>
+          <div class="source">
+            <span lang="ja">乗りものニュース</span>
+            <a href="https://trafficnews.jp/post/723212" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>しかしながら、筆者が選んだのはこれらではなく、東海道新幹線でもない選択肢です。近畿日本鉄道が2022年4月に導入した観光特急「あをによし」が京都から大阪難波まで平日1時間26分、土曜・休日1時間17分で走っているのです。所要時間では東海道新幹線、新快速、阪急京都線の特急、京阪の特急のいずれにも勝てません。</p>
+            <p>他方で、それらよりも出費がかさみます。「あをによし」は運賃に特急料金、特別車両料金が加算されるため大人で2270円が必要。しかも“特別ルール”により、大人が1人で利用する場合には2840円を支払う必要があります。</p>
+            <p>……</p>
+            <p>近鉄役員から「『あをによし』はターゲットのインバウンド（訪日客）から人気で、満席になることが多い」と聞いていた通り、外国人客も多く乗った車内は満席でした。</p>
+            <p>……</p>
+            <p>新大宮を通り過ぎると、録音された車内放送の「まもなく奈良、奈良に到着します」という声が響きました。すると、周りの乗客のほとんどが席を立ちました。「あをによし」は古都の京都市と奈良市を結ぶのが大きな役割で、京都と大阪難波を「完乗」する利用者は少ないのです。</p>
+            <p>「あをによし」は近鉄奈良から大阪難波まで38分かかり、同じ日曜・祝日ダイヤならば1本前の17時26分発急行、1本後の17時36分発快速急行より、所要時間が1分早いに過ぎないのです。</p>
+            <p>……</p>
+            <p>停車したのは、15分前に訪れたばかりの大和西大寺です。一方、プラットホームの発車案内は「通過」と表示しています。これは扉が開かない「運転停車」のためで、20秒余り停車した後に再び動き出しました。</p>
+            <p>京都と現在の大阪難波を直通する近鉄特急は1973～92年に走っていましたが、直通需要が限られていたためいったん廃止されました。2022年登場の「あおによし」は、約30年ぶりの直通復活でした。「遅いのに一番高い」方法ではありますが、京都・奈良・大阪と関西をよりよく知るのに「急がば回れ」の経路となる、コスパの優れた選択肢でした。</p>
+          </div>
+          <p class="continue"><a href="https://trafficnews.jp/post/723212" target="_blank" rel="noopener" lang="ja">続きを読む · 乗りものニュース</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p11">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★★</span> <span class="chip mins">4 min</span> <span class="chip" lang="ja">Claude Code</span> <span class="chip" lang="ja">セキュリティ</span> <span class="chip" lang="ja">プロンプトインジェクション</span> <span class="chip" lang="ja">MCP</span> <span class="chip" lang="ja">自動化</span>
+          </div>
+          <h2 lang="ja">claude -p の --allowedTools は道具を絞らない。settingsの許可があれば「読むだけ」でもシェルが動く</h2>
+          <p class="why">Quem roda `claude -p` em scripts: `--allowedTools &quot;Read,Grep,Glob&quot;` NÃO limita ferramentas — só diz o que roda sem pedir confirmação. Com o settings.json liberando Bash, um texto externo poderia rodar shell. O autor testou 20 combinações (2x cada): `--tools` corta shell mas deixa MCP e conectores do claude.ai; `--strict-mcp-config` fecha isso; e o “só leitura” ainda lia ~/.ssh porque o cwd era o home. Muito prático.</p>
+          <div class="source">
+            <span lang="ja">Zenn</span>
+            <a href="https://zenn.dev/kentaro_tak/articles/claude-code-allowedtools-does-not-restrict" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>文章に「このコマンドを実行して」と紛れ込んでいたら困るので、道具は絞ったつもりでいた。</p>
+            <p>ファイルを読む・探すの3つだけ。そう思っていた。10月の自宅PCのセキュリティ点検で、この形のまま「whoami を実行して」と頼んでみたら、自分のユーザー名が返ってきた。シェルが動いていた。</p>
+            <p>--allowedTools は道具を絞るフラグではなかった。公式のCLIリファレンスにもそう書いてある。</p>
+            <p>……</p>
+            <p>--allowedTools &quot;Read,Grep,Glob&quot; は、何も指定しないのと1マスも違わない。シェルで作業フォルダの外にファイルを書けたし、Gmailのラベル一覧も取れた。settingsではGmailの検索とスレッドの読み取りも許可していた。読ませた文章に指示が紛れていれば、メールを探して、シェルで外へ送ることもできる組み合わせだった。</p>
+            <p>……</p>
+            <p>--tools &quot;Read,Grep,Glob&quot; --strict-mcp-config まで絞っても、作業フォルダの外のファイルが読めた。settingsで Read を丸ごと許可しているからだ。10月に直した「読むだけ」の2本はこの形で、外から来た文章を読ませながら、 ~/.ssh や .env を読める状態のままだった。</p>
+            <p>どちらも「作業フォルダの中」は読める。その2本は、2本とも作業フォルダをホームそのものにしていた（cwd=Path.home()。メモを読ませるのに都合がよかったから）。これでは閉じ込めても、 ~/.ssh は中に入っている。作業フォルダは、読ませたいファイルだけがある狭い場所にしておく必要がある。</p>
+            <p>……</p>
+            <p>確かめるなら、副作用のあるコマンドを頼み、その結果をファイルシステムで見る。今回はそうした。</p>
+          </div>
+          <p class="continue"><a href="https://zenn.dev/kentaro_tak/articles/claude-code-allowedtools-does-not-restrict" target="_blank" rel="noopener" lang="ja">続きを読む · Zenn</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p12">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★☆</span> <span class="chip mins">2 min</span> <span class="chip" lang="ja">Claude Code</span> <span class="chip" lang="ja">バックグラウンドエージェント</span> <span class="chip" lang="ja">トークン</span> <span class="chip" lang="ja">agent_summary</span> <span class="chip" lang="ja">Bun</span>
+          </div>
+          <h2 lang="ja">Claude Codeは各バックグラウンドエージェントのトランスクリプトを定期的にモデルに送信していることが発覚</h2>
+          <p class="why">Desde a v2.1.232 (ago/2026), a cada ~30 s o Claude Code reenvia a transcrição inteira de cada agente em background pedindo “descreva sua ação em 3–5 palavras” — só para atualizar a linha de status do painel. Estimativa: 15–20% dos tokens. Não dá para desligar nas configurações; alguém fez um preload Bun de ~70 linhas que bloqueia o timer.</p>
+          <div class="source">
+            <span lang="ja">GIGAZINE</span>
+            <a href="https://gigazine.net/news/20261102-claude-code-resends-background-agents-transcript/" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>Claude Codeの「エージェントサマリー」機能はバックグラウンドエージェントのステータスを約30秒ごとに更新するため、トランスクリプト(記録したデータ)全体をモデルに再送信しています。トランスクリプト送信によりトークンの約15～20％が消費されている計算になります。</p>
+            <p>具体的には、Claude Codeは約30秒ごとにすべてのバックグラウンドエージェントに対して、エージェントの会話記録全体をエージェント自身のモデルに送信し「あなたの直近の行動を3～5語で説明してください」と要求します。各エージェントから得た回答はエージェントパネルのステータス行を更新するためにのみ使用され、モデルや会話に情報は提供されません。エージェントサマリー機能は2026年8月のClaude Codeバージョン2.1.232以降デフォルトで有効化されており、設定による無効化は不可能とのこと。</p>
+          </div>
+          <p class="continue"><a href="https://gigazine.net/news/20261102-claude-code-resends-background-agents-transcript/" target="_blank" rel="noopener" lang="ja">続きを読む · GIGAZINE</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p13">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★☆</span> <span class="chip mins">3 min</span> <span class="chip" lang="ja">INORAN</span> <span class="chip" lang="ja">LUNA SEA</span> <span class="chip" lang="ja">ニライカナイ</span> <span class="chip" lang="ja">Zepp DiverCity</span> <span class="chip" lang="ja">ソロ30周年</span>
+          </div>
+          <h2 lang="ja">【ライブレポート】INORAN、進化し続けるグルーヴと不変の想いで紡ぎ上げた『ニライカナイ』最終章の夜</h2>
+          <p class="why">O guitarrista do LUNA SEA fecha a turnê de revival do álbum solo “Nirai Kanai” (2007) com três espelhos gigantes no palco que refletem a plateia, piada sobre como vocalista sofre (“tem que falar logo entre as músicas”) e o anúncio de que 2027 é o 30º aniversário solo de todos os membros do LUNA SEA. Boa leitura de vocabulário de show.</p>
+          <div class="source">
+            <span lang="ja">BARKS</span>
+            <a href="https://barks.jp/news/1102166" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>INORANが、2026年10月30日に東京・Zepp DiverCityにて、＜TOUR Determine 2026 GRAND FINAL“Naked Again”＞を開催した。</p>
+            <p>……</p>
+            <p>ステージセットには縦長の3つの巨大な鏡。SEの「Discus」が流れる中ステージが照らされると、観客の姿が鏡に映し出されていく。まずはドラマーのRyo Yamagata、ベーシスト・u:zo（ex.RIZE）、ギタリスト・Yukio Murata（MY WAY MY LOVE）が位置につき、最後にゆっくりとINORANが登場してセンターへ。その後ろ姿が鏡に映り、前からと背面からの両方のパフォーマンスを同時に観られる、摩訶不思議なステージ空間が出現した。</p>
+            <p>……</p>
+            <p>「ボーカリストは大変だ。ここですぐしゃべらないといけないもんね」と笑ったINORAN。LUNA SEAのホールツアーは10月18日にファイナルを迎えたばかりで、追加アリーナ公演を12月に控えている中、ギタリストというポジションと対比した実感なのだろう。『ニライカナイ』というアルバムを「皆さんの大好物」と表現すると、さらに、このバンドが14年続いていることを感慨深そうに振り返りながら、今年はバンドセットでのソロ公演が香港と台湾公演しかできなかったことを「寂しかった」とコメント。長くブランクがあっても「このバンドは一瞬で戻るんです」とも語り、長年掛けて4人で練り上げてきたグルーヴ、ピッタリと合った呼吸感への信頼を窺わせた。このINORANソロバンドが誇る、絶え間なく音が降り注ぐような心地良い音のアンサンブルを、「I miss you」「存在のカケラ」ではありありと体感することができた。曲の持つ繊細な世界観は壊さないまま、サウンドはより骨太かつ情熱的に深化。3つの鏡と色とりどりに煌めく光が交錯するステージは、まるで万華鏡の中に入り込んだかのような錯覚を起こさせる、夢のように美しい空間だった。その真ん中でINORANは魂のこもった歌声を響かせ、聴く者の心を震わせた。</p>
+            <p>……</p>
+            <p>大歓声の中、「本当に本当に感謝しかない。どうもありがとう！」とINORANは語ると、「2027年はLUNA SEAのメンバーそれぞれソロ30周年。当然チームINORANもフルパワーで行きたいと思ってます」とコメント。メンバー間の良好な関係が伺える和気藹々としたやり取りで笑わせた後、「このバンドでたくさんライブをやりたいと思ってます」と決意表明も。そして、2027年1月8日には品川教会でプレミアムニューイヤーライブを行うことを発表し、ライブ直後からファンクラブ先行受付第一弾がスタートすることも告知。場内には歓喜の声が響いた。</p>
+          </div>
+          <p class="continue"><a href="https://barks.jp/news/1102166" target="_blank" rel="noopener" lang="ja">続きを読む · BARKS</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p14">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★☆☆</span> <span class="chip mins">1 min</span> <span class="chip" lang="ja">永楽館歌舞伎</span> <span class="chip" lang="ja">出石</span> <span class="chip" lang="ja">豊岡</span> <span class="chip" lang="ja">片岡愛之助</span> <span class="chip" lang="ja">兵庫</span>
+          </div>
+          <h2 lang="ja">4日に初日迎える兵庫・豊岡の「永楽館歌舞伎」、まねき上げで開催ムード盛り上げ</h2>
+          <p class="why">Kabuki no teatrinho mais antigo de Kansai, em Izushi (Toyooka, Hyogo): Kataoka Ainosuke e companhia de 4 a 11/11, com as placas de nomes em caligrafia kantei-ryū já penduradas — e o teatro ainda surfando na fama de locação do filme “Kokuhō”. Nota curta, bem no tema kabuki do digest.</p>
+          <div class="source">
+            <span lang="ja">産経新聞</span>
+            <a href="https://www.sankei.com/article/20261103-DIAS6EWD6FNFFJAEOVUOI5PU7M/" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>近畿地方最古の芝居小屋として知られる兵庫県豊岡市出石町の出石永楽館で開催される「第16回永楽館歌舞伎」の初日を控え「まねき上げ」が2日行われ、片岡愛之助さんら出演の役者名を記したまねき看板が掲げられた。</p>
+            <p>お目見えしたのは、片岡さんら4人の役者名を独特の書体「勘亭（かんてい）流」で書いたまねき看板と、上演される演目「二人藤娘」「茶壺」「義経千本桜」の一場面をそれぞれ描いた歌舞伎絵。永楽館歌舞伎は4日に初日を迎え、11日に千秋楽を迎えるが、映画「国宝」のロケ地になった話題も相まってチケットは発売初日で即完売。市の担当者は「国宝人気はありがたいが、この勢いを来年以降も持続させていかなければ」と思いを新たにしていた。</p>
+          </div>
+          <p class="continue"><a href="https://www.sankei.com/article/20261103-DIAS6EWD6FNFFJAEOVUOI5PU7M/" target="_blank" rel="noopener" lang="ja">続きを読む · 産経新聞</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p15">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★☆☆</span> <span class="chip mins">2 min</span> <span class="chip" lang="ja">神戸</span> <span class="chip" lang="ja">六甲山</span> <span class="chip" lang="ja">冬</span> <span class="chip" lang="ja">ROKKO森の音ミュージアム</span> <span class="chip" lang="ja">野外アート</span>
+          </div>
+          <h2 lang="ja">六甲山山頂ちかくの『SIKIガーデン』が冬仕様に。カフェには期間限定の「こたつ」が登場、雪景色を楽しめる日も</h2>
+          <p class="why">Kobe a 5 °C a menos: de dezembro a fevereiro o jardim do museu de caixinhas de música no alto do Rokkō vira versão inverno — plantas “shimobashira” com colunas de gelo, pegadas de bichos, a abóbora da Kusama e a cabeça do Nara Yoshitomo sob neve, e kotatsu no terraço do café. Leve para fechar.</p>
+          <div class="source">
+            <span lang="ja">神戸ジャーナル</span>
+            <a href="https://kobe-journal.com/archives/8545488544.html" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>六甲山の「ROKKO森の音ミュージアム」にある「SIKIガーデン～音の散策路～」で、冬のフェアが開催されます。</p>
+            <p>山頂近くにある「SIKIガーデン」は、神戸の市街地より気温が約5℃低く、冬になると神戸では珍しい「雪景色」が見られる日もあるそう。</p>
+            <p>葉を落とす広葉樹や春を待つ木々のつぼみ、冬鳥の活動、野生の小動物の足跡（フィールドサイン）など、六甲山の自然を間近に感じられます。</p>
+            <p>ガーデン内に造成された「ウィンターガーデン」では、初冬には枯れ草の茎に霜がついて霜の柱ができる「シモバシラ」や「テンニンソウ」が見られるそう。</p>
+            <p>……</p>
+            <p>また一年を通して展示している、草間彌生さんの《南瓜》や奈良美智さんの《Peace Head》などの野外アート作品を、雪化粧をした状態で鑑賞できる日もあるみたい。</p>
+            <p>施設内のカフェ「森のCafé」のテラスには、期間限定で「こたつ」が置かれます。</p>
+          </div>
+          <p class="continue"><a href="https://kobe-journal.com/archives/8545488544.html" target="_blank" rel="noopener" lang="ja">続きを読む · 神戸ジャーナル</a></p>
+        </div>
+      </article>
+
+      <footer class="site">読解幕 · 2026-11-03 · ~46 min · <a href="/japanese-digest/history/" style="color:inherit">History</a> · deliton.github.io/japanese-digest</footer>
+    </main>
+  </div>
+</body>
+</html>
