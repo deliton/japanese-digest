@@ -1,0 +1,959 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>読解幕 · 2026-11-05 · Japanese Digest</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Noto+Serif+JP:wght@400;600;700&family=Shippori+Mincho:wght@500;700&display=swap" rel="stylesheet" />
+  <style>
+
+    :root {
+      --bg: #0a0a0a;
+      --bg-2: #121212;
+      --bg-card: #161616;
+      --ink: #f5f5f5;
+      --ink-dim: #a8a29a;
+      --ink-mute: #6b6560;
+      --shu: #c41e3a;
+      --shu-hot: #e11d48;
+      --shu-deep: #8b1228;
+      --gold: #d4a017;
+      --gold-soft: #c9a227;
+      --white: #fafafa;
+      --line: #2a2a2a;
+      --line-hot: rgba(196, 30, 58, 0.45);
+      --measure: 42rem;
+      --radius: 4px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: "Noto Sans JP", "Hiragino Sans", "Yu Gothic", system-ui, sans-serif;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .stage-bar {
+      height: 6px;
+      background: repeating-linear-gradient(
+        90deg,
+        var(--shu) 0 48px,
+        var(--white) 48px 56px,
+        #111 56px 64px,
+        var(--gold) 64px 72px,
+        #111 72px 88px
+      );
+    }
+
+    .wrap {
+      width: min(100% - 2rem, 74rem);
+      margin: 0 auto;
+      padding: 2rem 0 4.5rem;
+      display: grid;
+      grid-template-columns: 15.5rem 1fr;
+      gap: 2.75rem;
+      align-items: start;
+    }
+
+    @media (max-width: 900px) {
+      .wrap { grid-template-columns: 1fr; gap: 1.5rem; padding-top: 1.25rem; }
+      .sidebar { position: static !important; }
+    }
+
+    .sidebar { position: sticky; top: 1.25rem; }
+
+    .brand {
+      display: flex;
+      align-items: baseline;
+      gap: 0.55rem;
+      margin: 0 0 0.35rem;
+    }
+    .brand-mark {
+      font-family: "Shippori Mincho", "Noto Serif JP", serif;
+      font-size: 1.85rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      color: var(--white);
+      line-height: 1;
+    }
+    .brand-mark em {
+      font-style: normal;
+      color: var(--shu);
+    }
+    .brand-sub {
+      font-size: 0.65rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-weight: 700;
+    }
+
+    .meta {
+      color: var(--ink-mute);
+      font-size: 0.8rem;
+      margin: 0 0 1.25rem;
+    }
+
+    .stat-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-bottom: 1.35rem;
+    }
+    .stat {
+      border: 1px solid var(--line);
+      background: var(--bg-2);
+      padding: 0.32rem 0.65rem;
+      font-size: 0.72rem;
+      color: var(--ink-dim);
+      border-radius: var(--radius);
+    }
+    .stat strong { color: var(--white); font-weight: 700; }
+    .stat.hot {
+      border-color: var(--shu);
+      color: var(--shu-hot);
+      background: rgba(196, 30, 58, 0.1);
+    }
+
+    .toc {
+      border: 1px solid var(--line);
+      background: var(--bg-2);
+      padding: 0.85rem 0.9rem 0.95rem;
+      border-radius: var(--radius);
+    }
+    .toc h2 {
+      margin: 0 0 0.65rem;
+      font-size: 0.72rem;
+      letter-spacing: 0.16em;
+      color: var(--gold);
+      font-weight: 800;
+    }
+    .toc ol { list-style: none; margin: 0; padding: 0; }
+    .toc li { margin: 0; }
+    .toc a {
+      display: flex;
+      justify-content: space-between;
+      gap: 0.5rem;
+      text-decoration: none;
+      color: var(--ink-dim);
+      font-size: 0.82rem;
+      padding: 0.38rem 0.2rem;
+      border-bottom: 1px solid transparent;
+    }
+    .toc a:hover { color: var(--white); border-bottom-color: var(--line-hot); }
+    .toc .t-title { font-weight: 600; }
+    .toc .t-min { color: var(--gold); font-size: 0.72rem; font-weight: 700; flex-shrink: 0; }
+
+    .main { max-width: var(--measure); }
+
+    .digest-banner {
+      display: flex;
+      gap: 0.75rem;
+      align-items: flex-start;
+      background: #141014;
+      border: 1px solid var(--line);
+      border-left: 3px solid var(--shu);
+      padding: 0.85rem 1rem;
+      margin-bottom: 1.5rem;
+      font-size: 0.78rem;
+      color: var(--ink-dim);
+      line-height: 1.55;
+    }
+    .digest-banner .tag {
+      flex-shrink: 0;
+      background: var(--shu);
+      color: #fff;
+      font-size: 0.65rem;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      padding: 0.28rem 0.5rem;
+      border-radius: var(--radius);
+    }
+
+    .hero {
+      margin-bottom: 2rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid var(--line);
+      position: relative;
+    }
+    .hero::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -1px;
+      width: 4.5rem;
+      height: 2px;
+      background: var(--shu);
+    }
+    .kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.7rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--shu-hot);
+      font-weight: 800;
+      margin-bottom: 0.85rem;
+    }
+    .kicker::before {
+      content: "◆";
+      font-size: 0.55rem;
+      color: var(--gold);
+    }
+    .hero h1 {
+      font-family: "Shippori Mincho", "Noto Serif JP", serif;
+      font-size: clamp(1.85rem, 4vw, 2.55rem);
+      font-weight: 700;
+      line-height: 1.2;
+      margin: 0 0 0.75rem;
+      color: var(--white);
+      letter-spacing: 0.02em;
+    }
+    .hero p {
+      margin: 0;
+      color: var(--ink-dim);
+      font-size: 0.98rem;
+      max-width: 36rem;
+    }
+
+    article.piece {
+      background: var(--bg-card);
+      border: 1px solid var(--line);
+      margin-bottom: 1.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+    article.piece::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: linear-gradient(90deg, var(--shu) 0%, var(--shu) 35%, var(--gold) 35%, var(--gold) 42%, transparent 42%);
+    }
+
+    .piece-inner { padding: 1.6rem 1.55rem 1.35rem; }
+
+    .piece-head {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-bottom: 0.85rem;
+    }
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      border: 1px solid var(--line);
+      background: #111;
+      color: var(--ink-dim);
+      padding: 0.22rem 0.6rem;
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      border-radius: var(--radius);
+    }
+    .chip.interest {
+      border-color: var(--shu);
+      color: var(--shu-hot);
+      background: rgba(196, 30, 58, 0.12);
+    }
+    .chip.mins {
+      border-color: var(--gold);
+      color: var(--gold);
+      background: transparent;
+    }
+
+    .piece h2 {
+      font-family: "Noto Serif JP", "Shippori Mincho", "Yu Mincho", serif;
+      font-size: 1.38rem;
+      font-weight: 700;
+      line-height: 1.5;
+      margin: 0 0 0.6rem;
+      color: var(--white);
+      letter-spacing: 0.02em;
+    }
+
+    .why {
+      margin: 0 0 1rem;
+      color: var(--ink-dim);
+      font-size: 0.9rem;
+      border-left: 2px solid var(--gold);
+      padding-left: 0.85rem;
+    }
+
+    .source {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.65rem 1.1rem;
+      font-size: 0.76rem;
+      color: var(--ink-mute);
+      margin-bottom: 1.25rem;
+    }
+    .source a {
+      color: var(--shu-hot);
+      text-decoration: none;
+      font-weight: 600;
+    }
+    .source a:hover { color: var(--gold); }
+
+    .ja {
+      font-family: "Noto Serif JP", "Hiragino Mincho ProN", "Yu Mincho", serif;
+      font-size: 1.08rem;
+      line-height: 2;
+      letter-spacing: 0.03em;
+      color: #ebe7e1;
+    }
+    .ja p { margin: 0 0 1.15em; }
+    .ja p:last-child { margin-bottom: 0; }
+
+    .continue {
+      margin-top: 1.25rem;
+      padding-top: 1rem;
+      border-top: 1px solid var(--line);
+      font-size: 0.86rem;
+    }
+    .continue a {
+      color: var(--white);
+      text-decoration: none;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      border-bottom: 2px solid var(--shu);
+      padding-bottom: 0.1rem;
+    }
+    .continue a:hover {
+      color: var(--shu-hot);
+      border-bottom-color: var(--gold);
+    }
+
+    footer.site {
+      max-width: var(--measure);
+      margin-top: 1.75rem;
+      color: var(--ink-mute);
+      font-size: 0.72rem;
+      letter-spacing: 0.06em;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+    footer.site::before {
+      content: "";
+      width: 1.25rem;
+      height: 2px;
+      background: var(--shu);
+    }
+
+  
+    .excerpt-label { font-size: 0.66rem; letter-spacing: 0.18em; color: var(--gold); font-weight: 800; margin: 0 0 0.6rem; }
+    .brand-sub a, .stat a { color: var(--gold); text-decoration: none; }
+    .toc .t-min { font-variant-numeric: tabular-nums; }
+  </style>
+</head>
+<body>
+  <div class="stage-bar" aria-hidden="true"></div>
+
+  <div class="wrap">
+    <aside class="sidebar">
+      <div class="brand">
+        <span class="brand-mark" lang="ja">読解<em>幕</em></span>
+      </div>
+      <p class="brand-sub">Kabuki Digest · <a href="/japanese-digest/history/">History</a></p>
+      <p class="meta">2026-11-05 · America/Sao_Paulo</p>
+      <div class="stat-row">
+        <span class="stat"><strong>45</strong> min</span>
+        <span class="stat"><strong>15</strong> pieces</span>
+        <span class="stat"><strong>~12,200</strong> 字</span>
+        <span class="stat"><a href="/japanese-digest/history/">History</a></span>
+      </div>
+
+      <nav class="toc" aria-label="Índice">
+        <h2 lang="ja">本日の演目</h2>
+        <ol>
+          <li>
+            <a href="#p1">
+              <span class="t-title" lang="ja">奴隷売買を怒った秀吉は、自分も人取りをしていた</span>
+              <span class="t-min">4′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p2">
+              <span class="t-title" lang="ja">「五大老」は実は七人――秀吉が残した政権の仕組み</span>
+              <span class="t-min">3′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p3">
+              <span class="t-title" lang="ja">「生きた芸術品」と呼ばれた山田順子の恋愛と文学</span>
+              <span class="t-min">4′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p4">
+              <span class="t-title" lang="ja">なぜ「麒麟」と動物園の「キリン」は同じ名前なのか</span>
+              <span class="t-min">3′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p5">
+              <span class="t-title" lang="ja">火口湖から引き揚げた3300年前の青銅の剣</span>
+              <span class="t-min">3′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p6">
+              <span class="t-title" lang="ja">ゾンビ菌に「寄生されたふり」をする新種のクモ</span>
+              <span class="t-min">3′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p7">
+              <span class="t-title" lang="ja">ゴッホの「星月夜」は1889年7月22日の夜明け前？</span>
+              <span class="t-min">4′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p8">
+              <span class="t-title" lang="ja">平清盛の福原京、「御所南大路」が神戸で初確認</span>
+              <span class="t-min">2′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p9">
+              <span class="t-title" lang="ja">冥王星を外した「惑星」の定義、系外では通用しない</span>
+              <span class="t-min">3′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p10">
+              <span class="t-title" lang="ja">阪神の新型「赤胴車」3000系――姫路まで座れる席</span>
+              <span class="t-min">3′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p11">
+              <span class="t-title" lang="ja">日本の「書道」、ユネスコ無形文化遺産へ</span>
+              <span class="t-min">1′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p12">
+              <span class="t-title" lang="ja">言語モデルに筆を握らせる「AI書道コンクール」</span>
+              <span class="t-min">3′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p13">
+              <span class="t-title" lang="ja">継ぎ足しバイブコーディングで見えたClaude Codeのクセ</span>
+              <span class="t-min">4′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p14">
+              <span class="t-title" lang="ja">DEZERTのSORAがDIR EN GREYを観て考えた「自分のために」</span>
+              <span class="t-min">3′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p15">
+              <span class="t-title" lang="ja">神戸・兵庫の紅葉15選――布引から有馬まで</span>
+              <span class="t-min">2′</span>
+            </a>
+          </li>
+        </ol>
+      </nav>
+    </aside>
+
+    <main class="main">
+      <div class="digest-banner">
+        <span class="tag">TRIAGE</span>
+        <span>História japonesa (expulsão dos jesuítas e o comércio de escravos sob Hideyoshi; os “cinco anciãos” que eram sete; Yamada Junko e o círculo literário Taishō/Shōwa; etimologia qilin→girafa); arqueologia (espada de bronze no lago vulcânico; via de Fukuhara-kyō em Kobe); ciência/curiosidade (aranha que finge fungo zumbi; data astronômica de A Noite Estrelada; definição de planeta que não cobre exoplanetas); trens Hyogo (Hanshin 3000系); cultura (shodō rumo à UNESCO; AI shodō); IA/dev (hábitos do Claude Code em vibe-coding incremental); rock (DEZERT sobre Dir en grey); vida em Kobe (momiji). Pontos fracos: Sankei e NatGeo só no trecho gratuito; Kobe NP da via de Fukuhara é nota curta (mas densa); sem matsuri, vistos ou JRPG hoje.</span>
+      </div>
+
+      <header class="hero">
+        <div class="kicker">Daily curated reading</div>
+        <h1 lang="ja">伴天連追放令の裏、豊臣五大老の本当の人数、麒麟とキリン、火口湖の青銅剣、ゴッホの星月夜の日付、福原京の大路、AI書道とClaude Codeのクセ、DIR EN GREYを観たDEZERT</h1>
+        <p lang="ja">今日の幕は、昨日に続く豊臣――奴隷売買に怒って伴天連を追った秀吉が、小田原では人取りを野放しにしていた矛盾と、死の床で組んだ「五大老」が実は七人いた話から。大正の文壇では「生きた芸術品」山田順子と徳田秋声、そして600年前に永楽帝へ献上されたキリンが伝説の麒麟と結びついた訳語史。世界史と科学の幕では、イタリアの火口湖から鋭いまま引き揚げられた3300年前の青銅剣、ゾンビ菌に寄生されたふりをする新種のクモ、天文学が指したゴッホ「星月夜」の夜明け。神戸では平清盛の福原京「御所南大路」が初めて道として確認され、阪神の新型赤胴車は姫路まで座れる席を載せる。文化は書道のユネスコ登録見通しと、筆運びを言語モデルにシミュレートさせるAI書道。開発者の幕は継ぎ足しバイブコーディングで見えたClaude Codeのクセ。締めはDEZERTのSORAがDIR EN GREYのステージから受け取った「自分のために」と、神戸・兵庫の紅葉案内。約45分の読解です。</p>
+      </header>
+
+      <article class="piece" id="p1">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★★</span> <span class="chip mins">4 min</span> <span class="chip" lang="ja">伴天連追放令</span> <span class="chip" lang="ja">豊臣秀吉</span> <span class="chip" lang="ja">人身売買</span> <span class="chip" lang="ja">キリシタン</span> <span class="chip" lang="ja">九州征伐</span>
+          </div>
+          <h2 lang="ja">豊臣秀吉も奴隷売買を黙認していた？なぜキリシタン追放令を出したのか</h2>
+          <p class="why">A expulsão dos jesuítas em 1587 não foi só “Hideyoshi o humanitário”. O taikō proibia vender japoneses ao estrangeiro — e no mesmo exército, em Odawara, o raptar de civis seguia liberado. O medo real: daimyō cristãos que quebravam templos e obedeciam a Deus antes do senhor. Continua a saga Toyotomi de ontem.</p>
+          <div class="source">
+            <span lang="ja">BUSHOO!JAPAN（武将ジャパン）</span>
+            <a href="https://bushoojapan.com/bushoo/toyotomi/2026/11/05/222817" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>日本人の奴隷売買に怒り、キリシタンを追い出した――。</p>
+            <p>大河ドラマ『豊臣兄弟』では、秀吉が「キリシタン追放令」を出すにあたり、南蛮人による日本人奴隷売買を批判する姿が劇中で触れられました。</p>
+            <p>しかし当時は、日本国内いたるところで合戦が起きており、物や人が奪い奪われ、戦後は奴隷市場で売り買いされていた時代です。</p>
+            <p>他ならぬ秀吉も無関係ではなく、だからこそ不思議に思います。</p>
+            <p>……</p>
+            <p>戦国時代の戦場では、敵国の村へ攻め込んだ雑兵たちが物だけでなく人を連れ去る「人取り」や「乱取り」は決して珍しくありませんでした。</p>
+            <p>研究者の藤木久志氏は著書『新版雑兵たちの戦場』の中で、島津軍の略奪後、秀吉軍によって新しい暴力が加わり、人々の身売りや逃亡を引き起こしていた、と指摘しています。</p>
+            <p>九州の荒廃は「秀吉自身の側に多くの原因があった」とまで記している。</p>
+            <p>……</p>
+            <p>天正十八年（1590年）4月、秀吉は関東に展開する諸大名の軍に、人の売り買いを禁じ、捕らえた人を元の村へ返すよう命じました。</p>
+            <p>ただし、その範囲は「小田原町中の外」であり――つまり敵地の小田原城下では奴隷狩りもその売買も野放しだったのです。</p>
+            <p>人の売り買いを禁じる天下人の軍が、別の場所では人取りを事実上認めていた。</p>
+            <p>……</p>
+            <p>天正十五年（1587年）6月、九州を平定した豊臣秀吉は、博多に近い筑前の筥崎（はこざき・福岡市東区）で、キリスト教をめぐる法令を相次いで出しました。</p>
+            <p>一般に「伴天連（ばてれん）追放令」と呼ばれるのは19日付法令で、国外退去を命じた相手は信者全員ではなく、あくまで宣教師でした。</p>
+            <p>……</p>
+            <p>・大唐（中国）・南蛮・高麗（朝鮮）へ日本人を売ることを禁じる</p>
+            <p>人身売買の条文には、日本国内での人の売り買いを止める一文も付いていました。</p>
+            <p>外国への売却だけでなく、国内での売買も禁じていたのです。</p>
+            <p>たまに、ここだけを取り上げ「人身売買を禁じた秀吉は人道的だ！素晴らしい」という主張がありますが、最初からそうだったわけではありません。</p>
+            <p>……</p>
+            <p>19日付の法令は、日本は「神国」でキリスト教は「邪法」だとし、キリシタンによる寺社の破壊を理由に挙げて、宣教師の国外追放を命じました。</p>
+            <p>18日付の「覚」で秀吉は、キリシタンは本願寺門徒よりも危険だと記して警戒感をあらわにしていました。</p>
+            <p>なぜなら彼らは、天下人の言葉より、神の教えに従って動く。</p>
+          </div>
+          <p class="continue"><a href="https://bushoojapan.com/bushoo/toyotomi/2026/11/05/222817" target="_blank" rel="noopener" lang="ja">続きを読む · BUSHOO!JAPAN（武将ジャパン）</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p2">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★☆</span> <span class="chip mins">3 min</span> <span class="chip" lang="ja">豊臣五大老</span> <span class="chip" lang="ja">五奉行</span> <span class="chip" lang="ja">徳川家康</span> <span class="chip" lang="ja">前田利家</span> <span class="chip" lang="ja">関ヶ原</span>
+          </div>
+          <h2 lang="ja">豊臣五大老とは誰のこと？実は七人いた豊臣政権の重鎮とその役割</h2>
+          <p class="why">Não eram cinco desde o começo: com Kobayakawa Takakage eram seis, e o nome “gotairō” só veio no Edo. O texto separa bem quem dava a autoridade (os anciãos) de quem fazia o trabalho sujo (os gobugyō) — e mostra o desequilíbrio de Sekigahara sem virar lista seca.</p>
+          <div class="source">
+            <span lang="ja">BUSHOO!JAPAN（武将ジャパン）</span>
+            <a href="https://bushoojapan.com/bushoo/toyotomi/2026/11/05/222807" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>天下人の秀吉を支えた有力大名の豊臣五大老――彼らの名前をすべて言えるでしょうか？</p>
+            <p>死を前にした豊臣秀吉が、幼い豊臣秀頼の将来を託した有力大名たちですが、その経歴や秀吉との関係もまるでバラバラで統一感はない。</p>
+            <p>豊臣五大老の顔ぶれと、その役割も併せて振り返ってみましょう。</p>
+            <p>……</p>
+            <p>秀吉がまだ健在だった文禄四年（1595年）、豊臣政権の法令「御掟追加」に名を連ねた有力大名は、徳川家康・前田利家・毛利輝元・宇喜多秀家・上杉景勝、そして小早川隆景の6人でした。</p>
+            <p>そのため、かつては隆景が亡くなったあと、後任として上杉景勝が加わったと説明されてきました。</p>
+            <p>しかし研究者の光成準治氏は著書『小早川隆景・秀秋』の中で、景勝は隆景の生前から名を連ねていたとして、この見方を否定しています。</p>
+            <p>……</p>
+            <p>まず徳川家康は、天正十二年（1584年）の小牧・長久手の戦いで秀吉と戦った相手。</p>
+            <p>秀吉は妹あさひを嫁がせ、実母の大政所を人質に出し、四苦八苦しながら天正十四年（1586年）に上洛させ、ついに臣従させました。</p>
+            <p>かつての敵が、秀吉の義弟として政権の中に入ってきた。</p>
+            <p>……</p>
+            <p>家康の対抗馬でもあった前田利家は、織田家に仕えていた頃から秀吉とは古いなじみでした。</p>
+            <p>賤ヶ岳の戦いでは土壇場で柴田勝家のもとを離れて秀吉につき、北陸に大きな勢力を築いた、豊臣政権では家康と並ぶ最長老です。</p>
+            <p>……</p>
+            <p>秀吉が毛利と戦っていたときに味方になった宇喜多は、毛利や徳川と比べれば、もとは格下の大名でした。</p>
+            <p>秀吉養女で、前田利家の娘でもある豪姫（樹正院）を正妻に迎え、羽柴家の「親類」として扱われるようになり、若くして大抜擢されたのです。</p>
+            <p>40代〜60代の大名が並ぶなか、秀家ひとりだけ20代というのは、かなり目を引いたことでしょう。</p>
+            <p>……</p>
+            <p>慶長三年（1598年）の夏、重い病に倒れた豊臣秀吉は、幼い秀頼が成人するまでの政権の形を整えました。</p>
+            <p>一方、五大老は、秀吉の定めた方針どおりに政権を回すための補佐役です。</p>
+          </div>
+          <p class="continue"><a href="https://bushoojapan.com/bushoo/toyotomi/2026/11/05/222807" target="_blank" rel="noopener" lang="ja">続きを読む · BUSHOO!JAPAN（武将ジャパン）</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p3">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★☆</span> <span class="chip mins">4 min</span> <span class="chip" lang="ja">山田順子</span> <span class="chip" lang="ja">徳田秋声</span> <span class="chip" lang="ja">竹久夢二</span> <span class="chip" lang="ja">大正文壇</span> <span class="chip" lang="ja">順子もの</span>
+          </div>
+          <h2 lang="ja">多くの男を虜にした美人作家 〜竹久夢二と徳田秋声を翻弄した山田順子の生涯</h2>
+          <p class="why">Depois de Uno Chiyo ontem: Yamada Junko, a “obra de arte viva” de Tokuda Shūsei, amante também de Takehisa Yumeji, escândalo dos jornais Taishō/Shōwa — e no fim vivendo num barracão de obras em Hasedera, Kamakura, escrevendo sobre Kannon. Vocabulário literário + trajetória longa.</p>
+          <div class="source">
+            <span lang="ja">草の実堂</span>
+            <a href="https://kusanomido.com/study/history/japan/shouwa/135225/" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>大正末期、画家・竹久夢二や小説家・徳田秋声など、名だたる芸術家たちと次々に恋愛関係になり、世間を騒がせた一人の女性がいた。</p>
+            <p>彼女の恋愛遍歴は新聞や雑誌でたびたび報じられ、ついには「男を踏み台にして小説家としての名声を狙う女」とまで批判された。</p>
+            <p>文豪たちとの恋愛に翻弄され、世間から激しい批判を浴びながらも、文学を追い求め続けた山田順子とは、いったいどのような女性だったのだろうか。</p>
+            <p>……</p>
+            <p>明治34年（1901）、山田順子は秋田県の廻船問屋の娘として生まれた。</p>
+            <p>幼い頃から芸術に憧れていた順子は、夫と別れて上京し、小説を書いて自分の力で生きていくことを決意する。</p>
+            <p>大正13年（1924）、順子は自伝的小説『水は流るる』の原稿を携え、作家・徳田秋声（とくだしゅうせい）のもとを訪ねて出版を頼んだ。</p>
+            <p>徳田がその原稿を、門下生で出版社を始めたばかりの足立欽一に紹介したところ、足立は出版を約束し、翌大正14年（1925）に『流るるままに』という題名で刊行された。</p>
+            <p>……</p>
+            <p>大正14年（1925）、順子と夢二は彼女の故郷である秋田県を訪れた。</p>
+            <p>順子に誘われて実家まで足を運んだ夢二は、彼女の母親に2人が結婚するかのような印象を与えたという。実際、夢二も一時は順子との結婚を考えたことがあったようだ。</p>
+            <p>夢二とお葉の関係が終わる時期に順子との恋愛が始まったこともあり、この新たな恋愛は周囲の関心を集めた。</p>
+            <p>……</p>
+            <p>大正15年（1926）1月2日、かねてから交流のあった徳田秋声の妻・はまが脳溢血で急死する。その訃報を聞いた順子は、急いで秋田から上京した。</p>
+            <p>順子は徳田邸の近くの旅館に滞在するようになり、やがて約30歳年上の徳田と愛人関係になった。</p>
+            <p>徳田は30歳年下の若く美しい順子に惚れ込み、彼女を「生きた芸術品だ」と絶賛するほどだった。</p>
+            <p>……</p>
+            <p>徳田は、こうした順子との複雑な関係を次々と小説の題材にした。</p>
+            <p>大正15年（1926）から昭和3年（1928）にかけて発表された一連の短編作品は「順子もの」と呼ばれ、二人の私生活とともに世間の関心を集めた。</p>
+            <p>……</p>
+            <p>こうした順子の恋愛遍歴は、新聞や雑誌でたびたび報じられた。相手には文壇関係者が多かったことから「男を利用して、作家としての名声を得ようとしているのではないか」などと、厳しい批判を浴びることになる。</p>
+          </div>
+          <p class="continue"><a href="https://kusanomido.com/study/history/japan/shouwa/135225/" target="_blank" rel="noopener" lang="ja">続きを読む · 草の実堂</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p4">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★★</span> <span class="chip mins">3 min</span> <span class="chip" lang="ja">麒麟</span> <span class="chip" lang="ja">鄭和</span> <span class="chip" lang="ja">永楽帝</span> <span class="chip" lang="ja">上野動物園</span> <span class="chip" lang="ja">訳語史</span>
+          </div>
+          <h2 lang="ja">なぜ伝説の「麒麟」と動物園の「キリン」は同じ名前なのか？ 600年前の中国に隠された意外な歴史</h2>
+          <p class="why">Em 1414 um giraffe africano chega à corte Ming como “qilin” — presságio de bom imperador. No Japão Edo/Meiji a tradução oscila (麒麟／豹駝／長頭鹿); em 1907 o Ueno Zoo traz as primeiras girafas e o nome gruda — mesmo o zoólogo confessando a dúvida. Etymology perfeita para Yomitan.</p>
+          <div class="source">
+            <span lang="ja">草の実堂</span>
+            <a href="https://kusanomido.com/visited/135509/" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>有名なビールメーカーや、関西を中心に店舗を展開するドラッグストア「キリン堂」。</p>
+            <p>どちらの名前も、動物園でおなじみの首の長いキリンではなく、中国の伝説に登場する霊獣「麒麟」に由来しています。</p>
+            <p>ところが日本では、アフリカに生息する実在の動物も「キリン」と呼びます。英語では「ジラフ（giraffe）」という、まったく別の名前を持つ動物です。</p>
+            <p>なぜ想像上の霊獣と実在の動物が、同じ名前で呼ばれるようになったのでしょうか。</p>
+            <p>その謎を解く鍵は、15世紀の中国と、明治時代の日本にありました。</p>
+            <p>……</p>
+            <p>ところが15世紀の明では、アフリカに生息する本物のキリンが、この伝説の麒麟として皇帝に献上されたのです。</p>
+            <p>永楽帝は、宦官（かんがん）で側近の鄭和（ていわ）に大艦隊を率いさせ、東南アジアやインド洋方面へ派遣しました。</p>
+            <p>1414年には、ベンガル王の使節も、アフリカから運ばれてきたキリンを永楽帝に献上しました。</p>
+            <p>甥の建文帝から皇位を奪って即位した永楽帝にとって、麒麟の到来は、自らの統治の正当性を示すうえでも重要な意味を持っていました。</p>
+            <p>中国では古くから、麒麟の出現は「優れた君主が治める平和な世の中を示す吉兆」とされていました。そのため、宮廷ではこのキリンを伝説の「麒麟」として迎え、皇帝の徳を示す瑞獣として称えたのです。</p>
+            <p>……</p>
+            <p>1603年に刊行された『日葡辞書』にも「Qirin（キリン）」という言葉が登場します。ただし、ここで説明されているのは、あくまで伝説上の動物です。</p>
+            <p>1798年に刊行された『蛮語箋』では、ジラフを指す外国語に「麒麟」という訳語が当てられていました。</p>
+            <p>さらに1871年の『泰西訓蒙図解』では「麒麟」「豹駝」「長頭鹿」という複数の呼び名が紹介され、1876年に文部省が刊行した『具氏博物学』にも、ジラフを「麒麟」とする記述が見られます。</p>
+            <p>ただし当時は呼び名が統一されていたわけではなく、1891年刊行の国語辞典『言海』では、実在のキリンを「豹駝」として説明し、伝説の麒麟とは区別していました。</p>
+            <p>……</p>
+            <p>その代表例が、1888年に発売された「キリンビール」です。</p>
+            <p>ラベルに描かれたのは、龍を思わせる頭部などを持つ、伝説の霊獣「麒麟」でした。</p>
+            <p>……</p>
+            <p>そして1907年、ついに本物のキリンが上野動物園へやって来ます。</p>
+          </div>
+          <p class="continue"><a href="https://kusanomido.com/visited/135509/" target="_blank" rel="noopener" lang="ja">続きを読む · 草の実堂</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p5">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★★</span> <span class="chip mins">3 min</span> <span class="chip" lang="ja">青銅器時代</span> <span class="chip" lang="ja">メッツァーノ湖</span> <span class="chip" lang="ja">水中考古学</span> <span class="chip" lang="ja">奉納</span> <span class="chip" lang="ja">イタリア</span>
+          </div>
+          <h2 lang="ja">選ばれし勇者の剣？3300年前の青銅の剣を火口湖で発見。今も鋭い刃を保っていた</h2>
+          <p class="why">Lago vulcânico no centro da Itália: espada de bronze de ~3300 anos ainda afiada, preservada na argila do fundo. Queda de palafita ou oferenda ritual às águas? Ao lado, uma navalha de bronze — combo típico de guerreiro de alto status. Excalibur vibes, com ciência.</p>
+          <div class="source">
+            <span lang="ja">カラパイア</span>
+            <a href="https://karapaia.com/archives/636128.html" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>金属は長く水中に沈んでいれば、サビて朽ちてしまうことが多い。ところがイタリア中部のメッツァーノ湖から、鋭い刃を保った約3300年前の青銅の剣が引き揚げられた。</p>
+            <p>イタリアの考古学・美術・景観監督局の考古学チームは、ローマの国家治安警察隊（カラビニエリ）の水中部隊と協力し、イタリア中部にある火山性の火口湖、メッツァーノ湖の湖底を調査した。</p>
+            <p>すると、紀元前13世紀の青銅器時代に作られた青銅の剣を引き揚げた。</p>
+            <p>水の中に眠っていたにもかかわらず、剣は非常に良い状態で、鋭い刃を保っていた。</p>
+            <p>……</p>
+            <p>メッツァーノ湖では、2025年の調査でも斧や槍の穂先など、25点以上の青銅器の遺物が見つかっている。</p>
+            <p>監督局の報告によると、これらの遺物は、湖底の粘土に接していたため酸化が抑えられ、中には光沢が残っているものもあったという。</p>
+            <p>今回の剣も、湖底の粘土により、良好な状態が保たれていた可能性が高い。</p>
+            <p>……</p>
+            <p>出土した遺物から、当時湖のすぐ上には、水上に木の杭を打って家を建てる「高床式住居」の集落があったことがわかっている。</p>
+            <p>湖底の遺物の多くは、高床式住居の木の床から湖に落ちたものと考えられており、発見された剣も、他の道具とともに湖へ落ちた可能性があるという。</p>
+            <p>一方で、剣が意図的に湖へ沈められた可能性も考えられるという。</p>
+            <p>ヨーロッパの他の遺跡では、湖に武器を沈める行為は、水にまつわる儀式や信仰に基づく奉納だったと解釈されている。</p>
+            <p>……</p>
+            <p>今回の剣のすぐそばでは、青銅のカミソリも見つかった。剣とカミソリの組み合わせは、ほかの青銅器時代の遺跡でも確認されており、身分の高い戦士の持ち物だったと考えられている。</p>
+            <p>監督局は、この組み合わせが当時の人々の儀式や信仰を知る手がかりになるとして注目している。</p>
+          </div>
+          <p class="continue"><a href="https://karapaia.com/archives/636128.html" target="_blank" rel="noopener" lang="ja">続きを読む · カラパイア</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p6">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★☆</span> <span class="chip mins">3 min</span> <span class="chip" lang="ja">ゾンビ菌</span> <span class="chip" lang="ja">擬態</span> <span class="chip" lang="ja">アマゾン</span> <span class="chip" lang="ja">市民科学</span> <span class="chip" lang="ja">タチャノフスキア</span>
+          </div>
+          <h2 lang="ja">生きてたんかい！ゾンビ菌に寄生されて死んだふりをする新種のクモがアマゾンで発見</h2>
+          <p class="why">Pesquisadores acham uma aranha “morta por fungo zumbi” — e ela se mexe. É a primeira espécie reportada que imita o cadáver infectado por Gibellula: afasta predadores e atrai insetos. Bônus: a foto no iNaturalist e um espécime de 1903 parado 123 anos num museu.</p>
+          <div class="source">
+            <span lang="ja">カラパイア</span>
+            <a href="https://karapaia.com/archives/636090.html" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>アマゾンの熱帯雨林で、ゾンビ菌に寄生されて死んだふりをする新種のクモが見つかった。</p>
+            <p>ゾンビ菌は、虫やクモの体を乗っ取って操り、最後は命を奪う恐ろしい寄生菌だ。</p>
+            <p>新種のクモは白っぽい体から不気味な突起を突き出し、菌が生えた死骸そっくりの姿をしており、発見した研究者も、最初は本物の死骸だと見間違えたほどだ。</p>
+            <p>仲間を殺す菌に寄生されたふりをするクモは、これまで報告されたことがなかった。</p>
+            <p>研究チームは、捕食者から身を守り、獲物を油断させるための擬態だと考えている。</p>
+            <p>……</p>
+            <p>2025年8月8日の夜、ワスカ・アマソニア財団のナチュラリスト、アレクサンダー・ベントレー氏らのチームは、南米エクアドルのアンデス山脈とアマゾンが交わる森、リャンガナテス・サンガイ生態回廊で調査をしていた。</p>
+            <p>ベントレー氏らは最初、寄生菌に感染して死んだクモの死骸だと思った。</p>
+            <p>ところが触れてみると、死んだはずのクモが突然動き出した。クモは実際には菌に寄生されておらず、生きていたのだ。</p>
+            <p>クモは、のちにコガネグモ科タチャノフスキア属の新種と判明し、「タチャノフスキア・ワスカ（Taczanowskia waska）」と名付けられた。</p>
+            <p>……</p>
+            <p>タチャノフスキア・ワスカは、同じアマゾンの森にすむギベルラ属の菌に寄生されて死んだクモの姿をまねている。</p>
+            <p>このクモがじっと動かずに過ごす葉の裏も、ギベルラ属の菌に殺されたクモがよく見つかる場所だ。</p>
+            <p>タチャノフスキア・ワスカは、ゾンビ菌に寄生されたふりをするクモとして、初めて報告された。</p>
+            <p>……</p>
+            <p>研究チームは、死骸のふりをする擬態には、捕食者から身を守る効果と、狩りを助ける効果の2つがあると考えている。</p>
+            <p>鳥などの捕食者は、病気に感染した動物や死骸を食べるのを避けると考えられる。</p>
+            <p>タチャノフスキア・ワスカは、ゾンビ菌に寄生されたふりをすることで、捕食者に襲われにくくなっているとみられる。</p>
+            <p>また、菌に覆われた死骸に見えれば、獲物の昆虫も危険に気づかずに近づいてくるかもしれない。</p>
+            <p>……</p>
+            <p>新種発見につながったのは市民科学によるところが大きい。</p>
+          </div>
+          <p class="continue"><a href="https://karapaia.com/archives/636090.html" target="_blank" rel="noopener" lang="ja">続きを読む · カラパイア</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p7">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★★</span> <span class="chip mins">4 min</span> <span class="chip" lang="ja">ゴッホ</span> <span class="chip" lang="ja">星月夜</span> <span class="chip" lang="ja">天文学</span> <span class="chip" lang="ja">ヒアデス星団</span> <span class="chip" lang="ja">サン＝レミ</span>
+          </div>
+          <h2 lang="ja">ゴッホの「星月夜」は実際の夜空を描いていた。1889年7月22日の景色とほぼ一致</h2>
+          <p class="why">A “Noite Estrelada” não seria pura fantasia: análise com software astronômico e procrustes aponta lua, Vênus e o aglomerado Hyades alinhados como em 22/7/1889 ao amanhecer em Saint-Rémy. O museu Van Gogh discorda (crise naquela época). Mistério + método = NatGeo mental.</p>
+          <div class="source">
+            <span lang="ja">カラパイア</span>
+            <a href="https://karapaia.com/archives/635045.html" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>オランダ出身の画家「ファン・ゴッホ」は亡くなる約1年前、フランスの精神病院で療養中に「星月夜」を描き、後に彼の代表作となった。</p>
+            <p>その幻想的な景色は、長年ゴッホの頭の中で作り上げられた空想の産物だと考えられてきたが、天文学研究チームによる新たな検証で、絵画の月や星の配置が、1889年7月22日ごろの夜明け前に南フランスで見えた実際の夜空と一致することがわかった。</p>
+            <p>ゴッホは空想ではなく、実際に見た星空をもとに描いていた可能性が高いという。</p>
+            <p>……</p>
+            <p>これまで美術史の定説では、ゴッホが自ら入所したフランスのサン＝レミ＝ド＝プロヴァンスにあるサン＝ポール・ド・モゾール修道院の精神病院で、1889年6月に描いた作品だとされている。</p>
+            <p>絵画の独特な天体配置は、現実の空をそのまま描いたのではなく、ゴッホの豊かな想像力によって生み出されたものだと考えられていた。</p>
+            <p>……</p>
+            <p>韓国の慶熙大学校の天文学者であるイライジャ・ジョンヒョン・キム氏が率いる研究チームは、「星月夜」を天文学の観点で検証を行った。</p>
+            <p>そこで研究チームは、ゴッホが絵を描いた精神病院の南西にある尾根を特定し、ゴッホが以前に同じ村を描いたスケッチと実際の風景を照らし合わせた。</p>
+            <p>次にチームは、天体観測ソフトウェアを使用して1889年の6月と7月の夜明けの空をすべて再現した。</p>
+            <p>……</p>
+            <p>絵画の中では月が金星の上に配置されている。研究チームは、月と金星が上下に並び、なおかつゴッホの狭い視野に収まる夜明けを探した。</p>
+            <p>条件を満たした日は3日のみで、1889年7月22日が最も近い一致を示した。</p>
+            <p>この日の夜明け前の東の空には、細い月と金星、そしておうし座にあるヒアデス星団が、絵と同じように並んでいたのだ。</p>
+            <p>絵の中央に描かれた星の並びは、ヒアデス星団のV字と形が似ているだけでなく、地平線に対する傾きもほぼ同じだった。</p>
+            <p>……</p>
+            <p>ゴッホは精神病院の部屋の東向きの窓から、夜明け前の空を眺めていた。</p>
+            <p>6月初めごろには弟テオへの手紙に「今朝、日の出のずっと前に窓から田園を眺めた。明けの明星のほかには何もなく、その星はとても大きく見えた」と書いている。</p>
+            <p>……</p>
+            <p>キム氏の研究結果は、ゴッホが1889年6月に絵を描いたという美術史の定説と矛盾する。</p>
+            <p>オランダ・アムステルダムのゴッホ美術館は、ゴッホが7月22日ごろに重い発作を起こし、1か月以上絵が描けない状態だったと指摘している。</p>
+            <p>さらに、ゴッホは見たものを正確に写し取ることにこだわっていなかったため、天体の位置を制作日を特定する根拠にはできないと反論している。</p>
+          </div>
+          <p class="continue"><a href="https://karapaia.com/archives/635045.html" target="_blank" rel="noopener" lang="ja">続きを読む · カラパイア</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p8">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★★</span> <span class="chip mins">2 min</span> <span class="chip" lang="ja">福原京</span> <span class="chip" lang="ja">平清盛</span> <span class="chip" lang="ja">祇園遺跡</span> <span class="chip" lang="ja">兵庫区</span> <span class="chip" lang="ja">考古学</span>
+          </div>
+          <h2 lang="ja">平清盛が造営、福原京「御所南大路」遺構発見　街区示す主要道路、初の確認　7日に現地説明会　神戸</h2>
+          <p class="why">Em Hyōgo-ku, no antigo terreno da escola Hirano, saiu a primeira via principal clara de Fukuhara-kyō (Taira no Kiyomori): 12–13 m de largura, ~50 m, pedras laterais. Diário aristocrático falava dela; agora há chão. Visita guiada amanhã (7/11) 13–15h, grátis.</p>
+          <div class="source">
+            <span lang="ja">神戸新聞NEXT</span>
+            <a href="https://www.kobe-np.co.jp/news/society/202611/0021003900.shtml" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>神戸市兵庫区下三条町の祇園遺跡で、平安時代後期に平清盛が造営した「福原京」に整備された主要道路の一つ「御所南大路」の一部とみられる遺構が見つかった。市によると、福原京の主要道路が明確に見つかったのは初めて。今後、どのような位置関係で街区が存在したかを明らかにする研究に役立つという。</p>
+            <p>現地は旧平野小学校の跡地周辺。住宅や商業施設の整備に先立ち、市は２０２５年度から発掘調査を実施しており、道路跡は２年目となった今年の調査で確認された。</p>
+            <p>発見されたのは幅１２～１３メートル、長さ約５０メートルの遺構。北東から南西方向に平らな土地が一直線に伸び、盛り土をして整地した跡もあった。両側には、道路の装飾などのためと考えられる自然石も並んでいた。</p>
+            <p>祇園遺跡ではこれまでにも、当時の貴族が暮らした邸宅の一部とみられる跡や土器の皿などが出土していたが、街区を示す明確な痕跡はなかった。一方で、御所南大路は貴族の日記などに存在が記されていた。</p>
+            <p>兵庫県立考古博物館の菱田哲郎館長は「福原京の痕跡として貴重な遺構。現在も残る古い街路との位置関係と合わせて、街区構成を復元できる」などとコメントした。</p>
+            <p>市は一般向けの現地説明会を７日午後１～３時に開く。参加無料で予約不要。詳細は神戸市イベントサイト「おでかけＫＯＢＥ」に掲載している。当日の問い合わせ先は同市文化財課ＴＥＬ０９０・５０５７・７４００（岩崎昂志）</p>
+          </div>
+          <p class="continue"><a href="https://www.kobe-np.co.jp/news/society/202611/0021003900.shtml" target="_blank" rel="noopener" lang="ja">続きを読む · 神戸新聞NEXT</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p9">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★☆</span> <span class="chip mins">3 min</span> <span class="chip" lang="ja">惑星</span> <span class="chip" lang="ja">冥王星</span> <span class="chip" lang="ja">系外惑星</span> <span class="chip" lang="ja">褐色矮星</span> <span class="chip" lang="ja">IAU</span>
+          </div>
+          <h2 lang="ja">冥王星を外した「惑星の定義」、実は太陽系の外では通用しない</h2>
+          <p class="why">Abre com um sistema real (estrela → anã marrom → corpo tamanho Júpiter) e pergunta: satélite ou planeta? A definição da IAU de 2006, feita para rebaixar Plutão, não cobre ~6000 exoplanetas. Só o trecho gratuito, mas já vale a pergunta.</p>
+          <div class="source">
+            <span lang="ja">ナショナル ジオグラフィック日本版</span>
+            <a href="https://natgeo.nikkeibp.co.jp/atcl/news/26/082600477/" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>ある星を思い浮かべてほしい。質量は太陽の半分ほどで、ぼんやりと赤い光を放っている恒星だ。その周囲を5000年周期でゆっくりと回っている巨大な天体は褐色矮星と呼ばれており、惑星よりもはるかに重いが、恒星と呼べるほどの質量はない。その褐色矮星の周囲を木星に匹敵する質量の、ガスでできた天体が171日周期で公転している。</p>
+            <p>問題は、この天体を何と呼ぶかだ。衛星か、惑星か。それともまったく別の何かだろうか？</p>
+            <p>その答えは、天文学者たちにもはっきりとはわからなかった。種明かしをすると、この天体たちは「CD-35 2722」と名付けられた恒星を中心とする実際にある星系で、詳しい報告は7月22日付で学術誌「ネイチャー」に発表された。</p>
+            <p>実は今から20年前、「惑星」という言葉を初めて定義する投票を行った国際天文学連合（IAU）の研究者らも、同様の問題に直面した。</p>
+            <p>その前年、太陽系の外縁部で、冥王星よりも質量の大きな氷の天体が発見されていた。天文学者らは、子どもたちが学校で覚える天体を増やすのではなく、冥王星を準惑星に格下げすることを選択した。（参考記事：「冥王星は「惑星」に復帰できるか」）</p>
+            <p>その後の年月の間に、この問題はますます厄介になっている。「CD-35 2722」の周囲の三層構造のような、風変わりな例が次々と見つかっているからだ。</p>
+            <p>「あらゆる分野において、科学者たちは自身の研究に必要な用語を定義してきました」と、米カリフォルニア大学ロサンゼルス校の天文学者、ジャン・リュック・マーゴット氏は言う。</p>
+            <p>「三角形とは何か、ウイルスとは何かを、われわれは知っています。天文学者が『惑星』という言葉の厳密な定義に至っていないという事実には、いつも新鮮な驚きを覚えます」</p>
+            <p>現代の「プラネット（planet、惑星）」という言葉は、古代ギリシャ語で「さまようものたち」を意味する「プラネテス（planētēs）」に由来する。</p>
+          </div>
+          <p class="continue"><a href="https://natgeo.nikkeibp.co.jp/atcl/news/26/082600477/" target="_blank" rel="noopener" lang="ja">続きを読む · ナショナル ジオグラフィック日本版</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p10">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★☆</span> <span class="chip mins">3 min</span> <span class="chip" lang="ja">阪神電鉄</span> <span class="chip" lang="ja">3000系</span> <span class="chip" lang="ja">赤胴車</span> <span class="chip" lang="ja">らくやんシート</span> <span class="chip" lang="ja">姫路</span>
+          </div>
+          <h2 lang="ja">大阪～姫路を結ぶ「阪神の新型車両」ついに公開！ “限界ギリギリ”まで車体を拡大 「必ず座れる座席」も</h2>
+          <p class="why">Hanshin mostra o 3000系 (primavera 2027): vermelho clássico “re-vermelhão”, carroceria quase no limite da via, e o primeiro assento reservado da companhia (“rakuyan sheet”, +¥300) no expresso Osaka–Himeji. Infraestrutura Hyogo/Kansai bem concreta.</p>
+          <div class="source">
+            <span lang="ja">乗りものニュース</span>
+            <a href="https://trafficnews.jp/post/725244" target="_blank" rel="noopener">原文を開く ↗</a> · <a href="https://www.kobe-np.co.jp/news/economy/202611/0021004093.shtml" target="_blank" rel="noopener" lang="ja">神戸新聞：3000系（有料の可能性） ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>阪神電鉄は2026年11月5日、2027年春に導入する急行用の新型3000系電車を尼崎車庫（兵庫県尼崎市）で報道公開しました。6両編成のうち1両に、同社で初めてとなる座席指定サービス「らくやんシート」に対応する車両を導入します。今後、既存の8000系の代替として、順次増備される予定です。</p>
+            <p>3000系の外観は、阪神電車の急行用「赤胴車（あかどうしゃ）」の伝統を継承した「リ・バーミリオン」を採用。車体サイズは既存車両から拡大し、客室幅は2574mm（＋74mm）に。車体長も先頭車が18430mm（＋50mm）、中間車が18280mm（＋100mm）となり、車内空間にゆとりが生まれました。</p>
+            <p>客室幅の拡大は、車体幅を既存車両の2750mmから2778mmに拡大し、車両限界の2800mmに限りなく近づけたことと、側壁の厚さを125mmから102mmに薄くしたことで実現しています。</p>
+            <p>座席指定サービス「らくやんシート」は、6両編成のうち、大阪方から3両目の1両に設定されます。今後、大阪梅田～山陽姫路間を運行する一部の直通特急・特急でサービスを提供する予定で、運賃に加えて、1乗車あたり300円の料金が必要となります。</p>
+            <p>車内中央部の座席には、阪神電鉄で初となる、ロングシートとクロスシートの双方に転換可能な「L/C座席」が採用されており、「らくやんシート」として営業する際はクロスシート状態で運行されます。なお、座席指定サービス提供時は、神戸寄りの扉だけを開閉する予定です。</p>
+            <p>座席にはコンセントやリクライニング機能、ドリンクホルダー（一部座席を除く）を備えています。車端部の座席はロングシートですが、1人あたりの座席幅が通常470mmのところ、阪神電鉄で最大となる500mmが確保され、ロングシートとしては破格の広さを誇ります。</p>
+            <p>座席指定サービスの対象車両は、通常の昼白色LED照明ではなく、暖色のLED照明が採用され、落ち着きのある車内空間となっています。</p>
+          </div>
+          <p class="continue"><a href="https://trafficnews.jp/post/725244" target="_blank" rel="noopener" lang="ja">続きを読む · 乗りものニュース</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p11">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★☆☆</span> <span class="chip mins">1 min</span> <span class="chip" lang="ja">書道</span> <span class="chip" lang="ja">ユネスコ</span> <span class="chip" lang="ja">仮名</span> <span class="chip" lang="ja">無形文化遺産</span>
+          </div>
+          <h2 lang="ja">日本の「書道」悲願達成　中国先行も「仮名」の独自性で文化遺産へ、推進団体設立10年超</h2>
+          <p class="why">Nota curta (paywall): a caligrafia japonesa deve entrar no patrimônio imaterial da UNESCO — China chegou antes; o trunfo JP foi a especificidade do kana. Combina com o AI shodō logo abaixo.</p>
+          <div class="source">
+            <span lang="ja">産経ニュース</span>
+            <a href="https://www.sankei.com/article/20261105-WSET7CJPTJLJPF3SMMSBOTH27A/" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>日本の「書道」が、国連教育科学文化機関（ユネスコ）の無形文化遺産に登録される見通しとなった。登録に向けた推進団体の設立から10年超。中国の書道に先を越され、いわば出遅れ状態からのスタートだった。関係者らは日本に根付いた独自の「書道」の魅力を地道にアピールし、じわじわと機運を高めて悲願達成にこぎ着けた。</p>
+            <p>国内での登録に向けた動きは2014（平成26）年にさかのぼる。日本を代表する3人の書家が連名で、文化庁長官に書道の登録を目指すよう要望書を提出した。</p>
+          </div>
+          <p class="continue"><a href="https://www.sankei.com/article/20261105-WSET7CJPTJLJPF3SMMSBOTH27A/" target="_blank" rel="noopener" lang="ja">続きを読む · 産経ニュース</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p12">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★☆</span> <span class="chip mins">3 min</span> <span class="chip" lang="ja">AI書道</span> <span class="chip" lang="ja">言語モデル</span> <span class="chip" lang="ja">Claude</span> <span class="chip" lang="ja">楷書</span> <span class="chip" lang="ja">絵文字</span>
+          </div>
+          <h2 lang="ja">AIに無理やり書道をやらせる「AI書道コンクール」が登場、画像生成AIではなく言語モデルに挑戦させる</h2>
+          <p class="why">Imagem generativa “pinta” o resultado; shodō é processo (onde pousa o pincel, pressão, parada). O site força LLMs a simular o traço — kaisho e até emoji 🐈🍣. Claude Sonnet 5.5 brilha em kana, sofre em kanji. Curioso e bem no seu gosto AI.</p>
+          <div class="source">
+            <span lang="ja">GIGAZINE</span>
+            <a href="https://gigazine.net/news/20261105-ai-shodo/" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>AIに無理やり書道をやらせる「AI書道コンクール」が登場、画像生成AIではなく言語モデルに挑戦させる</p>
+            <p>さまざまなAIモデルに書道に挑戦させ、作品を並べて鑑賞するというサイトが「AI書道コンクール」です。</p>
+            <p>書道は「筆をどこに置き、どれだけ強く押し込み、どのように動かして止めるか」といったプロセスを重視する芸術ですが、一般的な画像生成AIは完成した画像を直接出力するだけ、つまりこの過程が存在しません。そのため、AI書道コンクールの作者である@enpitsuさんは、「書道の本質を表現することはできない」と表現しています。</p>
+            <p>一方で、言語モデルは画像こそ出力できないものの、筆運びのプロセスをデータとして生成することは可能です。そこで、画像生成AIではなく言語モデルを用いて「書を書く」という行為そのものをシミュレーションするのが、「AI書道」だそうです。そして、言語モデルが生成した書道であるAI書道を並べて鑑賞できるのが、「AI書道コンクール」というわけ。</p>
+            <p>記事作成時点でAI書道コンクールに存在するのは、「楷書の部」と「絵文字の部」の2つの部門。「楷書の部」の課題文は「やきいも」「シンギュラリティ」「春風」「森羅万象」「創造のよろこび」の5つで、「絵文字の部」の課題は「🐈」「🍣」「🐓」「🦍」「🎷」の5つです。</p>
+            <p>例えば「シンギュラリティ」のページでは、こんな感じで各モデルがどのように「シンギュラリティ」と書いたかをチェックできます。表示順は「ランダム」「リリース日」「所属」順にソート可能。</p>
+            <p>モデル名をクリックすれば各課題でどのような書を書いたのかもチェックできます。Claude Sonnet 5.5の作品は以下の通り。ひらがな・カタカナ・絵文字はかなり精巧ですが、漢字は少し苦手なようです。</p>
+          </div>
+          <p class="continue"><a href="https://gigazine.net/news/20261105-ai-shodo/" target="_blank" rel="noopener" lang="ja">続きを読む · GIGAZINE</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p13">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★★</span> <span class="chip mins">4 min</span> <span class="chip" lang="ja">Claude Code</span> <span class="chip" lang="ja">バイブコーディング</span> <span class="chip" lang="ja">ADR</span> <span class="chip" lang="ja">要件定義</span> <span class="chip" lang="ja">フロントエンド</span>
+          </div>
+          <h2 lang="ja">バイブコーディングで機能を継ぎ足していて見えてきたClaudeCodeの実装のクセ</h2>
+          <p class="why">Depois do agente campeão da ISUCON: o lado “junior genial e distraído” do Claude Code ao acrescentar features sem fluxo de negócio claro — ignora ADR, monólito no front, esquece o glossário. Receita prática: caderno de conceitos + mapa de telas + lint. Leitura útil se você vive de agente.</p>
+          <div class="source">
+            <span lang="ja">Zenn（うぐいす）</span>
+            <a href="https://zenn.dev/uguisu_blog/articles/45d1f446ece415" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>「業務フローがよくわからないんだよね」という状態でも、チャラくバイブコーディングで自力でシステムが作れる時代が来ました。特にエンジニアは、アイディアをすぐに形にできます。普段からClaude CodeなどのAIエージェントに慣れ親しんでいれば、バイブコーディングのハードルは数ミリ程度まで下がっています。</p>
+            <p>「要件メモ」の中にsuperpowersで作られる要件定義の資料はできあがります。ただ、今回のように「作りながら要件が固まる、変更がある」「最初に業務フロー全体像が見えていない」といった場合、途中で変更すると矛盾が生じます。AIが毎回このメモを更新して、唯一の正（SSOT）として活用してくれるわけではないからです。</p>
+            <p>ADRで常に決定は残しておいたのですが、それでも矛盾が生じました。テストはそこそこ書いてくれていたのでCIは緑のまま、触ってみて「oh……」となりましたね。</p>
+            <p>あと細かいところだと、保守性の面で、特にフロントエンドはアーキテクチャを指定しても無視して1ファイルに書き始めたり、UI/UX的な考慮はされず横にたくさんスクロールが必要な表ができたりもしました。</p>
+            <p>……</p>
+            <p>ADRや別の画面（受注一覧）は読まないことが多いようです。また、読む量が多すぎると、1で読んだはずの規則は華麗に無視してきます。こういうしくみなので、決めてから一気に組み上げるのには強く、運用ややりながら考えるのには弱い、という印象になるんですね。当たり前ですが、使っていると「なんでそんなこともわからんのだ……！」という気持ちになります。</p>
+            <p>同僚が使っているClaude DesktopはADRを書いて設計したがり、指示をせずともADRを勝手に書いていました。が、Claude Codeで開発する時はあまりそんな気遣いは望めません。今回はAGENTS.mdに「ADRは必要になったら読む」くらいに書いていたのですが、常に読むわけではなく、読むとしてもgrepした結果の画面と関連がありそうなADRだけのようです。</p>
+            <p>……</p>
+            <p>これも勝手にCLAUDE.mdとか何かしらからよしなに読むでしょ、と思っていました。人間でも最初に全体像がわかるようなドキュメントを読むじゃん。読まないんですよ。Claudeちゃんは究極のものぐさなので。ユースケースなどの全体像がわからないと、業務の流れがわからないまま画面単位で追加の実装をはじめます。さらに、</p>
+          </div>
+          <p class="continue"><a href="https://zenn.dev/uguisu_blog/articles/45d1f446ece415" target="_blank" rel="noopener" lang="ja">続きを読む · Zenn（うぐいす）</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p14">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★☆</span> <span class="chip mins">3 min</span> <span class="chip" lang="ja">DEZERT</span> <span class="chip" lang="ja">DIR EN GREY</span> <span class="chip" lang="ja">ヴィジュアル系</span> <span class="chip" lang="ja">ライヴ</span> <span class="chip" lang="ja">コラム</span>
+          </div>
+          <h2 lang="ja">DEZERT SORAの&quot;ロックって結局、なんなんだろね？&quot;第2回</h2>
+          <p class="why">SORA (DEZERT) no Garden Theater em julho no “MORTAL DOWNER”: 30 anos de Dir en grey ainda vomitando emoção no palco, e a frase que ficou — “andar mesmo sem ver a luz, por mim”. Visual kei + reflexão, sem fofoca.</p>
+          <div class="source">
+            <span lang="ja">激ロック</span>
+            <a href="https://gekirock.com/column/dezert/202611.php" target="_blank" rel="noopener">原文を開く ↗</a> · <a href="https://gekirock.com/news/2026/11/dezert_column.php" target="_blank" rel="noopener" lang="ja">告知ニュース ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>Visual Rock Band、DEZERTのSORAです。激ロック様のコラム、第二回でございます。</p>
+            <p>7月中旬、東京ガーデンシアター。 DIR EN GREY「MORTAL DOWNER」を見に行ってきました。</p>
+            <p>言わずもがな、僕は虜です。最新アルバム『MORTAL DOWNER』を聴き込んだ上で、この日を迎えました。</p>
+            <p>まず、一人のファンとしてライブを見て感じたのは、「音楽の中では、どんな感情だって吐き出していいんだよな」ということでした。</p>
+            <p>……</p>
+            <p>30年という長い年月を、第一線で走り続けてこられたバンド。その歴史の重みは、僕なんかが簡単に語れるものでは絶対にない。むしろちょっとこの記事を書いててビビっている。けど、本当に感銘を受けたことをこのコラムでお伝えしたい。僕はそんな大先輩方のライブを見て今もなお、自分たちの内側にある感情を音楽に乗せ、ステージの上で全身全霊で解き放っている。その姿に、強く心を動かされました。</p>
+            <p>どれだけ長く活動を続けていても、どれだけ多くの景色を見てきたとしても、音楽に向き合う姿勢に終わりなんてないんだなと肌で感じてしまったのです。</p>
+            <p>……</p>
+            <p>“真っ暗な道の先に、きっと光があると信じて歩き続けてきた人間でも、もしかしたら、その光は最後まで見つからないのかもと少し悟っているそれでも歩く、それでも歩くしかない誰のために？「自分のために」”</p>
+            <p>まるで目を覚まさせてもらったような感覚でした。ライブが終わり、帰りの車を走らせながら、ずっと考えていました。「自分のために生きるって、具体的にはどういうこと？」自分のために生きるというのは、決して自分勝手に生きることでも、自分だけが気持ちよく過ごせればいいということでもないと思うんです。</p>
+            <p>そして、誰かのためにも生きていきたいと思えることや、そう思える人たちと日々向き合っていくことが、結果として自分の人生をハッピーにしてくれるんじゃないかな？？？</p>
+            <p>……</p>
+            <p>30年という歴史を積み重ねてこられたバンドが、今この瞬間も、音楽を通して強烈な感情を届けてくれる。</p>
+          </div>
+          <p class="continue"><a href="https://gekirock.com/column/dezert/202611.php" target="_blank" rel="noopener" lang="ja">続きを読む · 激ロック</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p15">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★☆☆</span> <span class="chip mins">2 min</span> <span class="chip" lang="ja">神戸</span> <span class="chip" lang="ja">紅葉</span> <span class="chip" lang="ja">布引ハーブ園</span> <span class="chip" lang="ja">相楽園</span> <span class="chip" lang="ja">六甲有馬</span>
+          </div>
+          <h2 lang="ja">いよいよ見頃に！　兵庫・神戸の『紅葉スポット』15選。秋の「ドライブ」や「電車旅」にもおすすめ。夜は「ライトアップ」も</h2>
+          <p class="why">Prático para o fim de semana: Nunobiki Herb Garden (mercado de Natal + luzes), Sōraku-en (casa-barco Edo + noite iluminada), teleférico Rokko–Arima com degradê de momiji. Lista longa; o trecho cobre os três primeiros.</p>
+          <div class="source">
+            <span lang="ja">神戸ジャーナル</span>
+            <a href="https://kobe-journal.com/archives/5789247687.html" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>暑すぎる夏が終わり、ようやく過ごしやすい季節「秋」になりましたね。これから12月上旬頃にかけては、鮮やかに色づく「紅葉」が美しい季節となります。</p>
+            <p>2026年の紅葉の見頃は「平年並みか平年より遅い」と予想されていますが、寒暖差の大きい山間部では、すでに色づき始めているところもあるみたいです。</p>
+            <p>今回は、神戸から 1.5時間圏内のドライブスポットや、電車で気軽に行ける市内のスポットまで、兵庫県内の「紅葉」の名所を15カ所ご紹介します。秋はまだまだこれからなので、ぜひおでかけの参考にしてみてくださいね。</p>
+            <p>……</p>
+            <p>『神戸布引ハーブ園／ロープウェイ』は、神戸市営地下鉄新神戸駅を下車し、徒歩約5分の場所にあります。</p>
+            <p>ロープウェイ乗り場からハーブ園までは、ロープウェイで約10分。その間、車窓からは六甲山の紅葉や京阪神の景色を楽しむことができます。</p>
+            <p>11月7日（土）～12月28日（月）の期間中は「クリスマスマーケット」が開催され、夜になると紅葉のライトアップや、クリスマスツリーのイルミネーションを楽しむことができます。</p>
+            <p>見頃は例年11月上旬から12月上旬頃。秋色に彩られたガーデンや山々の中で、移ろいゆく季節を感じてみませんか。</p>
+            <p>……</p>
+            <p>JR元町駅から徒歩10分ほどの場所にある『相楽園』は、美しい四季折々の日本庭園を楽しむことができる都市公園です。</p>
+            <p>一歩園内に足を踏み入れると都会の喧騒を離れ、緑豊かで静かな時間を過ごすことができます。「ツツジ」の名所として知られていますが、実は紅葉スポットでもあるんですよ。</p>
+            <p>紅葉の見頃は、例年11月下旬から12月上旬あたり。園内に保存されている「川御座船（かわござぶね）」の屋形部分は、江戸時代に使われていた貴重なもので、重要文化財にも指定されています。</p>
+            <p>紅葉シーズンに合わせて、この「船屋形」が11月28日（土）・29日（日）の2日間、一般公開されるほか、11月27日（金）・28日（土）の2日間はライトアップされた紅葉が楽しめる「夜間開園」も実施予定です。</p>
+          </div>
+          <p class="continue"><a href="https://kobe-journal.com/archives/5789247687.html" target="_blank" rel="noopener" lang="ja">続きを読む · 神戸ジャーナル</a></p>
+        </div>
+      </article>
+
+      <footer class="site">読解幕 · 2026-11-05 · ~45 min · <a href="/japanese-digest/history/" style="color:inherit">History</a> · deliton.github.io/japanese-digest</footer>
+    </main>
+  </div>
+</body>
+</html>
