@@ -1,0 +1,950 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>読解幕 · 2026-11-06 · Japanese Digest</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Noto+Serif+JP:wght@400;600;700&family=Shippori+Mincho:wght@500;700&display=swap" rel="stylesheet" />
+  <style>
+
+    :root {
+      --bg: #0a0a0a;
+      --bg-2: #121212;
+      --bg-card: #161616;
+      --ink: #f5f5f5;
+      --ink-dim: #a8a29a;
+      --ink-mute: #6b6560;
+      --shu: #c41e3a;
+      --shu-hot: #e11d48;
+      --shu-deep: #8b1228;
+      --gold: #d4a017;
+      --gold-soft: #c9a227;
+      --white: #fafafa;
+      --line: #2a2a2a;
+      --line-hot: rgba(196, 30, 58, 0.45);
+      --measure: 42rem;
+      --radius: 4px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: "Noto Sans JP", "Hiragino Sans", "Yu Gothic", system-ui, sans-serif;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .stage-bar {
+      height: 6px;
+      background: repeating-linear-gradient(
+        90deg,
+        var(--shu) 0 48px,
+        var(--white) 48px 56px,
+        #111 56px 64px,
+        var(--gold) 64px 72px,
+        #111 72px 88px
+      );
+    }
+
+    .wrap {
+      width: min(100% - 2rem, 74rem);
+      margin: 0 auto;
+      padding: 2rem 0 4.5rem;
+      display: grid;
+      grid-template-columns: 15.5rem 1fr;
+      gap: 2.75rem;
+      align-items: start;
+    }
+
+    @media (max-width: 900px) {
+      .wrap { grid-template-columns: 1fr; gap: 1.5rem; padding-top: 1.25rem; }
+      .sidebar { position: static !important; }
+    }
+
+    .sidebar { position: sticky; top: 1.25rem; }
+
+    .brand {
+      display: flex;
+      align-items: baseline;
+      gap: 0.55rem;
+      margin: 0 0 0.35rem;
+    }
+    .brand-mark {
+      font-family: "Shippori Mincho", "Noto Serif JP", serif;
+      font-size: 1.85rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      color: var(--white);
+      line-height: 1;
+    }
+    .brand-mark em {
+      font-style: normal;
+      color: var(--shu);
+    }
+    .brand-sub {
+      font-size: 0.65rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-weight: 700;
+    }
+
+    .meta {
+      color: var(--ink-mute);
+      font-size: 0.8rem;
+      margin: 0 0 1.25rem;
+    }
+
+    .stat-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-bottom: 1.35rem;
+    }
+    .stat {
+      border: 1px solid var(--line);
+      background: var(--bg-2);
+      padding: 0.32rem 0.65rem;
+      font-size: 0.72rem;
+      color: var(--ink-dim);
+      border-radius: var(--radius);
+    }
+    .stat strong { color: var(--white); font-weight: 700; }
+    .stat.hot {
+      border-color: var(--shu);
+      color: var(--shu-hot);
+      background: rgba(196, 30, 58, 0.1);
+    }
+
+    .toc {
+      border: 1px solid var(--line);
+      background: var(--bg-2);
+      padding: 0.85rem 0.9rem 0.95rem;
+      border-radius: var(--radius);
+    }
+    .toc h2 {
+      margin: 0 0 0.65rem;
+      font-size: 0.72rem;
+      letter-spacing: 0.16em;
+      color: var(--gold);
+      font-weight: 800;
+    }
+    .toc ol { list-style: none; margin: 0; padding: 0; }
+    .toc li { margin: 0; }
+    .toc a {
+      display: flex;
+      justify-content: space-between;
+      gap: 0.5rem;
+      text-decoration: none;
+      color: var(--ink-dim);
+      font-size: 0.82rem;
+      padding: 0.38rem 0.2rem;
+      border-bottom: 1px solid transparent;
+    }
+    .toc a:hover { color: var(--white); border-bottom-color: var(--line-hot); }
+    .toc .t-title { font-weight: 600; }
+    .toc .t-min { color: var(--gold); font-size: 0.72rem; font-weight: 700; flex-shrink: 0; }
+
+    .main { max-width: var(--measure); }
+
+    .digest-banner {
+      display: flex;
+      gap: 0.75rem;
+      align-items: flex-start;
+      background: #141014;
+      border: 1px solid var(--line);
+      border-left: 3px solid var(--shu);
+      padding: 0.85rem 1rem;
+      margin-bottom: 1.5rem;
+      font-size: 0.78rem;
+      color: var(--ink-dim);
+      line-height: 1.55;
+    }
+    .digest-banner .tag {
+      flex-shrink: 0;
+      background: var(--shu);
+      color: #fff;
+      font-size: 0.65rem;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      padding: 0.28rem 0.5rem;
+      border-radius: var(--radius);
+    }
+
+    .hero {
+      margin-bottom: 2rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid var(--line);
+      position: relative;
+    }
+    .hero::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -1px;
+      width: 4.5rem;
+      height: 2px;
+      background: var(--shu);
+    }
+    .kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.7rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--shu-hot);
+      font-weight: 800;
+      margin-bottom: 0.85rem;
+    }
+    .kicker::before {
+      content: "◆";
+      font-size: 0.55rem;
+      color: var(--gold);
+    }
+    .hero h1 {
+      font-family: "Shippori Mincho", "Noto Serif JP", serif;
+      font-size: clamp(1.85rem, 4vw, 2.55rem);
+      font-weight: 700;
+      line-height: 1.2;
+      margin: 0 0 0.75rem;
+      color: var(--white);
+      letter-spacing: 0.02em;
+    }
+    .hero p {
+      margin: 0;
+      color: var(--ink-dim);
+      font-size: 0.98rem;
+      max-width: 36rem;
+    }
+
+    article.piece {
+      background: var(--bg-card);
+      border: 1px solid var(--line);
+      margin-bottom: 1.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+    article.piece::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: linear-gradient(90deg, var(--shu) 0%, var(--shu) 35%, var(--gold) 35%, var(--gold) 42%, transparent 42%);
+    }
+
+    .piece-inner { padding: 1.6rem 1.55rem 1.35rem; }
+
+    .piece-head {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-bottom: 0.85rem;
+    }
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      border: 1px solid var(--line);
+      background: #111;
+      color: var(--ink-dim);
+      padding: 0.22rem 0.6rem;
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      border-radius: var(--radius);
+    }
+    .chip.interest {
+      border-color: var(--shu);
+      color: var(--shu-hot);
+      background: rgba(196, 30, 58, 0.12);
+    }
+    .chip.mins {
+      border-color: var(--gold);
+      color: var(--gold);
+      background: transparent;
+    }
+
+    .piece h2 {
+      font-family: "Noto Serif JP", "Shippori Mincho", "Yu Mincho", serif;
+      font-size: 1.38rem;
+      font-weight: 700;
+      line-height: 1.5;
+      margin: 0 0 0.6rem;
+      color: var(--white);
+      letter-spacing: 0.02em;
+    }
+
+    .why {
+      margin: 0 0 1rem;
+      color: var(--ink-dim);
+      font-size: 0.9rem;
+      border-left: 2px solid var(--gold);
+      padding-left: 0.85rem;
+    }
+
+    .source {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.65rem 1.1rem;
+      font-size: 0.76rem;
+      color: var(--ink-mute);
+      margin-bottom: 1.25rem;
+    }
+    .source a {
+      color: var(--shu-hot);
+      text-decoration: none;
+      font-weight: 600;
+    }
+    .source a:hover { color: var(--gold); }
+
+    .ja {
+      font-family: "Noto Serif JP", "Hiragino Mincho ProN", "Yu Mincho", serif;
+      font-size: 1.08rem;
+      line-height: 2;
+      letter-spacing: 0.03em;
+      color: #ebe7e1;
+    }
+    .ja p { margin: 0 0 1.15em; }
+    .ja p:last-child { margin-bottom: 0; }
+
+    .continue {
+      margin-top: 1.25rem;
+      padding-top: 1rem;
+      border-top: 1px solid var(--line);
+      font-size: 0.86rem;
+    }
+    .continue a {
+      color: var(--white);
+      text-decoration: none;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      border-bottom: 2px solid var(--shu);
+      padding-bottom: 0.1rem;
+    }
+    .continue a:hover {
+      color: var(--shu-hot);
+      border-bottom-color: var(--gold);
+    }
+
+    footer.site {
+      max-width: var(--measure);
+      margin-top: 1.75rem;
+      color: var(--ink-mute);
+      font-size: 0.72rem;
+      letter-spacing: 0.06em;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+    footer.site::before {
+      content: "";
+      width: 1.25rem;
+      height: 2px;
+      background: var(--shu);
+    }
+
+  
+    .excerpt-label { font-size: 0.66rem; letter-spacing: 0.18em; color: var(--gold); font-weight: 800; margin: 0 0 0.6rem; }
+    .brand-sub a, .stat a { color: var(--gold); text-decoration: none; }
+    .toc .t-min { font-variant-numeric: tabular-nums; }
+  </style>
+</head>
+<body>
+  <div class="stage-bar" aria-hidden="true"></div>
+
+  <div class="wrap">
+    <aside class="sidebar">
+      <div class="brand">
+        <span class="brand-mark" lang="ja">読解<em>幕</em></span>
+      </div>
+      <p class="brand-sub">Kabuki Digest · <a href="/japanese-digest/history/">History</a></p>
+      <p class="meta">2026-11-06 · America/Sao_Paulo</p>
+      <div class="stat-row">
+        <span class="stat"><strong>44</strong> min</span>
+        <span class="stat"><strong>15</strong> pieces</span>
+        <span class="stat"><strong>~12,700</strong> 字</span>
+        <span class="stat"><a href="/japanese-digest/history/">History</a></span>
+      </div>
+
+      <nav class="toc" aria-label="Índice">
+        <h2 lang="ja">本日の演目</h2>
+        <ol>
+          <li>
+            <a href="#p1">
+              <span class="t-title" lang="ja">「転職王」藤堂高虎――七度の主君替えの実像</span>
+              <span class="t-min">4′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p2">
+              <span class="t-title" lang="ja">僧侶から1万人の倭寇頭目へ――徐海の末路</span>
+              <span class="t-min">4′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p3">
+              <span class="t-title" lang="ja">なぜ札幌が「首府」になったのか</span>
+              <span class="t-min">3′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p4">
+              <span class="t-title" lang="ja">古代エジプト人はビールとワニも食べた</span>
+              <span class="t-min">3′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p5">
+              <span class="t-title" lang="ja">孔子の子孫・孔融、曹操に斬られた理由</span>
+              <span class="t-min">3′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p6">
+              <span class="t-title" lang="ja">巨大氷惑星の奥で、水が予想より早く歪む</span>
+              <span class="t-min">3′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p7">
+              <span class="t-title" lang="ja">2026年11月13日「人類圧死」予測の正体</span>
+              <span class="t-min">4′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p8">
+              <span class="t-title" lang="ja">幻のダイオウクラゲを隠れ家にする稚魚</span>
+              <span class="t-min">2′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p9">
+              <span class="t-title" lang="ja">太陽まで数億往復する、足元の菌糸</span>
+              <span class="t-min">3′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p10">
+              <span class="t-title" lang="ja">人間の歌と鳥の声は同じ音の型を持つ</span>
+              <span class="t-min">2′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p11">
+              <span class="t-title" lang="ja">Claude Codeがメールを外部へ付けていた</span>
+              <span class="t-min">2′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p12">
+              <span class="t-title" lang="ja">コードを読まないバイブ、Claudeは気づいてスルー</span>
+              <span class="t-min">4′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p13">
+              <span class="t-title" lang="ja">阪急・武庫川の「川の上」新駅</span>
+              <span class="t-min">2′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p14">
+              <span class="t-title" lang="ja">アラル海の塩砂漠に残る「船の墓場」</span>
+              <span class="t-min">2′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p15">
+              <span class="t-title" lang="ja">HYDE×オーケストラ「JEKYLL」横浜終幕</span>
+              <span class="t-min">3′</span>
+            </a>
+          </li>
+        </ol>
+      </nav>
+    </aside>
+
+    <main class="main">
+      <div class="digest-banner">
+        <span class="tag">TRIAGE</span>
+        <span>História (Todo Takatora e as sete trocas de senhor; waikou Xu Hai; Sapporo como capital planejada; Kong Rong vs Cao Cao; dieta egípcia com mito da alface); ciência/curiosidade (gelo X em planetas de gelo; Doomsday 13/11/2026 de von Foerster; peixes sob a água-viva gigante; micélio que iria ao Sol; padrões acústicos canto×fala); IA/dev (e-mail no User-Agent do Claude Code; vibe-coding sem ler código e o bug “adiado”); trens Hyogo (estação Mukogawa sobre o rio); mundo (cemitério de navios do Aral); rock (HYDE JEKYLL com orquestra). Pontos fracos: Kobe NP (matsuri Ōnaka) só teaser paywall — não entrou; NatGeo e GIGAZINE no trecho gratuito; norimono curto mas denso; sem matsuri/visto/JRPG hoje.</span>
+      </div>
+
+      <header class="hero">
+        <div class="kicker">Daily curated reading</div>
+        <h1 lang="ja">藤堂高虎の七度転職、僧侶倭寇・徐海、札幌が首府になった理由、巨大氷惑星の水、11月13日「圧死」予測、菌糸と鳥の声、Claudeのメールとスルー、武庫川の新駅、HYDEのJEKYLL</h1>
+        <p lang="ja">今日の幕は、本日配信の武将ジャパンから――「転職王」藤堂高虎の七度の主君替えが、実は主君の死や家の断絶が半数以上で、秀長のもとでは15年も先鋒と外交を担った話。草の実堂では僧侶から1万人の倭寇頭目になった徐海と、明の名将・胡宗憲の離間策、石狩平原に人為的に置かれた札幌「首府」の地理、古代エジプトのビールとレタス神話とカバ狩り、孔子の末裔・孔融が曹操に斬られるまでの気骨。科学の幕は、巨大氷惑星を模した超高圧で歪む氷X、来週の「運命の日」2026年11月13日に人類圧死を予言した1960年の論文のマジック、幻のダイオウクラゲを隠れ家にする稚魚、太陽まで数億往復する菌糸、鳥の声と人間の歌の共通パターン。開発者の幕はClaude CodeがメールをUser-Agentに載せた問題と、コードを読まないバイブコーディングで「気づいてスルー」した計測バグ。兵庫では阪急・武庫川の橋上新駅、世界ではアラル海の船の墓場。締めはHYDEのオーケストラ「JEKYLL」横浜終幕。約44分の読解です。</p>
+      </header>
+
+      <article class="piece" id="p1">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★★</span> <span class="chip mins">4 min</span> <span class="chip" lang="ja">藤堂高虎</span> <span class="chip" lang="ja">豊臣秀長</span> <span class="chip" lang="ja">関ヶ原</span> <span class="chip" lang="ja">主従</span> <span class="chip" lang="ja">豊臣兄弟</span>
+          </div>
+          <h2 lang="ja">なぜ藤堂高虎は七度も主君を変えたのか？不満ばかりじゃなかった転職歴</h2>
+          <p class="why">Hoje no BUSHOO: Todo Takatora não era só o “rei das demissões”. Metade das trocas veio de morte do senhor ou herança — e sob Hidenaga ficou 15 anos, liderando vanguarda e diplomacia (Chōsokabe, Mōri). Depois ainda transferiu o templo funerário do senhor para Daitokuji. Continua a saga Toyotomi sem repetir ontem.</p>
+          <div class="source">
+            <span lang="ja">BUSHOO!JAPAN（武将ジャパン）</span>
+            <a href="https://bushoojapan.com/bushoo/toyotomi/2026/11/06/222827" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>大河ドラマ『豊臣兄弟』では佳久創さんが演じ、秀長の右腕として存在感を放っている藤堂高虎。</p>
+            <p>主君を七度も変えたからであり、これだけ奉公先が変わると、よほど性格に難アリだったのでは？とも思ってしまいますよね。</p>
+            <p>高虎は豊臣秀長に長く仕え、その死後も菩提を弔い続けました。</p>
+            <p>七度の中には、主君の死や跡継ぎへの代替わりで奉公先が変わった例も含まれており、必ずしも不満爆発で飛び出した！とかそういうわけではないのです。</p>
+            <p>……</p>
+            <p>最初の2名が浅井家で次が織田家、以降、豊臣家、徳川家と続きます。</p>
+            <p>右側の理由をご覧の通り、奉公先を変えたのは家中の代替わりや主君の死によるものが半数以上。</p>
+            <p>近江の浅井長政のもとで、高虎は武将として歩み始めました。</p>
+            <p>しかし元亀三年（1572年）、高虎は家中で争いを起こして刃傷沙汰となり、小谷城を飛び出したと伝わります。</p>
+            <p>……</p>
+            <p>そんな藤堂高虎が次に向かったのが、『豊臣兄弟』の主人公である豊臣秀長でした。</p>
+            <p>藤堂高虎が羽柴秀長に仕えたのは、天正四年（1576年）頃とされます。</p>
+            <p>ここから天正十九年（1591年）に秀長が亡くなるまで15年あまり仕え続けました。</p>
+            <p>あれほど落ち着かなかった男が、一人の主君のもとに留まったのは、なぜか？</p>
+            <p>大河ドラマ『豊臣兄弟』で時代考証を務める黒田基樹氏は著書『羽柴秀長とその家臣たち』の中で、高虎が秀長軍の先鋒を務め、敵の城を攻めるときにはしばしば先頭を駆けていたと述べています。</p>
+            <p>……</p>
+            <p>もちろん秀長の家臣団には桑山重晴ら他の重臣もいましたが、高虎がこの主君のもとを自分から離れることはなく、最終的に二人の別れは秀長の死によるものでした。</p>
+            <p>藤堂高虎が次に仕えたのは、秀長の跡を継いだ養子の豊臣秀保です。</p>
+            <p>しかし文禄四年（1595年）4月、秀保は数え17歳の若さで十津川にて病死し、大和羽柴家は断絶してしまいました。</p>
+            <p>高虎はその後、高野山に登って出家しようとしたと伝わるのですが、ここで引き留めに動いたのが秀吉です。</p>
+            <p>……</p>
+            <p>藤堂高虎と徳川家康のつながりは、秀長の家臣時代にさかのぼります。</p>
+            <p>秀吉の没後はさらに家康へ近づき、慶長五年（1600年）の関ヶ原の戦いでは東軍として参戦。</p>
+            <p>つまり、ある日突然、豊臣から徳川へ転職したという話ではないのですね。</p>
+            <p>……</p>
+            <p>家康へ一層近づいた慶長四年（1599年）、高虎は秀長の菩提寺・大光院を、大和郡山から京都の大徳寺内へ移築しました。</p>
+          </div>
+          <p class="continue"><a href="https://bushoojapan.com/bushoo/toyotomi/2026/11/06/222827" target="_blank" rel="noopener" lang="ja">続きを読む · BUSHOO!JAPAN（武将ジャパン）</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p2">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★★</span> <span class="chip mins">4 min</span> <span class="chip" lang="ja">倭寇</span> <span class="chip" lang="ja">徐海</span> <span class="chip" lang="ja">胡宗憲</span> <span class="chip" lang="ja">王直</span> <span class="chip" lang="ja">明史</span>
+          </div>
+          <h2 lang="ja">『僧侶から1万人の海賊の頭目になった男』倭寇・徐海とは？明の名将の策略にはまった末路</h2>
+          <p class="why">Waikou não eram “só japoneses”: Xu Hai, monge de Hangzhou virado chefe de ~10 mil, passa por Ōsumi (Kagoshima) como refém, volta como “General do Mar” — e cai na estratégia de divisão de Hu Zongxian. História marítima Leste Asiática com personagem e reviravolta.</p>
+          <div class="source">
+            <span lang="ja">草の実堂</span>
+            <a href="https://kusanomido.com/study/history/chinese/min/135946/" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>かつて東アジアの海を舞台に跳梁跋扈し、人々を恐怖に陥れた倭寇（わこう）たち。</p>
+            <p>その名が示す通り日本人も少なからずいたようですが、16世紀に活動した倭寇の多くは中国人を中心とする人々から構成されていました。</p>
+            <p>当時の倭寇には密貿易に携わる商人や沿岸住民なども加わっており、その実態は日本人の海賊という言葉だけでは説明できないほど複雑だったのです。</p>
+            <p>今回はそんな倭寇の一人である徐海（じょかい）を紹介。果たして彼はどんな人物で、どんな生涯をたどったのでしょうか。</p>
+            <p>……</p>
+            <p>徐海は生年不詳、現代の安徽省黄山市にあたる徽州歙県（きしゅうしょうけん）の出身です。</p>
+            <p>しかし、後に叔父の徐碧溪（じょへきけい）にそそのかされ、倭寇に転身します。僧侶から倭寇とは随分と激しい落差ですが、それだけ世が乱れていた証と言えるでしょう。</p>
+            <p>ともあれ倭寇となった徐海は、明山和尚（みょうざんおしょう）の二つ名で呼ばれるようになり、叔父と共に王直（おうちょく）の手下として密貿易に手を染め始めました。</p>
+            <p>……</p>
+            <p>叔父は徐海を倭国の大隅（鹿児島県東部）へ送り、現地の領主（詳細は不詳）に身柄を預けましたが、実は借金のカタで人質にされていたのです。</p>
+            <p>叔父に騙されていたと知った徐海は激怒し、領主の下から脱走して再び倭寇に舞い戻りました。</p>
+            <p>やがて江蘇・浙江あたりの沿岸地域を荒らし回り、倭寇の一味である辛五郎（しんごろう）らとも手を組みながら、乍浦鎮（さくほちん浙江省）などを拠点とするまでに勢力を拡大します。</p>
+            <p>この頃になると「天差平海大将軍」と自称しました。天が海洋を平らげるために差し遣わした大将軍とは、大きく出たものですね。</p>
+            <p>……</p>
+            <p>やがて倭寇の陳東（ちんとう）や麻葉（まよう）らとも行動を共にし、嘉靖35年（1556年）には大隅・薩摩の倭寇を率いて明の沿岸部へ攻め込みました。</p>
+            <p>『明史』によると、その兵力は1万人余りに達したといいます。</p>
+            <p>これを迎え撃つのは明の軍事指揮官・胡宗憲（こそうけん）でした。</p>
+            <p>老獪な胡宗憲は、倭寇の大軍といきなり真っ向からぶつかることを避け、まずは離間の策をもって徐海を疑心暗鬼に陥らせました。</p>
+            <p>……</p>
+            <p>徐海は捕虜200人を返し、桐郷の包囲を解くなど降伏に傾いていきましたが、胡宗憲はさらに揺さぶりをかけます。徐海が弟の徐洪を人質として差し出すと、胡宗憲は「陳東と麻葉を捕らえて引き渡せば、世襲の地位を与える」と持ちかけたのです。</p>
+          </div>
+          <p class="continue"><a href="https://kusanomido.com/study/history/chinese/min/135946/" target="_blank" rel="noopener" lang="ja">続きを読む · 草の実堂</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p3">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★☆</span> <span class="chip mins">3 min</span> <span class="chip" lang="ja">札幌</span> <span class="chip" lang="ja">開拓使</span> <span class="chip" lang="ja">松浦武四郎</span> <span class="chip" lang="ja">明治</span> <span class="chip" lang="ja">石狩平原</span>
+          </div>
+          <h2 lang="ja">なぜ札幌は北海道の中心地として発展したのか？荒野から北の大都市へ</h2>
+          <p class="why">Por que Sapporo, no meio da planície Ishikari, e não Hakodate? Defesa contra a Rússia, Matsuura Takeshirō, plano em xadrez inspirado em Kyoto, porto próximo e o primeiro trilho Sapporo–Temiya em 1880. Urbanismo bakumatsu/Meiji sem virar manual de arquitetura.</p>
+          <div class="source">
+            <span lang="ja">草の実堂</span>
+            <a href="https://kusanomido.com/study/history/japan/bakumatu/136216/" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>その政治、経済、文化の中心地として君臨するのが、人口約190万人を抱える大都市・札幌である。</p>
+            <p>歴史的に見れば、本州から海を渡った開拓者たちが最初に足を踏み入れたのは函館や道南の港町であり、さらにアイヌの人々が独自の生活圏を築いていた歴史を踏まえても、札幌の位置は必ずしも「自然発生的な交通の要衝」にあったわけではない。</p>
+            <p>それにもかかわらず、なぜ石狩平原のただ中に位置する札幌が、北の大国の「首府」として急成長を遂げることになったのか。</p>
+            <p>その背景にある明治期の開拓史と、冷徹な地理的必然を紐解く。</p>
+            <p>……</p>
+            <p>明治維新以降、新政府にとって最優先課題となったのは、ロシア帝国の南下政策に対抗するための「北方の防衛（開拓と警備）」であった。</p>
+            <p>当時、本州との海の玄関口として栄えていたのは函館であり、開拓使も函館を重要な拠点としていた。しかし函館は北海道の南端に位置しており、広大な道内全域を統治し、内陸部の資源開発や農業経営を進める上では地理的に不便だった。</p>
+            <p>そこで新政府は、北海道の内陸部に新たな政治・行政の中心地を建設する方針を打ち出した。</p>
+            <p>その候補地として札幌付近を強く推したのが、幕末から蝦夷地を調査していた松浦武四郎である。</p>
+            <p>松浦の構想も踏まえ、1869年（明治2年）、石狩平原の広がる現在の札幌の地で本府建設が始まった。</p>
+            <p>……</p>
+            <p>札幌が選ばれた大きな地理的理由は、広大な石狩平原に位置しながら、日本海側の港湾にも比較的近いという好条件にあった。</p>
+            <p>当時、陸上交通網が未発達だった北海道において、物資や人の移動には海運や河川を利用した舟運が欠かせなかった。</p>
+            <p>札幌は銭函や手宮、石狩といった港湾地域へのアクセスに恵まれ、内陸部の開拓を進めるための物資を集積・分配する上でも有利な立地だったのである。</p>
+            <p>実際に、開拓使判官・島義勇は1869年（明治2年）、松浦武四郎に宛てた書簡で、札幌について「四方広莫タル平原ニテ地勢最絶妙」と高く評価している。</p>
+            <p>……</p>
+            <p>さらに島義勇らによって、京都の街並みを参考にした「碁盤の目状の整然とした都市計画」が構想された。</p>
+          </div>
+          <p class="continue"><a href="https://kusanomido.com/study/history/japan/bakumatu/136216/" target="_blank" rel="noopener" lang="ja">続きを読む · 草の実堂</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p4">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★☆</span> <span class="chip mins">3 min</span> <span class="chip" lang="ja">古代エジプト</span> <span class="chip" lang="ja">ビール</span> <span class="chip" lang="ja">レタス神話</span> <span class="chip" lang="ja">カバ</span> <span class="chip" lang="ja">食文化</span>
+          </div>
+          <h2 lang="ja">古代エジプト人は何を食べていた？ビールを飲み、ワニやカバまで食べた意外な食生活</h2>
+          <p class="why">Pão de trigo emmer, cerveja turva como salário de operário, alface fálica no mito de Hórus vs Seth, e crocodilo/hipopótamo sagrados — e caçados. NatGeo mental com vocabulário egípcio útil.</p>
+          <div class="source">
+            <span lang="ja">草の実堂</span>
+            <a href="https://kusanomido.com/sekai/135595/" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>古代エジプト文明は、紀元前3000年頃から紀元前30年頃まで、約3000年にわたって栄えた。</p>
+            <p>古代エジプト文明が成立する頃には乾燥化が進んでいたものの、ナイル川がもたらす肥沃な大地は、人々の暮らしを支え続けた。</p>
+            <p>そんな土地で育まれた古代エジプトの食文化は、現代人には意外な食材も取り入れた、実に興味深いものだった。</p>
+            <p>今回は、古代エジプト人の知られざる食生活について紹介していきたい。</p>
+            <p>……</p>
+            <p>古代エジプト人の食生活を支えていたのは、小麦や大麦から作られるパンとビールであった。</p>
+            <p>当時使われていた小麦は、エンマーコムギと呼ばれる品種で、現在一般的な小麦とは異なり、粒が丈夫なもみ殻に包まれているのが特徴である。</p>
+            <p>古代エジプトでは、こうした穀物を挽いて生地を作り、さまざまな形のパンを焼いていた。発酵させたパンも作られており、パン作りは人々の暮らしに欠かせない技術となっていた。</p>
+            <p>古代エジプトのビールは、現在のものとは製法も味わいも大きく異なっていた。ホップは使用せず、小麦や大麦を原料としており、穀物の成分が残った濁りのある飲み物だったと考えられている。</p>
+            <p>栄養を補う役割もあり、労働者への配給品としても重宝されていた。</p>
+            <p>……</p>
+            <p>実際、紀元前3600年頃のヒエラコンポリス遺跡からは大規模な醸造施設が発見されており、容器に残された成分の分析から、エンマーコムギや大麦が使われていたことが確認されている。</p>
+            <p>ピラミッドや墳墓の建築に従事した労働者たちにとっても、ビールは日々の食事を支える重要な存在だったのである。</p>
+            <p>ちなみに古代エジプト人も、酒の飲みすぎには手を焼いていたようだ。古文書『アニの教訓』には、ビールを飲みすぎて言動が乱れたり、人前で醜態をさらしたりすることを戒める教えが残されている。</p>
+            <p>……</p>
+            <p>また、古代エジプトではレタスも盛んに栽培されていた。</p>
+            <p>そのたくましい形状に加え、切ると白く濁った汁が出ることから、レタスは男根や生殖力を連想させる植物でもあった。</p>
+          </div>
+          <p class="continue"><a href="https://kusanomido.com/sekai/135595/" target="_blank" rel="noopener" lang="ja">続きを読む · 草の実堂</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p5">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★☆</span> <span class="chip mins">3 min</span> <span class="chip" lang="ja">孔融</span> <span class="chip" lang="ja">曹操</span> <span class="chip" lang="ja">建安七子</span> <span class="chip" lang="ja">譲梨</span> <span class="chip" lang="ja">後漢</span>
+          </div>
+          <h2 lang="ja">孔子の子孫・孔融は、なぜ曹操に処刑されたのか？妻子まで命を奪われた天才文人の末路</h2>
+          <p class="why">Kong Rong, 20º neto de Confúcio, “cede a pêra”, esconde um fugitivo aos 16, confronta eunucos e He Jin — e acaba executado por Cao Cao (com a família). Personagem + virada, não lista seca de batalhas.</p>
+          <div class="source">
+            <span lang="ja">草の実堂</span>
+            <a href="https://kusanomido.com/study/history/chinese/sangoku/135059/" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>筆者が中学時代に遊んでいた『三國志ゲームボーイ版』でお世話になっていた人物がおり、その名を孔融（こうゆう）という。</p>
+            <p>孔融は、曹操と対立して処刑された事で知られているが、具体的にどのような人物だったのだろうか。</p>
+            <p>今回は、後漢を代表する文人である「建安の七子」の一人にして、儒学者として現代にも名を残す孔融の生涯を辿る。</p>
+            <p>……</p>
+            <p>153年に生まれた孔融は、儒教の祖である孔子の20世の孫にあたり、当時においても極めて由緒ある家柄の出身だった。</p>
+            <p>孔融は7人兄弟の6番目だったが、4歳の頃、兄たちと梨を食べる際には、いつも小さな梨を選んでいた。不思議に思った大人がその理由を尋ねると、孔融は「私は幼いので、小さい方を取るのが当然です」と答えたという。</p>
+            <p>この逸話は「孔融譲梨（こうゆうじょうり）」として知られ、年長者を敬い、他者に譲る礼節の大切さを説く故事として、後世まで語り継がれることになった。</p>
+            <p>……</p>
+            <p>孔融が13歳の時、父の孔宙（こうちゅう）が亡くなった。</p>
+            <p>孔融は父の死を深く悲しみ、骨と皮ばかりになるほど痩せ細り、人に支えられなければ立つこともできなかった。</p>
+            <p>後漢の時代には、儒教の教えに従い、親が亡くなると数年にわたって喪に服す習慣があったが、ここまで悲しみに暮れる孔融の姿は人々の心を打ち、その孝行心は大いに称賛された。</p>
+            <p>……</p>
+            <p>そんな孔融が16歳の頃、一族を巻き込む大きな事件が起こった。</p>
+            <p>張倹は各地の有力者を頼って逃亡を続け、その途中で孔融の兄・孔褒（こうほう）の家を訪ねた。ところが孔褒はあいにく留守で、代わりに応対したのが、当時16歳の孔融であった。</p>
+            <p>孔融は追われる身となった張倹を匿ったが、やがてその事実が発覚し、兄の孔褒とともに逮捕されてしまう。</p>
+            <p>……</p>
+            <p>取り調べを受けた孔融は「張倹を家に入れたのは私であり、兄は関係ありません」と主張した。</p>
+            <p>ところが孔褒も「張倹は私を頼って来たのだから、弟に罪はありません」と述べ、自分が処罰を受けるべきだと訴えた。兄弟が互いに罪を引き受けようとするため、役人たちは判断に困ってしまう。</p>
+            <p>そこで二人の母親を呼び出したところ、今度は母親まで「家の長である私に責任があります。どうか私を処罰してください」と申し出たのである。兄も弟も、そして母親までもが、自分の命を差し出そうとする異例の事態となった。</p>
+          </div>
+          <p class="continue"><a href="https://kusanomido.com/study/history/chinese/sangoku/135059/" target="_blank" rel="noopener" lang="ja">続きを読む · 草の実堂</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p6">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★★</span> <span class="chip mins">3 min</span> <span class="chip" lang="ja">氷X</span> <span class="chip" lang="ja">天王星</span> <span class="chip" lang="ja">海王星</span> <span class="chip" lang="ja">高圧実験</span> <span class="chip" lang="ja">水</span>
+          </div>
+          <h2 lang="ja">地球の常識は通用しない。過酷な環境の惑星の中で「水」は予想外の変化を見せる</h2>
+          <p class="why">Laboratório esmaga gelo entre diamantes (~2,4 milhões de atm = 400 elefantes na ponta do dedo): o gelo X distorce antes do previsto. O que isso diz sobre Urano/Netuno. Ciência de planeta com imagem mental forte.</p>
+          <div class="source">
+            <span lang="ja">カラパイア</span>
+            <a href="https://karapaia.com/archives/636112.html" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>太陽から遠く離れた惑星の過酷な環境下では、水が予想外のふるまいを見せることが明らかとなった。</p>
+            <p>アメリカのネバダ大学ラスベガス校を中心とする研究チームは、海王星や天王星の深部に似た超高圧環境を実験室で再現した。</p>
+            <p>その結果、押し潰されて氷になった水の結晶構造が、これまで予想されていたよりも低い圧力で、別の形へと歪み始める様子が観測された。</p>
+            <p>遠い惑星の奥深くでは、水が地球上とは似ても似つかない姿へと変化しているようだ。</p>
+            <p>……</p>
+            <p>太陽系の外縁部を公転する海王星や天王星は、「巨大氷惑星」と呼ばれている。</p>
+            <p>内部には水やアンモニア、メタンが大量に存在し、極度の高温・高圧にさらされていると考えられている。天文学ではこうした物質をまとめて「氷」と呼んでいる。</p>
+            <p>そこでネバダ大学ラスベガス校、カリフォルニア大学バークレー校、アルゴンヌ国立研究所の共同研究チームは、地球上の実験室で巨大氷惑星の内部に近い環境を作り出すことにした。</p>
+            <p>実は水は、冷やさなくても、強い力で押し潰すだけで固体の氷になる。</p>
+            <p>最も硬い物質として知られる2つのダイヤモンドの間に氷のサンプルを挟み込み、強烈な力で押し潰したのだ。</p>
+            <p>……</p>
+            <p>実験室で再現された「超高圧環境」は、車のタイヤの空気圧の100万倍以上、大気圧のおよそ240万倍にもなる。</p>
+            <p>わかりやすく言えば、指の先（1cm四方）にアフリカゾウ約400頭が同時に乗っているのと同じくらい、とてつもない力がかかっている状態だ。</p>
+            <p>氷は強く押し潰されると、立方体の箱を整然と積み重ねたような結晶構造をもつ「氷X（アイステン）」になる。</p>
+            <p>さらに押し潰すと、この立方体が歪み、縦・横・高さの長さがそろわない箱を積み重ねたような、別の結晶構造に変わることが、約30年前から計算で予測されていた。その境目は、大気圧のおよそ300万〜400万倍と考えられてきた。</p>
+            <p>……</p>
+            <p>ところが今回の実験では、大気圧の約220万倍を超えたあたりで、すでに氷Xの立方体が歪み始めたのだ。</p>
+            <p>氷は、科学者の予想よりも手前で、姿を変え始めていたのである。</p>
+          </div>
+          <p class="continue"><a href="https://karapaia.com/archives/636112.html" target="_blank" rel="noopener" lang="ja">続きを読む · カラパイア</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p7">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★★</span> <span class="chip mins">4 min</span> <span class="chip" lang="ja">運命の日</span> <span class="chip" lang="ja">フォン・フェルスター</span> <span class="chip" lang="ja">人口学</span> <span class="chip" lang="ja">Science</span> <span class="chip" lang="ja">マジック</span>
+          </div>
+          <h2 lang="ja">2026年11月13日に人類は滅亡すると予測した1960年の科学者。心配するべきなのか？</h2>
+          <p class="why">Daqui a uma semana (13/11/2026) cai o “Doomsday” de von Foerster em Science 1960: população → infinito por “esmagamento”. Acertou 30 anos — depois a natalidade caiu. E o autor era mágico de palco; 13/11 era o aniversário dele. Timing perfeito.</p>
+          <div class="source">
+            <span lang="ja">カラパイア</span>
+            <a href="https://karapaia.com/archives/631405.html" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>1960年、アメリカのまじめな科学研究誌『Science』誌に驚きの論文が掲載された。</p>
+            <p>アメリカ人物理学者ハインツ・フォン・フェルスター氏らは、人類は増え続け、2026年11月13日（金）に人口が無限大に近づき「圧死」により自滅すると予測したのだ。</p>
+            <p>緻密な数式に裏付けられた「運命の日」の予測は、30年以上にわたって実際の人口を言い当て、世界中で議論を呼んだ。</p>
+            <p>我々は本当に心配するべきなのだろうか？その真相に迫っていこう。</p>
+            <p>……</p>
+            <p>1960年、世界で最も権威ある科学誌の一つ『Science』に、「運命の日：西暦2026年11月13日金曜日」という非常に具体的なタイトルの論文が掲載された。</p>
+            <p>発表したのは、アメリカのイリノイ大学に所属するオーストリア系アメリカ人の物理学者ハインツ・フォン・フェルスター氏と、2人の学生であるパトリシア・M・モーラ氏、ローレンス・W・アミオット氏だ。</p>
+            <p>論文の内容は、現在の2026年10月から約1か月ほど先のこの日、世界の人口が無限大に近づき、人類が事実上自滅するという衝撃的な予測だった。</p>
+            <p>研究チームは「私たちの玄孫（孫の孫）は餓死することはない。押しつぶされて死ぬのだ」と主張した。</p>
+            <p>……</p>
+            <p>この不安の根底には、18世紀イギリスの経済学者マルサスが1798年に著書『人口論』で唱えた考え方があった。</p>
+            <p>人間は数が増えるほど、協力して知恵を出し合い、食料を増やす方法や病気を防ぐ方法を生み出すことができる。</p>
+            <p>3人は過去2000年分の世界人口の推計値24個を使い、人類の数が実際に予想を上回る速さで増え続けてきたことを示した。</p>
+            <p>このデータを未来に当てはめると、人口が2倍になるまでの時間はどんどん短くなり、2026年11月13日にはゼロになる。</p>
+            <p>2026年11月13日、人口は計算上無限大に近づき、地球は人で埋め尽くされるのだ。</p>
+            <p>……</p>
+            <p>この予測が長く信じられたのは、フォン・フェルスター氏らの計算式が1970年代から1980年代を通して、ほとんどの人口学者の予測よりも正確に世界の人口を言い当てていたからだ。</p>
+            <p>しかし1993年頃になると、実際の世界人口が予測を下回るようになった。</p>
+            <p>3人が論文で勧めた通りに、世界の出生率が下がり始めたからだ。</p>
+            <p>1960年代に女性1人あたり約5人だった子どもの数は、2024年には約2.2人まで減り、半分を下回っている。</p>
+            <p>……</p>
+            <p>では我々は本当にあと1か月少しで滅亡してしまうのか？</p>
+            <p>現在のデータを見る限り、私たちが2026年11月13日の金曜日に「圧死」して目覚めることはなさそうだ。</p>
+          </div>
+          <p class="continue"><a href="https://karapaia.com/archives/631405.html" target="_blank" rel="noopener" lang="ja">続きを読む · カラパイア</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p8">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★☆</span> <span class="chip mins">2 min</span> <span class="chip" lang="ja">ダイオウクラゲ</span> <span class="chip" lang="ja">深海</span> <span class="chip" lang="ja">共生</span> <span class="chip" lang="ja">イボダイ</span> <span class="chip" lang="ja">ROV</span>
+          </div>
+          <h2 lang="ja">ここがらくちん！幻の巨大クラゲを隠れ家として利用している稚魚たち</h2>
+          <p class="why">ROV na Argentina: peixes-bebê escondidos sob uma Stygiomedusa de 6 m — “Medusa do Hades”. Menos de 120 avistamentos desde 1899; no Japão o ibodai faz o mesmo com águas-vivas. Natureza com nome grego para o Yomitan.</p>
+          <div class="source">
+            <span lang="ja">カラパイア</span>
+            <a href="https://karapaia.com/archives/635601.html" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>クラゲの中では世界最大級であるにもかかわらず、深海に生息するため、めったに見ることができない幻の「ダイオウクラゲ」は、深海生物好きを魅了してやまない。私もその中のワンオブゼムだ。</p>
+            <p>アルゼンチン沖の深海で撮影された貴重なダイオウクラゲの映像には、傘の下に小さな稚魚の群れが身を寄せ、一緒に泳ぐ姿が映っていた。</p>
+            <p>アルゼンチンの研究チームは、稚魚たちが巨大クラゲを隠れ家代わりに利用して、捕食者から身を守っていると考えている。</p>
+            <p>……</p>
+            <p>アルゼンチンのブエノスアイレス大学のマリア・エミリア・ブラーボ博士率いる研究チームは、2025年12月から2026年1月にかけて、アメリカのシュミット海洋研究所の調査船に乗り込み、アルゼンチン沖の深海を調査した。</p>
+            <p>遠隔操作型の無人探査機（ROV）を使って探査中、水深約250mの薄暗い海中に漂っているダイオウクラゲの姿をとらえた。</p>
+            <p>ダイオウクラゲは世界最大級のクラゲであり、傘の幅は1mを超え、腕の長さは10mに達することもある。</p>
+            <p>これほど巨大なのに、1899年に最初の標本が採取されて以来、世界中でまだ120回未満しか目撃されていない幻のクラゲなのである。</p>
+            <p>……</p>
+            <p>ダイオウクラゲには、「スティギオメデューサ・ギガンテア（Stygiomedusa gigantea）」という学名が付けられている。「冥界の巨大なメデューサ」という意味だ。</p>
+            <p>今回撮影された個体は全長約6mに達し、海流の中に長い腕をなびかせながら泳いでいた。</p>
+            <p>映像を詳しく確認すると、ダイオウクラゲのまわりには、約19匹の小さな魚が泳いでいた。</p>
+            <p>この魚はイボダイ科のクロアブライボダイ（Centrolophus niger）の稚魚である。</p>
+            <p>……</p>
+            <p>深海の海中には身を隠す場所がほとんどなく、魚の稚魚にとって非常に危険な場所である。</p>
+            <p>研究チームは、稚魚たちが暗闇から襲いかかってくる捕食者から身を守るため、巨大なクラゲを動く隠れ家として利用していると推測している。</p>
+          </div>
+          <p class="continue"><a href="https://karapaia.com/archives/635601.html" target="_blank" rel="noopener" lang="ja">続きを読む · カラパイア</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p9">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★★</span> <span class="chip mins">3 min</span> <span class="chip" lang="ja">菌糸</span> <span class="chip" lang="ja">アーバスキュラー菌根</span> <span class="chip" lang="ja">炭素</span> <span class="chip" lang="ja">サイエンス</span> <span class="chip" lang="ja">SPUN</span>
+          </div>
+          <h2 lang="ja">太陽まで数億回往復する長さの糸、その正体は足元に潜む菌類</h2>
+          <p class="why">Mapa mundial das micorrizas arbusculares: carbono no solo = 4–6× o de toda a humanidade; filamentos fino como 1/10 de cabelo iriam ao Sol e voltariam centenas de milhões de vezes. Trecho gratuito já dá o punch NatGeo.</p>
+          <div class="source">
+            <span lang="ja">ナショナル ジオグラフィック日本版</span>
+            <a href="https://natgeo.nikkeibp.co.jp/atcl/news/26/061900353/" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>## 炭素の量は全人類の4～6倍、この菌類の密度を初めて世界地図に</p>
+            <p>「菌類」と聞くと、壁に生えるカビや、腐った丸太に生えてくる肉質のものや、スーパーで売られているキノコなどを思い浮かべるかもしれない。しかし、菌類の生命活動のほとんどは、私たちの目の届かない場所で繰り広げられている。</p>
+            <p>いわゆるキノコは菌類の子実体と呼ばれる部分で、本体は土の中にある菌糸体だ。菌糸体は、菌糸と呼ばれる糸状の構造の集合体で、菌類のなかには植物の根と結びついてネットワークを形成し、植物の成長に必要な栄養素を供給するものもいる。2026年6月11日付けで学術誌「サイエンス」に発表された論文で、こうした菌糸ネットワークの広がりの定量化が試みられ、科学者たちは、特定の種類の菌類が最も多く見られる場所の世界地図を初めて作成した。</p>
+            <p>科学者たちはまた、機械学習モデルと1万6000本の土壌コアの証拠を用いて、地球上のアーバスキュラー菌根菌のネットワークに含まれる炭素の量が300メガトンに達することも突き止めた。これは、地球上の全人類の体に含まれる炭素の量の4～6倍に相当する。このネットワークを構成する微細な菌糸の「指」の総延長は、地球～太陽間を数億回往復できるほど長い。</p>
+            <p>……</p>
+            <p>「これは、植物を孤立した生物と見なす思い込みに正面から疑問を投げかけ、生物が目に見えない無数の相互作用に組み込まれていることを改めて考えさせる発見です」と、オランダ、アムステルダム自由大学の進化生物学者で、論文の最終著者であるトビー・キアーズ氏は語る。</p>
+            <p>「地中ネットワーク保全協会（SPUN）」の事務局長も務めているキアーズ氏は、こうした菌類のホットスポットがある場所を把握し、保全することが、気候変動の抑制にもつながる可能性があると考えている。（参考記事：「酸素も土も人体も…地球と生命の運命を握る、守るべき微生物5選」）</p>
+            <p>……</p>
+            <p>植物は根を通じて水や養分（リンや窒素など）を吸収する。けれどもほとんどの植物は、アーバスキュラー菌根菌に養分の吸収を手伝ってもらっている。</p>
+          </div>
+          <p class="continue"><a href="https://natgeo.nikkeibp.co.jp/atcl/news/26/061900353/" target="_blank" rel="noopener" lang="ja">続きを読む · ナショナル ジオグラフィック日本版</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p10">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★☆</span> <span class="chip mins">2 min</span> <span class="chip" lang="ja">鳥のさえずり</span> <span class="chip" lang="ja">音響学</span> <span class="chip" lang="ja">言語</span> <span class="chip" lang="ja">発声学習</span> <span class="chip" lang="ja">サイエンス</span>
+          </div>
+          <h2 lang="ja">人間の歌や話し言葉は鳥の鳴き声と共通した音響パターンを持っていることが明らかに</h2>
+          <p class="why">367 espécies de aves × 52 línguas humanas: padrões acústicos se sobrepõem — e às vezes o canto de pássaro parece mais com fala humana do que com canto humano (e vice-versa). Aprendizado vocal quase não explica a diferença. Ciência curta e afiada.</p>
+          <div class="source">
+            <span lang="ja">GIGAZINE</span>
+            <a href="https://gigazine.net/news/20261106-human-speech-birdsong/" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>367種の鳥の鳴き声を52の人間言語における歌や話し言葉の例と比較した研究で、人間の歌や話し言葉に見られる音響パターンの多くは、鳥のさえずりにも共通していることが示されました。 Pervasive patterns in bird songs resemble those in human speech and song and are independent of vocal learning | Science https://www.science.org/doi/10.1126/science.adr9983 Human speech follows the same patterns as birdsong — new research https://theconversation.com/human-speech-follows-the-same-patterns-as-birdsong-new-research-295030 鳥の歌はしばしば人間の話し言葉や歌に類似していると説明されますが、具体的な類似性やメカニズムを明らかにするには、広範な比較が必要です。</p>
+            <p>加えて、800以上の話し言葉または歌のフレーズから1万5000以上の要素を含む52の人間の言語についても、グローバルコーパスから分析しています。鳥のデータセットと人間のデータセットを比較することで、発声要素のパターンについて類似点を探っています。結果として、鳥の歌と人間の発声の音響パターンには全体的に多くの類似点が見られたと研究チームは報告しています。</p>
+            <p>全体的な傾向として、鳥の鳴き声は、人間の言葉よりも人間の歌に似ている場合もあったと研究チームは述べています。また、鳥の歌は人間の歌よりも人間の言葉に似ている傾向があることも判明しました。加えて研究では、発声学習能力と発声パターンの形成についても分析しています。多くの鳥類は人間と同様に、成長するにつれて他者から発声の構造を学びます。</p>
+          </div>
+          <p class="continue"><a href="https://gigazine.net/news/20261106-human-speech-birdsong/" target="_blank" rel="noopener" lang="ja">続きを読む · GIGAZINE</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p11">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★☆</span> <span class="chip mins">2 min</span> <span class="chip" lang="ja">Claude Code</span> <span class="chip" lang="ja">プライバシー</span> <span class="chip" lang="ja">User-Agent</span> <span class="chip" lang="ja">Anthropic</span> <span class="chip" lang="ja">セキュリティ</span>
+          </div>
+          <h2 lang="ja">Claude Codeがユーザーのメールアドレスを外部サイトに勝手に送信する問題が発覚、約4カ月前から報告されていたことも判明</h2>
+          <p class="why">Claude Code embutia o e-mail do usuário no User-Agent de curls — inclusive para sites externos; relatos desde agosto, thread no HN, resposta da equipe em 5/11. Aviso prático se você vive de agente.</p>
+          <div class="source">
+            <span lang="ja">GIGAZINE</span>
+            <a href="https://gigazine.net/news/20261106-claude-code-mail-address/" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>今回、Claude Codeが外部サイトにアクセスする際、HTTPリクエストの「User-Agent」という情報にユーザーのメールアドレスを含めていたことがわかりました。User-Agentは、ウェブサイトにアクセスするソフトウェアの名前やバージョンなどを相手のサーバーに伝えるための情報で、通常はブラウザやツールを識別するために使われますが、Claude Codeが実行した一部の通信ではユーザーの個人情報が含まれていたとのこと。</p>
+            <p>さらに8月11日には別のユーザーが同様の問題を報告し、実際の実行ログを公開しました。ログには、Claude Codeが`curl`コマンドで外部サイトのAPIにアクセスする際、User-Agentにメールアドレスを組み込んでいた様子が記録されています。投稿者によると、1時間のセッション中に同様の操作が5回確認されたとのことです。</p>
+            <p>そして10月30日ごろには「Claude CodeがメールアドレスをAIへの指示に含め、それが外部サイトに送信される」という問題が再びHacker Newsに投稿されました。投稿では、AIに渡される情報にメールアドレスが含まれている問題と、AIがその情報を外部に送信する問題の両方が指摘されています。</p>
+            <p>Hacker Newsでは、Claude Codeがメールアドレス以外の情報も送信していたという報告が寄せられました。あるユーザーは、自社のウェブサーバーへのアクセス記録を調べたところ、AIエージェントが作成したUser-Agentに自分の名前、所属企業、チーム名、作業中のプロジェクトのGitHubリポジトリなどが含まれていたと説明しています。</p>
+          </div>
+          <p class="continue"><a href="https://gigazine.net/news/20261106-claude-code-mail-address/" target="_blank" rel="noopener" lang="ja">続きを読む · GIGAZINE</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p12">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★★</span> <span class="chip mins">4 min</span> <span class="chip" lang="ja">Claude Code</span> <span class="chip" lang="ja">バイブコーディング</span> <span class="chip" lang="ja">サブエージェント</span> <span class="chip" lang="ja">CLAUDE.md</span> <span class="chip" lang="ja">計測</span>
+          </div>
+          <h2 lang="ja">コードを読まずにバイブコーディングしたら、Claude Codeは分かっていてスルーしていた</h2>
+          <p class="why">Dashboard de 12k linhas sem ler código: Claude sabia que o contador de tokens ignorava subagentes, anotou “deixar para depois” no meio da resposta — e o refactor “antes=depois” preservou o bug. Lição: ler os 3 lugares onde o mesmo número aparece. Melhor peça AI/dev do dia.</p>
+          <div class="source">
+            <span lang="ja">Zenn（ネクスタ）</span>
+            <a href="https://zenn.dev/nexta_/articles/42a828ca2b8a02" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>Claude Code のセッションを、VSCode の拡張機能で5つほど並べて使っている。 Markdown が見やすく、コードも見られて、VSCode から離れなくて済むからだ。ただ、パネルの見出しは短く、5枚並べるとどれが何をしているのか分からなくなる。使用枠があとどれくらい持つのかも気になる。</p>
+            <p>作るときに1つ決めたことがある。コードは一切読まない。 1年前にもバイブコーディングの連載を書いたが、そのときはコードを読みながら AI と作っていた。今回は読まずに作るとどうなるかを試したかったので、画面の動きだけを見て「こう動いてほしい」と伝え、直させることを繰り返した。見た目だけは途中で気に入らなくなり、AI と相談して余白・文字の大きさ・色の意味の決まりを作った。</p>
+            <p>初期版は1週間ほどで固まり、1か月足らずでほぼ今の形になった。コードは約12,000行ある。速さは想像以上だった。</p>
+            <p>この記事は、その読まなかったコードの中に何があったか、という話だ。しかも AI は、それに気づいていた。</p>
+            <p>……</p>
+            <p>あった。「1日に使ったトークン」の数え方が、画面によって2通りあった。</p>
+            <p>使用枠の推移の画面は、サブエージェントが使った分を親のセッションに足して数えている。サブエージェント（重い調査を任せる子のエージェント）の記録は親とは別のファイルに書かれるので、5時間枠ごとに見ると、実際の 1/9 ほどに見える回があった。その対策だ。ところが作業履歴とセッションカレンダーは、親のセッションの記録だけを数えていた。</p>
+            <p>……</p>
+            <p>Claude Code の会話の記録は既定では約30日で消えるが、このダッシュボードは依頼と返答の文を自前で控えている。それを遡ると、経緯はこうだった。</p>
+            <p>これまでの5時間枠の按分は、サブエージェントの消費を1つも数えていませんでした。（中略）8.8倍の過小評価でした。今回から親に合算しています。</p>
+            <p>同じ報告の中には作業履歴の画面にも手を入れたと書いてある（見出しの付け方を直した）。同じ日に同じファイルを触っていながら、作業履歴のトークンの数え方には一言も触れていない。</p>
+            <p>10日後のリファクタリングでは、作業履歴とセッション一覧の組み立てを1つにまとめた。確かめ方は「直す前と後で、画面のデータが一致するか」。作業履歴は前から親の記録だけを数えていたので、一致して通った。ずれも一緒に、そのまま守られた。</p>
+            <p>……</p>
+            <p>その4日後、詳細ページの設計を相談していたとき、Claude は回答の途中にこう書いていた。</p>
+          </div>
+          <p class="continue"><a href="https://zenn.dev/nexta_/articles/42a828ca2b8a02" target="_blank" rel="noopener" lang="ja">続きを読む · Zenn（ネクスタ）</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p13">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★☆</span> <span class="chip mins">2 min</span> <span class="chip" lang="ja">阪急神戸線</span> <span class="chip" lang="ja">武庫川新駅</span> <span class="chip" lang="ja">尼崎</span> <span class="chip" lang="ja">西宮</span> <span class="chip" lang="ja">インフラ</span>
+          </div>
+          <h2 lang="ja">阪急「異色の新駅」ついに完成イメージが明らかに 今年度から工事に着手へ 建設地は“川の真上”！</h2>
+          <p class="why">Estação nova da Hankyū Kōbe Line bem em cima da ponte do Mukogawa (entre Mukogayaso e Nishinomiya-Kitaguchi): obras 2026, abertura ~2031, ¥8,6 bi divididos 1/3 cidade×2 + Hankyū. Infra Hyogo bem concreta.</p>
+          <div class="source">
+            <span lang="ja">乗りものニュース</span>
+            <a href="https://trafficnews.jp/post/710335" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>阪急神戸線の武庫之荘～西宮北口間に新設される武庫川新駅の完成イメージが明らかになりました。</p>
+            <p>兵庫県尼崎市は2026年9月11日、阪急神戸線の武庫之荘～西宮北口間に設ける武庫川新駅の完成イメージを明らかにしました。同市は2026年度から駅舎工事に着手し、2031年度末の開業を目指すとしています。</p>
+            <p>新駅は武庫之荘駅から約1.6km、西宮北口駅から約1.7kmの武庫川橋梁上に設けられます。ホームは上下線とも8両編成に対応した2面で、西宮・尼崎の両市側に改札口が設置予定となっています。また、高架下には駐輪場や生活利便施設も設けられます。</p>
+            <p>整備費用は86億円で、西宮市と尼崎市、阪急電鉄がそれぞれ3分の1ずつ負担します。両市の負担分は国庫補助を活用する想定です。</p>
+            <p>尼崎市は新駅を「生活拠点」として位置づけており、都市緑地や都市農地など、身近な自然がある地域の特色を活かしたまちづくりを進める方針。さらに徒歩や自転車、公共交通を組み合わせた、歩きたくなる健康的な暮らしを促進するとしています。</p>
+            <p>駅周辺では、堤防道路へのアクセス路や交差点の改良、南北道路の新設、水路暗渠化による道路拡幅なども予定されており、新駅が開業する2031年度までに完了する見込みです。</p>
+          </div>
+          <p class="continue"><a href="https://trafficnews.jp/post/710335" target="_blank" rel="noopener" lang="ja">続きを読む · 乗りものニュース</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p14">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★☆</span> <span class="chip mins">2 min</span> <span class="chip" lang="ja">アラル海</span> <span class="chip" lang="ja">ウズベキスタン</span> <span class="chip" lang="ja">灌漑</span> <span class="chip" lang="ja">環境破壊</span> <span class="chip" lang="ja">モイナク</span>
+          </div>
+          <h2 lang="ja">気温50度！ 塩の砂漠に広がる「船の墓場」 “映え”では済まない20世紀最大の環境破壊の現場</h2>
+          <p class="why">Moynaq, Uzbequistão: o 4º maior lago do mundo virou deserto de sal com navios enferrujados — algodão soviético desviou Syr Darya e Amu Darya. Não é só “foto Instagram”; é o desastre ambiental do século XX em escala.</p>
+          <div class="source">
+            <span lang="ja">乗りものニュース</span>
+            <a href="https://trafficnews.jp/post/724801" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>ウズベキスタンの西方には世界第4位の広さを誇った塩湖「アラル海」がありましたが、ソ連時代の灌漑によって面積が減少し、干上がって砂漠化した湖面跡には遺棄された漁船がいくつも横たわっていました。</p>
+            <p>中央アジアの内陸国ウズベキスタンは、紀元前よりシルクロードの交易中心地となり、7～8世紀頃にアラブ人征服によってイスラム化しました。19世紀から中央アジアを征服したロシア帝国の一部となり、ロシア革命後はソビエト連邦のウズベク・ソビエト社会主義共和国に、そしてソ連崩壊によって1991年9月1日、ソ連からウズベキスタンへと独立しました。</p>
+            <p>首都のタシュケントから、西へ約1100kmの都市ヌクス。そこから北へ約200kmの町モイナクには、かつて面積世界第4位の湖「アラル海」が面していました。アラル海はカスピ海のような内陸の塩湖で、カザフスタンとウズベキスタンにまたがっています。</p>
+            <p>アラル海は古来よりチョウザメや淡水魚などの漁業が盛んで、水源となるシルダリヤ川とアムダリア川との川岸などは湿地帯となり、渡り鳥の飛来地や豊かな生態系を形成していました。</p>
+            <p>しかし、今や世界第4位の面影はありません。第二次世界大戦が終了したあとソ連の「自然改造計画」という農地改革に基づき、乾燥地帯の砂漠を綿花栽培の農地に変えるため、大規模な灌漑事業が行われました。アラル海に注ぐシルダリヤ川とアムダリア川を灌漑用水として使用し、水路を引いて大規模な綿花栽培を展開したのです。</p>
+          </div>
+          <p class="continue"><a href="https://trafficnews.jp/post/724801" target="_blank" rel="noopener" lang="ja">続きを読む · 乗りものニュース</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p15">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★★</span> <span class="chip mins">3 min</span> <span class="chip" lang="ja">HYDE</span> <span class="chip" lang="ja">JEKYLL</span> <span class="chip" lang="ja">オーケストラ</span> <span class="chip" lang="ja">ROENTGEN</span> <span class="chip" lang="ja">ぴあアリーナMM</span>
+          </div>
+          <h2 lang="ja">HYDE×オーケストラ協演「JEKYLL」ツアー国内編終幕、音楽の街・横浜に響いた豊潤な歌とアンサンブル</h2>
+          <p class="why">Live report do fim da turnê JEKYLL em Yokohama: trono, orquestra em três níveis, loop ROENTGEN→JEKYLL→ROENTGEN, pudim Marlowe no palco, e LAST SONG sob penas brancas. Rock/orquestra no gosto Kansai sem fofoca.</p>
+          <div class="source">
+            <span lang="ja">音楽ナタリー</span>
+            <a href="https://natalie.mu/music/news/667197" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>HYDE のオーケストラツアー「HYDE Orchestra Tour 2026 JEKYLL」の国内最終公演が、4月1日に神奈川・ぴあアリーナMMで行われた。</p>
+            <p>今年1月に、音楽都市としても知られる福島・郡山で幕を開け、全国のホール会場を中心に展開された「HYDE Orchestra Tour 2026 JEKYLL」。HYDEは弦楽ダブルカルテット、管楽器隊、コーラスを擁する総勢22名からなるJEKYLLオーケストラとともに各地を巡り、1stアルバム「ROENTGEN」の続編となる最新アルバム「JEKYLL」の世界を来場者に余すことなく届けた。</p>
+            <p>ステージを覆っていた緞帳がなめらかに上がり、観客の目には3段のひな壇の上にスタンバイするJEKYLLオーケストラのメンバー、そして玉座に座るHYDEのシルエットが飛び込んでくる。オーケストラの演奏が厳かに始まり、その音に合わせておもむろに立ち上がったHYDEは、トレンチコートの裾を揺らしながら甘やかな声で「DIE HAPPILY」を歌い出した。</p>
+            <p>……</p>
+            <p>「『JEKYLL』へようこそ」。恭しくそう告げたHYDEは、改めて「JEKYLL」について言及する。「25年前に1stアルバム『ROENTGEN』というのをリリースいたしました。そのアルバムはオーケストラを主体とした、映画音楽だったり、ジャジーな雰囲気のアルバムで。すごく大変だったので、第2弾をなかなか作ることができなかったんですが、25年経ってやっと、第2弾をリリースすることができました」としみじみ。</p>
+            <p>ライブの導入こそアダルトな側面を打ち出していたHYDEだったが、「僕がレストランのオーナーとなって、年に一度現れるお客様を歓迎するという曲」という紹介とともに始まった「SO DREAMY」では、心をとろかすチャーミングな歌声で1万人の観客をもてなし、ぴあアリーナMMをクリスマスシーズンへと誘っていく。</p>
+          </div>
+          <p class="continue"><a href="https://natalie.mu/music/news/667197" target="_blank" rel="noopener" lang="ja">続きを読む · 音楽ナタリー</a></p>
+        </div>
+      </article>
+
+      <footer class="site">読解幕 · 2026-11-06 · ~44 min · <a href="/japanese-digest/history/" style="color:inherit">History</a> · deliton.github.io/japanese-digest</footer>
+    </main>
+  </div>
+</body>
+</html>
