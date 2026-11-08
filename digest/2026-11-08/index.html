@@ -1,0 +1,933 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>読解幕 · 2026-11-08 · Japanese Digest</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Noto+Serif+JP:wght@400;600;700&family=Shippori+Mincho:wght@500;700&display=swap" rel="stylesheet" />
+  <style>
+
+    :root {
+      --bg: #0a0a0a;
+      --bg-2: #121212;
+      --bg-card: #161616;
+      --ink: #f5f5f5;
+      --ink-dim: #a8a29a;
+      --ink-mute: #6b6560;
+      --shu: #c41e3a;
+      --shu-hot: #e11d48;
+      --shu-deep: #8b1228;
+      --gold: #d4a017;
+      --gold-soft: #c9a227;
+      --white: #fafafa;
+      --line: #2a2a2a;
+      --line-hot: rgba(196, 30, 58, 0.45);
+      --measure: 42rem;
+      --radius: 4px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: "Noto Sans JP", "Hiragino Sans", "Yu Gothic", system-ui, sans-serif;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .stage-bar {
+      height: 6px;
+      background: repeating-linear-gradient(
+        90deg,
+        var(--shu) 0 48px,
+        var(--white) 48px 56px,
+        #111 56px 64px,
+        var(--gold) 64px 72px,
+        #111 72px 88px
+      );
+    }
+
+    .wrap {
+      width: min(100% - 2rem, 74rem);
+      margin: 0 auto;
+      padding: 2rem 0 4.5rem;
+      display: grid;
+      grid-template-columns: 15.5rem 1fr;
+      gap: 2.75rem;
+      align-items: start;
+    }
+
+    @media (max-width: 900px) {
+      .wrap { grid-template-columns: 1fr; gap: 1.5rem; padding-top: 1.25rem; }
+      .sidebar { position: static !important; }
+    }
+
+    .sidebar { position: sticky; top: 1.25rem; }
+
+    .brand {
+      display: flex;
+      align-items: baseline;
+      gap: 0.55rem;
+      margin: 0 0 0.35rem;
+    }
+    .brand-mark {
+      font-family: "Shippori Mincho", "Noto Serif JP", serif;
+      font-size: 1.85rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      color: var(--white);
+      line-height: 1;
+    }
+    .brand-mark em {
+      font-style: normal;
+      color: var(--shu);
+    }
+    .brand-sub {
+      font-size: 0.65rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-weight: 700;
+    }
+
+    .meta {
+      color: var(--ink-mute);
+      font-size: 0.8rem;
+      margin: 0 0 1.25rem;
+    }
+
+    .stat-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-bottom: 1.35rem;
+    }
+    .stat {
+      border: 1px solid var(--line);
+      background: var(--bg-2);
+      padding: 0.32rem 0.65rem;
+      font-size: 0.72rem;
+      color: var(--ink-dim);
+      border-radius: var(--radius);
+    }
+    .stat strong { color: var(--white); font-weight: 700; }
+    .stat.hot {
+      border-color: var(--shu);
+      color: var(--shu-hot);
+      background: rgba(196, 30, 58, 0.1);
+    }
+
+    .toc {
+      border: 1px solid var(--line);
+      background: var(--bg-2);
+      padding: 0.85rem 0.9rem 0.95rem;
+      border-radius: var(--radius);
+    }
+    .toc h2 {
+      margin: 0 0 0.65rem;
+      font-size: 0.72rem;
+      letter-spacing: 0.16em;
+      color: var(--gold);
+      font-weight: 800;
+    }
+    .toc ol { list-style: none; margin: 0; padding: 0; }
+    .toc li { margin: 0; }
+    .toc a {
+      display: flex;
+      justify-content: space-between;
+      gap: 0.5rem;
+      text-decoration: none;
+      color: var(--ink-dim);
+      font-size: 0.82rem;
+      padding: 0.38rem 0.2rem;
+      border-bottom: 1px solid transparent;
+    }
+    .toc a:hover { color: var(--white); border-bottom-color: var(--line-hot); }
+    .toc .t-title { font-weight: 600; }
+    .toc .t-min { color: var(--gold); font-size: 0.72rem; font-weight: 700; flex-shrink: 0; }
+
+    .main { max-width: var(--measure); }
+
+    .digest-banner {
+      display: flex;
+      gap: 0.75rem;
+      align-items: flex-start;
+      background: #141014;
+      border: 1px solid var(--line);
+      border-left: 3px solid var(--shu);
+      padding: 0.85rem 1rem;
+      margin-bottom: 1.5rem;
+      font-size: 0.78rem;
+      color: var(--ink-dim);
+      line-height: 1.55;
+    }
+    .digest-banner .tag {
+      flex-shrink: 0;
+      background: var(--shu);
+      color: #fff;
+      font-size: 0.65rem;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      padding: 0.28rem 0.5rem;
+      border-radius: var(--radius);
+    }
+
+    .hero {
+      margin-bottom: 2rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid var(--line);
+      position: relative;
+    }
+    .hero::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -1px;
+      width: 4.5rem;
+      height: 2px;
+      background: var(--shu);
+    }
+    .kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.7rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--shu-hot);
+      font-weight: 800;
+      margin-bottom: 0.85rem;
+    }
+    .kicker::before {
+      content: "◆";
+      font-size: 0.55rem;
+      color: var(--gold);
+    }
+    .hero h1 {
+      font-family: "Shippori Mincho", "Noto Serif JP", serif;
+      font-size: clamp(1.85rem, 4vw, 2.55rem);
+      font-weight: 700;
+      line-height: 1.2;
+      margin: 0 0 0.75rem;
+      color: var(--white);
+      letter-spacing: 0.02em;
+    }
+    .hero p {
+      margin: 0;
+      color: var(--ink-dim);
+      font-size: 0.98rem;
+      max-width: 36rem;
+    }
+
+    article.piece {
+      background: var(--bg-card);
+      border: 1px solid var(--line);
+      margin-bottom: 1.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+    article.piece::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: linear-gradient(90deg, var(--shu) 0%, var(--shu) 35%, var(--gold) 35%, var(--gold) 42%, transparent 42%);
+    }
+
+    .piece-inner { padding: 1.6rem 1.55rem 1.35rem; }
+
+    .piece-head {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-bottom: 0.85rem;
+    }
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      border: 1px solid var(--line);
+      background: #111;
+      color: var(--ink-dim);
+      padding: 0.22rem 0.6rem;
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      border-radius: var(--radius);
+    }
+    .chip.interest {
+      border-color: var(--shu);
+      color: var(--shu-hot);
+      background: rgba(196, 30, 58, 0.12);
+    }
+    .chip.mins {
+      border-color: var(--gold);
+      color: var(--gold);
+      background: transparent;
+    }
+
+    .piece h2 {
+      font-family: "Noto Serif JP", "Shippori Mincho", "Yu Mincho", serif;
+      font-size: 1.38rem;
+      font-weight: 700;
+      line-height: 1.5;
+      margin: 0 0 0.6rem;
+      color: var(--white);
+      letter-spacing: 0.02em;
+    }
+
+    .why {
+      margin: 0 0 1rem;
+      color: var(--ink-dim);
+      font-size: 0.9rem;
+      border-left: 2px solid var(--gold);
+      padding-left: 0.85rem;
+    }
+
+    .source {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.65rem 1.1rem;
+      font-size: 0.76rem;
+      color: var(--ink-mute);
+      margin-bottom: 1.25rem;
+    }
+    .source a {
+      color: var(--shu-hot);
+      text-decoration: none;
+      font-weight: 600;
+    }
+    .source a:hover { color: var(--gold); }
+
+    .ja {
+      font-family: "Noto Serif JP", "Hiragino Mincho ProN", "Yu Mincho", serif;
+      font-size: 1.08rem;
+      line-height: 2;
+      letter-spacing: 0.03em;
+      color: #ebe7e1;
+    }
+    .ja p { margin: 0 0 1.15em; }
+    .ja p:last-child { margin-bottom: 0; }
+
+    .continue {
+      margin-top: 1.25rem;
+      padding-top: 1rem;
+      border-top: 1px solid var(--line);
+      font-size: 0.86rem;
+    }
+    .continue a {
+      color: var(--white);
+      text-decoration: none;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      border-bottom: 2px solid var(--shu);
+      padding-bottom: 0.1rem;
+    }
+    .continue a:hover {
+      color: var(--shu-hot);
+      border-bottom-color: var(--gold);
+    }
+
+    footer.site {
+      max-width: var(--measure);
+      margin-top: 1.75rem;
+      color: var(--ink-mute);
+      font-size: 0.72rem;
+      letter-spacing: 0.06em;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+    footer.site::before {
+      content: "";
+      width: 1.25rem;
+      height: 2px;
+      background: var(--shu);
+    }
+
+  
+    .excerpt-label { font-size: 0.66rem; letter-spacing: 0.18em; color: var(--gold); font-weight: 800; margin: 0 0 0.6rem; }
+    .brand-sub a, .stat a { color: var(--gold); text-decoration: none; }
+    .toc .t-min { font-variant-numeric: tabular-nums; }
+  </style>
+</head>
+<body>
+  <div class="stage-bar" aria-hidden="true"></div>
+
+  <div class="wrap">
+    <aside class="sidebar">
+      <div class="brand">
+        <span class="brand-mark" lang="ja">読解<em>幕</em></span>
+      </div>
+      <p class="brand-sub">Kabuki Digest · <a href="/japanese-digest/history/">History</a></p>
+      <p class="meta">2026-11-08 · America/Sao_Paulo</p>
+      <div class="stat-row">
+        <span class="stat"><strong>42</strong> min</span>
+        <span class="stat"><strong>15</strong> pieces</span>
+        <span class="stat"><strong>~12,000</strong> 字</span>
+        <span class="stat"><a href="/japanese-digest/history/">History</a></span>
+      </div>
+
+      <nav class="toc" aria-label="Índice">
+        <h2 lang="ja">本日の演目</h2>
+        <ol>
+          <li>
+            <a href="#p1">
+              <span class="t-title" lang="ja">福島正則はなぜ約50万石を失ったのか</span>
+              <span class="t-min">4′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p2">
+              <span class="t-title" lang="ja">承久の乱――後鳥羽上皇はなぜ幕府を討ったか</span>
+              <span class="t-min">4′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p3">
+              <span class="t-title" lang="ja">紅山文化の7基の土坑は北斗七星か</span>
+              <span class="t-min">3′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p4">
+              <span class="t-title" lang="ja">三星堆の青銅器は赤と黒に彩られていた</span>
+              <span class="t-min">3′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p5">
+              <span class="t-title" lang="ja">9000年前の黒曜石の矢尻、模様は全部バラバラ</span>
+              <span class="t-min">3′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p6">
+              <span class="t-title" lang="ja">幽霊屋敷で1000人が歩いた過去最大の実験</span>
+              <span class="t-min">3′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p7">
+              <span class="t-title" lang="ja">超音波ビームで従来の6倍先まで物体を浮かす</span>
+              <span class="t-min">3′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p8">
+              <span class="t-title" lang="ja">500年ぶり、ネス湖にビーバーが帰還する</span>
+              <span class="t-min">2′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p9">
+              <span class="t-title" lang="ja">サンアンドレアスの「地震の門」カホン・パス</span>
+              <span class="t-min">2′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p10">
+              <span class="t-title" lang="ja">驚くと瞳孔が開くのは脳の「更新」の副作用</span>
+              <span class="t-min">2′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p11">
+              <span class="t-title" lang="ja">透かしがユーザーを追う「スパイマーク」になる</span>
+              <span class="t-min">3′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p12">
+              <span class="t-title" lang="ja">Claude Code、作業フォルダの外へのWriteを止める鍵</span>
+              <span class="t-min">4′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p13">
+              <span class="t-title" lang="ja">会議で上司が質問するだけだと逆効果？</span>
+              <span class="t-min">2′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p14">
+              <span class="t-title" lang="ja">ANA、聖地・下地島で12年ぶり訓練再開</span>
+              <span class="t-min">2′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p15">
+              <span class="t-title" lang="ja">BABYMETAL、デラックス盤と南米ツアー</span>
+              <span class="t-min">2′</span>
+            </a>
+          </li>
+        </ol>
+      </nav>
+    </aside>
+
+    <main class="main">
+      <div class="digest-banner">
+        <span class="tag">TRIAGE</span>
+        <span>História: kaieki de Fukushima Masanori (hoje no BUSHOO, ângulo Edo/permissão — não mais uma biografia de Hideyoshi) + Jōkyū no (Kamakura: Gotoba vs Yoshitoki, virada de fontes). China: Hongshan e a Ursa Maior no chão; Sanxingdui a cores (cinábrio e laca). Ciência: pontas de obsidiana sem padrão; Hampton Court com 1027 pessoas; levitação por ultrassom em Tsukuba; castores no Loch Ness; “portão sísmico” no NatGeo (paywall depois do lede, usamos só o trecho livre). IA/dev: spymarks vs watermarks; teste honesto do blockWritesOutsideWorkingDirectories no Claude Code (hoje). Reunião/pupilas no GIGAZINE. Infra: ANA volta a Shimojishima. Rock: BABYMETAL deluxe + São Paulo 28/11 — anúncio de abril (FOX DAY), não entrevista longa. Pontos fracos: Kobe NP (大中遺跡まつり / 出石城まつり) só lead atrás de paywall, caímos o slot; um Zenn de React+Cursor era dica de 800 caracteres e foi trocado pelo teste de permissão; 乗りもの é curto como de costume.</span>
+      </div>
+
+      <header class="hero">
+        <div class="kicker">Daily curated reading</div>
+        <h1 lang="ja">福島正則の改易、承久の乱と後鳥羽の不信、紅山の北斗七星土坑、三星堆の彩色青銅、9000年前の矢尻模様、幽霊屋敷1000人実験、超音波浮遊、ネス湖のビーバー、地震の門、瞳孔とスパイマーク、Claudeの外書き禁止、会議の傾聴、ANA下地島、BABYMETALデラックス</h1>
+        <p lang="ja">今日の幕は、本日配信の武将ジャパンから――賤ヶ岳七本槍の筆頭・福島正則が広島約50万石を洪水後の無断修復で失う改易の経緯と、鎌倉へ時代を戻して後鳥羽上皇が北条義時を討とうとした承久の乱を、実朝暗殺・地頭問題・政子の演説・隠岐配流まで辿る再検討。草の実堂では、紅山文化・牛河梁で見つかった北斗七星に似た7基の紅焼土坑と、三星堆の青銅器が錆色ではなく辰砂の赤と漆の黒に彩られていたという2025年の研究成果。科学の幕は、アナトリアの9000年前の黒曜石矢尻に彫られたバラバラの幾何学模様、ハンプトン・コート宮殿で1027人が歩いた幽霊屋敷実験、筑波大学の超音波ベッセルビームによる6倍距離の音響浮遊、500年ぶりにネス湖へ帰還するビーバー、サンアンドレアスとサンジャシントが交わる「地震の門」カホン・パス。GIGAZINEでは、驚きで瞳孔が開くのは脳の更新の副作用だとする研究、AIの透かしがユーザー追跡の「スパイマーク」になる懸念、会議で上司が質問するだけで聞かないと逆効果になる実験。開発者の幕はZennで、Claude Codeの新設定blockWritesOutsideWorkingDirectoriesを4つの権限モードで測った記録。鉄道ならぬ空のインフラは、ANAが聖地・下地島空港で12年ぶりにタッチアンドゴー訓練を再開した話。締めはBABYMETAL初のデラックス盤と、11月28日サンパウロを含む中南米ツアー。約42分の読解です。</p>
+      </header>
+
+      <article class="piece" id="p1">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★★</span> <span class="chip mins">4 min</span> <span class="chip" lang="ja">福島正則</span> <span class="chip" lang="ja">改易</span> <span class="chip" lang="ja">広島城</span> <span class="chip" lang="ja">徳川秀忠</span> <span class="chip" lang="ja">賤ヶ岳七本槍</span>
+          </div>
+          <h2 lang="ja">福島正則はなぜ改易された？秀吉子飼いの大大名が約50万石を失うまで</h2>
+          <p class="why">Hoje no BUSHOO: Fukushima Masanori, primo de Hideyoshi e o mais premiado das Sete Lanças de Shizugatake, chega a quase 500 mil koku em Hiroshima — e perde tudo em 1619 porque consertou o castelo após uma enchente sem licença de Hidetada e atrasou a demolição ordenada. Não é “o Tokugawa odiava o Toyotomi”: é permissão, dilação e kaieki.</p>
+          <div class="source">
+            <span lang="ja">BUSHOO!JAPAN（武将ジャパン）</span>
+            <a href="https://bushoojapan.com/bushoo/toyotomi/2026/11/08/222866" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>秀吉子飼いの代表格である福島正則（ふくしままさのり）。</p>
+            <p>大河ドラマ『豊臣兄弟』にも登場する賤ヶ岳の七本槍であり、関ヶ原では石田三成と対立してその後約50万石の大大名にまで上り詰めています。</p>
+            <p>というと、広島の領地を取り上げられたのは有名ですが、なぜそんな事態へ追い込まれたのか、どんな最期を迎えたのか？という点についてはあまり注目されてないようにも思われます。</p>
+            <p>秀吉のもとでの出世から改易まで、福島正則の歩みを振り返ってみましょう。</p>
+            <p>福島正則は永禄四年（1561年）に尾張で生まれ、幼名を市松といいました。</p>
+            <p>母は、秀吉の叔母（父の妹）とされ、従兄弟という関係。</p>
+            <p>……</p>
+            <p>幼い頃から羽柴秀吉に仕えたと伝わり、その名が大きく上がったのは、天正十一年（1583年）の賤ヶ岳の戦いでした。</p>
+            <p>柴田勝家の軍勢に攻めかかって一番槍の手柄を立て、5000石を与えられたのです。</p>
+            <p>いわゆる「賤ヶ岳の七本槍」の一人ですが、ほかの面々が3000石だったのに対し、正則だけが5000石という別格の扱いだったのはなぜか？</p>
+            <p>研究者の黒田基樹氏は編書『戦国武将列伝別巻2 豊臣編』の中で、この差は正則が秀吉の父方の親族だったためと見ています。</p>
+            <p>その後、伊予の大名を経て、文禄四年（1595年）には尾張清須20万石の領主となり、秀吉の近習から出た者としては、ほぼ最大クラスの石高を得ました。</p>
+            <p>朝鮮出兵（文禄の役）では、戦うだけでなく、兵糧米を各陣所へ配って回る城米奉行も務めており、槍働きだけの武将ではなかったんですね。</p>
+            <p>……</p>
+            <p>では秀吉が亡くなった後、正則は誰を頼ったのか？</p>
+            <p>慶長三年（1598年）8月に豊臣秀吉が亡くなると、豊臣政権の内部では対立が深まっていきます。</p>
+            <p>その中で福島正則が選んだのは、徳川家康でした。</p>
+            <p>慶長五年（1600年）の関ヶ原の戦いでは、家康方の有力大名として美濃の岐阜城攻めから働き、戦後は大坂城の受け取りまで家康方の軍政を担っています。</p>
+            <p>このとき、正則の嫡男が家康の養女を妻に迎えており、その縁で家康についた――という話を聞いた方もいるかもしれません。</p>
+            <p>しかし黒田氏によると、この結婚は家康が征夷大将軍になった後のことで、関ヶ原の時点ではまだ成立していなかったと見られます。</p>
+            <p>戦後は、関ヶ原での一連の功績により、旧毛利領の安芸・備後二か国を与えられ、広島城に入りました。</p>
+          </div>
+          <p class="continue"><a href="https://bushoojapan.com/bushoo/toyotomi/2026/11/08/222866" target="_blank" rel="noopener" lang="ja">続きを読む · BUSHOO!JAPAN（武将ジャパン）</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p2">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★★</span> <span class="chip mins">4 min</span> <span class="chip" lang="ja">承久の乱</span> <span class="chip" lang="ja">後鳥羽上皇</span> <span class="chip" lang="ja">北条義時</span> <span class="chip" lang="ja">源実朝</span> <span class="chip" lang="ja">六波羅探題</span>
+          </div>
+          <h2 lang="ja">なぜ承久の乱は勃発しどう鎮圧されたのか？後鳥羽上皇が抱いた不信感</h2>
+          <p class="why">Virada para Kamakura: Gotoba não era um louco sem exército — tinha shōen, Hokumen/Saimen e até shugo do bakufu. O assassinato de Sanetomo, o jitō que era o próprio Yoshitoki e mil homens de Tokifusa em Kyoto fecham o diagnóstico. Discurso de Masako, 1–2 mil do bakufu vs ~1700 da corte, e o “súdito julga o jōkō” que Hongō chama de um dos maiores pontos de virada.</p>
+          <div class="source">
+            <span lang="ja">BUSHOO!JAPAN（武将ジャパン）</span>
+            <a href="https://bushoojapan.com/jphistory/middle/2025/05/13/125097" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>承久三年（1221年）5月14日は承久の乱が勃発した日です。</p>
+            <p>後鳥羽上皇が鎌倉幕府に対抗する兵を挙げ、約1ヶ月で鎮圧された出来事ですね。</p>
+            <p>朝廷の軍が武家政権に負けた――そんな衝撃的な展開であり、『鎌倉殿の13人』ではドラマ最終盤のクライマックスにもなりましたが、不思議なことに世間的にはあまりインパクトがない気もします。</p>
+            <p>しかし、この一件は、日本史上でもかなり大きな転換点と指摘されることもあります。</p>
+            <p>本稿では、事件前の時点から、流れを追っていきましょう。</p>
+            <p>……</p>
+            <p>後鳥羽上皇は、歴代天皇の中でも相当な能力の持ち主でした。</p>
+            <p>荘園を集めることによって、主に畿内＆西日本の政治経済を動かしていたばかりか、幕府と戦うための軍事力も有していたのです。</p>
+            <p>本人も武芸に通じ、武士団（北面の武士・西面の武士）を掌握。</p>
+            <p>「西面の武士は身辺警護強化のため」という見方もありますので、この辺は意見が分かれるところですけれども、鎌倉幕府の御家人も味方に引き入れるなどして、その強化を着々と進めていました。</p>
+            <p>さらに、日本各地で幕府の派遣した守護・地頭と、朝廷から派遣された国司の間でトラブルが起きるようになります。</p>
+            <p>税は無限に取れるわけではありませんから、どちらかが税を取ればもう一方に収める分がなくなり、庶民も徴税しそこねたほうも困るわけです。</p>
+            <p>頼朝から将軍を継いだ長男の源頼家が周囲と協調できずに排除されると、母である北条政子と叔父の北条義時が幕府の実権を掌握。</p>
+            <p>頼朝の次男である三幡（源実朝）が慌ただしく元服して、将軍を継ぐことになりました。</p>
+            <p>「実朝」の名は後鳥羽上皇が与えたものですので、上皇が最初から新将軍と事を構えようとしていたとは考えにくいところです。</p>
+            <p>……</p>
+            <p>一方で後鳥羽上皇は、鎌倉幕府（という武士軍団）はあくまで朝廷の下に位置させるという考えであり、幕府に干渉する権利もあると捉えていました。</p>
+            <p>そもそも幕府の代表者である征夷大将軍は、朝廷から任命される役職ですから。</p>
+            <p>そこで後鳥羽上皇は、まだ若く文化にも興味があり「妻には公家の姫を迎えたい」と希望していた源実朝をガッチリ抱え込もうと考えたのでした。</p>
+            <p>後鳥羽上皇にしてみれば、この時点で北条氏は「二代続けて将軍を横死させた者ども」ということにもなる。</p>
+          </div>
+          <p class="continue"><a href="https://bushoojapan.com/jphistory/middle/2025/05/13/125097" target="_blank" rel="noopener" lang="ja">続きを読む · BUSHOO!JAPAN（武将ジャパン）</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p3">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★★</span> <span class="chip mins">3 min</span> <span class="chip" lang="ja">紅山文化</span> <span class="chip" lang="ja">牛河梁</span> <span class="chip" lang="ja">北斗七星</span> <span class="chip" lang="ja">紅焼土坑</span> <span class="chip" lang="ja">新石器</span>
+          </div>
+          <h2 lang="ja">5000年以上前の遺跡に「北斗七星」？ 紅山文化で発見された7基の謎の土坑</h2>
+          <p class="why">Arqueologia chinesa com mistério de céu: em Niuheliang (cultura Hongshan, ~6500–5000 anos), 7 fossos de terra queimada vermelha alinhados como a Ursa Maior. Os pesquisadores não cravam “calendário”, mas o altar de três círculos já tinha sido lido como solstícios — e agora o céu volta ao sítio.</p>
+          <div class="source">
+            <span lang="ja">草の実堂</span>
+            <a href="https://kusanomido.com/study/history/chinese/132416/" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>紅山文化（こうさんぶんか）とは、今から約6500～5000年前、中国東北部の遼寧省西部から内モンゴル自治区東南部などに広がった新石器時代の文化である。</p>
+            <p>人々は粟（あわ）や黍（きび）などを栽培する一方、狩猟や採集、魚を捕るなどして生活していたと考えられている。</p>
+            <p>紅山文化を代表する遺跡の一つが、遼寧省西部にある牛河梁（ぎゅうかりょう）遺跡である。</p>
+            <p>牛河梁遺跡は1981年に発見され、1983年から本格的な発掘調査が始まった。</p>
+            <p>その後40年以上にわたって調査が続けられ、神殿や祭壇、積石塚（つみいしづか）と呼ばれる墓地、大量の玉器などが発見されている。</p>
+            <p>なかでもよく知られているのが、女神廟（じょしんびょう）から出土した「紅山文化女神像」だ。</p>
+            <p>牛河梁では現在も発掘が続けられており、紅山文化の社会や信仰について新たな発見が相次いでいる。</p>
+            <p>そして2026年、これまでとは少し変わった遺構が注目を集めることになった。</p>
+            <p>……</p>
+            <p>2026年8月、牛河梁遺跡の新たな発掘成果が公表された。</p>
+            <p>牛河梁遺跡の第一地点では、これまでに9基の大型台基（だいき）と付属施設からなる大規模な建築群が確認されている。</p>
+            <p>なかでも今回注目されたのが、7号台基から発見された7基の「紅焼土坑（こうしょうどこう）」である。</p>
+            <p>紅焼土とは、強い熱を受けて赤く焼けた土のことで、7基の土坑は一定の規則をもって配置されていた。</p>
+            <p>その並び方が、夜空に浮かぶ「北斗七星」と非常によく似ていたのである。</p>
+            <p>もちろん、7つ並んでいるからといって、それだけで北斗七星を表したものだと断定することはできない。</p>
+            <p>しかし発掘を率いる研究者は、紅山文化の人々が天体や宇宙に対する認識を地上に表現した可能性があるとみている。</p>
+            <p>……</p>
+            <p>北斗七星は、北の空に見える七つの明るい星からなる星の並びである。</p>
+            <p>地球から見ると北極星の周囲を回るように動き、季節によって「斗柄（とへい）」と呼ばれる柄の部分が指す方向も変化する。</p>
+            <p>そのため中国では後世、北斗七星の向きと季節を結びつける考え方が生まれた。</p>
+          </div>
+          <p class="continue"><a href="https://kusanomido.com/study/history/chinese/132416/" target="_blank" rel="noopener" lang="ja">続きを読む · 草の実堂</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p4">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★☆</span> <span class="chip mins">3 min</span> <span class="chip" lang="ja">三星堆</span> <span class="chip" lang="ja">古蜀</span> <span class="chip" lang="ja">彩色青銅器</span> <span class="chip" lang="ja">辰砂</span> <span class="chip" lang="ja">商代</span>
+          </div>
+          <h2 lang="ja">「宇宙人のような仮面」で知られる3000年前の三星堆遺跡 〜新たな研究成果</h2>
+          <p class="why">As máscaras “de extraterrestre” de Sanxingdui não nasceram verde-de-ferrugem: o fórum de 2025 mostrou vermelho de cinábrio nas pétalas da árvore de bronze e preto de laca mais fina que metade de uma folha A4 — mil anos antes do que se achava para bronze colorido na China.</p>
+          <div class="source">
+            <span lang="ja">草の実堂</span>
+            <a href="https://kusanomido.com/study/history/chinese/126102/" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>三星堆遺跡（さんせいたいいせき）とは、中国四川省広漢市にある古蜀文明の代表的な遺跡である。</p>
+            <p>1934年に初めて発掘が行われ、1986年には1号・2号祭祀坑から巨大な青銅仮面、青銅神樹、金製品、玉器などが相次いで出土した。</p>
+            <p>それまで知られていた古代中国文明のイメージとは大きく異なる造形の遺物が大量に見つかったことで、三星堆遺跡は古代史を塗り替える大発見として、世界的な注目を集めることになった。</p>
+            <p>三星堆遺跡で特に有名なのは、大きな耳や突出した目を持つ青銅仮面である。</p>
+            <p>特に目が大きく突き出た青銅仮面は、その異様な姿から「宇宙人のようだ」と形容されることもあり、今なお多くの人々を惹きつけている。</p>
+            <p>三星堆遺跡の重要性は、その奇抜な造形だけにあるのではない。</p>
+            <p>それまで古代中国文明は黄河流域を中心に語られることが多かったが、三星堆遺跡は四川盆地にも高度な青銅文明が存在したことを示す、非常に重要な存在となった。</p>
+            <p>……</p>
+            <p>近年も三星堆遺跡では発掘と研究が続けられている。</p>
+            <p>2019年以降には新たに6つの祭祀坑が見つかり、従来知られていた1号・2号祭祀坑と合わせて、合計8つの祭祀坑が確認された。</p>
+            <p>2025年9月の三星堆フォーラムでは、放射性炭素年代測定により、3号・4号・6号・8号祭祀坑の埋蔵年代が紀元前1201年から紀元前1012年ごろ、つまり商代末期にあたる可能性が高いことも発表された。</p>
+            <p>現在もなお、三星堆遺跡は新しい発見を生み出し続けているのである。</p>
+            <p>今回は、その中でも特に注目を集めた「彩色された青銅器」について取り上げたい。</p>
+            <p>2025年9月27日、四川省徳陽市で開かれた「2025三星堆フォーラム」において、三星堆遺跡に関する新たな研究成果が発表された。</p>
+            <p>その中で特に注目を集めたのが、三星堆遺跡から出土した青銅器には、大量の彩色が施されていたという発見である。</p>
+            <p>私たちが青銅器と聞いて思い浮かべるのは、青緑色をした古びた金属の姿だろう。</p>
+          </div>
+          <p class="continue"><a href="https://kusanomido.com/study/history/chinese/126102/" target="_blank" rel="noopener" lang="ja">続きを読む · 草の実堂</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p5">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★★</span> <span class="chip mins">3 min</span> <span class="chip" lang="ja">黒曜石</span> <span class="chip" lang="ja">矢尻</span> <span class="chip" lang="ja">新石器</span> <span class="chip" lang="ja">アナトリア</span> <span class="chip" lang="ja">PLOS One</span>
+          </div>
+          <h2 lang="ja">9000年前の黒曜石の矢尻に彫られた謎の彫刻に考古学者らが困惑</h2>
+          <p class="why">54 pontas de obsidiana na Anatólia (~9000–8000 a.C.) com gravuras geométricas: todas diferentes, feitas de propósito com sílex mais duro (às vezes 20 passadas no mesmo ponto), usadas em caça como as lisas, e só no centro da Anatólia. Nem marca de caçador nem feitiço fecha o caso. PLOS One 2026.</p>
+          <div class="source">
+            <span lang="ja">カラパイア</span>
+            <a href="https://karapaia.com/archives/624759.html" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>約9000年前の新石器時代、現在のトルコにあたるアナトリア中部では、黒曜石で作られた矢尻が数多く出土しているが、そのうちの一部に、謎の幾何学模様が彫られている。</p>
+            <p>フランスのエクス・マルセイユ大学の研究チームが調査したところ、意図的に彫られているにもかかわらず、54個発見された矢尻の模様は決まったパターンがなく、すべてバラバラだった。</p>
+            <p>狩猟の目印なのか？呪術的な儀式なのか？様々な仮説はあるものの、いったい何を意味した模様なのか、考古学者たちはまだ謎を解けずにいる。</p>
+            <p>この研究成果は『PLOS One』誌（2026年7月28日付）に掲載された。</p>
+            <p>……</p>
+            <p>9000年前の黒曜石の矢尻に見つかった奇妙な幾何学模様</p>
+            <p>トルコのアナトリア中部にあるテペジク・チフトリク遺跡などでは、新石器時代の農耕牧畜民が使っていた黒曜石の矢尻が数千個も発掘されている。</p>
+            <p>黒曜石は火山ガラスの一種で、非常に鋭く割れるため、当時の人々にとって刃物や矢尻の材料として欠かせない貴重な資源だった。</p>
+            <p>不可解なことに、これら大量の矢尻のうち、ほんの一握りだけに奇妙な幾何学模様が彫られている。</p>
+            <p>1988年に考古学者が初めて31個の模様入り矢尻について報告して以来、各地の遺跡で少しずつ数が増えてきた。</p>
+            <p>そして最近、新たに11個が特定され、模様入りの矢尻は合計54個となった。</p>
+            <p>これらはおよそ9000年前から8000年前にかけて、1000年以上の間使われていたとみられている。</p>
+            <p>大量にある矢尻の中で、模様が彫られたものが54個しかないのは極端に少ない。</p>
+            <p>発見された場所を調べても、特別な墓や儀式用の場所ではなく、一般的な住居跡や石器を作る作業場などに他の普通の矢尻と混ざって落ちていた。</p>
+            <p>さらに、使用痕を調べると、普通の黒曜石の矢尻と同じように狩猟や武力衝突に使われていたことがわかった。</p>
+            <p>最も考古学者を悩ませているのは、54個の矢尻に彫られた模様がすべてバラバラで、共通するモチーフや繰り返されるパターンが一切存在しないことだ。</p>
+          </div>
+          <p class="continue"><a href="https://karapaia.com/archives/624759.html" target="_blank" rel="noopener" lang="ja">続きを読む · カラパイア</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p6">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★★</span> <span class="chip mins">3 min</span> <span class="chip" lang="ja">ハンプトン・コート</span> <span class="chip" lang="ja">心霊</span> <span class="chip" lang="ja">磁場</span> <span class="chip" lang="ja">超低周波音</span> <span class="chip" lang="ja">ギネス</span>
+          </div>
+          <h2 lang="ja">幽霊屋敷で行われた過去最大規模の実験。1000人以上の参加者に何が起きたのか？</h2>
+          <p class="why">Hampton Court, palácio de Henrique VIII: 1027 voluntários (recorde Guinness) caminham pelas galerias “mal-assombradas”. Quem já acreditava em fantasma sentiu mais; a sugestão só neles funcionou. Mas até quem não conhecia a lenda marcou os MESMOS corredores — campo magnético, luz e infrassom de 18 Hz entram na conta.</p>
+          <div class="source">
+            <span lang="ja">カラパイア</span>
+            <a href="https://karapaia.com/archives/636548.html" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>歴史的建造物が数多く残されているイギリスでは、場所に付随した幽霊のうわさも絶えない。そういった場所では、ふいに寒気を覚えたり、誰かの視線を感じたりするという。</p>
+            <p>それが本当に霊の仕業なのかを確かめるため、イギリス、ハートフォードシャー大学の心理学者は、数多くの幽霊伝説を持つ宮殿に1000人以上を集めて実験を行った。</p>
+            <p>参加者をグループに分けて館内を歩かせたところ、幽霊伝説を知らない人たちまでもが、昔から幽霊が目撃されてきた場所で異変を感じていたという。</p>
+            <p>この研究成果は『British Journal of Psychology』誌に掲載されたものだ。</p>
+            <p>……</p>
+            <p>幽霊宮殿を舞台に1000人で過去最大規模の実験</p>
+            <p>イギリスのロンドン郊外にあるハンプトン・コート宮殿は、かつてのイングランド王、ヘンリー8世が愛用した旧王宮として知られている。</p>
+            <p>ハンプトン・コート宮殿では、不貞の罪で処刑された5番目の妻キャサリン・ハワードが、命乞いをしながら廊下を走り抜ける姿など、数多くの幽霊伝説が語り継がれてきた。</p>
+            <p>1999年には、幽霊が出るとされる回廊「ホーンテッド・ギャラリー」のまったく同じ場所で、2人の観光客が立て続けに気を失う騒ぎも起きている。</p>
+            <p>超常現象の心理学的な解明で知られるハートフォードシャー大学のリチャード・ワイズマン博士は、宮殿の管理者から依頼を受けて、この宮殿で実験を行った。</p>
+            <p>2000年の5月から6月にかけて、ワイズマン博士は1027人の一般ボランティアを集め、幽霊が出るとされる場所を調査した。</p>
+            <p>この人数は、幽霊屋敷の科学的調査として最多の参加者数として、ギネス世界記録に認定されている。</p>
+            <p>……</p>
+            <p>グループ分けをして、いわくつきの場所を探索</p>
+            <p>実験の目的は、人が心霊現象を体験するときに、幽霊を信じる気持ちや、事前に聞かされた話による心理的な暗示がどれほど影響するかを調べることだった。</p>
+            <p>研究チームはまずアンケートを行い、参加者を「幽霊を信じる人」と「信じない人」に分類した。</p>
+            <p>その後、参加者を少人数のグループに分けて、宮殿内でもっとも幽霊の目撃情報が多い部屋や回廊を歩かせた。</p>
+          </div>
+          <p class="continue"><a href="https://karapaia.com/archives/636548.html" target="_blank" rel="noopener" lang="ja">続きを読む · カラパイア</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p7">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★☆</span> <span class="chip mins">3 min</span> <span class="chip" lang="ja">音響浮遊</span> <span class="chip" lang="ja">ゼロ次ベッセルビーム</span> <span class="chip" lang="ja">筑波大学</span> <span class="chip" lang="ja">Physical Review Letters</span>
+          </div>
+          <h2 lang="ja">超音波ビームで従来の6倍の距離まで物体を浮遊させることに成功（筑波大学）</h2>
+          <p class="why">Tsukuba + Bristol: um feixe de Bessel de ordem zero levita uma esfera a 40 cm — cerca de 6 vezes mais longe que o recorde anterior de um só lado — e ainda move o objeto em 3D, atrás de obstáculos. Physical Review Letters 2026. Som como pinça, sem cercar o alvo.</p>
+          <div class="source">
+            <span lang="ja">カラパイア</span>
+            <a href="https://karapaia.com/archives/624919.html" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>超音波の力を使って、物体に触れずに空中へ浮かせる技術が大きく進化した。</p>
+            <p>日本の筑波大学とイギリスのブリストル大学の研究チームは、片側のスピーカーから特殊な超音波ビームを照射し、従来の約6倍となる40cm離れた場所で物体を浮かせて操ることに成功した。</p>
+            <p>これまでは距離が離れると物体を空中に安定して維持できなかったが、特殊な音の波を用いることで限界を突破したのだ。</p>
+            <p>この技術は、壊れやすいものや危険な物質を安全に扱う新たな手段として期待されている。</p>
+            <p>この研究成果は『Physical Review Letters』誌（2026年8月24日付）に掲載された。</p>
+            <p>……</p>
+            <p>音の力で物体を浮かせる「音響浮遊」の限界</p>
+            <p>音響浮遊とは、物理的に接触することなく、音波を使って物体を空中に浮かせる技術である。</p>
+            <p>物体に直接触れないため、壊れやすい材料や汚染を嫌う試料、危険な物質を安全に扱う手段として長年注目されてきた。</p>
+            <p>従来の音響浮遊システムは、装置に囲われた空間の上下など、対向する方向から音波を当てて物体を安定させる仕組みが主流だった。</p>
+            <p>片側からの音波だけで物体を浮かせる装置の開発も試みられてきたが、そこには物理的な限界があった。</p>
+            <p>ブリストル大学のブルース・ドリンクウォーター教授によると、音源から物体が遠ざかるにつれて、物体をその場に留める力は弱くなってしまうという。</p>
+            <p>距離が離れると、物体を固定するどころか遠ざけるように力が働くため、片側からの照射による長距離での浮遊は不可能とされていた。</p>
+            <p>……</p>
+            <p>特殊な超音波「ゼロ次ベッセルビーム」を採用</p>
+            <p>この限界を打ち破るため、筑波大学とブリストル大学の共同研究チームは新しい方法を試みた。</p>
+            <p>研究チームが着目したのは、「ゼロ次ベッセルビーム」と呼ばれる特殊な形の超音波ビームである。</p>
+            <p>一般的な音の波は、進むにつれて周囲へ広がり、エネルギーが分散して弱くなる。</p>
+            <p>だがベッセルビームは通常の音響ビームとは性質が異なり、長い距離にわたってビームが広がりにくい。高い強度の中心部分を維持したまま、まっすぐ進む性質を持っている。</p>
+          </div>
+          <p class="continue"><a href="https://karapaia.com/archives/624919.html" target="_blank" rel="noopener" lang="ja">続きを読む · カラパイア</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p8">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★☆</span> <span class="chip mins">2 min</span> <span class="chip" lang="ja">ネス湖</span> <span class="chip" lang="ja">ビーバー</span> <span class="chip" lang="ja">再導入</span> <span class="chip" lang="ja">生態系エンジニア</span> <span class="chip" lang="ja">NatureScot</span>
+          </div>
+          <h2 lang="ja">ネッシーと遭遇なるか？500年ぶり、ネス湖にビーバーを再導入</h2>
+          <p class="why">NatureScot aprovou trazer castores de volta à bacia do Ness pela primeira vez desde 1526–27. Até 15 famílias em 3 anos: diques que viram esponja contra cheia e seca, “estação de tratamento” grátis, e até estoque de carbono no leito. Nessie pode ser um tronco — o gancho é engenharia ecológica.</p>
+          <div class="source">
+            <span lang="ja">カラパイア</span>
+            <a href="https://karapaia.com/archives/637053.html" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>未確認生物「ネッシー」の伝説で知られるスコットランドのネス湖に、約500年ぶりにあの職人（職動物）が帰ってくる！</p>
+            <p>鋭い歯で太い木々を次々と切り倒し、水辺の環境を作り変える生態系のエンジニア、ビーバーたちだ。</p>
+            <p>地元の自然保護機関は、失われた生物多様性を取り戻す切り札として、ビーバーたちをネス川流域に放つ決定を下した。</p>
+            <p>もしネス湖にネッシーがいるのなら、ビーバーたちが探してくれるかもしれない。</p>
+            <p>……</p>
+            <p>500年ぶりにネス湖に帰還するビーバーたち</p>
+            <p>2026年10月30日、スコットランドの自然保護機関であるネイチャースコットは、ネス湖周辺に広がるネス川流域にビーバーを再導入する計画を承認した。</p>
+            <p>計画を主導するのは、地元の非営利団体「ツリーズ・フォー・ライフ」と「ビーバー・トラスト」で、今後3年間で、最大15組のビーバーの家族がこの地に放たれることになる。</p>
+            <p>ネス湖周辺で最後にビーバーが目撃されたのは1526年から1527年のことだ。</p>
+            <p>かつてヨーロッパ全土に生息していたヨーロッパビーバー（Castor fiber）は、毛皮や香料の材料をとるために乱獲され、16世紀には姿を消してしまった。</p>
+            <p>500年の時を経て、ビーバーたちはついに故郷の水辺に帰還するのだ。</p>
+            <p>……</p>
+            <p>ヨーロッパでは、ビーバーの再導入計画が次々と進められている。</p>
+            <p>その理由は、ビーバーが「生態系のエンジニア」と呼ばれるほど、自然環境の回復に絶大な効果をもたらすからだ。</p>
+            <p>ビーバーは木をかじって削れるほど頑丈で鋭いオレンジ色の前歯を持ち、完全に成長した大木も倒し、ダムを築いて川の流れを変える。</p>
+            <p>ビーバーが作ったダムは、巨大なスポンジのような湿地を生み出す。</p>
+            <p>この湿地は、豪雨の際に川が急激に増水するのを抑え、下流の洪水被害を軽減する。</p>
+            <p>乾燥する時期には、蓄えた水をゆっくりと放出するため、干ばつ対策にもなる。</p>
+          </div>
+          <p class="continue"><a href="https://karapaia.com/archives/637053.html" target="_blank" rel="noopener" lang="ja">続きを読む · カラパイア</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p9">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★☆</span> <span class="chip mins">2 min</span> <span class="chip" lang="ja">地震の門</span> <span class="chip" lang="ja">サンアンドレアス断層</span> <span class="chip" lang="ja">カホン・パス</span> <span class="chip" lang="ja">サンジャシント</span>
+          </div>
+          <h2 lang="ja">科学者が恐れる「地震の門」とは、「開門」なら断層破壊が連鎖</h2>
+          <p class="why">Cajon Pass, a uma hora de Los Angeles: San Andreas e San Jacinto se encontram sob a artéria (I-15, trilhos, gás, fibra). Se o “portão sísmico” abrir, a ruptura pode saltar de uma falha à outra; se fechar, para. Trecho gratuito do NatGeo — o restante é paywall.</p>
+          <div class="source">
+            <span lang="ja">ナショナル ジオグラフィック日本版</span>
+            <a href="https://natgeo.nikkeibp.co.jp/atcl/news/26/082000469/" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>「夜も眠れません」、地殻のストレスが過去1000年で最高の場所も南カリフォルニア</p>
+            <p>米国ロサンゼルスからラスベガスに向かって州間高速道路15号線（I-15）を車で北上すると、1時間ほどで、北米でも特に地質学的に不安定な地域を縫うように進むことになる。</p>
+            <p>南カリフォルニアへの玄関口としても知られる山道「カホン・パス」は、そびえ立つサンバーナディーノ山脈とサンガブリエル山脈の境を通る自然の交通路として、何世紀にもわたり利用されてきた。現在は、主要な幹線道路や、鉄道、送水路、地下ガス管、光ファイバーケーブルが通る、産業の大動脈となっている。</p>
+            <p>それだけではない。カホン・パスの下では「サンジャシント断層」と「サンアンドレアス断層」という、世界でも特に危険な2つの断層が合流している。これらの断層は太平洋プレートと北米プレートの境界にあり、いつ破壊されてもおかしくない。</p>
+            <p>この地域を次に大地震が襲うとき、カホン・パスは極めて重要な場所になる。最近の研究では、一帯では地殻の応力（ストレス）が過去1000年間で最高レベルに達している場所もあり、カホン・パスが「地震の門」として機能する可能性があると指摘された。</p>
+            <p>つまり、もし地震の門が閉まれば、一方の断層で発生した大規模な破壊がもう一方に広がるのを食い止められ、門が開けば、両方の断層にまたがって破壊が広がる可能性があるのだ。</p>
+            <p>この研究結果が発表されると、カリフォルニア州にある交通の要衝カホン・パスをめぐり、地震学者や防災担当者たちの間で懸念が再燃した。ここを通る各種ライフラインの問題、そして次の断層破壊がどこまで広がるかという問題だ。</p>
+          </div>
+          <p class="continue"><a href="https://natgeo.nikkeibp.co.jp/atcl/news/26/082000469/" target="_blank" rel="noopener" lang="ja">続きを読む · ナショナル ジオグラフィック日本版</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p10">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★☆</span> <span class="chip mins">2 min</span> <span class="chip" lang="ja">瞳孔</span> <span class="chip" lang="ja">ノルアドレナリン</span> <span class="chip" lang="ja">青斑核</span> <span class="chip" lang="ja">驚き</span> <span class="chip" lang="ja">ブラウン大学</span>
+          </div>
+          <h2 lang="ja">人が驚くと瞳孔が拡大するのはなぜか？研究者が解説</h2>
+          <p class="why">Por que a pupila abre no susto? Brown University: o locus coeruleus dispara noradrenalina e o cérebro “dá refresh” para aprender o novo. Experiência com cores que mudam de família vs. um oddball passageiro. A dilatação é efeito colateral do reset — e o sujeito nem percebe.</p>
+          <div class="source">
+            <span lang="ja">GIGAZINE</span>
+            <a href="https://gigazine.net/news/20261108-pupils-dilation-surprise/" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>周囲が暗かったり、感情が高ぶったりすると人の瞳孔は開きます。なぜこのような動きが見られるのかについて、ブラウン大学の研究者らが新しい研究と共に紹介しました。 Fluctuations in arousal reflect latent state transitions that facilitate behavioural optimization | Nature Human Behaviour https://www.nature.com/articles/s41562-026-02533-1</p>
+            <p>Surprise helps people learn and think better, brain study finds - The Brighter Side of News https://www.thebrighterside.news/post/surprise-helps-people-learn-and-think-better-brain-study-finds/ ブラウン大学のマット・ナサール氏によると、瞳孔が開くのは「新しい状況に適応するために脳内で何らかの働きが起きていることを示すサイン」だそうです。</p>
+            <p>ナッサール氏らは、画面上に色付きの四角形を表示し、被験者に何が見えたかを報告してもらうと共に、次に何が表示されるかを予測してもらうという実験を行いました。この間、ナッサール氏らは瞳孔の大きさや脳波が変化する様子を追跡しました。</p>
+            <p>実験では、これまで同じ系統の色が出ていたのに突然別の系統の色に遷移する「チェンジポイント条件」と、同じ系統の色が出る中で突然別の系統の色が出て、また元の系統の色に戻るという「オッドボール条件」の2種類が行われました。</p>
+          </div>
+          <p class="continue"><a href="https://gigazine.net/news/20261108-pupils-dilation-surprise/" target="_blank" rel="noopener" lang="ja">続きを読む · GIGAZINE</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p11">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★☆</span> <span class="chip mins">3 min</span> <span class="chip" lang="ja">スパイマーク</span> <span class="chip" lang="ja">SynthID</span> <span class="chip" lang="ja">透かし</span> <span class="chip" lang="ja">プライバシー</span> <span class="chip" lang="ja">追跡</span>
+          </div>
+          <h2 lang="ja">AI生成の証拠「透かし」がユーザー追跡の「スパイマーク」と化している</h2>
+          <p class="why">Watermark de “isto é IA” vs. spymark: sinal invisível que carrega ID de banco (SynthID-O: 64 bits numa imagem 512²). Não é EXIF apagável; sobrevive a edições. O fundador da ArtCraft chama de Rumpelstiltskin da privacidade — vocabulário útil para quem vive de modelos.</p>
+          <div class="source">
+            <span lang="ja">GIGAZINE</span>
+            <a href="https://gigazine.net/news/20261108-spymarks-not-watermarks/" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>近年よく目にするようになった「ウォーターマーク」という言葉はメディアが本物であることを確認したりメディアの所有権を主張したりするために用いられる可視の「透かし」を指します。しかし、AIを用いて画像・動画制作ソフトを開発する ArtCraft の創業者であるブランドン・トーマス氏は、よく似た別物として我々の知らないうちにデジタルコンテンツを追跡可能にする「スパイマーク」と呼ぶべき新たな技術が登場しているとし、スパイマークによってプライバシーが侵害される恐れがあるとの懸念を表明しています。</p>
+            <p>本来の「ウォーターマーク」という言葉は歴史的に、「真正性を証明する印」「紙幣のセキュリティ機能」「著作権表示」といった悪意のない目的で使われてきました。しかし近年では隠された追跡信号としての意味合いも強くなり、プライバシーリスクが曖昧になりつつあります。「スパイマーク(Spymark)」という新しい言葉を用いるのは、プライバシーリスクという問題の存在を明確にし、プライバシーへの懸念を前面に出す目的があります。</p>
+            <p>Googleの SynthID は画像・音声・テキスト・ビデオに「人間には感知できない」秘密の隠し信号を埋め込むスパイマークの一例です。隠し信号にはユーザーの身元情報(氏名・IPアドレス・生年月日・住所・所属政党など)に対応するデータベース識別子をエンコードすることができます。SynthIDの画像用変種であるSynthID-Oは、512x512ピクセルの画像に64ビットのデータベース識別子とエラー訂正用の72ビットを格納できる容量を持ちます。</p>
+          </div>
+          <p class="continue"><a href="https://gigazine.net/news/20261108-spymarks-not-watermarks/" target="_blank" rel="noopener" lang="ja">続きを読む · GIGAZINE</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p12">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★★</span> <span class="chip mins">4 min</span> <span class="chip" lang="ja">Claude Code</span> <span class="chip" lang="ja">blockWritesOutsideWorkingDirectories</span> <span class="chip" lang="ja">権限</span> <span class="chip" lang="ja">autoモード</span> <span class="chip" lang="ja">Bash</span>
+          </div>
+          <h2 lang="ja">Claude Codeは作業フォルダの外を書き換える？ 新設定1行で、4つのモードとも Write は止まりました</h2>
+          <p class="why">Publicado no espírito de hoje: permissions.blockWritesOutsideWorkingDirectories (v2.1.314). O autor mediu Write em 4 modos — a mesma frase de recusa para todos. Sem a chave, o auto mode escreveu fora sem perguntar; com ela, parou. Bash echo NÃO para (docs avisam). Teste honesto, não tutorial genérico.</p>
+          <div class="source">
+            <span lang="ja">Zenn（ojisan_ai_lab）</span>
+            <a href="https://zenn.dev/ojisan_ai_lab/articles/claude-code-block-writes-outside-20261108" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>Claude Code を使い始めると、「作業中のフォルダの外にある、関係ないファイルまで書き換えられたらどうしよう」と気になりませんか。おじさんも、許可の確認を少しずつゆるめるたびに、そこが気になっていました。</p>
+            <p>10月30日に出た v2.1.314 で、ちょうどそのための設定が入りました。 permissions.blockWritesOutsideWorkingDirectories という長い名前の設定です。 .claude/settings.json に1行足すと、ファイルを書く道具が作業フォルダの外を断るようになります。この記事では、この1行を「鍵」と呼びます。</p>
+            <p>鍵なしと鍵ありを並べて測ってみました。結果は、外への Write は、試した4つの権限モードのどれでも、同じ1つの拒否文で止まりました。Edit も、試した default モードで同じ文で止まりました。一方で、 Bash の echo で外に書くのは止まりませんでした。これは docs に書いてあるとおりです。</p>
+            <p>作業フォルダは、Claude Code を起動したフォルダと、あとから /add-dir などで足したフォルダのことです（docs では working directories）。「外」は、そのどれにも入っていない場所です。</p>
+            <p>……</p>
+            <p>Added permissions.blockWritesOutsideWorkingDirectories: Write, Edit and NotebookEdit refuse paths outside the working directories in every permission mode</p>
+            <p>Write（ファイルを作る）・Edit（ファイルの一部を書き換える）・NotebookEdit（Jupyter のノートを書き換える）の3つの道具が、どの権限モードでも、作業フォルダの外を断る、という意味です。</p>
+            <p>docs の settings-reference の節で、おじさんが大事だと思ったのは次の5つです。</p>
+            <p>bypassPermissions を含む、全部の権限モードで断る</p>
+            <p>シェルのコマンド・MCP の道具・hooks が動かすプログラムは止めない（The key doesn&#x27;t limit shell commands, MCP tools, or the programs hooks run.）。シェルの書き込み先を絞るならサンドボックスを使う</p>
+          </div>
+          <p class="continue"><a href="https://zenn.dev/ojisan_ai_lab/articles/claude-code-block-writes-outside-20261108" target="_blank" rel="noopener" lang="ja">続きを読む · Zenn（ojisan_ai_lab）</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p13">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★☆☆</span> <span class="chip mins">2 min</span> <span class="chip" lang="ja">会議科学</span> <span class="chip" lang="ja">傾聴</span> <span class="chip" lang="ja">意思決定</span> <span class="chip" lang="ja">ハンブルク大学</span>
+          </div>
+          <h2 lang="ja">会議では上司が話す時間を減らして部下の話を聞くべきだと研究者が指摘、質問するだけでは逆効果になる可能性も</h2>
+          <p class="why">Meeting science: 22 times escolhem um piloto com informações espalhadas. O pior resultado foi o líder que pergunta muito e não escuta; o melhor, contra-intuitivo, foi o que quase não pergunta nem reage. Ouvir de verdade &gt; bombardeio de perguntas. Chamadas no Zoom perdem até o “unhum”.</p>
+          <div class="source">
+            <span lang="ja">GIGAZINE</span>
+            <a href="https://gigazine.net/news/20261108-bosses-should-avoid-speaking-during-meetings/" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>会議は企業活動に欠かせないものですが、多くの時間を費やしても十分な成果が得られない場合があります。近年は会議中の発言や参加者の行動を分析する「会議科学(Meeting Science)」という研究分野が発展し、効果的な会議の進め方が調べられています。ドイツのハンブルク大学などの研究チームによる実験で、リーダーが積極的に質問しても回答を十分に聞かない場合、チームの意思決定の質が低下することが明らかになりました。</p>
+            <p>各チームには訓練を受けた男性俳優がリーダーとして加わり、「積極的に質問して回答を注意深く聞く」「質問は控えるが発言を注意深く聞く」「質問を控えて発言にも注意を払わない」「積極的に質問するが回答を十分に聞かない」という4つの条件で会議を進行しました。注意深く聞くリーダーは相手と視線を合わせたり相づちを打ったりする一方、話を聞かないリーダーはこうした反応を控えました。</p>
+            <p>一方、最も意思決定の質が高かったのは「質問を控えて発言にも注意を払わない」条件で、「積極的に質問して回答を注意深く聞く」条件が2番目でした。研究チームは、今回の課題では参加者が事前に与えられた情報を共有する必要があったため、リーダーからの追加質問が必ずしも役立たなかった可能性を挙げています。</p>
+            <p>効果的な会議には、相手の発言に適切な反応を返す「積極的傾聴」が重要とされています。特にオンライン会議では発言していない参加者がマイクをミュートにするため、相づちなどの反応が失われやすいとのこと。また、会議の冒頭に短い雑談の時間を設けることも有効とされています。研究によれば会議前の雑談が会議の効果を予測する要因となっており、特に内向的な参加者が積極的に話し合いに加わる助けになることが示されています。</p>
+          </div>
+          <p class="continue"><a href="https://gigazine.net/news/20261108-bosses-should-avoid-speaking-during-meetings/" target="_blank" rel="noopener" lang="ja">続きを読む · GIGAZINE</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p14">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★☆</span> <span class="chip mins">2 min</span> <span class="chip" lang="ja">下地島空港</span> <span class="chip" lang="ja">ANA</span> <span class="chip" lang="ja">タッチアンドゴー</span> <span class="chip" lang="ja">伊良部大橋</span> <span class="chip" lang="ja">17エンド</span>
+          </div>
+          <h2 lang="ja">「伝説の光景」再び ANAが“聖地”下地島空港で12年ぶり訓練再開 機体が普段じゃありえない動きを絶景空港で！</h2>
+          <p class="why">Shimojishima, o único aeroporto do Japão nascido para treinar pilotos: a ANA voltou em 1/11, 12 anos depois, com A320 fazendo touch-and-go (~45 min de circuitos). A ponte Irabu tornou o “17 end” bem mais fácil de ver do que na era da balsa. Infra + cena lendária, texto curto mas completo no livre.</p>
+          <div class="source">
+            <span lang="ja">乗りものニュース</span>
+            <a href="https://trafficnews.jp/post/725443" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>沖縄・宮古島と橋づたいでつながっており、「第2の宮古島の空の玄関口」となっている「下地島空港」。2026年11月より、ここに往年の航空ファンの多くが知る”伝説の光景”が出現しています。</p>
+            <p>それがANA（全日空）機による訓練飛行です。下地島空港は2026年現在こそ旅客便が発着していますが、国内唯一の「パイロット訓練用空港」として設立された空港です。かつてはANAもここで訓練を行っていましたが、2014年をもって同空港での訓練を終了。しかし2026年11月1日より、12年ぶりに同空港での訓練が行われることになりました。</p>
+            <p>訓練はエアバスの単通路旅客機「A320」で行われ、およそ45分ほど、空港周辺を周回しながら着陸したのちすぐ速度を上げ離陸する操作「タッチアンドゴー」が何度も繰り返されるというのがスタンダードなスケジュールです。</p>
+            <p>なお、過去にANAが同空港で訓練を行っていた時代、下地島と宮古島を結ぶ橋「伊良部大橋」はまだ開通しておらず、船で行き来する必要がありました。そのため往年と比べて、一般ユーザーが同空港での訓練を空港外から見学できるハードルは、かなり低くなっています。</p>
+            <p>ちなみに下地島空港は沖縄特有の青い海と機体との距離感などから「航空機見学の聖地」とされる国内屈指の航空機撮影スポット「17エンド」があることでも知られています。</p>
+          </div>
+          <p class="continue"><a href="https://trafficnews.jp/post/725443" target="_blank" rel="noopener" lang="ja">続きを読む · 乗りものニュース</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p15">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★☆</span> <span class="chip mins">2 min</span> <span class="chip" lang="ja">BABYMETAL</span> <span class="chip" lang="ja">METAL FORTH</span> <span class="chip" lang="ja">Major Lazer</span> <span class="chip" lang="ja">サンパウロ</span> <span class="chip" lang="ja">ワールドツアー</span>
+          </div>
+          <h2 lang="ja">BABYMETALが初のデラックスアルバムリリース、Major Lazerがリミックス参加</h2>
+          <p class="why">FOX DAY: primeiro deluxe de METAL FORTH com remixes de Major Lazer e Jordan Fish, mais ao vivo de O2, Intuit Dome e Saitama Super Arena. A turnê uns/latam fecha em São Paulo em 28/11 — data próxima e pessoal. É anúncio, não entrevista longa, mas o alinhamento (remix + SP) vale a cadeira.</p>
+          <div class="source">
+            <span lang="ja">ナタリー</span>
+            <a href="https://natalie.mu/music/news/666424" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>BABYMETAL が“FOX DAY”である本日4月1日に、“メタルの神・キツネ様からのお告げ”として2026年の活動予定を発表。中南米を巡るワールドツアーの開催と、初のデラックスアルバム「METAL FORTH（DELUXE EDITION）」のリリースをアナウンスした。</p>
+            <p>6月から7月にかけてヨーロッパツアーを行うことを発表していたBABYMETAL。ヨーロッパツアーを経て、彼女たちは8月30日のアメリカ・サンディエゴから12月12日のメキシコ・メキシコシティまで北米と中南米を巡る。</p>
+            <p>デラックスアルバム「METAL FORTH（DELUXE EDITION）」は6月26日に全世界で同時リリースされる。本作は2025年発表のアルバム「METAL FORTH」の収録曲に加え、新たなリミックス楽曲としてMajor Lazerによる「from me to u（Major Lazer Remix）」や、ジョーダン・フィッシュによる「from me to u（Jordan Fish Remix）」を収録。</p>
+            <p>海外では楽曲のテーマのアイコンをあしらったゾートロープ仕様のアナログ盤も発売される。国内でもCD作品「METAL FORTH（Deluxe Japan Edition）」のリリースが決定している。日本盤の詳細については後日発表される。</p>
+            <p>……</p>
+            <p>01. from me to u（feat. Poppy） 02. RATATATA（BABYMETAL x Electric Callboy） 03. Song 3（BABYMETAL x Slaughter to Prevail） 04. Kon! Kon!（feat. Bloodywood） 05. KxAxWxAxIxI</p>
+          </div>
+          <p class="continue"><a href="https://natalie.mu/music/news/666424" target="_blank" rel="noopener" lang="ja">続きを読む · ナタリー</a></p>
+        </div>
+      </article>
+
+      <footer class="site">読解幕 · 2026-11-08 · ~42 min · <a href="/japanese-digest/history/" style="color:inherit">History</a> · deliton.github.io/japanese-digest</footer>
+    </main>
+  </div>
+</body>
+</html>
