@@ -1,0 +1,962 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>読解幕 · 2026-11-09 · Japanese Digest</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Noto+Serif+JP:wght@400;600;700&family=Shippori+Mincho:wght@500;700&display=swap" rel="stylesheet" />
+  <style>
+
+    :root {
+      --bg: #0a0a0a;
+      --bg-2: #121212;
+      --bg-card: #161616;
+      --ink: #f5f5f5;
+      --ink-dim: #a8a29a;
+      --ink-mute: #6b6560;
+      --shu: #c41e3a;
+      --shu-hot: #e11d48;
+      --shu-deep: #8b1228;
+      --gold: #d4a017;
+      --gold-soft: #c9a227;
+      --white: #fafafa;
+      --line: #2a2a2a;
+      --line-hot: rgba(196, 30, 58, 0.45);
+      --measure: 42rem;
+      --radius: 4px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: "Noto Sans JP", "Hiragino Sans", "Yu Gothic", system-ui, sans-serif;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .stage-bar {
+      height: 6px;
+      background: repeating-linear-gradient(
+        90deg,
+        var(--shu) 0 48px,
+        var(--white) 48px 56px,
+        #111 56px 64px,
+        var(--gold) 64px 72px,
+        #111 72px 88px
+      );
+    }
+
+    .wrap {
+      width: min(100% - 2rem, 74rem);
+      margin: 0 auto;
+      padding: 2rem 0 4.5rem;
+      display: grid;
+      grid-template-columns: 15.5rem 1fr;
+      gap: 2.75rem;
+      align-items: start;
+    }
+
+    @media (max-width: 900px) {
+      .wrap { grid-template-columns: 1fr; gap: 1.5rem; padding-top: 1.25rem; }
+      .sidebar { position: static !important; }
+    }
+
+    .sidebar { position: sticky; top: 1.25rem; }
+
+    .brand {
+      display: flex;
+      align-items: baseline;
+      gap: 0.55rem;
+      margin: 0 0 0.35rem;
+    }
+    .brand-mark {
+      font-family: "Shippori Mincho", "Noto Serif JP", serif;
+      font-size: 1.85rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      color: var(--white);
+      line-height: 1;
+    }
+    .brand-mark em {
+      font-style: normal;
+      color: var(--shu);
+    }
+    .brand-sub {
+      font-size: 0.65rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-weight: 700;
+    }
+
+    .meta {
+      color: var(--ink-mute);
+      font-size: 0.8rem;
+      margin: 0 0 1.25rem;
+    }
+
+    .stat-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-bottom: 1.35rem;
+    }
+    .stat {
+      border: 1px solid var(--line);
+      background: var(--bg-2);
+      padding: 0.32rem 0.65rem;
+      font-size: 0.72rem;
+      color: var(--ink-dim);
+      border-radius: var(--radius);
+    }
+    .stat strong { color: var(--white); font-weight: 700; }
+    .stat.hot {
+      border-color: var(--shu);
+      color: var(--shu-hot);
+      background: rgba(196, 30, 58, 0.1);
+    }
+
+    .toc {
+      border: 1px solid var(--line);
+      background: var(--bg-2);
+      padding: 0.85rem 0.9rem 0.95rem;
+      border-radius: var(--radius);
+    }
+    .toc h2 {
+      margin: 0 0 0.65rem;
+      font-size: 0.72rem;
+      letter-spacing: 0.16em;
+      color: var(--gold);
+      font-weight: 800;
+    }
+    .toc ol { list-style: none; margin: 0; padding: 0; }
+    .toc li { margin: 0; }
+    .toc a {
+      display: flex;
+      justify-content: space-between;
+      gap: 0.5rem;
+      text-decoration: none;
+      color: var(--ink-dim);
+      font-size: 0.82rem;
+      padding: 0.38rem 0.2rem;
+      border-bottom: 1px solid transparent;
+    }
+    .toc a:hover { color: var(--white); border-bottom-color: var(--line-hot); }
+    .toc .t-title { font-weight: 600; }
+    .toc .t-min { color: var(--gold); font-size: 0.72rem; font-weight: 700; flex-shrink: 0; }
+
+    .main { max-width: var(--measure); }
+
+    .digest-banner {
+      display: flex;
+      gap: 0.75rem;
+      align-items: flex-start;
+      background: #141014;
+      border: 1px solid var(--line);
+      border-left: 3px solid var(--shu);
+      padding: 0.85rem 1rem;
+      margin-bottom: 1.5rem;
+      font-size: 0.78rem;
+      color: var(--ink-dim);
+      line-height: 1.55;
+    }
+    .digest-banner .tag {
+      flex-shrink: 0;
+      background: var(--shu);
+      color: #fff;
+      font-size: 0.65rem;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      padding: 0.28rem 0.5rem;
+      border-radius: var(--radius);
+    }
+
+    .hero {
+      margin-bottom: 2rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid var(--line);
+      position: relative;
+    }
+    .hero::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -1px;
+      width: 4.5rem;
+      height: 2px;
+      background: var(--shu);
+    }
+    .kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.7rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--shu-hot);
+      font-weight: 800;
+      margin-bottom: 0.85rem;
+    }
+    .kicker::before {
+      content: "◆";
+      font-size: 0.55rem;
+      color: var(--gold);
+    }
+    .hero h1 {
+      font-family: "Shippori Mincho", "Noto Serif JP", serif;
+      font-size: clamp(1.85rem, 4vw, 2.55rem);
+      font-weight: 700;
+      line-height: 1.2;
+      margin: 0 0 0.75rem;
+      color: var(--white);
+      letter-spacing: 0.02em;
+    }
+    .hero p {
+      margin: 0;
+      color: var(--ink-dim);
+      font-size: 0.98rem;
+      max-width: 36rem;
+    }
+
+    article.piece {
+      background: var(--bg-card);
+      border: 1px solid var(--line);
+      margin-bottom: 1.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+    article.piece::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: linear-gradient(90deg, var(--shu) 0%, var(--shu) 35%, var(--gold) 35%, var(--gold) 42%, transparent 42%);
+    }
+
+    .piece-inner { padding: 1.6rem 1.55rem 1.35rem; }
+
+    .piece-head {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-bottom: 0.85rem;
+    }
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      border: 1px solid var(--line);
+      background: #111;
+      color: var(--ink-dim);
+      padding: 0.22rem 0.6rem;
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      border-radius: var(--radius);
+    }
+    .chip.interest {
+      border-color: var(--shu);
+      color: var(--shu-hot);
+      background: rgba(196, 30, 58, 0.12);
+    }
+    .chip.mins {
+      border-color: var(--gold);
+      color: var(--gold);
+      background: transparent;
+    }
+
+    .piece h2 {
+      font-family: "Noto Serif JP", "Shippori Mincho", "Yu Mincho", serif;
+      font-size: 1.38rem;
+      font-weight: 700;
+      line-height: 1.5;
+      margin: 0 0 0.6rem;
+      color: var(--white);
+      letter-spacing: 0.02em;
+    }
+
+    .why {
+      margin: 0 0 1rem;
+      color: var(--ink-dim);
+      font-size: 0.9rem;
+      border-left: 2px solid var(--gold);
+      padding-left: 0.85rem;
+    }
+
+    .source {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.65rem 1.1rem;
+      font-size: 0.76rem;
+      color: var(--ink-mute);
+      margin-bottom: 1.25rem;
+    }
+    .source a {
+      color: var(--shu-hot);
+      text-decoration: none;
+      font-weight: 600;
+    }
+    .source a:hover { color: var(--gold); }
+
+    .ja {
+      font-family: "Noto Serif JP", "Hiragino Mincho ProN", "Yu Mincho", serif;
+      font-size: 1.08rem;
+      line-height: 2;
+      letter-spacing: 0.03em;
+      color: #ebe7e1;
+    }
+    .ja p { margin: 0 0 1.15em; }
+    .ja p:last-child { margin-bottom: 0; }
+
+    .continue {
+      margin-top: 1.25rem;
+      padding-top: 1rem;
+      border-top: 1px solid var(--line);
+      font-size: 0.86rem;
+    }
+    .continue a {
+      color: var(--white);
+      text-decoration: none;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      border-bottom: 2px solid var(--shu);
+      padding-bottom: 0.1rem;
+    }
+    .continue a:hover {
+      color: var(--shu-hot);
+      border-bottom-color: var(--gold);
+    }
+
+    footer.site {
+      max-width: var(--measure);
+      margin-top: 1.75rem;
+      color: var(--ink-mute);
+      font-size: 0.72rem;
+      letter-spacing: 0.06em;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+    footer.site::before {
+      content: "";
+      width: 1.25rem;
+      height: 2px;
+      background: var(--shu);
+    }
+
+  
+    .excerpt-label { font-size: 0.66rem; letter-spacing: 0.18em; color: var(--gold); font-weight: 800; margin: 0 0 0.6rem; }
+    .brand-sub a, .stat a { color: var(--gold); text-decoration: none; }
+    .toc .t-min { font-variant-numeric: tabular-nums; }
+  </style>
+</head>
+<body>
+  <div class="stage-bar" aria-hidden="true"></div>
+
+  <div class="wrap">
+    <aside class="sidebar">
+      <div class="brand">
+        <span class="brand-mark" lang="ja">読解<em>幕</em></span>
+      </div>
+      <p class="brand-sub">Kabuki Digest · <a href="../../history/">History</a></p>
+      <p class="meta">2026-11-09 · America/Sao_Paulo</p>
+      <div class="stat-row">
+        <span class="stat"><strong>51</strong> min</span>
+        <span class="stat"><strong>15</strong> pieces</span>
+        <span class="stat"><strong>~12,700</strong> 字</span>
+        <span class="stat"><a href="../../history/">History</a></span>
+      </div>
+
+      <nav class="toc" aria-label="Índice">
+        <h2 lang="ja">本日の演目</h2>
+        <ol>
+          <li>
+            <a href="#p1">
+              <span class="t-title" lang="ja">佐々成政はなぜ切腹させられたのか</span>
+              <span class="t-min">5′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p2">
+              <span class="t-title" lang="ja">120万石から4万石、改易、そして10万石――丹羽長重</span>
+              <span class="t-min">4′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p3">
+              <span class="t-title" lang="ja">由利鎌之助――鎖鎌ではなく槍と水練の豪傑</span>
+              <span class="t-min">4′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p4">
+              <span class="t-title" lang="ja">慶喜はなぜ寛永寺に逃げたのか――上野戦争</span>
+              <span class="t-min">2′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p5">
+              <span class="t-title" lang="ja">現代劇の女方・篠井英介の「いばらの道」</span>
+              <span class="t-min">2′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p6">
+              <span class="t-title" lang="ja">「女啄木」江口きち、武尊の麓の歌</span>
+              <span class="t-min">4′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p7">
+              <span class="t-title" lang="ja">121個に砕けた巨像とキュレネの発掘者たち</span>
+              <span class="t-min">3′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p8">
+              <span class="t-title" lang="ja">背後の灯台が前に見える「幻の灯台」の謎</span>
+              <span class="t-min">4′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p9">
+              <span class="t-title" lang="ja">人懐っこいキツネの脳から「攻撃ニューロン」が減った</span>
+              <span class="t-min">4′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p10">
+              <span class="t-title" lang="ja">明治の始まりが動いてCIのテストが落ちた</span>
+              <span class="t-min">4′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p11">
+              <span class="t-title" lang="ja">悪意なきインジェクション――「既知」の一文でAIは曲がる</span>
+              <span class="t-min">4′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p12">
+              <span class="t-title" lang="ja">Claude Codeの「次回から表示しない」で秘密が漏れる</span>
+              <span class="t-min">3′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p13">
+              <span class="t-title" lang="ja">AIが18年未解決の量子計算の予想を証明</span>
+              <span class="t-min">3′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p14">
+              <span class="t-title" lang="ja">内房線、3か月を48日に――全国から来た代行バス</span>
+              <span class="t-min">2′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p15">
+              <span class="t-title" lang="ja">hide with Spread Beaver、福岡でツアー完遂</span>
+              <span class="t-min">3′</span>
+            </a>
+          </li>
+        </ol>
+      </nav>
+    </aside>
+
+    <main class="main">
+      <div class="digest-banner">
+        <span class="tag">TRIAGE</span>
+        <span>História: Sassa Narimasa (hoje, BUSHOO) + Niwa Nagashige (草の実堂) — dois destinos opostos sob Hideyoshi/Ieyasu, sem repetir Fukushima/Tōdō; Yuri Kamanosuke como história da ficção popular; Ueno 1868 no Sankei (trecho livre curto). Cultura: onnagata no teatro moderno (combina com o tema kabuki) e a poeta Eguchi Kichi (pesado, 3★). Arqueologia: Cirene 1860 (NatGeo, só lede livre). Ciência: farol fantasma e raposas de Belyaev. Dev/IA: Meiji quebrando CI (adorei), injeção benigna medida, segredo vazando em settings.local.json, prova quântica em Lean. Trem: Uchibō 48 dias. Rock: hide with Spread Beaver. Pontos fracos: nada de Kobe/Hyogo novo (o achado de Fukuhara-kyō já saiu em 05/11); Sankei e NatGeo cortam no paywall; sem BABYMETAL/DIR EN GREY novos hoje — hide foi o melhor live report.</span>
+      </div>
+
+      <header class="hero">
+        <div class="kicker">Daily curated reading</div>
+        <h1 lang="ja">佐々成政の切腹、丹羽長重の浮沈、由利鎌之助、慶喜と寛永寺、現代劇の女方、江口きち、キュレネの巨像、幻の灯台、人懐っこいキツネの脳、明治の開始日とCI、悪意なきインジェクション、Claude Codeの秘密漏れ、AIの量子証明、内房線48日復旧、hide with Spread Beaver</h1>
+        <p lang="ja">今日の幕は戦国の「許されたのに切られた男」から――本日配信の武将ジャパンで、秀吉に二度背いて二度許された佐々成政が、肥後の一揆を経て尼崎で切腹を命じられるまで。草の実堂は、120万石の跡取りから4万石、改易、そして白河10万石へと浮き沈みした丹羽長重と、人質の少年に梨をむいた逸話。物語の側からは、鎖鎌ではなく槍と水練の豪傑だった真田十勇士・由利鎌之助。幕末は産経の新選組連載で、半日で決着した上野戦争と寛永寺。芸の幕は、現代劇の女方・篠井英介が自主公演で切り開いた「いばらの道」と、「女啄木」と呼ばれた歌人・江口きちの短い生涯。考古学史は、1860年にリビアのキュレネで121個に砕けた巨像に出会った英国人たち。科学は、背後の灯台が前の海に見える「幻の灯台」の錯視と、人懐っこいキツネの脳で減っていた攻撃ニューロン。開発者の幕は、ICUの更新で明治の開始日が動きCIが落ちた話、善意の注記がAIのレビューを曲げる「悪意なきインジェクション」の594回の検証、Claude Codeの「次回から表示しない」が秘密情報を残す問題、AIが18年来の量子計算の予想を証明した話。鉄道は台風で寸断された内房線を48日で戻した代行バスの連携。締めは、hideの声と“怪人”たちが福岡で完遂したZeppツアー。約51分の読解です。</p>
+      </header>
+
+      <article class="piece" id="p1">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★★</span> <span class="chip mins">5 min</span> <span class="chip" lang="ja">佐々成政</span> <span class="chip" lang="ja">黒母衣衆</span> <span class="chip" lang="ja">さらさら越え</span> <span class="chip" lang="ja">肥後国衆一揆</span> <span class="chip" lang="ja">尼崎</span>
+          </div>
+          <h2 lang="ja">佐々成政は豊臣秀長に処刑されたのか？秀吉に二度も許された猛将が切腹した理由</h2>
+          <p class="why">Publicado hoje: o chefe dos Kuro-horo de Nobunaga, que traiu Hideyoshi duas vezes e foi perdoado duas vezes (até ganhou Higo inteira) — e mesmo assim recebeu ordem de seppuku em Amagasaki, 1588. O texto desmonta o mito do “cadastro forçado” e separa drama do taiga (duelo com Hidenaga) do que as fontes dizem.</p>
+          <div class="source">
+            <span lang="ja">BUSHOO!JAPAN（武将ジャパン）</span>
+            <a href="https://bushoojapan.com/bushoo/oda/2026/11/09/222906" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>佐々成政（さっさなりまさ）は、豊臣秀長に処刑されたのか？</p>
+            <p>大河ドラマ『豊臣兄弟』第43回では、切腹の介錯をお願いしておきながら突如秀長に襲いかかり、結局、とどめを刺されるという驚きの展開で最期を迎えました。</p>
+            <p>それが切腹直前に暴れ出すなんて見苦しい真似をするものなのか。</p>
+            <p>……</p>
+            <p>成政出世のキッカケとなったのが、信長の親衛隊である黒母衣衆です。</p>
+            <p>馬廻衆の中でも特に優れた者たちが選び出されたエリート若手武士たちで構成され、成政はその黒母衣衆の筆頭で、赤母衣衆には後にライバルとされる前田利家がいました。</p>
+            <p>鉄砲500挺と弓衆30人ほどを預けられた三人は、追いすがる浅井勢を引きつけては反撃しながら下がり、二番手を受け持った成政は、八相山（はっそうざん）の矢合神社の後ろで戦い、武名を高めました。</p>
+            <p>……</p>
+            <p>その筆頭であった佐々成政が、さらなる飛躍を遂げるのは長篠の戦いと同じ天正三年（1575年）、越前一向一揆でした。</p>
+            <p>織田信長も出向いたこの一向一揆を平定すると、成政は利家・不破光治と共に府中（福井県越前市）周辺の二郡を与えられ、柴田勝家の与力となります。</p>
+            <p>勝家の指揮下で戦いながら、同時に勝家を見張る役目も負っていたんですね。</p>
+            <p>……</p>
+            <p>やがて勝家と秀吉が対立すると、成政は勝家方につきますが、天正十一年（1583年）、勝家は賤ヶ岳の戦いに敗れて自害。</p>
+            <p>窮地の成政は、金沢にいた秀吉のもとへ自ら乗り込みました。</p>
+            <p>越中国主の地位をそのまま認められたうえ、秀吉と越後の上杉氏、飛騨の三木氏との仲介役まで任されたのです。</p>
+            <p>……</p>
+            <p>天正十二年（1584年）、秀吉が、織田信雄と徳川家康の連合軍と戦い始めると、佐々成政は家康と申し合わせて信雄方へ転じました。</p>
+            <p>さらに家康が秀吉と講和してしまったため、成政は真意を確かめに富山から浜松へ向かいました。</p>
+            <p>これが真冬の北アルプスを越えたという「さらさら越え」の伝説であり、実際に雪山を踏破したかどうかは不明です。</p>
+            <p>しかし翌天正十三年（1585年）には信雄も秀吉に臣従しており、同年8月、秀吉は7万人余りの大軍で越中へ押し寄せました。</p>
+            <p>頭を剃って秀吉の本陣へ出向き、富山城を明け渡しました。</p>
+            <p>その後、天正十五年（1587年）に九州平定に伴って、成政は肥後一国を与えられました。</p>
+            <p>……</p>
+            <p>着任早々の天正十五年（1587年）夏、肥後で大規模な反乱が起こります。</p>
+            <p>一般には「秀吉が禁じた検地を成政が強行したから」と語られがちですが、萩原氏はこれを史料の裏付けがない俗説としています。</p>
+            <p>一方、秀吉自身は、有力国衆である隈部親永（くまべちかなが）への対応の不手際が一揆につながったと述べています。</p>
+            <p>成政は他国の大名の加勢も得て、年内に一揆をほぼ鎮めました。</p>
+            <p>天正十六年（1588年）正月、隈本城を差し押さえられた成政は弁明のため大坂へ。</p>
+            <p>しかし途中の尼崎で留め置かれ、閏5月14日に切腹を命じられました。</p>
+            <p>宣教師ルイス・フロイスの記録によれば、成政は妻や娘たちに遺書をしたため、身を清めて腹を切ったといいます。</p>
+            <p>大河ドラマ『豊臣兄弟』のように、豊臣秀長に介錯を頼んだ記録や、土壇場で刀を取り上げ、秀長と斬りあったという記録はありません。</p>
+          </div>
+          <p class="continue"><a href="https://bushoojapan.com/bushoo/oda/2026/11/09/222906" target="_blank" rel="noopener" lang="ja">続きを読む · BUSHOO!JAPAN（武将ジャパン）</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p2">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★★</span> <span class="chip mins">4 min</span> <span class="chip" lang="ja">丹羽長重</span> <span class="chip" lang="ja">丹羽長秀</span> <span class="chip" lang="ja">浅井畷の戦い</span> <span class="chip" lang="ja">前田利常</span> <span class="chip" lang="ja">白河小峰城</span>
+          </div>
+          <h2 lang="ja">「120万石→4万石→改易→10万石」天下人に翻弄され続けた丹羽長重の数奇な運命</h2>
+          <p class="why">Montanha-russa de koku: herdeiro de 1,2 milhão de koku, cai para 40 mil em dois anos por “culpa de vassalos”, é kaieki depois de Sekigahara e volta aos 100 mil em Shirakawa. Pérola: descascou uma pera para o menino-refém Saruchiyo — que, já senhor de Kaga, lembrou disso a vida toda.</p>
+          <div class="source">
+            <span lang="ja">草の実堂</span>
+            <a href="https://kusanomido.com/study/history/japan/azuchi/136086/" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>織田政権において「織田四天王」の一人に数えられる宿老であり、政務・土木・外交などに優れた実務能力を発揮し、信長の天下布武を支えた丹羽長秀。</p>
+            <p>その血を色濃く受け継ぎながら、豊臣秀吉、徳川家康の天下取りに翻弄され続けた武将がいた。</p>
+            <p>今回は120万石余の大名から改易という憂き目に遭いながら、秀吉・家康・秀忠という天下人の治世を生き抜いた、長重の波乱に満ちた生涯をひもとく。</p>
+            <p>……</p>
+            <p>1585年（天正13年）、丹羽長秀は51歳で生涯を閉じた。</p>
+            <p>その際、長重は父の所領120万石余を受け継ぎ、秀吉から羽柴姓を与えられている。</p>
+            <p>父・長秀の死からわずか2年で、120万石余の大大名から4万石の小大名へと転落してしまったのだ。</p>
+            <p>……</p>
+            <p>しかし一方で、ここまで過酷な処分を課しながら、不思議なことに秀吉の怒りがそれほど長く続いていたようには見えない。</p>
+            <p>たとえば若狭一国を失った1587年、長重は秀吉の参内に供奉し、侍従に任官している。その後、1588年（天正16年）には、羽柴姓に加えて豊臣姓も与えられた。</p>
+            <p>この加増からみえるのは、父の時代の所領には遠く及ばないものの、秀吉が長重を完全に見限ったのではないということだ。</p>
+            <p>……</p>
+            <p>これに対し長重は、西軍への加担を明確にしないまま、3千の兵とともに小松城に籠城した。</p>
+            <p>しかし難攻不落とうたわれた小松城への攻撃は避け、さらに南下して大聖寺城を攻略する。その後、大谷吉継率いる数万の軍勢が金沢を襲うとの噂が流れ、利長は主力を金沢へ引き返させることにした。</p>
+            <p>長重は、庶子として育った猿千代の境遇に同情し、自ら梨の皮を剥いてすすめた。後に加賀藩主となった利常は、このときの思い出を忘れず、晩年まで梨を食べるたびに語っていたという。</p>
+            <p>……</p>
+            <p>しかし長重はこれに応じず、戦後、その不参陣を咎められて所領を没収され、改易となったのである。</p>
+            <p>改易から3年後の1603年（慶長8年）、長重は常陸国古渡に1万石を与えられ大名に復帰する。</p>
+            <p>関ヶ原の戦いで敗れた武将が、その後再び大名に復帰する例は多くなく、長重のほかには立花宗茂など数えるほどであった。</p>
+            <p>……</p>
+            <p>さらに1627年（寛永4年）には、陸奥白河10万700石に加増移封され、四半世紀近くを経て、再び10万石を超える大名に返り咲いたのである。</p>
+            <p>長重は1637年（寛永14年）閏3月4日、白河藩江戸桜田上屋敷で、67歳の波乱に富んだ生涯を閉じた。</p>
+            <p>最後に、長重が残したとされる遺言を紹介して、本稿のまとめとしよう。</p>
+            <p>「将軍の恩を第一として、幕僚と円滑に付き合い、徳川幕府への忠勤に励むこと。だが、機転を利かせすぎたり、媚び諂うのはよくないことだ」</p>
+          </div>
+          <p class="continue"><a href="https://kusanomido.com/study/history/japan/azuchi/136086/" target="_blank" rel="noopener" lang="ja">続きを読む · 草の実堂</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p3">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★☆</span> <span class="chip mins">4 min</span> <span class="chip" lang="ja">由利鎌之助</span> <span class="chip" lang="ja">真田十勇士</span> <span class="chip" lang="ja">立川文庫</span> <span class="chip" lang="ja">難波戦記</span> <span class="chip" lang="ja">講談</span>
+          </div>
+          <h2 lang="ja">由利鎌之助は女忍者だったのか？槍と水中戦を得意とした真田十勇士の豪傑</h2>
+          <p class="why">Os Dez Bravos de Sanada como história da ficção popular: Kamanosuke é mais antigo que Sasuke e Saizō (Naniwa Senki, 1672), lutava de lança — a foice-corrente veio depois, por causa do nome. Bandido em Suzuka, duelo inventado com Fukushima Masanori, morte como dublê de Yukimura… ou fuga para Satsuma.</p>
+          <div class="source">
+            <span lang="ja">BUSHOO!JAPAN（武将ジャパン）</span>
+            <a href="https://bushoojapan.com/bushoo/sanada/2026/11/08/222858" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>真田十勇士の由利鎌之助（ゆりかまのすけ）といえば、鎖鎌の遣い手――。</p>
+            <p>と思いきや、真田十勇士の人気を広めた「立川文庫」の鎌之助が得意としたのは槍でした。</p>
+            <p>かつては槍と水練の名人として知られた由利鎌之助を振り返ってみましょう。</p>
+            <p>……</p>
+            <p>由利鎌之助は、猿飛佐助や霧隠才蔵と同じく、『真田十勇士』の物語に登場する架空の武士です。</p>
+            <p>しかし鎌之助は、実は佐助や才蔵よりもずっと古いキャラクターです。</p>
+            <p>江戸時代の寛文十二年（1672年）に成立した『難波戦記』に登場しており、その後の『真田三代記』では早くも大きな存在感を示していました。</p>
+            <p>立川文庫の十勇士で、その名がタイトルとして独立した書籍は、佐助、才蔵、三好清海入道、そして鎌之助の4人だけだったといいます。</p>
+            <p>……</p>
+            <p>鎌之助は、そんな主家の再興軍用金と仲間を集めるため、伊勢の鈴鹿峠で山賊の頭領になっていました。</p>
+            <p>そんな噂が立つほどの武人であり、退治に向かった武士たちは誰一人無事に帰れなかったほど。</p>
+            <p>激しい戦いの末に鎌之助をねじ伏せたのは佐助で、決め手は得意の忍術ではなく、なんと腕力です。</p>
+            <p>結局は脅しているのですが、なぜだか心を動かされた鎌之助は一味を解散し、佐助と清海の弟分として義兄弟の契りを結びました。</p>
+            <p>……</p>
+            <p>実は思わぬ戦国武将とも戦っていまして……それが福島正則です。</p>
+            <p>大正八年（1919年）の『真田郎党忍術名人猿飛佐助』での由利鎌之助は、広島城主だった福島正則と槍で立ち合いました。</p>
+            <p>鎌之助は飛ぶ鳥のように正則の手元へ飛び込んで槍を打ち落とすと、降参させてしまうのです。</p>
+            <p>言うまでもなく物語における武勇談であり、実際の正則とも全く関係ありませんが、これだけで「強い！」ということは伝わってくるでしょう。</p>
+            <p>……</p>
+            <p>大正四年（1915年）の『忍術名人難波合戦霧隠才蔵大活動』で、大坂夏の陣を迎えた由利鎌之助は、幸村の影武者として戦っていました。</p>
+            <p>驚いた西尾が鎌之助と渡り合うと、本物の幸村は素早く姿を消します。</p>
+            <p>こうして鎌之助は、主君を逃がすために自らの命を差し出したのです。</p>
+            <p>同作の主人公は鎌之助自身ですから、五十人力で槍の名手という看板キャラクターを、さすがに死なせるわけにはいかなかったのでしょう。</p>
+          </div>
+          <p class="continue"><a href="https://bushoojapan.com/bushoo/sanada/2026/11/08/222858" target="_blank" rel="noopener" lang="ja">続きを読む · BUSHOO!JAPAN（武将ジャパン）</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p4">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★☆</span> <span class="chip mins">2 min</span> <span class="chip" lang="ja">徳川慶喜</span> <span class="chip" lang="ja">寛永寺</span> <span class="chip" lang="ja">彰義隊</span> <span class="chip" lang="ja">上野戦争</span> <span class="chip" lang="ja">永倉新八</span>
+          </div>
+          <h2 lang="ja">なぜ将軍徳川慶喜は寛永寺に逃げたのか　彰義隊反乱は半日で決着　上野が見た時代の終幕</h2>
+          <p class="why">Série do Sankei sobre o Shinsengumi, hoje em Ueno: a batalha do Shōgitai durou meio dia, e o Kan’ei-ji — “o Hiei do Leste”, posto no portão demoníaco do castelo — encolheu para menos de 1/20 do terreno. Trecho livre curto (resto para assinantes), mas dá o porquê de Yoshinobu ter ido se recolher ali.</p>
+          <div class="source">
+            <span lang="ja">産経ニュース（誠の足跡 新選組を行く）</span>
+            <a href="https://www.sankei.com/article/20261109-446XMLPS3BNAJOYNDUGM4RZUBA/" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>江戸城が無血開城された後の慶応4（1868）年5月、旧幕府側の抗戦派らによる彰義隊と新政府軍が衝突した上野戦争。新選組二番隊組長だった永倉新八らも旧幕府側として参戦したものの、戦いはわずか半日で新政府軍が勝利。幕府の牙城だった江戸を落とし、関東以西を掌握した。戦いの舞台となったのは現在の東京・上野恩賜公園。激戦の爪痕がしのばれる。</p>
+            <p>JR上野駅公園口から徒歩約15分。外国人観光客や家族連れらのにぎわいを通り抜けた先に東叡山・寛永寺がたたずむ。徳川幕府ゆかりの寺とあって壮大な伽藍（がらん）を想像していたが、落ち着いた風情が印象的だ。</p>
+            <p>「江戸時代は日本一の寺でしたが、明治維新を経て、境内はかつての20分の1にも満たないくらいに縮小されたのです」と、寛永寺執事の石川亮岳さん（47）。江戸時代は今の上野公園や上野駅を含む広大な敷地に、36の塔頭（たっちゅう）寺院が立ち並んでいたという。</p>
+            <p>寛永寺は徳川3代将軍・家光が寛永2（1625）年、幕府の安泰を祈願するため江戸城の鬼門（北東）に創建。京の鬼門を守る比叡山延暦寺にならい、山号を「東叡山」（東の比叡山）と名付けた。</p>
+            <p>もともと将軍家の祈願寺だったが、4代以降計6人の将軍の墓所が造営されて菩提（ぼだい）寺も兼ね、承応3（1654）年には天皇の皇子（後の輪王寺宮（りんのうじのみや））が住職に就任。江戸で唯一の門跡寺院として、格、規模とも屈指の大寺院だった。</p>
+          </div>
+          <p class="continue"><a href="https://www.sankei.com/article/20261109-446XMLPS3BNAJOYNDUGM4RZUBA/" target="_blank" rel="noopener" lang="ja">続きを読む · 産経ニュース（誠の足跡 新選組を行く）</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p5">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★☆</span> <span class="chip mins">2 min</span> <span class="chip" lang="ja">女方</span> <span class="chip" lang="ja">篠井英介</span> <span class="chip" lang="ja">三代目澤村田之助</span> <span class="chip" lang="ja">娘道成寺</span> <span class="chip" lang="ja">自主公演</span>
+          </div>
+          <h2 lang="ja">女方はいばらの道　お手本は名女優、古今東西の「美しい所作」を探求　品よく上等に</h2>
+          <p class="why">Kabuki fora do kabuki: um onnagata no teatro contemporâneo, onde há atrizes de sobra — “por que usar um homem?”. Shinoi Eisuke banca do próprio bolso uma peça solo sobre Sawamura Tanosuke III com Musume Dōjōji dentro. Vocabulário de palco (所作, 囃子方, 劇中劇) que combina com o tema desta página.</p>
+          <div class="source">
+            <span lang="ja">産経ニュース（一聞百見）</span>
+            <a href="https://www.sankei.com/article/20261107-TZWXHVMANRP4FHE7URPVBHJV2U/" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>ぴんと伸びた背筋、なだらかな肩、指先まで宿る優美な動き。その中性的な面差しも女性を演じるにふさわしかったが、花組芝居を退団後に女方（おんながた）としての自分を待っていたのは「いばらの道だった」と振り返る。</p>
+            <p>歌舞伎と違い現代劇には多くの女優がいる。その中でどれだけ売り込んでも、「なぜわざわざ男の篠井英介を女の役で使う必要があるのか」というのは作り手側からすれば当然の疑問で、まだ説得できるほどの実績を持たなかった篠井は、はね返され続けた。</p>
+            <p>突破口として始めたのが、企画から制作まで自分で手掛ける自主公演だ。「大ヒロインに次々に挑戦して『ここにこんな女方がいますけどどうですか？』というアピールの繰り返し。使ってもらえないからやるしかない！と必死に続けました」</p>
+            <p>平成2年に初めて挑んだ自主公演が、オリジナル作品「女形能晨鐘（ハナノアケガタ）」。幕末から明治にかけて活躍した歌舞伎の女方、三代目澤村田之助をモチーフにした一人芝居で、こだわったのが、舞踊「娘道成寺」を踊る劇中劇だった。</p>
+            <p>当時の舞台写真がある。かつらも衣装も、本物の歌舞伎とみまがうような美しさ。後ろには小鼓など囃子（はやし）方が座り、制作費が自費の自主公演とは思えない豪華さが目を引く。</p>
+          </div>
+          <p class="continue"><a href="https://www.sankei.com/article/20261107-TZWXHVMANRP4FHE7URPVBHJV2U/" target="_blank" rel="noopener" lang="ja">続きを読む · 産経ニュース（一聞百見）</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p6">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★☆☆</span> <span class="chip mins">4 min</span> <span class="chip" lang="ja">江口きち</span> <span class="chip" lang="ja">短歌</span> <span class="chip" lang="ja">石川啄木</span> <span class="chip" lang="ja">川場村</span> <span class="chip" lang="ja">武尊の麓</span>
+          </div>
+          <h2 lang="ja">障害を持つ兄と遂げた悲しい最期〜「女啄木」と呼ばれた天才女流歌人・江口きち</h2>
+          <p class="why">Aviso: leitura pesada (termina em suicídio). Poeta de tanka de Gunma, pobre, autodidata em estilo Man’yō, chamada de “Takuboku de saia”; mil poemas em sete anos e um amor impossível às vésperas da mobilização geral de 1938. Vale pelos tanka (文語) com tradução livre ao lado.</p>
+          <div class="source">
+            <span lang="ja">草の実堂</span>
+            <a href="https://kusanomido.com/study/history/japan/shouwa/136409/" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>江口きちは、昭和初期に活躍していた大正時代生まれの女流歌人である。</p>
+            <p>石川啄木は26歳で肺結核によりこの世を去ったが、きちは啄木よりも早く、25歳でその生涯を終えている。</p>
+            <p>しかも彼女の死因は病死ではなく、実の兄を道連れにした自死であった。</p>
+            <p>……</p>
+            <p>江口きちは大正2年11月23日、群馬県利根郡川場村で、父・江口熊吉と母・ユワの長女として誕生した。</p>
+            <p>兄の廣寿には5歳の時に患った脳膜炎の後遺症で、知的障害があった。</p>
+            <p>……</p>
+            <p>きちが短歌に目覚めたのは、尋常高等小学校時代に彼女の担任を受け持った教師・田村晴子の影響だった。</p>
+            <p>まだ16歳にして、自活どころか家族の食い扶持をも稼がなくてはならなくなったきちは、慣れない商売に奮闘しながら、独学で万葉調の短歌を詠んで心の憂さを晴らすようになっていった。</p>
+            <p>そしてその翌年の1931年、小学校時代の恩師である晴子の勧めで、詩人の河井酔茗（かわいすいめい）と島本久恵夫妻が主宰する文芸誌『女性時代』の誌友として短歌の投稿をするようになり、家業の傍らで歌人として活躍するようになった。</p>
+            <p>……</p>
+            <p>川場村の長者という立場にあり、教養もあり人望も厚かったこの寡黙な男性と、きちは恋に落ちた。</p>
+            <p>男性の申し出を受け入れ、やがてお互いに思いを寄せ合う間柄となったが、2人の関係はいわゆる道ならぬ恋だった。</p>
+            <p>「生きの世の　現し歩みに　背は向けて　人を思ふは　かなしかりけり」</p>
+            <p>意訳…現実から目を背けてあの人のことを思い続けるのは、なんと悲しく切ないことだろうか。</p>
+            <p>……</p>
+            <p>「睡たらひて　夜は明けにけり　うつそみに　聴きをさめなる　雀鳴き初む」意訳…うとうとしているうちに夜が明けて、現世では聞き納めになるだろう雀が鳴き始めた</p>
+            <p>「大いなる　この寂けさや　天地の　時刻あやまたず　夜は明けにけり」意訳…この上なく大きく深いこのしずけさよ。天地の動きは少しの狂いもなく、時刻通りに夜は明けた。</p>
+            <p>……</p>
+            <p>きちは歌人として『女性時代』に短歌を投稿し始めてから命を絶つまでの7年間で、1,000首を越える作品を残した。</p>
+            <p>きちの死から約4ヶ月後の1939年4月、きちが短歌を投稿していた『女性時代』の主宰・河井酔茗の選によって、歌集『武尊の麓』が刊行され、同年に肉筆覆刻本として『江口きち歌集』が刊行された。</p>
+          </div>
+          <p class="continue"><a href="https://kusanomido.com/study/history/japan/shouwa/136409/" target="_blank" rel="noopener" lang="ja">続きを読む · 草の実堂</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p7">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★☆</span> <span class="chip mins">3 min</span> <span class="chip" lang="ja">キュレネ</span> <span class="chip" lang="ja">リビア</span> <span class="chip" lang="ja">大英博物館</span> <span class="chip" lang="ja">考古学史</span> <span class="chip" lang="ja">オスマン帝国</span>
+          </div>
+          <h2 lang="ja">危機遺産の神殿で121個に砕けた巨像　発掘者はなぜ迷ったのか</h2>
+          <p class="why">1860: dois oficiais britânicos em Malta decidem cavar a Cirene grega na Líbia, acampam em tumbas saqueadas e acham uma estátua de culto em 121 pedaços — hoje no British Museum. O trecho livre é a montagem da aventura (o resto é paywall); bom vocabulário de arqueologia sem jargão de arquitetura.</p>
+          <div class="source">
+            <span lang="ja">ナショナル ジオグラフィック日本版</span>
+            <a href="https://natgeo.nikkeibp.co.jp/atcl/news/26/071300392/" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>1860年春、地中海に浮かぶマルタ島に駐留していた技師で、若い英国陸軍中尉のロバート・マードック・スミスは、北アフリカで考古学調査を行う計画を立てていた。そして、海軍に従軍していたアマチュア芸術家のエドウィン・オーガスタス・ポーチャーを説得し、同行してもらうことにした。</p>
+            <p>二人はすでに、同僚たちが成し遂げた英国本土でも話題になるほどのすばらしい考古学的発見を目にしており、次は自分たちで発掘し、古代の財宝を見つけたいと考えていた。</p>
+            <p>スミスとポーチャーは、リビアの沿岸地帯に向かうことにした。あまり調査されていない遺跡が残っていたからだ。</p>
+            <p>紀元前7世紀ごろ、ギリシャ人入植者たちがキュレネという町を作った。町はやがて、この一帯の中心都市のひとつになった。しかし、紀元262年と365年に大きな地震が発生し、都市は衰退し、遊牧民や一部の地元民しか訪れない廃墟になっていた。ネクロポリス（「死者の町」を意味するギリシャ語。</p>
+            <p>19世紀初頭になると、さまざまなヨーロッパ人がキュレネを訪れるようになった。その中には、感想を記したり、版画を残したりする者もいた。フレデリックとヘンリーのビーチー兄弟（1821年）や、ジェームズ・ハミルトン（1852年）などだ。</p>
+            <p>スミスとポーチャーは、当時リビアを支配していたオスマン帝国当局から必要な許可を得ると、マルタを出て、1860年12月23日にキュレネに到着した。</p>
+            <p>都市のはずれにある墓地では、多くの墓が荒らされていた。そのため、盗掘されて空になっていた墓室を宿営地として利用し、都市の遺跡に注目することにした。柱や壁、劇場や噴水、演壇などの残骸が見つかった。埋もれかけたキュレネだったが、それでも過去の輝かしい栄光の跡は残されていた。</p>
+          </div>
+          <p class="continue"><a href="https://natgeo.nikkeibp.co.jp/atcl/news/26/071300392/" target="_blank" rel="noopener" lang="ja">続きを読む · ナショナル ジオグラフィック日本版</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p8">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★★</span> <span class="chip mins">4 min</span> <span class="chip" lang="ja">幻の灯台</span> <span class="chip" lang="ja">錯視</span> <span class="chip" lang="ja">予測符号化</span> <span class="chip" lang="ja">レディー・エリオット島</span> <span class="chip" lang="ja">Open Mind</span>
+          </div>
+          <h2 lang="ja">目の前の海に別の灯台が見える。長年人々を惑わせた「幻の灯台」の謎が解明</h2>
+          <p class="why">Marinheiros relatam desde 1937 um “farol fantasma” no mar à frente quando o verdadeiro está atrás. Melbourne explica: sem pistas de distância, o cérebro supõe que o feixe está perto, vê a ponta girando devagar e “coloca” a fonte no horizonte. Previsão testada em VR: com farol de 30 m, a ilusão começa a 67 m. Ótimo para quem veleja.</p>
+          <div class="source">
+            <span lang="ja">カラパイア</span>
+            <a href="https://karapaia.com/archives/636944.html" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>真っ暗な夜の海を見つめていると、はるか沖合にピカーッと光る灯台の光が見える。しかし、海の上には何もない。</p>
+            <p>本物の灯台は「自分の背後」にしかないはずだ。頭ではわかっていても、目の前の海にもうひとつの灯台があるように見えてしまう。</p>
+            <p>世界各地で報告されてきたこの奇妙な現象は「幻の灯台」と呼ばれ、人々を惑わせてきた。</p>
+            <p>背後の光を、脳はなぜ「目の前の海にある」と勘違いしてしまうのか。オーストラリアのメルボルン大学などの研究チームが、その謎をついに解き明かした。</p>
+            <p>……</p>
+            <p>最も古い記録は1937年にフランスのブルターニュ沖で報告されたもので、それから89年間、なぜ幻の灯台が見えるのか、科学者たちの間で議論が続いてきた。</p>
+            <p>メルボルン大学のチャールズ・ケンプ教授らの研究チームは、レディー・エリオット島で実際に幻の灯台を体験したうえで、バーチャルリアリティ（VR）で同じ見え方を再現し、原因を調べた。</p>
+            <p>……</p>
+            <p>研究チームによると、幻の灯台は、脳が目からの情報と自分の予想を組み合わせて景色を判断していることで生まれるという。</p>
+            <p>暗い夜の海には、ものまでの距離を測る手がかりがほとんどない。</p>
+            <p>手がかりが足りないとき、脳は目から入る情報だけでは判断できず、「たぶんこのくらいの距離だろう」という予想に頼って見え方を決めてしまう。</p>
+            <p>……</p>
+            <p>灯台の光は、ぐるぐる回りながら、背後の灯台から観察者の頭上を通り越し、はるか沖まで伸びている。</p>
+            <p>遠くの船にも届くほど長い光なので、光の遠い端は大きな円を描き、実際には猛スピードで動いている。</p>
+            <p>ところが人間の脳は、ふだん身近なものを見ることに慣れているため、夜の海で遠くの光を見ても「もっと近くにあるはずだ」と予想してしまう。</p>
+            <p>脳が距離を短く見積もると、光の遠い端は、近くをゆっくり動いているように見える。</p>
+            <p>そのため脳は、ゆっくり動いて見える沖のほうに光源があると判断し、背後の灯台の光が、目の前の海に立つ灯台から出ているように見えてしまうのだ。</p>
+            <p>……</p>
+            <p>これまで幻の灯台を報告してきたのは、灯台から1km以上離れた海を航行する船乗りたちがほとんどだった。</p>
+            <p>研究チームは自分たちの説明をもとに、高さ30mの灯台なら、灯台から67m離れただけで幻の灯台が見え始めると予測した。</p>
+            <p>VRで灯台からの距離を変えて試したところ、予測を裏付ける結果が得られた。</p>
+            <p>ふだん私たちが世界を正しく見られるように働いている脳の予測する力が、手がかりのない夜の海では、灯台の位置を数十kmも見誤らせてしまうのだ。</p>
+          </div>
+          <p class="continue"><a href="https://karapaia.com/archives/636944.html" target="_blank" rel="noopener" lang="ja">続きを読む · カラパイア</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p9">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★★</span> <span class="chip mins">4 min</span> <span class="chip" lang="ja">ギンギツネ</span> <span class="chip" lang="ja">ベリャーエフ</span> <span class="chip" lang="ja">家畜化症候群</span> <span class="chip" lang="ja">腹内側視床下部</span> <span class="chip" lang="ja">Current Biology</span>
+          </div>
+          <h2 lang="ja">人懐っこいキツネ同士を交配し続けると、脳の攻撃性に関するニューロンが減少する</h2>
+          <p class="why">O experimento soviético de raposas mansas (desde 1959!) ganha leitura celular: em Cornell, as raposas amigáveis têm menos neurônios de agressão no hipotálamo ventromedial. Junto com 2.700 genomas de cães (Seul), sugere que a domesticação começou por “perder o medo”, não pela aparência.</p>
+          <div class="source">
+            <span lang="ja">カラパイア</span>
+            <a href="https://karapaia.com/archives/637186.html" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>犬が長い年月を経て人間の親友となった。では野生のキツネも人間が関与することで良きパートナーとなれるのか？</p>
+            <p>ロシアでは1959年から、人懐っこい友好的なギンギツネだけを選んで選択交配を続ける実験が開始され、現在も続いている。</p>
+            <p>アメリカのコーネル大学は、ロシアのキツネたちの脳を細胞レベルで調べた。</p>
+            <p>その結果、脳の攻撃に関わるニューロンが減少し、より飼い犬に近いおだやかな性質へと変化していたことがわかった。</p>
+            <p>……</p>
+            <p>1959年、ソビエトの遺伝学者ドミトリー・ベリャーエフら研究チームは、シベリア、ノボシビルスク近郊にある毛皮農場で、実験を開始した。</p>
+            <p>農場で飼育されていたギンギツネの中から、人間に対して恐怖や攻撃性を示さず、人懐っこいキツネだけを選んで、選択交配を始めたのだ。</p>
+            <p>実験開始からわずか6世代で、一部のキツネは自ら人間に近づくようになった。</p>
+            <p>さらに世代を重ねるごとに、キツネたちは犬のように尻尾を振るようになり、耳が垂れ下がり、鼻面が短くなるといった家畜化症候群の傾向が現れ始めた。</p>
+            <p>……</p>
+            <p>コーネル大学の分子生物学・遺伝学のチームは、ロシアの研究者たちと協力し、保存されていた「友好的なグループ」、「攻撃的なグループ」、「野生」のキツネの脳をそれぞれ3つずつ調査した。</p>
+            <p>そこで研究チームは攻撃性や社会的な行動に関係する脳の奥深くの領域、「腹内側視床下部」を重点的に調べた。</p>
+            <p>細胞の種類ごとに目印をつけて光らせる方法で分析した結果、人懐っこいキツネは攻撃的なキツネに比べて、これらの「攻撃ニューロン」が少ないことが分かった。</p>
+            <p>人懐っこいキツネ同士の交配を続けることで、脳の細胞の構成そのものが変化していたのである。</p>
+            <p>……</p>
+            <p>シベリアのキツネの実験は、人間が意図的に交配を選択することで、動物の行動の傾向が急速に変化することを示している。</p>
+            <p>……</p>
+            <p>韓国のソウル大学などの研究チームが、約2,700匹の現代の様々な犬の遺伝子を分析したところ、身体的な特徴よりも「攻撃性と恐怖心の低下」の方が共通して受け継がれていることが分かったのだ。</p>
+            <p>「人間のそばにいても安心できる」という最初の行動の変化が、オオカミを現在の犬へと進化させるすべての始まりだったのかもしれない。</p>
+          </div>
+          <p class="continue"><a href="https://karapaia.com/archives/637186.html" target="_blank" rel="noopener" lang="ja">続きを読む · カラパイア</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p10">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★★</span> <span class="chip mins">4 min</span> <span class="chip" lang="ja">和暦</span> <span class="chip" lang="ja">ICU</span> <span class="chip" lang="ja">CLDR</span> <span class="chip" lang="ja">Ubuntu 26.04</span> <span class="chip" lang="ja">GitHub Actions</span>
+          </div>
+          <h2 lang="ja">[破壊的変更] 明治時代の開始日が変更になって単体テストが失敗した件</h2>
+          <p class="why">História do Japão quebrando CI: ubuntu-latest virou 26.04, o ICU novo corrigiu o início de Meiji de 1868/9/8 (data do calendário lunar tratada como gregoriana) para 1868/10/23, e &quot;ggy年M月d日&quot; passou a lançar exceção. Nos comentários, a virada de calendário de Meiji 5 — dezembro que terminou no dia 2.</p>
+          <div class="source">
+            <span lang="ja">Zenn（xin9le）</span>
+            <a href="https://zenn.dev/xin9le/articles/9a1cf8e10494d6" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>「お前は何を言っているんだ？」と思うかもしれませんが、本当なのだから仕方ない！動いていたはずの CI の単体テストが突然コケるという事態に遭遇してビックリ。「何もしてないのに壊れた」。まじで。</p>
+            <p>これは ubuntu-24.04 でちゃんとテストを pass します。何も問題ない。...が、CI で ubuntu-latest を指定していたために、ある日突然 (内部的に) ubuntu-26.04 に切り替わりました。ちょうど GitHub Actions でも最近切り替わりましたよね。</p>
+            <p>ではこれによって先のコードはどうなるかというと、 date.ToString(&quot;ggy年M月d日&quot;, culture) の部分で ArgumentOutOfRangeException が飛びます。全くもって意味不明ですね。</p>
+            <p>どうも調べていくと、 Ubuntu 26.04 に同梱されている ICU (International Components for Unicode) が更新され、明治時代の開始日が 1868/9/8 から 1868/10/23 に修正されたことにより元号の取得ができなくなったようです。</p>
+            <p>Unicode コンソーシアムが管理している CLDR (Common Locale Data Repository) という世界中の言語や地域に関する標準的なデータの集合体があります。この CLDR の旧データでは明治時代の開始日を 1868/9/8 として扱っていました。</p>
+            <p>そして Ubuntu 26.04 ではその修正が適用された ICU が同梱されるようになったため、めでたく (？) 単体テストがコケるようになったというわけです。ということで、以下のように日付を修正して get 事なき。</p>
+            <p>まさか今更 (？) 日付が変わることがあるとは...という感じですが、見事に時限爆弾を踏み抜いたおかげで新しい知識を得ることができました。</p>
+            <p>……</p>
+            <p>明治元年当時、日本はまだ旧暦（天保歴・太陰太陽暦）なので、太陽暦であるグレゴリオ暦とは日付の互換性がありません。明治元年9月8日というのは、日本の元号が明治に変わった日の、旧暦での日付であり、これをグレゴリオ暦に換算したのが 1868-10-23 にあたります。</p>
+          </div>
+          <p class="continue"><a href="https://zenn.dev/xin9le/articles/9a1cf8e10494d6" target="_blank" rel="noopener" lang="ja">続きを読む · Zenn（xin9le）</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p11">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★★</span> <span class="chip mins">4 min</span> <span class="chip" lang="ja">プロンプトインジェクション</span> <span class="chip" lang="ja">コードレビュー</span> <span class="chip" lang="ja">Claude</span> <span class="chip" lang="ja">CLAUDE.md</span> <span class="chip" lang="ja">検証</span>
+          </div>
+          <h2 lang="ja">悪意なきインジェクション：「既知」「他で担保済み」の一文でAIの判断はどこまで歪むか</h2>
+          <p class="why">Experimento sério (594 reviews com Haiku/Sonnet/Opus): um comentário bem-intencionado tipo “conhecido, tratado downstream” faz a IA rebaixar bug real. Mais raciocínio não ajuda; 3 frases de defesa no prompt, sim. O orquestrador erra por “não dá para verificar, então deixa como está”. Direto aplicável a CLAUDE.md e PR review.</p>
+          <div class="source">
+            <span lang="ja">Zenn（murooka_az）</span>
+            <a href="https://zenn.dev/murooka_az/articles/benign-injection-known-note-review" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>AI エージェントのセキュリティでよく聞く話に、プロンプトインジェクションがあります。README やコメント、Web ページに「この指示に従え」と仕込んでおき、読んだ AI に意図しない操作をさせる攻撃です。</p>
+            <p>気になったのは、その手前です。悪意の無いインジェクション、たとえば人が親切心で書いたコメントで、AI の判断が曲がることはないのか。たとえば、こんなコメントです（説明用に短くした例です）。</p>
+            <p>この記事では、命令に従わせる典型的なプロンプトインジェクションとは少し違い、悪意のない説明や注記が AI の判断の前提を変えてしまうことを、便宜上「悪意なきインジェクション」と呼びます。</p>
+            <p>……</p>
+            <p>注記をそのまま信じたレビューもありました。Sonnet で 25 回中 8 回、Opus で 24 回中 5 回です。防御の 3 文を入れると、Sonnet・Opus ともに 0 になりました。</p>
+            <p>今回の認可の欠落（J）や SQL 注入（H）は、注記があっても一度も通りませんでした。通ってしまったのは、金額の計算・丸め・決済の重複除去のように、注記が本当なら仕様として成り立つバグです。</p>
+            <p>……</p>
+            <p>「指摘しないで」を外しても、16 回中 9 回は実バグを止めませんでした。注記なしでは 0 回なので、説明だけで判断は曲がります。頼みの一言はその上に足されていて、Opus では大きく効きました（8/8 と 2/8）。</p>
+            <p>……</p>
+            <p>ルールを足さないと、Opus は 3 回とも同じ判断をしました。「README によれば呼び出し側は引き算しているので、挙動は変えず、説明（docstring）のほうを挙動に合わせる」。</p>
+            <p>嘘を信じたのではありません。「確認できないから、変えないのが安全」という、慎重に見える判断です。</p>
+            <p>……</p>
+            <p>悪意のある注入には、モデルの側で対策が進んでいます。けれど今回効いたのは、悪意のない、親切な一文でした。「既知」「下流で丸める」「指摘不要」。書いた人は善意で、たぶん多くは本当のことです。</p>
+            <p>分かれ目は、コードか文書かでも、レビューか修正かでもなく、注記の主張をその場で確かめられるかどうかでした。確かめられない注記には、どの成果物でも、どの役割でも引っ張られました。</p>
+          </div>
+          <p class="continue"><a href="https://zenn.dev/murooka_az/articles/benign-injection-known-note-review" target="_blank" rel="noopener" lang="ja">続きを読む · Zenn（murooka_az）</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p12">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★☆</span> <span class="chip mins">3 min</span> <span class="chip" lang="ja">Claude Code</span> <span class="chip" lang="ja">settings.local.json</span> <span class="chip" lang="ja">秘密情報</span> <span class="chip" lang="ja">Apiiro</span> <span class="chip" lang="ja">GitHub</span>
+          </div>
+          <h2 lang="ja">Claude Codeの「次回から表示しない」でパスワードが流出する恐れ、GitHubで2539件の秘密情報が見つかる</h2>
+          <p class="why">Prático para o dia a dia: “Yes, and don’t ask again” grava o comando inteiro — senha incluída — em .claude/settings.local.json; a Apiiro achou 2.539 segredos em 1.994 repositórios públicos. Remédio: variável de ambiente e conferir o que vai pro git.</p>
+          <div class="source">
+            <span lang="ja">GIGAZINE</span>
+            <a href="https://gigazine.net/news/20261109-claude-code-leak-secrets/" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>AnthropicのAIコーディングツール「Claude Code」でコマンドの実行を許可する際に「次回から表示しない」を選ぶと、コマンドに含まれるパスワードなどの秘密情報まで設定ファイルに保存される問題が明らかになりました。</p>
+            <p>Claude CodeはAIに指示するだけでプログラムの作成や修正、コマンドの実行などを自動化できるツールです。安全性を確保するため、コマンドを実行する際にはユーザーに許可を求める仕組みが用意されています。</p>
+            <p>ただし、作業のたびに許可を求められると開発が中断されてしまいます。</p>
+            <p>Apiiroによると、この時許可したコマンドの保存方法に問題があるとのこと。例えばClaude Codeにデータベースへの接続を指示した場合、実行するコマンドにはデータベースのパスワードが含まれることがあります。</p>
+            <p>設定ファイルは本来、開発者のPC内だけに保存されることを想定しています。</p>
+            <p>また、一般的な秘密情報の検出ツールでも問題を見逃すケースが確認されました。</p>
+            <p>Apiiroは対策として、設定ファイルがGitHubに公開されていないか確認することや、コマンドにパスワードを直接記述せずに環境変数を使うことを推奨しています。</p>
+            <p>Claude Codeの開発責任者を務めるボリス・チェルニー氏は11月7日、今回の問題についてHacker News上でコメントしました。</p>
+            <p>チェルニー氏は複数の対策案について試作を進め、実装前にそれぞれの利点と課題を確認する方針だと述べています。</p>
+          </div>
+          <p class="continue"><a href="https://gigazine.net/news/20261109-claude-code-leak-secrets/" target="_blank" rel="noopener" lang="ja">続きを読む · GIGAZINE</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p13">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★☆</span> <span class="chip mins">3 min</span> <span class="chip" lang="ja">アーロンソン＝アンバイニス予想</span> <span class="chip" lang="ja">量子計算</span> <span class="chip" lang="ja">Lean 4</span> <span class="chip" lang="ja">Anthropic</span> <span class="chip" lang="ja">PSI</span>
+          </div>
+          <h2 lang="ja">Anthropicの非公開AIモデルを使って18年間未解決だった量子コンピューターの難問が証明される</h2>
+          <p class="why">A conjectura Aaronson–Ambainis (2008: speedup quântico exponencial exige estrutura?) teria sido provada por um sistema com modelo não público da Anthropic — em 3 dias — e verificada em Lean 4 sem axiomas novos. Bom vocabulário de matemática; link extra sobre a “Dreaming” de memória do Claude.</p>
+          <div class="source">
+            <span lang="ja">GIGAZINE</span>
+            <a href="https://gigazine.net/news/20261109-anthropic-psi-aaronson-ambainis/" target="_blank" rel="noopener">原文を開く ↗</a> · <a href="https://gigazine.net/news/20261109-ai-dreaming-agent-memory/" target="_blank" rel="noopener" lang="ja">GIGAZINE：Claudeの記憶とDreaming ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>AI物理学スタートアップのPhysical Superintelligence(PSI)が2026年11月6日、2008年から未解決だった量子コンピューティングの難問「アーロンソン＝アンバイニス予想」の証明に成功したと発表しました。</p>
+            <p>量子コンピューターは量子力学の性質を利用することで、従来のコンピューターでは膨大な時間がかかる計算を高速に処理できると期待されています。</p>
+            <p>ただし、量子コンピューターが圧倒的な性能を発揮するためには、計算対象となる問題に特定の規則性や構造が必要なのかという疑問が残されていました。ショアのアルゴリズムも、数値に隠された周期的な規則性を利用しています。</p>
+            <p>2008年に計算機科学者のスコット・アーロンソン氏とアンドリス・アンバイニス氏が提唱した「アーロンソン＝アンバイニス予想」は、量子コンピューターの高速化に規則性が必要かどうかを数学的に解明するための予想です。</p>
+            <p>アーロンソン＝アンバイニス予想が正しければ、ランダムな入力の大部分について、量子コンピューターが従来のコンピューターより指数関数的に少ないデータ参照回数で計算を終えることはできないと示されます。</p>
+            <p>……</p>
+            <p>PSIはアーロンソン＝アンバイニス予想を解決するため、独自に開発したAI研究システムを使用しました。</p>
+            <p>PSIによると、AI研究システムは実行開始から3日目にアーロンソン＝アンバイニス予想の完全な証明を発見しました。さらに関連する数学的問題の研究を進める過程で証明を2回改良し、最終的な証明も完成させています。</p>
+            <p>数学の証明では結論が正しいかどうかに加え、結論に至るまでの論理に誤りがないかを確認する必要があります。特にAIが作成した複雑な証明については、もっともらしい説明に誤りが含まれている可能性があるため、厳密な検証が重要になります。</p>
+            <p>そこでPSIは定理証明支援システム「Lean 4」を使い、証明をコンピューターが確認できる形式に変換しました。</p>
+          </div>
+          <p class="continue"><a href="https://gigazine.net/news/20261109-anthropic-psi-aaronson-ambainis/" target="_blank" rel="noopener" lang="ja">続きを読む · GIGAZINE</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p14">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★☆</span> <span class="chip mins">2 min</span> <span class="chip" lang="ja">内房線</span> <span class="chip" lang="ja">代行バス</span> <span class="chip" lang="ja">都営バス</span> <span class="chip" lang="ja">京葉臨海鉄道</span> <span class="chip" lang="ja">台風25号</span>
+          </div>
+          <h2 lang="ja">台風被害の「内房線」ついに復旧 3か月を「48日間」に前倒し 鉄道とバス“空前絶後の連携プレー”が終焉</h2>
+          <p class="why">Infra em crise bem resolvida: deslizamento do tufão 25 fechou Anegasaki–Nagaura; previsão de 3 meses virou 48 dias. Enquanto isso, ônibus da Toei, Kominato e até de Hokkaido, Shiga e Kanazawa rodaram a ponte, com base num pátio de carga do Keiyō Rinkai. Ótimo vocabulário de 代行輸送.</p>
+          <div class="source">
+            <span lang="ja">乗りものニュース</span>
+            <a href="https://trafficnews.jp/post/726162" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>台風25号の影響で長期間不通となったJR内房線。復旧を支えたのは、仮設の折返し設備と、全国から集結した代行バスの連携プレーでした。</p>
+            <p>2026年9月21日の台風25号による大雨で大量の土砂が流入し、長期にわたって列車の運転を見合わせていたJR内房線の姉ケ崎～長浦間が11月8日昼頃に運転を再開しました。当初、復旧には少なくとも3か月程度を要する見込みでしたが、復旧を前倒し。</p>
+            <p>この間、鉄道の輸送を支えたのが、長浦駅に設けられた仮設の折返し設備と、全国各地から集まった代行バスでした。</p>
+            <p>不通区間の移動手段として、まず9月30日から小湊鐵道が長浦～姉ケ崎間で臨時バスの運行を開始しました。翌10月1日には東京都交通局が都営バス10台と乗務員を派遣しました。</p>
+            <p>JR東日本による列車代行輸送は、関連会社のジェイアールバス関東が運行管理を担当しました。付近を走る貨物鉄道事業者である京葉臨海鉄道の京葉久保田駅構内には「内房線列車代行現地対策本部」が設置され、ここを拠点に代行輸送が始まりました。</p>
+            <p>その後、国土交通省や日本バス協会などを通じた協力要請により、全国のバス事業者から順次応援が加わりました。北海道や滋賀、金沢など遠方からも車両と乗務員が集まり、長浦駅と姉ケ崎駅を結ぶ輸送を支えました。</p>
+            <p>11月6日夜と7日昼、長浦駅で代行輸送の様子を取材すると、駅前には、普段この地域では見かけない各地のバスが並び、多くの事業者の車両が確認できました。</p>
+          </div>
+          <p class="continue"><a href="https://trafficnews.jp/post/726162" target="_blank" rel="noopener" lang="ja">続きを読む · 乗りものニュース</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p15">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★☆</span> <span class="chip mins">3 min</span> <span class="chip" lang="ja">hide</span> <span class="chip" lang="ja">X JAPAN</span> <span class="chip" lang="ja">Spread Beaver</span> <span class="chip" lang="ja">Zepp Fukuoka</span> <span class="chip" lang="ja">日本武道館</span>
+          </div>
+          <h2 lang="ja">hide with Spread BeaverがZeppツアー完遂！次は日本武道館、怪人たちのhideとの旅は続く</h2>
+          <p class="why">Live report de hoje: a banda de hide (X JAPAN) segue tocando sincronizada com a voz e o vídeo dele — PATA, I.N.A., KIYOSHI — fechando a turnê Zepp em Fukuoka com a guitarra Yellow Heart no palco, demo inédita “TECHNO POP” e pane de som virando MC. Próximo: Budokan.</p>
+          <div class="source">
+            <span lang="ja">音楽ナタリー</span>
+            <a href="https://natalie.mu/music/news/697206" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>hide with Spread Beaver が11月6日に福岡・Zepp Fukuokaで全国ツアー「REPSYCLE THE REPSYCLED」のファイナルを開催した。</p>
+            <p>hide with Spread Beaverは、1998年5月に急逝したhide（X JAPAN）が同年1月に始動させたバンド。hideの映像と歌声を“怪人”とhideが称したバンドメンバーたちの生演奏に同期させるスタイルでライブを行っている。10月2日の愛知・Zepp Nagoya公演から始まった今回のツアーは、大阪、東京を経て福岡で2日間の最終公演を迎えた。</p>
+            <p>……</p>
+            <p>オープニングアクトを務めたのは、スペシャルゲストの木村世治（ZEPPET STORE）。木村はツアーを通して、今年になって初めて世に出たhideの未完の新曲「TECHNO POP（demo）」に少しずつ歌詞を書き足してきた。</p>
+            <p>今回のツアーでは、hideの愛用ギターも見どころの1つとなった。ステージ中央のアンプの上にはhideを象徴するギター“イエローハート”が置かれ、「FLAME」では木村がhideの使用していたギターを構えてバンドと共演。</p>
+            <p>……</p>
+            <p>MCでKIYOSHIは「hideの音楽が聴かれる場を絶やしちゃいけない、と言うヒロシ（松本裕士氏）の思いがわかる。I.N.A.は“恩返し”って言うの。hideのファンがまだまだ来られる場所を作りたいって」と、松本氏とI.N.A.の思いを代弁した。さらに「俺たちは老体にむち打って。60だぞ（笑）」と話しつつ、「これからもまだまだhideを大事にしていこうぜ！」と観客に呼びかけた。</p>
+            <p>……</p>
+            <p>メンバーがステージを去ったあと、観客は会場に流れる「HURRY GO ROUND」を歌い続けた。スクリーンにhideを乗せた宇宙船が銀河へ飛び立つ映像が流れ、終演かと思われたところで、映像は日本列島から東京へと絞り込まれていく。</p>
+          </div>
+          <p class="continue"><a href="https://natalie.mu/music/news/697206" target="_blank" rel="noopener" lang="ja">続きを読む · 音楽ナタリー</a></p>
+        </div>
+      </article>
+
+      <footer class="site">読解幕 · 2026-11-09 · ~51 min · <a href="../../history/" style="color:inherit">History</a> · deliton.github.io/japanese-digest</footer>
+    </main>
+  </div>
+</body>
+</html>
