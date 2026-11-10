@@ -1,0 +1,970 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>読解幕 · 2026-11-10 · Japanese Digest</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Noto+Serif+JP:wght@400;600;700&family=Shippori+Mincho:wght@500;700&display=swap" rel="stylesheet" />
+  <style>
+
+    :root {
+      --bg: #0a0a0a;
+      --bg-2: #121212;
+      --bg-card: #161616;
+      --ink: #f5f5f5;
+      --ink-dim: #a8a29a;
+      --ink-mute: #6b6560;
+      --shu: #c41e3a;
+      --shu-hot: #e11d48;
+      --shu-deep: #8b1228;
+      --gold: #d4a017;
+      --gold-soft: #c9a227;
+      --white: #fafafa;
+      --line: #2a2a2a;
+      --line-hot: rgba(196, 30, 58, 0.45);
+      --measure: 42rem;
+      --radius: 4px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: "Noto Sans JP", "Hiragino Sans", "Yu Gothic", system-ui, sans-serif;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .stage-bar {
+      height: 6px;
+      background: repeating-linear-gradient(
+        90deg,
+        var(--shu) 0 48px,
+        var(--white) 48px 56px,
+        #111 56px 64px,
+        var(--gold) 64px 72px,
+        #111 72px 88px
+      );
+    }
+
+    .wrap {
+      width: min(100% - 2rem, 74rem);
+      margin: 0 auto;
+      padding: 2rem 0 4.5rem;
+      display: grid;
+      grid-template-columns: 15.5rem 1fr;
+      gap: 2.75rem;
+      align-items: start;
+    }
+
+    @media (max-width: 900px) {
+      .wrap { grid-template-columns: 1fr; gap: 1.5rem; padding-top: 1.25rem; }
+      .sidebar { position: static !important; }
+    }
+
+    .sidebar { position: sticky; top: 1.25rem; }
+
+    .brand {
+      display: flex;
+      align-items: baseline;
+      gap: 0.55rem;
+      margin: 0 0 0.35rem;
+    }
+    .brand-mark {
+      font-family: "Shippori Mincho", "Noto Serif JP", serif;
+      font-size: 1.85rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      color: var(--white);
+      line-height: 1;
+    }
+    .brand-mark em {
+      font-style: normal;
+      color: var(--shu);
+    }
+    .brand-sub {
+      font-size: 0.65rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-weight: 700;
+    }
+
+    .meta {
+      color: var(--ink-mute);
+      font-size: 0.8rem;
+      margin: 0 0 1.25rem;
+    }
+
+    .stat-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-bottom: 1.35rem;
+    }
+    .stat {
+      border: 1px solid var(--line);
+      background: var(--bg-2);
+      padding: 0.32rem 0.65rem;
+      font-size: 0.72rem;
+      color: var(--ink-dim);
+      border-radius: var(--radius);
+    }
+    .stat strong { color: var(--white); font-weight: 700; }
+    .stat.hot {
+      border-color: var(--shu);
+      color: var(--shu-hot);
+      background: rgba(196, 30, 58, 0.1);
+    }
+
+    .toc {
+      border: 1px solid var(--line);
+      background: var(--bg-2);
+      padding: 0.85rem 0.9rem 0.95rem;
+      border-radius: var(--radius);
+    }
+    .toc h2 {
+      margin: 0 0 0.65rem;
+      font-size: 0.72rem;
+      letter-spacing: 0.16em;
+      color: var(--gold);
+      font-weight: 800;
+    }
+    .toc ol { list-style: none; margin: 0; padding: 0; }
+    .toc li { margin: 0; }
+    .toc a {
+      display: flex;
+      justify-content: space-between;
+      gap: 0.5rem;
+      text-decoration: none;
+      color: var(--ink-dim);
+      font-size: 0.82rem;
+      padding: 0.38rem 0.2rem;
+      border-bottom: 1px solid transparent;
+    }
+    .toc a:hover { color: var(--white); border-bottom-color: var(--line-hot); }
+    .toc .t-title { font-weight: 600; }
+    .toc .t-min { color: var(--gold); font-size: 0.72rem; font-weight: 700; flex-shrink: 0; }
+
+    .main { max-width: var(--measure); }
+
+    .digest-banner {
+      display: flex;
+      gap: 0.75rem;
+      align-items: flex-start;
+      background: #141014;
+      border: 1px solid var(--line);
+      border-left: 3px solid var(--shu);
+      padding: 0.85rem 1rem;
+      margin-bottom: 1.5rem;
+      font-size: 0.78rem;
+      color: var(--ink-dim);
+      line-height: 1.55;
+    }
+    .digest-banner .tag {
+      flex-shrink: 0;
+      background: var(--shu);
+      color: #fff;
+      font-size: 0.65rem;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      padding: 0.28rem 0.5rem;
+      border-radius: var(--radius);
+    }
+
+    .hero {
+      margin-bottom: 2rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid var(--line);
+      position: relative;
+    }
+    .hero::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -1px;
+      width: 4.5rem;
+      height: 2px;
+      background: var(--shu);
+    }
+    .kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.7rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--shu-hot);
+      font-weight: 800;
+      margin-bottom: 0.85rem;
+    }
+    .kicker::before {
+      content: "◆";
+      font-size: 0.55rem;
+      color: var(--gold);
+    }
+    .hero h1 {
+      font-family: "Shippori Mincho", "Noto Serif JP", serif;
+      font-size: clamp(1.85rem, 4vw, 2.55rem);
+      font-weight: 700;
+      line-height: 1.2;
+      margin: 0 0 0.75rem;
+      color: var(--white);
+      letter-spacing: 0.02em;
+    }
+    .hero p {
+      margin: 0;
+      color: var(--ink-dim);
+      font-size: 0.98rem;
+      max-width: 36rem;
+    }
+
+    article.piece {
+      background: var(--bg-card);
+      border: 1px solid var(--line);
+      margin-bottom: 1.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+    article.piece::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: linear-gradient(90deg, var(--shu) 0%, var(--shu) 35%, var(--gold) 35%, var(--gold) 42%, transparent 42%);
+    }
+
+    .piece-inner { padding: 1.6rem 1.55rem 1.35rem; }
+
+    .piece-head {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-bottom: 0.85rem;
+    }
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      border: 1px solid var(--line);
+      background: #111;
+      color: var(--ink-dim);
+      padding: 0.22rem 0.6rem;
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      border-radius: var(--radius);
+    }
+    .chip.interest {
+      border-color: var(--shu);
+      color: var(--shu-hot);
+      background: rgba(196, 30, 58, 0.12);
+    }
+    .chip.mins {
+      border-color: var(--gold);
+      color: var(--gold);
+      background: transparent;
+    }
+
+    .piece h2 {
+      font-family: "Noto Serif JP", "Shippori Mincho", "Yu Mincho", serif;
+      font-size: 1.38rem;
+      font-weight: 700;
+      line-height: 1.5;
+      margin: 0 0 0.6rem;
+      color: var(--white);
+      letter-spacing: 0.02em;
+    }
+
+    .why {
+      margin: 0 0 1rem;
+      color: var(--ink-dim);
+      font-size: 0.9rem;
+      border-left: 2px solid var(--gold);
+      padding-left: 0.85rem;
+    }
+
+    .source {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.65rem 1.1rem;
+      font-size: 0.76rem;
+      color: var(--ink-mute);
+      margin-bottom: 1.25rem;
+    }
+    .source a {
+      color: var(--shu-hot);
+      text-decoration: none;
+      font-weight: 600;
+    }
+    .source a:hover { color: var(--gold); }
+
+    .ja {
+      font-family: "Noto Serif JP", "Hiragino Mincho ProN", "Yu Mincho", serif;
+      font-size: 1.08rem;
+      line-height: 2;
+      letter-spacing: 0.03em;
+      color: #ebe7e1;
+    }
+    .ja p { margin: 0 0 1.15em; }
+    .ja p:last-child { margin-bottom: 0; }
+
+    .continue {
+      margin-top: 1.25rem;
+      padding-top: 1rem;
+      border-top: 1px solid var(--line);
+      font-size: 0.86rem;
+    }
+    .continue a {
+      color: var(--white);
+      text-decoration: none;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      border-bottom: 2px solid var(--shu);
+      padding-bottom: 0.1rem;
+    }
+    .continue a:hover {
+      color: var(--shu-hot);
+      border-bottom-color: var(--gold);
+    }
+
+    footer.site {
+      max-width: var(--measure);
+      margin-top: 1.75rem;
+      color: var(--ink-mute);
+      font-size: 0.72rem;
+      letter-spacing: 0.06em;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+    footer.site::before {
+      content: "";
+      width: 1.25rem;
+      height: 2px;
+      background: var(--shu);
+    }
+
+  
+    .excerpt-label { font-size: 0.66rem; letter-spacing: 0.18em; color: var(--gold); font-weight: 800; margin: 0 0 0.6rem; }
+    .brand-sub a, .stat a { color: var(--gold); text-decoration: none; }
+    .toc .t-min { font-variant-numeric: tabular-nums; }
+  </style>
+</head>
+<body>
+  <div class="stage-bar" aria-hidden="true"></div>
+
+  <div class="wrap">
+    <aside class="sidebar">
+      <div class="brand">
+        <span class="brand-mark" lang="ja">読解<em>幕</em></span>
+      </div>
+      <p class="brand-sub">Kabuki Digest · <a href="/japanese-digest/history/">History</a></p>
+      <p class="meta">2026-11-10 · America/Sao_Paulo</p>
+      <div class="stat-row">
+        <span class="stat"><strong>52</strong> min</span>
+        <span class="stat"><strong>15</strong> pieces</span>
+        <span class="stat"><strong>~13,200</strong> 字</span>
+        <span class="stat"><a href="/japanese-digest/history/">History</a></span>
+      </div>
+
+      <nav class="toc" aria-label="Índice">
+        <h2 lang="ja">本日の演目</h2>
+        <ol>
+          <li>
+            <a href="#p1">
+              <span class="t-title" lang="ja">刀は大仏の釘に――刀狩りと秀長</span>
+              <span class="t-min">5′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p2">
+              <span class="t-title" lang="ja">弥生時代に「戦争がはじまった」は本当か</span>
+              <span class="t-min">2′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p3">
+              <span class="t-title" lang="ja">「裏切り者」にされた中川清秀の名誉挽回</span>
+              <span class="t-min">3′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p4">
+              <span class="t-title" lang="ja">古民家から出た「マリア観音」の里帰り</span>
+              <span class="t-min">3′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p5">
+              <span class="t-title" lang="ja">海野六郎――幸村の影武者として散る</span>
+              <span class="t-min">4′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p6">
+              <span class="t-title" lang="ja">人類の定住を決めたのは「水」より「石」？</span>
+              <span class="t-min">3′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p7">
+              <span class="t-title" lang="ja">戦いを「見ただけ」でマウスは強くなる</span>
+              <span class="t-min">4′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p8">
+              <span class="t-title" lang="ja">アルテミス2号が電離層に開けた5000kmの「穴」</span>
+              <span class="t-min">3′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p9">
+              <span class="t-title" lang="ja">火星の巨大火山はまだ生きている？</span>
+              <span class="t-min">4′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p10">
+              <span class="t-title" lang="ja">脳を保存して未来に蘇る確率は「4分の1」</span>
+              <span class="t-min">4′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p11">
+              <span class="t-title" lang="ja">Opus 5.5は11月3日から変わった？1400セッションの分析</span>
+              <span class="t-min">4′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p12">
+              <span class="t-title" lang="ja">「削除しました」と嘘をつくアプリ――黙る失敗322か所</span>
+              <span class="t-min">3′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p13">
+              <span class="t-title" lang="ja">Claude Codeで最近使っているTips【2026/11】</span>
+              <span class="t-min">3′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p14">
+              <span class="t-title" lang="ja">路面電車と無料の渡船――万葉線で越ノ潟へ</span>
+              <span class="t-min">3′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p15">
+              <span class="t-title" lang="ja">TETSUYA、ふたつの顔のバースデーライヴ</span>
+              <span class="t-min">4′</span>
+            </a>
+          </li>
+        </ol>
+      </nav>
+    </aside>
+
+    <main class="main">
+      <div class="digest-banner">
+        <span class="tag">TRIAGE</span>
+        <span>História: katanagari visto pelo Hidenaga e pelo diário de Kōfuku-ji (BUSHOO), Yayoi e a “origem da guerra” (Sankei), Nakagawa Kiyohide reabilitado e a Maria Kannon dos cristãos de Urakami — três do Sankei de hoje; Unno Rokurō continua a série dos Dez Bravos. Ciência: pedra &gt; água na saída da África, camundongos que aprendem assistindo, buraco na ionosfera, vulcão de Marte, preservação de cérebro. Dev/IA: Opus 5.5 “mudou” em 4/11?, 322 excepts silenciosos, dicas de Claude Code. Trem: Man’yōsen + ferry grátis em Toyama. Rock: TETSUYA (L’Arc). Pontos fracos: nada bom de Kobe/Hyogo hoje (só notas curtas); os três do Sankei são curtos e o do Yayoi começa no meio do argumento; NatGeo corta no paywall.</span>
+      </div>
+
+      <header class="hero">
+        <div class="kicker">Daily curated reading</div>
+        <h1 lang="ja">刀狩りと大仏の釘、弥生の「戦争」の揺らぎ、中川清秀の名誉挽回、マリア観音の里帰り、海野六郎、水より石、見て学ぶマウス、電離層の穴、火星の火山、脳保存の確率、Opus 5.5の変化、黙る失敗322か所、Claude Code Tips、万葉線と渡船、TETSUYA</h1>
+        <p lang="ja">今日の幕は「刀は大仏の釘に」という口上から――武将ジャパンの史実解説で、刀狩令と方広寺大仏がひとつの計画だった可能性と、『多聞院日記』の僧が書き留めた本音。考古学は、弥生時代に「戦争がはじまった」という定説の揺らぎ。大河で裏切り者にされた中川清秀は、長浜で名誉挽回のツアーへ。奈良の古民家から出た小さな「マリア観音」は、浦上四番崩れで流された信徒たちの祈りを伝えます。物語の側からは、幸村の影武者として散る真田十勇士・海野六郎。人類史では、砂漠の古代湖に人の痕跡がなかった理由――水より石。科学は、戦いを見ただけで強くなるマウス、アルテミス2号が電離層に開けた5000キロの穴、火星の火山にまだ残る熱、そして脳保存で未来に蘇る確率。開発者の幕は、Opus 5.5の「思考」の変化を1400セッションで追った話、AIと作ったアプリに潜む322か所の黙る失敗、Claude Codeの最新Tips。旅は万葉線と無料の渡船で越ノ潟へ。締めはTETSUYAのふたつの顔。約52分の読解です。</p>
+      </header>
+
+      <article class="piece" id="p1">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★★</span> <span class="chip mins">5 min</span> <span class="chip" lang="ja">刀狩令</span> <span class="chip" lang="ja">方広寺大仏</span> <span class="chip" lang="ja">豊臣秀長</span> <span class="chip" lang="ja">多聞院日記</span> <span class="chip" lang="ja">藤木久志</span>
+          </div>
+          <h2 lang="ja">刀狩りと大仏建立を結びつけたのは秀長だったのか｜豊臣兄弟史実解説第43回</h2>
+          <p class="why">O katanagari visto pelo argumento de venda: “suas espadas viram pregos do Grande Buda, e você ganha salvação nesta vida e na próxima”. O diário do monge de Kōfuku-ji desmascara: “dizem que é para o Buda, mas é para impedir revoltas”. E na prática houve jeitinho — armaduras guardadas no templo e emprestadas só para festivais.</p>
+          <div class="source">
+            <span lang="ja">BUSHOO!JAPAN（武将ジャパン）</span>
+            <a href="https://bushoojapan.com/taiga/toyobro/2026/11/09/222890" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>民衆から武器を取り上げたい秀吉に対し、「集めた武器を大仏建立に使ってはどうか？」と秀長が持ちかける。</p>
+            <p>そもそも「大仏建立」がなぜ民衆から武器を取り上げるための説得材料となるのか？</p>
+            <p>……</p>
+            <p>佐々成政に切腹を命じた秀吉は、二度と一揆を起こさせないため、民衆から武器を回収する「刀狩り」を決断。</p>
+            <p>「刀狩り」で集めた武器は「大仏建立のために使われる」と庶民たちに説明されていたのか？</p>
+            <p>一、百姓は農具だけを持って耕作に励めば、子々孫々まで安泰である</p>
+            <p>【原文】今生之儀は不及申、来世迄も百姓相たすかる儀に候事</p>
+            <p>……</p>
+            <p>大仏は、奈良東大寺ではなく、秀吉が京都東山に建て始めていた方広寺です。</p>
+            <p>しかも釘やかすがいが使われるのは、仏像そのものではなく、それを納める大仏殿の建物のほうでした。</p>
+            <p>……</p>
+            <p>百姓にも身を守るための刀が必要であり、力ずくで取り上げれば再び一揆を招きかねない。</p>
+            <p>研究者の藤木久志氏は著書『刀狩り武器を封印した民衆』の中で、中世の刀は成人した村の男たちの人格と名誉を示すものだったと述べています。</p>
+            <p>しかも大仏の話は、口先だけの方便ではありませんでした。</p>
+            <p>秀吉は天正十四年（1586年）頃から東山で大仏殿造りに取りかかり、いったん中断したのち、天正十六年（1588年）5月15日に、本格的な工事を再開していたのです。</p>
+            <p>……</p>
+            <p>ゆえに藤木氏は、刀狩令と大仏造営は元々ひとつの計画だったのではないか？とも指摘しています。</p>
+            <p>同じ天正十六年（1588年）11月6日には、加賀・能登を治める前田利家も、大仏殿の釘や金物の御用として、百姓に対し「刀・脇指を差し出せ」と指令しました。</p>
+            <p>劇中で秀長が持ち出した大仏の理屈は、実際、刀を集める決め手として使われていたんですね。</p>
+            <p>……</p>
+            <p>豊臣秀長が治める大和でも「刀狩り」はすぐに始まりました。</p>
+            <p>その様子を書き留めていたのが、奈良・興福寺の僧が記した『多聞院日記』です。</p>
+            <p>どれだけ大仏のありがたい話を聞かされても、武器を取り上げられる不安が拭えなかったのでしょう。</p>
+            <p>戦国時代に入り、武力を低下させていた興福寺ですが、そもそもは僧兵という強大な戦闘集団を有していた組織です。</p>
+            <p>……</p>
+            <p>京都の鞍馬（くらま）では、刀狩りで集めた具足（ぐそく・甲冑のこと）や弓矢が、祭りに必要だとして寺に返還された記録が残されています。</p>
+            <p>普段は寺で預かっておき、神事のときだけ村人に貸し出す――確かにこれなら安心ではありますね。</p>
+            <p>百姓たちが一斉に丸腰になったわけでもなく、一律に厳罰で臨んだわけでもありません。</p>
+            <p>藤木氏は、百姓が刀を差すことを原則として許可制にし、刀を武士の身分の印とする建前をつくったところに真の狙いがあったと指摘しています。</p>
+            <p>……</p>
+            <p>天正十六年（1588年）5月15日、京都の三十三間堂の北側で、大仏殿の礎がすえられました。</p>
+            <p>研究者の河内将芳氏は著書『図説豊臣秀長』の中で、豊臣秀長もこの造営に関わっていたことを紹介。</p>
+            <p>それでも、仏師たちを連れて都へのぼり、大仏造営を支えた秀長の仕事は、『多聞院日記』にしっかり書き留められています。</p>
+            <p>ドラマの秀長が武器を集める理屈を考えた一方で、史実の秀長は、大仏を造るための人を動かしていたのです。</p>
+          </div>
+          <p class="continue"><a href="https://bushoojapan.com/taiga/toyobro/2026/11/09/222890" target="_blank" rel="noopener" lang="ja">続きを読む · BUSHOO!JAPAN（武将ジャパン）</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p2">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★★</span> <span class="chip mins">2 min</span> <span class="chip" lang="ja">弥生時代</span> <span class="chip" lang="ja">佐原眞</span> <span class="chip" lang="ja">武器</span> <span class="chip" lang="ja">青銅器</span> <span class="chip" lang="ja">弥生文化博物館</span>
+          </div>
+          <h2 lang="ja">弥生時代に「戦争がはじまった」の揺らぎ　ヒト・戦い㊤武器を手にした弥生人</h2>
+          <p class="why">Publicado hoje: o dogma de Sahara Makoto de que “a guerra começa no Yayoi” está balançando. Armas de pedra, bronze e ferro chegaram da península coreana em ondas — mas muitas eram símbolos de status ou de ritual, algumas de bronze com 80 cm, impossíveis de brandir. Trecho curto (começa já no meio do argumento), mas ótimo vocabulário de arqueologia.</p>
+          <div class="source">
+            <span lang="ja">産経ニュース（弥生文化博物館 特別展）</span>
+            <a href="https://www.sankei.com/article/20261110-EF6I2EYBHNMDTJS4553QFLW3OQ/" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>このように述べた考古学者の佐原眞氏は「戦争」を「多数の殺傷をともない得る集団間の武力衝突」と定義し、「戦争」のある社会を認識するための6つの考古学的事実を提示した。しかしその評価は現在揺らぎつつある。</p>
+            <p>人を攻撃するための道具である武器は弥生時代早期（紀元前10～8世紀ごろ）に石製品、中期初頭（紀元前4世紀ごろ）には青銅製品、中期後半（紀元前2世紀ごろ）には鉄製品が朝鮮半島から伝わってきた。</p>
+            <p>実用されたものもあったが、多くは個人の地位を表すシンボルや、まつりの道具として用いられた。とりわけ青銅製品の中には、長さ80センチというとうてい振り回せない大きさへと変容したものもあった。（専門学芸員　田中美玖）</p>
+            <p>大阪府和泉市の府立弥生文化博物館で秋季特別展「ヒト・戦い－武器を手にした弥生人－」（同館および産経新聞社主催）を12月13日まで開催中（月曜休館、祝日の場合は翌火曜休館）。一般650円。問い合わせは同館（0725・46・2162）。</p>
+          </div>
+          <p class="continue"><a href="https://www.sankei.com/article/20261110-EF6I2EYBHNMDTJS4553QFLW3OQ/" target="_blank" rel="noopener" lang="ja">続きを読む · 産経ニュース（弥生文化博物館 特別展）</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p3">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★☆</span> <span class="chip mins">3 min</span> <span class="chip" lang="ja">中川清秀</span> <span class="chip" lang="ja">賤ケ岳の戦い</span> <span class="chip" lang="ja">大岩山</span> <span class="chip" lang="ja">長浜</span> <span class="chip" lang="ja">豊後岡藩</span>
+          </div>
+          <h2 lang="ja">「豊臣兄弟！」賤ケ岳合戦シーンで裏切り者にされた中川清秀　滋賀で「名誉挽回」ツアー</h2>
+          <p class="why">Quando o taiga erra, a terra natal reage: Nakagawa Kiyohide, que morreu defendendo o forte de Ōiwayama em Shizugatake, apareceu na TV como traidor. Agora Nagahama monta um tour guiado pelo diretor do museu do castelo para “limpar o nome” dele — história, memória local e o peso da ficção.</p>
+          <div class="source">
+            <span lang="ja">産経ニュース</span>
+            <a href="https://www.sankei.com/article/20261110-J6ZNJCFQMFIQNDZHOFTMYFKAA4/" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>NHK大河ドラマ「豊臣兄弟！」の賤ケ岳合戦シーンで裏切り者として描かれた戦国武将、中川清秀の〝名誉挽回ツアー〟が12月7日、清秀が布陣した大岩山砦（とりで）（滋賀県長浜市）などで開催される。ドラマの清秀は羽柴（豊臣）秀吉を裏切って柴田勝家に味方したが、通説では大岩山砦（とりで）を守り、勝家軍の佐久間盛政の急襲で討ち死にしたとされる。ツアーでは秀吉の逆転勝利の足がかりになった壮絶な戦いとして清秀の足跡を追う。</p>
+            <p>長浜市内の戦国遺産を語り継ぐ人材を育成し、観光や産業振興につなげようと今年度に活動を開始した市民団体「北近江・長浜戦国遺産創生会議」が10日、ツアー開催を告知した。</p>
+            <p>賤ケ岳合戦シーンは8月に放送されたが、「史実と違う」と話題になり、清秀ゆかりの大分県竹田市と大阪府茨木市がNHKに対して同月、史実を尊重するように求める文書を連名で送る事態になった。</p>
+            <p>ツアーは長浜城歴史博物館の福井智英館長がナビゲーターを務める。大岩山に登り、清秀の決死の戦いをたどり、北国街道の宿場町「木之本宿」に向かう。</p>
+            <p>清秀は摂津国茨木城（茨木市）の城主だったが、家督を継いだ次男の秀成が豊後国岡藩（竹田市）の初代藩主となった。木之本宿では、岡藩主が大岩山の清秀の墓参りのため宿泊したという本陣などを巡る。</p>
+            <p>その後、ドラマの放送に合わせて設置された賤ケ岳戦国ステーションで、福井館長によるミニ講座「裏切り者が動かした賤ケ岳合戦」を開き、熾烈（しれつ）な情報戦を解き明かす。</p>
+            <p>ツアーを企画した北近江・長浜戦国遺産創生会議の担当者は「清秀が逃げずに砦を死守したことが大きな勝因になった。史実と違う描写で話題になったことを逆手にとって清秀の戦いとその後を追いながら、素晴らしい城郭が集中する賤ケ岳エリアの魅力を発信したい」と話している。</p>
+          </div>
+          <p class="continue"><a href="https://www.sankei.com/article/20261110-J6ZNJCFQMFIQNDZHOFTMYFKAA4/" target="_blank" rel="noopener" lang="ja">続きを読む · 産経ニュース</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p4">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★★</span> <span class="chip mins">3 min</span> <span class="chip" lang="ja">浦上四番崩れ</span> <span class="chip" lang="ja">隠れキリシタン</span> <span class="chip" lang="ja">マリア観音</span> <span class="chip" lang="ja">郡山藩</span> <span class="chip" lang="ja">ヴィリオン神父</span>
+          </div>
+          <h2 lang="ja">浦上キリシタンゆかりの「マリア観音像」?　奈良・大和郡山市で一日限定の里帰り展示</h2>
+          <p class="why">Uma Kannon de 11,5 cm com um bebê no colo, achada em 2022 numa casa velha de Yamato-Kōriyama, perto de onde cristãos de Urakami deportados (1867–73) ficaram presos. Provável “Maria Kannon”: a Virgem disfarçada de Kannon por quem era pressionado a renegar a fé. Pigmentos com chumbo e mercúrio, e uma freira de 90 anos bisneta de um líder de Urakami.</p>
+          <div class="source">
+            <span lang="ja">産経ニュース</span>
+            <a href="https://www.sankei.com/article/20261110-NROI2GUPX5NE5BXXCRNUCOAPDA/" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>奈良県大和郡山市の古民家で令和4年に発見され、現在は浦上キリシタン資料館（長崎市）に常設展示されている「マリア観音像」とみられる「子安観音像」が、カトリック大和郡山教会（大和郡山市）で一日限定で里帰り展示された。訪れた人たちはキリシタン弾圧の歴史に思いをはせていた。</p>
+            <p>江戸末期から明治初期にかけての「浦上四番崩れ」と呼ばれる弾圧では、長崎・浦上地域のキリスト教の信徒約3400人が全国各地に強制移住させられた。郡山藩にも86人の信徒が移され、奈良市内で紙漉（す）きや天川村で銅山採掘など重労働に従事させられるなど、苦難の日々を送った。</p>
+            <p>幼子を胸に抱く観音像は高さ11.5センチ。調査した四天王寺大教育学部の仲野純章准教授によると、像はろう石製で鉱物の燐灰（りんかい）石が混じり、残存する顔料から鉛や硫化水銀、銅などが検出された。東京国立博物館所蔵のマリア観音像と材質や塗料に類似が見られるという。</p>
+            <p>観音像が見つかった古民家は、かつて信徒たちが収容された綿町収容所の近くにあり、棄教を迫られる中でも信仰を忘れず、観音像を聖母マリアに見立て「マリア観音」として信仰した可能性が高いとされる。</p>
+            <p>今回の一般公開は、大正15（1926）年にフランス人宣教師のヴィリオン神父が流配されたキリシタンたちをしのび記念碑を市内に建立して100年経ったことを記念して開催され、記念ミサや園児による歌の披露、パネル展示も行われた。実行委員会によると、今後も年に一度の里帰り展示を計画しているという。</p>
+            <p>記念講演を行った援助修道会の高木慶子シスター（90）は、浦上信徒の中心人物だった曽祖父の高木仙右衛門に触れ、「観音像をきっかけに、迫害した人のために祈る。人を許す。その教えを迫害に負けずに守ったキリシタンの信仰を、今の人たちに知ってもらえたら」と話していた。</p>
+          </div>
+          <p class="continue"><a href="https://www.sankei.com/article/20261110-NROI2GUPX5NE5BXXCRNUCOAPDA/" target="_blank" rel="noopener" lang="ja">続きを読む · 産経ニュース</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p5">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★☆</span> <span class="chip mins">4 min</span> <span class="chip" lang="ja">海野六郎</span> <span class="chip" lang="ja">真田十勇士</span> <span class="chip" lang="ja">海野氏</span> <span class="chip" lang="ja">海野平合戦</span> <span class="chip" lang="ja">立川文庫</span>
+          </div>
+          <h2 lang="ja">海野六郎は実在の海野氏と関係あるのか？幸村の影武者として散る真田十勇士</h2>
+          <p class="why">Publicado hoje, continua a série dos Dez Bravos de Sanada (ontem foi Yuri Kamanosuke): o personagem é inventado, mas o sobrenome Unno é real — o clã principal do qual os Sanada diziam descender, esmagado em 1541. Na ficção Meiji/Taishō, ele entra no Castelo de Osaka fingindo ser Yukimura, e no fim sete “Yukimuras” atacam ao mesmo tempo para o verdadeiro fugir para Satsuma.</p>
+          <div class="source">
+            <span lang="ja">BUSHOO!JAPAN（武将ジャパン）</span>
+            <a href="https://bushoojapan.com/bushoo/sanada/2026/11/10/222985" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>海野六郎（うんのろくろう）があっという間に退場しすぎではないか――。</p>
+            <p>なんせ海野六郎といえば、『真田十勇士』のオリジナルといえる立川文庫の作品で、最後の大坂夏の陣まで真田幸村を守り抜いた武士の一人として描かれています。</p>
+            <p>さらには名字の「海野」は、史実の真田家とも関わりが深い実在する一族なのですから何かと気になる存在。</p>
+            <p>……</p>
+            <p>最初に断っておきますと、真田十勇士の海野六郎は架空の武士です。</p>
+            <p>研究者の平山優氏は著書『大いなる謎真田一族』の中で、十勇士はみな架空の人物だとしたうえで、根津（禰津）・海野・望月の名前には、実在した滋野三家の名字が使われていると指摘。</p>
+            <p>ゆえに後世の作家が、海野六郎を生み出すときに参考にした可能性がある、というのです。</p>
+            <p>六郎というキャラクターは架空でも、創作の参考になったかもしれない実在の武士はいた。</p>
+            <p>……</p>
+            <p>海野氏は、信濃の小県郡（ちいさがたぐん）を中心に広がった滋野一族の惣領家、つまり本家にあたる有力な家でした。</p>
+            <p>江戸時代の真田家は幕府に対し、この海野氏の直系子孫が戦国時代に真田へ改姓した、と説明しています。</p>
+            <p>ただし、この家伝をそのまま史実とすることはできません。</p>
+            <p>いわゆる「海野平合戦」に敗れた棟綱と幸綱は、上野（群馬県）へ逃れることになりました。</p>
+            <p>海野は物語の中だけの名字ではなく、真田家の歴史にも深く関わる名前だったのです。</p>
+            <p>……</p>
+            <p>海野六郎の名が初めて見えるのは、寛文十二年（1672年）に成立した軍記物語『難波戦記』でした。</p>
+            <p>幸村を守る架空の家臣6人の一人として「海野六郎兵衛」が登場。</p>
+            <p>幸村が大坂城に入るとき、立派な装束と武具に身を固め、名馬にまたがって現れたのは、どう見ても幸村その人。</p>
+            <p>腹心たちを幸村に扮させて人目を引きつけ、その間に本物はさっさと入城していた、という筋書きです。</p>
+            <p>もちろん、史実の大坂入城を描いたものではありません。</p>
+            <p>……</p>
+            <p>翌明治四十五年（1912年）の『真田幸村諸国漫遊記』で、名前はようやく「海野六郎」に落ち着きます。</p>
+            <p>ただし、このときはまだ十勇士ではなく、幸村の腹心「七傑」の一人でした。</p>
+            <p>大正四年（1915年）の立川文庫『忍術名人難波合戦霧隠才蔵大活動』は、慶長二十年（1615年）の大坂夏の陣を舞台に、海野六郎の最期を描いています。</p>
+            <p>敵に「幸村は死んだ」と思わせ、その隙に本物の幸村を薩摩へ落ち延びさせるためでした。</p>
+            <p>そんな重大な役目を、海野六郎は命と引き換えに果たしたのです。</p>
+          </div>
+          <p class="continue"><a href="https://bushoojapan.com/bushoo/sanada/2026/11/10/222985" target="_blank" rel="noopener" lang="ja">続きを読む · BUSHOO!JAPAN（武将ジャパン）</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p6">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★☆</span> <span class="chip mins">3 min</span> <span class="chip" lang="ja">出アフリカ</span> <span class="chip" lang="ja">ルブアルハリ砂漠</span> <span class="chip" lang="ja">緑の回廊</span> <span class="chip" lang="ja">石器</span> <span class="chip" lang="ja">地球考古学</span>
+          </div>
+          <h2 lang="ja">先史時代の人間が定住するには「水」だけでなく「石」も重要だった可能性が砂漠の調査で明らかに</h2>
+          <p class="why">1.300 km atravessando o Rub al-Khali: 125 pontos às margens de antigos lagos do “corredor verde” da Arábia — e nenhum sinal humano. A explicação: sem pedra boa para lascar ferramentas, água não bastava; 57% dos lugares com água não tinham pedra. Muda o mapa mental da saída da África.</p>
+          <div class="source">
+            <span lang="ja">GIGAZINE</span>
+            <a href="https://gigazine.net/news/20261110-stone-water-determined-human-settlement/" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>現世人類(ホモ・サピエンス)はアフリカ大陸で誕生し、12万5000年前頃にアラビア半島への進出を始め、6万年前頃に本格的なユーラシア大陸への移動( 出アフリカ )が進んだとされています。</p>
+            <p>古代の人類がアフリカからユーラシア大陸へと広がっていく際は、必ずアラビア半島を通る必要があります。</p>
+            <p>今回、オーストラリア・ウィーン大学の地球考古学者であるルドルフ・デルモア氏らの国際研究チームは、ルブアルハリ砂漠を1300kmにわたって横断し、かつて「緑の回廊」が存在した場所の堆積物やそこに残された人類の痕跡を調査しました。</p>
+            <p>1300kmに及ぶルート上で125カ所を調査したところ、合計55カ所で「古代の湖の痕跡」が確認されました。これらの湖に残された堆積物の年代は約12万2000年～6万7000年前であり、人類がアラビア半島に進出し始めた年代に合致します。</p>
+            <p>以下の図はアラビア半島のもので、黒い線が探検隊の調査ルートを示しています。</p>
+            <p>デルモア氏は「私たちは次々と古代湖の岸辺に立ってみましたが、人間の手によって作られたものは何も見つかりませんでした」と語っています。</p>
+            <p>研究チームはこの理由について、石器を作ることができる「加工可能な石」の存在が影響したのではないかと考えています。</p>
+            <p>以下の図は濃い茶色が「石器に加工可能な石がある場所」を示しており、中央の線は探検隊の調査ルートを示しています。青い円は石器に加工可能な石があった調査地点を、白い円は石器に加工可能な石がなかった調査地点を表しています。</p>
+            <p>研究チームの計算によると、先史時代のアラビア半島において水が利用可能だったであろう地形の57％には、石器作りに適した石が存在していなかったとのこと。</p>
+            <p>研究チームは、「アラビア半島は水と石器の原料が共存する、それぞれ独立した地域がパッチワークのように集まった場所だったようです」「石器の原材料分布を考慮しない人類の拡散モデルは、石器に依存する人々が居住可能な地域を体系的に過大評価する可能性があります」と述べました。</p>
+          </div>
+          <p class="continue"><a href="https://gigazine.net/news/20261110-stone-water-determined-human-settlement/" target="_blank" rel="noopener" lang="ja">続きを読む · GIGAZINE</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p7">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★★</span> <span class="chip mins">4 min</span> <span class="chip" lang="ja">ミラーニューロン</span> <span class="chip" lang="ja">観察学習</span> <span class="chip" lang="ja">プリンストン大学</span> <span class="chip" lang="ja">Nature</span> <span class="chip" lang="ja">抑制性ニューロン</span>
+          </div>
+          <h2 lang="ja">映画マトリックスを再現。戦いを見ただけでマウスの脳が変化し、戦い方を身に着けていた</h2>
+          <p class="why">Camundongos que só assistiram a brigas atrás de um vidro lutaram no dia seguinte quase como os veteranos: o freio inibitório do cérebro afrouxou (metade do efeito de quem lutou). Próximo passo da equipe: “baixar” o padrão cerebral num camundongo que nunca viu luta — Matrix de verdade. Os comentários lembram o 見取り稽古 das artes marciais.</p>
+          <div class="source">
+            <span lang="ja">カラパイア</span>
+            <a href="https://karapaia.com/archives/637384.html" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>格闘技の試合やアクション映画に夢中になる人は多いが、マウスも他のマウス同士のケンカが始まると、じっと見入る。</p>
+            <p>アメリカのプリンストン大学の研究チームた、他のマウス同士の戦いを見ていたマウスの脳を調べた。</p>
+            <p>すると、見ていただけのマウスの脳は、実際に戦ったマウスの脳と同じように変化し、戦い方を身に着けていたことがわかったという。</p>
+            <p>研究チームは今後、映画『マトリックス』の主人公が脳にデータを読み込んで格闘技を覚えたように、戦いを見たマウスの脳活動のパターンを、戦いを見ていないマウスの脳回路で再生し、戦い方を身に着けられるかどうかを確かめるという。</p>
+            <p>……</p>
+            <p>プリンストン大学のアネグレット・ファルクナー助教授ら研究チームは、オスのマウスを「戦うグループ」「見るグループ」「遊ぶグループ」の3つに分け、8日間にわたって1日3回、1回10分間、それぞれの役割を行わせる実験を行った。</p>
+            <p>戦うグループのマウスは、簡単に倒せる弱いマウスと戦わせた。</p>
+            <p>見るグループのマウスは、戦いを見ていただけで、実戦を積んだマウスと同じような戦い方を身につけていたことになる。</p>
+            <p>一方、遊ぶグループは、攻撃を仕掛けるまでに時間がかかり、相手に背中を向ける時間が長かった。</p>
+            <p>……</p>
+            <p>研究チームは、マウスの脳の中で互いにつながり合っている12の領域に、髪の毛ほどの細さの光ファイバーを埋め込み、ニューロン（神経細胞）の活動を記録した。</p>
+            <p>動物が行動する時と、他者が同じ行動を行うのを観察する時の両方で活動する神経細胞を「ミラーニューロン」という。</p>
+            <p>ただし、見るグループの脳の変化は、戦うグループと比べると半分ほどだったという。</p>
+            <p>研究チームは次の段階として、戦いを見ている間に記録した脳活動のパターンを、戦いを見ていないマウスの脳回路で再生し、見るグループと同じ変化が起きるかを確かめようとしている。</p>
+            <p>……</p>
+            <p>研究チームの実験がうまくいけば、一度も戦いを見たことのないマウスでも、脳の活動を再生するだけで、戦いを方を習得できるかもしれないという。</p>
+            <p>もちろん今回の研究はマウスで確認されたもので、人間に当てはまるわけではない。</p>
+            <p>戦いをよく見ている人の脳でも同じような変化が起きているとしたら、咄嗟に左フックとか出せるようになってしまうわけなんだけど、人間も同様なのか、どの程度見れば習得できるのかなどは、今後の研究を待つことにしよう、そうしよう。</p>
+          </div>
+          <p class="continue"><a href="https://karapaia.com/archives/637384.html" target="_blank" rel="noopener" lang="ja">続きを読む · カラパイア</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p8">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★☆</span> <span class="chip mins">3 min</span> <span class="chip" lang="ja">アルテミス2号</span> <span class="chip" lang="ja">電離層</span> <span class="chip" lang="ja">GPS</span> <span class="chip" lang="ja">SLSロケット</span> <span class="chip" lang="ja">国立成功大学</span>
+          </div>
+          <h2 lang="ja">月を目指すNASAのロケット、地球の上層大気に巨大な穴を開けていた</h2>
+          <p class="why">O voo tripulado à Lua de abril/2026 deixou um “buraco” de mais de 5.000 km na ionosfera sobre a América do Norte — não na decolagem, e sim na queima do estágio superior a 185 km, com 1/30 da energia. Resultado: GPS bagunçado por um tempo. Bom vocabulário de física atmosférica explicado sem sofrimento.</p>
+          <div class="source">
+            <span lang="ja">カラパイア</span>
+            <a href="https://karapaia.com/archives/637271.html" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>2026年4月、NASAはアルテミス2号のミッションで、50年以上ぶりに人類を月の周辺へと運ぶ巨大ロケット「SLS」を打ち上げた。</p>
+            <p>台湾の国立成功大学による最新の研究によると、ロケットが月へ向かう途中、北米大陸を左右に横切るように長く伸びた、長さ5000km以上の「穴」を開けていたことがわかった。</p>
+            <p>ごく短時間とはいえ、この穴がアメリカ一部地域のGPSを狂わせていた可能性があるという。</p>
+            <p>……</p>
+            <p>アルテミス2号のSLSロケットは空高く上昇していく際、上空50kmより上に広がる「電離層」という大気の層を通過した。</p>
+            <p>電離層は、電気を帯びた粒子である電子がたくさん集まっている場所だ。</p>
+            <p>穴といっても物理的なぽっかりとした穴が開いたわけはなく、飛行機雲のような細長い状態だ。</p>
+            <p>……</p>
+            <p>GPS局のデータを分析した結果、地上からの打ち上げ時、その約2時間後、約25時間後の合計3回にわたって大気の乱れが生じていた。</p>
+            <p>もっとも巨大な穴を作ったのは、打ち上げから約2時間後のエンジン噴射だった。</p>
+            <p>約25時間後には、オリオン宇宙船が月へ向かうためにエンジンを噴射したため、3回目の乱れを起こしている。</p>
+            <p>……</p>
+            <p>上空に電子の少ない空間ができると、地上で暮らす私たちの生活に影響が及ぶ。</p>
+            <p>スマートフォンやカーナビなど、現在地を割り出すGPS衛星は、高度約2万200kmの宇宙空間を飛んでおり、地球に向けて送られる位置情報の電波は、必ず電離層を通り抜けなければならない。</p>
+            <p>だが、たとえ数mの誤差であっても自動運転車が誤って車線を変更してしまう危険性があると、リン教授は指摘している。</p>
+            <p>……</p>
+            <p>太陽の活動が活発になる太陽嵐のときにもGPSは乱れ、自然現象による影響は何日も続く。</p>
+            <p>それに対し、ロケットによる乱れは短時間で収まるものの、人間の活動が直接引き起こしている影響だ。</p>
+            <p>今後、月や火星を目指す巨大なロケットの打ち上げが増えれば、こうした影響は大きくなるとリン教授は予想している。</p>
+            <p>研究チームは、GPSの地上局のネットワークを使って、電離層の変化を見張り続ける必要があると提言している。</p>
+          </div>
+          <p class="continue"><a href="https://karapaia.com/archives/637271.html" target="_blank" rel="noopener" lang="ja">続きを読む · カラパイア</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p9">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★☆</span> <span class="chip mins">4 min</span> <span class="chip" lang="ja">火星</span> <span class="chip" lang="ja">アルバ山</span> <span class="chip" lang="ja">塩化水素</span> <span class="chip" lang="ja">エクソマーズ</span> <span class="chip" lang="ja">Science</span>
+          </div>
+          <h2 lang="ja">火星の火山はまだ生きている？ 巨大火山の亀裂の近くに謎のガス</h2>
+          <p class="why">A sonda ExoMars detecta há anos picos passageiros de ácido clorídrico no ar de Marte; agora o rastro aponta para fissuras do vulcão Alba Mons — talvez magma ainda vivo no subsolo. Planeta pequeno, que devia ter esfriado bilhões de anos atrás, com lava de 1–2 milhões de anos. Só o lede é livre, mas é denso e bonito.</p>
+          <div class="source">
+            <span lang="ja">ナショナル ジオグラフィック日本版</span>
+            <a href="https://natgeo.nikkeibp.co.jp/atcl/news/26/110900607/" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>火星にはかつてあちこちに活火山があったが、今や静まり返っている。ところが、まだ活火山がある可能性を示す興味深い証拠がこのほど新たに見つかった。11月4日付けで学術誌「Science Advances」に掲載された論文で報告されたこの証拠は、決定的なものではない。しかし、ポーランド科学アカデミー宇宙研究センターの惑星科学者で、今回の研究の共同筆頭著者であるダニエル・メージュ氏は「総合的に見ると、これらの兆候はガスが火山起源であることを示唆しています」と言う。</p>
+            <p>ここ数年、欧州宇宙機関（ESA）の火星探査機エクソマーズ・トレース・ガス・オービターは、火星の大気中で塩化水素が一時的に増える現象を検出してきた。塩化水素は酢に強力なトイレ用洗剤を混ぜたような刺激臭を放つ無色の腐食性ガスで、地球では火山噴火に伴って放出されることが知られている。火星の塩化水素も巨大な火山の斜面にある一連の亀裂から発生しているようで、地中で板状に広がるマグマから少しずつ漏れ出している可能性がある。</p>
+            <p>今回の発見は、火星のような小さな惑星が、どのようにして火山活動を維持し、微生物が生きられる環境を作るかもしれない熱を生み出すのかという長年の議論に新たな一石を投じるものだ。</p>
+            <p>現在の火星の表面は極寒で乾燥している。だが、かつては巨大なオリンポス山をはじめとする火山からの溶岩と、灰や軽石を含む火山噴出物に覆われていた。噴火の原動力になっていたのは、火星が形成された際の残留熱や、放射性元素の崩壊による熱だ。（参考記事：「火星のオリンポス山は島だった？太陽系最大の火山の形成に新説」）</p>
+            <p>しかし、地球のわずか10分の1の質量しかない火星は、内部の熱を十分に保持できず、熱は比較的短期間で宇宙空間へと逃げてしまった。また、放射性元素の量も少なく、失われる熱を補うことはできなかった。</p>
+            <p>火星の内部は急速に冷却され、活発な火山活動の時代は何十億年も前に終わってしまった。</p>
+            <p>とはいえ、溶岩の噴出は完全に止まったわけではなかった。少なくとも周回軌道から撮影された画像では、100万年から200万年前、あるいはそれより新しいと思われる溶岩流の痕跡が見られる。また、火星の火山は死に絶えたわけではなく、眠っているだけかもしれないことを示す兆候もある。（参考記事：「火星で巨大な火山を発見、裾野約450kmで37億年間活動、米学会」）</p>
+          </div>
+          <p class="continue"><a href="https://natgeo.nikkeibp.co.jp/atcl/news/26/110900607/" target="_blank" rel="noopener" lang="ja">続きを読む · ナショナル ジオグラフィック日本版</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p10">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★☆</span> <span class="chip mins">4 min</span> <span class="chip" lang="ja">コネクトーム</span> <span class="chip" lang="ja">脳保存</span> <span class="chip" lang="ja">ガラス化</span> <span class="chip" lang="ja">終末期医療</span> <span class="chip" lang="ja">PLOS One</span>
+          </div>
+          <h2 lang="ja">人間の脳を保存し、将来蘇らせることができる確率は4分の1。アメリカの医師たちの見解</h2>
+          <p class="why">Médicos americanos estimam, em média, 1 chance em 4 de um cérebro preservado hoje ser “revivido” no futuro. O texto explica conectoma, vitrificação com fixação aldeídica, um banco de cérebros no Oregon — e o dilema ético: preservar bem exige começar antes da parada cardíaca, perto demais da eutanásia.</p>
+          <div class="source">
+            <span lang="ja">カラパイア</span>
+            <a href="https://karapaia.com/archives/637250.html" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>亡くなった人の脳をそのままの状態で保存し、科学が発達した未来の世界で再びその人を蘇らせる。</p>
+            <p>かつては夢物語と思われていた未来の蘇生について、アメリカの最前線で命と向き合う医師たちに調査を行ったところ、理想的な条件が整えば、蘇る確率は約4分の1あると見積もられた。</p>
+            <p>脳の保存が終末期医療の新たな選択肢になったとき、私たちの死生観はどう変わるのだろうか。</p>
+            <p>……</p>
+            <p>死んだ人の脳を保存し、未来の技術で蘇らせる。SFの世界の概念は今や現実的な議論になっている。</p>
+            <p>2025年に行われた神経科学者312人を対象にした調査では、将来的に保存した脳から記憶を取り出せる確率の中央値は約40%と見積もられた。</p>
+            <p>およそ4人に1人の医師が、保存した人を将来生き返らせることは「ありうる」または「十分にありうる」と回答した。</p>
+            <p>専門医の中で蘇生の可能性を平均して最も高く評価したのは、日々脳を直接扱っている脳神経外科医だった。</p>
+            <p>……</p>
+            <p>その理由の中心には、「コネクトーム」という概念がある。</p>
+            <p>コネクトームとは、ゲノムにならって作られた言葉で、脳内の神経細胞同士のつながりの全体図を表したものだ。</p>
+            <p>血管から固定液を流し込んで脳の組織を固め、凍結防止剤を加えてから-135℃の極低温に冷やす。すると、脳の中の水分は「ガラス化」して固まる。</p>
+            <p>ガラス化すると水分は結晶を作らず、透明なまま固まるので、脳の構造を壊さずに保存できるのだ。</p>
+            <p>……</p>
+            <p>脳の保存が現実味を帯びるにつれ、医療現場には新たな課題が突きつけられている。</p>
+            <p>脳をきれいな状態で保存するには、患者が生きている間に準備を整える必要があるからだ。</p>
+            <p>積極的安楽死が合法化されている国であっても、心停止の前に人体保存処置を始めることは現在世界のどの国でも法律で認められていない。</p>
+            <p>調査に答えた医師の約5人に1人は、保存の成功率を高めるための判断が、患者に対する最善の医療と対立するのではないかと心配している。</p>
+            <p>……</p>
+            <p>研究の筆頭著者であるゼレズニコウ＝ジョンストン氏は、保存に否定的な医師は現代の保存技術の科学的根拠を知らないことが原因ではないかと指摘する。</p>
+            <p>死にゆく患者と深く向き合い、この問題について真剣に考えたことのある医師ほど、脳の保存に対して受容的だった。</p>
+            <p>患者が死後の保存を望んだとき、医療と法律はそれにどう応えるべきなのか。</p>
+            <p>研究チームは、将来の蘇生を見据えた指針を作る時期に差し掛かっていると考えている。</p>
+          </div>
+          <p class="continue"><a href="https://karapaia.com/archives/637250.html" target="_blank" rel="noopener" lang="ja">続きを読む · カラパイア</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p11">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★★</span> <span class="chip mins">4 min</span> <span class="chip" lang="ja">Claude Opus 5.5</span> <span class="chip" lang="ja">Claude Code</span> <span class="chip" lang="ja">推論</span> <span class="chip" lang="ja">要約モデル</span> <span class="chip" lang="ja">Hacker News</span>
+          </div>
+          <h2 lang="ja">Claude Opus 5.5の推論能力が11月3日から急激に低下したとの指摘、1400件の利用履歴から変化が判明</h2>
+          <p class="why">Um dev analisou 1.400 sessões de Claude Code e viu o “pensamento” mudar de estilo do nada em 4/11 (JST): frases com “I’m” de ~25% para 61%, “I should/I need to” de 50% para 11%. Mas o raciocínio que aparece é um resumo feito por outro modelo — talvez só o resumidor tenha mudado. Leitura útil para seu dia a dia com Claude.</p>
+          <div class="source">
+            <span lang="ja">GIGAZINE</span>
+            <a href="https://gigazine.net/news/20261110-claude-opus-nerf/" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>AnthropicのAIモデル「Claude Opus 5.5」の推論能力が2026年11月3日頃から急激に低下した可能性が指摘されています。</p>
+            <p>……</p>
+            <p>メロー氏はClaude Opus 5.5を使用する中で、以前は問題なく処理できていた作業がうまく進まなくなったと感じたそう。</p>
+            <p>以下の画像はメロー氏が公開した分析結果です。11月3日を境にAIの思考内容を示す文章の特徴が大きく変化していることが分かります。</p>
+            <p>分析によると「I&#x27;m」で始まる文章の割合は従来の20～30％程度から61.3％に増加。</p>
+            <p>さらにメロー氏はAIが実際の作業を始めるまでに費やす思考量にも注目しました。Claude Opus 5.5には推論に費やす処理量を調整する設定があり、複雑な問題では推論の負荷を高めることで解決能力の向上が期待できます。</p>
+            <p>以下の画像は同じ不具合を異なる推論負荷で修正した結果です。highでは160回のやり取りを繰り返しても修正できなかった一方、xhighでは5回のやり取りで修正に成功したとのことです。</p>
+            <p>なお、Anthropicの公式資料によるとClaude Codeなどで利用者に表示される思考内容はAIの内部処理をそのまま示したものではなく、別のAIモデルが作成した要約とのこと。</p>
+            <p>実際に開発者のテオ・ブラウン氏は約45万8000件のClaude Opus 5.5の応答履歴を調査し、Anthropicが思考内容を要約する仕組みをアカウントごとに順次変更している可能性を指摘しました。</p>
+            <p>……</p>
+            <p>なお、Claudeの品質低下を巡っては過去にも問題が発生しています。Anthropicは2026年4月にClaude Codeの品質低下について調査結果を公表し、推論に費やす処理量の設定変更などが原因だったと説明しました。</p>
+            <p>Claudeの品質が低下していた問題についてAnthropicが調査結果を報告、ユーザーには利用制限をリセットへ - GIGAZINE</p>
+            <p>メロー氏は今回の調査について「科学的に厳密な性能評価ではない」と説明しており、個人的な利用体験をきっかけに分析したことを強調しています。</p>
+          </div>
+          <p class="continue"><a href="https://gigazine.net/news/20261110-claude-opus-nerf/" target="_blank" rel="noopener" lang="ja">続きを読む · GIGAZINE</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p12">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★★</span> <span class="chip mins">3 min</span> <span class="chip" lang="ja">例外処理</span> <span class="chip" lang="ja">except</span> <span class="chip" lang="ja">Claude Code</span> <span class="chip" lang="ja">サイレント障害</span> <span class="chip" lang="ja">品質ゲート</span>
+          </div>
+          <h2 lang="ja">AIと作ったアプリは、削除に失敗しても「削除しました」と言った — 黙って失敗する箇所が322か所あった</h2>
+          <p class="why">Um app pessoal feito com IA perdia texto e apagava tags sem avisar ninguém. Caçando a causa: 322 blocos try/except que engoliam o erro (45 deles except: genérico). Regra nova — todo except tem que logar, avisar o usuário ou justificar o silêncio por escrito. Japonês simples e muito claro, ótimo para ler rápido.</p>
+          <div class="source">
+            <span lang="ja">Zenn（sbkm）</span>
+            <a href="https://zenn.dev/sbkm/articles/81f37a67359ba6" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>書いた文章をためておいて、あとで検索したり集計したりする個人用のアプリを Claude Code と作っています。Python で書いた、Windows で動くアプリです。本体は1つのファイルで、約2万2千行あります。</p>
+            <p>2件続いて、共通点は不具合の中身ではありませんでした。失敗したときに、誰も気づけないことです。そこで、失敗を受け止めて黙って先へ進む箇所を全部数えました。322か所ありました。</p>
+            <p>……</p>
+            <p>Python では、失敗しそうな処理を try で包み、失敗したときの動きを except に書きます。黙る失敗は、この except の中身が空か、それに近いものです。</p>
+            <p>開発中はコンソールが見えるので、2つ目はまだ気づけます。ところが、人に渡すために1つの exe にまとめると、コンソールそのものがありません。 print は誰にも読まれずに消えます。</p>
+            <p>……</p>
+            <p>3つとも、原因はそれぞれ別です。順番の間違い、部品の入れ忘れ、戻り値の見落とし。共通していたのは、失敗したときに誰も知らされないことでした。</p>
+            <p>うち45か所は、どんな失敗でも受け止める except: でした。202の関数に散らばっていて、どこか1か所の書き癖ではありません。</p>
+            <p>残りの316か所は、Claude Code に書き換え用のスクリプトを書かせて、機械的に直しました。</p>
+            <p>……</p>
+            <p>あれも、黙る失敗の親戚です。落ちない作りは、壊れたことを隠す作りでもありました。</p>
+            <p>失敗の値を返すだけの処理は、関門では見えません。表の1つ目と3つ目の中心は、 except ではなくこの形でした。保存の処理は今も失敗を例外にせず、値で返します。呼ぶ側がその値を見ているかを確かめる関門はありません。</p>
+            <p>「記録だけ」は、人が記録を開かなければ見えません。使う人が困らない場所だけに使っていますが、その線引きが正しかったかは、困った人が出るまで分かりません。</p>
+            <p>……</p>
+            <p>AI と作ったコードを読むとき、気にするようにしたのは1つだけです。</p>
+            <p>答えが「誰も」なら、そこは黙る失敗です。落ちずに動いているアプリは、壊れていないアプリとは限りませんでした。</p>
+          </div>
+          <p class="continue"><a href="https://zenn.dev/sbkm/articles/81f37a67359ba6" target="_blank" rel="noopener" lang="ja">続きを読む · Zenn（sbkm）</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p13">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★☆</span> <span class="chip mins">3 min</span> <span class="chip" lang="ja">Claude Code</span> <span class="chip" lang="ja">/btw</span> <span class="chip" lang="ja">Claude Mods</span> <span class="chip" lang="ja">プロンプトキャッシュ</span> <span class="chip" lang="ja">マルチエージェント</span>
+          </div>
+          <h2 lang="ja">Claude Codeで最近使っているTips【2026/11】</h2>
+          <p class="why">Dicas práticas de um autor de livro de Claude Code: /btw para perguntar sem poluir o contexto (ótimo antes de /compact), documentos em HTML em vez de Markdown, Claude Mods para mostrar o TTL de 5 min do cache de prompt, e os padrões orchestrator–subagent vs. Agent Teams. Direto para o seu fluxo com agentes.</p>
+          <div class="source">
+            <span lang="ja">Zenn（oikon）</span>
+            <a href="https://zenn.dev/oikon/articles/claude-code-recipe" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>気がつけば2026年も終わりが見えてきました。今年はありがたいことにClaude Codeの書籍を2冊出版させていただきました。</p>
+            <p>今回紹介するのは、最近Claude Codeを使っていて特に重宝している次の5つです。</p>
+            <p>……</p>
+            <p>/btw は会話履歴に残さずに、今のセッションについて質問できるコマンドです。多分一度は使ったことがあるのではないでしょうか？ちなみにbtwは&quot;by the way&quot;（ところで）という意味です。</p>
+            <p>個人的によく使う /btw コマンドの使い道として、 /compact [description] を実行するための指示（[description]）部分を /btw コマンドで生成する方法が挙げられます。</p>
+            <p>……</p>
+            <p>Claude CodeをはじめとしたAIエージェントは大量の作業をこなしてくれますが、最近はもう人間が全容を把握できる量を超えつつあるように思います。</p>
+            <p>HTML形式を利用するメリットには以下のような点が挙げられます。</p>
+            <p>……</p>
+            <p>個人的に最近はサイドプロジェクトでClaude Codeを24/7で実行していることも多いため、Claude Codeに1日2回ほどレポートをClaude Artifactsで追記・更新してもらい、そこで進捗確認をすることが多いです。</p>
+            <p>Claude Modsは色々カスタマイズできるため、EmacsやVimを弄くり回していたエンジニアは結構好きだと思います。</p>
+            <p>……</p>
+            <p>そもそもClaude Codeはメッセージを送るたびに、それまでの会話をすべてAPIに送り直しています。前のリクエストと先頭から一致する部分はキャッシュから読まれるので、処理が速くなり、料金も安くなります。</p>
+            <p>帯の最後にはそのまま続けてよいか、 /compact や /clear をしたほうがよいかが出ます。キャッシュを読めなかったときは、モデルの変更やキャッシュの期限切れといった原因も表示します。</p>
+          </div>
+          <p class="continue"><a href="https://zenn.dev/oikon/articles/claude-code-recipe" target="_blank" rel="noopener" lang="ja">続きを読む · Zenn（oikon）</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p14">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★☆</span> <span class="chip mins">3 min</span> <span class="chip" lang="ja">万葉線</span> <span class="chip" lang="ja">デ7000形</span> <span class="chip" lang="ja">越ノ潟</span> <span class="chip" lang="ja">県営渡船</span> <span class="chip" lang="ja">命名権</span>
+          </div>
+          <h2 lang="ja">北陸の小さな「無料の鉄道連絡船」先行き不透明!? “電車～船～巨大橋”乗り継ぎ 楽しむなら今のうちか</h2>
+          <p class="why">Toyama: o bonde Man’yōsen (carro de 1967, ronco grave) leva 49 min de Takaoka a Koshinokata, onde um ferry gratuito cruza o porto — e dá para subir de graça numa ponte gigante. Detalhes saborosos: metade da linha é “bonde” por lei e a outra metade é “ferrovia”, e uma estação cujo patrocinador se mudou virou “antiga sede da Makita-gumi”.</p>
+          <div class="source">
+            <span lang="ja">乗りものニュース</span>
+            <a href="https://trafficnews.jp/post/725853" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>物価高が直撃する中で、「タダ乗り歓迎」の渡船が北陸地方で運行されています。ここでは陸・水上・空の移動を手頃に楽しめますが、先行きは視界不良です。</p>
+            <p>……</p>
+            <p>物価高がますます進んでいます。総務省が2026年10月30日に発表した10月の東京都区部の生鮮食品を除く消費者物価指数（CPI、中旬速報値）が前年同月より2.6%上昇し、伸び率は日本銀行が物価安定目標としている2％を上回りました。</p>
+            <p>この一帯では陸・水上・空の移動を手頃に楽しめますが、先行きには不安があるだけに訪れるべきなのは「今でしょ」と言えそうです。</p>
+            <p>筆者（大塚圭一郎：共同通信社経済部次長）が万葉線の高岡駅停留場に着くと、日本車両製造が1967年に造ったデ7000形のデ7076号の越ノ潟行きが待ち受けていました。</p>
+            <p>万葉線の高岡軌道線は道路に敷かれた線路を走る併用軌道で、デ7000形は床下から「グオーン」という重厚な走行音を響かせながら駆けます。</p>
+            <p>面白いポイントが二つあり、一つはほぼ全ての電車が直通運転している高岡軌道線と、六渡寺～越ノ潟（射水市）間の新湊港線とでは異なる法律が適用されていることです。高岡軌道線は軌道法による軌道路線で、「停留場」に停まります。</p>
+            <p>これに対し、専用軌道が敷かれている新湊港線は鉄道事業法に基づいており、六渡寺～越ノ潟はいずれも「駅」の呼称です。</p>
+            <p>もう一つ面白いのは、六渡寺に付けられた「旧牧田組本社」のネーミングライツ（命名権）です。これは建設会社の牧田組が2020年5月1日に命名権を取得した段階では、本社が近くにあったため「牧田組本社」と付けられました。</p>
+            <p>ところが、牧田組が2026年8月に本社を移転したため、8月1日付で「旧牧田組本社」に変わりました。</p>
+            <p>なお、「第一イン新湊クロスベイ前」は、ホテル「第一イン新湊」と複合施設「クロスベイ新湊」の名前を組み合わせています。うち「第一イン新湊」は命名権で、到着前の自動車内放送で広告も流れます。</p>
+            <p>高岡を出て49分後、電車が終点の越ノ潟に滑り込みました。</p>
+          </div>
+          <p class="continue"><a href="https://trafficnews.jp/post/725853" target="_blank" rel="noopener" lang="ja">続きを読む · 乗りものニュース</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p15">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★☆</span> <span class="chip mins">4 min</span> <span class="chip" lang="ja">TETSUYA</span> <span class="chip" lang="ja">L’Arc-en-Ciel</span> <span class="chip" lang="ja">Like-an-Angel</span> <span class="chip" lang="ja">DIVE TO BLUE</span> <span class="chip" lang="ja">ライヴレポート</span>
+          </div>
+          <h2 lang="ja">TETSUYA (L’Arc-en-Ciel)、バースデーライヴ＜THANK YOU＞にふたつの顔「感極まって。よくできたなぁと思って」</h2>
+          <p class="why">O baixista do L’Arc fez aniversário em dose dupla: primeira parte cantando a própria carreira solo, segunda como baixista/líder do Like-an-Angel (a banda que toca L’Arc com o vocalista jekyll), com DIVE TO BLUE. Termina exausto — “desculpa pelo trabalho que dei aos membros” — seis dias antes de subir ao palco de Yoyogi com o L’Arc.</p>
+          <div class="source">
+            <span lang="ja">BARKS</span>
+            <a href="https://barks.jp/news/1103619" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>2026年10月3日(土)、TETSUYAの誕生日を祝うスペシャルライヴ＜TETSUYA BIRTHDAY CELEBRATION LIVE 2026 “THANK YOU”』が東京・Spotify O-EASTで開催された。</p>
+            <p>……</p>
+            <p>第1部の幕開けを飾ったのは「TIGHTROPE」だった。TETSUYAのソロ活動のスタートともいえる楽曲を誕生日という特別な日のオープニングに配置する。</p>
+            <p>この後、「Can’t stop believing」、エンディングでステージがピンクに染まった「蜃気楼」、中世ヨーロッパを彷彿とさせる街並みをバックスクリーン一面に映し出し、季節の移ろいを紡いだ「I WANNA BE WITH YOU」を続けて披露。</p>
+            <p>……</p>
+            <p>第2部は、tetsuyaがリーダー＆ベースを担当するLike-an-Angelのライヴだ。tetsuyaのベースが雄麗な響きを奏で出す。イントロ、最初のワンフレーズで大歓声があがる。「In the Air」。</p>
+            <p>ステージが鮮やかなブルーに染まり「DIVE TO BLUE」へ。フロントの4人が、ステージ前に設けられた高台に上り、優美な音像を作っていく。フロアを埋めたオーディエンスの、パパン、パンのクラップもばっちり合っている。さすがだ。</p>
+            <p>……</p>
+            <p>jekyllのMC。英語で来場した観客に感謝を伝え、みんなと一緒にtetsuyaの誕生日を祝える喜びを語った。そして、いつもは英語でMCをしているが、今日は少し日本語に挑戦してみたいと告げた。盛り上がる観客がjekyllの次の言葉を待つ。</p>
+            <p>過去のキャリアを振り返るだけではなく、その先にある表現の可能性を提示すること。誕生日という節目に開催された＜THANK YOU＞は、これまでの歩みへの感謝と、これからの音楽への意志が共存する特別な1日だった。</p>
+            <p>……</p>
+            <p>最後にtetsuyaがマイクをとる。満身創痍といった様子で「頑張ったなぁ」とポツリ。言葉に詰まる。少し間を置いて「頑張ったなぁと思ったら感極まって。よくできたなぁと思って」と話を続けた。</p>
+            <p>この6日後、tetsuyaはL’Arc-en-Cielのベーシストとして、東京・国立代々木競技場第一体育館のステージに立っていた。</p>
+          </div>
+          <p class="continue"><a href="https://barks.jp/news/1103619" target="_blank" rel="noopener" lang="ja">続きを読む · BARKS</a></p>
+        </div>
+      </article>
+
+      <footer class="site">読解幕 · 2026-11-10 · ~52 min · <a href="/japanese-digest/history/" style="color:inherit">History</a> · deliton.github.io/japanese-digest</footer>
+    </main>
+  </div>
+</body>
+</html>
