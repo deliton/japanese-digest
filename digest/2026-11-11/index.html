@@ -1,0 +1,933 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>読解幕 · 2026-11-11 · Japanese Digest</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Noto+Serif+JP:wght@400;600;700&family=Shippori+Mincho:wght@500;700&display=swap" rel="stylesheet" />
+  <style>
+
+    :root {
+      --bg: #0a0a0a;
+      --bg-2: #121212;
+      --bg-card: #161616;
+      --ink: #f5f5f5;
+      --ink-dim: #a8a29a;
+      --ink-mute: #6b6560;
+      --shu: #c41e3a;
+      --shu-hot: #e11d48;
+      --shu-deep: #8b1228;
+      --gold: #d4a017;
+      --gold-soft: #c9a227;
+      --white: #fafafa;
+      --line: #2a2a2a;
+      --line-hot: rgba(196, 30, 58, 0.45);
+      --measure: 42rem;
+      --radius: 4px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: "Noto Sans JP", "Hiragino Sans", "Yu Gothic", system-ui, sans-serif;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .stage-bar {
+      height: 6px;
+      background: repeating-linear-gradient(
+        90deg,
+        var(--shu) 0 48px,
+        var(--white) 48px 56px,
+        #111 56px 64px,
+        var(--gold) 64px 72px,
+        #111 72px 88px
+      );
+    }
+
+    .wrap {
+      width: min(100% - 2rem, 74rem);
+      margin: 0 auto;
+      padding: 2rem 0 4.5rem;
+      display: grid;
+      grid-template-columns: 15.5rem 1fr;
+      gap: 2.75rem;
+      align-items: start;
+    }
+
+    @media (max-width: 900px) {
+      .wrap { grid-template-columns: 1fr; gap: 1.5rem; padding-top: 1.25rem; }
+      .sidebar { position: static !important; }
+    }
+
+    .sidebar { position: sticky; top: 1.25rem; }
+
+    .brand {
+      display: flex;
+      align-items: baseline;
+      gap: 0.55rem;
+      margin: 0 0 0.35rem;
+    }
+    .brand-mark {
+      font-family: "Shippori Mincho", "Noto Serif JP", serif;
+      font-size: 1.85rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      color: var(--white);
+      line-height: 1;
+    }
+    .brand-mark em {
+      font-style: normal;
+      color: var(--shu);
+    }
+    .brand-sub {
+      font-size: 0.65rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-weight: 700;
+    }
+
+    .meta {
+      color: var(--ink-mute);
+      font-size: 0.8rem;
+      margin: 0 0 1.25rem;
+    }
+
+    .stat-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-bottom: 1.35rem;
+    }
+    .stat {
+      border: 1px solid var(--line);
+      background: var(--bg-2);
+      padding: 0.32rem 0.65rem;
+      font-size: 0.72rem;
+      color: var(--ink-dim);
+      border-radius: var(--radius);
+    }
+    .stat strong { color: var(--white); font-weight: 700; }
+    .stat.hot {
+      border-color: var(--shu);
+      color: var(--shu-hot);
+      background: rgba(196, 30, 58, 0.1);
+    }
+
+    .toc {
+      border: 1px solid var(--line);
+      background: var(--bg-2);
+      padding: 0.85rem 0.9rem 0.95rem;
+      border-radius: var(--radius);
+    }
+    .toc h2 {
+      margin: 0 0 0.65rem;
+      font-size: 0.72rem;
+      letter-spacing: 0.16em;
+      color: var(--gold);
+      font-weight: 800;
+    }
+    .toc ol { list-style: none; margin: 0; padding: 0; }
+    .toc li { margin: 0; }
+    .toc a {
+      display: flex;
+      justify-content: space-between;
+      gap: 0.5rem;
+      text-decoration: none;
+      color: var(--ink-dim);
+      font-size: 0.82rem;
+      padding: 0.38rem 0.2rem;
+      border-bottom: 1px solid transparent;
+    }
+    .toc a:hover { color: var(--white); border-bottom-color: var(--line-hot); }
+    .toc .t-title { font-weight: 600; }
+    .toc .t-min { color: var(--gold); font-size: 0.72rem; font-weight: 700; flex-shrink: 0; }
+
+    .main { max-width: var(--measure); }
+
+    .digest-banner {
+      display: flex;
+      gap: 0.75rem;
+      align-items: flex-start;
+      background: #141014;
+      border: 1px solid var(--line);
+      border-left: 3px solid var(--shu);
+      padding: 0.85rem 1rem;
+      margin-bottom: 1.5rem;
+      font-size: 0.78rem;
+      color: var(--ink-dim);
+      line-height: 1.55;
+    }
+    .digest-banner .tag {
+      flex-shrink: 0;
+      background: var(--shu);
+      color: #fff;
+      font-size: 0.65rem;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      padding: 0.28rem 0.5rem;
+      border-radius: var(--radius);
+    }
+
+    .hero {
+      margin-bottom: 2rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid var(--line);
+      position: relative;
+    }
+    .hero::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -1px;
+      width: 4.5rem;
+      height: 2px;
+      background: var(--shu);
+    }
+    .kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.7rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--shu-hot);
+      font-weight: 800;
+      margin-bottom: 0.85rem;
+    }
+    .kicker::before {
+      content: "◆";
+      font-size: 0.55rem;
+      color: var(--gold);
+    }
+    .hero h1 {
+      font-family: "Shippori Mincho", "Noto Serif JP", serif;
+      font-size: clamp(1.85rem, 4vw, 2.55rem);
+      font-weight: 700;
+      line-height: 1.2;
+      margin: 0 0 0.75rem;
+      color: var(--white);
+      letter-spacing: 0.02em;
+    }
+    .hero p {
+      margin: 0;
+      color: var(--ink-dim);
+      font-size: 0.98rem;
+      max-width: 36rem;
+    }
+
+    article.piece {
+      background: var(--bg-card);
+      border: 1px solid var(--line);
+      margin-bottom: 1.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+    article.piece::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: linear-gradient(90deg, var(--shu) 0%, var(--shu) 35%, var(--gold) 35%, var(--gold) 42%, transparent 42%);
+    }
+
+    .piece-inner { padding: 1.6rem 1.55rem 1.35rem; }
+
+    .piece-head {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-bottom: 0.85rem;
+    }
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      border: 1px solid var(--line);
+      background: #111;
+      color: var(--ink-dim);
+      padding: 0.22rem 0.6rem;
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      border-radius: var(--radius);
+    }
+    .chip.interest {
+      border-color: var(--shu);
+      color: var(--shu-hot);
+      background: rgba(196, 30, 58, 0.12);
+    }
+    .chip.mins {
+      border-color: var(--gold);
+      color: var(--gold);
+      background: transparent;
+    }
+
+    .piece h2 {
+      font-family: "Noto Serif JP", "Shippori Mincho", "Yu Mincho", serif;
+      font-size: 1.38rem;
+      font-weight: 700;
+      line-height: 1.5;
+      margin: 0 0 0.6rem;
+      color: var(--white);
+      letter-spacing: 0.02em;
+    }
+
+    .why {
+      margin: 0 0 1rem;
+      color: var(--ink-dim);
+      font-size: 0.9rem;
+      border-left: 2px solid var(--gold);
+      padding-left: 0.85rem;
+    }
+
+    .source {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.65rem 1.1rem;
+      font-size: 0.76rem;
+      color: var(--ink-mute);
+      margin-bottom: 1.25rem;
+    }
+    .source a {
+      color: var(--shu-hot);
+      text-decoration: none;
+      font-weight: 600;
+    }
+    .source a:hover { color: var(--gold); }
+
+    .ja {
+      font-family: "Noto Serif JP", "Hiragino Mincho ProN", "Yu Mincho", serif;
+      font-size: 1.08rem;
+      line-height: 2;
+      letter-spacing: 0.03em;
+      color: #ebe7e1;
+    }
+    .ja p { margin: 0 0 1.15em; }
+    .ja p:last-child { margin-bottom: 0; }
+
+    .continue {
+      margin-top: 1.25rem;
+      padding-top: 1rem;
+      border-top: 1px solid var(--line);
+      font-size: 0.86rem;
+    }
+    .continue a {
+      color: var(--white);
+      text-decoration: none;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      border-bottom: 2px solid var(--shu);
+      padding-bottom: 0.1rem;
+    }
+    .continue a:hover {
+      color: var(--shu-hot);
+      border-bottom-color: var(--gold);
+    }
+
+    footer.site {
+      max-width: var(--measure);
+      margin-top: 1.75rem;
+      color: var(--ink-mute);
+      font-size: 0.72rem;
+      letter-spacing: 0.06em;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+    footer.site::before {
+      content: "";
+      width: 1.25rem;
+      height: 2px;
+      background: var(--shu);
+    }
+
+  
+    .excerpt-label { font-size: 0.66rem; letter-spacing: 0.18em; color: var(--gold); font-weight: 800; margin: 0 0 0.6rem; }
+    .brand-sub a, .stat a { color: var(--gold); text-decoration: none; }
+    .toc .t-min { font-variant-numeric: tabular-nums; }
+  </style>
+</head>
+<body>
+  <div class="stage-bar" aria-hidden="true"></div>
+
+  <div class="wrap">
+    <aside class="sidebar">
+      <div class="brand">
+        <span class="brand-mark" lang="ja">読解<em>幕</em></span>
+      </div>
+      <p class="brand-sub">Kabuki Digest · <a href="/japanese-digest/history/">History</a></p>
+      <p class="meta">2026-11-11 · America/Sao_Paulo</p>
+      <div class="stat-row">
+        <span class="stat"><strong>50</strong> min</span>
+        <span class="stat"><strong>15</strong> pieces</span>
+        <span class="stat"><strong>~12,300</strong> 字</span>
+        <span class="stat"><a href="/japanese-digest/history/">History</a></span>
+      </div>
+
+      <nav class="toc" aria-label="Índice">
+        <h2 lang="ja">本日の演目</h2>
+        <ol>
+          <li>
+            <a href="#p1">
+              <span class="t-title" lang="ja">千人で三万を止めた――耳川の戦いと島津家久</span>
+              <span class="t-min">5′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p2">
+              <span class="t-title" lang="ja">「毛抜きと爪切りを百個ずつ」――秀吉最古の自筆書状</span>
+              <span class="t-min">3′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p3">
+              <span class="t-title" lang="ja">ベトナムを荒らした日本人倭寇・白濱顕貴</span>
+              <span class="t-min">4′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p4">
+              <span class="t-title" lang="ja">「明治まで肉を食べなかった」は本当か</span>
+              <span class="t-min">4′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p5">
+              <span class="t-title" lang="ja">キトラ古墳の天井に描かれた世界最古の星図</span>
+              <span class="t-min">3′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p6">
+              <span class="t-title" lang="ja">観光洞窟で60年見逃された氷期の彫刻</span>
+              <span class="t-min">4′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p7">
+              <span class="t-title" lang="ja">「ホビット」はコモドドラゴンの食べ残しを食べていた</span>
+              <span class="t-min">3′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p8">
+              <span class="t-title" lang="ja">神への供物の猫はひどい暮らしをしていた</span>
+              <span class="t-min">3′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p9">
+              <span class="t-title" lang="ja">うるう秒は廃止、次は数百年後の「うるう時」</span>
+              <span class="t-min">4′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p10">
+              <span class="t-title" lang="ja">Claude Sheets／Whiteboards／Data登場</span>
+              <span class="t-min">2′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p11">
+              <span class="t-title" lang="ja">週間制限に3日で到達→ModelとEffortの使い分けで5日</span>
+              <span class="t-min">4′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p12">
+              <span class="t-title" lang="ja">11年かけてDOS版「ウイングコマンダー」を協力プレイ化</span>
+              <span class="t-min">3′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p13">
+              <span class="t-title" lang="ja">路面電車が50km/hへ――「昭和の上限」を破る広電</span>
+              <span class="t-min">3′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p14">
+              <span class="t-title" lang="ja">「水炊きは関西のほうが古い」――有馬温泉と昆布だし</span>
+              <span class="t-min">2′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p15">
+              <span class="t-title" lang="ja">THE ALFEEのSLが秩父夜祭の冬を走る</span>
+              <span class="t-min">3′</span>
+            </a>
+          </li>
+        </ol>
+      </nav>
+    </aside>
+
+    <main class="main">
+      <div class="digest-banner">
+        <span class="tag">TRIAGE</span>
+        <span>História: batalha de Mimikawa (BUSHOO, aniversário amanhã), a carta mais antiga de Hideyoshi e o pirata japonês no Vietnã (Japaaan — fonte nova no rodízio), carne antes de Meiji (草の実堂), mapa estelar de Kitora. Arqueologia/ciência: gravuras do Paleolítico numa caverna turística, hobbit comendo sobras de dragão-de-komodo, gatos-oferenda do Egito, fim do segundo bissexto. Dev/IA: Claude Sheets/Whiteboards/Data, Model×Effort no Claude Code, Wing Commander co-op por engenharia reversa. Trem: bonde de Hiroshima a 50 km/h. Kobe: mizutaki de Kansai e Arima. Rock+trem+matsuri: THE ALFEE no Chichibu Yomatsuri. Pontos fracos: rock/metal fraco hoje (nada de HYDE/BABYMETAL/DIR EN GREY com texto bom); Kobe Shimbun e NatGeo cortam no paywall; Japaaan só traz até a pág. 2–3 do artigo; nada de sailing ou JRPG no sentido estrito.</span>
+      </div>
+
+      <header class="hero">
+        <div class="kicker">Daily curated reading</div>
+        <h1 lang="ja">耳川の島津家久、秀吉の毛抜きと爪切り、ベトナムの日本人倭寇、明治前の肉食、キトラの星図、観光洞窟の氷期彫刻、ホビットとコモドドラゴン、供物の猫、うるう秒の廃止、Claude Sheets、ModelとEffortの使い分け、ウイングコマンダー協力プレイ、広電50km/h、関西の水炊き、THE ALFEEのSL</h1>
+        <p lang="ja">今日の幕開けは天正六年の日向・高城――千余の籠城勢が三万の大友軍を食い止め、島津四兄弟の「釣り野伏」が九州の勢力図を塗り替えた耳川の戦い。続いて、戦いの合間に湯治を楽しみにする秀吉が「毛抜きと爪切りを百個ずつ」と書き送った最古の自筆書状。海の向こうでは、ベトナムを荒らした日本人倭寇・白濱顕貴が、思いがけず日越外交の幕を開けます。暮らしの歴史は「明治まで肉を食べなかった」という思い込みの検証、そして世界遺産キトラ古墳の天井に輝く世界最古級の星図。考古学と科学の幕は、60年見逃された洞窟の彫刻、コモドドラゴンの食べ残しを食べていた「ホビット」、神への供物にされた猫たちの過酷な暮らし、うるう秒の廃止と数百年後の「うるう時」。開発者の幕は、Claude Sheetsの登場、ModelとEffortの使い分けで利用枠を延ばす話、11年がかりのウイングコマンダー協力プレイ。旅と食は、昭和の上限を破った広電の路面電車と、関西風水炊きの逆襲。締めはTHE ALFEEのSLが走る秩父夜祭の冬。約50分の読解です。</p>
+      </header>
+
+      <article class="piece" id="p1">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★★</span> <span class="chip mins">5 min</span> <span class="chip" lang="ja">耳川の戦い</span> <span class="chip" lang="ja">島津家久</span> <span class="chip" lang="ja">島津四兄弟</span> <span class="chip" lang="ja">釣り野伏</span> <span class="chip" lang="ja">大友宗麟</span>
+          </div>
+          <h2 lang="ja">1千余で3万の大友軍を迎え撃った島津家久｜耳川の戦いで九州の勢力図一変</h2>
+          <p class="why">Aniversário amanhã (12/11 do calendário antigo, 1578): mil homens trancados no castelo de Takajō contra 30 mil do clã Ōtomo, até os três irmãos Shimazu chegarem com a tática do “tsuri-nobuse” — fingir fuga e atrair o inimigo para a emboscada. O caçula Iehisa sai do castelo e fecha a armadilha; Kyūshū muda de dono. E um mito desmontado: a derrota não foi “culpa do cristianismo” de Sōrin.</p>
+          <div class="source">
+            <span lang="ja">BUSHOO!JAPAN（武将ジャパン）</span>
+            <a href="https://bushoojapan.com/bushoo/shima/2026/11/11/223000" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>天正六年11月12日（1578年12月10日）は「耳川の戦い」があった日です。</p>
+            <p>1千余の兵と島津家久が、3万の大友軍に対して日向の高城（たかじょう）で籠城を決行。</p>
+            <p>いくらなんでも絶望的な兵力差でしたが、城外には島津義久・義弘・歳久――いわゆる島津四兄弟の兄三名も援軍にやってきて、末弟の家久が驚異的な働きを見せます。</p>
+            <p>九州の戦国史に残る島津と大友の死闘を振り返ってみましょう。</p>
+            <p>……</p>
+            <p>5万ともいわれる大軍を率いて日向へ攻め込んだのは天正六年（1578年）9月のこと。</p>
+            <p>高城を預かっていたのは地頭の山田有信であり、そこへ急ぎ救援に入ったのが、島津四兄弟の末弟・島津家久たちでした。</p>
+            <p>一方の大友軍は、木城町の史跡解説では3万、新名一仁氏の著書では5万ともいわれます。</p>
+            <p>いずれも後世に伝わる概数で、確かな実数ではありませんが、城内の兵ではとても太刀打ちできる相手でなかったことは確かでしょう。</p>
+            <p>……</p>
+            <p>決戦前日の11月11日、島津義弘・島津歳久らは「野伏（のぶせ）」あるいは「釣り野伏」と呼ばれる戦術で大友勢の一部をおびき出し、撃破していました。</p>
+            <p>囮の部隊が敗走するフリをして敵をおびき出し、味方の伏兵が隠れる場所まで引き連れてくると、一気に反撃して殲滅する。</p>
+            <p>勢いに乗って突出した大友勢を、義弘・歳久らの軍勢が正面から迎え撃ち、さらに根白坂に陣を構えていた義久の手勢が、横合いから攻めかかりました。</p>
+            <p>大友勢は大混乱に陥り、退こうとした先には小丸川の深い淵があり、多くの兵が溺れ死んだといいます。</p>
+            <p>そこへ追い打ちをかけたのが、高城の島津家久たちでした。</p>
+            <p>城から打って出た家久は、樺山規久・吉利忠澄らとともに大友勢の本陣を襲い、大友軍は総崩れ。</p>
+            <p>江戸時代の島津家の記録には、家久が単騎で大軍に突入し、十余人の将を討ち取ったとまで記されています。</p>
+            <p>さすがに誇張もあるでしょうが、それほどの奮戦ぶりとして語り継がれていたのです。</p>
+            <p>戦いは午後2時頃まで続き、大友方は重臣3人を含む有力な武将を次々と討ち取られ、耳川の北まで逃げていきました。</p>
+            <p>北の務志賀にいた宗麟も、敗戦を知るとその夜のうちに豊後へ引き揚げたといいます。</p>
+            <p>……</p>
+            <p>父祖以来の悲願だった薩摩・大隅・日向の三か国統一が、ここに実現したのです。</p>
+            <p>一方、北部九州の6か国の守護を兼ねていた大友家にとって、この大敗の打撃は計り知れません。</p>
+            <p>かつては、その原因を宗麟のキリスト教信仰に求める説明もありました。</p>
+            <p>しかし研究者の鹿毛敏夫氏は著書『大友義鎮』の中で、耳川での大敗理由をキリシタン大名としての宗麟と結びつける説明を、創作であると批判しており通説の見直しが求められています。</p>
+            <p>……</p>
+            <p>家久は戦後、佐土原（宮崎市）の領主となり、天正七年（1579年）3月に佐土原城へ入っています。</p>
+            <p>高城で大友の大軍を食い止めた末弟の家久は、やがて肥前や豊後の戦場へと向かっていくのです。</p>
+          </div>
+          <p class="continue"><a href="https://bushoojapan.com/bushoo/shima/2026/11/11/223000" target="_blank" rel="noopener" lang="ja">続きを読む · BUSHOO!JAPAN（武将ジャパン）</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p2">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★★</span> <span class="chip mins">3 min</span> <span class="chip" lang="ja">豊臣秀吉</span> <span class="chip" lang="ja">自筆書状</span> <span class="chip" lang="ja">湯治</span> <span class="chip" lang="ja">内藤記念くすり博物館</span> <span class="chip" lang="ja">元亀元年</span>
+          </div>
+          <h2 lang="ja">【豊臣兄弟！】秀吉の自筆書状など新発見！一般公開へ…「毛抜きと爪切りをよこせ」家臣への気配り</h2>
+          <p class="why">A carta autógrafa mais antiga de Hideyoshi que se conhece (1570), achada num museu de remédios em Gifu: depois de um ano de batalhas, ele vai às termas e encomenda com urgência 100 pinças, 100 cortadores de unha e 5 prendedores de cabelo — brindes para a comitiva (95 homens e 5 mulheres?). História humana, em japonês leve.</p>
+          <div class="source">
+            <span lang="ja">Japaaan（ジャパーン）</span>
+            <a href="https://mag.japaaan.com/archives/293052" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>豊臣秀吉の自筆書状などが新たに発見され、岐阜県各務原市の「内藤記念くすり博物館」で一般公開中です。</p>
+            <p>4通ある秀吉自筆書状のうち、最も古いものは元亀元年（1570年）12月29日付で、現存する秀吉自筆書状72通の中で最古となるそうです。</p>
+            <p>その「木下秀吉消息」には、こんなことが書かれていました。</p>
+            <p>「湯治に行くので、正月10日までに、けぬき（毛抜き）百個、つまきり（爪切り）百個、まるかみ（髪を結う際に使用するもの）5本を急ぎ手配して湯治場までよこしてほしい」</p>
+            <p>12月29日から翌1月10日までの12日間（当時は1ヶ月が30日）で、毛抜きと爪切り100個ずつ、そしてまるかみ（丸髪？）5本を注文しています。</p>
+            <p>どうやら湯治に同行する家臣や女性（妻女や侍女）たちへ配るためだそうで、注文数から察するに、男性95名と女性5名が同行予定だったのでしょう。</p>
+            <p>単なる記念品として配ったのか、あるいは湯治先でリラックスしながら身体の手入れをするのに使ってもらったのかもしれません。こうした細やかな気遣いは、実に秀吉らしいですね。</p>
+            <p>……</p>
+            <p>元亀元年（1570年）と言えば、秀吉にとって金ヶ崎の退口（4月）や姉川の戦い（6月）など、生死の修羅場をくぐり抜けた一年でした。</p>
+            <p>そんな年の暮れに、来年からも続くであろう激闘に備えて英気を養うべく、湯治を計画したのでしょう。</p>
+            <p>元亀2年（1571年）1月10日からの湯治には、誰が同行したのかも気になるところ（女性5名については特に）。主従そろって楽しめたのだろうかと想像してしまいますね。</p>
+            <p>……</p>
+            <p>そんな「豊臣秀吉自筆等文書一括五通」が発見されたのは、今から8年前となる平成30年（2018年）のこと。</p>
+            <p>こちらの「豊臣秀吉自筆等文書一括五通」は令和8年（2026年）12月23日（水）まで同館特設スペースで一般公開されているため、ご興味ある方は一度見学されてはいかがでしょうか。</p>
+          </div>
+          <p class="continue"><a href="https://mag.japaaan.com/archives/293052" target="_blank" rel="noopener" lang="ja">続きを読む · Japaaan（ジャパーン）</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p3">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★★</span> <span class="chip mins">4 min</span> <span class="chip" lang="ja">倭寇</span> <span class="chip" lang="ja">白濱顕貴</span> <span class="chip" lang="ja">広南国</span> <span class="chip" lang="ja">阮潢</span> <span class="chip" lang="ja">徳川家康</span>
+          </div>
+          <h2 lang="ja">戦国時代にベトナムで暴れた最凶海賊！日本人倭寇・白濱顕貴とは何者？家康外交へと繋がる意外な結末</h2>
+          <p class="why">Um pirata japonês de verdade (a maioria dos “wakō” não era japonesa) saqueia a costa do Vietnã em 1585, confundido com europeu; naufraga em 1599 e vai preso. O rei Nguyễn Hoàng, com medo de incidente diplomático, escreve a Ieyasu perguntando o que fazer — e esse pirata vira o pretexto da primeira diplomacia Japão–Vietnã.</p>
+          <div class="source">
+            <span lang="ja">Japaaan（ジャパーン）</span>
+            <a href="https://mag.japaaan.com/archives/292749" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>かつて日本をはじめ東アジア各地の海を荒らし回った倭寇（わこう）たち。その多くは日本人以外から構成されたものの、その獰猛ゆえに倭（日本）を冠されたそうです。</p>
+            <p>今回はそんな倭寇の中で、本当に日本人だったという白濱顕貴（しらはまけんき）を紹介。果たしてどんな人物で、どんな悪行に及んだのでしょうか。</p>
+            <p>白濱顕貴は生年不詳、出身地や出自についてもよくわかっていません。</p>
+            <p>史料的な裏づけがないため仮説の域を出ないものの、水軍として活躍していたなら、その後に倭寇として暴れ回ったキャリアにも説得力があります。</p>
+            <p>いずれにしても白濱顕貴の正体については謎が多く、はっきりしたことはわかっていません。</p>
+            <p>……</p>
+            <p>そんな白濱顕貴が歴史の表舞台に登場したのは天正13年（1585年／ベトナム暦で光興8年）のこと。</p>
+            <p>5隻の船団を率いて広南国（クアンナム。阮朝ベトナム）の沿岸地域に出現し、片っ端から襲撃しました。</p>
+            <p>やがて10隻の海軍船団が鎮圧に乗り出し、激戦の末に白濱倭寇団は2隻の船を沈められてしまいます。</p>
+            <p>そんな白濱倭寇団が再び登場するのは慶長4年（1599年／ベトナム暦で光興22年）のことでした。ベトナム南部のトゥアンアン近海で難破したため、立ち往生してしまいます。</p>
+            <p>地元当局はこれ幸いとばかり白濱倭寇団を追捕しようと乗り出しますが、腐っても鯛ならぬ難破しても倭寇。奮戦の末にこれを返り討ちにしました。</p>
+            <p>が、身動きもとれず補給もない状態では、それからどうすることもできません。白濱倭寇団は程なくお縄となり、投獄されてしまったのでした。</p>
+            <p>……</p>
+            <p>さて、捕らわれた倭寇は極刑に処されるのがお決まりですが、広南国王の阮潢（グエン・ホアン）は考えます。</p>
+            <p>日本人である白濱顕貴を処刑したら、国際問題になるのではないか？と。</p>
+            <p>そこで白濱顕貴や今後の取り扱いをどうするべきか尋ねるため、徳川家康へ書簡を送りました。</p>
+            <p>これが日本とベトナムにおける史上初の外交となりました。その後、両国の友好は日本が鎖国政策をとるまでの数十年にわたって続いたそうです。</p>
+            <p>ちなみに白濱顕貴がどうなったか、詳しい記録は残っていません。恐らく、別に生かしておく必要もなかったため、つつがなく処刑されてしまったのでしょう。</p>
+            <p>ほとんど謎の人物ですが、図らずも日本とベトナム両国の架け橋となったのは興味深いですね。</p>
+          </div>
+          <p class="continue"><a href="https://mag.japaaan.com/archives/292749" target="_blank" rel="noopener" lang="ja">続きを読む · Japaaan（ジャパーン）</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p4">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★★</span> <span class="chip mins">4 min</span> <span class="chip" lang="ja">肉食禁止令</span> <span class="chip" lang="ja">薬食い</span> <span class="chip" lang="ja">ももんじや</span> <span class="chip" lang="ja">薩摩</span> <span class="chip" lang="ja">豚一様</span>
+          </div>
+          <h2 lang="ja">「日本人は明治まで肉を食べなかった」は間違い？かつて日本に存在した意外な肉食文化</h2>
+          <p class="why">O decreto de 675 só proibia vaca, cavalo, cão, macaco e galinha, e só de abril a setembro. Javali virava “botan”, cervo “momiji”, carne era “remédio” (kusuri-gui) e havia loja especializada desde 1718. Em Satsuma comia-se porco — Saigō adorava tonkotsu — e o último xógum Yoshinobu tinha o apelido de “Buta-ichi-sama”.</p>
+          <div class="source">
+            <span lang="ja">草の実堂</span>
+            <a href="https://kusanomido.com/study/history/japan/bakumatu/136244/" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>仏教の伝来以来、日本では「不殺生」の教えが広まり、肉食を避ける風潮が根付いていった。</p>
+            <p>天武天皇4年（675）に肉食を禁じる詔が出され、明治5年（1872）に明治天皇が牛肉を食するまで、約1200年もの間、日本人は肉を食べなかったというイメージも根強い。</p>
+            <p>そもそも天武天皇の詔で食用を禁じられたのは牛・馬・犬・猿・鶏の5種類であり、猪や鹿などは対象外だった。しかも禁止された期間は旧暦4月から9月までの半年間に限られていた。</p>
+            <p>……</p>
+            <p>当時は滋養をつけるために肉を食べることを「薬食い」と呼び、猪や鹿、鴨などが食用にされていた。武士としては貧しい部類だった石城の食卓にも鴨汁が登場することから、肉食は必ずしも裕福な人々だけの習慣ではなかったことがうかがえる。</p>
+            <p>……</p>
+            <p>その代表例が、享保3年（1718）創業と伝わる「ももんじや（豊田屋）」である。</p>
+            <p>同店では猪などの獣肉を扱っており、江戸時代には鹿肉を「紅葉」、猪肉を「牡丹」などと呼ぶ習慣もあった。</p>
+            <p>……</p>
+            <p>明治以前の日本でも、肉食が比較的盛んだった地域として知られるのが薩摩（鹿児島）である。</p>
+            <p>現代でも「かごしま黒豚」が名高いが、薩摩の豚肉文化には長い歴史がある。『南洲翁逸話』には、西郷隆盛が「豚骨と味噌汁を好まれ、骨をすすりてその味を賞せられた」という逸話が紹介されている。</p>
+            <p>また、西郷は若いころ、大久保利通とともに猪や兎を狩りに出かけるのが趣味だったともいい、当時の薩摩では獣肉が比較的身近な存在だったことがうかがえる。</p>
+            <p>……</p>
+            <p>特に豚は、野山で捕獲できる猪や鹿とは異なり、飼育に手間や費用がかかるため、高価なご馳走として扱われていたようだ。</p>
+            <p>薩摩藩第11代藩主の島津斉彬（しまづなりあきら）が、藩主となって初めて薩摩に戻った際には、勤務する藩士たちに豚汁や炒り豚（豚肉の炒め物）を振る舞ったという逸話も残されている。また、斉彬は水戸藩の徳川斉昭に豚肉を贈ったとも伝えられ、薩摩の豚肉は他藩の有力者にも知られていた。</p>
+            <p>斉昭の息子で、最後の徳川将軍となった徳川慶喜も豚肉好きとして有名だった。慶喜は一橋家の当主だったころ、豚肉を好んで食べていたことから「豚一様（ぶたいちさま）」というあだ名で呼ばれていたという。</p>
+            <p>……</p>
+            <p>明治時代の肉食普及は、何もないところに突然生まれたものではなく、それ以前から日本人がさまざまな形で肉を食べてきた歴史の延長線上にあったのである。</p>
+          </div>
+          <p class="continue"><a href="https://kusanomido.com/study/history/japan/bakumatu/136244/" target="_blank" rel="noopener" lang="ja">続きを読む · 草の実堂</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p5">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★☆</span> <span class="chip mins">3 min</span> <span class="chip" lang="ja">キトラ古墳</span> <span class="chip" lang="ja">天文図</span> <span class="chip" lang="ja">四神</span> <span class="chip" lang="ja">十二支</span> <span class="chip" lang="ja">飛鳥・藤原の宮都</span>
+          </div>
+          <h2 lang="ja">なぜ暗闇の石槨内に星空を描いた？世界遺産・キトラ古墳の極彩色壁画と「古代人の宇宙観」【前編】</h2>
+          <p class="why">Asuka virou Patrimônio Mundial em julho, e a tumba de Kitora guarda o mapa estelar de estilo chinês completo mais antigo do mundo: mais de 360 estrelas em folha de ouro, 74 constelações ligadas em vermelho, equador e eclíptica — talvez observado da latitude de Chang’an. Mais os quatro animais divinos guardando o morto no escuro.</p>
+          <div class="source">
+            <span lang="ja">Japaaan（ジャパーン）</span>
+            <a href="https://mag.japaaan.com/archives/292622" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>奈良県の明日香村・橿原市・桜井市にまたがる遺跡群「飛鳥・藤原の宮都（きゅうと）」が、今年7月26日に世界文化遺産に正式登録されました。</p>
+            <p>今回は、墳墓（古墳）の中から「キトラ古墳」を取り上げ、2回にわたってその全容をひも解きます。</p>
+            <p>キトラ古墳が注目を集めたのは、1983年（昭和58年）、石槨内のファイバースコープ調査によって「壁画」が発見されたことでした。</p>
+            <p>その約10年前の1972年（昭和47年）には、北に約1.2キロメートル離れた高松塚古墳から極彩色壁画が発見されています。</p>
+            <p>現在までに、このような本格的な彩色壁画が確認されている古墳は、国内ではこの2基のみです。キトラ古墳の壁画の存在が明らかになると、考古学界だけでなく、一般社会からも大きな関心が寄せられました。</p>
+            <p>……</p>
+            <p>その構成は、北壁に玄武、東壁に青龍、南壁に朱雀、西壁に白虎。そして、各壁面には十二支像が配され、天井には天文図、日像・月像が描かれるというものです。</p>
+            <p>四方の壁に描かれた玄武、青龍、朱雀、白虎の四神は、天の四方を司る神獣とされます。</p>
+            <p>そして、天井中央部に描かれた「キトラ天文図」と称される天文図。天井の東西にある斜面部分には、東側に金箔で日像が、西側には銀箔で月像が表現されています。</p>
+            <p>この天文図は、天の北極を中心とした円形の星図で、 360個以上の星々が金箔であしらわれており、それらを朱線によって結んだ中国の星座は、現在のところ74座が確認されています。</p>
+            <p>このキトラ天文図の大きな特徴は、朱線で描かれた4つの大円です。</p>
+            <p>内側から順に「内規」「赤道」「外規」とされる3つの同心円に加え、北西にずれたもう一つの円は「黄道」を示しています。</p>
+            <p>これらの構成や星の配置などから、観測地は北緯34度付近、中国の長安周辺とする説があります。ただし、天文図の観測地や制作地については、なお検討を要するでしょう。</p>
+            <p>いずれにしても、4つの大円を備えたキトラ天文図は、本格的な中国式星図としては現存する世界最古の実例と評価される、極めて貴重なものです。</p>
+          </div>
+          <p class="continue"><a href="https://mag.japaaan.com/archives/292622" target="_blank" rel="noopener" lang="ja">続きを読む · Japaaan（ジャパーン）</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p6">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★★</span> <span class="chip mins">4 min</span> <span class="chip" lang="ja">旧石器時代</span> <span class="chip" lang="ja">ペトログリフ</span> <span class="chip" lang="ja">最終氷期</span> <span class="chip" lang="ja">カタルーニャ</span> <span class="chip" lang="ja">Antiquity</span>
+          </div>
+          <h2 lang="ja">60年以上誰も気づかず。スペイン観光地の洞窟で大量の最終氷期の壁面彫刻を発見</h2>
+          <p class="why">Uma caverna turística da Catalunha, aberta desde 1957: guias e visitantes iluminavam a parede de frente com a lanterna do capacete, e ninguém viu 280 gravuras de 40 a 26 mil anos — até alguém iluminar de lado e aparecer um cavalo. Tem até um urso de frente, raríssimo. E turistas que gravaram o nome por cima.</p>
+          <div class="source">
+            <span lang="ja">カラパイア</span>
+            <a href="https://karapaia.com/archives/637362.html" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>スペイン北東部にあるフォント・マジョール洞窟洞窟から、最終氷期の壁面彫刻が230点発見された。</p>
+            <p>この洞窟は1950年代から一般公開されている人気の観光地だが、60年以上も多くの人から見逃されていた。</p>
+            <p>スペインの研究チームが調査した結果、壁には馬やシカなどの動物の絵や模様が数多く刻まれており、旧石器時代の人々が独自の芸術を残していたことがわかった。</p>
+            <p>……</p>
+            <p>スペイン・カタルーニャ地方にあるフォント・マジョール洞窟は、1957年から一般公開され、1993年からは観光ルートに組み込まれた人気の観光地だ。</p>
+            <p>これまで60年以上も多くの人が訪れていたが、壁に旧石器時代の壁面彫刻（ペトログリフ）が存在していたことを誰も気づいていなかった。</p>
+            <p>2019年10月、カタルーニャ州文化局のプロジェクトチームが発掘調査を行ったところ、壁に刻まれた現代の落書きや日付の中に、古い線が混じっていることに気づいた。</p>
+            <p>ライトを斜めから当てて溝に影を作ると、馬の姿が現れたのだ。</p>
+            <p>ツアーガイドも観光客もヘルメットのライトで壁を正面から照らしていたため、浅い溝はほとんど見えていなかったようだ。</p>
+            <p>中には、壁面彫刻の上に自分の名前や日付を刻んでいた観光客もいたという。</p>
+            <p>……</p>
+            <p>専門家が詳しく調べた結果、壁の広範囲に280点の図形が彫られていることがわかった。</p>
+            <p>そのうち55点は馬やヤギ、シカなどの動物の姿を描いたものだ。</p>
+            <p>中でも、耳が見えて口を少し開けた、正面を向いているクマの彫刻は、ヨーロッパの旧石器時代の壁画では極めて珍しい例だ。</p>
+            <p>当時の人々は、壁を引っかいたり尖った道具で削ったりして、幅3mmから7mmほどの浅い溝を彫ったとみられている。</p>
+            <p>……</p>
+            <p>研究チームが洞窟内から見つかった木炭や骨などを調べたところ、約4万年前から2万6000年前の後期旧石器時代の人々が洞窟で暮らしていたことがわかった。</p>
+            <p>この時代は、地球が最後に寒くなった「最終氷期」（約7万年前から1万年前）にあたる。</p>
+            <p>今回の発見により、スペインの地中海側にも独自の芸術文化を持った人々がたくさん暮らしていたことが明らかになった。</p>
+            <p>……</p>
+            <p>研究チームは、壁面彫刻が発見されていない地域も、実は芸術文化がなかったわけではなく、見逃されているだけかもしれないと考えている。</p>
+          </div>
+          <p class="continue"><a href="https://karapaia.com/archives/637362.html" target="_blank" rel="noopener" lang="ja">続きを読む · カラパイア</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p7">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★★</span> <span class="chip mins">3 min</span> <span class="chip" lang="ja">フローレス原人</span> <span class="chip" lang="ja">ホビット</span> <span class="chip" lang="ja">コモドドラゴン</span> <span class="chip" lang="ja">ステゴドン</span> <span class="chip" lang="ja">古人類学</span>
+          </div>
+          <h2 lang="ja">古代人類の「ホビット」はコモドドラゴンの食べ残しを食べていた</h2>
+          <p class="why">O Homo floresiensis, o “hobbit” de 1 metro, tinha fama de caçador de elefantes-anões (stegodon). Nova análise: quem caçava era o dragão-de-komodo, e os hobbits comiam as sobras. Um pilar da imagem do “hobbit genial” desaba. Só o lede é aberto, mas é bem escrito.</p>
+          <div class="source">
+            <span lang="ja">ナショナル ジオグラフィック日本版</span>
+            <a href="https://natgeo.nikkeibp.co.jp/atcl/news/26/070900385/" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>インドネシアの島で発見された絶滅種の小さな人類は、20年以上にわたって科学者たちを困惑させてきた。その理由の一つは、小さな体に似合わず、驚くほど高度な暮らしを送っていたように見えたことだ。脳のサイズは小さかったにもかかわらず、この身長1メートルほどの人類は、複雑な石器をつくり、火を操り、大きな獲物を狩っていたようだった。</p>
+            <p>研究者たちはこの人類を、発見されたフローレス島にちなんで「ホモ・フローレシエンシス」（フローレス原人）と命名し、J・R・R・トールキンの小説に登場する意外な英雄にちなんで「ホビット」という愛称を付けた。</p>
+            <p>ところが、「見事な知性を持つホビット」というかつてのイメージの土台の一つが、新たな研究論文によって打ち砕かれた。</p>
+            <p>この論文を発表した研究チームは、2003年にリアンブア洞窟でホモ・フローレシエンシスが発見された直後に、あることに気付いていた。ホビットの石器と同じ地層に埋まっていたステゴドンの骨に引っかき傷があったのだ。ステゴドンは絶滅したゾウの近縁種で、ウシほどの大きさだった。これをホビットによる狩りの証拠と見る者もいたが、その根拠は、骨と石器が一緒に発見されたという事実のみだった。</p>
+            <p>「ホモ・フローレシエンシスが、何十年にもわたって考えられてきたようなハンターだったことを、本当に裏付けられるのか確かめたかったのです」と、論文の筆頭著者であるドイツ、テュービンゲン大学の古人類学者エリザベス・グレース・ビーチ氏は語る。</p>
+            <p>しかし、新たな分析によれば、島で最大級の獲物であるステゴドンを狩っていたのは、地球上で最も大きく恐ろしい現生トカゲのコモドドラゴン（コモドオオトカゲ）であり、ホビットたちはその食べ残しを食べていたことが示唆されている。</p>
+          </div>
+          <p class="continue"><a href="https://natgeo.nikkeibp.co.jp/atcl/news/26/070900385/" target="_blank" rel="noopener" lang="ja">続きを読む · ナショナル ジオグラフィック日本版</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p8">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★☆</span> <span class="chip mins">3 min</span> <span class="chip" lang="ja">古代エジプト</span> <span class="chip" lang="ja">猫のミイラ</span> <span class="chip" lang="ja">ベニ・ハサン</span> <span class="chip" lang="ja">動物考古学</span> <span class="chip" lang="ja">プトレマイオス朝</span>
+          </div>
+          <h2 lang="ja">古代エジプトで「神に捧げられる供物用の猫」がひどい扱いを受けていたことが判明</h2>
+          <p class="why">131 crânios de gatos esquecidos desde o século XIX num museu de Viena: mais da metade com doença, dentes perdidos, mordidas e golpes. Os gatos criados para virar múmia-oferenda viviam amontoados e estressados — e alguns eram gatos-da-selva capturados filhotes. O resto dos esqueletos provavelmente virou remédio ou adubo no século XIX.</p>
+          <div class="source">
+            <span lang="ja">GIGAZINE</span>
+            <a href="https://gigazine.net/news/20261111-egyptian-cats-meant-for-gods/" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>古代エジプトでは神々に供物として猫が捧げられていました。考古学の学術誌である「Journal of Archaeological Science」に掲載された最新の研究によると、そんな神々の供物となる猫でさえ、手厚く世話されていたわけではないそうです。</p>
+            <p>……</p>
+            <p>古代エジプトで神々の供物とされてきた猫について調査した研究の共著者であるベルギー王立自然科学研究所の動物考古学者であるベア・デ・キュペレ氏は、「最も驚いたのは、けがや病気の痕跡が見られる猫の割合が高かったことです。劣悪な環境で暮らしていたことが伺えます。神々に奉納するミイラとなる動物に、こうした痕跡があることは普通考えられません」と語りました。</p>
+            <p>……</p>
+            <p>調査対象となった頭骨の半数以上で、病気や怪我の痕跡が見つかりました。歯が抜けていたり、歯周病の兆候が見られたり、骨の表面に小さなくぼみが見つかったり、感染症による兆候とみられるものものありました。傷が残る頭骨や、猫同士の争いでついたとみられるかみ跡がある頭骨もあります。</p>
+            <p>ファン・ネール氏は「狭い場所に多くの猫がいれば、ストレスがたまり、攻撃的になって怪我をするのは避けられなかったでしょう。病気も広がりやすかったはずです」と語りました。</p>
+            <p>他にも、刃物で傷つけられたり、棒のような鈍器で殴られたりしたとみられる頭骨もありました。致命傷となった例がある一方で、傷が治りかけていた痕跡が残る例もあるそうです。「ミイラを作るために猫を捕まえて殺す作業は、いつも思いどおりに進んだわけではないのかもしれません」とファン・ネール氏は言及。</p>
+            <p>……</p>
+            <p>また、骨の化学分析からイエネコは人のそばで生まれ育った可能性が高いことも明らかになりました。ジャングルキャットは幼いうちに捕獲され、その後、ほかの猫と一緒に飼われていたとみられています。今回の調査から、神々への供物となる猫がどのような環境で暮らしていたのかが伺えると研究チームは言及。猫たちは過密な環境で暮らし、病気が広がりやすく、争いも頻繁に起きていたとみられます。</p>
+          </div>
+          <p class="continue"><a href="https://gigazine.net/news/20261111-egyptian-cats-meant-for-gods/" target="_blank" rel="noopener" lang="ja">続きを読む · GIGAZINE</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p9">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★☆</span> <span class="chip mins">4 min</span> <span class="chip" lang="ja">うるう秒</span> <span class="chip" lang="ja">協定世界時</span> <span class="chip" lang="ja">光格子時計</span> <span class="chip" lang="ja">国際度量衡総会</span> <span class="chip" lang="ja">香取秀俊</span>
+          </div>
+          <h2 lang="ja">うるう秒廃止、代わりの「うるう時」とは　国際度量衡総会で決議</h2>
+          <p class="why">Fim do segundo bissexto a partir de 20/5/2027: a diferença entre relógio atômico e rotação da Terra vai acumular até uma hora inteira, para um “leap hour” daqui a séculos ou mil anos. Bônus: a Terra voltou a girar mais rápido desde 2020, e o próximo segundo pode ser redefinido pelo relógio de rede óptica japonês (erro de 1 s em 30 bilhões de anos).</p>
+          <div class="source">
+            <span lang="ja">ナショナル ジオグラフィック日本版</span>
+            <a href="https://natgeo.nikkeibp.co.jp/atcl/news/26/111100610/" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>世界中の時計や時刻を合わせるための協定世界時で、原子時計の時刻と地球の自転の間のずれを調整してきた「うるう秒」を廃止することが決まった。単位やその運用を議論する、国際度量衡総会が決議した。情報化の進展を受けたもので、今後は、ずれを3600秒（1時間）まで許容し、数百年後に「うるう時」でまとめて調整することになった。</p>
+            <p>協定世界時では、セシウム原子が振動する時間を基に1秒を定義することが、国際単位系（SI）で定められている。一方、地球の自転は細かい変動があり、精密なセシウム原子時計に基づく時刻との間に、時間と共にずれが生じる。このずれが0.9秒を超えないよう、原子時計の時刻に1秒を加えるか引く調整が、うるう秒だ。産業技術総合研究所によると1972年に始まり、これまで27回、いずれも1秒を加える形で実施されてきた。直近では、日本時間2017年元日の午前8時59分59秒の後に「59分60秒」を加えた。</p>
+            <p>しかし近年は情報通信技術の進展により、この調整が社会インフラの機器類や経済社会活動に与える影響が拡大した。また、うるう秒の採用以来、地球の自転は遅くなってきたが、2000年以降は速度の低下が鈍り、20年以降は逆に速まっている。この変化の予測が難しい上に、初めて1秒を差し引く“負のうるう秒”によるトラブルも懸念された。こうした状況から見直しが進んだ。</p>
+            <p>10月15日までフランス・ベルサイユで開かれた第28回の同総会で、うるう秒の実質的な廃止を正式に決議した。世界計量記念日である2027年5月20日から正式に適用する。初のうるう時の実施は、数百～1000年後が見込まれる。22年の前回総会では、35年までに廃止するとされたが、リスクを早く解消するために前倒しが決まった。</p>
+            <p>2030年の次回総会での決議を目指しており、東京大学大学院工学系研究科の香取秀俊教授らが開発した「光格子時計」が、その有力候補となっている。光格子時計はストロンチウムなどの原子をレーザー光で作った格子に閉じ込め、原子が特定の周波数を持つ光を吸収することを利用し、時間を計測するもの。香取氏が01年に提唱し、14年には誤差が300億年に1秒などとされる時計を開発した。</p>
+            <p>今回の総会は宇宙開発利用の進展を見込み、月面活動で用いる国際基準時の検討を進めることも決議した。</p>
+          </div>
+          <p class="continue"><a href="https://natgeo.nikkeibp.co.jp/atcl/news/26/111100610/" target="_blank" rel="noopener" lang="ja">続きを読む · ナショナル ジオグラフィック日本版</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p10">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★☆</span> <span class="chip mins">2 min</span> <span class="chip" lang="ja">Claude</span> <span class="chip" lang="ja">Claude Sheets</span> <span class="chip" lang="ja">Claude Whiteboards</span> <span class="chip" lang="ja">Claude Data</span> <span class="chip" lang="ja">Anthropic</span>
+          </div>
+          <h2 lang="ja">Claude内で表計算アプリをそのまま実行できる「Claude Sheets」が登場、「Claude Whiteboards」と「Claude Data」も</h2>
+          <p class="why">Novidade de ontem da Anthropic: planilhas e quadros brancos dentro do próprio Claude, editáveis pelo time e pelo modelo ao mesmo tempo (beta nos planos pagos), e o antigo “Dashboards” rebatizado como Claude Data, conectado a BigQuery/Redshift. Curto e direto — vocabulário útil de produto.</p>
+          <div class="source">
+            <span lang="ja">GIGAZINE</span>
+            <a href="https://gigazine.net/news/20261111-claude-sheets-whiteboards-data/" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>Anthropicが、AIの「Claude」が取り扱うことができるツール群を発表しました。外部のツールではできなかった細かい作業を行えるようになります。</p>
+            <p>今回発表されたのは、スプレッドシートの「Claude Sheets」と共有ボードの「Claude Whiteboards」、データ管理ツールの「Claude Data」です。</p>
+            <p>Claude Sheetsはタブ、数式、書式設定、ドロップダウンリストなど基本的な機能を備えたスプレッドシートです。Claudeが直接シートを作成・編集でき、チームと共有することで複数の人間とClaudeが一緒に共同作業できます。</p>
+            <p>Claude Whiteboardsはさまざまな情報をまとめてチームと共同編集できるツールです。</p>
+            <p>Claude DataはAmazon RedshiftやBigQuery、ClickHouseといったデータ管理プラットフォームに接続してデータ解析ができるツールです。</p>
+            <p>Claude Whiteboards、Sheets、Claude Dataは有料プランの加入者向けにリリースされており、ウェブ、デスクトップ、モバイルで利用可能。</p>
+            <p>Teamプランでは3つの機能すべてがデフォルトで有効になっています。</p>
+          </div>
+          <p class="continue"><a href="https://gigazine.net/news/20261111-claude-sheets-whiteboards-data/" target="_blank" rel="noopener" lang="ja">続きを読む · GIGAZINE</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p11">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★★</span> <span class="chip mins">4 min</span> <span class="chip" lang="ja">Claude Code</span> <span class="chip" lang="ja">Effort</span> <span class="chip" lang="ja">Opus 5.5</span> <span class="chip" lang="ja">Sonnet</span> <span class="chip" lang="ja">利用制限</span>
+          </div>
+          <h2 lang="ja">週間制限に3日で到達していたClaudeが、ModelとEffortの使い分けで5日持つようになった話</h2>
+          <p class="why">Quem estoura o limite semanal do Claude Code em 3 dias: o problema não era uso demais, e sim Effort “high” fixo em tudo (o padrão do Opus 5.5 é medium, e tokens de pensamento contam como saída). A receita: design com Opus, implementação com Sonnet, revisão no modo mais pesado. Aplicável direto ao seu fluxo.</p>
+          <div class="source">
+            <span lang="ja">Zenn（Sun* / sun_asterisk）</span>
+            <a href="https://zenn.dev/sun_asterisk/articles/1d1c65b1fe409a" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>結論から言うと、Claude Codeの利用制限に毎週引っかかる原因は「使いすぎ」ではなく「設定の当て方」でした。モデルとEffortを工程ごとに使い分けただけで、同じ仕事量でも利用枠の減りが大幅に遅くなりました。</p>
+            <p>以前はモデルをdefaultのまま、Effortを常にhighにしていました。「品質を落としたくない」という理由だけで、作業の種類は意識していませんでした。</p>
+            <p>当時は「自分の使い方がヘビーすぎるのだろう」と考えていました。</p>
+            <p>消費は「モデルの重さ」と「考える量」の掛け算で効いてきます。</p>
+            <p>Effortは「各ステップでどれだけ考えるか」をモデル自身に決めさせる適応的推論の強さです。公式にも、低いEffortは単純な作業を速く安くこなし、高いEffortは複雑な問題に深い推論を使うと説明されています（Adjust effort level）。</p>
+            <p>そして思考トークンは出力トークンとして課金され、画面上で折りたたまれていても全量がカウントされます（Manage costs effectively）。highを常時使うと、ファイル探索や定型的な修正のような「考えなくていい作業」にも、見えないところでコストを払い続けることになります。</p>
+            <p>つまり問題は品質重視という方針ではなく、「全工程に同じ重さをかけていたこと」でした。実装のように手数が多い工程ほど、この無駄が積み上がります。</p>
+            <p>……</p>
+            <p>今は工程を「設計・調査」「実装」「レビュー」の3つに分け、モデルとEffortを切り替えています。</p>
+            <p>ポイントは、お金をかける工程を意図的に絞っていることです。設計は方向を決めるので質が必要ですが、実装は方針が決まっていればSonnetで十分な場面が多いです。</p>
+            <p>その代わり、レビューだけは最も重い設定にしています。実装を軽くしたぶんの見落としを、最後にまとめて潰す考え方です。</p>
+            <p>……</p>
+            <p>ClaudeやClaude Codeの利用枠は、使う量よりも「どの作業にどれだけ重さをかけるか」で持ちが大きく変わります。全部をhighにするのは安心感がありますが、実際には考えなくていい作業にまでコストを払っていました。</p>
+            <p>制限に悩んでいる方は、まず「実装だけSonnetに下げ、レビューだけ重くする」ところから試してみてください。Claude Codeを使っていない方も、チャットのモデルとEffortを一度見直してみる価値はあります。設定を変えるだけなので、品質との調整をしながらベストなラインを探っていきましょう！</p>
+          </div>
+          <p class="continue"><a href="https://zenn.dev/sun_asterisk/articles/1d1c65b1fe409a" target="_blank" rel="noopener" lang="ja">続きを読む · Zenn（Sun* / sun_asterisk）</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p12">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★☆</span> <span class="chip mins">3 min</span> <span class="chip" lang="ja">Wing Commander</span> <span class="chip" lang="ja">リバースエンジニアリング</span> <span class="chip" lang="ja">DOSBox</span> <span class="chip" lang="ja">WebRTC</span> <span class="chip" lang="ja">レトロゲーム</span>
+          </div>
+          <h2 lang="ja">11年間にわたるリバースエンジニアリングでDOS版「ウイングコマンダー」の2人同時協力プレイ実現に成功</h2>
+          <p class="why">Dois irmãos que jogavam Wing Commander juntos na infância passaram 11 anos (2015–2026) caçando endereços de memória no DOSBox, “sequestrando” funções do jogo para disparar lasers e sincronizando naves via rede — até virar co-op de verdade com WebRTC e chat de voz feito com ajuda de LLM. Nostalgia de jogo + engenharia reversa.</p>
+          <div class="source">
+            <span lang="ja">GIGAZINE</span>
+            <a href="https://gigazine.net/news/20261111-wing-commander-together/" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>子どもの頃にDOS版「ウイングコマンダー」の協力プレイを楽しんでいた兄弟が、11年もの間リバースエンジニアリングを続け、ついに夢に見た「僚機との協力プレイ」を実現しました。</p>
+            <p>プロジェクトの最初の着想は2015年10月4日、ダニエル・ホーン氏とパトリック・ホーン氏の兄弟が「ウイングコマンダー」のメモリフットプリント全体がDOSで使用可能な640KBのRAMに収まる可能性に気づいたことから始まりました。</p>
+            <p>兄弟はDOSBoxデバッガーを使用した体系的なアプローチを採用しました。</p>
+            <p>……</p>
+            <p>プロジェクトが進むにつれて、単純なメモリ書き込みだけでは武器の発射のようなアクションには不十分であることが明らかになり、ゲーム自身の関数を「乗っ取る」必要が出てきました。</p>
+            <p>……</p>
+            <p>2017年8月に、シンプルなTCPクライアント/サーバーアーキテクチャと protobufメッセージを使用したネットワークプロトコルが作成されました。</p>
+            <p>大きな問題となったのは、特に隕石やレーザー弾のような一時的なオブジェクトにおいて、サーバーとクライアント間で一貫したエンティティスロットを確保することでした。</p>
+            <p>……</p>
+            <p>2020年に最終調整を行いゲームはプレイ可能な状態になったものの、友人たちと実際に楽しむ方法についてはアイデアが尽きてしまっており、ゲームはGitHub上に放置されたまましばらく放置されていたそうです。</p>
+            <p>しかし2026年、WebRTC技術の普及と「lobbylink」という新しいシステムを開発したことでゲームは復活を果たしました。</p>
+            <p>さらに追加機能としてLLMに依頼し、2番目のWebRTCピア接続を介したボイスチャットが統合されたことにより、ゲームプレイ中のリアルタイム音声通信が可能になりました。</p>
+          </div>
+          <p class="continue"><a href="https://gigazine.net/news/20261111-wing-commander-together/" target="_blank" rel="noopener" lang="ja">続きを読む · GIGAZINE</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p13">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★☆</span> <span class="chip mins">3 min</span> <span class="chip" lang="ja">広島電鉄</span> <span class="chip" lang="ja">路面電車</span> <span class="chip" lang="ja">併用軌道</span> <span class="chip" lang="ja">軌道運転規則</span> <span class="chip" lang="ja">1000形</span>
+          </div>
+          <h2 lang="ja">全国初、路面電車の「速度アップ」が拡大！ “昭和のスピード”を改める動き 広電</h2>
+          <p class="why">O limite de 40 km/h dos bondes japoneses vem da era Shōwa, quando eles estavam sendo extintos. Hiroshima é a primeira a rodar a 50 km/h em via compartilhada com carros — mesma velocidade dos automóveis, o que reduz colisões. Agora estendido de 15 para 42 viagens de ida e volta por dia.</p>
+          <div class="source">
+            <span lang="ja">乗りものニュース</span>
+            <a href="https://trafficnews.jp/post/726484" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>広島電鉄が11月10日より、路面電車7号線の一部区間で最高速度を50km/hに引き上げました。「路面電車は遅い」を覆す改革が進んでいます。</p>
+            <p>広島電鉄は2026年11月10日より、路面電車の7号線（横川駅～広島港）の一部区間を運行する全ての1000形電車で、最高速度を引き上げました。</p>
+            <p>対象区間は十日市町～別院前停留場間です。この区間を走行する低床車両の1000形について、最高速度が現行の40km/hから50km/hへと引き上げられます。この区間を走る自動車の最高速度と同じになります。</p>
+            <p>同社ではすでに、9月18日から8号線（横川駅～江波）の同区間・同形式の車両で50km/h運転を開始しています。</p>
+            <p>ただし、交通信号や道路の状況などをふまえて運転するため、必ず50km/hで運転するものではないとのことです。また、同区間を1000形以外の車両で運転する場合の最高速度は、従来どおり40km/hとなります。</p>
+            <p>道路上に軌道が敷かれ、自動車と並走する「併用軌道」区間において、路面電車が40km/hを超えて営業運転を行うのは、9月に始まった広島電鉄の取り組みが全国で初めてです。</p>
+            <p>路面電車の最高速度は、軌道運転規則で40km/h以下と定められていますが、これは路面電車の廃止が相次いだ昭和の時代から変わっていませんでした。</p>
+            <p>今回の対象区間は国道183号上にあり、片側3車線の中央に複線の軌道が通る幅の広い道路となっています。</p>
+            <p>広島電鉄は今回の取り組み拡大について、「これにより、自動車との速度差が少なくなり接触事故の減少や、将来的には速達性向上につながることが考えられます」としています。</p>
+          </div>
+          <p class="continue"><a href="https://trafficnews.jp/post/726484" target="_blank" rel="noopener" lang="ja">続きを読む · 乗りものニュース</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p14">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★☆☆</span> <span class="chip mins">2 min</span> <span class="chip" lang="ja">水炊き</span> <span class="chip" lang="ja">関西風</span> <span class="chip" lang="ja">昆布だし</span> <span class="chip" lang="ja">北前船</span> <span class="chip" lang="ja">有馬温泉</span>
+          </div>
+          <h2 lang="ja">「水炊き＝博多」のイメージやけど…「関西のほうが古いし透明」　料理人らが「郷土料理化」宣言</h2>
+          <p class="why">Cozinheiros de Kansai declaram guerra ao mizutaki de Hakata: “o nosso é mais antigo e transparente, por que a internet só mostra Hakata?”. Caldo de kombu trazido de Hokkaidō pelos navios kitamaebune, e uma pista da história do nabe em Arima Onsen (Kobe). Trecho curto (paywall), com saboroso Kansai-ben.</p>
+          <div class="source">
+            <span lang="ja">神戸新聞NEXT</span>
+            <a href="https://www.kobe-np.co.jp/news/society/202611/0021022644.shtml" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>「水炊きと言えば博多」のイメージに、一石を投じられるか。関西の料理人らが１１月、昆布だしで煮込む関西風水炊きの「郷土料理化」を高らかに宣言した。鍋料理が世に広まった歴史をひもとくと、神戸の有馬温泉にも手がかりがあり、老舗旅館は江戸期の献立の再現。新たな水炊きを売り出す動きもあり、にわかに盛り上がりを見せている。</p>
+            <p>「インターネットで水炊きを検索すると博多ばっかり出てくる。関西のほうが古いし透明なのになんでやねん、と」</p>
+            <p>今月４日、大阪市のミツカン大阪支店に併設する「ミツカンフォーラム」。集まった報道関係者ら約３０人を前に、フードジャーナリストの曽我和弘さん（６６）が宣言の背景を解説した。</p>
+            <p>昨今の水炊きと言えば、鶏がらを煮込んだ白いスープの博多風が知られる。長崎に伝わった南蛮料理が明治後半に博多に伝わり、今の形に変化してきた。</p>
+            <p>一方、大坂は江戸時代の昆布の集積地。昆布は北海道から西回り航路を通って北前船で運ばれるようになり、大坂で生まれた「昆布でだしをとる食文化」が日本料理を発展させた。</p>
+          </div>
+          <p class="continue"><a href="https://www.kobe-np.co.jp/news/society/202611/0021022644.shtml" target="_blank" rel="noopener" lang="ja">続きを読む · 神戸新聞NEXT</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p15">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★☆</span> <span class="chip mins">3 min</span> <span class="chip" lang="ja">THE ALFEE</span> <span class="chip" lang="ja">秩父鉄道</span> <span class="chip" lang="ja">SL</span> <span class="chip" lang="ja">秩父夜祭</span> <span class="chip" lang="ja">星空のディスタンス</span>
+          </div>
+          <h2 lang="ja">SL、普通列車、記念乗車券！この冬の秩父鉄道はTHE ALFEE一色</h2>
+          <p class="why">Rock + trem + matsuri num só: locomotiva a vapor “SL THE ALFEE EXPRESS 2026” em 5–6/12 pelo Chichibu Railway, para celebrar o show da banda no Chichibu Yomatsuri (um dos três grandes festivais com carros alegóricos). E a estação Ohanabatake toca “Hoshizora no Distance” como melodia de partida.</p>
+          <div class="source">
+            <span lang="ja">音楽ナタリー</span>
+            <a href="https://natalie.mu/music/news/697550" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>THE ALFEE と秩父鉄道のコラボ蒸気機関車「SL THE ALFEE EXPRESS 2026」が12月5、6日の2日間限定で運行される。</p>
+            <p>これは、THE ALFEEが埼玉県秩父市と連携して企画したイベント「THE ALFEE 秩父夜祭2026」の開催を記念して行われるもので、2025年に実施された「THE ALFEE『51年目の冬祭り』」に続くコラボとなる。期間中はメンバー3人の写真をあしらったヘッドマークを付けた「SL THE ALFEE EXPRESS 2026」が、秩父鉄道熊谷～三峰口駅間を運行する。下りの熊谷～御花畑駅間の車内では、埼玉県秩父市のイメージキャラクター・ポテくまくんとTHE ALFEEによるコラボグッズが販売される。なおSLは全席指定席で事前予約制となっている。</p>
+            <p>そのほか、普通列車に特別ヘッドマークと中吊りポスターを掲出する「THE ALFEE TRAIN 2026」の運行や、メンバーの写真をデザインした記念乗車券の販売など、THE ALFEEとのコラボが盛りだくさん。記念乗車券は、秩父市荒川出身で、秩父市観光大使を務める桜井賢（Vo, B）ゆかりの武州中川駅からの大人1000円区間乗車券がセットになっている。12月1日から2027年1月11日まで、秩父鉄道の羽生、熊谷、寄居、長瀞、秩父、御花畑、影森、三峰口の各駅窓口で販売され、秩父鉄道通販サイト「ちちてつe-shop」では12月8日13:00より購入することができる。</p>
+            <p>また御花畑駅では、昨年11月よりTHE ALFEEの代表曲「星空のディスタンス」の発車メロディを、10:00～15:00の間に放送中。</p>
+          </div>
+          <p class="continue"><a href="https://natalie.mu/music/news/697550" target="_blank" rel="noopener" lang="ja">続きを読む · 音楽ナタリー</a></p>
+        </div>
+      </article>
+
+      <footer class="site">読解幕 · 2026-11-11 · ~50 min · <a href="/japanese-digest/history/" style="color:inherit">History</a> · deliton.github.io/japanese-digest</footer>
+    </main>
+  </div>
+</body>
+</html>
