@@ -1,0 +1,1008 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>読解幕 · 2026-11-13 · Japanese Digest</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Noto+Serif+JP:wght@400;600;700&family=Shippori+Mincho:wght@500;700&display=swap" rel="stylesheet" />
+  <style>
+
+    :root {
+      --bg: #0a0a0a;
+      --bg-2: #121212;
+      --bg-card: #161616;
+      --ink: #f5f5f5;
+      --ink-dim: #a8a29a;
+      --ink-mute: #6b6560;
+      --shu: #c41e3a;
+      --shu-hot: #e11d48;
+      --shu-deep: #8b1228;
+      --gold: #d4a017;
+      --gold-soft: #c9a227;
+      --white: #fafafa;
+      --line: #2a2a2a;
+      --line-hot: rgba(196, 30, 58, 0.45);
+      --measure: 42rem;
+      --radius: 4px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: "Noto Sans JP", "Hiragino Sans", "Yu Gothic", system-ui, sans-serif;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .stage-bar {
+      height: 6px;
+      background: repeating-linear-gradient(
+        90deg,
+        var(--shu) 0 48px,
+        var(--white) 48px 56px,
+        #111 56px 64px,
+        var(--gold) 64px 72px,
+        #111 72px 88px
+      );
+    }
+
+    .wrap {
+      width: min(100% - 2rem, 74rem);
+      margin: 0 auto;
+      padding: 2rem 0 4.5rem;
+      display: grid;
+      grid-template-columns: 15.5rem 1fr;
+      gap: 2.75rem;
+      align-items: start;
+    }
+
+    @media (max-width: 900px) {
+      .wrap { grid-template-columns: 1fr; gap: 1.5rem; padding-top: 1.25rem; }
+      .sidebar { position: static !important; }
+    }
+
+    .sidebar { position: sticky; top: 1.25rem; }
+
+    .brand {
+      display: flex;
+      align-items: baseline;
+      gap: 0.55rem;
+      margin: 0 0 0.35rem;
+    }
+    .brand-mark {
+      font-family: "Shippori Mincho", "Noto Serif JP", serif;
+      font-size: 1.85rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      color: var(--white);
+      line-height: 1;
+    }
+    .brand-mark em {
+      font-style: normal;
+      color: var(--shu);
+    }
+    .brand-sub {
+      font-size: 0.65rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-weight: 700;
+    }
+
+    .meta {
+      color: var(--ink-mute);
+      font-size: 0.8rem;
+      margin: 0 0 1.25rem;
+    }
+
+    .stat-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-bottom: 1.35rem;
+    }
+    .stat {
+      border: 1px solid var(--line);
+      background: var(--bg-2);
+      padding: 0.32rem 0.65rem;
+      font-size: 0.72rem;
+      color: var(--ink-dim);
+      border-radius: var(--radius);
+    }
+    .stat strong { color: var(--white); font-weight: 700; }
+    .stat.hot {
+      border-color: var(--shu);
+      color: var(--shu-hot);
+      background: rgba(196, 30, 58, 0.1);
+    }
+
+    .toc {
+      border: 1px solid var(--line);
+      background: var(--bg-2);
+      padding: 0.85rem 0.9rem 0.95rem;
+      border-radius: var(--radius);
+    }
+    .toc h2 {
+      margin: 0 0 0.65rem;
+      font-size: 0.72rem;
+      letter-spacing: 0.16em;
+      color: var(--gold);
+      font-weight: 800;
+    }
+    .toc ol { list-style: none; margin: 0; padding: 0; }
+    .toc li { margin: 0; }
+    .toc a {
+      display: flex;
+      justify-content: space-between;
+      gap: 0.5rem;
+      text-decoration: none;
+      color: var(--ink-dim);
+      font-size: 0.82rem;
+      padding: 0.38rem 0.2rem;
+      border-bottom: 1px solid transparent;
+    }
+    .toc a:hover { color: var(--white); border-bottom-color: var(--line-hot); }
+    .toc .t-title { font-weight: 600; }
+    .toc .t-min { color: var(--gold); font-size: 0.72rem; font-weight: 700; flex-shrink: 0; }
+
+    .main { max-width: var(--measure); }
+
+    .digest-banner {
+      display: flex;
+      gap: 0.75rem;
+      align-items: flex-start;
+      background: #141014;
+      border: 1px solid var(--line);
+      border-left: 3px solid var(--shu);
+      padding: 0.85rem 1rem;
+      margin-bottom: 1.5rem;
+      font-size: 0.78rem;
+      color: var(--ink-dim);
+      line-height: 1.55;
+    }
+    .digest-banner .tag {
+      flex-shrink: 0;
+      background: var(--shu);
+      color: #fff;
+      font-size: 0.65rem;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      padding: 0.28rem 0.5rem;
+      border-radius: var(--radius);
+    }
+
+    .hero {
+      margin-bottom: 2rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid var(--line);
+      position: relative;
+    }
+    .hero::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -1px;
+      width: 4.5rem;
+      height: 2px;
+      background: var(--shu);
+    }
+    .kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.7rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--shu-hot);
+      font-weight: 800;
+      margin-bottom: 0.85rem;
+    }
+    .kicker::before {
+      content: "◆";
+      font-size: 0.55rem;
+      color: var(--gold);
+    }
+    .hero h1 {
+      font-family: "Shippori Mincho", "Noto Serif JP", serif;
+      font-size: clamp(1.85rem, 4vw, 2.55rem);
+      font-weight: 700;
+      line-height: 1.2;
+      margin: 0 0 0.75rem;
+      color: var(--white);
+      letter-spacing: 0.02em;
+    }
+    .hero p {
+      margin: 0;
+      color: var(--ink-dim);
+      font-size: 0.98rem;
+      max-width: 36rem;
+    }
+
+    article.piece {
+      background: var(--bg-card);
+      border: 1px solid var(--line);
+      margin-bottom: 1.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+    article.piece::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: linear-gradient(90deg, var(--shu) 0%, var(--shu) 35%, var(--gold) 35%, var(--gold) 42%, transparent 42%);
+    }
+
+    .piece-inner { padding: 1.6rem 1.55rem 1.35rem; }
+
+    .piece-head {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-bottom: 0.85rem;
+    }
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      border: 1px solid var(--line);
+      background: #111;
+      color: var(--ink-dim);
+      padding: 0.22rem 0.6rem;
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      border-radius: var(--radius);
+    }
+    .chip.interest {
+      border-color: var(--shu);
+      color: var(--shu-hot);
+      background: rgba(196, 30, 58, 0.12);
+    }
+    .chip.mins {
+      border-color: var(--gold);
+      color: var(--gold);
+      background: transparent;
+    }
+
+    .piece h2 {
+      font-family: "Noto Serif JP", "Shippori Mincho", "Yu Mincho", serif;
+      font-size: 1.38rem;
+      font-weight: 700;
+      line-height: 1.5;
+      margin: 0 0 0.6rem;
+      color: var(--white);
+      letter-spacing: 0.02em;
+    }
+
+    .why {
+      margin: 0 0 1rem;
+      color: var(--ink-dim);
+      font-size: 0.9rem;
+      border-left: 2px solid var(--gold);
+      padding-left: 0.85rem;
+    }
+
+    .source {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.65rem 1.1rem;
+      font-size: 0.76rem;
+      color: var(--ink-mute);
+      margin-bottom: 1.25rem;
+    }
+    .source a {
+      color: var(--shu-hot);
+      text-decoration: none;
+      font-weight: 600;
+    }
+    .source a:hover { color: var(--gold); }
+
+    .ja {
+      font-family: "Noto Serif JP", "Hiragino Mincho ProN", "Yu Mincho", serif;
+      font-size: 1.08rem;
+      line-height: 2;
+      letter-spacing: 0.03em;
+      color: #ebe7e1;
+    }
+    .ja p { margin: 0 0 1.15em; }
+    .ja p:last-child { margin-bottom: 0; }
+
+    .continue {
+      margin-top: 1.25rem;
+      padding-top: 1rem;
+      border-top: 1px solid var(--line);
+      font-size: 0.86rem;
+    }
+    .continue a {
+      color: var(--white);
+      text-decoration: none;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      border-bottom: 2px solid var(--shu);
+      padding-bottom: 0.1rem;
+    }
+    .continue a:hover {
+      color: var(--shu-hot);
+      border-bottom-color: var(--gold);
+    }
+
+    footer.site {
+      max-width: var(--measure);
+      margin-top: 1.75rem;
+      color: var(--ink-mute);
+      font-size: 0.72rem;
+      letter-spacing: 0.06em;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+    footer.site::before {
+      content: "";
+      width: 1.25rem;
+      height: 2px;
+      background: var(--shu);
+    }
+
+  
+    .excerpt-label { font-size: 0.66rem; letter-spacing: 0.18em; color: var(--gold); font-weight: 800; margin: 0 0 0.6rem; }
+    .brand-sub a, .stat a { color: var(--gold); text-decoration: none; }
+    .toc .t-min { font-variant-numeric: tabular-nums; }
+  </style>
+</head>
+<body>
+  <div class="stage-bar" aria-hidden="true"></div>
+
+  <div class="wrap">
+    <aside class="sidebar">
+      <div class="brand">
+        <span class="brand-mark" lang="ja">読解<em>幕</em></span>
+      </div>
+      <p class="brand-sub">Kabuki Digest · <a href="/japanese-digest/history/">History</a></p>
+      <p class="meta">2026-11-13 · America/Sao_Paulo</p>
+      <div class="stat-row">
+        <span class="stat"><strong>48</strong> min</span>
+        <span class="stat"><strong>16</strong> pieces</span>
+        <span class="stat"><strong>~12,000</strong> 字</span>
+        <span class="stat"><a href="/japanese-digest/history/">History</a></span>
+      </div>
+
+      <nav class="toc" aria-label="Índice">
+        <h2 lang="ja">本日の演目</h2>
+        <ol>
+          <li>
+            <a href="#p1">
+              <span class="t-title" lang="ja">信長の叔母を娶った武田の猛将――秋山虎繁と岩村城</span>
+              <span class="t-min">4′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p2">
+              <span class="t-title" lang="ja">反乱の旗印にされた少年――頼家の遺児・栄実</span>
+              <span class="t-min">3′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p3">
+              <span class="t-title" lang="ja">なぜ「大阪」が都だったのか――重なって眠る二つの難波宮</span>
+              <span class="t-min">3′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p4">
+              <span class="t-title" lang="ja">辞書を奪い合った若者たち――緒方洪庵の適塾</span>
+              <span class="t-min">3′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p5">
+              <span class="t-title" lang="ja">「武士になりたい」茶人――信長と秀吉に二度追放された武野宗瓦</span>
+              <span class="t-min">3′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p6">
+              <span class="t-title" lang="ja">史上初めて写った人間はどこに立っていたか――188年越しの特定</span>
+              <span class="t-min">3′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p7">
+              <span class="t-title" lang="ja">『時のオカリナ』リメイク、変えたもの・残したもの</span>
+              <span class="t-min">2′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p8">
+              <span class="t-title" lang="ja">人類は今も進化している――体に現れた5つの兆候</span>
+              <span class="t-min">3′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p9">
+              <span class="t-title" lang="ja">3400万年前のタイに体重30kgの巨大ネズミ</span>
+              <span class="t-min">2′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p10">
+              <span class="t-title" lang="ja">生命の材料は彗星が運んだ？――100年来の説にほぼ「否」</span>
+              <span class="t-min">3′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p11">
+              <span class="t-title" lang="ja">パンを噛んで彫刻に――精神科病院から生まれたプリンツホルン・コレクション</span>
+              <span class="t-min">3′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p12">
+              <span class="t-title" lang="ja">絶滅したはずのネズミ、洗濯場の小川で約100年ぶり再発見</span>
+              <span class="t-min">3′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p13">
+              <span class="t-title" lang="ja">Claude Codeに「忘れさせたら」トークンが4割減った</span>
+              <span class="t-min">4′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p14">
+              <span class="t-title" lang="ja">タッチしない改札、2028年春に山手線全駅へ</span>
+              <span class="t-min">3′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p15">
+              <span class="t-title" lang="ja">姫路城に「人間の塔」／播磨の屋台を守る工夫</span>
+              <span class="t-min">2′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p16">
+              <span class="t-title" lang="ja">＜AIR JAM 2026＞9時間・11組――ハイスタが作った「カルチャー」</span>
+              <span class="t-min">4′</span>
+            </a>
+          </li>
+        </ol>
+      </nav>
+    </aside>
+
+    <main class="main">
+      <div class="digest-banner">
+        <span class="tag">TRIAGE</span>
+        <span>História: Akiyama Torashige e a tia de Nobunaga (BUSHOO, aniversário amanhã), Eijitsu filho de Yoriie (hoje), Naniwa-no-miya e o Tekijuku em Osaka (草の実堂), o mestre do chá Takeno Sōga exilado duas vezes (Japaaan). Mundo/ciência: primeiros humanos fotografados (1838), coleção Prinzhorn, evolução humana atual, roedor gigante tailandês, cometas × origem da vida, rato-d’água-etíope redescoberto. Jogos/dev: remake de Ocarina of Time; compactação no Claude Code (Zenn). Trem: catraca sem toque da JR East. Hyōgo: torres humanas em Himeji + yatai de Harima. Rock: AIR JAM 2026. Pontos fracos: Kobe Shimbun só o lide (paywall); nada de HYDE/BABYMETAL/L’Arc com texto bom hoje (AIR JAM é punk/melódico); nada de sailing/visto; NatGeo hoje só uma matéria nova com história.</span>
+      </div>
+
+      <header class="hero">
+        <div class="kicker">Daily curated reading</div>
+        <h1 lang="ja">秋山虎繁と信長の叔母、頼家の遺児・栄実、二つの難波宮、適塾の若者たち、二度追放された茶人・武野宗瓦、史上初めて写った人間の立ち位置、時のオカリナ・リメイク秘話、今も進化する人類、タイの巨大げっ歯類、彗星と生命の起源、プリンツホルン・コレクション、再発見されたエチオピアミズネズミ、Claude Codeのcompact術、タッチ不要の改札、姫路城の人間の塔と播磨の屋台、AIR JAM 2026</h1>
+        <p lang="ja">今日の幕開けは、明日で岩村城が武田方に渡ってから454年――かつて信長に鷹を頼まれるほどの交渉役だった武田の猛将・秋山虎繁が、敵方の女城主、つまり信長の叔母を妻に迎え、やがて夫婦そろって長良川の河原で最期を迎えるまで。続いて、今日が命日の頼家の遺児・栄実は、13歳で反乱の旗印にされ、僧になっても逃れられませんでした。大阪の幕では、飛鳥と奈良の二度にわたって都が置かれた難波宮と、辞書を奪い合って蘭学を学んだ適塾の若者たち、そして信長と秀吉に二度追放された「武士になりたい」茶人・武野宗瓦。世界の幕は、1838年の写真に偶然写った靴磨きと客の立ち位置を188年越しに突き止めた話と、精神科病院から生まれたプリンツホルン・コレクション。科学の幕は、今も進化を続ける人類の体、3400万年前のタイにいた体重30kgのげっ歯類、彗星が生命の材料を運んだという説への「ほぼ否」、そして洗濯場の小川で約100年ぶりに見つかったエチオピアミズネズミ。ゲームと開発者の幕は『時のオカリナ』リメイクの制作秘話と、Claude Codeに「忘れさせて」トークンを4割減らした記録。旅はタッチ不要の改札、兵庫は姫路城の人間の塔と播磨の屋台、締めはハイスタの＜AIR JAM 2026＞です。約48分の読解です。</p>
+      </header>
+
+      <article class="piece" id="p1">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★★</span> <span class="chip mins">4 min</span> <span class="chip" lang="ja">秋山虎繁</span> <span class="chip" lang="ja">岩村城</span> <span class="chip" lang="ja">武田信玄</span> <span class="chip" lang="ja">織田信長</span> <span class="chip" lang="ja">おつやの方</span>
+          </div>
+          <h2 lang="ja">武田の猛将・秋山虎繁が敵方の女城主と結婚｜岩村城でいったい何が起きたのか</h2>
+          <p class="why">Amanhã faz 454 anos que o castelo de Iwamura passou aos Takeda. O general Akiyama Torashige, que antes era o “diplomata” que arranjava falcões para Nobunaga, casa com a viúva-castelã — tia do próprio Nobunaga. Casamento político, cerco por Nobutada e um final brutal às margens do Nagara.</p>
+          <div class="source">
+            <span lang="ja">BUSHOO!JAPAN（武将ジャパン）</span>
+            <a href="https://bushoojapan.com/bushoo/takeda/2026/11/13/223062" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>元亀三年11月14日（1572年12月18日）は、岩村城が武田方に渡った日です。</p>
+            <p>やがてこの城に入り、敵方の女城主と結婚したのが、武田の猛将・秋山虎繁（とらしげ）でした。</p>
+            <p>敵味方を越えた恋の物語なんて話ではなく、武田信玄の西上作戦にも関わる重要な縁組であり、信長にとっては屈辱とも言える展開でした。</p>
+            <p>もともと秋山は、信長との外交を受け持っていた人物だったのに、それがなぜ信長の叔母を自身の妻としたのか。</p>
+            <p>……</p>
+            <p>秋山信友の名でも知られますが、正しい実名は「虎繁」とされています。</p>
+            <p>信濃の伊那にある大島城（長野県松川町）を拠点に、下伊那の郡司を務めていました。</p>
+            <p>研究者の平山優氏は著書『図説武田信玄』の中で、永禄元年（1558年）11月、信長が秋山に書状を送り、使者への礼を述べつつ大鷹（おおたか）の調達を頼んでいたことを紹介しています。</p>
+            <p>信長にとって秋山は、鷹を頼めるほどの交渉相手だったのでしょう。</p>
+            <p>……</p>
+            <p>もともと岩村城を治めていたのは、東美濃の遠山氏でした。</p>
+            <p>織田と武田が円満の頃は、両家に従い、双方と関係を保っており、当主・遠山景任の妻は信長の叔母でした。</p>
+            <p>信長は、事前に一門や家臣の了解を得ていなかったようで、彼らは武田方に従うと表明、岩村城に武田の軍勢を迎え入れます。</p>
+            <p>そして元亀三年（1572年）11月14日、武田方は岩村城を受け取り、伊那の国衆・下条信氏を入城させます。</p>
+            <p>……</p>
+            <p>元亀四年（1573年）3月、信玄の命を受けた秋山虎繁が岩村城に入り、城代となりました。</p>
+            <p>岩村に入った秋山は、遠山景任の未亡人、つまり信長の叔母を妻とします。</p>
+            <p>前城主の妻を迎えることで、秋山は城だけでなく、遠山家の領地と人を引き継ぐ立場を固めたのでしょう。</p>
+            <p>一方、信長の子・御坊丸は甲府へ送られ、後に武田家のもとで元服しました。</p>
+            <p>……</p>
+            <p>ところが同年4月、信玄が病のため世を去り、武田家は勝頼の代となります。</p>
+            <p>天正三年（1575年）5月、長篠の戦いで武田軍が大敗。</p>
+            <p>その後1ヶ月もしないうちに、信長の命を受けた嫡男・織田信忠が岩村城を包囲しました。</p>
+            <p>かつて信長と書状を交わした秋山が、今度は信長の子を相手に籠城することになったのです。</p>
+            <p>……</p>
+            <p>秋山らは、勝頼のもとへ次々と使者を送り、救援を求めました。</p>
+            <p>ただ、武田家には三河や遠江でも徳川軍の反撃が迫っており、すぐに岩村へ向かう余裕がありません。</p>
+            <p>信長との交渉役から始まり、信長の叔母の夫となり、最後は信長の嫡男・織田信忠に包囲されて散った秋山虎繁。</p>
+            <p>織田と武田の間をつないだ男の生涯は、妻とともに、両家の対立の最前線で幕を閉じたのです。</p>
+          </div>
+          <p class="continue"><a href="https://bushoojapan.com/bushoo/takeda/2026/11/13/223062" target="_blank" rel="noopener" lang="ja">続きを読む · BUSHOO!JAPAN（武将ジャパン）</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p2">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★☆</span> <span class="chip mins">3 min</span> <span class="chip" lang="ja">栄実</span> <span class="chip" lang="ja">源頼家</span> <span class="chip" lang="ja">北条義時</span> <span class="chip" lang="ja">和田合戦</span> <span class="chip" lang="ja">鎌倉</span>
+          </div>
+          <h2 lang="ja">源頼家の息子・栄実はなぜ自害に追い込まれた？反乱に担がれた将軍の遺児</h2>
+          <p class="why">Hoje (13/11/1214) morreu Eijitsu, filho do xogum deposto Yoriie: aos 13 anos virou bandeira de um complô contra Hōjō Yoshitoki, foi feito monge por Masako para sair da política — e mesmo assim foi caçado em Kyoto. Kamakura no seu modo mais implacável.</p>
+          <div class="source">
+            <span lang="ja">BUSHOO!JAPAN（武将ジャパン）</span>
+            <a href="https://bushoojapan.com/jphistory/middle/2026/11/13/223040" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>建保二年11月13日（1214年12月15日）は、源頼家の息子・栄実（えいじつ）が京都で命を落とした日です。</p>
+            <p>鎌倉幕府の二代将軍を父に持ち、祖父母は源頼朝と北条政子。</p>
+            <p>こちらは大河ドラマ『鎌倉殿の13人』で大きく注目されましたが、栄実はその弟にあたる別の人物です。</p>
+            <p>……</p>
+            <p>栄実はもともと千手丸（せんじゅまる）といい、二代将軍・源頼家の三男として生まれました。</p>
+            <p>建仁三年（1203年）9月、頼家に代わって弟の源実朝が将軍となり、頼家は北条時政や大江広元らによって鎌倉を追われ、伊豆の修禅寺へ移されました。</p>
+            <p>しかし「頼家の息子」という出自のため、千手丸は本人の思いとは別のところで、物騒なトラブルに巻き込まれていきます。</p>
+            <p>……</p>
+            <p>建暦三年（1213年）2月、鎌倉で大きな陰謀が発覚しました。</p>
+            <p>信濃の武士・泉親衡（いずみちかひら）が中心となって一昨年から計画を練り、頼家の遺児・千手丸を担いで、執権の北条義時を倒そうとしていたというのです。</p>
+            <p>しかし、甥の赦免は義時に退けられて両者の対立は深まり、ついには同年5月、和田一族は兵を挙げて敗れ、義盛は討死しました。いわゆる和田合戦ですね。</p>
+            <p>……</p>
+            <p>建保元年（1213年）11月10日、千手丸は将軍御所で出家し、栄実と名乗りました。</p>
+            <p>どうやら祖母・北条政子の計らいがあったようで、実は頼家の息子たちは、ほかにも次々と僧になっていました。</p>
+            <p>担ぎ上げられやすい頼家の息子たち、彼女にとっての孫を、政治の場から遠ざける意味もあったのかもしれません。</p>
+            <p>……</p>
+            <p>しかし翌年、京都で再び、頼家の遺児を担ぐ動きが伝わります。</p>
+            <p>建保二年（1214年）11月13日、京都で騒ぎが起こりました。</p>
+            <p>彼らは京都の一条辺りにあった宿所を襲い、栄実はその場で自害したといいます。</p>
+            <p>……</p>
+            <p>京都からの飛脚が鎌倉に着き、残党が栄実を「大将軍」に担いで謀反を企てていたと報告したのは、12日後の11月25日のことでした。</p>
+            <p>ただ、上杉和彦氏は著書『大江広元』で、広元か、その子・親広が和田合戦の報復を警戒し続けていたのだろうと見ています。</p>
+            <p>頼家の息子という宿命から、最後まで逃れられませんでした。</p>
+          </div>
+          <p class="continue"><a href="https://bushoojapan.com/jphistory/middle/2026/11/13/223040" target="_blank" rel="noopener" lang="ja">続きを読む · BUSHOO!JAPAN（武将ジャパン）</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p3">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★☆</span> <span class="chip mins">3 min</span> <span class="chip" lang="ja">難波宮</span> <span class="chip" lang="ja">大化の改新</span> <span class="chip" lang="ja">聖武天皇</span> <span class="chip" lang="ja">法円坂遺跡</span> <span class="chip" lang="ja">難波津</span>
+          </div>
+          <h2 lang="ja">なぜ古代の天皇は「大阪」を都に選んだのか？二度も宮殿が築かれた難波宮の謎</h2>
+          <p class="why">Osaka foi capital duas vezes antes de Nara/Kyoto: após o assassinato de Soga no Iruka (645) e de novo sob Shōmu. Briga imperador × príncipe Naka no Ōe, incêndio de 686, mudanças frenéticas de capital e 16 armazéns do século V que explicam por que ali. Pertinho do Castelo de Osaka.</p>
+          <div class="source">
+            <span lang="ja">草の実堂</span>
+            <a href="https://kusanomido.com/visited/135043/" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>大阪城の南西、大阪市中央区法円坂には、飛鳥時代と奈良時代の二度にわたって天皇の宮殿が築かれた難波宮跡（なにわのみやあと）があります。</p>
+            <p>これらは「前期難波宮」「後期難波宮」と呼ばれています。</p>
+            <p>……</p>
+            <p>645年、乙巳（いっし）の変で蘇我入鹿が殺害され、孝徳天皇が即位しました。後に「大化の改新」と呼ばれる政治改革が始まり、同年、都は飛鳥から難波へ遷されます。</p>
+            <p>こうして前期難波宮は、その歴史に幕を下ろしたのです。</p>
+            <p>……</p>
+            <p>前期難波宮の焼失から約40年後の726年、聖武天皇の命によって同じ場所で新たな宮殿の造営が始まりました。</p>
+            <p>聖武天皇は平城京を拠点としていましたが、740年以降、恭仁京（くにきょう）、難波京、紫香楽宮（しがらきのみや）へと政治の拠点を移し、745年には平城京へ戻りました。</p>
+            <p>その後、難波宮は都としての役割を終えました。 784年、桓武天皇による長岡京遷都に際しては、難波宮の建物が解体され、建築資材が長岡宮へ運ばれたと伝えられています。</p>
+            <p>……</p>
+            <p>難波宮がなぜこの場所に造られたのか？その手がかりの一つが、近くに残る法円坂（ほうえんざか）遺跡です。</p>
+            <p>法円坂遺跡では、古墳時代中期にあたる5世紀前半頃の大型倉庫群が発見されています。</p>
+            <p>この一帯は瀬戸内海と内陸部を結ぶ交通の要所で、倉庫群も水運を利用した物資の集積に関わっていたとみられています。</p>
+            <p>……</p>
+            <p>5世紀後半から7世紀前半にかけての建物跡は60棟以上確認されており、難波宮が築かれる以前から、この地域が重要な拠点だったことが分かります。</p>
+            <p>近くには、古代の港「難波津（なにわづ）」があったと考えられています。</p>
+            <p>港の正確な位置は分かっていませんが、瀬戸内海を通じて各地や大陸とつながる交通の利便性は、難波に宮殿が置かれた大きな理由の一つだったのでしょう。</p>
+          </div>
+          <p class="continue"><a href="https://kusanomido.com/visited/135043/" target="_blank" rel="noopener" lang="ja">続きを読む · 草の実堂</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p4">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★☆</span> <span class="chip mins">3 min</span> <span class="chip" lang="ja">適塾</span> <span class="chip" lang="ja">緒方洪庵</span> <span class="chip" lang="ja">福沢諭吉</span> <span class="chip" lang="ja">大村益次郎</span> <span class="chip" lang="ja">蘭学</span>
+          </div>
+          <h2 lang="ja">幕末の大阪にあった伝説の私塾「適塾」〜日本を動かす人物を次々と育てた緒方洪庵の功績</h2>
+          <p class="why">A escola de holandês em Kitahama onde estudaram Fukuzawa Yukichi, Ōmura Masujirō e o médico que tratava feridos dos dois lados em Hakodate: um único dicionário disputado à força, ranking por desempenho e marcas de espada nos pilares. Bom paralelo com seu próprio estudo de língua.</p>
+          <div class="source">
+            <span lang="ja">草の実堂</span>
+            <a href="https://kusanomido.com/visited/135408/" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>幕末、日本が大きな変革期を迎えようとしていた頃、大坂には全国から若者たちが集まる一つの私塾がありました。</p>
+            <p>蘭学者で医師の緒方洪庵（おがたこうあん）が開いた学びの場で、福沢諭吉や大村益次郎など、後に日本の近代化を支える人物を数多く輩出しました。</p>
+            <p>……</p>
+            <p>適塾は1838年に蘭学者で医師の緒方洪庵が開いた私塾で、全国から集まった若者たちがオランダ語を通じて西洋の医学や科学などを学びました。</p>
+            <p>適塾の門下生は、1844年以降の入門者を記録した名簿に636人の名前が残されており、それ以前の塾生や通いの門下生を含めると、1000人を超えたと推定されています。</p>
+            <p>……</p>
+            <p>入門したばかりの塾生は、まずオランダ語の文法を学び、一定の学力に達すると原書を読み解く「会読（かいどく）」に参加する仕組みです。</p>
+            <p>洪庵自身も原書の内容を正確に理解することを重視し、塾生たちが自ら考え、学ぶ姿勢を何よりも大切にしていたのでした。</p>
+            <p>……</p>
+            <p>緒方洪庵は1810年、備中国足守藩（現在の岡山市北区足守）の藩士・佐伯惟因（さえきこれより）の三男として生まれました。</p>
+            <p>1862年には江戸幕府から招かれ、将軍の診療にあたる奥医師と西洋医学所の頭取に就任。しかし、その翌年の1863年に江戸で急死し、54歳（数え年）で生涯を閉じました。</p>
+            <p>……</p>
+            <p>代表的なのが、慶應義塾を創設した福沢諭吉（ふくざわゆきち）です。</p>
+            <p>ほかにも、福井藩士で安政の大獄によって処刑された橋本左内（はしもとさない）、幕府の軍人として活躍し、後に工部大学校長を務めた大鳥圭介（おおとりけいすけ）、日本赤十字社の創設に尽力した佐野常民（さのつねたみ）、箱館戦争で敵味方の区別なく負傷兵の救護にあたった医師・高松凌雲（たかまつりょううん）などが挙げられます。</p>
+            <p>……</p>
+            <p>建物の柱には、当時の塾生が刀でつけたと伝えられる傷跡も残っており、若者たちが共同生活を送っていた頃の様子を今に伝えています。</p>
+          </div>
+          <p class="continue"><a href="https://kusanomido.com/visited/135408/" target="_blank" rel="noopener" lang="ja">続きを読む · 草の実堂</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p5">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★☆</span> <span class="chip mins">3 min</span> <span class="chip" lang="ja">武野宗瓦</span> <span class="chip" lang="ja">武野紹鴎</span> <span class="chip" lang="ja">今井宗久</span> <span class="chip" lang="ja">茶人</span> <span class="chip" lang="ja">御伽衆</span>
+          </div>
+          <h2 lang="ja">信長と秀吉から2度も追放！戦国時代の茶人・武野宗瓦が波乱の末に仕えた「最後の主君」とは？</h2>
+          <p class="why">Filho do grande mestre do chá Takeno Jōō, perdeu a herança para o cunhado Imai Sōkyū num julgamento feito pelo próprio Nobunaga, sonhou em virar samurai, foi exilado por Nobunaga e depois por Hideyoshi, e morreu em Osaka às vésperas do cerco. Uma vida de Sengoku vista da sala de chá.</p>
+          <div class="source">
+            <span lang="ja">Japaaan（ジャパーン）</span>
+            <a href="https://mag.japaaan.com/archives/293059" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>武野宗瓦は天文19年（1550年）2月11日、茶人として名高い武野紹鴎（じょうおう）の嫡男として誕生します。</p>
+            <p>幼くして父を亡くしたため、姉婿である今井宗久（いまいそうきゅう）によって養育されたと言います。</p>
+            <p>茶人として元亀年間（1570～1573年）ごろから活動し、はじめ織田信長に仕えました。</p>
+            <p>そんなこともあって不遇であった宗瓦は、茶人ではなく武士としての活躍を夢見るようになったそうです。</p>
+            <p>まさか直接言った訳ではないでしょうが、その意向を知った信長は激怒。天正9年（1581年）に宗瓦を追放してしまいました。</p>
+            <p>……</p>
+            <p>信長の怒りを買って堺から追放された宗瓦がどこでどんな暮らしをしていたかはわかりません。</p>
+            <p>翌天正10年（1582年）に本能寺の変が起こり、信長が横死を遂げると、宗瓦はひょっこり堺へ舞い戻りました。</p>
+            <p>そしてしばらく情勢を見極め、羽柴秀吉が織田政権の乗っ取りに成功したあたりで秀吉に仕えたようです。</p>
+            <p>やがて徳川家康のとりなしによって天正18年（1590年）に帰参が許され、秀吉の御伽衆に加えられます。もう恐らく、武士としての夢は諦めていたことでしょう。</p>
+            <p>宗瓦が大坂で世を去ったのは慶長19年（1614年）8月26日のこと。やがて徳川政権から豊臣家に対する圧力が強まり、いよいよ大坂冬の陣が始まろうとする直前でした。</p>
+            <p>……</p>
+            <p>かくして武士になる夢を見ながら（たぶん）果たせなかった武野宗瓦。しかしその息子たちは、父の悲願？を果たして武士に取り立てられています。</p>
+            <p>長男の武野仲定（なかさだ）は織田有楽斎（信長弟・長益）の仲立ちによって徳川義直（家康九男）に仕え、尾張藩士となりました。</p>
+            <p>ただしその子孫は、幕末・慶応4年（1868年）の佐幕派粛清（青松葉事件）によって御家断絶の憂き目を見ています。</p>
+            <p>いっぽう次男の武野知信（とものぶ）は出家して沢庵宗彭に弟子入りしました。</p>
+            <p>こちらの家系は尾張藩士として明治維新を迎え、その子孫は今日まで続いているそうです。</p>
+          </div>
+          <p class="continue"><a href="https://mag.japaaan.com/archives/293059" target="_blank" rel="noopener" lang="ja">続きを読む · Japaaan（ジャパーン）</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p6">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★★</span> <span class="chip mins">3 min</span> <span class="chip" lang="ja">ダゲレオタイプ</span> <span class="chip" lang="ja">パリ</span> <span class="chip" lang="ja">写真史</span> <span class="chip" lang="ja">3Dスキャン</span>
+          </div>
+          <h2 lang="ja">人間が初めて写ったとされる写真の「靴磨き」と「客」がいた場所を188年越しに特定</h2>
+          <p class="why">Na foto de Daguerre de 1838, a rua movimentada aparece vazia (exposição de minutos) — só um engraxate e seu cliente ficaram parados o bastante para entrar na história. Agora, com escaneamento 3D e mapas antigos, acharam o ponto exato e puseram uma placa de bronze na Place de la République.</p>
+          <div class="source">
+            <span lang="ja">GIGAZINE</span>
+            <a href="https://gigazine.net/news/20261113-first-photographed-humans-location/" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>フランス・パリのレピュブリック広場で、1838年に撮影された「人間が初めて写ったとされる写真」に写った靴磨きとその客がいた地点を示す銘板が2026年10月15日に公開されました。</p>
+            <p>……</p>
+            <p>銀板写真(ダゲレオタイプ)を考案したフランスの発明家「ルイ・ダゲール」が1838年春のある朝にアトリエの窓から撮影した写真「タンプル大通り(Boulevard du Temple)」には、街路樹の並ぶ通りの手前に2人の小さな人影が写っています</p>
+            <p>人通りの多い時間帯に撮影された写真ですが、当時の銀板写真では数分間光を取り込む必要があったため、通りを行き交う人々の姿は写真に写りませんでした。</p>
+            <p>……</p>
+            <p>この写真を取り上げた2023年のドキュメンタリー映画「And the King Said, What a Fantastic Machine」を共同監督したマクシミリアン・ヴァン・アールトリック氏らは、2024年6月にレピュブリック広場を訪れた際、靴磨きと客がいた場所を見つけて印を残そうと調査を開始。</p>
+            <p>しかし、広場の整備により周囲の街並みは撮影当時から大きく変わっていました。そこでアールトリック氏らはレピュブリック広場とタンプル大通りを3Dスキャンして現在の建物の位置を測り、古い区画図や版画などをもとに1838年の街並みを復元しました。</p>
+            <p>……</p>
+            <p>アールトリック氏らから資料を受け取ったスウェーデンの建築事務所「Rumlab」は、写真に写った建物のうち現在も残る3棟を目印に、復元した街並みの3Dモデルと写真を重ねて撮影時の視点を再現し、被写体がいた地点を割り出しました。</p>
+            <p>また、フランスの建築事務所であるMater Studioも異なる方法で独自に調査し、Rumlabとほぼ同じ地点を割り出しました。</p>
+            <p>……</p>
+            <p>地面に埋め込まれた青銅の銘板「Un détail imprévu」には靴磨きと客の姿を丸で囲んだ写真の一部と、撮影の経緯を説明する文章が刻まれています</p>
+          </div>
+          <p class="continue"><a href="https://gigazine.net/news/20261113-first-photographed-humans-location/" target="_blank" rel="noopener" lang="ja">続きを読む · GIGAZINE</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p7">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★☆</span> <span class="chip mins">2 min</span> <span class="chip" lang="ja">ゼルダの伝説</span> <span class="chip" lang="ja">時のオカリナ</span> <span class="chip" lang="ja">青沼英二</span> <span class="chip" lang="ja">ゲームデザイン</span>
+          </div>
+          <h2 lang="ja">Nintendo Switch 2版「ゼルダの伝説 時のオカリナ」のクリエイターが制作秘話を語る</h2>
+          <p class="why">Aonuma e Fujibayashi contam o remake de Ocarina of Time feito por uma equipe jovem: o debate sobre adicionar botão de pulo, ReDeads “menos assustadores”, por que Hyrule Field não virou mundo aberto, e NPCs com rotina de 24 horas. Design de jogo explicado em japonês claro.</p>
+          <div class="source">
+            <span lang="ja">GIGAZINE</span>
+            <a href="https://gigazine.net/news/20261113-nintendo-how-made-zelda-ocarina-of-time/" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>青沼プロデューサーと藤林プロデューサーの2人によると、Nintendo Switch 2版「ゼルダの伝説時のオカリナ」の開発には、「若い世代と自分たち自身の双方にとって学びの機会にする」という狙いがあったそうです。</p>
+            <p>藤林プロデューサーによると、Nintendo Switch 2版「ゼルダの伝説時のオカリナ」の開発を担当したスタッフやディレクターは、任天堂の中でも若い世代だそうです。</p>
+            <p>……</p>
+            <p>「残した部分」の代表例が、「オリジナル版の開発者がゲームを通してどんな体験を届けようとしたのか」です。ジャンプボタンについてもかなり議論したそうで、「もともとジャンプボタンがなかったのに、変えていいのか」と開発陣の間でも議論になった模様。</p>
+            <p>「検討したものの採用には至らなかったアイデア」も多数あります。</p>
+            <p>……</p>
+            <p>また、オープンエアー作品のように「ゼルダの伝説時のオカリナ」のハイラル平原をより広大なフィールドに変えるアイデアはなかったのかと聞かれた青沼プロデューサーは、「これもまさに受け継ぎたい部分に当たります。</p>
+            <p>……</p>
+            <p>GameSpotが今回の開発で得た学びのうち、今後のゲーム開発で活かせそうなものについて質問したところ、藤林プロデューサーは「3Dゲームを作るうえでの基礎的な技術」を挙げています。</p>
+            <p>……</p>
+            <p>また、NPCのセリフはメインのライターと若手スタッフがそれぞれ担当したそうですが、最終的にはすべてのセリフに藤林プロデューサーが目を通しているそうです。</p>
+          </div>
+          <p class="continue"><a href="https://gigazine.net/news/20261113-nintendo-how-made-zelda-ocarina-of-time/" target="_blank" rel="noopener" lang="ja">続きを読む · GIGAZINE</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p8">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★☆</span> <span class="chip mins">3 min</span> <span class="chip" lang="ja">人類進化</span> <span class="chip" lang="ja">自然選択</span> <span class="chip" lang="ja">乳糖耐性</span> <span class="chip" lang="ja">高地適応</span> <span class="chip" lang="ja">近視</span>
+          </div>
+          <h2 lang="ja">人類は今もなお進化し続けている、人類の体に現れている「5つの進化の兆候」とは？</h2>
+          <p class="why">Leite, batata dos quíchuas, oxigênio no Tibete, cor da pele e… miopia: cinco sinais de que a seleção natural continua agindo em nós, com números concretos (1,24% de vantagem por geração; +100 mil míopes por geração só no Reino Unido).</p>
+          <div class="source">
+            <span lang="ja">GIGAZINE</span>
+            <a href="https://gigazine.net/news/20261113-humans-still-evolving-5-signs/" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>人類は約1万年前、複数の地域で牛などの草食動物を家畜化し、そのミルクを飲むようになりました。</p>
+            <p>ところが、一部の人類は遺伝子変異によって乳糖を分解する乳糖分解酵素活性持続性(ラクターゼ活性持続症)という能力を維持しており、これを持つ人々はミルクを飲んでも症状が出ません。</p>
+            <p>……</p>
+            <p>南アメリカ・アンデス山脈の高地民族の血を引いているケチュア族は、世界で最初にジャガイモを栽培し始めた民族のひとつです。</p>
+            <p>ケチュア族の祖先がジャガイモ栽培を始めた際、デンプンの消化に役立つ特定の遺伝子変異を持っている人々は、進化上の優位性を獲得したと考えられます。</p>
+            <p>……</p>
+            <p>ユーラシア大陸中央部に位置するチベット高原は高度3500～5500mと非常に標高が高く、空気中の酸素濃度は海抜が低い地域と比べてかなり少なくなっています。</p>
+            <p>研究チームは、標高3500mを超える高地で生涯を過ごしたネパール人女性417人を調査しました。その結果、最も多くの子どもを産んだ女性では、赤血球に存在して酸素を運搬する役割を担うヘモグロビンの酸素飽和度が異常に高いことがわかりました。</p>
+            <p>……</p>
+            <p>これまでで最大規模の古代DNAデータセットを分析した2026年の研究では、西ユーラシア人の間で起きていた自然選択が特定されました。</p>
+            <p>高緯度の弱い日差しでは、肌の色が濃すぎると十分なビタミンDを生成できません。</p>
+            <p>……</p>
+            <p>近視の人は過去数十年で急増しており、2021年の研究では近視に関連する特定の遺伝子変異が過去25年間で増加していることが示されました。</p>
+            <p>研究チームは「自然選択により、イギリスだけでも世代ごとに10万件以上も近視が増加していると推定されます。</p>
+          </div>
+          <p class="continue"><a href="https://gigazine.net/news/20261113-humans-still-evolving-5-signs/" target="_blank" rel="noopener" lang="ja">続きを読む · GIGAZINE</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p9">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★☆☆</span> <span class="chip mins">2 min</span> <span class="chip" lang="ja">古生物</span> <span class="chip" lang="ja">げっ歯類</span> <span class="chip" lang="ja">タイ</span> <span class="chip" lang="ja">化石</span>
+          </div>
+          <h2 lang="ja">約3400万年前のタイに生息していた巨大げっ歯類を発見。新属新種に分類される</h2>
+          <p class="why">Dois dentes achados numa mina de linhito na Tailândia revelam um roedor de 30 kg, 34 milhões de anos atrás — muito antes das capivaras gigantes da América do Sul. Batizado “Yakamys” (yak = gigante em tailandês). Curto e simpático.</p>
+          <div class="source">
+            <span lang="ja">カラパイア</span>
+            <a href="https://karapaia.com/archives/637925.html" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>現代を生きる最大のげっ歯類といえば、南米に生息するカピバラだ。巨大なげっ歯類は南米で進化を遂げたことが知られているが、それよりもはるか昔に、大型のげっ歯類がアジアに存在していたことがわかった。</p>
+            <p>今回の発見は、げっ歯類の巨大化の歴史がこれまで考えられていた以上に古く、そして広い範囲に及んでいたことを物語っている。</p>
+            <p>……</p>
+            <p>タイ南部のアンダマン海に面したクラビ県にあるバンマーク褐炭鉱山で、タイの鉱物資源局と、カナダのマギル大学、フランス国立科学研究センターなどの国際研究チームが共同で発掘調査を行っていた。</p>
+            <p>発見された新属新種はタイ語で「巨人」を意味する「ヤック」と、ギリシャ語で「ネズミ」を意味する「ミス」を組み合わせ、「ヤカミス・シリントーネ（Yakamys sirindhornae）」と名付けられた。</p>
+            <p>……</p>
+            <p>研究チームは、発見された歯の化石の寸法から動物の体重を割り出す7つの手法を用いた。</p>
+            <p>歯2本だけでは姿はわからないが、研究チームはカピバラのように湖のほとりで暮らしていたと考えている。</p>
+            <p>……</p>
+            <p>げっ歯類が巨大化する進化は、約2300万年前から、主に南米大陸で繰り返し起きてきたという見方が一般的だった。</p>
+            <p>東南アジアもまた、大型げっ歯類の進化の初期の歴史において重要な役割を果たしていた可能性が高いという。</p>
+          </div>
+          <p class="continue"><a href="https://karapaia.com/archives/637925.html" target="_blank" rel="noopener" lang="ja">続きを読む · カラパイア</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p10">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★☆</span> <span class="chip mins">3 min</span> <span class="chip" lang="ja">生命の起源</span> <span class="chip" lang="ja">パンスペルミア</span> <span class="chip" lang="ja">彗星</span> <span class="chip" lang="ja">シミュレーション</span>
+          </div>
+          <h2 lang="ja">彗星が地球に生命の材料を運んだ説はありえないとする最新研究</h2>
+          <p class="why">Cambridge simulou 100 mil histórias de impactos na Terra primitiva: o calor vaporiza o cianeto de hidrogênio e só ~1 impacto em um bilhão de anos funciona. Curiosamente, Marte era 5x mais favorável. E os asteroides (Ryugu, Bennu) entram em cena.</p>
+          <div class="source">
+            <span lang="ja">カラパイア</span>
+            <a href="https://karapaia.com/archives/636860.html" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>「地球上の生命は彗星が運んできた材料から誕生した」とする100年来の説が、英ケンブリッジ大学の研究チームによる最新のシミュレーションでほぼ否定された。</p>
+            <p>生命の起源を彗星に求める長年のロマンに大きな転換を迫る研究成果となっている。</p>
+            <p>……</p>
+            <p>地球の生命の起源が地球外から来たとする説は「パンスペルミア説」と呼ばれている。</p>
+            <p>今回の研究対象となったのは、「彗星が生命の材料を地球に運んだ」という説だ。</p>
+            <p>初期の地球には無数の彗星が降り注ぎ、シアン化水素が地球に持ち込まれて生命誕生のきっかけを作ったという説は、長きにわたって支持されてきた。</p>
+            <p>……</p>
+            <p>ケンブリッジ大学天文学研究所のリチャード・アンスロー博士らの研究チームは、地球に彗星が衝突した初期の歴史を10万通りシミュレーションした。</p>
+            <p>地球は重力が強いため、落下してくる彗星の速度がすさまじく速くなる。</p>
+            <p>アンスロー博士は、条件が揃うのは100万に1回の奇跡だと説明する。</p>
+            <p>……</p>
+            <p>彗星が生命の材料を無事に運ぶには、ちょうどいい角度と速度で大気圏に進入する必要がある。</p>
+            <p>地球の厚い大気は、小さな彗星や斜めに入ってくる彗星を途中で壊す壁として立ちふさがっていた。</p>
+            <p>火星は地球よりも小さくて重力が弱いため、彗星の衝突速度が遅くなり、地表までシアン化水素を届けることができた彗星の割合は、地球の5倍もあったと計算されている。</p>
+            <p>……</p>
+            <p>彗星が生命の種を運んだ可能性がほぼゼロになった今、研究チームは別の可能性を挙げている。</p>
+            <p>一つは、彗星よりもはるかに頻繁に地球に衝突していた小惑星だ。</p>
+            <p>また2025年には、東北大学などの研究チームが、NASAの探査機「オシリス・レックス」が持ち帰った小惑星ベンヌの砂から、リボースなど6種類の糖を発見している。</p>
+          </div>
+          <p class="continue"><a href="https://karapaia.com/archives/636860.html" target="_blank" rel="noopener" lang="ja">続きを読む · カラパイア</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p11">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★☆</span> <span class="chip mins">3 min</span> <span class="chip" lang="ja">プリンツホルン</span> <span class="chip" lang="ja">アール・ブリュット</span> <span class="chip" lang="ja">パウル・クレー</span> <span class="chip" lang="ja">美術史</span>
+          </div>
+          <h2 lang="ja">精神疾患を持つ人々の芸術的才能に光を当てたドイツ・プリンツホルン・コレクション</h2>
+          <p class="why">Um psiquiatra que tinha estudado arte reuniu milhares de obras de pacientes em Heidelberg (1919–21) e defendeu que eram arte de verdade — escultura de pão mastigado, desenhos em papel higiênico. Inspirou Klee e Max Ernst e deu origem à “art brut”.</p>
+          <div class="source">
+            <span lang="ja">カラパイア</span>
+            <a href="https://karapaia.com/archives/637505.html" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>20世紀初頭、ドイツのハイデルベルク大学病院の精神科では、入院している患者たちに絵や彫刻、文章などを作ってもらい保管していた。</p>
+            <p>今なお集め続けられている作品は4万点を超え、「プリンツホルン・コレクション」として研究者や一般の人々に公開されている。</p>
+            <p>……</p>
+            <p>1900年代初頭、ハイデルベルク大学病院の精神科に勤務する、医師のエミール・クレペリン氏は、医学研究や教育のために患者の作った作品収集を開始した。</p>
+            <p>プリンツホルン氏は医学を修める前に美術を学んでおり、芸術理論と医学の両方を理解している彼は、患者の心理と創造的な表現の関係を調べるための適任者だった。</p>
+            <p>……</p>
+            <p>こうして1919年から1921年の間に、精神疾患と診断された約450人の患者から、絵画や彫刻、手書きの文章など数千点の作品がハイデルベルクに集まった。</p>
+            <p>6つの衝動が沸き上がる根本的な理由は、「自分が生きた痕跡を世界に残したいという欲求」であると結論づけた。</p>
+            <p>……</p>
+            <p>出版された著書には豊富な図版が収録されており、医学界だけでなく当時の芸術家たちに影響を与えた。</p>
+            <p>美術の専門教育を受けていない人々による純粋な表現は、後に「アール・ブリュット（生の芸術）」や「アウトサイダー・アート」と呼ばれる新しい芸術概念につながっていった。</p>
+            <p>……</p>
+            <p>プリンツホルン氏はこの作品群を常設展示する博物館の設立を望んでいたが、1933年にこの世を去った。</p>
+            <p>設立当初から現在に至るまで新たな作品を受け入れており、今日では1825年頃から現代までに制作された約4万点の視覚芸術作品や文書、楽曲が保管されている。</p>
+          </div>
+          <p class="continue"><a href="https://karapaia.com/archives/637505.html" target="_blank" rel="noopener" lang="ja">続きを読む · カラパイア</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p12">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★☆</span> <span class="chip mins">3 min</span> <span class="chip" lang="ja">エチオピア</span> <span class="chip" lang="ja">再発見</span> <span class="chip" lang="ja">哺乳類</span> <span class="chip" lang="ja">コーヒー森林</span>
+          </div>
+          <h2 lang="ja">絶滅したはずのネズミ、見つかったのは村人が洗濯する小川だった</h2>
+          <p class="why">Conhecido por um único espécime de 1927 e dado como extinto, o rato-d’água-etíope apareceu numa armadilha com isca de manteiga de amendoim — num riacho onde a vila lava roupa, numa reserva de café arábica selvagem. A marca: uma mancha branca na base da orelha.</p>
+          <div class="source">
+            <span lang="ja">ナショナル ジオグラフィック日本版</span>
+            <a href="https://natgeo.nikkeibp.co.jp/atcl/news/26/111200613/" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>エチオピアミズネズミ（Nilopegamys plumbeus）は、エチオピア国内でさえ、あまり知られていない動物だ。</p>
+            <p>この種は1927年に発見され、翌年には新種として正式に記載されたが、研究者が手がかりにできたのは、わずか1個体の標本だけだった。</p>
+            <p>「初めて見たとき、とても興奮しました」とワレ氏は話す。「これはエチオピアミズネズミだと95％確信しました」。この地域に生息するほかの多くのげっ歯類とは異なり、エチオピアミズネズミには耳の付け根にはっきりとした白い斑点がある。</p>
+            <p>驚いたことに、ワレ氏らはその後、さらに2個体を捕獲した。個体の特徴を1928年の記載内容と照らし合わせ、これらは絶滅したと思われていた種に属すると確信している。</p>
+            <p>……</p>
+            <p>今回の発見が予想外だった理由のひとつは、その場所にある。エチオピアミズネズミが最初に発見されたのはエチオピア北部だったが、その採集場所での探索は、これまでいずれも「成果なし」に終わっていたとジアーラ氏は言う。</p>
+            <p>一方、今回の新たな個体は、エチオピア南西部に広がるヤユ・コーヒー森林生物圏保護区の「移行地域（住民が暮らし、農業などを営む区域）」で発見された。</p>
+            <p>研究者らは、エチオピアミズネズミは昆虫や、おそらく魚を捕食して生きていると考えているが、ワレ氏によれば、今回の個体はごく普通のピーナッツバターを使ったワナに引き寄せられていたという。</p>
+            <p>人の生活圏の近くで発見されたことから、開発による影響は従来考えられていたほど大きくないのかもしれないと、フォルヌスコバ氏は言う。だが、エチオピアミズネズミにとって生息地の問題は依然として大きい。</p>
+          </div>
+          <p class="continue"><a href="https://natgeo.nikkeibp.co.jp/atcl/news/26/111200613/" target="_blank" rel="noopener" lang="ja">続きを読む · ナショナル ジオグラフィック日本版</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p13">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★☆</span> <span class="chip mins">4 min</span> <span class="chip" lang="ja">Claude Code</span> <span class="chip" lang="ja">compact</span> <span class="chip" lang="ja">prompt cache</span> <span class="chip" lang="ja">トークン節約</span>
+          </div>
+          <h2 lang="ja">Claude Code に忘れさせたら、トークン使用量が4割減った</h2>
+          <p class="why">Dados reais de um mês de uso: cada pedido dispara ~26 requisições que reenviam a conversa inteira; voltar do almoço depois de 1h de cache expirado custava 40x um turno normal. Compactar em 500k e guardar decisões num discussion.md cortou 39%. Útil direto para o seu fluxo com Cursor/Claude.</p>
+          <div class="source">
+            <span lang="ja">Zenn</span>
+            <a href="https://zenn.dev/sae_eng/articles/0e9ed7205ebc41" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>最近、Claude Code の使用頻度が多くなってきてトークン節約したいなーと倹約家の血が騒いだので、シンプルですが compact の設定と、離席中に compact させる仕組みを調整してみました。</p>
+            <p>そうしたら、結論送っているトークンが合計で4割ほど減りました。使い心地も変わらず使えているので、やったことを書いておきます。</p>
+            <p>……</p>
+            <p>これまでは、会話が97万トークンまで育たないと compact が動きませんでした。これを、50万トークンで動くようにしました。</p>
+            <p>この2つで、1回に送る量は平均26.3万トークンになりました。 39%減です。</p>
+            <p>……</p>
+            <p>Claude Code に「直して」と1回送ると、裏では API へのリクエストが何回も飛んでいます。ファイルを読む、コマンドを動かす、といったツールを1回使うたびに、リクエストが1回増えるからです。</p>
+            <p>手元の記録で数えてみたら、約26回。 163の会話で、リクエスト53,018回を送信2,056回で割った値です（会話ごとの中央値は26.3回）。</p>
+            <p>……</p>
+            <p>もう1つ効いていたのが、cache の残る時間です。</p>
+            <p>お昼を食べて戻ってきて「続きお願い」と送るだけで、これだけかかっていたわけです。</p>
+            <p>……</p>
+            <p>正直、これまでは compact をなるべく避けていました。要約に置き換わると、話が通じなくなりそうで嫌だったんです。</p>
+            <p>最近触ったファイル（5つまで）や、使った skill の本文も一緒です。要約に残るのは、依頼の中身と主なコード。序盤の細かい指示は落ちることがあるそうです。</p>
+            <p>……</p>
+            <p>もう1つ大きかったのは、決めたことを、もともと会話の外に残していたことです。</p>
+            <p>なので、compact で細かいやり取りが要約に縮んでも、決定と理由はファイルに残っています。要約で足りなければそのファイルを読めばいいし、それでも足りなければ会話の記録（jsonl）を探せば済みます。</p>
+            <p>……</p>
+            <p>1M もあるなら、使い切るまで1つの会話で続けたほうが楽なんじゃないかなーと、ついこの前まではそう思っていました。</p>
+            <p>それなら、会話は50万で忘れさせて、決めたことは外に残すほうが、軽くて楽ですしね。みんなもトークン消費量抑えて、長くClaude Codeとハッピーに遊びましょうー。</p>
+          </div>
+          <p class="continue"><a href="https://zenn.dev/sae_eng/articles/0e9ed7205ebc41" target="_blank" rel="noopener" lang="ja">続きを読む · Zenn</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p14">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★☆☆</span> <span class="chip mins">3 min</span> <span class="chip" lang="ja">JR東日本</span> <span class="chip" lang="ja">ウォークスルー改札</span> <span class="chip" lang="ja">UWB</span> <span class="chip" lang="ja">Suica</span>
+          </div>
+          <h2 lang="ja">JR東日本が「タッチ不要の次世代改札機」2028年春に導入 さらに近い将来は改札の概念が変わる？</h2>
+          <p class="why">Catraca sem encostar o celular: UWB (alcance de metros) no lugar do NFC, teste em 14 estações em abril de 2027, todas do Yamanote em 2028 e, nos anos 2030, “catraca por GPS” sem dentro/fora de estação. Infraestrutura curta e concreta.</p>
+          <div class="source">
+            <span lang="ja">乗りものニュース</span>
+            <a href="https://trafficnews.jp/post/726632" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>JR東日本は2026年11月10日、ウォークスルー改札を2028年春、東京都内の40駅に本格導入すると発表しました。</p>
+            <p>現在、モバイルSuicaで改札を通る時は、改札機の読み取り部にタッチして通過しますが、ウォークスルー改札の場合は、スマートフォンを取り出さず、タッチせずに、従来のスピードで改札を通過できるといいます。両手に大きな荷物を持っている時や、ベビーカーを使用している人、車いすの人も利便性が向上しそうです。</p>
+            <p>通信技術としては、現在は通信距離が数cmのNFCを使用していますが、ウォークスルー改札は通信距離が数mのUWB（Ultra-Wide Band）を採用します。</p>
+            <p>2027年4月10日から、広域品川圏（大崎・品川・高輪ゲートウェイ・田町・浜松町・大井町）や首都圏主要ターミナル駅（東京・上野・池袋・新宿・渋谷）など14駅で体験導入を実施。この時は400人程度対象に、シャープ協力のもと開発した体験用アプリ搭載のウォークスルー対応スマートフォンを使用します。</p>
+            <p>2028年には、本格導入として山手線全駅や東京モノレール羽田空港各駅、成田空港各駅など40駅に拡大。さらにその後も、首都圏や地方の新幹線・在来線で導入駅を拡大し、2031年度末にはすべての改札機設置駅にウォークスルー改札を導入していく計画です。</p>
+            <p>また、2030年代中頃には、GPSを活用した「スマホ改札（仮称）」を導入し、JR東日本全駅で駅ナカと駅ソトの区別のない移動体験を実現する構想を掲げています。</p>
+          </div>
+          <p class="continue"><a href="https://trafficnews.jp/post/726632" target="_blank" rel="noopener" lang="ja">続きを読む · 乗りものニュース</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p15">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★☆☆</span> <span class="chip mins">2 min</span> <span class="chip" lang="ja">姫路城</span> <span class="chip" lang="ja">カステイ</span> <span class="chip" lang="ja">播磨</span> <span class="chip" lang="ja">秋祭り</span> <span class="chip" lang="ja">屋台</span>
+          </div>
+          <h2 lang="ja">姫路城に「人間の塔」出現　スペインの公演団が披露／今年も播磨の秋祭りを彩った屋台</h2>
+          <p class="why">Dois flashes de Hyōgo: castellers catalães montando torres humanas de 9 m diante do donjon de Himeji (hoje), e como os bairros de Harima mantêm os yatai dos festivais de outono apesar do êxodo e da madeira cara — um até aumentou o yatai para atrair mais carregadores. Só o lide é aberto (paywall).</p>
+          <div class="source">
+            <span lang="ja">神戸新聞NEXT</span>
+            <a href="https://www.kobe-np.co.jp/news/society/202611/0021030506.shtml" target="_blank" rel="noopener">原文を開く ↗</a> · <a href="https://www.kobe-np.co.jp/news/society/202611/0021028134.shtml" target="_blank" rel="noopener" lang="ja">播磨の秋祭り屋台（神戸新聞） ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>スペイン・カタルーニャ地方で２００年以上の歴史がある「人間の塔」が１３日、世界文化遺産・国宝姫路城内にある千姫ぼたん園で披露された。大天守を背景に、高さ９メートルを超える塔を次々と完成させた。</p>
+            <p>……</p>
+            <p>豪華な装飾を施した屋台の練り合わせで知られる播磨地域の秋祭りは、今年も各地で盛り上がった。ただ屋台を巡っては、少子高齢化や人口減少で担ぎ手の確保に悩む地区が増えた上、木材価格の高騰が維持や新調に影を落とす。そうした中、古い屋台を有効活用したり部材の選定や加工に工夫を凝らしたりして、屋台文化を守る取り組みが進んでいる。あえて屋台の大型化に踏み切り、担ぎ手を増やすことができた地区もある。（船田翔太）</p>
+          </div>
+          <p class="continue"><a href="https://www.kobe-np.co.jp/news/society/202611/0021030506.shtml" target="_blank" rel="noopener" lang="ja">続きを読む · 神戸新聞NEXT</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p16">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★☆☆</span> <span class="chip mins">4 min</span> <span class="chip" lang="ja">AIR JAM</span> <span class="chip" lang="ja">Hi-STANDARD</span> <span class="chip" lang="ja">MAN WITH A MISSION</span> <span class="chip" lang="ja">マキシマム ザ ホルモン</span> <span class="chip" lang="ja">10-FEET</span>
+          </div>
+          <h2 lang="ja">【ライブレポート】＜AIR JAM 2026＞、全9時間全11組の至福「みんなで作ったね。それがカルチャー」</h2>
+          <p class="why">Relato do festival punk de Hi-STANDARD no ZOZO Marine (7/11): 10-FEET dizendo que só existe por causa da Hi-STA, MAN WITH A MISSION citando Ohtani, a baterista do Maximum the Hormone cuja filha de 1 ano em 2011 hoje tem banda. Rock pesado de verdade; nada de HYDE/BABYMETAL com texto bom hoje.</p>
+          <div class="source">
+            <span lang="ja">BARKS</span>
+            <a href="https://barks.jp/news/1104049" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>Hi-STANDARDおよび＜AIR JAM＞が再始動したのが2011年のこと。</p>
+            <p>……</p>
+            <p>AIR STAGEのトップを飾ったのは、＜AIR JAM 2011＞から5回連続出演となる10-FEET。1曲目は「第ゼロ感」だ。のっけからの大ヒットチューンが観客を激しく焚き付けた。「幼稚園のころ、近所でよういじめられとってな。</p>
+            <p>また、最新チューン「Fortress Defense」のあとのMCでTAKUMAは、「まじで、ハイスタとAIR JAMがあるから、俺たちが存在してます」と語った。</p>
+            <p>……</p>
+            <p>AIR STAGEの二番手として登場したMAN WITH A MISSIONは2曲目からサプライズを披露。</p>
+            <p>「“憧れるのをやめましょう”と言った偉大なベースボールプレイヤーがいましたが、 “俺らもいつかああなるんだ”と憧れ続けて走り続けて、俺らは憧れることを一度もやめたことはない。ハイスタと皆さんに捧げます！</p>
+            <p>……</p>
+            <p>「俺たちのAIR JAMが来たぞ！熱き“シミ”を残して！」とダイスケはん(キャーキャーうるさい方)が気合十分に叫び、マキシマムザホルモンが＜AIR JAM 2026＞のAIR STAGEに参上。</p>
+            <p>ナヲ(ドラムと女声と姉)は15年前に初出演した＜AIR JAM 2011＞を振り返り、「15年前に1歳だった娘が今は女子高生です、バンドをやってます。15年前の自分たちにも誇れるようなライヴをしたい！</p>
+            <p>……</p>
+            <p>＜AIR JAM 2026＞の目玉はまだまだ続く。＜AIR JAM＞初出演となるザ・クロマニヨンズがAIR STAGEに登場だ。</p>
+            <p>「パンクロックのお祭りに参加できて嬉しい！僕らは1970年代製のパンクロックに魅せられた世代です。今日は、2026年の最新製のパンクロックに混ざれて、気持ちがいいです！」と甲本ヒロトは叫び、「イノチノマーチ」へ。</p>
+            <p>……</p>
+            <p>「今日出てくれたバンド、みんなありがとうー！」(横山) 「AIR JAMはみんなで作ってるからね。そして、スケート、BMX、スタジアムの外でやってくれてるアーティストもすげえデザインしてくれて…みんな感じてくれた？いろんなカルチャーがある。</p>
+            <p>その言葉にスタジアムは沸き上がった。「ZAXがいるから、まだハイスタがいるぜ！」と横山は言葉を添え、本編を「CAN’T HELP FALLING IN LOVE」で本編を締め括った。</p>
+            <p>……</p>
+            <p>世代を超えて様々なバンドやエクストリームスポーツ、アートを繋いだ＜AIR JAM 2026＞は、間違いなく過去最大規模へと発展しただろう。AI社会が猛威をふるう中、人と人との繋がりによってしか生まれないカルチャーが、確かにここにはある。</p>
+          </div>
+          <p class="continue"><a href="https://barks.jp/news/1104049" target="_blank" rel="noopener" lang="ja">続きを読む · BARKS</a></p>
+        </div>
+      </article>
+
+      <footer class="site">読解幕 · 2026-11-13 · ~48 min · <a href="/japanese-digest/history/" style="color:inherit">History</a> · deliton.github.io/japanese-digest</footer>
+    </main>
+  </div>
+</body>
+</html>
