@@ -1,0 +1,972 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>読解幕 · 2026-11-14 · Japanese Digest</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Noto+Serif+JP:wght@400;600;700&family=Shippori+Mincho:wght@500;700&display=swap" rel="stylesheet" />
+  <style>
+
+    :root {
+      --bg: #0a0a0a;
+      --bg-2: #121212;
+      --bg-card: #161616;
+      --ink: #f5f5f5;
+      --ink-dim: #a8a29a;
+      --ink-mute: #6b6560;
+      --shu: #c41e3a;
+      --shu-hot: #e11d48;
+      --shu-deep: #8b1228;
+      --gold: #d4a017;
+      --gold-soft: #c9a227;
+      --white: #fafafa;
+      --line: #2a2a2a;
+      --line-hot: rgba(196, 30, 58, 0.45);
+      --measure: 42rem;
+      --radius: 4px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: "Noto Sans JP", "Hiragino Sans", "Yu Gothic", system-ui, sans-serif;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .stage-bar {
+      height: 6px;
+      background: repeating-linear-gradient(
+        90deg,
+        var(--shu) 0 48px,
+        var(--white) 48px 56px,
+        #111 56px 64px,
+        var(--gold) 64px 72px,
+        #111 72px 88px
+      );
+    }
+
+    .wrap {
+      width: min(100% - 2rem, 74rem);
+      margin: 0 auto;
+      padding: 2rem 0 4.5rem;
+      display: grid;
+      grid-template-columns: 15.5rem 1fr;
+      gap: 2.75rem;
+      align-items: start;
+    }
+
+    @media (max-width: 900px) {
+      .wrap { grid-template-columns: 1fr; gap: 1.5rem; padding-top: 1.25rem; }
+      .sidebar { position: static !important; }
+    }
+
+    .sidebar { position: sticky; top: 1.25rem; }
+
+    .brand {
+      display: flex;
+      align-items: baseline;
+      gap: 0.55rem;
+      margin: 0 0 0.35rem;
+    }
+    .brand-mark {
+      font-family: "Shippori Mincho", "Noto Serif JP", serif;
+      font-size: 1.85rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      color: var(--white);
+      line-height: 1;
+    }
+    .brand-mark em {
+      font-style: normal;
+      color: var(--shu);
+    }
+    .brand-sub {
+      font-size: 0.65rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-weight: 700;
+    }
+
+    .meta {
+      color: var(--ink-mute);
+      font-size: 0.8rem;
+      margin: 0 0 1.25rem;
+    }
+
+    .stat-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-bottom: 1.35rem;
+    }
+    .stat {
+      border: 1px solid var(--line);
+      background: var(--bg-2);
+      padding: 0.32rem 0.65rem;
+      font-size: 0.72rem;
+      color: var(--ink-dim);
+      border-radius: var(--radius);
+    }
+    .stat strong { color: var(--white); font-weight: 700; }
+    .stat.hot {
+      border-color: var(--shu);
+      color: var(--shu-hot);
+      background: rgba(196, 30, 58, 0.1);
+    }
+
+    .toc {
+      border: 1px solid var(--line);
+      background: var(--bg-2);
+      padding: 0.85rem 0.9rem 0.95rem;
+      border-radius: var(--radius);
+    }
+    .toc h2 {
+      margin: 0 0 0.65rem;
+      font-size: 0.72rem;
+      letter-spacing: 0.16em;
+      color: var(--gold);
+      font-weight: 800;
+    }
+    .toc ol { list-style: none; margin: 0; padding: 0; }
+    .toc li { margin: 0; }
+    .toc a {
+      display: flex;
+      justify-content: space-between;
+      gap: 0.5rem;
+      text-decoration: none;
+      color: var(--ink-dim);
+      font-size: 0.82rem;
+      padding: 0.38rem 0.2rem;
+      border-bottom: 1px solid transparent;
+    }
+    .toc a:hover { color: var(--white); border-bottom-color: var(--line-hot); }
+    .toc .t-title { font-weight: 600; }
+    .toc .t-min { color: var(--gold); font-size: 0.72rem; font-weight: 700; flex-shrink: 0; }
+
+    .main { max-width: var(--measure); }
+
+    .digest-banner {
+      display: flex;
+      gap: 0.75rem;
+      align-items: flex-start;
+      background: #141014;
+      border: 1px solid var(--line);
+      border-left: 3px solid var(--shu);
+      padding: 0.85rem 1rem;
+      margin-bottom: 1.5rem;
+      font-size: 0.78rem;
+      color: var(--ink-dim);
+      line-height: 1.55;
+    }
+    .digest-banner .tag {
+      flex-shrink: 0;
+      background: var(--shu);
+      color: #fff;
+      font-size: 0.65rem;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      padding: 0.28rem 0.5rem;
+      border-radius: var(--radius);
+    }
+
+    .hero {
+      margin-bottom: 2rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid var(--line);
+      position: relative;
+    }
+    .hero::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -1px;
+      width: 4.5rem;
+      height: 2px;
+      background: var(--shu);
+    }
+    .kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.7rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--shu-hot);
+      font-weight: 800;
+      margin-bottom: 0.85rem;
+    }
+    .kicker::before {
+      content: "◆";
+      font-size: 0.55rem;
+      color: var(--gold);
+    }
+    .hero h1 {
+      font-family: "Shippori Mincho", "Noto Serif JP", serif;
+      font-size: clamp(1.85rem, 4vw, 2.55rem);
+      font-weight: 700;
+      line-height: 1.2;
+      margin: 0 0 0.75rem;
+      color: var(--white);
+      letter-spacing: 0.02em;
+    }
+    .hero p {
+      margin: 0;
+      color: var(--ink-dim);
+      font-size: 0.98rem;
+      max-width: 36rem;
+    }
+
+    article.piece {
+      background: var(--bg-card);
+      border: 1px solid var(--line);
+      margin-bottom: 1.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+    article.piece::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: linear-gradient(90deg, var(--shu) 0%, var(--shu) 35%, var(--gold) 35%, var(--gold) 42%, transparent 42%);
+    }
+
+    .piece-inner { padding: 1.6rem 1.55rem 1.35rem; }
+
+    .piece-head {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-bottom: 0.85rem;
+    }
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      border: 1px solid var(--line);
+      background: #111;
+      color: var(--ink-dim);
+      padding: 0.22rem 0.6rem;
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      border-radius: var(--radius);
+    }
+    .chip.interest {
+      border-color: var(--shu);
+      color: var(--shu-hot);
+      background: rgba(196, 30, 58, 0.12);
+    }
+    .chip.mins {
+      border-color: var(--gold);
+      color: var(--gold);
+      background: transparent;
+    }
+
+    .piece h2 {
+      font-family: "Noto Serif JP", "Shippori Mincho", "Yu Mincho", serif;
+      font-size: 1.38rem;
+      font-weight: 700;
+      line-height: 1.5;
+      margin: 0 0 0.6rem;
+      color: var(--white);
+      letter-spacing: 0.02em;
+    }
+
+    .why {
+      margin: 0 0 1rem;
+      color: var(--ink-dim);
+      font-size: 0.9rem;
+      border-left: 2px solid var(--gold);
+      padding-left: 0.85rem;
+    }
+
+    .source {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.65rem 1.1rem;
+      font-size: 0.76rem;
+      color: var(--ink-mute);
+      margin-bottom: 1.25rem;
+    }
+    .source a {
+      color: var(--shu-hot);
+      text-decoration: none;
+      font-weight: 600;
+    }
+    .source a:hover { color: var(--gold); }
+
+    .ja {
+      font-family: "Noto Serif JP", "Hiragino Mincho ProN", "Yu Mincho", serif;
+      font-size: 1.08rem;
+      line-height: 2;
+      letter-spacing: 0.03em;
+      color: #ebe7e1;
+    }
+    .ja p { margin: 0 0 1.15em; }
+    .ja p:last-child { margin-bottom: 0; }
+
+    .continue {
+      margin-top: 1.25rem;
+      padding-top: 1rem;
+      border-top: 1px solid var(--line);
+      font-size: 0.86rem;
+    }
+    .continue a {
+      color: var(--white);
+      text-decoration: none;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      border-bottom: 2px solid var(--shu);
+      padding-bottom: 0.1rem;
+    }
+    .continue a:hover {
+      color: var(--shu-hot);
+      border-bottom-color: var(--gold);
+    }
+
+    footer.site {
+      max-width: var(--measure);
+      margin-top: 1.75rem;
+      color: var(--ink-mute);
+      font-size: 0.72rem;
+      letter-spacing: 0.06em;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+    footer.site::before {
+      content: "";
+      width: 1.25rem;
+      height: 2px;
+      background: var(--shu);
+    }
+
+  
+    .excerpt-label { font-size: 0.66rem; letter-spacing: 0.18em; color: var(--gold); font-weight: 800; margin: 0 0 0.6rem; }
+    .brand-sub a, .stat a { color: var(--gold); text-decoration: none; }
+    .toc .t-min { font-variant-numeric: tabular-nums; }
+  </style>
+</head>
+<body>
+  <div class="stage-bar" aria-hidden="true"></div>
+
+  <div class="wrap">
+    <aside class="sidebar">
+      <div class="brand">
+        <span class="brand-mark" lang="ja">読解<em>幕</em></span>
+      </div>
+      <p class="brand-sub">Kabuki Digest · <a href="/japanese-digest/history/">History</a></p>
+      <p class="meta">2026-11-14 · America/Sao_Paulo</p>
+      <div class="stat-row">
+        <span class="stat"><strong>50</strong> min</span>
+        <span class="stat"><strong>16</strong> pieces</span>
+        <span class="stat"><strong>~12,100</strong> 字</span>
+        <span class="stat"><a href="/japanese-digest/history/">History</a></span>
+      </div>
+
+      <nav class="toc" aria-label="Índice">
+        <h2 lang="ja">本日の演目</h2>
+        <ol>
+          <li>
+            <a href="#p1">
+              <span class="t-title" lang="ja">山陰の猛将、最期は九州の陣中で――吉川元春</span>
+              <span class="t-min">4′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p2">
+              <span class="t-title" lang="ja">ドラマの刺客にモデルはいたか――伊賀越えの案内役・柘植清広</span>
+              <span class="t-min">4′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p3">
+              <span class="t-title" lang="ja">兵馬俑に残る2200年前の指紋――作り手には女性と子供も</span>
+              <span class="t-min">3′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p4">
+              <span class="t-title" lang="ja">海に眠るエルトゥールル号――引き揚げた滑車を「糖」で守る</span>
+              <span class="t-min">2′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p5">
+              <span class="t-title" lang="ja">最後の将軍が撮った一枚――慶喜の愛猫「ハン」</span>
+              <span class="t-min">3′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p6">
+              <span class="t-title" lang="ja">人を喰う水妖、キノコを食べる妖精――ウェールズの怪異</span>
+              <span class="t-min">3′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p7">
+              <span class="t-title" lang="ja">テオティワカンは「文字」を持っていた――洞窟の「歌う山」</span>
+              <span class="t-min">4′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p8">
+              <span class="t-title" lang="ja">つり橋のカメラに新種のホエザル――守られていた「未知のサル」</span>
+              <span class="t-min">3′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p9">
+              <span class="t-title" lang="ja">タコはなぜ頭より狭い穴を抜けられる？</span>
+              <span class="t-min">3′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p10">
+              <span class="t-title" lang="ja">人が死ぬとき、体の中で何が起きているのか</span>
+              <span class="t-min">3′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p11">
+              <span class="t-title" lang="ja">流暢なAIは間違っていても信用される</span>
+              <span class="t-min">2′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p12">
+              <span class="t-title" lang="ja">妻の収入が増えると夫は家事をするのか――日本の最低賃金で検証</span>
+              <span class="t-min">2′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p13">
+              <span class="t-title" lang="ja">Claude Codeを無人で回す――exit 0を信じて5週間</span>
+              <span class="t-min">5′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p14">
+              <span class="t-title" lang="ja">あいみょんも通った「まんぼう」――西宮、150年の激セマトンネル</span>
+              <span class="t-min">5′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p15">
+              <span class="t-title" lang="ja">80年ぶりの「故郷」――戦時中を過ごした北野の異人館へ</span>
+              <span class="t-min">2′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p16">
+              <span class="t-title" lang="ja">HYDE、オーストリア共和国の勲章を受ける</span>
+              <span class="t-min">2′</span>
+            </a>
+          </li>
+        </ol>
+      </nav>
+    </aside>
+
+    <main class="main">
+      <div class="digest-banner">
+        <span class="tag">TRIAGE</span>
+        <span>História: Kikkawa Motoharu (BUSHOO, aniversário de morte amanhã), Tsuge Kiyohiro e a fuga de Ieyasu por Iga (BUSHOO), digitais nos guerreiros de terracota (草の実堂), Ertuğrul e arqueologia subaquática (Sankei), a foto do gato de Yoshinobu (Japaaan). Mundo/ciência: folclore galês, escrita de Teotihuacan, bugio novo do Mato Grosso (NatGeo), polvo atravessando buracos, o que acontece quando morremos. IA/dev: fluência engana leitores; Claude Code rodando sem humano (Zenn). Sociedade: salário mínimo × tarefas domésticas no Japão. Hyōgo/trem: túneis “manbō” de Nishinomiya; volta aos ijinkan de Kitano. Rock: HYDE condecorado pela Áustria. Pontos fracos: Sankei e Kobe Shimbun só a abertura (paywall/limite); nada de BABYMETAL/DIR EN GREY com texto bom hoje; nada de sailing/visto; Japaaan e GIGAZINE hoje mais curtos.</span>
+      </div>
+
+      <header class="hero">
+        <div class="kicker">Daily curated reading</div>
+        <h1 lang="ja">吉川元春の最期、伊賀越えの案内役・柘植清広、兵馬俑の指紋、エルトゥールル号の水中考古学、慶喜の愛猫写真、ウェールズの怪異、テオティワカンの文字、つり橋の新種ホエザル、タコのすり抜け術、人が死ぬとき体で起きること、流暢なAIの罠、妻の収入と夫の家事、Claude Code無人運用、西宮のまんぼうトンネル、北野異人館への里帰り、HYDEとオーストリア</h1>
+        <p lang="ja">今日の幕開けは、明日が命日の「毛利両川」の猛将・吉川元春。山陰で尼子氏と戦い抜き、陣中で『太平記』全40冊を書き写した男は、かつての敵・秀吉の命で渡った九州・小倉で最期を迎えました。続いて、本能寺の変の直後、家康を伊賀の山道から伊勢へ導いたと伝わる伊賀の武士・柘植清広。ドラマの刺客と一字違いの実在の人物です。歴史と考古学の幕では、兵馬俑に残された2200年前の指紋が語る「女性と子供の作り手」、熊野灘の海底に眠るエルトゥールル号を砂糖の一種トレハロースで守る日土の研究者たち、そして最後の将軍・徳川慶喜が静岡で撮った愛猫ハンの一枚。世界の幕は、ウェールズの奇怪な妖怪たちと、洞窟の「歌う山」が裏付けたテオティワカンの文字。科学の幕は、ブラジル・マトグロッソのつり橋に写っていた新種のホエザル、頭より狭い穴を抜けるタコ、そして人が死ぬとき体の中で起きる連鎖。AIの幕は、流暢なら誤りも信じてしまう人間の弱さと、exit 0を信じて5週間失敗し続けたClaude Code無人運用の記録。日本社会からは、最低賃金と夫婦の家事分担。兵庫の幕は、あいみょんも通った西宮の「まんぼう」トンネルと、80年ぶりに北野の異人館へ帰ってきた家族たち。締めはオーストリアから勲章を受けたHYDEです。約50分の読解です。</p>
+      </header>
+
+      <article class="piece" id="p1">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★★</span> <span class="chip mins">4 min</span> <span class="chip" lang="ja">吉川元春</span> <span class="chip" lang="ja">毛利両川</span> <span class="chip" lang="ja">尼子氏</span> <span class="chip" lang="ja">九州攻め</span> <span class="chip" lang="ja">太平記</span>
+          </div>
+          <h2 lang="ja">猛将・吉川元春が迎えた意外な最期｜なぜ秀吉の九州攻めに出陣したのか</h2>
+          <p class="why">Amanhã (15/11/1586) é o aniversário de morte de Kikkawa Motoharu, o “punho” dos Mōri no San’in. Herdou um clã cujo líder foi forçado a se aposentar e depois assassinado, copiou à mão os 40 volumes do Taiheiki em plena guerra contra os Amago — e morreu doente em Kokura lutando a mando de Hideyoshi, o ex-inimigo.</p>
+          <div class="source">
+            <span lang="ja">BUSHOO!JAPAN（武将ジャパン）</span>
+            <a href="https://bushoojapan.com/bushoo/mouri/2026/11/14/223057" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>天正十四年11月15日（1586年12月25日）は、吉川元春の命日です。</p>
+            <p>そんな元春が亡くなったのは、長年戦い続けた山陰ではなく九州・小倉の陣中であり、しかも九州攻めは、かつて敵として戦った羽柴秀吉の命による出陣です。</p>
+            <p>元春は一体なぜ、最後の戦場を九州で迎えることになったのか？</p>
+            <p>……</p>
+            <p>吉川元春は享禄三年（1530年）、前述の通り毛利元就の次男として生まれました。</p>
+            <p>同年9月、隠居先を襲われた興経は、子の千法師とともに殺害され、吉川家の嫡流は絶えます。</p>
+            <p>……</p>
+            <p>しかし当時の山陰には、出雲の尼子氏が大きな勢力を築いています。</p>
+            <p>補給を断たれた富田城は孤立し、永禄九年（1566年）、尼子義久はついに降伏。</p>
+            <p>……</p>
+            <p>永禄六年（1563年）から永禄八年（1565年）にかけて、元春は軍記物語『太平記』全40冊を書き写しました。</p>
+            <p>尼子氏と戦っていたさなかのことで、この写本は今も国の重要文化財として伝わっています。</p>
+            <p>……</p>
+            <p>吉川元春の兄で当主の毛利隆元が永禄六年（1563年）に急死。</p>
+            <p>山陰の元春と、山陽の隆景――二人がそれぞれの方面軍を受け持ち、輝元を支える形だったのでしょう。</p>
+            <p>……</p>
+            <p>敵方の先頭に立っていたのが、織田方の羽柴秀吉でした。</p>
+            <p>天正九年（1581年）、鳥取城の救援を目指した元春父子は、南条氏に進軍を阻まれ、救援活動がままならないうちに鳥取城は秀吉の兵糧攻めで落ちました。</p>
+            <p>そんな窮地に追い込まれて起こったのが本能寺の変でした。</p>
+            <p>結果、毛利家と秀吉の間で講和が結ばれ、両者の戦いはいったん終了と相成るわけですが、幾度も激しい戦いをしていた秀吉と元春の関係はどうなったのでしょう。</p>
+            <p>……</p>
+            <p>秀吉のことを嫌っていた――そんなイメージも根強いですが、少なくとも元春の行動からそうとは読み取れません。</p>
+            <p>……</p>
+            <p>天正十四年（1586年）、九州では島津氏が大友氏の本拠・豊後へ攻め込もうとしており、秀吉は島津攻めを決断、その先兵として送り込んだのが毛利家でした。</p>
+            <p>毛利勢は小倉城を手はじめに、豊前島津方の城を次々に攻略。</p>
+            <p>天正十四年（1586年）11月15日、元春は小倉の陣中で病のため世を去ってしまいます。</p>
+            <p>嫡男の元長も、翌年の九州出兵の陣中で亡くなり、吉川家は弟の吉川広家が継ぐことになります。</p>
+          </div>
+          <p class="continue"><a href="https://bushoojapan.com/bushoo/mouri/2026/11/14/223057" target="_blank" rel="noopener" lang="ja">続きを読む · BUSHOO!JAPAN（武将ジャパン）</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p2">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★☆</span> <span class="chip mins">4 min</span> <span class="chip" lang="ja">柘植清広</span> <span class="chip" lang="ja">神君伊賀越え</span> <span class="chip" lang="ja">徳川家康</span> <span class="chip" lang="ja">伊賀</span> <span class="chip" lang="ja">砲術</span>
+          </div>
+          <h2 lang="ja">真田十勇士の刺客・柘植清弘は実在した？家康を助けたほぼ同名の伊賀の武士</h2>
+          <p class="why">O vilão ninja da série “Sanada Jūyūshi” tem um quase-homônimo real: Tsuge Kiyohiro, samurai de Iga que guiou Ieyasu na fuga desesperada pelas montanhas após Honnōji. Curioso: a crônica oficial dos Tokugawa nem menciona Hattori Hanzō como herói — e Kiyohiro acabou fundando uma escola de arcabuz.</p>
+          <div class="source">
+            <span lang="ja">BUSHOO!JAPAN（武将ジャパン）</span>
+            <a href="https://bushoojapan.com/bushoo/tokugawa/2026/11/14/223069" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>真田十勇士を追い詰める徳川の刺客は、実在したのか――。</p>
+            <p>テレビ朝日で放送中の『真田十勇士 SHADOWS OF THE TEN NINJA』で、関口メンディーさんが演じる柘植清弘（つげきよひろ）。</p>
+            <p>実は歴史の記録には、一字違いの「柘植清広」という伊賀の武士が登場します。</p>
+            <p>しかもこの清広、本能寺の変直後、徳川家康の命がけの「神君伊賀越え」に関わったと伝わる人物です。</p>
+            <p>……</p>
+            <p>柘植清広は、伊賀（三重県西部）の武士で、通称を三之丞（さんのじょう）といいました。</p>
+            <p>伊賀流忍者博物館が所蔵する鉄砲術伝書の解説によれば、清広は「家康の伊賀越えに供奉した伊賀郷士」とされています。</p>
+            <p>……</p>
+            <p>きっかけは天正十年（1582年）6月2日、本能寺の変です。</p>
+            <p>織田信長が明智光秀に討たれたとき、徳川家康はわずかな供を連れて堺を見学した直後のことでした。</p>
+            <p>敵味方もはっきりしない土地を、わずかな供で通行するのはまさに命がけです。</p>
+            <p>そこで選ばれたのが、山城から近江の信楽を通り、伊賀を越えて伊勢へ出る山中の道でした。</p>
+            <p>……</p>
+            <p>それによると、柘植清広は一族や甲賀の者たちを誘い、人質を出して道案内をし、伊勢まで家康のお供をしたといいます。</p>
+            <p>しかも伊勢路までお供した者たちは、のちに徳川の直参に取り立てられ、途中で引き返した200人ほどは、服部半蔵正成の配下の伊賀同心になったとも記されています。</p>
+            <p>実はこの『徳川実紀』、伊賀越えの場面で、のちに有名になる服部半蔵が大活躍したとは書いていません。</p>
+            <p>家康の道案内として名が挙がるのは、むしろ清広たちだったのです。</p>
+            <p>ただし山田氏は、『徳川実紀』は伊賀者の由緒書などをもとにまとめられており、どこまで信頼できるか疑問なところもあると指摘。</p>
+            <p>……</p>
+            <p>柘植流、そして威風流と呼ばれる砲術の祖とされ、鉄砲の技に長じていたとされるのですね。</p>
+            <p>柘植三之丞清広を流祖とする砲術の伝書であり、今も伊賀流忍者博物館に残されています。</p>
+            <p>……</p>
+            <p>しかし記録の清広は、家康を伊勢へと導いた案内役であり、そして鉄砲の技を後世に伝えた砲術家でもありました。</p>
+            <p>ドラマの怪力の刺客とは異なる姿で、清広の名は、伊賀越えの伝承と一冊の伝書の中に今も残っているのです。</p>
+          </div>
+          <p class="continue"><a href="https://bushoojapan.com/bushoo/tokugawa/2026/11/14/223069" target="_blank" rel="noopener" lang="ja">続きを読む · BUSHOO!JAPAN（武将ジャパン）</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p3">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★★</span> <span class="chip mins">3 min</span> <span class="chip" lang="ja">兵馬俑</span> <span class="chip" lang="ja">始皇帝</span> <span class="chip" lang="ja">指紋</span> <span class="chip" lang="ja">考古学</span> <span class="chip" lang="ja">睡虎地秦簡</span>
+          </div>
+          <h2 lang="ja">始皇帝の兵馬俑「2200年前の指紋」から浮かび上がった真実とは</h2>
+          <p class="why">Medindo a largura das cristas de 79 impressões digitais deixadas no barro dos guerreiros de terracota, pesquisadores estimaram quem os fez: ~45% homens, ~33% mulheres e ~22% crianças com menos de 15 anos. E as leis de Qin em tiras de bambu confirmam que mulheres e jovens eram contados como mão de obra do Estado.</p>
+          <div class="source">
+            <span lang="ja">草の実堂</span>
+            <a href="https://kusanomido.com/study/history/chinese/china/136700/" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>中国・西安郊外にある始皇帝陵には、約2200年前に作られた兵馬俑（へいばよう）が眠っている。</p>
+            <p>2026年10月、この兵馬俑について興味深い研究結果が発表された。陶製の兵士たちに残されていた指紋を詳しく調べたところ、製作に携わった人々の年齢や性別が、ある程度推定できるようになったというのだ。</p>
+            <p>しかもその指紋からは、成人男性だけでなく、女性や15歳未満の子供も製作に関わっていた可能性が浮かび上がってきた。</p>
+            <p>……</p>
+            <p>兵馬俑は1974年、地元の農民たちが井戸を掘っていた際に偶然発見され、世界中を驚かせた。</p>
+            <p>そして今回、研究者たちが注目したのは、こうした兵馬俑を作る途中で、まだ柔らかい粘土に残された指紋だった。</p>
+            <p>……</p>
+            <p>研究チームは兵馬俑1号坑の一部を調べ、頭部や鎧、腕などに残された91個の指紋を記録した。</p>
+            <p>指紋には「隆線」と呼ばれる細かな筋があり、その幅には年齢や性別による傾向が見られる。研究チームは隆線の幅を測定し、統計的な推定に用いる「ベイズ混合モデル」で分析した。</p>
+            <p>その結果、調査した指紋の構成は、成人男性が約45.0％、成人女性が約32.7％、15歳未満の子供が約22.3％と推定された。</p>
+            <p>兵馬俑の製作に女性や子供も参加していた可能性を、陶俑そのものに残る痕跡から示したのである。</p>
+            <p>……</p>
+            <p>実は秦の時代には、女性や子供も国家の仕事に駆り出されていたことが、当時の法律から分かっている。</p>
+            <p>1975年、湖北省で発見された「睡虎地秦簡（すいこちしんかん）」という竹簡には、秦の法律や労働に関する決まりが記されていた。</p>
+            <p>その中の「工人程」という規定には、隷属身分にあった女性や、働くことのできる年少者についても、労働力として計算する仕組みが定められている。</p>
+            <p>つまり、秦の国家事業を支えていたのは成人男性だけではなく、女性や子供たちも労働力として組み込まれていたのである。</p>
+            <p>……</p>
+            <p>兵馬俑の製作現場でも、熟練した職人のそばで若い見習いたちが作業を手伝いながら、少しずつ技術を身につけていたのかもしれない。</p>
+            <p>発見から半世紀以上が過ぎた今も、2200年前の兵馬俑は、私たちに新たな歴史を見せ続けている。</p>
+          </div>
+          <p class="continue"><a href="https://kusanomido.com/study/history/chinese/china/136700/" target="_blank" rel="noopener" lang="ja">続きを読む · 草の実堂</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p4">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★☆</span> <span class="chip mins">2 min</span> <span class="chip" lang="ja">エルトゥールル号</span> <span class="chip" lang="ja">水中考古学</span> <span class="chip" lang="ja">串本</span> <span class="chip" lang="ja">トレハロース</span> <span class="chip" lang="ja">日土友好</span>
+          </div>
+          <h2 lang="ja">海に眠るトルコ軍艦、引き揚げられた木製滑車の保存に「トレハロース」水中考古学の最前線</h2>
+          <p class="why">A fragata otomana Ertuğrul afundou num tufão em Kushimoto (1890), ~600 mortos, 69 salvos pelos ilhéus — e 95 anos depois a Turquia resgatou japoneses presos no Irã. Hoje um arqueólogo subaquático turco de 74 anos e a Universidade de Nara conservam as peças de madeira usando… açúcar (trealose). Só a abertura está livre.</p>
+          <div class="source">
+            <span lang="ja">産経ニュース</span>
+            <a href="https://www.sankei.com/article/20261114-RNDATIOHWRNGNGJRWAFCP7CP3Q/" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>太平洋に面した熊野灘の荒々しい潮流にもまれながら、140年近く海底に眠るトルコ軍艦「エルトゥールル号（エ号）」の残骸。和歌山・紀伊大島沖の潜水調査で砲弾や銃、金貨など8000点以上が引き揚げられた。「発掘以上に重要なのが保存と修復。これなくしてエ号のプロジェクトは全うしない」。20年近く調査を続けるトルコの水中考古学者の信念だ。保存修復を支えるのが、全国初の「文化財学科」創設で知られる奈良大学（奈良市）。国境を超えた研究者の思いが両国の懸け橋となっている。</p>
+            <p>エ号が紀伊大島沖（同県串本町）で遭難したのは明治23（1890）年9月16日夜。台風で岩礁に衝突して沈没し乗組員約600人が犠牲になったが、島民によって69人が救助された。</p>
+            <p>「エ号の恩返し」。95年後の昭和60（1985）年3月、イラン・イラク戦争で日本人がイランに取り残された際、救援に向かったのがトルコ政府だった。</p>
+            <p>「エ号は両国のすばらしい友情を築くきっかけになった。世界に知ってもらうにはこの遺産を守り伝えなければ」。平成19年から発掘を続けるトルコの水中考古学者、トゥファン・トゥランルさん（74）は話す。</p>
+          </div>
+          <p class="continue"><a href="https://www.sankei.com/article/20261114-RNDATIOHWRNGNGJRWAFCP7CP3Q/" target="_blank" rel="noopener" lang="ja">続きを読む · 産経ニュース</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p5">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★☆</span> <span class="chip mins">3 min</span> <span class="chip" lang="ja">徳川慶喜</span> <span class="chip" lang="ja">写真</span> <span class="chip" lang="ja">静岡</span> <span class="chip" lang="ja">猫</span> <span class="chip" lang="ja">明治</span>
+          </div>
+          <h2 lang="ja">徳川慶喜の150年前の「愛猫写真」が優しすぎる！幕末を動かした“最後の将軍”の意外な素顔</h2>
+          <p class="why">Um gato branquinho sobre uma almofada, com golinha de babados e uma bolinha ao lado: o fotógrafo foi Tokugawa Yoshinobu, o último xogum, que passou 30 anos aposentado em Shizuoka caçando, pintando a óleo e fotografando. A foto até entrou na biografia oficial organizada por Shibusawa Eiichi.</p>
+          <div class="source">
+            <span lang="ja">Japaaan（ジャパーン）</span>
+            <a href="https://mag.japaaan.com/archives/293259" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>洋間らしい部屋に座布団が敷かれ、その上に白っぽい猫がちょこんと座っています。首にはフリフリの襟巻のようなもの。横には、猫用の小さな鞠がひとつ置いてあります。</p>
+            <p>少しぽっちゃりとしたその猫は、カメラをじっと見つめているわけでもなく、ただそこにいます。それだけの写真なのです。けれど、この写真を撮った人物の名前を知ると、見え方がまるで変わります。</p>
+            <p>撮ったのは、徳川幕府最後の将軍、徳川慶喜その人でした。</p>
+            <p>……</p>
+            <p>この写真に写る猫には、名前があります。ハン、といいます。</p>
+            <p>この写真、いまは「静岡猫ハン」という名前で茨城県立歴史館に収まっています。静岡市美術館の「家康と慶喜―徳川家と静岡」展に出たときには、「慶喜が愛猫を撮る！」というキャプションが付いていました。</p>
+            <p>ちなみにこの写真、渋沢栄一が編んだ『徳川慶喜公伝』の第四巻にも載っています。将軍の伝記に猫の写真。なんだかそれだけで、慶喜がぐっと身近な人に思えてきます。</p>
+            <p>……</p>
+            <p>慶喜がこの写真を撮ったのは、静岡での隠居時代のこととされています。慶応三年（1867年）に大政奉還を行い、鳥羽・伏見の戦いに敗れたのち謹慎の身となった慶喜は、翌年の七月、静岡の宝台院に移ります。</p>
+            <p>謹慎が解けても、慶喜は静岡を離れませんでした。徳川宗家の隠居として、およそ三十年ものあいだ、静岡で暮らしたといいます。</p>
+            <p>その暮らしは、将軍時代とはまるで別物でした。鷹狩に出かけたり、投網を打ったり、狩りをしたりしました。油彩画も描き、写真も撮りました。政治の世界からはすっかり離れ、自分の好きなことだけに没頭する日々。</p>
+            <p>慶喜が将軍として生きることをやめたとき、初めて自分の意志で選びとる人生が始まりました。明治を生きる、初めての「市民」だったのかもしれません。</p>
+            <p>ハンがその後どう過ごしたのか、詳しいことはわかりません。ただ一枚の写真だけが、150年の時をこえて残っています。</p>
+            <p>座布団の上にちょこんと座る、白っぽい猫。撮った男はもういませんけれど、猫への愛情だけは、写真の中にそのまま残っているようです。</p>
+          </div>
+          <p class="continue"><a href="https://mag.japaaan.com/archives/293259" target="_blank" rel="noopener" lang="ja">続きを読む · Japaaan（ジャパーン）</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p6">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★☆☆</span> <span class="chip mins">3 min</span> <span class="chip" lang="ja">ウェールズ</span> <span class="chip" lang="ja">妖精</span> <span class="chip" lang="ja">民話</span> <span class="chip" lang="ja">ケルト</span> <span class="chip" lang="ja">アーヴァンク</span>
+          </div>
+          <h2 lang="ja">ウェールズに伝わる奇怪な伝説 〜人を喰う水妖、毒キノコを食べる妖精、死を告げる魔犬</h2>
+          <p class="why">Folclore galês para comparar com os yōkai: o Afanc, “castor gigante” que devora gente; o Water Leaper, sapo alado que rouba isca dos pescadores; fadas que comem cogumelos venenosos (a Rainha Mab de Shakespeare seria uma delas); e cães do além cujo uivo fica mais alto quanto mais longe estão.</p>
+          <div class="source">
+            <span lang="ja">草の実堂</span>
+            <a href="https://kusanomido.com/study/fushigi/story/135832/" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>なかでもウェールズは、古代ブリテン島に暮らしていたブリトン人の文化を色濃く受け継ぐ土地として知られる。</p>
+            <p>その伝承に登場するのは、人間を水中へ引きずり込む怪物や、キノコを食べる小さな妖精、死を告げる不気味な猟犬など、一風変わった存在ばかりである。</p>
+            <p>……</p>
+            <p>その代表格が、凶悪な水の妖怪アーヴァンク（Afanc）である。</p>
+            <p>外見には諸説あるが、巨大なビーバーの姿で描かれることが多く、家畜や人間を水中に引きずり込んで殺し、貪り喰らう恐ろしい怪物として知られている。</p>
+            <p>学者エドワード・ルイド（1660～1709年）が蒐集した民間伝承によると、ある時アーヴァンクは美女の子守歌にうっとりし、その膝で眠りこけてしまったという。</p>
+            <p>すかさず隠れていた男衆が怪物を捕縛したが、目を覚ましたアーヴァンクは怒り狂い、哀れにも美女の乳房を千切り取ってしまったそうだ。</p>
+            <p>……</p>
+            <p>ウェールズでは世にも珍しい「キノコを主食とする」妖精の伝説がある。</p>
+            <p>この妖精は非常に背丈が小さく、木立や谷間に出没するが、人間がその姿を目にすることは滅多にない。「カエルの腰掛け」と呼ばれる毒キノコや、「妖精のバター」と呼ばれる不思議な物質を食するとされる。</p>
+            <p>かの『ロミオとジュリエット』の登場人物「マブの女王」も、エサソンであるとされている。</p>
+            <p>……</p>
+            <p>アンヌンとはウェールズの伝承における冥界のような場所であり、そこに棲むクーン・アンヌンは、白い体に赤い耳を持つ恐ろしい猟犬として知られている。</p>
+            <p>面白い特徴として、この犬の唸り声は遠くにいればいるほど大きく聞こえ、反対に、近くにいればいるほど小さく聞こえるのだそうだ。</p>
+          </div>
+          <p class="continue"><a href="https://kusanomido.com/study/fushigi/story/135832/" target="_blank" rel="noopener" lang="ja">続きを読む · 草の実堂</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p7">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★★</span> <span class="chip mins">4 min</span> <span class="chip" lang="ja">テオティワカン</span> <span class="chip" lang="ja">文字体系</span> <span class="chip" lang="ja">メソアメリカ</span> <span class="chip" lang="ja">巡礼</span> <span class="chip" lang="ja">考古学</span>
+          </div>
+          <h2 lang="ja">古代都市テオティワカンは本格的な「文字」を持っていた。洞窟壁画が裏付け</h2>
+          <p class="why">Três glifos vermelhos numa caverna de Chalcatzingo, a 110 km de Teotihuacan: “Montanha que Canta”, um título de guerreiros e uma moldura de estrelas em volta de uma laje queimada. Reforça que a maior cidade das Américas tinha escrita de verdade — misturando sinais de sentido e de som, como kanji + kana.</p>
+          <div class="source">
+            <span lang="ja">カラパイア</span>
+            <a href="https://karapaia.com/archives/632293.html" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>紀元前2世紀から6世紀頃に繁栄したアメリカ大陸最大級の古代都市「テオティワカン」にはまだまだ謎が隠されている。</p>
+            <p>壁画や土器には多くの絵文字のような記号が残されているが、それらが本物の文字なのかどうかはわかっていなかった。</p>
+            <p>コペンハーゲン大学などの研究チームは、メキシコにあるチャルカツィンゴ遺跡の洞窟で、約1500年前の壁画を最新技術で再調査したところ、テオティワカンの人々が、本格的な文字体系を持っていたことを示す新たな証拠が見つかった。</p>
+            <p>壁画には「歌う山」という地名や戦士を示す独自の絵文字が描かれており、テオティワカンの人々が遠方から神聖な山を訪れて儀式を行っていたことがうかがえるという。</p>
+            <p>……</p>
+            <p>最初の絵文字は、山の形を簡単な絵にした象形文字で、開いた口から渦巻きが出ている。</p>
+            <p>テオティワカンの絵文字では、渦巻きは「言葉」や「歌」を表す。研究チームは、この絵文字を「歌う山」という地名だと解釈している。</p>
+            <p>2つ目の絵文字は、ビーズの首飾り、布、そして古代の投槍器であるアトラトルから放たれた投げ矢を組み合わせたものだ。</p>
+            <p>研究チームは組み合わせを、特定の戦士団を示す軍事的な称号だと解釈している。</p>
+            <p>3つ目は文字というより、火で黒く焦げた岩棚の周囲を直接囲む、星で装飾された長方形の枠である。</p>
+            <p>星の枠は、テオティワカンの美術において、死んだ戦士を追悼する儀式で立てられる日よけの屋根として描かれている。</p>
+            <p>……</p>
+            <p>近くにある丘の一つは、かつてナワトル語（メキシコ先住民の言語）で「歌う山」を意味する「クイカテペク」と呼ばれていた。</p>
+            <p>壁画の絵文字はデルガド山そのものの名前を示している可能性があり、山の名が1000年以上にわたって受け継がれてきたのかもしれない。</p>
+            <p>テオティワカンのテティトラ地区にある壁画には、神官たちが香をまきながら「歌う山」へ向かう儀式の行列が描かれている。</p>
+            <p>テオティワカンにある「歌う山」の記録と、チャルカツィンゴの山に直接描かれた「歌う山」の絵文字は一致する。</p>
+            <p>……</p>
+            <p>現在までに研究者たちは、場所、人物、称号、暦、行動などを含む120近くの記号を特定している。</p>
+            <p>テオティワカンの文字は意味を表す文字と音を表す文字を組み合わせたもので、漢字とかなを使う日本語に似た仕組みを持っている。</p>
+            <p>洞窟壁画の再調査は、テオティワカンが本格的な「文字」を持っていたことをさらに裏付ける結果となった。</p>
+          </div>
+          <p class="continue"><a href="https://karapaia.com/archives/632293.html" target="_blank" rel="noopener" lang="ja">続きを読む · カラパイア</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p8">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★☆</span> <span class="chip mins">3 min</span> <span class="chip" lang="ja">ホエザル</span> <span class="chip" lang="ja">新種</span> <span class="chip" lang="ja">アマゾン</span> <span class="chip" lang="ja">マトグロッソ</span> <span class="chip" lang="ja">つり橋</span>
+          </div>
+          <h2 lang="ja">【動画】実は新種だったホエザル、つり橋のカメラにひょっこり</h2>
+          <p class="why">Uma espécie nova de bugio, Alouatta matogrossensis — do Mato Grosso! —, já vinha atravessando as pontes de corda sobre estradas da Amazônia do projeto Reconecta, flagrada pelas câmeras antes mesmo de ter nome. Separada há mais de 500 mil anos por rios e pelo Cerrado.</p>
+          <div class="source">
+            <span lang="ja">ナショナル ジオグラフィック日本版</span>
+            <a href="https://natgeo.nikkeibp.co.jp/atcl/news/26/111200616/" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>新種が見つかったものの、命名のためにラテン語の辞書を取り出す間もなく、その動物がすでに危機的状況にあると分かる。野生生物保護の世界ではよくある話だ。</p>
+            <p>この新発見を、2026年10月30日付けの学術誌「Communications Biology」で報告する前に、国際研究チームはブラジルの道路にロープ製のつり橋を架けるプロジェクト「Projeto Reconecta」に連絡を取った。</p>
+            <p>つり橋に設置したカメラトラップ（自動撮影装置）には、オマキザル、マーモセット、ティティといった野生のサルたちがつり橋を渡る様子が何千枚も記録されていた。そのなかに、今回の新種が写っていたのだ。</p>
+            <p>「私たちが架けた橋を新種のサルが利用していたなんて、本当に驚きでした」と、Projeto Reconectaを率いる道路生態学者でありナショナルジオグラフィックのエクスプローラー（探求者）でもある、フェルナンダ・アブラ氏は振り返る。</p>
+            <p>……</p>
+            <p>ホエザルの仲間は西半球に生息する最大級の霊長類で、中南米全域に分布している。100デシベルを超える非常に大きな鳴き声で知られる。その声は数キロ先まで聞こえるほどだ。それでも、新種だと特定するには骨の折れる作業が必要だった。</p>
+            <p>むしろ、新種の独自性はもっと深いところにある。今回の研究では、アマゾン全域で数十年にわたって収集されたサンプルから、遺伝的な証拠を集めた。その結果、この集団は50万年以上前に分岐して、独立した種になった可能性が高いことが明らかになった。</p>
+          </div>
+          <p class="continue"><a href="https://natgeo.nikkeibp.co.jp/atcl/news/26/111200616/" target="_blank" rel="noopener" lang="ja">続きを読む · ナショナル ジオグラフィック日本版</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p9">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★☆☆</span> <span class="chip mins">3 min</span> <span class="chip" lang="ja">タコ</span> <span class="chip" lang="ja">生物学</span> <span class="chip" lang="ja">ロボット工学</span> <span class="chip" lang="ja">頭蓋軟骨</span>
+          </div>
+          <h2 lang="ja">猫も負ける液体ぶり。タコが狭い隙間にスルリと入り込める理由が明らかに</h2>
+          <p class="why">Se gato é líquido, polvo é o quê? Pesquisadores de robótica mediram a distância entre os olhos (o limite da cartilagem craniana) e viram o polvo-comum mudar de estratégia para passar por buracos 5 mm mais estreitos — inspiração para robôs de resgate em escombros.</p>
+          <div class="source">
+            <span lang="ja">カラパイア</span>
+            <a href="https://karapaia.com/archives/637632.html" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>シンガポール国立大学などの国際研究チームが行った実験で、タコは脳を保護する役割を果たす硬い「頭蓋軟骨」の幅より狭い穴であっても、通り方を巧みにに変え、するりと抜けられることが判明したのだ。</p>
+            <p>どう見ても通れそうにない狭いすき間にも、タコは体を押し込んでするりと抜けてしまう。</p>
+            <p>飼育されているタコが、水槽のわずかなすき間から脱走することもよく知られている。</p>
+            <p>……</p>
+            <p>タコの体はほとんどが柔らかく、口にあるくちばしと、脳を包む「頭蓋軟骨」の2か所だけが硬い組織でできている。</p>
+            <p>頭蓋軟骨は、人間の頭蓋骨のように左右の目の間で脳を取り囲んで守っている。</p>
+            <p>そのため、目と目の間の距離を測れば、タコにとっての物理的な限界サイズの目安になるのだ。</p>
+            <p>そして透明なアクリル板の箱に、目と目の間の距離より「少し広い穴」と、「5mmほど狭い穴」を開け、タコが隣の箱へどうやって通り抜けるかを撮影し、分析した。</p>
+            <p>……</p>
+            <p>実験の結果、タコは穴の大きさに応じて、見事なまでに通り方を変えていることがわかった。</p>
+            <p>マダコは筋肉を使って胴体を細く縮めながら、頭蓋軟骨の幅より狭い限界ギリギリの穴であっても、みごとに通り抜けてみせたのだ。</p>
+            <p>シンガポール国立大学の筆頭著者であるウェンチー・シン博士は、当初「タコのすり抜け行動には共通のやり方が1つあるだけだろう」と思い込んでいたため、この作戦変更にはチーム全員が首をかしげたという。</p>
+            <p>……</p>
+            <p>研究チームは、タコの「液体のようなすり抜け技術」を模倣できれば、通常なら小さな体でしか入れないような場所にもロボットが入り込めるようになり、次世代の捜索救助ロボットや探査ロボットの開発に大きく役立つと期待している。</p>
+          </div>
+          <p class="continue"><a href="https://karapaia.com/archives/637632.html" target="_blank" rel="noopener" lang="ja">続きを読む · カラパイア</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p10">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★☆</span> <span class="chip mins">3 min</span> <span class="chip" lang="ja">死</span> <span class="chip" lang="ja">細胞</span> <span class="chip" lang="ja">脳死</span> <span class="chip" lang="ja">Kurzgesagt</span> <span class="chip" lang="ja">生理学</span>
+          </div>
+          <h2 lang="ja">人間が死ぬ時に体の中では何が起きているのか？</h2>
+          <p class="why">Baseado no Kurzgesagt: a morte não é um interruptor, é uma cascata. Neurônios caem em segundos, órgãos entram em “modo sobrevivência”, bactérias do intestino escapam após ~1 h, células-tronco hibernam por até 2 semanas apostando numa ressurreição. Vocabulário de biologia muito útil.</p>
+          <div class="source">
+            <span lang="ja">GIGAZINE</span>
+            <a href="https://gigazine.net/news/20261113-what-actually-happens-when-die/" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>「人間の死とは何か」と聞かれた場合、「心臓が止まる」「脳への酸素供給が停止する」といった回答をする人が多いかもしれません。</p>
+            <p>野生動物の中には「スイッチを切るようにして死ぬ『シャットダウン』的な死に方」のものもいるそうですが、少なくとも人間に関していえば、死はスイッチを切るように一気にすべてが完了するものではなく、不可逆的な事象が連鎖的に進行していくものだとのこと。</p>
+            <p>Kurzgesagtは「死とは酸素の欠乏」に他ならないと表現しています。酸素は動物の細胞が糖分子を分解し、細胞を動かすエネルギー源であるアデノシン三リン酸(ATP) を獲得するために必要不可欠です。</p>
+            <p>……</p>
+            <p>一般的にいえば、最初に「死ぬ」のは脳です。脳は体内で最も多くの酸素とエネルギーを消費する臓器であり、心停止から30秒もたたないうちに脳の各部位間の電気的な通信が失われ、人は意識を喪失します。</p>
+            <p>死の影響は毎分数mmの速度で脳内を広がっていきます。</p>
+            <p>この時点で人間が何を感じているのかは不明ですが、死の間際からよみがえった人の中には「臨死体験」を報告する人もいます。実際、死ぬ間際の脳内では脳活動を引き起こす化学物質が大量に放出されるとのこと。</p>
+            <p>心停止から20分もたたないうちに脳は取り返しがつかない損傷を受け、体の組織に脳からの信号や命令が届くことはなくなります。脳が停止すると、それぞれの臓器や組織は脳からの指令や調整を受けずに独立して機能するようになります。</p>
+            <p>……</p>
+            <p>しかし、生きている時は粘膜などの物理的障壁や免疫細胞によって腸内などに抑え込まれていたこれらの微生物は、心停止からおよそ1時間が経過するとこれらの障壁を突破し始めます。</p>
+            <p>筋肉や骨髄の奥深くにある幹細胞は代謝を遅くして休眠状態に入ります。これは万が一の蘇生に賭けたものであり、冷蔵された死体の中で2週間にわたり生存し続けることも可能だとのこと。</p>
+            <p>結局のところ、すべての細胞が死ぬまでは数週間かかります。Kurzgesagtは、人体は徐々に死へと向かっていくものであるため、「人が死んだ瞬間」を定義するのは困難であると結論付けました。</p>
+          </div>
+          <p class="continue"><a href="https://gigazine.net/news/20261113-what-actually-happens-when-die/" target="_blank" rel="noopener" lang="ja">続きを読む · GIGAZINE</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p11">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★☆</span> <span class="chip mins">2 min</span> <span class="chip" lang="ja">AI</span> <span class="chip" lang="ja">ハルシネーション</span> <span class="chip" lang="ja">LLM</span> <span class="chip" lang="ja">信頼性</span>
+          </div>
+          <h2 lang="ja">幻覚がひどいAIでも言葉遣いが洗練されていれば人を簡単に騙せることが判明</h2>
+          <p class="why">Mesmo fãs que acertaram 7 de 10 perguntas sobre O Senhor dos Anéis não perceberam os erros de um chatbot que escrevia bonito: fluência compra a mesma credibilidade que a exatidão. Os autores defendem obrigar as IAs a exibir incerteza — pertinente para quem revisa código gerado por IA.</p>
+          <div class="source">
+            <span lang="ja">GIGAZINE</span>
+            <a href="https://gigazine.net/news/20261114-llm-fluency-credible/" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>ChatGPTなどに代表される大規模言語モデルは、その根本的な仕組みとして、モデル自身は自分の回答が合っているか間違っているかを判断できません。そのためこの手のAIには事実ではないことをまるで事実かのように話してしまう「幻覚(ハルシネーション)」の問題が常につきまといます。</p>
+            <p>事前の予想通り、被験者は洗練された言葉遣いで正しい回答をするAIを最も高く評価しました。一方で、流暢な文章で微妙に間違ったことを言うAIも、正しい回答をするAIと同程度に「知的で好ましい」と見なされたことが分かりました。</p>
+            <p>この研究により、人々がいかに簡単に誤った方向へ導かれ、AIを信頼してしまうかが示されました。研究の共著者で准教授のバーバラ・ミュラー氏は、「文章が洗練され、自然に聞こえると、人々は自動的に知性を感じ取ります。その結果、無意識のうちに『これは問題ない。これ以上確認する必要はない』と考えるようになるのです」と指摘しました。</p>
+          </div>
+          <p class="continue"><a href="https://gigazine.net/news/20261114-llm-fluency-credible/" target="_blank" rel="noopener" lang="ja">続きを読む · GIGAZINE</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p12">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★☆☆</span> <span class="chip mins">2 min</span> <span class="chip" lang="ja">家事分担</span> <span class="chip" lang="ja">最低賃金</span> <span class="chip" lang="ja">日本社会</span> <span class="chip" lang="ja">経済学</span>
+          </div>
+          <h2 lang="ja">日本では妻の収入が増えると夫はより多くの家事をするようになるのか？</h2>
+          <p class="why">Experimento natural com os aumentos de salário mínimo por província (2003–2019): as esposas passaram a trabalhar e ganhar mais, mas os maridos japoneses não fizeram nem um minuto a mais de tarefas domésticas — com filhos pequenos, elas simplesmente cortaram o próprio lazer. Retrato afiado da sociedade japonesa.</p>
+          <div class="source">
+            <span lang="ja">GIGAZINE</span>
+            <a href="https://gigazine.net/news/20261114-japanese-wives-earn-more-husbands-households/" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>夫婦の間で家事を分担する際には、「収入は夫(妻)の方が多いので妻(夫)にはより多くの家事を負担させる」といった風に、労働収入によって家事負担を割り振る場合があります。日本の既婚者を追跡した研究では、「妻の収入が上がった時に夫婦の家事分担はどうなるのか？」という疑問について調べています。</p>
+            <p>そこでアメリカ・パデュー大学で経済学の博士課程に在籍するチールー・パン氏は、妻の収入増加が家事分担に与える影響を調べるため、日本の夫婦を対象に研究を行いました。</p>
+            <p>夫婦の雇用状況や賃金、そして各配偶者が労働・育児・家事に費やした具体的な時間については、2003年～2019年に実施された日本の世帯パネル調査から収集されました。パン氏はこれらのデータと都道府県ごとの最低賃金引き上げを照らし合わせ、最低賃金の引き上げが夫婦に与えた影響について調べました。</p>
+            <p>今回の調査結果は、最低賃金の引き上げが女性の雇用率向上や男女間の賃金格差に有効である一方、経済的不平等の解消が家事分担の格差解消につながらないことを示唆しています。なお、今回の調査は家事労働を時間のみで測定しており、ヘルパーを雇うなどして労働を代替させたかどうかは追跡していません。</p>
+          </div>
+          <p class="continue"><a href="https://gigazine.net/news/20261114-japanese-wives-earn-more-husbands-households/" target="_blank" rel="noopener" lang="ja">続きを読む · GIGAZINE</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p13">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★★</span> <span class="chip mins">5 min</span> <span class="chip" lang="ja">Claude Code</span> <span class="chip" lang="ja">claude -p</span> <span class="chip" lang="ja">自動化</span> <span class="chip" lang="ja">権限設定</span> <span class="chip" lang="ja">運用</span>
+          </div>
+          <h2 lang="ja">Claude Code を無人で回す設計 — 6 段の型と、exit 0 を信じて 5 週間失敗し続けた話</h2>
+          <p class="why">Cinco meses rodando claude -p sem humano: um job “verificou” notas por 5 semanas recebendo só o 1º parágrafo do prompt — sempre com exit 0; regras Write() de permissão nunca valeram (é Edit()); o agente bloqueado sugeriu sozinho “use o ssh.exe pelo caminho absoluto”. Lição: exit 0 e “concluído” são alegações, não evidência.</p>
+          <div class="source">
+            <span lang="ja">Zenn</span>
+            <a href="https://zenn.dev/wisteriacorp/articles/wisteria-683ca00f597f" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>Claude Code を対話で使うだけでなく、 claude -p （非対話モード）を Windows のタスクスケジューラから起動して、夜のあいだにメモの整理や検証を進めさせています。5 か月ほど回して分かったのは、難しいのは「動かすこと」ではなく「正しく終わったと知ること」でした。先に数字を並べます。</p>
+            <p>……</p>
+            <p>対話の消費は、94.5% が「キャッシュ済み文脈の読み直し」でした。対話は 1 回応答するたびに、それまでの長い文脈を読み直します。ピーク時の文脈が 40 万トークンを超えた 32 セッションだけで、読み直し全体の 61.1% を占めていました。</p>
+            <p>無人ジョブはこの逆です。毎回まっさらな文脈で始まり、対象を 1 件か数件に絞って渡すので、文脈が太りません。</p>
+            <p>……</p>
+            <p>② プロンプトは標準入力で渡す — 5 週間、1 段落目しか届いていなかった</p>
+            <p>毎週土曜に動く「裏取りジョブ」があります。メモの記述を Web で確かめ、確認できたものに検証済みの印を付けるジョブです。これが 2026-06-13 から 07-11 まで、5 回連続で壊れていました。5 回とも exit 0 でした。</p>
+            <p>その結果、毎週数件ずつ、検証されていないメモが検証待ちの列から消えていきました。5 週間、監視は何も言いませんでした。</p>
+            <p>誤って処理済みになっていた 18 件は、台帳から外して列に戻しました。</p>
+            <p>……</p>
+            <p>ルールの種類を間違えると、黙って無視されます。設定ファイルに Write(パス) の形で書いていた許可ルール 12 件が、一度も効いていませんでした（2026-08-03 に発見）。ファイル操作のルールは Edit(パス) で書きます。deny 側で実測したところ、 Edit(パス) は Write ツールと、Bash からのファイル書き込みも止めました。</p>
+            <p>deny は「コマンド名」ではなく「到達手段」で塞ぎます。 2026-11-04 に、無人ジョブから LAN 内サーバーへの ssh を deny に足しました。テスト実行で止められたエージェントは、「絶対パスの ssh.exe なら通ります」と迂回路を自分で提案してきました。絶対パスの形と PowerShell 経由の形も、deny に足しています。Bash への deny はベストエフォートです。Bash が要らないジョブでは、Bash ごと deny します。</p>
+            <p>……</p>
+            <p>exit 0 も、モデルの「完了しました」も、引き継ぎ用の要約文も、すべて主張です。証拠は、ジョブの種類ごとに決めます。</p>
+            <p>証拠を決めると、台帳の側の嘘も見つかります。キュー処理を無人化した初日、起動前に台帳と実ファイルを突き合わせると、未処理は 213 件から 175 件に減りました。118 件は、作業が済んでいるのに台帳が古いだけでした。対話なら、食い違いは人に聞けます。無人では聞けません。「実ファイルを真実として台帳を作り直す」処理を、毎回の起動前に入れました。</p>
+            <p>……</p>
+            <p>各ジョブは、終わるときに実行記録を 1 行書きます。毎朝のまとめを作る処理が、直近 24 時間分をジョブ別に畳んで、「夜間の無人処理」の 1 行にします。見えない自動化は、無いのと同じです。</p>
+            <p>……</p>
+            <p>特別な技術は 1 つもありません。どれも、 exit 0 を信じて失敗したあとに足した点検です。</p>
+          </div>
+          <p class="continue"><a href="https://zenn.dev/wisteriacorp/articles/wisteria-683ca00f597f" target="_blank" rel="noopener" lang="ja">続きを読む · Zenn</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p14">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★★</span> <span class="chip mins">5 min</span> <span class="chip" lang="ja">まんぼうトンネル</span> <span class="chip" lang="ja">西宮</span> <span class="chip" lang="ja">JR神戸線</span> <span class="chip" lang="ja">天井川</span> <span class="chip" lang="ja">細雪</span>
+          </div>
+          <h2 lang="ja">あいみょん、ココ通ってたの!? 150年の歴史を刻む「激セマトンネル群」のナゾ “暗黙のルール”で住民が行き交う</h2>
+          <p class="why">Em Nishinomiya, debaixo da JR Kōbe Line de 1874, três túneis de pedestre com 1,3 m de altura que nasceram como canais de irrigação sob o aterro dos “rios-teto”. Aparecem em “Sasameyuki” de Tanizaki, Aimyon passava de bicicleta e a regra tácita é esperar o outro sair. Passeio de trem perto de casa.</p>
+          <div class="source">
+            <span lang="ja">乗りものニュース</span>
+            <a href="https://trafficnews.jp/post/727426" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>兵庫県西宮市を走るJR神戸線（東海道本線）。この高架部分の下に、名物となっているトンネルが3つあります。通称「まんぼうトンネル」。全国的に見ても稀有な激低・激狭のトンネルです。</p>
+            <p>1874（明治7）年、大阪〜神戸を結ぶ現在のJR神戸線（東海道本線）にあたる官設鉄道が開業しました。日本では2番目、西日本エリア初の官設鉄道で沿線の人々の生活や経済に大きな影響を与えた路線でした。</p>
+            <p>ただし、鉄道の開設は一筋縄ではいきませんでした。大阪〜神戸一帯の南部には、六甲山系から大阪湾へと流れる複数の川があり、周囲の土地よりも高い位置を流れるいわゆる「天井川」が多くあったからです。</p>
+            <p>そこで土手の下に農業用水路の管を設けたのが、西宮に3つあるまんぼうトンネルの最初の成り立ちです。</p>
+            <p>その後、1890年代に鉄道の複線化に合わせて「甲子園口のまんぼう」（正式名称：庄川橋梁）、平松町・和上町を結ぶ「平松町のまんぼう」（正式名称：平松橋梁）、さくら夙川駅〜芦屋駅間にある「大谷道のまんぼう」（正式名称：東皿池橋梁）がそれぞれ補強されました。</p>
+            <p>後述する谷崎潤一郎の名作『細雪』では、オランダ語で短いトンネルを意味する「マンプウ」が関西弁でなまって「まんぼう」になったと記されています。</p>
+            <p>……</p>
+            <p>西宮に3つあるまんぼうトンネルのうち、よく知られているのが高さ約1.3m・幅約1.5mと最も激低・激狭の「甲子園口のまんぼう」です。</p>
+            <p>トンネル全長は約30mほどですが、通行する際腰をかがめる必要があるため、結構疲れます。</p>
+            <p>「甲子園口のまんぼう」は先で触れた1890年代の鉄道の複線化に合わせてまず、トンネル北側のアーチ状の部分がレンガや石で強固に造り替えられ、さらに1920年代の「人道ミニトンネル」化に際して、南側がコンクリートで四角いトンネルが延伸されました。</p>
+            <p>そのため、「北側は明治時代の美しいレンガのアーチトンネル、南側は大正から昭和にかけての無骨なコンクリートの四角いトンネル」となっていて、この狭く低いトンネルに歴史の継ぎ目も見てとれるという意義深い構造になっています。</p>
+            <p>また往来も結構あり、筆者来訪時（平日の夕方）も頭を下げ自転車をひきながら行き来する人を数人見かけました。</p>
+            <p>「平松町のまんぼう」は、谷崎潤一郎の『細雪』では、四姉妹の末っ子・妙子の恋人・奥畑が近隣に住んでいる設定で、また女中・お春が日常的に「まんぼう」という言葉を使い、関西エリアの人にしか通じない「狭いトンネル」を指す言葉だとして紹介しています。</p>
+            <p>……</p>
+            <p>多くのメディアで紹介されてきた西宮の3つのまんぼうトンネルは、その激低・激狭ぶりから「見た目」「通行の大変さ」ばかりに注目が集まっていましたが、ここまでの通り、界隈の鉄道や風土を背景に作られた歴史深いトンネルだったというわけです。</p>
+          </div>
+          <p class="continue"><a href="https://trafficnews.jp/post/727426" target="_blank" rel="noopener" lang="ja">続きを読む · 乗りものニュース</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p15">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★☆☆</span> <span class="chip mins">2 min</span> <span class="chip" lang="ja">北野異人館</span> <span class="chip" lang="ja">神戸</span> <span class="chip" lang="ja">太平洋戦争</span> <span class="chip" lang="ja">家族史</span>
+          </div>
+          <h2 lang="ja">戦時中に過ごした神戸の異人館へ里帰り　現「神戸トリックアート」など　思い出の写真が語る家族の物語</h2>
+          <p class="why">Estrangeiros que viveram nos casarões de Kitano e partiram por causa da guerra estão voltando, alguns com filhos, para ver as casas 80 anos depois — uma delas hoje é o museu de trick art. Curtinho (paywall), mas é Kobe com história humana.</p>
+          <div class="source">
+            <span lang="ja">神戸新聞NEXT</span>
+            <a href="https://www.kobe-np.co.jp/news/society/202611/0021034028.shtml" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>神戸・北野の異人館街を訪れる外国人旅行客の中に、かつて神戸で暮らし、太平洋戦争の影響で帰国した人たちの姿が見られるようになった。新型コロナウイルスの流行が落ち着いて以降、年に数組のペースで続いている。異人館街に現存する明治期の洋館は三十数軒。当時住んでいた場所に子どもたちと一緒に立ち寄るケースもあり、８０年ぶりの“故郷”で家族の物語を語り継いでいる。（若林幹夫）</p>
+          </div>
+          <p class="continue"><a href="https://www.kobe-np.co.jp/news/society/202611/0021034028.shtml" target="_blank" rel="noopener" lang="ja">続きを読む · 神戸新聞NEXT</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p16">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★☆</span> <span class="chip mins">2 min</span> <span class="chip" lang="ja">HYDE</span> <span class="chip" lang="ja">L’Arc-en-Ciel</span> <span class="chip" lang="ja">オーストリア</span> <span class="chip" lang="ja">ウィーン</span> <span class="chip" lang="ja">JEKYLL</span>
+          </div>
+          <h2 lang="ja">【レポート】HYDE、「オーストリア共和国有功栄誉銀章」授与式へ登壇。オーストリア観光大使の任期満了</h2>
+          <p class="why">Fim do mandato de 3 anos de HYDE como embaixador de turismo da Áustria, com medalha de prata de mérito: 3 MVs em Viena/Salzburgo/Innsbruck, primeiro roqueiro japonês com orquestra local no Konzerthaus, o presidente austríaco aparecendo “do nada” ao lado dele — e uma Sachertorte de presente.</p>
+          <div class="source">
+            <span lang="ja">BARKS</span>
+            <a href="https://barks.jp/news/1104510" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>HYDE（L’Arc-en-Ciel、VAMPS、THE LAST ROCKSTARS）が2024年より務めるオーストリア観光大使としての活動に対し、その多大な功績を讃える「オーストリア共和国有功栄誉銀章」授与式が11月13日、東京都内の駐日オーストリア大使館公邸にて執り行われた。</p>
+            <p>在任中には3度、オーストリアを訪問し、ウィーン、ザルツブルク、インスブルックを舞台として「LAST SONG」「FADING OUT」「THE ABYSS」と3曲に及ぶミュージックビデオを撮影、さらに自らプロデュースした2冊の写真集の刊行や、2025年に開催された大阪・関西万博においてもオーストリアパビリオンの特別企画への協力など多岐にわたって同国の魅力を積極的に発信し続けてきた。</p>
+            <p>……</p>
+            <p>授章後、HYDEは「このたびオーストリア共和国有功栄誉銀章という栄誉ある勲章をいただき、大変光栄に思います。3年間、オーストリア観光大使として活動するなかでこの国の素晴らしい文化や歴史、音楽に触れる貴重な経験をさせていただきました。今回の授章を大変嬉しく思うとともに、これまでお世話になった皆様にも心より感謝を申し上げたいと思います」と一礼。</p>
+            <p>授与式のあとには、サプライズとしてオーストリアの伝統菓子であり、観光大使の活動を通じてHYDEの大好物となったザッハトルテの贈呈も。「実は少し期待していました(笑)」と顔をほころばせるHYDEに場の空気が一気に和む。</p>
+          </div>
+          <p class="continue"><a href="https://barks.jp/news/1104510" target="_blank" rel="noopener" lang="ja">続きを読む · BARKS</a></p>
+        </div>
+      </article>
+
+      <footer class="site">読解幕 · 2026-11-14 · ~50 min · <a href="/japanese-digest/history/" style="color:inherit">History</a> · deliton.github.io/japanese-digest</footer>
+    </main>
+  </div>
+</body>
+</html>
