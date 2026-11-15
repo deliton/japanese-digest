@@ -1,0 +1,1017 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>読解幕 · 2026-11-15 · Japanese Digest</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Noto+Serif+JP:wght@400;600;700&family=Shippori+Mincho:wght@500;700&display=swap" rel="stylesheet" />
+  <style>
+
+    :root {
+      --bg: #0a0a0a;
+      --bg-2: #121212;
+      --bg-card: #161616;
+      --ink: #f5f5f5;
+      --ink-dim: #a8a29a;
+      --ink-mute: #6b6560;
+      --shu: #c41e3a;
+      --shu-hot: #e11d48;
+      --shu-deep: #8b1228;
+      --gold: #d4a017;
+      --gold-soft: #c9a227;
+      --white: #fafafa;
+      --line: #2a2a2a;
+      --line-hot: rgba(196, 30, 58, 0.45);
+      --measure: 42rem;
+      --radius: 4px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: "Noto Sans JP", "Hiragino Sans", "Yu Gothic", system-ui, sans-serif;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .stage-bar {
+      height: 6px;
+      background: repeating-linear-gradient(
+        90deg,
+        var(--shu) 0 48px,
+        var(--white) 48px 56px,
+        #111 56px 64px,
+        var(--gold) 64px 72px,
+        #111 72px 88px
+      );
+    }
+
+    .wrap {
+      width: min(100% - 2rem, 74rem);
+      margin: 0 auto;
+      padding: 2rem 0 4.5rem;
+      display: grid;
+      grid-template-columns: 15.5rem 1fr;
+      gap: 2.75rem;
+      align-items: start;
+    }
+
+    @media (max-width: 900px) {
+      .wrap { grid-template-columns: 1fr; gap: 1.5rem; padding-top: 1.25rem; }
+      .sidebar { position: static !important; }
+    }
+
+    .sidebar { position: sticky; top: 1.25rem; }
+
+    .brand {
+      display: flex;
+      align-items: baseline;
+      gap: 0.55rem;
+      margin: 0 0 0.35rem;
+    }
+    .brand-mark {
+      font-family: "Shippori Mincho", "Noto Serif JP", serif;
+      font-size: 1.85rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      color: var(--white);
+      line-height: 1;
+    }
+    .brand-mark em {
+      font-style: normal;
+      color: var(--shu);
+    }
+    .brand-sub {
+      font-size: 0.65rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-weight: 700;
+    }
+
+    .meta {
+      color: var(--ink-mute);
+      font-size: 0.8rem;
+      margin: 0 0 1.25rem;
+    }
+
+    .stat-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-bottom: 1.35rem;
+    }
+    .stat {
+      border: 1px solid var(--line);
+      background: var(--bg-2);
+      padding: 0.32rem 0.65rem;
+      font-size: 0.72rem;
+      color: var(--ink-dim);
+      border-radius: var(--radius);
+    }
+    .stat strong { color: var(--white); font-weight: 700; }
+    .stat.hot {
+      border-color: var(--shu);
+      color: var(--shu-hot);
+      background: rgba(196, 30, 58, 0.1);
+    }
+
+    .toc {
+      border: 1px solid var(--line);
+      background: var(--bg-2);
+      padding: 0.85rem 0.9rem 0.95rem;
+      border-radius: var(--radius);
+    }
+    .toc h2 {
+      margin: 0 0 0.65rem;
+      font-size: 0.72rem;
+      letter-spacing: 0.16em;
+      color: var(--gold);
+      font-weight: 800;
+    }
+    .toc ol { list-style: none; margin: 0; padding: 0; }
+    .toc li { margin: 0; }
+    .toc a {
+      display: flex;
+      justify-content: space-between;
+      gap: 0.5rem;
+      text-decoration: none;
+      color: var(--ink-dim);
+      font-size: 0.82rem;
+      padding: 0.38rem 0.2rem;
+      border-bottom: 1px solid transparent;
+    }
+    .toc a:hover { color: var(--white); border-bottom-color: var(--line-hot); }
+    .toc .t-title { font-weight: 600; }
+    .toc .t-min { color: var(--gold); font-size: 0.72rem; font-weight: 700; flex-shrink: 0; }
+
+    .main { max-width: var(--measure); }
+
+    .digest-banner {
+      display: flex;
+      gap: 0.75rem;
+      align-items: flex-start;
+      background: #141014;
+      border: 1px solid var(--line);
+      border-left: 3px solid var(--shu);
+      padding: 0.85rem 1rem;
+      margin-bottom: 1.5rem;
+      font-size: 0.78rem;
+      color: var(--ink-dim);
+      line-height: 1.55;
+    }
+    .digest-banner .tag {
+      flex-shrink: 0;
+      background: var(--shu);
+      color: #fff;
+      font-size: 0.65rem;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      padding: 0.28rem 0.5rem;
+      border-radius: var(--radius);
+    }
+
+    .hero {
+      margin-bottom: 2rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid var(--line);
+      position: relative;
+    }
+    .hero::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -1px;
+      width: 4.5rem;
+      height: 2px;
+      background: var(--shu);
+    }
+    .kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.7rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--shu-hot);
+      font-weight: 800;
+      margin-bottom: 0.85rem;
+    }
+    .kicker::before {
+      content: "◆";
+      font-size: 0.55rem;
+      color: var(--gold);
+    }
+    .hero h1 {
+      font-family: "Shippori Mincho", "Noto Serif JP", serif;
+      font-size: clamp(1.85rem, 4vw, 2.55rem);
+      font-weight: 700;
+      line-height: 1.2;
+      margin: 0 0 0.75rem;
+      color: var(--white);
+      letter-spacing: 0.02em;
+    }
+    .hero p {
+      margin: 0;
+      color: var(--ink-dim);
+      font-size: 0.98rem;
+      max-width: 36rem;
+    }
+
+    article.piece {
+      background: var(--bg-card);
+      border: 1px solid var(--line);
+      margin-bottom: 1.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+    article.piece::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: linear-gradient(90deg, var(--shu) 0%, var(--shu) 35%, var(--gold) 35%, var(--gold) 42%, transparent 42%);
+    }
+
+    .piece-inner { padding: 1.6rem 1.55rem 1.35rem; }
+
+    .piece-head {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-bottom: 0.85rem;
+    }
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      border: 1px solid var(--line);
+      background: #111;
+      color: var(--ink-dim);
+      padding: 0.22rem 0.6rem;
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      border-radius: var(--radius);
+    }
+    .chip.interest {
+      border-color: var(--shu);
+      color: var(--shu-hot);
+      background: rgba(196, 30, 58, 0.12);
+    }
+    .chip.mins {
+      border-color: var(--gold);
+      color: var(--gold);
+      background: transparent;
+    }
+
+    .piece h2 {
+      font-family: "Noto Serif JP", "Shippori Mincho", "Yu Mincho", serif;
+      font-size: 1.38rem;
+      font-weight: 700;
+      line-height: 1.5;
+      margin: 0 0 0.6rem;
+      color: var(--white);
+      letter-spacing: 0.02em;
+    }
+
+    .why {
+      margin: 0 0 1rem;
+      color: var(--ink-dim);
+      font-size: 0.9rem;
+      border-left: 2px solid var(--gold);
+      padding-left: 0.85rem;
+    }
+
+    .source {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.65rem 1.1rem;
+      font-size: 0.76rem;
+      color: var(--ink-mute);
+      margin-bottom: 1.25rem;
+    }
+    .source a {
+      color: var(--shu-hot);
+      text-decoration: none;
+      font-weight: 600;
+    }
+    .source a:hover { color: var(--gold); }
+
+    .ja {
+      font-family: "Noto Serif JP", "Hiragino Mincho ProN", "Yu Mincho", serif;
+      font-size: 1.08rem;
+      line-height: 2;
+      letter-spacing: 0.03em;
+      color: #ebe7e1;
+    }
+    .ja p { margin: 0 0 1.15em; }
+    .ja p:last-child { margin-bottom: 0; }
+
+    .continue {
+      margin-top: 1.25rem;
+      padding-top: 1rem;
+      border-top: 1px solid var(--line);
+      font-size: 0.86rem;
+    }
+    .continue a {
+      color: var(--white);
+      text-decoration: none;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      border-bottom: 2px solid var(--shu);
+      padding-bottom: 0.1rem;
+    }
+    .continue a:hover {
+      color: var(--shu-hot);
+      border-bottom-color: var(--gold);
+    }
+
+    footer.site {
+      max-width: var(--measure);
+      margin-top: 1.75rem;
+      color: var(--ink-mute);
+      font-size: 0.72rem;
+      letter-spacing: 0.06em;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+    footer.site::before {
+      content: "";
+      width: 1.25rem;
+      height: 2px;
+      background: var(--shu);
+    }
+
+  
+    .excerpt-label { font-size: 0.66rem; letter-spacing: 0.18em; color: var(--gold); font-weight: 800; margin: 0 0 0.6rem; }
+    .brand-sub a, .stat a { color: var(--gold); text-decoration: none; }
+    .toc .t-min { font-variant-numeric: tabular-nums; }
+  </style>
+</head>
+<body>
+  <div class="stage-bar" aria-hidden="true"></div>
+
+  <div class="wrap">
+    <aside class="sidebar">
+      <div class="brand">
+        <span class="brand-mark" lang="ja">読解<em>幕</em></span>
+      </div>
+      <p class="brand-sub">Kabuki Digest · <a href="/japanese-digest/history/">History</a></p>
+      <p class="meta">2026-11-15 · America/Sao_Paulo</p>
+      <div class="stat-row">
+        <span class="stat"><strong>51</strong> min</span>
+        <span class="stat"><strong>16</strong> pieces</span>
+        <span class="stat"><strong>~13,600</strong> 字</span>
+        <span class="stat"><a href="/japanese-digest/history/">History</a></span>
+      </div>
+
+      <nav class="toc" aria-label="Índice">
+        <h2 lang="ja">本日の演目</h2>
+        <ol>
+          <li>
+            <a href="#p1">
+              <span class="t-title" lang="ja">政宗の宿敵は、調停役でもあった――相馬義胤</span>
+              <span class="t-min">5′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p2">
+              <span class="t-title" lang="ja">淡路水軍の棟梁、最後は大坂城の堀で――菅達長</span>
+              <span class="t-min">5′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p3">
+              <span class="t-title" lang="ja">勝海舟はなぜ犬嫌いだったのか――9歳の大事件と父・小吉</span>
+              <span class="t-min">3′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p4">
+              <span class="t-title" lang="ja">女性は28歳、男性は32歳が全盛期――『黄帝内経』の身体観</span>
+              <span class="t-min">3′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p5">
+              <span class="t-title" lang="ja">8000個のカエルの骨、犯人はフクロウだった</span>
+              <span class="t-min">3′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p6">
+              <span class="t-title" lang="ja">マヤの「赤」が湖を毒に変えていた</span>
+              <span class="t-min">3′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p7">
+              <span class="t-title" lang="ja">「CLOUD GONE」――エノラ・ゲイの航法記録に残った2語</span>
+              <span class="t-min">3′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p8">
+              <span class="t-title" lang="ja">世界の電力網が「1分ごとに脈打つ」謎</span>
+              <span class="t-min">3′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p9">
+              <span class="t-title" lang="ja">義務教育が1年延びると、認知症が減った？</span>
+              <span class="t-min">3′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p10">
+              <span class="t-title" lang="ja">AIが95%を片づけると、残り5%に人は弱くなる――「自動化の皮肉」</span>
+              <span class="t-min">2′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p11">
+              <span class="t-title" lang="ja">昔のソフトはもっとひどかった――Ctrl+Sの癖とDiablo II</span>
+              <span class="t-min">3′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p12">
+              <span class="t-title" lang="ja">SessionStart hookで渡した31万字は、会話に入っていなかった</span>
+              <span class="t-min">3′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p13">
+              <span class="t-title" lang="ja">車齢45年の客車が豪華列車に――JR北海道「赤い星」</span>
+              <span class="t-min">3′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p14">
+              <span class="t-title" lang="ja">しまなみ海道を歩いて渡る――路線図にない「馬島IC」</span>
+              <span class="t-min">4′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p15">
+              <span class="t-title" lang="ja">夜明け前の「稲妻」――六甲全山縦走の56キロ</span>
+              <span class="t-min">2′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p16">
+              <span class="t-title" lang="ja">BAND-MAID、武道館でワールドツアー完走――2027年は小休止</span>
+              <span class="t-min">3′</span>
+            </a>
+          </li>
+        </ol>
+      </nav>
+    </aside>
+
+    <main class="main">
+      <div class="digest-banner">
+        <span class="tag">TRIAGE</span>
+        <span>História: Sōma Yoshitane, rival e mediador de Date Masamune (BUSHOO, aniversário de morte amanhã); Kan Michinaga, almirante de Awaji (草の実堂 — Hyōgo); Katsu Kaishū e o cão (Japaaan); medicina chinesa antiga (草の実堂). Arqueologia/mistério: sapos e corujas na Britânia romana (カラパイア), mercúrio maia e “CLOUD GONE” do Enola Gay (Nazology, fonte nova). Ciência/infra: o pulso de 60 s das redes elétricas (Nazology), escola × demência (GIGAZINE). IA/dev: deskilling em SRE, software antigo era pior, limite de 10 mil caracteres nos hooks do Claude Code (Zenn). Trens/viagem: “Akai Hoshi” da JR Hokkaido e Shimanami a pé (乗りもの). Kobe: Rokkō Zenzan Jūsō. Rock: BAND-MAID no Budokan. Pontos fracos: Kobe Shimbun só aberturas curtas (paywall); Sankei sem nada bom hoje; NatGeo pulado (só guias de viagem/saúde novos); nada de sailing/vistos/imóveis com texto bom; Japaaan com tema algo escatológico, mas histórico e divertido.</span>
+      </div>
+
+      <header class="hero">
+        <div class="kicker">Daily curated reading</div>
+        <h1 lang="ja">相馬義胤と淡路水軍、勝海舟の犬嫌い、カエルの骨とマヤの赤、エノラ・ゲイの2語、脈打つ電力網、自動化の皮肉、Claude Codeの1万字、赤い星としまなみ、六甲縦走、BAND-MAID武道館</h1>
+        <p lang="ja">今日の幕開けは、明日が命日の南奥羽の大名・相馬義胤。伊達政宗と刃を交えながら、ときには和睦の仲立ちもした男は、一度は徳川に領地を没収されながら、息子の交渉で家を守り抜きました。続いて兵庫の海から、淡路水軍の棟梁・菅達長。秀吉に城を落とされ、やがて秀吉の水軍を率い、最後は大坂城の堀の埋め立てをめぐって切腹を命じられます。幕末の幕は、勝海舟が犬嫌いになった9歳の大事件と、型破りな父・小吉。考古学と歴史の謎の幕では、2000年前の中国医学書『黄帝内経』、ローマ時代のイギリスに積もった8000点のカエルの骨、マヤ文明を彩った赤い顔料が湖に残した水銀、そしてエノラ・ゲイの航法記録に書かれた「CLOUD GONE」の2語。科学とインフラの幕は、5大陸の電力網が1分ごとに脈打つ謎と、義務教育の1年が認知症を減らしたという自然実験。AIと開発の幕は、「自動化の皮肉」、昔のソフトウェアのひどさ、そしてClaude Codeのhookが黙って切り捨てていた31万字。鉄道と道の幕は、45歳の客車が生まれ変わったJR北海道「赤い星」と、歩いて渡るしまなみ海道。兵庫からは夜明け前の六甲全山縦走、締めは武道館でワールドツアーを完走したBAND-MAIDです。約51分の読解です。</p>
+      </header>
+
+      <article class="piece" id="p1">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★★</span> <span class="chip mins">5 min</span> <span class="chip" lang="ja">相馬義胤</span> <span class="chip" lang="ja">伊達政宗</span> <span class="chip" lang="ja">小田原合戦</span> <span class="chip" lang="ja">改易</span> <span class="chip" lang="ja">相馬利胤</span>
+          </div>
+          <h2 lang="ja">南奥羽の戦国大名・相馬義胤は生き残れるか｜政宗の対立と家康の領地没収</h2>
+          <p class="why">Amanhã (16/11/1635) é o aniversário de morte de Sōma Yoshitane, o vizinho-rival de Date Masamune — que às vezes também mediava a paz por ele. Não conseguiu ir a Odawara, sobreviveu mesmo assim; perdeu tudo para os Tokugawa em 1602 e recuperou porque o filho foi a Edo negociar contra a vontade do pai. Raríssimo na época.</p>
+          <div class="source">
+            <span lang="ja">BUSHOO!JAPAN（武将ジャパン）</span>
+            <a href="https://bushoojapan.com/bushoo/others/2026/11/15/223103" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>寛永十二年（1635年）11月16日は相馬義胤の命日です。</p>
+            <p>伊達家と領地を接し、幾度も刃を交えた南奥羽の戦国大名。</p>
+            <p>それだけに政宗の宿敵として語られがちな人物ですが、実は戦うだけの武将ではありません。</p>
+            <p>相馬家は、秀吉の時代を乗り切ったあと、徳川から領地を没収されるという危機にまで見舞われているのですが、どうにか荒波を乗り越えていきます。</p>
+            <p>……</p>
+            <p>天正十二年（1584年）、田村清顕らの仲介で伊達家と相馬家で和睦が成立。</p>
+            <p>同年11月、義胤は政宗の家督相続を祝って弓10張を贈るだけでなく、天正十四年（1586年）、政宗が二本松城を攻めたときには、義胤が間に入って開城の話をまとめています。</p>
+            <p>宿敵どころか、ときには政宗と手を結び、争いを収める調停役まで務めていたのです。</p>
+            <p>……</p>
+            <p>ただ、伊達も相馬も、もはや東北で争っている場合ではありません。</p>
+            <p>豊臣秀吉が小田原の北条氏を攻め、各地の大名に参陣を求めていたのです。</p>
+            <p>ついにリミットが来たか！と腹をくくったのか、政宗は小田原へ向かい、秀吉に臣従を誓っていました。</p>
+            <p>しかし相馬義胤は、小田原へ向かうことすらできません。</p>
+            <p>もしそうであれば改易必至……と思いきや、小田原合戦が終わって秀吉が奥州へ向かう途中、どうにか宇都宮でお目通りが叶います。</p>
+            <p>同年12月には4万8700石の知行宛行状を受け取りました。</p>
+            <p>……</p>
+            <p>慶長七年（1602年）5月、義胤と嫡男の利胤が牛越城で野馬追を見ていたところへ、佐竹義宣から急ぎの知らせが届きました。</p>
+            <p>縁の深い佐竹家は出羽秋田へ国替え、そして相馬家の領地も没収――。</p>
+            <p>表立って東軍へ味方しなかったことで、石田三成に味方したと徳川から疑われたのでしょう。</p>
+            <p>しかも相馬家は、佐竹家の新しい領地から1万石を分けてもらい、秋田へ移るよう命じられていました。</p>
+            <p>領地を失ったうえに、佐竹家で家臣同然の立場になれという話です。</p>
+            <p>義胤は「秋田行きもやむなし……」と考えたようですが、これに異を唱えたのが嫡男の相馬利胤でした。</p>
+            <p>佐竹の下に入るより、江戸へ行って交渉すべきだ！と主張し、父の了承を得て江戸へ向かったのです。</p>
+            <p>三成とは豊臣政権への取次を頼んだ間柄にすぎず、味方したことはないと弁明したうえで、今後は徳川の譜代家臣と同じように奉公すると約束しました。</p>
+            <p>しかし同年10月、宇多・行方・標葉の三郡が元のとおり相馬家に安堵されました。</p>
+            <p>一度徳川に没収された領地が元に戻るのは、極めて稀なことでした。</p>
+            <p>父の判断を押し返し、江戸へ乗り込んだ利胤の交渉が、相馬家を救ったのでしょう。</p>
+            <p>……</p>
+            <p>そして寛永十二年（1635年）11月16日、義胤は中村城で亡くなりました。</p>
+            <p>政宗と戦い、ときに手を結び、息子の交渉に家の命運を託した義胤。</p>
+            <p>相馬家は、こうして孫の代へと受け継がれていったのです。</p>
+          </div>
+          <p class="continue"><a href="https://bushoojapan.com/bushoo/others/2026/11/15/223103" target="_blank" rel="noopener" lang="ja">続きを読む · BUSHOO!JAPAN（武将ジャパン）</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p2">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★★</span> <span class="chip mins">5 min</span> <span class="chip" lang="ja">菅達長</span> <span class="chip" lang="ja">淡路水軍</span> <span class="chip" lang="ja">洲本城</span> <span class="chip" lang="ja">藤堂高虎</span> <span class="chip" lang="ja">大坂冬の陣</span>
+          </div>
+          <h2 lang="ja">豊臣秀吉に仕えた菅達長とは何者？大坂冬の陣後に切腹を命じられた水軍武将の最期</h2>
+          <p class="why">Hyōgo no período Sengoku: o chefe da marinha de Awaji perdeu o castelo de Iwaya em um dia para Hideyoshi, viveu escondido nas montanhas, tomou Sumoto após Honnōji, fugiu para Shikoku — e acabou almirante do próprio Hideyoshi, que lhe deixou uma espada de herança. O fim: mandado aterrar o fosso do Castelo de Osaka, se recusou e foi obrigado ao seppuku. Está enterrado em Sumoto.</p>
+          <div class="source">
+            <span lang="ja">草の実堂</span>
+            <a href="https://kusanomido.com/study/history/japan/sengoku/136426/" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>瀬戸内海に浮かぶ淡路国（淡路島）は、古くから海上交通の要衝であり、水軍の拠点としても栄えてきました。</p>
+            <p>今回はそんな淡路水軍の棟梁であった菅達長（かんみちなが）を紹介。</p>
+            <p>果たしてどんな活躍をして、どんな最期を遂げたのでしょうか。</p>
+            <p>……</p>
+            <p>天正年間（1573年～）に入ると、瀬戸内海の覇権を巡って、畿内を制した織田家と中国地方の雄たる毛利家が争うようになります。</p>
+            <p>淡路国衆がどちらに与するか迷う中、達長はいち早く毛利に与して織田と対抗するようになりました。</p>
+            <p>達長は毛利方として水軍を率い、石山本願寺への支援にも関わりました。しかし天正9年（1581年）11月、信長の命を受けた羽柴秀吉と池田元助（恒興の嫡男）が淡路国へ侵攻します。</p>
+            <p>達長は本拠地の岩屋城で果敢に抵抗しましたが、城はわずか1日で落城。淡路国衆の多くが織田方に制圧される中、達長は辛くも追討の手を逃れました。</p>
+            <p>……</p>
+            <p>岩屋城を失った達長は山中に潜伏し、食うや食わずの生活を送りながら捲土重来を期していました。</p>
+            <p>そんな天正10年（1582年）6月2日、京都で本能寺の変が勃発し、信長が横死を遂げます。</p>
+            <p>織田政権の混乱に乗じて達長は挙兵し、仙石秀久が統治していた洲本城をまんまと乗っ取ります。</p>
+            <p>しかし織田方の廣田蔵之丞（ひろたくらのじょう）らによってたちまち奪還されてしまい、達長は四国へ逃亡しました。</p>
+            <p>……</p>
+            <p>翌天正13年（1585年）、羽柴秀長を総大将とする四国征伐が行われると、達長は長宗我部元親ともども降伏し、秀吉に臣従します。</p>
+            <p>秀吉は達長の水軍力を買ったのでしょう。淡路国内に1万石とも1万5千石ともいわれる知行を安堵し、後に伊予国へ転封させました。</p>
+            <p>……</p>
+            <p>慶長3年（1598年）に秀吉が世を去った時、達長は遺品として長光の太刀を拝領したそうです。</p>
+            <p>……</p>
+            <p>やがて慶長5年（1600年）に関ヶ原の戦いが勃発します。達長は、九鬼嘉隆（くきよしたか）らと共に石田三成率いる西軍につきましたが敗れ、その後、改易処分（所領全没収）とされてしまいました。</p>
+            <p>しばらく尼崎で蟄居していた達長ですが、後に伊予今治藩主となった藤堂高虎に召し抱えられ、5千石どりの侍大将となります。</p>
+            <p>……</p>
+            <p>大坂冬の陣では、徳川家康が豊臣秀頼の籠もる大坂城を攻めましたが、両者は和睦することになり、その条件として大坂城の堀が埋め立てられることになります。</p>
+            <p>達長は主君・藤堂高虎から外堀の埋め立て工事の監督を命じられましたが、どういうわけか仕事を怠っていました。</p>
+            <p>そこで高虎が現場を視察して達長を叱責したところ、達長は激しく反発し、今にも高虎に斬りかかろうとするほどの態度を見せたのです。</p>
+            <p>これに激怒した高虎は、達長に切腹を命じたと伝わっています。</p>
+            <p>慶長19年12月26日（1615年1月25日）、達長はその生涯を閉じました。</p>
+            <p>亡骸は故郷の淡路島にある真浄寺（兵庫県洲本市安乎町）に葬られています。</p>
+            <p>……</p>
+            <p>それにしても、大坂城の埋め立て工事では、なぜ職務を怠った上に、主君の高虎へ斬りかかろうとするほど激怒したのでしょうか。</p>
+            <p>かつて秀吉に仕え、その形見の太刀まで受け取った達長です。</p>
+            <p>豊臣家の城を自らの手で埋め立てることに、何か思うところがあったのかもしれません。</p>
+          </div>
+          <p class="continue"><a href="https://kusanomido.com/study/history/japan/sengoku/136426/" target="_blank" rel="noopener" lang="ja">続きを読む · 草の実堂</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p3">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★☆</span> <span class="chip mins">3 min</span> <span class="chip" lang="ja">勝海舟</span> <span class="chip" lang="ja">勝小吉</span> <span class="chip" lang="ja">夢酔独言</span> <span class="chip" lang="ja">江戸</span> <span class="chip" lang="ja">犬</span>
+          </div>
+          <h2 lang="ja">勝海舟が極度の犬嫌いになった壮絶な理由とは？9歳で“大切な場所”を咬みちぎられた衝撃トラウマ</h2>
+          <p class="why">Katsu Kaishū odiava cães — e com razão: aos 9 anos um vira-lata o mordeu… lá. A estrela, porém, é o pai, Katsu Kokichi: crava a espada ao lado do travesseiro para o filho aguentar a sutura, vai rezar de tanga com banho de água fria e dorme abraçado ao menino por 70 dias. Vocabulário de Edo saboroso (水垢離, 裸参り, 犬死).</p>
+          <div class="source">
+            <span lang="ja">Japaaan（ジャパーン）</span>
+            <a href="https://mag.japaaan.com/archives/293770" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>ちなみに幕末維新に活躍した勝海舟（かつかいしゅう。勝麟太郎）は大の犬嫌いでした。</p>
+            <p>「え～何で？ワンちゃん可愛いのに……」と思うかもしれませんが、彼は幼少期に、大変なトラウマを抱えていたのです。</p>
+            <p>……</p>
+            <p>目をそむけたくなってしまいますが、医者は縫合手術を始めます。しかし麟太郎は激痛のあまり泣き叫び、震えて上手く縫えません。</p>
+            <p>場所が場所だけに大人だって痛いでしょうが、このままでは埒があかないと小吉は刀を抜き放ち、麟太郎の枕元に突き立てました。</p>
+            <p>父親に白刃を突きつけられた麟太郎は、残った睾丸が縮み上がったのではないでしょうか。</p>
+            <p>小吉「このまま死んだら文字通りの犬死だ。生きたかったら死ぬ気で堪えろ」</p>
+            <p>……</p>
+            <p>さて手術が何とか終わり、後は麟太郎の生命力を信じるよりない状態です。小吉は居ても立ってもいられず、近所の金毘羅（こんぴら）様へ裸参りに飛び出しました。</p>
+            <p>裸参りとは褌（ふんどし）一丁で寺社へ参拝する行為で、特に寒い冬などは大変だったことでしょう。さらに小吉は頭から水をかぶって心身を清める水垢離（みずごり）も行います。これもまた願掛けの苦行でした。</p>
+            <p>まさに人事尽くして天命を待つ状態ですが、小吉はまだ人事を尽くし足りません。帰宅すると、今度は麟太郎を抱きしめながら添い寝したというのです。</p>
+            <p>とまぁこんなことをずっと続けていたところ、必死の願いが神仏に達したのか、麟太郎は次第に回復していきました。</p>
+            <p>そして事故から70日目には、とうとう日常生活が出来るほど元気になったということです。</p>
+            <p>……</p>
+            <p>かくして一命をとりとめたものの、睾丸を片方失ってしまった麟太郎は、大小を問わず犬嫌いとなりました。</p>
+            <p>ちなみに父親の勝小吉も睾丸を片方失っており、こちらは旅の道中で崖から落ちた時に潰してしまったそうです。</p>
+            <p>ちなみに生殖機能に影響がなかったか気になるところですが、正妻との間に4人の子供をはじめ、妾たちにも子供を生ませていました。</p>
+          </div>
+          <p class="continue"><a href="https://mag.japaaan.com/archives/293770" target="_blank" rel="noopener" lang="ja">続きを読む · Japaaan（ジャパーン）</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p4">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★☆</span> <span class="chip mins">3 min</span> <span class="chip" lang="ja">黄帝内経</span> <span class="chip" lang="ja">中国医学</span> <span class="chip" lang="ja">未病</span> <span class="chip" lang="ja">気</span> <span class="chip" lang="ja">古代中国</span>
+          </div>
+          <h2 lang="ja">女性は28歳、男性は32歳が全盛期？ 約2000年前の中国医学書が面白い</h2>
+          <p class="why">O clássico médico chinês de ~2.000 anos explica o soluço pelo “qi” que sobe, diz que tratar doença já instalada é “cavar o poço quando já se tem sede” e divide a vida em ciclos de 7 anos (mulheres) e 8 (homens): auge aos 28 e 32. Origem de muita palavra que o japonês ainda usa, como 未病.</p>
+          <div class="source">
+            <span lang="ja">草の実堂</span>
+            <a href="https://kusanomido.com/study/history/chinese/sankou/134502/" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>中国の伝説に登場する黄帝（こうてい）は、古代の人々を治め、さまざまな文化をもたらしたと語られる帝王である。</p>
+            <p>司馬遷の『史記』では五帝の最初に位置づけられ、後世には中国文明の始祖として尊ばれるようになった。</p>
+            <p>そんな黄帝の名を冠した医学書が『黄帝内経（こうていだいけい）』である。</p>
+            <p>黄帝が自ら書き残したものではなく、戦国時代から漢代にかけての医学思想を背景に、長い年月をかけて形づくられた文献と考えられている。古代中国では、伝説の聖王の名を借りて書物に権威を持たせることがあり『黄帝内経』もその一つだった。</p>
+            <p>……</p>
+            <p>『霊枢』の「口問篇」では、黄帝が伝説上の医師・岐伯（きはく）に「人はなぜ噦（しゃっくり）を起こすのか」と尋ねる場面がある。</p>
+            <p>この問いに対して、岐伯は「胃に入った飲食物の気と寒気がぶつかり、気が逆上するためだ」と説明している。</p>
+            <p>現代医学では、しゃっくりは主に横隔膜などの不随意な収縮によって起こると説明されるが、古代中国ではこうした身近な身体の現象も「気」の働きによって説明しようとしていたのだ。</p>
+            <p>……</p>
+            <p>『素問』の「四気調神大論篇」には「聖人不治已病治未病」と記されている。</p>
+            <p>これは「優れた人は病気になってから治すのではなく、病気になる前に手を打つ」という意味である。さらに病気になってから治療を始めるのは「喉が渇いてから井戸を掘るようなものだ」とたとえているのだ。</p>
+            <p>……</p>
+            <p>『黄帝内経』の説明には、現代医学とは異なるものも少なくない。それでも病気を防ぐこと、加齢による変化、感情と身体の関係といった問いは、今を生きる私たちにも身近なものだ。</p>
+            <p>伝説の帝王と医師の問答を通して見えてくるのは、古代中国の人々が自分たちの身体をどう観察し、健康や老いと向き合っていたのかという2000年以上前から受け継がれてきた医学思想なのである。</p>
+          </div>
+          <p class="continue"><a href="https://kusanomido.com/study/history/chinese/sankou/134502/" target="_blank" rel="noopener" lang="ja">続きを読む · 草の実堂</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p5">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★★</span> <span class="chip mins">3 min</span> <span class="chip" lang="ja">考古学</span> <span class="chip" lang="ja">古代ローマ</span> <span class="chip" lang="ja">タフォノミー</span> <span class="chip" lang="ja">コミミズク</span> <span class="chip" lang="ja">イギリス</span>
+          </div>
+          <h2 lang="ja">犯人はフクロウ！古代ローマ時代の遺跡から出土した8000点のカエルの骨の謎が解明</h2>
+          <p class="why">Mais de 8.000 ossos de sapos numa vala de vilarejo romano na Inglaterra: banquete? sacrifício ritual? Nada disso — a perícia dos ossos (sem cortes, 86% corroídos por ácido gástrico) aponta para corujas-do-campo que passaram um inverno inteiro num rodízio de sapos. E isso ainda revela que ninguém andava por ali naquele inverno.</p>
+          <div class="source">
+            <span lang="ja">カラパイア</span>
+            <a href="https://karapaia.com/archives/638082.html" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>イギリスにある約1700年前のローマ帝国時代の遺跡の浅い溝から、おびただしい数のカエルの骨が発掘された。</p>
+            <p>古代人による大宴会の跡か、謎めいた儀式の生贄か。考古学者たちを悩ませてきた、カエルの骨大量遺棄事件の謎が、最新研究で明らかになった。</p>
+            <p>イギリスのボーンマス大学などの研究チームによると、カエルの骨の山は、ひと冬をここで過ごしたフクロウの群れが築き上げたものだったという。</p>
+            <p>……</p>
+            <p>2016年から2018年にかけて、イギリスのケンブリッジとハンティンドンを結ぶ幹線道路の改良工事に伴い、ロンドン考古学博物館（MOLA）などの考古学者たちが、バー・ヒルという村にある古い遺跡の溝を掘り進めていた。</p>
+            <p>遺跡は鉄器時代（紀元前400年から紀元43年）のもので、土の中からカエルやヒキガエルの骨、8000点以上が発掘された。</p>
+            <p>冬眠中に集団凍死したという説、病気説、人間が宴会で食べた跡、儀式のために埋めた説などが飛び交った。</p>
+            <p>……</p>
+            <p>研究チームは、動物が死んでから発掘されるまでに骨に何が起きたのかを、骨に残った傷から読み解く「タフォノミー（taphonomy：化石生成論）」という手法を使った。</p>
+            <p>人間が調理に関わっていれば、骨にナイフの切り傷や焼けた跡が残る。バー・ヒルのカエルの骨からは、切り傷も焼けた跡も一切見つからなかった。</p>
+            <p>代わりに、手足の長い骨の約86%に、動物に食べられて胃酸で溶かされた跡が残っていた。</p>
+            <p>……</p>
+            <p>普段はネズミを主食とするコミミズクだが、獲物が少ない年には手に入るものを何でも狩る。</p>
+            <p>カエルの大発生に引き寄せられたコミミズクの群れがこの草地に集まり、ひと冬の間カエルを食べ続けたとみられている。</p>
+            <p>……</p>
+            <p>コミミズクやハイイロチュウヒは静かな場所だけをねぐらに選び、人、特に犬を連れた人が訪れる場所を避ける。</p>
+            <p>猛禽類がここでひと冬を過ごして大量のペリットを残せたということは、その冬、溝の周辺にはほとんど人が足を踏み入れていなかったことになる。</p>
+            <p>だが、フクロウたちがこの冬、カエルの食べ放題バイキングの宴を行っていたのは確かなようだ。</p>
+          </div>
+          <p class="continue"><a href="https://karapaia.com/archives/638082.html" target="_blank" rel="noopener" lang="ja">続きを読む · カラパイア</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p6">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★★</span> <span class="chip mins">3 min</span> <span class="chip" lang="ja">マヤ文明</span> <span class="chip" lang="ja">辰砂</span> <span class="chip" lang="ja">水銀</span> <span class="chip" lang="ja">コバー</span> <span class="chip" lang="ja">環境考古学</span>
+          </div>
+          <h2 lang="ja">マヤ文明の鮮やかな赤の原料が湖や川の水を毒に変えていた</h2>
+          <p class="why">Os maias pintavam tudo de vermelho — inclusive os mortos — com cinábrio (sulfeto de mercúrio) trazido de longe. Testemunhos de sedimento de um lago em Cobá e de um cenote mostram mercúrio acima do nível “de dano severo” por quase 300 anos, chegando a 18 µg/g. Mais uma peça no quebra-cabeça do colapso maia. Fonte nova: Nazology.</p>
+          <div class="source">
+            <span lang="ja">ナゾロジー</span>
+            <a href="https://nazology.kusuguru.co.jp/archives/206912" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>古代マヤの人々は、身の回りのありとあらゆるものを赤く塗りました。</p>
+            <p>彫刻や記念碑、壁や広場、土器、さらには葬儀で弔われる遺体まで、赤く染められた遺物が数多く見つかっています。</p>
+            <p>マヤの人々にとって、赤は太陽や血、そして命を表す色だったのです。</p>
+            <p>その赤をつくる顔料の1つが、辰砂(しんしゃ)という鮮やかな赤い鉱物でした。</p>
+            <p>辰砂は水銀と硫黄が結びついた鉱物で、朱色の顔料になります。</p>
+            <p>……</p>
+            <p>では、町を赤く彩った辰砂は、その後どこへ行ったのでしょうか？</p>
+            <p>もし雨に流された顔料が近くの湖に流れ込んでいたら、水の中では何が起きていたのでしょうか？</p>
+            <p>……</p>
+            <p>8〜9世紀に起きたマヤ文明の崩壊も、干ばつで食料が足りなくなったことが有力な原因の1つとされています。</p>
+            <p>水銀の汚染や藍藻(らんそう)が出す毒によって、水の質そのものが悪くなっていた可能性です。</p>
+            <p>辰砂などの水銀が湖の底にたまると、酸素のない泥の中で、細菌のはたらきによって強い毒をもつメチル水銀に変わることがあります。</p>
+            <p>……</p>
+            <p>そこで米オーバーン大学のマシュー・ウォーターズ氏らは、ユカタン半島の2つの水場を調べました。</p>
+            <p>1つは、マヤの都市コバーのすぐそばにある浅い湖、コバー湖です。</p>
+            <p>コバーは古典期から後古典期のはじめにかけて人口5万〜9万人に達した大きな都市で、盛り土で高くした道が35本も通り、そのうち2本はほかのマヤの都市までつながっていました。</p>
+            <p>……</p>
+            <p>汚れていない時代のコバー湖の泥は、1グラムあたり約0.02マイクログラムで、重度影響の水準の100分の1でした。</p>
+            <p>ところがコバー湖では、紀元40年ごろから水銀が増えはじめます。</p>
+            <p>そして250〜300年ごろには、1グラムあたり約2.3マイクログラムに達しました。</p>
+            <p>重度影響の水準を超えていたのは、340〜370年ごろでした。</p>
+            <p>……</p>
+            <p>また辰砂はユカタン半島では自然には採れず、今のホンジュラスやメキシコ中央部の火山地帯から、遠くまでの交易で運び込まれたと考えられています。</p>
+            <p>つまりこの水銀は、マヤの人々が持ち込んだ水銀や辰砂が、湖へ流れ込んだものと考えられるのです。</p>
+          </div>
+          <p class="continue"><a href="https://nazology.kusuguru.co.jp/archives/206912" target="_blank" rel="noopener" lang="ja">続きを読む · ナゾロジー</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p7">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★★</span> <span class="chip mins">3 min</span> <span class="chip" lang="ja">広島</span> <span class="chip" lang="ja">エノラ・ゲイ</span> <span class="chip" lang="ja">火災旋風</span> <span class="chip" lang="ja">核の冬</span> <span class="chip" lang="ja">歴史資料</span>
+          </div>
+          <h2 lang="ja">広島の原爆投下の「ぞっとする事実」が飛行記録の2語から判明</h2>
+          <p class="why">97 minutos depois da bomba, o navegador do Enola Gay anotou em maiúsculas “CLOUD GONE” — a ~750 km de Hiroshima. Somando um memorando do general Groves, a curvatura da Terra e a refração do ar (100 mil simulações), pesquisadores de Berkeley calcularam: a coluna de fumaça do incêndio passou de 11,3 km. Detalhe que pesa no debate do “inverno nuclear”.</p>
+          <div class="source">
+            <span lang="ja">ナゾロジー</span>
+            <a href="https://nazology.kusuguru.co.jp/archives/206235" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>1945年8月6日の朝8時15分、広島に原子爆弾が落とされました。</p>
+            <p>地上で数万人が命を落とすなか、爆弾を落とした爆撃機エノラ・ゲイは、その場を飛び去っていきます。</p>
+            <p>その帰り道、機内では航法士(機体の位置を記録する係)が飛行記録をつけ続けていました。</p>
+            <p>爆発から97分後、その記録に短い2語が書き込まれます。</p>
+            <p>見落とされてきたこの走り書きが、80年以上たって、ある大事な数字を割り出す手がかりになりました。</p>
+            <p>……</p>
+            <p>たった2語のメモから、いったい何が分かったのでしょうか？</p>
+            <p>研究の詳細は、米カリフォルニア大学バークレー校らにより、2026年10月28日付で学術誌『Geophysical Research Letters』に掲載されました。</p>
+            <p>原爆の爆発そのものとキノコ雲は、比較的すぐに終わります。</p>
+            <p>……</p>
+            <p>核戦争で多くの火災が起きれば、たまったすすが地球を冷やす「核の冬」につながりかねません。</p>
+            <p>ところが、火災のすすが本当にそこまで上がるのかは、研究者の間で意見が割れてきました。</p>
+            <p>こうした計算によれば、低い空のすすは、地球の気候に長く影響する前に雨で洗い流されうることになります。</p>
+            <p>……</p>
+            <p>エノラ・ゲイは爆撃のあとテニアン島へ向かい、機体の後ろからけむりの柱を見続けていました。</p>
+            <p>航法士のセオドア・ヴァン・カーク氏は、飛行中ずっと機体の位置や向き、速さを書き留めていました。</p>
+            <p>そして爆発から97分後、テニアン時間の午前10時52分に、大文字で「CLOUD GONE」と記したのです。</p>
+            <p>このとき機体は、広島から750〜764キロメートル離れていたと見積もられています。</p>
+            <p>……</p>
+            <p>その結果、95%の確かさで、けむりの柱の頂上は11.3キロメートルを超えていたことが分かりました。</p>
+            <p>当日、たまたま火災の嵐を目にした米陸軍の別の2機も、けむりが3万5000フィート(約11キロメートル)まで上がったと報告しており、この結果と合っています。</p>
+            <p>少なくとも一部のすすは、天気の変化が起きる層(対流圏)の上のほうまで運ばれていたことになります。</p>
+          </div>
+          <p class="continue"><a href="https://nazology.kusuguru.co.jp/archives/206235" target="_blank" rel="noopener" lang="ja">続きを読む · ナゾロジー</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p8">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★★</span> <span class="chip mins">3 min</span> <span class="chip" lang="ja">電力網</span> <span class="chip" lang="ja">周波数</span> <span class="chip" lang="ja">UPS</span> <span class="chip" lang="ja">インフラ</span> <span class="chip" lang="ja">Nature Energy</span>
+          </div>
+          <h2 lang="ja">5大陸の電力網が「60秒ごとに脈打つ」謎の答えが見えてきた</h2>
+          <p class="why">Redes elétricas sem nenhuma ligação entre si — Islândia, Europa, Coreia, África do Sul — tremem exatamente a cada 60 segundos há mais de 10 anos. O culpado provável: o autoteste das baterias de no-breaks (UPS), todos com relógio sincronizado, disparando juntos. Mistério de infraestrutura com cara de conto policial (e lição para quem programa cron jobs).</p>
+          <div class="source">
+            <span lang="ja">ナゾロジー</span>
+            <a href="https://nazology.kusuguru.co.jp/archives/208491" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>家のコンセントの電気は、1秒間に50回か60回のリズムで波打っています。</p>
+            <p>この電気を届ける電力網は、暮らしの中で当たり前すぎる存在です。</p>
+            <p>ところが世界の電力網を細かく調べると、このリズムが1分おきに、ごくわずかに揺れていました。</p>
+            <p>しかも、互いにつながっていない別々の電力網で、同じ揺れが見つかっていたのです。</p>
+            <p>この揺れは10年以上も続いてきましたが、原因はずっと謎のままでした。</p>
+            <p>時計のように正確な1分の脈を、いったい何が刻んでいたのでしょうか？</p>
+            <p>……</p>
+            <p>テレビのCMの間に大勢が一斉に電気ケトルでお湯を沸かし、需要が急に跳ね上がるのです。</p>
+            <p>こうした揺れはふつう小さく不規則で、電力網を動かす会社が絶えず抑え込んでいます。</p>
+            <p>ところが遅くとも2014年には、北欧の研究者が1分ほどの周期の変わった揺れを記録していました。</p>
+            <p>……</p>
+            <p>手がかりを探すため、チームはドイツのユーリッヒ研究センターの建物に目を向けました。</p>
+            <p>すると、1分の周期がはっきり出たのは測った場所の一部だけで、建物にして4棟でした。</p>
+            <p>そしてその4棟には、どれも電池を使った無停電電源装置(UPS)が入っていたのです。</p>
+            <p>UPSは、停電の時にも電池から電気を送り続ける予備の電源です。</p>
+            <p>……</p>
+            <p>するとそこには、1分ごとにくり返す細く鋭い電流の山が現れていました。</p>
+            <p>メーカーも独自に、この山は電池を管理するソフトが行う定期の自己点検によるものだと確認しました。</p>
+            <p>……</p>
+            <p>では、なぜ別々の建物や国の装置が、同じ瞬間にそろって点検するのでしょうか？</p>
+            <p>チームは、その鍵が「時計」にあると考えています。</p>
+            <p>デジタル機器は、外から届く時刻の信号で内部の時計を合わせることがあります。</p>
+            <p>すると、無関係に動く装置どうしでも、予定の作業を同じ時刻に始めてしまうことがあります。</p>
+            <p>チームは論文で「害の無い制御の手順でも、多くの機器がそろって動けば、全体に関わる問題になりうる」と書いています。</p>
+            <p>世界の1分の脈は、時計を合わせた機器たちが、自己点検のような決まった作業を意図せずそろって行うことで生まれている可能性が高いのです。</p>
+          </div>
+          <p class="continue"><a href="https://nazology.kusuguru.co.jp/archives/208491" target="_blank" rel="noopener" lang="ja">続きを読む · ナゾロジー</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p9">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★☆</span> <span class="chip mins">3 min</span> <span class="chip" lang="ja">認知症</span> <span class="chip" lang="ja">教育</span> <span class="chip" lang="ja">自然実験</span> <span class="chip" lang="ja">UKバイオバンク</span> <span class="chip" lang="ja">遺伝</span>
+          </div>
+          <h2 lang="ja">「義務教育期間を1年延ばす」という政策が後の認知症発症率を大きく引き下げた可能性</h2>
+          <p class="why">Experimento natural britânico: quem nasceu a partir de 1/9/1957 teve de ficar um ano a mais na escola (até os 16). Décadas depois, essa turma tem bem menos demência — inclusive quem tem risco genético alto. Ótimo vocabulário de pesquisa (因果関係, 不連続性, 対照群).</p>
+          <div class="source">
+            <span lang="ja">GIGAZINE</span>
+            <a href="https://gigazine.net/news/20261115-more-education-reduces-dementia-risk/" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>認知症は人生の質を大きく低下させる深刻な病気であり、その発症リスクは遺伝・生活習慣・環境・社会経済的状況などさまざまな要因に左右されます。新たな研究では、義務教育の期間が1年延びたことで後の認知症発症率が大きく低下した可能性が示されました。</p>
+            <p>……</p>
+            <p>そこでバルセロス氏らの研究チームは、「1970年代のイギリスで行われた義務教育期間の法改正」を一種の自然実験として利用し、義務教育の年数が後の認知症リスクに与える影響を調べました。イギリスでは1972年に「卒業年齢引き上げ法」が試行され、イングランド・スコットランド・ウェールズにおける最低卒業年齢が15歳から16歳に引き上げられました。</p>
+            <p>法律の対象になったのは1957年9月1日以降に生まれた子どもたちで、それ以前に生まれた子どもたちより義務教育機関が1年延びました。この変更により、少なくとも16歳まで学校に通い続ける子どもの割合が14パーセントポイント増加し、生まれた時期が近いにもかかわらず教育機関に大きな差が生まれています。</p>
+            <p>……</p>
+            <p>データを分析した結果、1957年9月1日以降に生まれた人々はそれ以前に生まれた人々と比較して、ADRDの累積発症率が急激に低下していることが明らかになりました。この結果は、学校に通う期間が延びることで、後年の認知症リスクが大幅に下がることを示唆するものです。</p>
+            <p>……</p>
+            <p>論文の共著者で、南カリフォルニア大学の医療経済学者であるレアンドロ・カルヴァーリョ准教授は、「認知症の遺伝的リスクが高いと自覚している人々にとって、これは希望の持てる発見です。遺伝子は病気のリスクを左右しますが、必ずしも発症を決定づけるわけではありません。今回の研究結果は、人生の中で変化させることができる経験や状況が、遺伝的素因が最終的に病気につながるかどうかに影響を与える可能性を示唆しています。どのような介入がこうした予防効果をもたらすかを理解することは、今後の研究にとって重要な方向性です」とコメントしています。</p>
+          </div>
+          <p class="continue"><a href="https://gigazine.net/news/20261115-more-education-reduces-dementia-risk/" target="_blank" rel="noopener" lang="ja">続きを読む · GIGAZINE</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p10">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★☆</span> <span class="chip mins">2 min</span> <span class="chip" lang="ja">AI</span> <span class="chip" lang="ja">SRE</span> <span class="chip" lang="ja">デスキリング</span> <span class="chip" lang="ja">自動化の皮肉</span> <span class="chip" lang="ja">インシデント対応</span>
+          </div>
+          <h2 lang="ja">AIが便利になればなるほど深刻になる「自動化の皮肉」に人間はどう対処すべきか</h2>
+          <p class="why">O paradoxo de 1983 (“ironies of automation”) aplicado a SRE com IA: se a IA resolve 95% dos incidentes, quem ainda sabe resolver os 5% difíceis? Pior: “never-skilling”, juniores que nunca aprendem. Proposta: como a FAA exige horas de voo manual, deixar incidentes de propósito para humanos. Direto para quem vive com Claude/Cursor no dia a dia.</p>
+          <div class="source">
+            <span lang="ja">GIGAZINE</span>
+            <a href="https://gigazine.net/news/20261115-ai-isnt-replacing-sres-its-deskilling/" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>近年のAIの進化はSRE(サイト信頼性エンジニアリング)に大きな影響を与えています。AIがインシデント対応の大部分を自動化するにつれて、人間が担うべき「稀・複雑・曖昧」な問題への対応能力が低下するという「自動化の皮肉」が指摘されています。オープンソースのシステム監視・分析ツール「SigNoz」の開発者エリザベス・マシュー氏は「AIがインシデント対応の95%を処理するようになったら、実際に重要な5%の対応能力は低下するのか？」という疑問について考察しています。</p>
+            <p>……</p>
+            <p>SREにおいても、AIがログを要約することで生のログストリームを読む機会が減る、AIが根本原因を提案することで仮説を立てなくなる、AIが依存関係をマッピングすることでシステムのメンタルモデルを構築しなくなるといった風に、専門知識が空洞化する懸念があります。さらに深刻なのは「ネバースキリング」です。AIがインシデント対応の大部分を処理する環境でキャリアをスタートさせた若いSREは、デスキリング以前の問題でそもそもスキルを身に着ける機会が失われつつあります。</p>
+            <p>……</p>
+            <p>FAA(連邦航空局)がパイロットに手動操縦時間を義務付けるように、SREチームも人間のスキル維持のための実践機会として、AIが処理できるインシデントであっても意図的に人間の作業として残すことが考えられます。いわば人間のスキルを維持するための長期的な投資です。</p>
+          </div>
+          <p class="continue"><a href="https://gigazine.net/news/20261115-ai-isnt-replacing-sres-its-deskilling/" target="_blank" rel="noopener" lang="ja">続きを読む · GIGAZINE</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p11">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★☆☆</span> <span class="chip mins">3 min</span> <span class="chip" lang="ja">ソフトウェア</span> <span class="chip" lang="ja">Windows</span> <span class="chip" lang="ja">Diablo II</span> <span class="chip" lang="ja">ゲーム史</span> <span class="chip" lang="ja">開発</span>
+          </div>
+          <h2 lang="ja">現代のソフトウェアは劣化しているかもしれないが昔のソフトウェアはもっとひどかったという指摘</h2>
+          <p class="why">Nostalgia desmontada por um engenheiro que entrou no Google Docs em 2010 e descobriu que todo mundo apertava Ctrl+S mesmo com autosave — trauma de tela azul. Também: jogos rápidos demais em CPU nova, a irmã de 9 anos burlando o screensaver com senha, e o caos dos itens duplicados em Diablo II.</p>
+          <div class="source">
+            <span lang="ja">GIGAZINE</span>
+            <a href="https://gigazine.net/news/20261114-software-used-to-be-horrible/" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>ソフトウェアの肥大化や動作の遅さ、バグの増加などを理由に「昔のソフトウェアの方が品質が高かった」と主張する人もいます。しかし、1990年からコンピューターを使い続けてきたソフトウェアエンジニアのジェイク・ヴォイトコ氏は過去のソフトウェアが抱えていた問題を振り返り、現代のソフトウェアがいかに改善されてきたのかを解説しています。</p>
+            <p>……</p>
+            <p>ヴォイトコ氏が2010年にGoogleドキュメントの開発チームに加わった際、ユーザーのキー操作を調査したところ、自動保存機能があるにもかかわらず保存用のショートカットキーである「Ctrl＋S」が頻繁に押されていたとのこと。長年にわたってデータ消失を経験してきたユーザーにとって、こまめに保存することが習慣になっていたわけです。</p>
+            <p>……</p>
+            <p>ゲームの設計についても改善が進んでいます。例えば2000年に発売された「Diablo II」では、アイテムの複製バグによってゲーム内経済が混乱したほか、敵が落としたアイテムをプレイヤー同士で奪い合う必要がありました。後継作の「Diablo III」ではアイテムの複製対策が強化され、プレイヤーごとにアイテムがドロップする仕組みが採用されています。</p>
+            <p>……</p>
+            <p>ヴォイトコ氏は現代のソフトウェアにも肥大化や複雑化といった問題があり、AIエージェントへの依存が進むことで開発者自身が内部の仕組みを把握できなくなりつつあると認めています。それでも、プロセスの分離による安定性の向上、インターネット経由でのアップデート、プログラミングにおけるミスを減らす高水準言語の普及など、現代のソフトウェア開発がもたらした恩恵は大きく、ヴォイトコ氏は昔のソフトウェア開発のあり方に戻りたいとは思わないと述べました。</p>
+          </div>
+          <p class="continue"><a href="https://gigazine.net/news/20261114-software-used-to-be-horrible/" target="_blank" rel="noopener" lang="ja">続きを読む · GIGAZINE</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p12">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★★</span> <span class="chip mins">3 min</span> <span class="chip" lang="ja">Claude Code</span> <span class="chip" lang="ja">hooks</span> <span class="chip" lang="ja">SessionStart</span> <span class="chip" lang="ja">additionalContext</span> <span class="chip" lang="ja">jq</span>
+          </div>
+          <h2 lang="ja">Claude Code の SessionStart hook で渡していた 31 万字は、会話にほぼ入っていなかった（上限は 1 万字）</h2>
+          <p class="why">Armadilha silenciosa do Claude Code: o additionalContext de um hook tem teto de 10.000 caracteres (sem configuração para aumentar); acima disso vai para arquivo e só entra um preview. O autor injetava 305 mil caracteres há meses sem saber. Correção: uma linha por projeto, limite de 9.500 em UTF-16, e um hook de 8,5 s reescrito para 0,46 s.</p>
+          <div class="source">
+            <span lang="ja">Zenn</span>
+            <a href="https://zenn.dev/shogaku/articles/claude-code-hook-10k-cap" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>Claude Code でいくつものプロジェクトを並行して進めていて、プロジェクトごとに「次にやること」を 1 つのファイルに書いています（以下、まとめて pickup と呼びます）。会話を始めるたびに、SessionStart hook でその全部を Claude に渡していました。</p>
+            <p>PC の掃除のついでにメモを整理していて、pickup の量を測ったところ 53 万バイトありました。 hook が渡せる量には上限があったはずだと思い、調べてみました。</p>
+            <p>結論から書くと、hook が会話に渡せるのは 1 万字までで、それを大きく超えていた pickup は、会話の冒頭にほとんど入っていませんでした。その確かめ方と直し方を残しておきます。</p>
+            <p>……</p>
+            <p>SessionStart hook は、会話の開始時に動くコマンドです。標準出力に JSON を返し、その中の additionalContext に入れた文字列が会話の文脈に入ります。</p>
+            <p>……</p>
+            <p>記録が残る最初の日（5 月 10 日）でも 14,559 字で、すでに 1 万字を超えていました。 7 月 7 日より前の控えには index と pickup 1 本しか入っていないので、グラフの 7 月の段差はそのためです。その後はプロジェクトが増えるにつれて伸び、11 月 12 日には 305,295 字になっていました。</p>
+            <p>……</p>
+            <p>## 確かめ方 2：新しい会話に「冒頭に何が見えるか」を聞く</p>
+            <p>字数が上限内でも、本当に会話に入っているかは別の話です。 claude -p で新しい会話を 1 つ開き、冒頭にあるはずの見出しが見えるかを聞きました。</p>
+            <p>直したあとの hook では「あります」と答え、hook が出した 3 行をそのまま書き返してきました。直す前の hook では、この確かめ方は試していません。</p>
+            <p>……</p>
+            <p>hook で何かを会話に入れている場合、出力の字数を一度測っておくと、黙って切られていないかが分かります。私はそれまで一度も測っていませんでした。</p>
+          </div>
+          <p class="continue"><a href="https://zenn.dev/shogaku/articles/claude-code-hook-10k-cap" target="_blank" rel="noopener" lang="ja">続きを読む · Zenn</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p13">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★☆</span> <span class="chip mins">3 min</span> <span class="chip" lang="ja">JR北海道</span> <span class="chip" lang="ja">赤い星</span> <span class="chip" lang="ja">水戸岡鋭治</span> <span class="chip" lang="ja">観光列車</span> <span class="chip" lang="ja">キハ143形</span>
+          </div>
+          <h2 lang="ja">車齢45年「異色の車両」が驚愕の大変貌！ 茶室も備えた豪華列車がついに公開 水戸岡氏は「ななつ星にも負けない」</h2>
+          <p class="why">Vagões de passageiros de 1978–82, convertidos em automotrizes e corroídos pelo sal da linha Muroran, viraram o trem turístico “Akai Hoshi” (¥1,8 bi): piano, sala de chá com tatame, cabines com janela até o chão. Mitooka (do Nanatsuboshi) diz que foi o projeto mais difícil da vida. Sapporo–Abashiri a partir de fev/2027.</p>
+          <div class="source">
+            <span lang="ja">乗りものニュース</span>
+            <a href="https://trafficnews.jp/post/728058" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>JR北海道は2026年11月14日、2027年2月から運行を開始する新たな観光列車「赤い星」を苗穂運転所（札幌市東区）で報道公開しました。</p>
+            <p>「赤い星」は、沿線地域と一体で北海道の活性化を目指す「スタートレイン計画」の一環として、JR北海道が準備を進めている新たな観光列車です。工業デザイナーの水戸岡鋭治氏がデザインを担当し、かつて普通列車として使用されていたキハ143形4両を約18億円かけて大幅に改造しています。改造に伴い、車両形式は「RS143形」に変更されました。</p>
+            <p>種車となったキハ143形は元々、1978年から1982年にかけて製造された50系51形客車で、その後気動車に改造され、札沼線（学園都市線）や室蘭本線などで活躍した異色の経歴を持ちます。</p>
+            <p>既に車齢が約45年となっており、改造にあたって通常の定期検査では取り外さない内装材の内側を確認した際、想定以上の腐食や歪みが判明しました。特に「海沿いの室蘭本線を走ったことで、塩害による車体の腐食が進んでいた」（JR北海道広報部）といいます。</p>
+            <p>当初「赤い星」は2026年4月の運行開始を予定していましたが、この補修に時間を要したため、延期となっていました。</p>
+            <p>……</p>
+            <p>「赤い星」は季節や時期によってルートを変えながら北海道各地を巡る計画で、車内には案内や食事の提供を行うアテンダントが乗務します。まずは2027年2月から、函館線・石北線の札幌～網走間で運行を開始する予定です。</p>
+            <p>1日片道1本の運転で、札幌発・網走行き「赤い星オホーツクの風」は札幌駅を9時7分頃に発車し、網走駅に15時59分頃に到着。網走発・札幌行き「赤い星雪華（せっか）の風」は網走駅を翌日10時頃に発車し、札幌駅には17時22分頃に到着します。</p>
+          </div>
+          <p class="continue"><a href="https://trafficnews.jp/post/728058" target="_blank" rel="noopener" lang="ja">続きを読む · 乗りものニュース</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p14">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★☆</span> <span class="chip mins">4 min</span> <span class="chip" lang="ja">しまなみ海道</span> <span class="chip" lang="ja">来島海峡大橋</span> <span class="chip" lang="ja">馬島</span> <span class="chip" lang="ja">今治</span> <span class="chip" lang="ja">潮流</span>
+          </div>
+          <h2 lang="ja">「日本有数の絶景高速道路」じつは“歩ける！” 海峡ウォーキングで「路線図にないIC」を見つけた件</h2>
+          <p class="why">Dá para atravessar a pé a ponte Kurushima-Kaikyō, 65 m acima de um dos três estreitos de correnteza mais forte do Japão (até 10 nós — de interesse para quem veleja). No meio, a ilha de Umashima tem um acesso de autoestrada secreto, só para seus ~dez moradores. Passeio de 40 min, perto de casa para quem mora em Kansai.</p>
+          <div class="source">
+            <span lang="ja">乗りものニュース</span>
+            <a href="https://trafficnews.jp/post/726137" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>広島県尾道市と愛媛県今治市をつなぐ「西瀬戸自動車道」は、通称「しまなみ海道」と呼ばれ、神戸淡路鳴門道（明石海峡大橋・大鳴門橋）、瀬戸中央道（瀬戸大橋）と並ぶ本州四国連絡橋3ルートの一つです。瀬戸内の島々を巡る美しい景観が楽しめる人気のドライブコースとしても知られています。</p>
+            <p>また、本州と四国を結ぶ本州四国連絡橋の3ルートのうち、自転車が走れるのは、しまなみ海道だけです。そのためサイクリストにとっては“聖地”とも評される場所ですが、じつは徒歩でも行き来できることをご存じでしょうか。</p>
+            <p>しまなみ海道の橋には、自転車や歩行者が通行できる道路が併設されています。ただ、全線だと約80kmにもおよび、健脚自慢であっても、すべてを渡り切るには2〜3日がかりの行程となってしまいます。</p>
+            <p>……</p>
+            <p>来島海峡第三大橋の桁下高は略最高高潮面（満潮時にこれより高くならないと想定される潮位）まで65mと、ほぼ20階建てのビルに相当する高さですが、自転車歩行者道の幅員が十分にあること、また車道を大型トラックが通ってもほとんど揺れを感じないことから、高さの実感はあまりありません。ただ欄干の高さは大人の目線よりも低く、また細めの形状を採用していることから、高所恐怖症の人は海側を歩くのを躊躇するかもしれません。</p>
+            <p>ただこのふたつの主塔間の距離は1030mもあり、歩いても歩いても、景色はなかなか変わりません。しかし海側に目を移すと、はるか眼下に青い瀬戸内海が見えます。この来島海峡の潮流はときに10ノットに達するとされ、鳴門海峡、関門海峡とともに「日本三大強潮流」として知られています。</p>
+            <p>馬島側の主塔では、自転車歩行者道は主塔の外側を回り込むように続きます。そしてその先には「路線バス馬島」と、バス停を示す看板があり、車道から分岐した側道に、バス停留所が設けられています。ただ、その側道の入口には、他の高速道路ではまず見かけない看板が現れます。</p>
+            <p>「この先のゲートは島民専用です一般の通行券では通行できません」</p>
+            <p>そしてバス停留所の先の左側には、チェーンで閉ざされたゲートがあります。このスロープは、馬島に住む十数名の住民のクルマ、および緊急自動車などが通行を許された「馬島IC」なのです。しまなみ海道の路線図には、馬島のバス停は記載されていても、ICの存在は書かれていないものがほとんどです。</p>
+            <p>糸山から歩きはじめ、このバス停までの所要時間は、景観を楽しんだり、写真撮影したりする時間を含め、約40分でした。“無料で楽しめるアトラクション”としては、十分に満足度が高いと言えるでしょう。</p>
+          </div>
+          <p class="continue"><a href="https://trafficnews.jp/post/726137" target="_blank" rel="noopener" lang="ja">続きを読む · 乗りものニュース</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p15">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★☆</span> <span class="chip mins">2 min</span> <span class="chip" lang="ja">六甲全山縦走</span> <span class="chip" lang="ja">神戸</span> <span class="chip" lang="ja">須磨</span> <span class="chip" lang="ja">宝塚</span> <span class="chip" lang="ja">ハイキング</span>
+          </div>
+          <h2 lang="ja">山の斜面に一筋の稲光?　六甲全山縦走大会でつかの間の「光のショー」</h2>
+          <p class="why">Antes das 6h, as lanternas de testa de 2.500 caminhantes desenham um “raio” em zigue-zague na encosta de Suma: é o Rokkō Zenzan Jūsō, 56 km de Suma a Takarazuka num dia, desde 1975 — e mantido por cidadãos voluntários. Dois textos curtos (paywall) do Kobe Shimbun juntos.</p>
+          <div class="source">
+            <span lang="ja">神戸新聞NEXT</span>
+            <a href="https://www.kobe-np.co.jp/news/society/202611/0021031428.shtml" target="_blank" rel="noopener">原文を開く ↗</a> · <a href="https://www.kobe-np.co.jp/news/richb/202611/0021030360.shtml" target="_blank" rel="noopener" lang="ja">＜六甲山録(7)＞全山縦走 ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>今月８日の午前６時前。六甲山系の栂尾山（神戸市須磨区）中腹から南西方向を望む。８００メートルほど離れた通称「おらが山」を見やると、稲光が走ったかのように斜面がジグザグに輝いていた。</p>
+            <p>光の正体は無数のヘッドライトの光跡だ。約５６キロ（公称）を歩く「ＫＯＢＥ六甲全山縦走大会」。須磨浦公園を朝の５時に出発したハイカーたちが続々と、階段を下りてきていた。</p>
+            <p>今年の参加者は半縦走コースも含めると約２５００人。コース序盤は狭い道に渋滞が発生しやすく、足元を照らす明かりが斜面に一筋の光の帯を描き出す。</p>
+            <p>数十分後、空が白み始めると、ヘッドライトはぽつぽつと消えていく。つかの間の光のショーは終わったが、宝塚を目指す長い旅路は続いた。（風斗雅博）</p>
+            <p>……</p>
+            <p>切り立った尾根を歩くハイカーの列を朝日が照らす。横尾山（神戸市須磨区）から続く名勝「馬の背」。広大な大阪湾を眺めながら、風化した岩場を進む。半日以上かけてゴールを目指すその足取りはまだ軽い。</p>
+            <p>１１月８日に開かれた「ＫＯＢＥ六甲全山縦走大会」。元々は神戸市の主催で１９７５年に始まった。その後、「市に据え膳してもらうものではなく、市民全体が自分のこととして関与すべき」と、有志が「六甲全山縦走市民の会」を立ち上げた。第３回から市との共催になり、今では県内外から集まった１００人以上のボランティアが運営を支える。</p>
+            <p>コースは神戸市須磨区から宝塚市までの公称約５６キロ。半縦走コースを含めると、これまでの参加者は１７万人に迫る。</p>
+          </div>
+          <p class="continue"><a href="https://www.kobe-np.co.jp/news/society/202611/0021031428.shtml" target="_blank" rel="noopener" lang="ja">続きを読む · 神戸新聞NEXT</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p16">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★☆</span> <span class="chip mins">3 min</span> <span class="chip" lang="ja">BAND-MAID</span> <span class="chip" lang="ja">日本武道館</span> <span class="chip" lang="ja">ワールドツアー</span> <span class="chip" lang="ja">お給仕</span> <span class="chip" lang="ja">2028年15周年</span>
+          </div>
+          <h2 lang="ja">BAND-MAID、ワールドツアーを日本武道館2daysで完走。映像作品発売＆新曲リリースも発表</h2>
+          <p class="why">Final da turnê mundial de 2026 (Ásia, Europa, América do Norte) em dois dias no Budokan, com o 2º esgotado e transmitido ao mundo. Notícia importante: 2027 será um ano de pausa nas “oky-ūji” (shows), com filme da turnê e música nova — mirando os 15 anos em 2028.</p>
+          <div class="source">
+            <span lang="ja">BARKS</span>
+            <a href="https://barks.jp/news/1104553" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>BAND-MAIDが、約1年にわたり展開してきたワールドツアーのファイナル公演＜BAND-MAID WORLD TOUR 2026 FINAL＞を11月13日・14日の2日間にわたり東京・日本武道館にて開催し、全行程を熱狂のうちに完走した。</p>
+            <p>2026年3月よりアジア、ヨーロッパ、北米、そして日本各地を巡ってきた大規模なワールドツアーの集大成となった本公演。会場には日本国内のみならず、全世界から多くのご主人様・お嬢様（BAND-MAIDファンの呼称）が集結した。なお、11月14日の最終日公演のチケットはソールドアウトし、全世界への生配信も実施されるなど、国内外から大きな注目を集める中で幕を閉じた。</p>
+            <p>ステージはBAND-MAIDらしく、高い演奏力を堪能できるインストゥルメンタルのセッションで幕を開けた。セットリストは新旧の楽曲を織り交ぜた構成となり、持ち味である激しいハードロックナンバーはもちろん、SAIKI(Vo.)によるキーボード弾き語りや、ファイナルのために新たに構成されたセッションやソロパートなど、見どころ満載の内容で観客を魅了。MCではこれまで走り続けてきた軌跡を振り返りつつ未来を語るメンバーの目に涙が浮かぶ場面も見られたが、終始会場は笑顔と熱気に包まれた。</p>
+            <p>すでに発表されていた通り、2027年はお給仕（ライブ）活動を小休止するBAND-MAIDだが、会場に集まった全世界のご主人様・お嬢様と共に過ごす中で、結成15周年を迎える2028年への意気込みと希望に溢れた一夜となった。</p>
+            <p>また、2027年に新曲をリリースすることも明かされた。お給仕活動の充電期間中も制作面での歩みを止めず、次なるフェーズへと向かう姿勢を示している。映像作品の発売日や商品仕様、新曲リリースの詳細などは、いずれも後日発表される予定だ。</p>
+          </div>
+          <p class="continue"><a href="https://barks.jp/news/1104553" target="_blank" rel="noopener" lang="ja">続きを読む · BARKS</a></p>
+        </div>
+      </article>
+
+      <footer class="site">読解幕 · 2026-11-15 · ~51 min · <a href="/japanese-digest/history/" style="color:inherit">History</a> · deliton.github.io/japanese-digest</footer>
+    </main>
+  </div>
+</body>
+</html>
