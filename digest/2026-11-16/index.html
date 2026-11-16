@@ -1,0 +1,990 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>読解幕 · 2026-11-16 · Japanese Digest</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Noto+Serif+JP:wght@400;600;700&family=Shippori+Mincho:wght@500;700&display=swap" rel="stylesheet" />
+  <style>
+
+    :root {
+      --bg: #0a0a0a;
+      --bg-2: #121212;
+      --bg-card: #161616;
+      --ink: #f5f5f5;
+      --ink-dim: #a8a29a;
+      --ink-mute: #6b6560;
+      --shu: #c41e3a;
+      --shu-hot: #e11d48;
+      --shu-deep: #8b1228;
+      --gold: #d4a017;
+      --gold-soft: #c9a227;
+      --white: #fafafa;
+      --line: #2a2a2a;
+      --line-hot: rgba(196, 30, 58, 0.45);
+      --measure: 42rem;
+      --radius: 4px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: "Noto Sans JP", "Hiragino Sans", "Yu Gothic", system-ui, sans-serif;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .stage-bar {
+      height: 6px;
+      background: repeating-linear-gradient(
+        90deg,
+        var(--shu) 0 48px,
+        var(--white) 48px 56px,
+        #111 56px 64px,
+        var(--gold) 64px 72px,
+        #111 72px 88px
+      );
+    }
+
+    .wrap {
+      width: min(100% - 2rem, 74rem);
+      margin: 0 auto;
+      padding: 2rem 0 4.5rem;
+      display: grid;
+      grid-template-columns: 15.5rem 1fr;
+      gap: 2.75rem;
+      align-items: start;
+    }
+
+    @media (max-width: 900px) {
+      .wrap { grid-template-columns: 1fr; gap: 1.5rem; padding-top: 1.25rem; }
+      .sidebar { position: static !important; }
+    }
+
+    .sidebar { position: sticky; top: 1.25rem; }
+
+    .brand {
+      display: flex;
+      align-items: baseline;
+      gap: 0.55rem;
+      margin: 0 0 0.35rem;
+    }
+    .brand-mark {
+      font-family: "Shippori Mincho", "Noto Serif JP", serif;
+      font-size: 1.85rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      color: var(--white);
+      line-height: 1;
+    }
+    .brand-mark em {
+      font-style: normal;
+      color: var(--shu);
+    }
+    .brand-sub {
+      font-size: 0.65rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-weight: 700;
+    }
+
+    .meta {
+      color: var(--ink-mute);
+      font-size: 0.8rem;
+      margin: 0 0 1.25rem;
+    }
+
+    .stat-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-bottom: 1.35rem;
+    }
+    .stat {
+      border: 1px solid var(--line);
+      background: var(--bg-2);
+      padding: 0.32rem 0.65rem;
+      font-size: 0.72rem;
+      color: var(--ink-dim);
+      border-radius: var(--radius);
+    }
+    .stat strong { color: var(--white); font-weight: 700; }
+    .stat.hot {
+      border-color: var(--shu);
+      color: var(--shu-hot);
+      background: rgba(196, 30, 58, 0.1);
+    }
+
+    .toc {
+      border: 1px solid var(--line);
+      background: var(--bg-2);
+      padding: 0.85rem 0.9rem 0.95rem;
+      border-radius: var(--radius);
+    }
+    .toc h2 {
+      margin: 0 0 0.65rem;
+      font-size: 0.72rem;
+      letter-spacing: 0.16em;
+      color: var(--gold);
+      font-weight: 800;
+    }
+    .toc ol { list-style: none; margin: 0; padding: 0; }
+    .toc li { margin: 0; }
+    .toc a {
+      display: flex;
+      justify-content: space-between;
+      gap: 0.5rem;
+      text-decoration: none;
+      color: var(--ink-dim);
+      font-size: 0.82rem;
+      padding: 0.38rem 0.2rem;
+      border-bottom: 1px solid transparent;
+    }
+    .toc a:hover { color: var(--white); border-bottom-color: var(--line-hot); }
+    .toc .t-title { font-weight: 600; }
+    .toc .t-min { color: var(--gold); font-size: 0.72rem; font-weight: 700; flex-shrink: 0; }
+
+    .main { max-width: var(--measure); }
+
+    .digest-banner {
+      display: flex;
+      gap: 0.75rem;
+      align-items: flex-start;
+      background: #141014;
+      border: 1px solid var(--line);
+      border-left: 3px solid var(--shu);
+      padding: 0.85rem 1rem;
+      margin-bottom: 1.5rem;
+      font-size: 0.78rem;
+      color: var(--ink-dim);
+      line-height: 1.55;
+    }
+    .digest-banner .tag {
+      flex-shrink: 0;
+      background: var(--shu);
+      color: #fff;
+      font-size: 0.65rem;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      padding: 0.28rem 0.5rem;
+      border-radius: var(--radius);
+    }
+
+    .hero {
+      margin-bottom: 2rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid var(--line);
+      position: relative;
+    }
+    .hero::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -1px;
+      width: 4.5rem;
+      height: 2px;
+      background: var(--shu);
+    }
+    .kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.7rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--shu-hot);
+      font-weight: 800;
+      margin-bottom: 0.85rem;
+    }
+    .kicker::before {
+      content: "◆";
+      font-size: 0.55rem;
+      color: var(--gold);
+    }
+    .hero h1 {
+      font-family: "Shippori Mincho", "Noto Serif JP", serif;
+      font-size: clamp(1.85rem, 4vw, 2.55rem);
+      font-weight: 700;
+      line-height: 1.2;
+      margin: 0 0 0.75rem;
+      color: var(--white);
+      letter-spacing: 0.02em;
+    }
+    .hero p {
+      margin: 0;
+      color: var(--ink-dim);
+      font-size: 0.98rem;
+      max-width: 36rem;
+    }
+
+    article.piece {
+      background: var(--bg-card);
+      border: 1px solid var(--line);
+      margin-bottom: 1.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+    article.piece::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: linear-gradient(90deg, var(--shu) 0%, var(--shu) 35%, var(--gold) 35%, var(--gold) 42%, transparent 42%);
+    }
+
+    .piece-inner { padding: 1.6rem 1.55rem 1.35rem; }
+
+    .piece-head {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-bottom: 0.85rem;
+    }
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      border: 1px solid var(--line);
+      background: #111;
+      color: var(--ink-dim);
+      padding: 0.22rem 0.6rem;
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      border-radius: var(--radius);
+    }
+    .chip.interest {
+      border-color: var(--shu);
+      color: var(--shu-hot);
+      background: rgba(196, 30, 58, 0.12);
+    }
+    .chip.mins {
+      border-color: var(--gold);
+      color: var(--gold);
+      background: transparent;
+    }
+
+    .piece h2 {
+      font-family: "Noto Serif JP", "Shippori Mincho", "Yu Mincho", serif;
+      font-size: 1.38rem;
+      font-weight: 700;
+      line-height: 1.5;
+      margin: 0 0 0.6rem;
+      color: var(--white);
+      letter-spacing: 0.02em;
+    }
+
+    .why {
+      margin: 0 0 1rem;
+      color: var(--ink-dim);
+      font-size: 0.9rem;
+      border-left: 2px solid var(--gold);
+      padding-left: 0.85rem;
+    }
+
+    .source {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.65rem 1.1rem;
+      font-size: 0.76rem;
+      color: var(--ink-mute);
+      margin-bottom: 1.25rem;
+    }
+    .source a {
+      color: var(--shu-hot);
+      text-decoration: none;
+      font-weight: 600;
+    }
+    .source a:hover { color: var(--gold); }
+
+    .ja {
+      font-family: "Noto Serif JP", "Hiragino Mincho ProN", "Yu Mincho", serif;
+      font-size: 1.08rem;
+      line-height: 2;
+      letter-spacing: 0.03em;
+      color: #ebe7e1;
+    }
+    .ja p { margin: 0 0 1.15em; }
+    .ja p:last-child { margin-bottom: 0; }
+
+    .continue {
+      margin-top: 1.25rem;
+      padding-top: 1rem;
+      border-top: 1px solid var(--line);
+      font-size: 0.86rem;
+    }
+    .continue a {
+      color: var(--white);
+      text-decoration: none;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      border-bottom: 2px solid var(--shu);
+      padding-bottom: 0.1rem;
+    }
+    .continue a:hover {
+      color: var(--shu-hot);
+      border-bottom-color: var(--gold);
+    }
+
+    footer.site {
+      max-width: var(--measure);
+      margin-top: 1.75rem;
+      color: var(--ink-mute);
+      font-size: 0.72rem;
+      letter-spacing: 0.06em;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+    footer.site::before {
+      content: "";
+      width: 1.25rem;
+      height: 2px;
+      background: var(--shu);
+    }
+
+  
+    .excerpt-label { font-size: 0.66rem; letter-spacing: 0.18em; color: var(--gold); font-weight: 800; margin: 0 0 0.6rem; }
+    .brand-sub a, .stat a { color: var(--gold); text-decoration: none; }
+    .toc .t-min { font-variant-numeric: tabular-nums; }
+  </style>
+</head>
+<body>
+  <div class="stage-bar" aria-hidden="true"></div>
+
+  <div class="wrap">
+    <aside class="sidebar">
+      <div class="brand">
+        <span class="brand-mark" lang="ja">読解<em>幕</em></span>
+      </div>
+      <p class="brand-sub">Kabuki Digest · <a href="../../history/">History</a></p>
+      <p class="meta">2026-11-16 · America/Sao_Paulo</p>
+      <div class="stat-row">
+        <span class="stat"><strong>50</strong> min</span>
+        <span class="stat"><strong>18</strong> pieces</span>
+        <span class="stat"><strong>~12,400</strong> 字</span>
+        <span class="stat"><a href="../../history/">History</a></span>
+      </div>
+
+      <nav class="toc" aria-label="Índice">
+        <h2 lang="ja">本日の演目</h2>
+        <ol>
+          <li>
+            <a href="#p1">
+              <span class="t-title" lang="ja">芸者から華族の妻へ、そして孤独な最期――江木欣々</span>
+              <span class="t-min">4′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p2">
+              <span class="t-title" lang="ja">秀長と秀次は本当に不仲だったのか――叔父と甥の史実</span>
+              <span class="t-min">3′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p3">
+              <span class="t-title" lang="ja">うどん・そばは博多から？――聖一国師と承天寺</span>
+              <span class="t-min">3′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p4">
+              <span class="t-title" lang="ja">2800年前の王の塚――大麻は「葬儀」のためだった</span>
+              <span class="t-min">3′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p5">
+              <span class="t-title" lang="ja">いけにえの谷の「平和」――干ばつでも人は争わなかった</span>
+              <span class="t-min">3′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p6">
+              <span class="t-title" lang="ja">もし生命が生まれなかったら、地球はどうなっていたか</span>
+              <span class="t-min">3′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p7">
+              <span class="t-title" lang="ja">手術のあと、人の顔に「愛猫の目」が見える</span>
+              <span class="t-min">3′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p8">
+              <span class="t-title" lang="ja">ウォズはBASICを紙に書き、手でアセンブルした</span>
+              <span class="t-min">3′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p9">
+              <span class="t-title" lang="ja">「西部開拓時代のよう」――AIに揺れる文学界</span>
+              <span class="t-min">3′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p10">
+              <span class="t-title" lang="ja">AIは計算できても「聞くべきこと」を聞かない――税務ベンチマーク</span>
+              <span class="t-min">3′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p11">
+              <span class="t-title" lang="ja">AIの回答が長すぎる――「理解負債」をCLAUDE.md数行で減らす</span>
+              <span class="t-min">3′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p12">
+              <span class="t-title" lang="ja">フレームワークを安全に入れ替える――「並べるけれど、混ぜない」</span>
+              <span class="t-min">3′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p13">
+              <span class="t-title" lang="ja">96KBのHTML1枚で泳げる海――WebGPU「Abyssal Garden」</span>
+              <span class="t-min">2′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p14">
+              <span class="t-title" lang="ja">JR神戸線の新快速「Aシート」が約3倍に</span>
+              <span class="t-min">2′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p15">
+              <span class="t-title" lang="ja">心霊スポット？ 線路のY字の下でねじれる地下道</span>
+              <span class="t-min">3′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p16">
+              <span class="t-title" lang="ja">国史跡「高輪築堤」の石が消えた</span>
+              <span class="t-min">2′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p17">
+              <span class="t-title" lang="ja">兵庫の海の幸――家島の「未利用魚」缶詰と香住の松葉がにまつり</span>
+              <span class="t-min">2′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p18">
+              <span class="t-title" lang="ja">KIRITO、年跨ぎツアー＜OVERRIDE＞開幕</span>
+              <span class="t-min">2′</span>
+            </a>
+          </li>
+        </ol>
+      </nav>
+    </aside>
+
+    <main class="main">
+      <div class="digest-banner">
+        <span class="tag">TRIAGE</span>
+        <span>História: Eki Kinkin, gueixa→baronesa→anfitriã de Tóquio (草の実堂); Hidenaga × Hidetsugu, rivais só na TV (草の実堂); udon/soba nascidos em Hakata no período Kamakura (Japaaan). Arqueologia/ciência (Nazology): cannabis num kurgan cita, a “paz” de Lambayeque, Terra sem vida; GIGAZINE: olhos de gato em rostos humanos. IA/dev: Woz e o BASIC escrito à mão, IA no mundo literário, benchmark fiscal (Claude 10,8%), “dívida de compreensão” no Claude Code e migração de framework React sem big bang (Zenn), WebGPU em 97 KB. Trens: A-Seat no Shinkaisoku da JR Kobe, túnel retorcido de Nishiarai, pedras sumidas do Takanawa Chikutei (産経). Hyōgo: Ieshima e Kasumi. Rock: KIRITO. Pontos fracos: BUSHOO só tinha o comentário do drama sobre Yoshikawa Heisuke (tema já usado em 10/10) — pulado, então pouco Sengoku “puro”; Kobe Shimbun só aberturas curtas (paywall); NatGeo sem nada novo de bom (só saúde/viagem); nenhum favorito do rock com notícia nova (DIR EN GREY toca em Kishiwada 19/11; SCANDAL em Kyoto 24/11); nada de sailing/vistos/imóveis com texto bom; 3 peças da Nazology e 5 da GIGAZINE pesam na mistura.</span>
+      </div>
+
+      <header class="hero">
+        <div class="kicker">Daily curated reading</div>
+        <h1 lang="ja">江木欣々の栄華と孤独、秀長と秀次、博多の麺、王の塚の大麻、いけにえの谷の平和、命のない地球、猫の目、ウォズの手書きBASIC、AIと文学・税務、理解負債、フロント移行、Aシート、ねじれ地下道、高輪築堤、兵庫の海、KIRITO</h1>
+        <p lang="ja">今日の幕開けは「大正三美人」のひとり、江木欣々。生母と引き離され、芸者から華族の妻へ、そして東京の社交界の花形へ――その華やかさは関東大震災で灰になり、孤独な最期を迎えます。続いて大河の裏側から、本当は協力し合っていた豊臣秀長と甥の秀次。明石から淡路へ渡った四国攻めの記録も登場します。鎌倉時代の博多に製粉の技を持ち帰った聖一国師の話は、うどん・そば発祥の地の謎解きです。考古学と科学の幕では、シベリアの「王の塚」で見つかった最古の大麻の証拠、いけにえで知られるペルーの谷に3000年続いた「平和」、生命が一度も生まれなかった地球のシミュレーション、そして脳の手術のあと人の顔に愛猫の目が見えるようになった男性。AIと開発の幕は、紙の上でBASICを書いたウォズニアック、AIに揺れる文学界、「聞くべきこと」を聞かないAIの税務テスト、Claude Codeとの「理解負債」、フレームワークを安全に入れ替える方法、96KBの海。鉄道とインフラの幕は、JR神戸線の新快速Aシート増発、心霊スポットと呼ばれるねじれた地下道、消えた高輪築堤の石。兵庫の海の幸を味わい、締めはKIRITOのツアー開幕です。約50分の読解です。</p>
+      </header>
+
+      <article class="piece" id="p1">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★★</span> <span class="chip mins">4 min</span> <span class="chip" lang="ja">江木欣々</span> <span class="chip" lang="ja">大正三美人</span> <span class="chip" lang="ja">長谷川時雨</span> <span class="chip" lang="ja">関東大震災</span> <span class="chip" lang="ja">早川徳次</span>
+          </div>
+          <h2 lang="ja">「大正三美人」芸者から華族の妻に上り詰めた美女が、53歳で自殺…江木欣々の数奇な生涯</h2>
+          <p class="why">Uma das “Três Belezas de Taishō”: filha ilegítima de um futuro governador, entregue para adoção, gueixa em Shinbashi, viúva de barão aos 16, depois anfitriã do salão mais brilhante de Tóquio — com menkyo kaiden (diploma máximo) em jūjutsu, e que fez Izumi Kyōka comer tartaruga sem saber. O terremoto de 1923 queimou tudo; morreu só em 1930. Twist: o meio-irmão era Hayakawa Tokuji, fundador da Sharp.</p>
+          <div class="source">
+            <span lang="ja">草の実堂</span>
+            <a href="https://kusanomido.com/study/history/japan/shouwa/136694/" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>後世「大正三美人」として名前を挙げられることが多いのが、九条武子（くじょうたけこ）、柳原白蓮（やなぎわらびゃくれん）、そして江木欣々（えぎきんきん）です。</p>
+            <p>今回紹介する江木欣々は、本名を江木栄子といい、芸者から華族の妻となり、さらに法律家の妻として華やかな社交界を彩った女性です。</p>
+            <p>……</p>
+            <p>栄子（えいこ）と名づけられた彼女は、幼いうちに京橋区木挽町（現在の中央区）の古道具屋へ養女に出され、5歳ごろには本所緑町（現在の墨田区）の顔役だった田岡某の養女となります。</p>
+            <p>生母の花とは引き離されたまま、生涯再会することがありませんでした。</p>
+            <p>……</p>
+            <p>やがて養父が病死して家計が傾くと、栄子は新橋の花街へ出され、半玉（はんぎょく。見習い芸者）として働くようになりました。</p>
+            <p>美貌と芸事の才能で評判となった栄子は、十代半ばで男爵の有吉立愛（ありよしたつよし）に身請けされ、正妻として迎えられました。</p>
+            <p>有吉家を出た栄子は再び花柳界に戻り、下谷の講武所で芸者として名をはせました。</p>
+            <p>そして、明神下の開花楼で開かれた弁護士たちの宴会をきっかけに、法律家の江木衷（えぎちゅう／まこと）と結婚することになります。</p>
+            <p>……</p>
+            <p>栄子は作家の泉鏡花（いずみきょうか）とも親しく、スッポン嫌いの鏡花に、そうとは知らせずスッポン料理を食べさせたという愉快な逸話も残っています。</p>
+            <p>さらに武術にも心得があり、粕川廩子（かすかわりんこ）から十剣大神流の柔術を学び、大正6年（1917年）4月5日には免許皆伝を受けています。</p>
+            <p>……</p>
+            <p>栄子の華やかな暮らしに大きな転機が訪れたのは、大正12年（1923年）の関東大震災でした。</p>
+            <p>神田淡路町の江木邸は焼失し、長年集めてきた美術品や名器、自ら制作した篆刻作品までもが灰になってしまったのです。さらに大正14年（1925年）には夫の江木衷が亡くなり、栄子を取り巻く環境は一変しました。</p>
+            <p>そして昭和5年（1930年）2月20日、栄子は首を吊って亡くなりました。享年54。</p>
+            <p>最期を迎えた場所については、大阪の異父弟・早川徳次の家とする説がある一方、長谷川時雨は京都の宿だったと記しています。早川徳次は後にシャープを創業した人物で、栄子とは母親を同じくする姉弟でした。</p>
+          </div>
+          <p class="continue"><a href="https://kusanomido.com/study/history/japan/shouwa/136694/" target="_blank" rel="noopener" lang="ja">続きを読む · 草の実堂</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p2">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★☆</span> <span class="chip mins">3 min</span> <span class="chip" lang="ja">豊臣秀長</span> <span class="chip" lang="ja">豊臣秀次</span> <span class="chip" lang="ja">四国攻め</span> <span class="chip" lang="ja">明石・淡路</span> <span class="chip" lang="ja">大和郡山</span>
+          </div>
+          <h2 lang="ja">秀長と秀次は本当に不仲だったのか？史実に見る叔父と甥の関係『豊臣兄弟！』</h2>
+          <p class="why">O drama da NHK pinta Hidenaga e o sobrinho Hidetsugu como rivais; as fontes contam outra história: os dois atravessaram juntos de Akashi para Awaji na invasão de Shikoku (1585), dividiram a recepção de Mōri Terumoto em 1588 — e, em 8 meses de 1591, morrem Hidenaga, Rikyū e o herdeiro Tsurumatsu, e Hidetsugu vira kanpaku… rumo à tragédia.</p>
+          <div class="source">
+            <span lang="ja">草の実堂</span>
+            <a href="https://kusanomido.com/study/history/japan/azuchi/toyotomi/136569/" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>史実では、秀長と秀次の関係はどのようなものだったのでしょうか。</p>
+            <p>実際には、秀長と秀次の確執を直接示す同時代史料は確認されていません。</p>
+            <p>むしろ記録に残る軍事行動や家族関係からは、豊臣家を支えるためにそれぞれ重要な役割を果たしていた姿が浮かび上がってきます。</p>
+            <p>……</p>
+            <p>「四国攻めでは、秀吉の弟・羽柴秀長を総大将として、8万余の軍勢が海を渡った。ただし、全軍が同じ場所から出発したわけではなかった。</p>
+            <p>摂津・丹波の軍勢は羽柴孫七郎秀次が率い、播磨の明石から淡路の岩屋へ上陸した。</p>
+            <p>秀長と秀次は船頭たちに褒美を与え、阿波の土佐泊へ渡った。そして、まず城を築いて味方の拠点とした。」</p>
+            <p>……</p>
+            <p>一方、秀次は前年の『小牧・長久手の戦い』で大失態を犯していました。</p>
+            <p>そのため、秀吉から家臣を見殺しにしたことや、一門の面目を損なったことを厳しく叱責する「五箇条の折檻状」まで送られています。ただし今後の覚悟次第では、挽回の余地があることも示されていました。</p>
+            <p>秀長の指揮下で戦った四国攻めは、秀次にとって汚名を返上し、武将としての評価を取り戻す重要な機会にもなったのです。</p>
+            <p>……</p>
+            <p>一方、秀長は天正17年（1589）ごろから重い病を患い、有馬温泉で湯治を行ったものの回復せず、翌年の正月には年頭の挨拶にも出られないほど衰弱していました。</p>
+            <p>しかし秀長の病状は好転せず、翌天正19年（1591）1月22日に死去しました。</p>
+            <p>その翌月には、秀吉の側近として豊臣政権を支えてきた千利休が切腹を命じられ、さらに8月には秀吉と淀殿の間に生まれた鶴松が、数え3歳で亡くなります。</p>
+            <p>わずか8か月ほどの間に、重要人物や幼い後継者が相次いで亡くなり、秀吉の周囲は大きく様変わりしたのです。</p>
+            <p>こうした状況の中、秀吉は同年12月、甥の秀次に関白の座を譲りました。</p>
+            <p>かつて小牧・長久手の戦いで厳しく叱責された秀次は、ついに豊臣政権の後継者という地位に上り詰めたのです。</p>
+            <p>しかしその栄華も長く続かず、やがて秀次とその一族を悲劇が襲うことになります。</p>
+            <p>……</p>
+            <p>しかし史料から浮かび上がるのは、豊臣家の繁栄をそれぞれの立場から支えた叔父と甥の姿なのです。</p>
+          </div>
+          <p class="continue"><a href="https://kusanomido.com/study/history/japan/azuchi/toyotomi/136569/" target="_blank" rel="noopener" lang="ja">続きを読む · 草の実堂</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p3">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★☆☆</span> <span class="chip mins">3 min</span> <span class="chip" lang="ja">博多</span> <span class="chip" lang="ja">承天寺</span> <span class="chip" lang="ja">聖一国師</span> <span class="chip" lang="ja">鎌倉時代</span> <span class="chip" lang="ja">年越しそば</span>
+          </div>
+          <h2 lang="ja">香川や長野じゃないの！？実は博多が「うどん・そば発祥の地」と呼ばれる納得の歴史的理由とは</h2>
+          <p class="why">Curta e saborosa: em 1241 o monge Shōichi Kokushi voltou da China Song com técnicas de moinho d’água e fundou o Jōten-ji em Hakata — onde hoje há uma pedra “berço do udon e soba”. Bônus: por que o udon de Hakata é mole (comerciantes apressados) e uma das origens do toshikoshi-soba.</p>
+          <div class="source">
+            <span lang="ja">Japaaan（ジャパーン）</span>
+            <a href="https://mag.japaaan.com/archives/291391" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>豚骨ラーメンをはじめ、明太子、屋台など、豊かな食や食文化が広がる福岡・博多。そんなおいしいものがたくさんある博多ですが、実は「うどん・そばの発祥の地」と言われているのを知っていましたか？</p>
+            <p>うどんは香川、そばは長野などのイメージもあると思いますが、こうした麺類と博多との意外な歴史的つながりをご紹介します。</p>
+            <p>……</p>
+            <p>福岡市博多区にある博多駅の近くに、「承天寺（じょうてんじ）」というお寺があります。</p>
+            <p>聖一国師は、嘉禎元年（1235年）に宋に渡り、径山寺で仏教を学びました。仁知二年（1241年）に仏教の教えとともに、さまざまな宋の文化を身につけて日本に帰国。以後、2年ほど博多に滞在し、そのあいだに承天寺を開きました。</p>
+            <p>布教活動とあわせて、「水磨」と言う水車による製粉技術などを博多に広めたといわれています。こうした歴史的背景から、承天寺の境内に「うどん・そばの発祥之地」という石碑があるのです。</p>
+            <p>……</p>
+            <p>讃岐うどんはインパクトのあるコシの強さが特徴ですが、博多のうどんは麺のコシがなく、柔らかくふわふわ・もちもちとした食感で知られています。これは、博多が歴史的に「商人の街」だったことに由来するようです。</p>
+            <p>商人たちは、とにかく時間にシビアでせっかち。注文してすぐにさっと食べられるように、麺を「茹でおき（調理時間を短縮できる）」にしておいたからだといいます。</p>
+            <p>年末に食べる人が多い「年越しそば」ですが、その始まりも博多にあると言われています。製麺技術をもたらした聖一国師ですが、彼を支えたのが博多で生活していた謝国明という貿易商でした。</p>
+            <p>ある年、彼は飢饉のために飢えている人々が年を越せるようにそば（現在のそばというよりは、「そばがき」のようなもの）を振る舞いました。</p>
+            <p>これを食べた人々は希望を持ち、翌年彼らに幸福がもたらされたという言い伝えがあり、これが年越しそばの起源のひとつとされています。ちなみに、この言い伝えに由来し、博多では大晦日に食べるおそばのことを「運そば」や「福そば」と呼ぶこともあるようです。</p>
+          </div>
+          <p class="continue"><a href="https://mag.japaaan.com/archives/291391" target="_blank" rel="noopener" lang="ja">続きを読む · Japaaan（ジャパーン）</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p4">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★★</span> <span class="chip mins">3 min</span> <span class="chip" lang="ja">考古学</span> <span class="chip" lang="ja">スキタイ</span> <span class="chip" lang="ja">シベリア</span> <span class="chip" lang="ja">大麻</span> <span class="chip" lang="ja">ミイラの髪</span>
+          </div>
+          <h2 lang="ja">最古の大麻は楽しむためではなく「葬儀の儀式」に使われていた</h2>
+          <p class="why">Num kurgan cita de ~2.800 anos na Sibéria (Tunnug), cavalos enfileirados — a “procissão fantasma” —, mais de 1.000 sementes de cannabis e cabelos de múmia com THC: a prova direta mais antiga de uso psicoativo, 300 anos antes da tumba chinesa que detinha o recorde. Heródoto já contava que os citas inalavam fumaça de cânhamo. (Science, nov/2026.)</p>
+          <div class="source">
+            <span lang="ja">ナゾロジー</span>
+            <a href="https://nazology.kusuguru.co.jp/archives/206597" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>実は、大昔の人が大麻を体に取り込んでいたことを直接示す証拠は、めったに見つかっていませんでした。</p>
+            <p>そんな中、手がかりが出てきたのは、シベリア南部にある約2800年前の大きな墓です。</p>
+            <p>そこには、ずらりと並んだ馬の骨と、小さな植物の種の山が眠っていました。</p>
+            <p>……</p>
+            <p>紀元前5世紀、古代ギリシャの歴史家ヘロドトスは、遊牧民スキタイ人が麻の種を燃やした煙を吸ったと書き残しました。</p>
+            <p>また、中国のある墓地からは、紀元前500年ごろ、つまり今から約2500年前の大麻の使用の跡が見つかっていました。</p>
+            <p>今回、研究チームが調べたのは、シベリア南部のウユク谷にあるトゥンヌグ遺跡です。</p>
+            <p>ここには「王の塚」と呼ばれる、土を盛り上げた大きな墓があります。</p>
+            <p>そして木の施設の上には、何頭もの馬の骨が並んでいたのです。</p>
+            <p>これは「亡霊の騎馬行列」と呼ばれる、スキタイの葬送のしきたりの跡だと考えられています。</p>
+            <p>このしきたりでは、馬や人を生贄として捧げていました。</p>
+            <p>さらに木の施設の中からは、野生の大麻の一種(カンナビス・ルデラリス)の小さな種が、山のように見つかりました。</p>
+            <p>……</p>
+            <p>まず種は、丸ごと残ったものが1000粒以上、欠けたものが約500粒ありました。</p>
+            <p>種の年代を、炭素を使った方法(放射性炭素年代測定)で測ると、紀元前800〜760年と出ました。</p>
+            <p>すると、大麻に含まれる、心に作用する2つの成分と一致する信号が出たのです。</p>
+            <p>1つは大麻の精神作用成分として知られるTHC(テトラヒドロカンナビノール)、もう1つはカンナビノールです。</p>
+            <p>髪に残った分子の跡と大麻の種が同じ墓から出たことは、大麻が酔いをもたらす性質を目当てに使われていたことを示唆する、というのです。</p>
+            <p>研究チームは、これを大麻を使っていた最も古い直接の証拠だとしています。</p>
+            <p>これまで知られていた中国の墓地の例より、約300年さかのぼる結果です。</p>
+          </div>
+          <p class="continue"><a href="https://nazology.kusuguru.co.jp/archives/206597" target="_blank" rel="noopener" lang="ja">続きを読む · ナゾロジー</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p5">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★☆</span> <span class="chip mins">3 min</span> <span class="chip" lang="ja">考古学</span> <span class="chip" lang="ja">ペルー</span> <span class="chip" lang="ja">ランバイエケ谷</span> <span class="chip" lang="ja">エルニーニョ</span> <span class="chip" lang="ja">暴力の考古学</span>
+          </div>
+          <h2 lang="ja">いけにえの谷を30年の干ばつが襲っても、人どうしの争いは増えず</h2>
+          <p class="why">No litoral norte do Peru, famoso por sacrifícios humanos em massa nos anos de El Niño, 1.519 esqueletos de 3.000 anos mostram só 1,6% com ferimentos de briga — e nenhuma alta em secas ou enchentes. A “paz de Lambayeque” contradiz o clichê “clima ruim = violência”; a hipótese é o mar rico em peixe e os rios das montanhas como amortecedor.</p>
+          <div class="source">
+            <span lang="ja">ナゾロジー</span>
+            <a href="https://nazology.kusuguru.co.jp/archives/208587" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>アメリカのニューヨーク大学（NYU）などの研究チームが、ペルー北部の海辺にあるランバイエケ谷で、3000年以上の時代にわたる1519人分の骨を調べました。</p>
+            <p>頭の骨に争いでできたとみられる傷が残る人はわずか1.6%で、山地の雨の量やエルニーニョ現象の起きやすさとの結びつきも見つかりませんでした。</p>
+            <p>この数字は、いけにえの犠牲者を除いて、ふだんの暮らしの中で起きた争いの跡だけを数えたものです。</p>
+            <p>この海岸は、エルニーニョの大雨のころに大勢の人がいけにえにされた遺跡で知られ、天候が荒れれば人の暴力も増えると語られてきた土地です。</p>
+            <p>……</p>
+            <p>つまり、骨を折るほどのふだんの争いに限れば、論文が疑問符つきで「ランバイエケの平和」と呼ぶ状態が、3000年以上の時代を通して続いていたということです。</p>
+            <p>……</p>
+            <p>同じアンデスの同じ時代なのに、山地と海辺の谷で争いの出方が違ったのはなぜなのでしょうか。</p>
+            <p>そこで著者らが目を向けるのは、暮らしの土台の違いです。</p>
+            <p>この海岸では、深いところから栄養を多く含んだ冷たい水が湧き上がってプランクトンを育て、それを食べる魚や貝が一年中あてにできました。</p>
+            <p>山の雨と雪解け水で水量の多い川が、大きな用水路の農業を支えていました。</p>
+            <p>人々は標高2000メートルほどまでの環境を使い分け、山の隣人とお互いさまの関係を結んで水を確保していました。</p>
+            <p>一方の山地は、寒さや薄い空気、やせた土のせいで育てられる作物が限られ、人々は遠くの土地に移住地を置いたり段々畑を築いたりして暮らしを支えました。</p>
+            <p>気候が大きく変わるとその工夫が通じなくなり、時に暴力に至ったのかもしれないと著者らは考えています。</p>
+            <p>つまり、天候の悪化は、押せば必ず争いが始まるスイッチではありません。</p>
+            <p>争いは、天候の変化に対して、土地ごとの条件しだいで起こりうる反応の一つだった、ということです。</p>
+          </div>
+          <p class="continue"><a href="https://nazology.kusuguru.co.jp/archives/208587" target="_blank" rel="noopener" lang="ja">続きを読む · ナゾロジー</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p6">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★☆</span> <span class="chip mins">3 min</span> <span class="chip" lang="ja">地球科学</span> <span class="chip" lang="ja">ガイア仮説</span> <span class="chip" lang="ja">炭酸塩-ケイ酸塩サイクル</span> <span class="chip" lang="ja">ハビタブル</span> <span class="chip" lang="ja">系外惑星</span>
+          </div>
+          <h2 lang="ja">もし生命が一度も生まれなかったら地球はどんな姿だったのかを再現</h2>
+          <p class="why">Simularam 4,5 bilhões de anos de uma Terra sem vida nenhuma: começa com 1 atmosfera de CO₂, oceano ácido (pH 6,6) e 24 °C sob um Sol 30% mais fraco — e termina em ~14 °C, pH 8,28, igual à Terra real em 17 de 19 medidas. O termostato é a erosão das rochas, não a vida. Ruim para a hipótese de Gaia — e um alerta para quem vai caçar vida em exoplanetas.</p>
+          <div class="source">
+            <span lang="ja">ナゾロジー</span>
+            <a href="https://nazology.kusuguru.co.jp/archives/208461" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>では、もし地球に一度も生命が生まれなかったら、この星は今も海をたたえた「住める星」のままだったのでしょうか？</p>
+            <p>今回、米国とオーストリアの研究チームは、生命だけがいない地球を、生まれて間もないころから未来までコンピューターの中で育ててみました。</p>
+            <p>……</p>
+            <p>しかし、生命がいなければ星は何十億年も住める状態を保てないのかどうかは、分かっていませんでした。</p>
+            <p>近い将来には、宇宙望遠鏡「ハビタブル・ワールズ・オブザーバトリー(HWO)」による生命探しも始まります。</p>
+            <p>……</p>
+            <p>結論から言うと、生き物のいない地球も、45億年にわたって住める温度を保ち続けました。</p>
+            <p>計算を始めてわずか10万年ほどで、地下から出てくる二酸化炭素が大気にたまり、その量は約1気圧に達しました。</p>
+            <p>今の空気をもう1つ分、まるごと二酸化炭素で上乗せしたような状態です。</p>
+            <p>温室効果ガスに厚く包まれた若い地球は、暗い太陽のもとでも地表がおよそ24℃と、比較的温かい状態でした。</p>
+            <p>誕生から10億年より前の時期には、海のpH(酸性・アルカリ性の度合い)が約6.6まで下がったのです。</p>
+            <p>これは今の海より30倍も酸性が強く、わずかにアルカリ性の今の海とは逆に、酸性の側に傾いた海です。</p>
+            <p>鍵を握ったのは、岩石が雨水などに少しずつ溶ける「風化」でした。</p>
+            <p>地球が温まると風化が進み、岩や海へ引き込まれる二酸化炭素の量が、地下から出てくる量を上回るようになりました。</p>
+            <p>暑くなるほど二酸化炭素を減らして冷まそうとする、エアコンの温度調節のようなしくみです(炭酸塩-ケイ酸塩サイクル)。</p>
+            <p>45億年のあいだに太陽は今の約7割の明るさから今の明るさまで強まりましたが、この調節が二酸化炭素と気温を住める範囲にとどめたのです。</p>
+            <p>そして今にあたる時点で、地表の温度は286.9ケルビン、つまり約14℃に落ち着きました。</p>
+            <p>大気の二酸化炭素は1気圧の約0.03%まで減り、海もしだいにアルカリ性へ傾いて、pHは8.28になりました。</p>
+            <p>答え合わせの19項目のうち17項目は、本物の地球の測定値の誤差の範囲に収まりました。</p>
+          </div>
+          <p class="continue"><a href="https://nazology.kusuguru.co.jp/archives/208461" target="_blank" rel="noopener" lang="ja">続きを読む · ナゾロジー</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p7">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★★</span> <span class="chip mins">3 min</span> <span class="chip" lang="ja">脳科学</span> <span class="chip" lang="ja">相貌変形視</span> <span class="chip" lang="ja">側頭葉</span> <span class="chip" lang="ja">ネコ</span> <span class="chip" lang="ja">AIで知覚を再現</span>
+          </div>
+          <h2 lang="ja">人間の顔に「飼いネコの目や特徴」が重なって見えるという奇妙な症例が報告される</h2>
+          <p class="why">Depois de remover parte do lobo temporal direito, Karl passou a ver, por horas, os olhos amendoados e as listras da sua gata Luna nos rostos das pessoas — se o primeiro rosto do dia for o dela. E o contrário também: traços humanos na gata. Pesquisadores de Dartmouth usaram IA de imagem para reconstruir o que ele vê. Um vislumbre de como memória “contamina” a percepção.</p>
+          <div class="source">
+            <span lang="ja">GIGAZINE</span>
+            <a href="https://gigazine.net/news/20261116-man-seeing-cats-peoples-faces/" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>アメリカ北東部に住む28歳のカールさんという男性は、「ルナ」という灰色のネコを飼っています。そんなカールさんは脳手術を受けて以降、「出会った人の顔に飼いネコの目や特徴が重なって見える」という奇妙な症状を経験しているとのことです。</p>
+            <p>カールさんは2年前に、動脈と静脈が絡み合ってしまい脳出血の原因になる動静脈奇形という病気を治すための手術を受け、右側頭葉の一部を切除しました。するとカールさんは、「一日の最初に見た顔が飼いネコのルナのものだった場合、その後出会う人の顔にルナの目や特徴が重なって見える」という奇妙な症状を経験するようになりました。</p>
+            <p>また、これとは逆にカールさんが朝一番に見た顔が人間のものだった場合、飼いネコの顔に人間の特徴が反映されることもあるそうです。これらの症状は数時間ほど続き、時には一日中続くこともあります。</p>
+            <p>ダートマス大学とブリガム・アンド・ウィメンズ病院の研究チームは、OpenAIのGPT-5.5を用いてカールさんが見ている顔がどのようなものかを再現しました。こうした最新のAIツールは、視覚認識がゆがんだ人がどのような世界を見ているのかを知る上で、非常に有用なツールになると期待されています。</p>
+            <p>カールさんが見ている顔は、パーツや特徴の組み合わせが異常な点を除けば、結果として調和が取れたものとなっています。ネコの顔のような特徴は顔そのものとシームレスに統合されていて、顔を見る角度や距離に応じて違和感なく変化するそうです。</p>
+            <p>このように人間の顔の一部または全体がゆがんで見えてしまう障害は、「相貌変形視」という名前で知られています。過去には「人間の顔がまるで悪魔のように見える」という症例も報告されています。</p>
+            <p>デュシェイン氏は、「カールさんが人間の顔に自分の飼いネコの特徴を見いだし、その逆の現象も起きている今回の事例は、個々の特徴が記憶から引き出され、私たちの継続的な知覚に影響を与える可能性があることを示しています」とコメントしました。</p>
+          </div>
+          <p class="continue"><a href="https://gigazine.net/news/20261116-man-seeing-cats-peoples-faces/" target="_blank" rel="noopener" lang="ja">続きを読む · GIGAZINE</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p8">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★☆</span> <span class="chip mins">3 min</span> <span class="chip" lang="ja">コンピュータ史</span> <span class="chip" lang="ja">ウォズニアック</span> <span class="chip" lang="ja">Apple I</span> <span class="chip" lang="ja">Integer BASIC</span> <span class="chip" lang="ja">6502</span>
+          </div>
+          <h2 lang="ja">Appleの共同設立者であるスティーブ・ウォズニアックはApple Iを組み立てる前にどうやってBASIC言語を開発したのか？</h2>
+          <p class="why">História da computação em miniatura: Woz escreveu o Integer BASIC antes de ter o computador — no papel, montando à mão cada instrução 6502 em hexadecimal, porque não havia dinheiro para ferramentas. O BASIC que saiu no primeiro Apple II nunca passou por um assembler. Curta e deliciosa.</p>
+          <div class="source">
+            <span lang="ja">GIGAZINE</span>
+            <a href="https://gigazine.net/news/20261116-apple-basic-wozniak/" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>Apple初のマイクロコンピュータ「Apple I」向けに、Apple共同設立者のスティーブ・ウォズニアック氏は「Integer BASIC」を開発しました。Apple Iが開発される前にどうやってInteger BASICを開発したのか、Q＆Aサービス「Stack Exchange」でまとめられています。</p>
+            <p>1984年にByte Magazineで行われたインタビューで、ウォズニアック氏は「私はまず座ってBASICを書きました。それにはコンピューターの設計よりもはるかに多くの時間がかかりました。書き終えた後、コンピューターを製作しなければなりませんでした」と語っています。</p>
+            <p>「私は友人から、各命令を見ながら、ページの右側に命令を書き、左側にアドレスを書き、それぞれの命令に対応する16進数のデータを調べれば、自分でアセンブルできると教わりました。そこで私はただ座って、自分でアセンブルしていました。最初のApple IIに搭載して出荷したBASICは、一度もアセンブルされていません。手書きのコピーが1つあっただけで、すべて手書きで、すべて手作業でアセンブルされていました。つまり、私たちは開発ツールを購入する余裕がなかった時代にいたのです」</p>
+            <p>ウォズニアック氏によると、Apple IおよびIIに搭載されたMOS 6502用のマシンコードを紙の上に書いていて、Apple Iでテストしていたとのこと。BASICは単純なプログラムだったため、このようなことも可能だったそうです。ただ、アセンブリ言語ではなく、16進数をそのまま入力するという離れ業をやってのけていたとも語られています。</p>
+          </div>
+          <p class="continue"><a href="https://gigazine.net/news/20261116-apple-basic-wozniak/" target="_blank" rel="noopener" lang="ja">続きを読む · GIGAZINE</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p9">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★☆</span> <span class="chip mins">3 min</span> <span class="chip" lang="ja">生成AI</span> <span class="chip" lang="ja">出版</span> <span class="chip" lang="ja">著作権</span> <span class="chip" lang="ja">AI検出</span> <span class="chip" lang="ja">文学</span>
+          </div>
+          <h2 lang="ja">AIが文学界を揺るがしている</h2>
+          <p class="why">Resumo de uma longa reportagem do Guardian: autora que publica 200 romances por ano com IA, 45% dos escritores usando IA (a maioria escondendo), 1 em 5 livros autopublicados na Amazon com texto de IA — e o lado sombrio: acusações impossíveis de refutar, detectores pouco confiáveis, editoras cancelando livros. “Escrever sem máquina hoje é nadar contra a corrente.”</p>
+          <div class="source">
+            <span lang="ja">GIGAZINE</span>
+            <a href="https://gigazine.net/news/20261116-ai-literary-world/" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>生成AIの発達により自然な言葉づかいで物語性のある文章もAIが生成できるようになったことで、AIで年間200冊のロマンス小説を執筆する作家の例や、執筆に生成AIを使った疑いで出版を停止した騒動、「AIで書いたのではないか」と疑惑を受けた短編小説が国際文学賞の最優秀賞を受賞した一件など、さまざまな議論が文学界で発生しています。</p>
+            <p>書籍検索サービスのBookBubがさまざまなジャンルの1200人以上の作家を対象に実施した調査によると、回答者の約半数となる45％が「現在業務支援に生成型AIを活用している」と回答したとのこと。</p>
+            <p>また、ストーニーブルック大学のトゥヒン・チャクラバルティ氏が主導した研究の査読前論文では、2023年から2026年にかけてAmazonで出版された1万4419冊の自費出版ジャンル小説を対象に全文AI検索を実施した結果、全体の5分の1には少なくとも25％の量のAIテキストが含まれていたと(PDFファイル)報告されています。</p>
+            <p>AIと文学界を取り巻く大きな問題の1つとして、作家が告発された場合に潔白を証明するのが難しいことがあるとマクベイン氏は指摘。告発する側は多くの場合でAI検出器を用いていますが、決定的な証拠ではなく、また「AIの文章っぽい」という人間の判断も完璧ではありません。</p>
+            <p>マクベイン氏は「現在、機械の助けなしに文章を書くことは、強い文化的潮流に逆らうことになります。機械が生成した文章は、最も粗雑さに抵抗力があると思われる場所、つまり主要な新聞や文芸誌にも頻繁に現れます。この記事を書いている間にも、AIに関する小さなニュースがいくつも浮上してきました」と語っています。</p>
+          </div>
+          <p class="continue"><a href="https://gigazine.net/news/20261116-ai-literary-world/" target="_blank" rel="noopener" lang="ja">続きを読む · GIGAZINE</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p10">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★☆</span> <span class="chip mins">3 min</span> <span class="chip" lang="ja">AIエージェント</span> <span class="chip" lang="ja">ベンチマーク</span> <span class="chip" lang="ja">Claude</span> <span class="chip" lang="ja">税務</span> <span class="chip" lang="ja">判断力</span>
+          </div>
+          <h2 lang="ja">AIは答えを出せても「聞くべきこと」を見落とすことが税務の仕事を再現したテストで判明</h2>
+          <p class="why">Benchmark da Surge AI com 50 casos reais de contabilidade nos EUA: o melhor modelo (Claude Sonnet 5.5) passou em só 10,8% das tentativas. Calcular imposto, todos fazem; o que falha é perceber o que perguntar — tipo notar que o casal morou no Texas, onde existe casamento de fato. Lição que vale para agentes de código também.</p>
+          <div class="source">
+            <span lang="ja">GIGAZINE</span>
+            <a href="https://gigazine.net/news/20261115-dayjob-tax/" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>AIの性能評価を手がけるSurge AIは2026年10月27日、アメリカの税務相談や申告書の作成を題材にしたベンチマーク「DAYJOB: Tax」の結果を公開しました。</p>
+            <p>Surge AIによると、従来の税務ベンチマークの多くは税法に関する質問への回答や申告書に記載する金額の計算など、あらかじめ指定された作業をAIに求めるものでした。</p>
+            <p>その結果、合格率が最も高かったAnthropicのClaude Sonnet 5.5でも、250回の試行のうち合格したのは27回(10.8％)でした。Surge AIが上位10モデルの合格率をまとめたグラフでは、Claude Fable 5.1が9.6％で2位、Claude Opus 5.5が9.2％で3位に入っています。</p>
+            <p>AIに渡された資料によると、2人はフロリダ州に住んでいましたが、以前はテキサス州で同居し、コロラド州で結婚式を挙げていました。テキサス州では結婚に合意して州内で夫婦として暮らすなどの条件を満たせば、届け出をしなくても婚姻が成立します。他州で有効に成立した婚姻はフロリダ州でも認められるため、同居や結婚式の記録は2人が法律上の夫婦かを確かめる手掛かりでした。</p>
+            <p>住宅売却の課題でしっかりと期限を指摘したClaude Opus 5.5は、老後資金の課題では5回とも「2人が法律上結婚していない」という前提で助言しました。Surge AIによると、Claude Opus 5.5は「口座内の資産を分けると税金やペナルティーがかかる」と説明し、2人がそれぞれ自分の口座を維持し、資産の配分は現金の支払いで調整するよう勧めたとのこと。</p>
+            <p>Surge AIは、AIが税額の計算など個々の作業を処理できても、依頼人の説明と手元の資料を照らし合わせて何を追加で確かめるべきかを判断し、その結果を申告書や助言に反映するところまで安定してやり遂げるのは難しいと結論付けています。</p>
+          </div>
+          <p class="continue"><a href="https://gigazine.net/news/20261115-dayjob-tax/" target="_blank" rel="noopener" lang="ja">続きを読む · GIGAZINE</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p11">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★★</span> <span class="chip mins">3 min</span> <span class="chip" lang="ja">Claude Code</span> <span class="chip" lang="ja">CLAUDE.md</span> <span class="chip" lang="ja">理解負債</span> <span class="chip" lang="ja">AI協働</span> <span class="chip" lang="ja">ドキュメント</span>
+          </div>
+          <h2 lang="ja">AIの回答が長すぎて、理解しないまま実装している問題（理解負債）</h2>
+          <p class="why">Um dev C# de 25 anos dá nome ao problema que todo usuário do Claude Code sente: “dívida de compreensão” — implementar entendendo 80% porque a resposta é longa demais. A solução: algumas linhas no CLAUDE.md — conclusão em 3 linhas no chat, detalhes numa nota, “pontos não confirmados” no topo e um “próximo: …”. Prático e aplicável já.</p>
+          <div class="source">
+            <span lang="ja">Zenn</span>
+            <a href="https://zenn.dev/kent_code/articles/5892898be90cac" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>主に C#/.NET で業務システムを作って25年くらいになります。ここ1年ほどは、設計の相談も実装も Claude Code と一緒にやっています。</p>
+            <p>便利なのは間違いないんですが、使えば使うほどストレスも溜まっていました。返ってくる情報の量が膨大で、頭がついていかないのです。。</p>
+            <p>つまり、回答が長すぎて、理解が追いつかないまま実装に進んでしまう。</p>
+            <p>ありがたいんですが、人間は一度にそんなに飲み込めません（特に自分...）。上から順番に読んで、気になったところを質問して、その答えを読んで……とやっているうちに、最初の回答で「ここ、あとで聞こう」と思っていたことを忘れます。チャットはどんどん流れるので、最初の回答はもう画面の上の方に埋もれています。</p>
+            <p>結果どうなるかというと、 8割くらいの理解のまま「まあ動くし」で実装に入る。そしてあとで、分かっていなかった部分にちゃんとハマる。</p>
+            <p>借金と同じで、分からないまま進めた分はあとで利子をつけて返すことになります。自分ではこれを「理解負債」と呼んでいます。</p>
+            <p>AI の回答の質の問題ではなく、量と置き場所の問題です。だったら、量を絞って、置き場所を変えてあげればいいんじゃないか、と考えました。</p>
+            <p>チャットに出てきたのはこれだけでした。結論3行、「詳細あり」の見出し、未確認の論点、そして「次：どのクライアントから使うか」。</p>
+            <p>情報が減ったわけではなく、チャットとノートに分かれただけ、というのがポイントです。ここが一番大事なところかなと思っています。</p>
+            <p>読む深さを自分で選べるようになった。「詳細あり: A / B / C」と項目名だけが出るので、分かっているところは結論だけで先に進めます。怪しいところだけ「Bの詳細を」と頼めばいい。AI が全部書いてくるのを全部読む、という状態からようやく抜けられた気がします。</p>
+            <p>理解負債をゼロにするのは難しいと思いますが、少なくとも「気づいたら8割の理解で実装していた」ということは、だいぶ減ってきました。同じように情報の多さに疲れている人の、何かの参考になればうれしいです。</p>
+          </div>
+          <p class="continue"><a href="https://zenn.dev/kent_code/articles/5892898be90cac" target="_blank" rel="noopener" lang="ja">続きを読む · Zenn</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p12">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★☆</span> <span class="chip mins">3 min</span> <span class="chip" lang="ja">フロントエンド</span> <span class="chip" lang="ja">React</span> <span class="chip" lang="ja">移行</span> <span class="chip" lang="ja">strangler</span> <span class="chip" lang="ja">feature flag</span>
+          </div>
+          <h2 lang="ja">フロントエンドのフレームワークを、安全に段階的に入れ替える</h2>
+          <p class="why">Migrar de React para outro framework sem big bang: a fronteira é a URL e o carregamento do documento — “lado a lado, mas sem misturar”. PRs com menos de 10 arquivos, 22 issues, critérios de aceite e de DESISTÊNCIA definidos antes. Escrito para convencer gerente, útil para quem lida com código legado em React.</p>
+          <div class="source">
+            <span lang="ja">Zenn</span>
+            <a href="https://zenn.dev/yasuakiomokawa/articles/de83bb4c4ea928" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>framework の入れ替えは「計算の遅い部分だけを C++ に置き換えて呼ぶ」ような部品の差し替えとは違います。状態の置き場、描画、副作用の始め方が丸ごと変わるので、関数の引数と戻り値という境界では切れません。</p>
+            <p>そこで境界を URL と、page の読み込み (document) に置きます。大方針は 4 つです。</p>
+            <p>この形だと、移行の途中のどこで止めても、アプリは動いたままです。1 回分が小さく、戻すのも小さい変更で済みます。これが、マネージャーにとっての「経済的に安全な工事」の中身です。</p>
+            <p>筆者は個人開発の 2 つの repo (認証基盤の taimei-auth と、星取表のアプリ taimei) で、React から Foldkit (Elm の形を TypeScript で書く framework) へ、この形で移しています。taimei-auth は移し終え、taimei は途中です。どちらも公開しています。</p>
+            <p>この記事のやり方は「並べるけれど、混ぜない」を構造で守るものです。</p>
+            <p>……</p>
+            <p>途中のどこで止めても、アプリは動いています。新しい画面は切り替えるまで利用者に届きません。切り替えた画面は新で、残りは旧で動きます。どの時点で予算や人が別の仕事に回っても、壊れたものは残りません。「半分まで書いて捨てる」損失が出にくい形です。</p>
+            <p>1 回の工事が小さく、見積もりと進み具合が見えます。1 つの PR は 10 file 以下を目安にし、全体を 22 個の issue に分けました。</p>
+            <p>やめる条件も先に決めます。taimei-auth では移行を始める前に「この数字を下回ったら移行をやめる」という条件を決めて、試作で測りました。実際には条件に当たり、そこで判断の基準そのものを見直してから進めることにしました (基準を「誰が書いても同じ形になるか」に改めた)。結果がどうであれ、「続けるか」を決める場が工事の前に 1 回あることが、損失を抑えます。</p>
+          </div>
+          <p class="continue"><a href="https://zenn.dev/yasuakiomokawa/articles/de83bb4c4ea928" target="_blank" rel="noopener" lang="ja">続きを読む · Zenn</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p13">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★☆</span> <span class="chip mins">2 min</span> <span class="chip" lang="ja">WebGPU</span> <span class="chip" lang="ja">フロントエンド</span> <span class="chip" lang="ja">手続き生成</span> <span class="chip" lang="ja">Web Audio API</span> <span class="chip" lang="ja">オープンソース</span>
+          </div>
+          <h2 lang="ja">無料でブラウザから海の中を自由自在に泳ぎ回れる3D空間を形成する「Abyssal Garden」、WebGPUを駆使してわずか96KBのHTMLファイル1つでスマホでもオフラインでも動作可能</h2>
+          <p class="why">Um único index.html de 97 KB, sem imagens, modelos ou áudio: a GPU gera na hora um fundo do mar com ~2 milhões de folhas de alga, navio afundado e raias-manta, e o som é sintetizado ao vivo com Web Audio. Curta — e dá vontade de abrir o código (MIT).</p>
+          <div class="source">
+            <span lang="ja">GIGAZINE</span>
+            <a href="https://gigazine.net/news/20261116-abyssal-garden/" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>WebGPUを使ったコードのみで生成された「Abyssal Garden」は、わずか97KBのHTMLファイルをブラウザで開くだけで、水中世界の3D空間を自由自在に泳ぎ回ることができます。</p>
+            <p>製作者のマクシミリアン・デンドゥラ氏によると、Abyssal GardenはすべてWebGPUのコードのみで描画されており、ゲームエンジンや3Dライブラリ、その他の画像・AIモデル・音声ファイルは一切使用していないとのこと。ページが開くたびに、グラフィックカード上に海底が造形され、約200万枚の昆布の葉や植物、数万個の岩、そして数千個の海綿、サンゴ、魚で装飾されます。船やクジラの尾、マンタ、魚、サンゴは、単純な数学的形状から構成されており、音声はWeb Audio APIを使用してリアルタイムで合成されます。</p>
+            <p>Abyssal GardenはMIT Licenseで公開されており、自由に使用・変更・共有できます。</p>
+          </div>
+          <p class="continue"><a href="https://gigazine.net/news/20261116-abyssal-garden/" target="_blank" rel="noopener" lang="ja">続きを読む · GIGAZINE</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p14">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★☆</span> <span class="chip mins">2 min</span> <span class="chip" lang="ja">JR西日本</span> <span class="chip" lang="ja">新快速</span> <span class="chip" lang="ja">Aシート</span> <span class="chip" lang="ja">JR神戸線</span> <span class="chip" lang="ja">姫路</span>
+          </div>
+          <h2 lang="ja">京阪神を走る有料座席列車「約3倍」に！ 朝は倍増・昼も新たに設定 JR西日本</h2>
+          <p class="why">Notícia útil para quem vive em Kobe: o assento pago “A-Seat” do Shinkaisoku (Yasu–Aboshi, ¥840 ou ¥600 sem bilhete) vai de 12 para 40 trens nos dias úteis a partir da primavera de 2027, dobrando no rush Himeji→Osaka e com 1 por hora no meio do dia. Curtinha.</p>
+          <div class="source">
+            <span lang="ja">乗りものニュース</span>
+            <a href="https://trafficnews.jp/post/728441" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>JR西日本は2026年11月16日、京阪神を走る新快速の有料着席サービス「Aシート」を、2027年春から大幅に増やすと発表しました。</p>
+            <p>Aシートは、東海道本線・山陽本線（琵琶湖線・JR京都線・JR神戸線）を走る新快速の野洲～網干間に設定。料金は840円（チケットレス600円）で、リクライニング座席、テーブル、電源コンセント、車内Wi-Fi、大型荷物用荷物棚が用意されます。</p>
+            <p>Aシートの設定列車は現在、平日・土休日とも12本ですが、5編成を追加投入し、2027年春から平日40本・土休日34本に増える予定です。</p>
+            <p>特に平日朝ラッシュ時、姫路→大阪方面は倍増し6本に、野洲→大阪方面は2本が新設されます。また、平日・土休日とも日中は新たに概ね1時間あたり1本が設定されます。</p>
+          </div>
+          <p class="continue"><a href="https://trafficnews.jp/post/728441" target="_blank" rel="noopener" lang="ja">続きを読む · 乗りものニュース</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p15">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★☆☆</span> <span class="chip mins">3 min</span> <span class="chip" lang="ja">地下道</span> <span class="chip" lang="ja">東武</span> <span class="chip" lang="ja">西新井</span> <span class="chip" lang="ja">インフラの謎</span> <span class="chip" lang="ja">心霊スポット</span>
+          </div>
+          <h2 lang="ja">足立区の住宅街にある「奇妙な構造の地下道」なぜ？ ”心霊スポット”としても有名な異次元空間の現実とは</h2>
+          <p class="why">Um túnel em U, em rampa, com divisória que sobe e desce e três escadas — parece casa mal-assombrada (e a internet jura que é). Explicação: passa sob a bifurcação em Y das linhas Tōbu Isesaki e Daishi, ligando três terrenos separados pelos trilhos. Infraestrutura estranha com lógica.</p>
+          <div class="source">
+            <span lang="ja">乗りものニュース</span>
+            <a href="https://trafficnews.jp/post/726891" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>都内足立区には、心霊スポットとして有名な奇妙な地下道が存在します。現地を訪れると、自転車がひっきりなしに行き交う生活道路でした。なぜ奇妙な形になったのでしょうか。</p>
+            <p>現地を訪れると、まず目を引くのが、その独特な構造です。普通の地下道といえば、線路の下をまっすぐ抜けるような形を想像しますが、ここは大きくU字状に曲がっており、内部の見通しがよくありません。車道は自動車の一方通行となっており、その脇には歩行者用の通路が設けられています。</p>
+            <p>しかも、道路は平坦ではなく、坂道になっているうえにカーブも続いています。車道と歩行者用の通路を隔てるコンクリート製の分離帯も、道路に合わせて曲がりながら上下しているため、まるで地下道そのものがゆがんでいるようにも見えます。</p>
+            <p>さらに特徴的なのが、地下道に設けられた3か所の階段です。道路の両端だけでなく、途中からも地上へ出られる構造になっているのです。</p>
+            <p>なぜ、このような複雑な形をしているのでしょうか。この構造には、頭上を走る鉄道の線路配置が関係しています。</p>
+            <p>……</p>
+            <p>都内足立区には、心霊スポットとして有名な奇妙な地下道が存在します。現地を訪れると、自転車がひっきりなしに行き交う生活道路でした。なぜ奇妙な形になったのでしょうか。</p>
+            <p>西新井駅では、浅草方面から延びてきた東武伊勢崎線と、西新井大師方面へ向かう大師線がY字状に分岐しています。この地下道は、ちょうどその分岐部分の下に設けられており、線路によって隔てられた3つのエリアを結んでいます。</p>
+            <p>伊勢崎線と大師線に挟まれた土地にも、階段を使って出入りできるようになっています。つまり、複雑な線路配置に合わせて、道路や階段が設けられているというわけです。</p>
+            <p>一方、この西新井トンネルは道路自体に勾配があるものの、自転車でも階段を使わずに通り抜けることができます。複雑な形をしていますが、地域の移動を支える便利な道路なのです。</p>
+          </div>
+          <p class="continue"><a href="https://trafficnews.jp/post/726891" target="_blank" rel="noopener" lang="ja">続きを読む · 乗りものニュース</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p16">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★☆☆</span> <span class="chip mins">2 min</span> <span class="chip" lang="ja">高輪築堤</span> <span class="chip" lang="ja">鉄道遺構</span> <span class="chip" lang="ja">明治</span> <span class="chip" lang="ja">史跡</span> <span class="chip" lang="ja">JR東日本</span>
+          </div>
+          <h2 lang="ja">国史跡の鉄道遺構「高輪築堤」の石が所在不明　再開発事業で出土　JR東が文化庁に届け出</h2>
+          <p class="why">Pequeno mistério ferroviário: três pedras de ~100 kg do Takanawa Chikutei — o aterro no mar por onde passou a primeira ferrovia do Japão (1872), achado em 2021 — sumiram de um sítio histórico nacional com câmera de vigilância. Roubo e descarte por engano parecem improváveis… Curta.</p>
+          <div class="source">
+            <span lang="ja">産経新聞</span>
+            <a href="https://www.sankei.com/article/20261116-VN5HJRL2TVNUBEFWXDLFHXS6FY/" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>JR東日本は16日、東京都港区の高輪ゲートウェイ駅周辺で進める再開発事業で出土した鉄道遺構「高輪築堤」で、2021年の出土時に確認していた築堤の石が所在不明になったと明らかにした。国の史跡に指定されている場所で、JR東は文化財保護法に基づき文化庁に届け出た。</p>
+            <p>JR東によると、所在が分からないのは築堤を構成する計3個の石で、縦横最大約40センチ、奥行き約25センチ、重さは約100キロ。現場は築堤の保存と28年春の一般公開に向けた工事を進めている。10月22日に保存のために埋め戻した築堤を掘り起こした際、石がなくなっていることが判明した。</p>
+            <p>現場には定点カメラがあり、盗難や誤廃棄の可能性は低いとみられる。JR東は今後、専門家や自治体など関係機関と協議し、原因究明や対応を検討する。</p>
+          </div>
+          <p class="continue"><a href="https://www.sankei.com/article/20261116-VN5HJRL2TVNUBEFWXDLFHXS6FY/" target="_blank" rel="noopener" lang="ja">続きを読む · 産経新聞</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p17">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★☆☆</span> <span class="chip mins">2 min</span> <span class="chip" lang="ja">兵庫</span> <span class="chip" lang="ja">家島諸島</span> <span class="chip" lang="ja">未利用魚</span> <span class="chip" lang="ja">香住</span> <span class="chip" lang="ja">松葉ガニ</span>
+          </div>
+          <h2 lang="ja">家島の恵み、無駄なく　「未利用魚」使い缶詰開発　和洋4品、ネットで試験販売　島内で店頭販売も</h2>
+          <p class="why">Dois cantos do mar de Hyōgo: nas ilhas Ieshima (ao largo de Himeji), um jovem de 33 anos enlata peixes “sem mercado” com receitas da ilha, como sawara no missô; e em Kasumi começou a temporada do caranguejo Matsuba com o 42º festival. Aberturas curtas (paywall do Kobe Shimbun).</p>
+          <div class="source">
+            <span lang="ja">神戸新聞NEXT</span>
+            <a href="https://www.kobe-np.co.jp/news/himeji/202611/0021038407.shtml" target="_blank" rel="noopener">原文を開く ↗</a> · <a href="https://www.kobe-np.co.jp/news/tajima/202611/0021041232.shtml" target="_blank" rel="noopener" lang="ja">松葉ガニぷりぷり、みそもうまし！　香住漁港でまつり ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>姫路市沖合の家島諸島周辺でとれる魚介類を無駄なく味わってもらおうと、水産加工業などを営む小林昂祐さん（３３）が、市場に広く流通しない「未利用魚」を使った缶詰を開発した。現在、サワラのみそ炊きなど島に伝わる味を詰めた４品を、電子商取引（ＥＣ）サイトで試験的に販売している。１２月半ばには、同市家島町宮で経営する弁当・総菜店で店頭販売を始めるほか、料理の品数も増やしていく予定だ。（中西幸大）</p>
+            <p>……</p>
+            <p>香美町香住区若松の香住漁港西港で、カニシーズンの到来をアピールする「第４２回香住松葉がにまつり」が１５日、開かれた。生きた松葉ガニ（ズワイガニの雄）やセコガニ（ズワイガニの雌）汁の販売などがあり、季節の味覚を求める人たちでにぎわった。</p>
+          </div>
+          <p class="continue"><a href="https://www.kobe-np.co.jp/news/himeji/202611/0021038407.shtml" target="_blank" rel="noopener" lang="ja">続きを読む · 神戸新聞NEXT</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p18">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★☆☆</span> <span class="chip mins">2 min</span> <span class="chip" lang="ja">KIRITO</span> <span class="chip" lang="ja">PIERROT</span> <span class="chip" lang="ja">ヴィジュアル系</span> <span class="chip" lang="ja">ライヴレポート</span> <span class="chip" lang="ja">梅田CLUB QUATTRO</span>
+          </div>
+          <h2 lang="ja">【ライヴレポート】KIRITO、ツアー＜OVERRIDE＞開幕「年を跨いで燃えていきましょう」</h2>
+          <p class="why">O ex-vocal do PIERROT abriu em Yokohama a turnê de 12 datas “OVERRIDE”, misturando o peso de NEOSPIRAL/ALPHA/CROSS com o melódico SHIFT. Para Kansai: Umeda CLUB QUATTRO em 25/12. Nenhum dos seus favoritos teve notícia nova hoje — mas a DIR EN GREY toca no Nankai Namikiri Hall (Kishiwada) em 19/11.</p>
+          <div class="source">
+            <span lang="ja">BARKS</span>
+            <a href="https://barks.jp/news/1104821" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>KIRITOが11月14日、神奈川・YOKOHAMA Bay Hall公演を皮切りに全国ツアー＜KIRITO Tour 2026-2027『OVERRIDE』＞を開催した。2026年と2027年の年跨ぎ全12公演ツアーの開幕だ。ツアー初日公演のオフィシャルレポートをお届けしたい。</p>
+            <p>具体的には、前ツアーが『SHIFT』リリースに伴うものであったため、本編前半ではミニアルバム収録曲と同じ曲順で披露されたのに対し、今回のツアーでは歴代のソロ楽曲をフラットな視点から組み上げたセットリストとなっている。ヘヴィサウンドを突き詰めた過去3作のアルバム『NEOSPIRAL』『ALPHA』『CROSS』と、メロディを重視した最新作『SHIFT』が混ざり合い、ひとつのステージとして再構成する表現は、まさに“オーバーライド”そのものだ。</p>
+            <p>「年を跨いで燃えていきましょう」というKIRITOのMCにもあった通り、ツアーは翌11月15日、同会場での第二夜を経て各地を巡り、年明け2027年1月9日および10日の東京・渋谷 Spotify O-EASTでファイナルを迎える。＜OVERRIDE＞がどのように結実し、KIRITOの次なる未来へと繋がっていくのかが、明らかとなるはずだ。</p>
+          </div>
+          <p class="continue"><a href="https://barks.jp/news/1104821" target="_blank" rel="noopener" lang="ja">続きを読む · BARKS</a></p>
+        </div>
+      </article>
+
+      <footer class="site">読解幕 · 2026-11-16 · ~50 min · <a href="../../history/" style="color:inherit">History</a> · deliton.github.io/japanese-digest</footer>
+    </main>
+  </div>
+</body>
+</html>
