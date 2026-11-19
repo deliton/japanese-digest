@@ -1,0 +1,1015 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>読解幕 · 2026-11-19 · Japanese Digest</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Noto+Serif+JP:wght@400;600;700&family=Shippori+Mincho:wght@500;700&display=swap" rel="stylesheet" />
+  <style>
+
+    :root {
+      --bg: #0a0a0a;
+      --bg-2: #121212;
+      --bg-card: #161616;
+      --ink: #f5f5f5;
+      --ink-dim: #a8a29a;
+      --ink-mute: #6b6560;
+      --shu: #c41e3a;
+      --shu-hot: #e11d48;
+      --shu-deep: #8b1228;
+      --gold: #d4a017;
+      --gold-soft: #c9a227;
+      --white: #fafafa;
+      --line: #2a2a2a;
+      --line-hot: rgba(196, 30, 58, 0.45);
+      --measure: 42rem;
+      --radius: 4px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: "Noto Sans JP", "Hiragino Sans", "Yu Gothic", system-ui, sans-serif;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .stage-bar {
+      height: 6px;
+      background: repeating-linear-gradient(
+        90deg,
+        var(--shu) 0 48px,
+        var(--white) 48px 56px,
+        #111 56px 64px,
+        var(--gold) 64px 72px,
+        #111 72px 88px
+      );
+    }
+
+    .wrap {
+      width: min(100% - 2rem, 74rem);
+      margin: 0 auto;
+      padding: 2rem 0 4.5rem;
+      display: grid;
+      grid-template-columns: 15.5rem 1fr;
+      gap: 2.75rem;
+      align-items: start;
+    }
+
+    @media (max-width: 900px) {
+      .wrap { grid-template-columns: 1fr; gap: 1.5rem; padding-top: 1.25rem; }
+      .sidebar { position: static !important; }
+    }
+
+    .sidebar { position: sticky; top: 1.25rem; }
+
+    .brand {
+      display: flex;
+      align-items: baseline;
+      gap: 0.55rem;
+      margin: 0 0 0.35rem;
+    }
+    .brand-mark {
+      font-family: "Shippori Mincho", "Noto Serif JP", serif;
+      font-size: 1.85rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      color: var(--white);
+      line-height: 1;
+    }
+    .brand-mark em {
+      font-style: normal;
+      color: var(--shu);
+    }
+    .brand-sub {
+      font-size: 0.65rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-weight: 700;
+    }
+
+    .meta {
+      color: var(--ink-mute);
+      font-size: 0.8rem;
+      margin: 0 0 1.25rem;
+    }
+
+    .stat-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-bottom: 1.35rem;
+    }
+    .stat {
+      border: 1px solid var(--line);
+      background: var(--bg-2);
+      padding: 0.32rem 0.65rem;
+      font-size: 0.72rem;
+      color: var(--ink-dim);
+      border-radius: var(--radius);
+    }
+    .stat strong { color: var(--white); font-weight: 700; }
+    .stat.hot {
+      border-color: var(--shu);
+      color: var(--shu-hot);
+      background: rgba(196, 30, 58, 0.1);
+    }
+
+    .toc {
+      border: 1px solid var(--line);
+      background: var(--bg-2);
+      padding: 0.85rem 0.9rem 0.95rem;
+      border-radius: var(--radius);
+    }
+    .toc h2 {
+      margin: 0 0 0.65rem;
+      font-size: 0.72rem;
+      letter-spacing: 0.16em;
+      color: var(--gold);
+      font-weight: 800;
+    }
+    .toc ol { list-style: none; margin: 0; padding: 0; }
+    .toc li { margin: 0; }
+    .toc a {
+      display: flex;
+      justify-content: space-between;
+      gap: 0.5rem;
+      text-decoration: none;
+      color: var(--ink-dim);
+      font-size: 0.82rem;
+      padding: 0.38rem 0.2rem;
+      border-bottom: 1px solid transparent;
+    }
+    .toc a:hover { color: var(--white); border-bottom-color: var(--line-hot); }
+    .toc .t-title { font-weight: 600; }
+    .toc .t-min { color: var(--gold); font-size: 0.72rem; font-weight: 700; flex-shrink: 0; }
+
+    .main { max-width: var(--measure); }
+
+    .digest-banner {
+      display: flex;
+      gap: 0.75rem;
+      align-items: flex-start;
+      background: #141014;
+      border: 1px solid var(--line);
+      border-left: 3px solid var(--shu);
+      padding: 0.85rem 1rem;
+      margin-bottom: 1.5rem;
+      font-size: 0.78rem;
+      color: var(--ink-dim);
+      line-height: 1.55;
+    }
+    .digest-banner .tag {
+      flex-shrink: 0;
+      background: var(--shu);
+      color: #fff;
+      font-size: 0.65rem;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      padding: 0.28rem 0.5rem;
+      border-radius: var(--radius);
+    }
+
+    .hero {
+      margin-bottom: 2rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid var(--line);
+      position: relative;
+    }
+    .hero::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -1px;
+      width: 4.5rem;
+      height: 2px;
+      background: var(--shu);
+    }
+    .kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.7rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--shu-hot);
+      font-weight: 800;
+      margin-bottom: 0.85rem;
+    }
+    .kicker::before {
+      content: "◆";
+      font-size: 0.55rem;
+      color: var(--gold);
+    }
+    .hero h1 {
+      font-family: "Shippori Mincho", "Noto Serif JP", serif;
+      font-size: clamp(1.85rem, 4vw, 2.55rem);
+      font-weight: 700;
+      line-height: 1.2;
+      margin: 0 0 0.75rem;
+      color: var(--white);
+      letter-spacing: 0.02em;
+    }
+    .hero p {
+      margin: 0;
+      color: var(--ink-dim);
+      font-size: 0.98rem;
+      max-width: 36rem;
+    }
+
+    article.piece {
+      background: var(--bg-card);
+      border: 1px solid var(--line);
+      margin-bottom: 1.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+    article.piece::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: linear-gradient(90deg, var(--shu) 0%, var(--shu) 35%, var(--gold) 35%, var(--gold) 42%, transparent 42%);
+    }
+
+    .piece-inner { padding: 1.6rem 1.55rem 1.35rem; }
+
+    .piece-head {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-bottom: 0.85rem;
+    }
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      border: 1px solid var(--line);
+      background: #111;
+      color: var(--ink-dim);
+      padding: 0.22rem 0.6rem;
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      border-radius: var(--radius);
+    }
+    .chip.interest {
+      border-color: var(--shu);
+      color: var(--shu-hot);
+      background: rgba(196, 30, 58, 0.12);
+    }
+    .chip.mins {
+      border-color: var(--gold);
+      color: var(--gold);
+      background: transparent;
+    }
+
+    .piece h2 {
+      font-family: "Noto Serif JP", "Shippori Mincho", "Yu Mincho", serif;
+      font-size: 1.38rem;
+      font-weight: 700;
+      line-height: 1.5;
+      margin: 0 0 0.6rem;
+      color: var(--white);
+      letter-spacing: 0.02em;
+    }
+
+    .why {
+      margin: 0 0 1rem;
+      color: var(--ink-dim);
+      font-size: 0.9rem;
+      border-left: 2px solid var(--gold);
+      padding-left: 0.85rem;
+    }
+
+    .source {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.65rem 1.1rem;
+      font-size: 0.76rem;
+      color: var(--ink-mute);
+      margin-bottom: 1.25rem;
+    }
+    .source a {
+      color: var(--shu-hot);
+      text-decoration: none;
+      font-weight: 600;
+    }
+    .source a:hover { color: var(--gold); }
+
+    .ja {
+      font-family: "Noto Serif JP", "Hiragino Mincho ProN", "Yu Mincho", serif;
+      font-size: 1.08rem;
+      line-height: 2;
+      letter-spacing: 0.03em;
+      color: #ebe7e1;
+    }
+    .ja p { margin: 0 0 1.15em; }
+    .ja p:last-child { margin-bottom: 0; }
+
+    .continue {
+      margin-top: 1.25rem;
+      padding-top: 1rem;
+      border-top: 1px solid var(--line);
+      font-size: 0.86rem;
+    }
+    .continue a {
+      color: var(--white);
+      text-decoration: none;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      border-bottom: 2px solid var(--shu);
+      padding-bottom: 0.1rem;
+    }
+    .continue a:hover {
+      color: var(--shu-hot);
+      border-bottom-color: var(--gold);
+    }
+
+    footer.site {
+      max-width: var(--measure);
+      margin-top: 1.75rem;
+      color: var(--ink-mute);
+      font-size: 0.72rem;
+      letter-spacing: 0.06em;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+    footer.site::before {
+      content: "";
+      width: 1.25rem;
+      height: 2px;
+      background: var(--shu);
+    }
+
+  
+    .excerpt-label { font-size: 0.66rem; letter-spacing: 0.18em; color: var(--gold); font-weight: 800; margin: 0 0 0.6rem; }
+    .brand-sub a, .stat a { color: var(--gold); text-decoration: none; }
+    .toc .t-min { font-variant-numeric: tabular-nums; }
+  </style>
+</head>
+<body>
+  <div class="stage-bar" aria-hidden="true"></div>
+
+  <div class="wrap">
+    <aside class="sidebar">
+      <div class="brand">
+        <span class="brand-mark" lang="ja">読解<em>幕</em></span>
+      </div>
+      <p class="brand-sub">Kabuki Digest · <a href="../../history/">History</a></p>
+      <p class="meta">2026-11-19 · America/Sao_Paulo</p>
+      <div class="stat-row">
+        <span class="stat"><strong>50</strong> min</span>
+        <span class="stat"><strong>17</strong> pieces</span>
+        <span class="stat"><strong>~12,300</strong> 字</span>
+        <span class="stat"><a href="../../history/">History</a></span>
+      </div>
+
+      <nav class="toc" aria-label="Índice">
+        <h2 lang="ja">本日の演目</h2>
+        <ol>
+          <li>
+            <a href="#p1">
+              <span class="t-title" lang="ja">明日は宇喜多秀家の命日――豊臣のプリンス、八丈島で50年</span>
+              <span class="t-min">4′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p2">
+              <span class="t-title" lang="ja">兜に“毛虫”――伊達成実、謎の出奔</span>
+              <span class="t-min">3′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p3">
+              <span class="t-title" lang="ja">秀長から島津へ譲られた鷹匠、関ヶ原の「退口」を生還</span>
+              <span class="t-min">3′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p4">
+              <span class="t-title" lang="ja">長さ17cm、世界最大級の金貨「天正大判」</span>
+              <span class="t-min">3′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p5">
+              <span class="t-title" lang="ja">ナスカの地上絵の近く、壺に眠る「一つ目」の赤ちゃん</span>
+              <span class="t-min">3′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p6">
+              <span class="t-title" lang="ja">地層から消えた「10億年」の謎</span>
+              <span class="t-min">4′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p7">
+              <span class="t-title" lang="ja">火星はまだ生きている？アルバ山の下のマグマ</span>
+              <span class="t-min">2′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p8">
+              <span class="t-title" lang="ja">ボイジャー1号、ついに「1光日」の彼方へ</span>
+              <span class="t-min">2′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p9">
+              <span class="t-title" lang="ja">初代シムシティの最高得点都市は「道路が少なく消防署なし」</span>
+              <span class="t-min">3′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p10">
+              <span class="t-title" lang="ja">ケンブリッジ辞典「今年の単語」は「human」</span>
+              <span class="t-min">3′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p11">
+              <span class="t-title" lang="ja">Claude Codeチームの「検証」の流儀</span>
+              <span class="t-min">3′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p12">
+              <span class="t-title" lang="ja">Claude Codeがドラクエ3リメイクをクリアするまで</span>
+              <span class="t-min">4′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p13">
+              <span class="t-title" lang="ja">空から辿る「北海道初の鉄道」幌内鉄道の痕跡</span>
+              <span class="t-min">3′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p14">
+              <span class="t-title" lang="ja">ドイツ生まれ130歳の鉄橋、九州から会津へ「大転勤」</span>
+              <span class="t-min">3′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p15">
+              <span class="t-title" lang="ja">北野・うろこの家の「世相サンタ」、今年はグレー</span>
+              <span class="t-min">2′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p16">
+              <span class="t-title" lang="ja">BUCK∞TICK『存在理由　改』――今井寿の近未来SF</span>
+              <span class="t-min">3′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p17">
+              <span class="t-title" lang="ja">西宮出身・あいみょん、6thアルバム『スマイル週間』</span>
+              <span class="t-min">2′</span>
+            </a>
+          </li>
+        </ol>
+      </nav>
+    </aside>
+
+    <main class="main">
+      <div class="digest-banner">
+        <span class="tag">TRIAGE</span>
+        <span>História: amanhã (calendário antigo) é o aniversário de morte de Ukita Hideie, o “príncipe” dos Toyotomi exilado 50 anos em Hachijō (BUSHOO); Date Shigezane, o da lagarta no elmo que sumiu do clã, e o falcoeiro que sobreviveu à retirada de Shimazu em Sekigahara (Japaaan); o ōban de ouro de 17 cm de Hideyoshi (草の実堂). Mundo/ciência: o bebê ciclope de Nazca (カラパイア), o bilhão de anos sumido do Grand Canyon (ナゾロジー), Marte talvez ainda vulcânico (カラパイア), a Voyager 1 a 1 dia-luz desde ontem (GIGAZINE). IA/dev/jogos: o código do SimCity original, a palavra do ano “human”, como o time do Claude Code verifica o próprio trabalho (GIGAZINE) e o Claude Code zerando o DQ3 HD-2D (Zenn). Trens: a primeira ferrovia de Hokkaidō vista do alto e a ponte alemã que mudou de Kyūshū para Aizu (乗りもの). Kobe/música: o Papai Noel cinza de Kitano (神戸新聞), BUCK-TICK (Real Sound), Aimyon (BARKS). Pontos fracos: Kobe Shimbun hoje quase só notícia dura (só a nota curta do Papai Noel); nenhum dos seus favoritos do rock com notícia nova (BUCK-TICK é o mais próximo); NatGeo JP com paywall/saúde; nada de vistos/imóveis/sailing com texto bom.</span>
+      </div>
+
+      <header class="hero">
+        <div class="kicker">Daily curated reading</div>
+        <h1 lang="ja">八丈島で50年を生きた宇喜多秀家、兜に毛虫の伊達成実、島津の退口を生き延びた鷹匠、世界最大級の金貨・天正大判、ナスカの一つ目の赤ちゃん、地層から消えた10億年、まだ生きている火星、1光日のボイジャー、シムシティ最高得点の都市、今年の単語「human」、Claude Codeチームの検証、ドラクエ3をクリアしたClaude Code、北海道初の鉄道、ドイツ生まれの転勤鉄橋、北野の世相サンタ、BUCK∞TICK、あいみょん</h1>
+        <p lang="ja">旧暦で明日、明暦元年11月20日（1655年12月17日）は宇喜多秀家の命日。20代で豊臣政権の五大老に名を連ねた「プリンス」は、関ヶ原に敗れ、薩摩に潜み、八丈島で約50年を過ごしました。今日の幕開けはその流人の生涯から。続いて、兜に“毛虫”を掲げ、ある日突然伊達家から姿を消した伊達成実、秀長から島津義弘に譲られ、関ヶ原の「退口」を生き延びた鷹匠・広場重綱、そして長さ17cm、世界最大級の金貨「天正大判」。世界と科学の幕では、ナスカの地上絵の近くで壺に眠っていた「一つ目」の赤ちゃん、グランドキャニオンの地層から消えた「10億年」の謎、地下にまだマグマが残るかもしれない火星、そして昨夜ついに地球から「1光日」の彼方へ到達したボイジャー1号。AIと開発の幕は、初代シムシティのソースコードが明かす最高得点の都市、ケンブリッジ辞典の今年の単語「human」、Claude Codeチームの検証の流儀、Claude Codeにドラクエ3リメイクをクリアさせた記録。最後は空から辿る北海道初の鉄道、ドイツ生まれで九州から会津へ「転勤」した鉄橋、神戸北野の灰色の世相サンタ、BUCK∞TICKの新曲、西宮出身あいみょんの新アルバムで締めます。約50分の読解です。</p>
+      </header>
+
+      <article class="piece" id="p1">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★★</span> <span class="chip mins">4 min</span> <span class="chip" lang="ja">宇喜多秀家</span> <span class="chip" lang="ja">五大老</span> <span class="chip" lang="ja">関ヶ原の戦い</span> <span class="chip" lang="ja">島津氏</span> <span class="chip" lang="ja">八丈島</span>
+          </div>
+          <h2 lang="ja">若くして五大老となった宇喜多秀家はなぜ八丈島へ？豊臣政権プリンスの末路</h2>
+          <p class="why">Amanhã (20/11 no calendário antigo, 1655) é o aniversário de morte de Ukita Hideie: genro adotivo de Hideyoshi, um dos Cinco Regentes aos vinte e poucos anos, derrotado em Sekigahara, escondido em segredo pelos Shimazu em Satsuma — e exilado em Hachijō-jima, onde viveu mais de 50 anos, sustentado por arroz mandado pelos Maeda. Mais da metade da vida como exilado.</p>
+          <div class="source">
+            <span lang="ja">BUSHOO!JAPAN（武将ジャパン）</span>
+            <a href="https://bushoojapan.com/bushoo/ukita/2026/11/19/223219" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>明暦元年11月20日（1655年12月17日）は宇喜多秀家の命日です。</p>
+            <p>豊臣秀吉の養女を妻に迎え、20代で豊臣政権の大老に名を連ねた備前の大名であり、大河ドラマ『豊臣兄弟』にも終盤になって登場してきました。</p>
+            <p>その秀家が八丈島へ流され、亡くなるまでの約50年を島で過ごしたことをご存知でしょうか。</p>
+            <p>数え84歳まで生きたとされますから、実は、人生の半分以上が流人暮らしだったのです。</p>
+            <p>秀吉にあれほど目をかけられた大名が、なぜ絶海の孤島へ？</p>
+            <p>……</p>
+            <p>宇喜多秀家は元亀三年（1572年）、備前の大名・宇喜多直家の子として生まれました。</p>
+            <p>その直家が病で亡くなると、天正十年（1582年）正月、織田信長の承認を得て秀家が家督を継ぎました。</p>
+            <p>……</p>
+            <p>幼い頃に前田家からもらった利家の娘で、大事に育ててきた養女の豪姫を、宇喜多秀家に嫁がせたのです。</p>
+            <p>豪姫は秀吉夫妻に実の子のように可愛がられた女性ですから、秀家はこの婚姻により秀吉の「身内」に準じる立場となりました。</p>
+            <p>さらに秀吉の晩年には、徳川家康や前田利家らと並ぶ大老の一人にまで抜擢されました。</p>
+            <p>……</p>
+            <p>慶長五年（1600年）正月、家康の仲裁によりようやく収束するのですが、この騒動で秀家と宇喜多家の威信は大きく損なわれます。</p>
+            <p>……</p>
+            <p>慶長五年（1600年）7月、宇喜多秀家は同じ大老の毛利輝元や石田三成ら奉行とともに、反家康の兵を挙げました。</p>
+            <p>そして迎えた慶長五年9月15日（1600年10月21日）の関ヶ原本戦。</p>
+            <p>しかい、松尾山から下ってきた小早川秀秋と、その軍勢に乗じた諸将の裏切りにより、西軍は総崩れとなり、秀家もこの流れには抗えません。</p>
+            <p>……</p>
+            <p>同じ敗者とはいえ、徳川に敵対した豊臣政権の中心人物を匿うなど、危険極まりない行為。</p>
+            <p>しかし島津家が家康と和睦し、薩摩大隅の本領を安堵されるとなると、さすがに秀家もこれ以上は潜んでいられなくなります。</p>
+            <p>自ら旧知の禅僧・西笑承兌（さいしょうじょうたい）に助命への尽力を頼み、忠恒もまた、遠島でも構わないから命だけは助けてほしいと承兌に働きかけます。</p>
+            <p>結果、慶長八年9月2日（1603年10月6日）、家康は秀家を死罪とせず、まず駿河へ送ると決めました。</p>
+            <p>……</p>
+            <p>その後、秀家は二人の息子とともに伊豆の八丈島へ流されました。</p>
+            <p>八丈島へ渡ったのは宇喜多秀家と息子の孫九郎・小平次らで、妻の豪姫は同行していません。</p>
+            <p>秀家たちは、芳春院（まつ）や前田家、旧臣たちが送る米などに支えられ、島での暮らしを続けます。</p>
+            <p>しかし、結局その夢は叶うことなく、明暦元年11月20日（1655年12月17日）、数え84歳とされる生涯を八丈島で閉じました。</p>
+          </div>
+          <p class="continue"><a href="https://bushoojapan.com/bushoo/ukita/2026/11/19/223219" target="_blank" rel="noopener" lang="ja">続きを読む · BUSHOO!JAPAN（武将ジャパン）</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p2">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★☆</span> <span class="chip mins">3 min</span> <span class="chip" lang="ja">伊達成実</span> <span class="chip" lang="ja">伊達政宗</span> <span class="chip" lang="ja">人取橋の戦い</span> <span class="chip" lang="ja">出奔</span> <span class="chip" lang="ja">前立</span>
+          </div>
+          <h2 lang="ja">伊達政宗が震えた最強の右腕！兜に“毛虫”を掲げた猛将・伊達成実、その輝かしい武功と突然の失踪劇</h2>
+          <p class="why">O braço direito de Date Masamune salvou o chefe no desastre de Hitotoribashi, usava uma lagarta peluda no elmo (porque lagarta “nunca anda para trás”) — e em 1595 simplesmente sumiu do clã, sem motivo conhecido até hoje. Só voltou em 1600. Teorias: ranking, dívidas, missão secreta…</p>
+          <div class="source">
+            <span lang="ja">Japaaan（ジャパーン）</span>
+            <a href="https://mag.japaaan.com/archives/290605" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>戦国時代にはさまざまな武将が活躍しましたが、知名度・人気どちらも高い人物の一人が「伊達政宗」ではないでしょうか。</p>
+            <p>独眼竜の名前でも知られる伊達政宗ですが、今回の生地では、そんな彼の右腕的な存在だった武将「伊達成実（だてしげざね）」をご紹介したいと思います。</p>
+            <p>戦の強さはもちろんのこと、兜に“毛虫”のモチーフが付いていたことなど、伊達成実は知れば知るほど面白い人物でした。</p>
+            <p>……</p>
+            <p>時宗の僧・了山和尚のもとで学問を修め、天正7年（1579年）には大森城にて元服を迎えます。天正11年（1583年）には家督を継ぎ大森城主に。</p>
+            <p>若い頃から特に武勇の面で優れ、伊達政宗の右腕として片倉景綱（片倉小十郎）とともに活躍しました。</p>
+            <p>……</p>
+            <p>伊達成実の人生において、未だに具体的な理由がわかっていない出来事があります。それが、文禄4年（1595年）の突然の伊達家からの出奔です。</p>
+            <p>数年前から伊達政宗の留守を預かっていたり、文禄の役でも優れた働きを見せていましただけに、突然の出奔には伊達政宗も驚いたといいます。</p>
+            <p>使いを出し説得しようとするも、聞く耳を持たず。最終的には、関ヶ原の戦いが起きた慶長5年（1600年）に片倉景綱らの説得によって政宗のもとに戻りました。</p>
+            <p>……</p>
+            <p>慶長7年（1602年）からは、片倉景綱に代わって亘理（亘理要害）に入り、城下町づくりに勤しみます。領主として、亘理要害の改修や治水、用水、新田開発、塩田開発など亘理全体の発展に尽力しました。</p>
+            <p>伊達成実の人柄が見える例として、兜の前立があげられます。</p>
+            <p>前立は「毛虫」をモチーフにしたものであり、一瞬ぎょっとしてしまいますが、これは、「決して後ろに退かない」という毛虫の習性に由来するものでした。</p>
+            <p>実際に、伊達成実は戦場で絶対に退かなかった、「徹底抗戦」を主張しつづけた人物だったと言われています。</p>
+          </div>
+          <p class="continue"><a href="https://mag.japaaan.com/archives/290605" target="_blank" rel="noopener" lang="ja">続きを読む · Japaaan（ジャパーン）</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p3">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★☆</span> <span class="chip mins">3 min</span> <span class="chip" lang="ja">広場重綱</span> <span class="chip" lang="ja">鷹匠</span> <span class="chip" lang="ja">島津義弘</span> <span class="chip" lang="ja">豊臣秀長</span> <span class="chip" lang="ja">島津の退き口</span>
+          </div>
+          <h2 lang="ja">【豊臣兄弟！】関ヶ原の死地も生還！豊臣秀長から島津義弘に譲られた凄腕の鷹匠・広場重綱とは何者？</h2>
+          <p class="why">Um falcoeiro tão bom que Shimazu Yoshihiro o pediu de presente a Toyotomi Hidenaga — e depois sobreviveu à famosa retirada de Shimazu em Sekigahara (1.500 homens atravessando 100 mil inimigos; só uns 50–60 voltaram). Depois trocou de sobrenome e sumiu da história. Combina com a peça do Hideie.</p>
+          <div class="source">
+            <span lang="ja">Japaaan（ジャパーン）</span>
+            <a href="https://mag.japaaan.com/archives/294205" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>戦国時代の武将たちは、ただ武力や知識だけでなく、様々な能力を発揮していました。</p>
+            <p>今回は特殊技能をもって活躍した広場重綱（ひろばしげつな）を紹介。果たしてどんな技能をもっていたのでしょうか。</p>
+            <p>……</p>
+            <p>元服して通称を広場休蔵（きゅうぞう）と名乗り、はじめは父に従って秀吉に仕えたと考えられます。</p>
+            <p>それが後に秀長家臣に転属したようですが、これも詳しい時期などはわかっていません。</p>
+            <p>この重綱は鷹の扱いに長けていたそうで、秀長が鷹狩りに出る時はその能力を発揮したことでしょう。</p>
+            <p>……</p>
+            <p>義弘が秀長と仲良くなっていたことはもちろん、重綱の鷹匠としての技量を高く評価してのことでしょう。</p>
+            <p>秀長はこれを快諾し、果たして重綱は島津義弘に仕えたと言うことです。</p>
+            <p>……</p>
+            <p>島津義弘に仕えた重綱は専属の鷹匠となり、その後も義弘の側近として各地に従軍しました。</p>
+            <p>二度にわたる朝鮮征伐（文禄の役・慶長の役）や関ヶ原の合戦にも参陣したそうです。</p>
+            <p>関ヶ原の合戦で島津義弘に従っていたのなら、言うまでもなく、かの有名な島津の退口（のきぐち）にも参加していたことでしょう。</p>
+            <p>島津の退口とは、わずか1,500ばかりの軍勢で、十万を超える東軍に真正面から突っ込むという壮絶な退却劇です。</p>
+            <p>……</p>
+            <p>かくして死闘をくぐり抜けた重綱は、加治木（鹿児島県姶良市）へ移り住み、苗字を広場から鈴木に改めました。</p>
+            <p>広場では不都合な事情でもあったのか、あるいは特別な理由で鈴木となったのか、詳しいことはよくわかっていません。</p>
+            <p>そしていつ、どのように亡くなったのかも不明です。命懸けで守り抜いた義弘のお膝元で、末永く穏やかに暮らしたことを願います。</p>
+          </div>
+          <p class="continue"><a href="https://mag.japaaan.com/archives/294205" target="_blank" rel="noopener" lang="ja">続きを読む · Japaaan（ジャパーン）</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p4">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★☆</span> <span class="chip mins">3 min</span> <span class="chip" lang="ja">天正大判</span> <span class="chip" lang="ja">豊臣秀吉</span> <span class="chip" lang="ja">金貨</span> <span class="chip" lang="ja">後藤家</span> <span class="chip" lang="ja">金配り</span>
+          </div>
+          <h2 lang="ja">秀吉が配った金貨は世界最大級だった！長さ17cmの「天正大判」に込められた天下人の狙い</h2>
+          <p class="why">A moeda de ouro de Hideyoshi com 17 cm — das maiores do mundo — não era para comprar pão: servia de prêmio e presente político. Em 1589 ele distribuiu ~6.000 peças de ouro e 25.000 de prata no Jurakudai. História econômica com vocabulário útil (鍛造, 純度, 恩賞, 貨幣制度).</p>
+          <div class="source">
+            <span lang="ja">草の実堂</span>
+            <a href="https://kusanomido.com/study/history/japan/azuchi/toyotomi/136770/" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>みなさん、『豊臣兄弟！』第43話「殿下の刀狩り」での終盤のワンシーンを覚えていますか？</p>
+            <p>刀狩りを何とか成功させたい豊臣秀長が、郡山城に徳川家康、前田利家、宇喜多秀家、毛利輝元、小早川隆景を招き、一芝居を打ちました。</p>
+            <p>その後、協力してくれた家康と利家にお礼として差し出したのが、大判だったのです。</p>
+            <p>……</p>
+            <p>秀吉は天下統一を進める過程で各地の鉱山を掌握し、そこから得られる金銀を用いて、豪華絢爛な天正大判を作らせました。</p>
+            <p>ただし天正大判の主な使い道は、武功を上げた家臣への恩賞や、有力大名・朝廷への贈答品でした。</p>
+            <p>つまりこの豪華な金貨には、豊臣政権の圧倒的な経済力と権力を誇示するという政治的な意図もあったのです。</p>
+            <p>……</p>
+            <p>天正大判は、1588年（天正16年）、秀吉が京都の金工師・後藤家に命じて作らせたものです。</p>
+            <p>……</p>
+            <p>そして特筆すべきは素材となる金の純度です。その割合はおおむね70～76％程度とされ、金と銀の合金で構成されていました。</p>
+            <p>……</p>
+            <p>天正菱大判に続いて作られた大判で、縦に長い形状が特徴です。その長さは約17.3センチメートルに達し、金貨としては世界最大級とされています。</p>
+            <p>……</p>
+            <p>冒頭で秀吉は派手好きだったと記しましたが、そのパフォーマンスにも大判は使われています。</p>
+            <p>秀吉は、めでたい出来事があると、惜しげもなく金銀を配る「金配り」を行いました。</p>
+            <p>1589年（天正17年）、聚楽第で行われた金配りでは、金子約6000枚、銀子約2万5000枚が諸大名や公家などに配られたと伝わります。まさに天下人ならではの豪快な振る舞いといえるでしょう。</p>
+            <p>……</p>
+            <p>そして1615年（慶長20年）、大坂夏の陣によって豊臣家は滅亡します。このとき、豊臣家が蓄えていた莫大な財産も、徳川家の手に渡ることになりました。</p>
+            <p>しかし秀吉が始めた大判の製造は江戸幕府にも引き継がれ、その後の日本の貨幣制度を考えるうえで重要な影響を与えたのでした。</p>
+          </div>
+          <p class="continue"><a href="https://kusanomido.com/study/history/japan/azuchi/toyotomi/136770/" target="_blank" rel="noopener" lang="ja">続きを読む · 草の実堂</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p5">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★☆</span> <span class="chip mins">3 min</span> <span class="chip" lang="ja">ナスカ</span> <span class="chip" lang="ja">古代DNA</span> <span class="chip" lang="ja">単眼症</span> <span class="chip" lang="ja">13トリソミー</span> <span class="chip" lang="ja">壺葬</span>
+          </div>
+          <h2 lang="ja">1600年前のペルーで発見された一つ目の赤ちゃん、単眼症の原因が明らかに</h2>
+          <p class="why">Perto das Linhas de Nazca, um crânio de bebê de ~1.600 anos com uma única órbita no meio do rosto (ciclopia). DNA antigo apontou trissomia do 13 — o caso mais antigo conhecido. Ela foi enterrada num pote junto com outro bebê, de outra mãe. Por quê? Ninguém sabe.</p>
+          <div class="source">
+            <span lang="ja">カラパイア</span>
+            <a href="https://karapaia.com/archives/638414.html" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>南米ペルーのナスカの地上絵から数km離れた遺跡で、1600年ほど前の女の子の赤ちゃんの頭蓋骨が発見された。</p>
+            <p>顔の中央に眼窩（目が収まるくぼみ）が1つだけしかない単眼症の特徴を持っていた。</p>
+            <p>……</p>
+            <p>下にいた女の子の頭蓋骨には鼻の骨がなく、顔の中央に眼窩（がんか：頭蓋骨にある眼球が収まっている骨のくぼみ）1つだけあった。</p>
+            <p>研究チームがすねの骨から抽出した古代DNAを解析したところ、女の子には13番染色体が通常より1本多くあった。</p>
+            <p>13トリソミーは、胎児の脳の前方部分が左右に分かれずに発達する状態を引き起こすことがある。</p>
+            <p>分離が十分に進まないと、顔の中央に眼窩が1つだけできる単眼症（cyclopia）など、重い顔面の特徴が現れる場合がある。</p>
+            <p>論文によると、単眼症は出生約10万人に1人の割合で起こる極めてまれな状態だ。</p>
+            <p>……</p>
+            <p>母親から受け継がれるミトコンドリアDNAを調べた結果、同じ壺に納められていたもう1人の女の赤ちゃんとは、母親が異なることもわかった。</p>
+            <p>2人がなぜ一緒に埋葬されたのかは、明らかになっていない。</p>
+            <p>単眼症は、生まれる前か出生後まもなく命を落とすことが多い。今回の女の子が生まれてからどれほど生きたのかはまだ確定できない。</p>
+            <p>歯の発達段階は生後2〜4か月ごろに相当する一方、長骨の長さは妊娠36〜40週ごろの発達段階を示していた。</p>
+            <p>……</p>
+            <p>ナスカ文化では、幼い子どもが亡くなった場合、土器の壺に入れて埋葬する「壺葬」の習わしがあった。</p>
+            <p>女の子が納められていた壺には副葬品がなく、パルパ谷で見つかるほかの子どもの墓と同様に簡素なものだった。</p>
+            <p>ただし、1つの壺に赤ちゃんを2人納める例は珍しいという。</p>
+            <p>同研究をまとめたマックス・プランク進化人類学研究所のチームは、これほど古い遺骨から13トリソミーが見つかった例は、今まで知られていなかったと述べている。</p>
+          </div>
+          <p class="continue"><a href="https://karapaia.com/archives/638414.html" target="_blank" rel="noopener" lang="ja">続きを読む · カラパイア</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p6">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★☆</span> <span class="chip mins">4 min</span> <span class="chip" lang="ja">大不整合</span> <span class="chip" lang="ja">グランドキャニオン</span> <span class="chip" lang="ja">マントル</span> <span class="chip" lang="ja">全球凍結</span> <span class="chip" lang="ja">地質学</span>
+          </div>
+          <h2 lang="ja">地球史の「10億年の空白」は大陸の浮き沈みで生まれた</h2>
+          <p class="why">No Grand Canyon, camadas de 540 milhões de anos assentam direto sobre rocha de mais de 1 bilhão: até 1 bilhão de anos de registro sumiu (a “Grande Discordância”). Simulando o manto desde 1 bi de anos atrás, viu-se: continentes subiram, geleiras da Terra-bola-de-neve rasparam, depois afundaram e foram cobertos. Explicado com a analogia de um pátio de escola depois da chuva.</p>
+          <div class="source">
+            <span lang="ja">ナゾロジー</span>
+            <a href="https://nazology.kusuguru.co.jp/archives/209839" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>崖に見える地層は、ふつう下から上へ、古い順に積み重なっています。</p>
+            <p>ところがアメリカのグランドキャニオンなど世界の各地では、その途中の記録が何億年分、場所によっては10億年以上も抜け落ちています。</p>
+            <p>「大不整合」と呼ばれるこの空白がなぜできたのかは、長く謎のままでした。</p>
+            <p>……</p>
+            <p>これらは、大不整合があると知られている地域と重なります。</p>
+            <p>……</p>
+            <p>ところが世界には、その順番が途中でごっそり抜けている場所があります。</p>
+            <p>アメリカのグランドキャニオンでは、約5億4000万年前に始まるカンブリア紀の地層が、花崗岩のような古い結晶質の岩の上にじかに載っています。</p>
+            <p>下の岩は10億年以上前にできたものであることもあり、その間にあったはずの記録が見当たらないのです。</p>
+            <p>地質学では、この巨大な空白を「大不整合」と呼びます。グランドキャニオンは、大不整合が初めて報告された場所でもあります。</p>
+            <p>……</p>
+            <p>この仕組みは、雨上がりの校庭を思い浮かべると分かりやすくなります。</p>
+            <p>校庭では、少し盛り上がった所の土は雨水に流され、くぼみにできた水たまりの底には、流れてきた細かい泥が薄く積もっていきます。</p>
+            <p>……</p>
+            <p>大陸でいえば、盛り上がりにあたるのが海の上に高く出た陸地、水たまりにあたるのが海、固い地面にあたるのが古い結晶質の岩です。</p>
+            <p>……</p>
+            <p>答えの鍵は、地面のずっと下、地殻の下に広がるマントルにあります。</p>
+            <p>マントルは熱い岩でできていますが、液体の海のようなものではありません。ほぼ固体のまま、地質学的な長い時間をかけて、とてもゆっくり流れています。</p>
+            <p>この流れは、上に乗った大陸を数千kmの広さで持ち上げたり、沈ませたりします。その変化は数千万年という時間をかけて進みます。</p>
+            <p>……</p>
+            <p>つまり今回の研究は氷河説を否定するのではなく、マントルの流れが陸地を長く持ち上げ、氷河が大きく削れる舞台を用意したと考えるものです。</p>
+            <p>大不整合ほどの空白が地球の歴史でまれなのは、9億年を超える長い上下と大規模な氷河時代が重なる必要があり、しかも古い記録ほど残りにくいからではないかと研究チームは考えています。</p>
+            <p>消えた記録は、ただの空白ではなく、地球の奥の動きを今に伝える手がかりだったのです。</p>
+          </div>
+          <p class="continue"><a href="https://nazology.kusuguru.co.jp/archives/209839" target="_blank" rel="noopener" lang="ja">続きを読む · ナゾロジー</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p7">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★☆</span> <span class="chip mins">2 min</span> <span class="chip" lang="ja">火星</span> <span class="chip" lang="ja">火山</span> <span class="chip" lang="ja">アルバ山</span> <span class="chip" lang="ja">塩化水素</span> <span class="chip" lang="ja">トレース・ガス・オービター</span>
+          </div>
+          <h2 lang="ja">火星はまだ生きている。地下にマグマが残り、今も火山活動が続いている可能性</h2>
+          <p class="why">Marte não estaria morto: gás cloreto de hidrogênio aparece só sobre o Monte Alba (o vulcão mais largo do Sistema Solar) mesmo na estação fria sem poeira — e bem embaixo há fissuras novas, finas, que já teriam sumido se nada estivesse ativo. Câmara de magma ainda viva?</p>
+          <div class="source">
+            <span lang="ja">カラパイア</span>
+            <a href="https://karapaia.com/archives/638265.html" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>内部が冷え、火山活動は終わったと考えられていた火星だが、地下には今もマグマ溜まりがあって、今もガスが漏れだしている可能性が高いという。</p>
+            <p>2021年に、火星の大気から塩化水素ガスを初めて検出された。当初は、暖かい時期に舞い上がった地表の塵（ちり）から生まれたと考えられていた。</p>
+            <p>……</p>
+            <p>磁場の盾を失った火星は太陽風に直接さらされ、大気は宇宙空間へと逃げていった。</p>
+            <p>……</p>
+            <p>だが、現在の火星では、火山の活動はとうの昔に終わったと考えられてきた。</p>
+            <p>……</p>
+            <p>その結果、ちりの少ない寒い時期にも、アルバ山周辺の限られた地域でだけ塩化水素が検出されていたことがわかった。</p>
+            <p>同じ時期、火星のほかの場所では塩化水素は見つかっていない。</p>
+            <p>火山のガスといえば二酸化硫黄が一般的だが、火星の大気からはまだ見つかっていない。</p>
+            <p>地球の火山でも、噴火が収まった後には二酸化硫黄の放出は減り、塩化水素は出続ける傾向がある。</p>
+            <p>……</p>
+            <p>亀裂は幅数十cmと細く、長いところでは数十kmにわたって群れをなしている。</p>
+            <p>論文によると、これほど幅の狭い亀裂は、内部の活動が続いていなければ、ちりが積もったり季節ごとに地面が動いたりして、すぐに消えてしまうという。</p>
+            <p>研究チームは、アルバ山周辺の亀裂が、地下深くにあるマグマ溜まりから塩化水素ガスが漏れ出す通り道になっていると考えている。</p>
+            <p>研究チームは、火星の内部で今も火山活動が続いていると考えるのが、今回の観測結果を最もよく説明できると結論づけている。</p>
+          </div>
+          <p class="continue"><a href="https://karapaia.com/archives/638265.html" target="_blank" rel="noopener" lang="ja">続きを読む · カラパイア</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p8">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★★</span> <span class="chip mins">2 min</span> <span class="chip" lang="ja">ボイジャー1号</span> <span class="chip" lang="ja">NASA</span> <span class="chip" lang="ja">1光日</span> <span class="chip" lang="ja">深宇宙</span> <span class="chip" lang="ja">グリーゼ445</span>
+          </div>
+          <h2 lang="ja">ボイジャー1号が光の粒子が24時間で進む距離「1光日」に到達</h2>
+          <p class="why">Ontem às 19h16 (hora do Japão) a Voyager 1 se tornou o primeiro objeto humano a 1 dia-luz da Terra (~25,9 bilhões de km), após 49 anos, 2 meses e 11 dias. Um sinal dela agora leva mais de 24 h para chegar. A Voyager 2 chega lá em 2035.</p>
+          <div class="source">
+            <span lang="ja">GIGAZINE</span>
+            <a href="https://gigazine.net/news/20261119-voyager-1-light-day/" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>1977年9月に打ち上げられたNASAの無人宇宙探査機「ボイジャー1号」が、地球から光の粒子が24時間で進む距離である「1光日」の距離に到達したことが発表されました。</p>
+            <p>ボイジャー1号は打ち上げから約50年を経たアメリカ東部標準時の2026年11月18日午前5時16分07秒(日本時間の2026年11月18日19時16分07秒)、地球から1光日の距離となる約259億kmに到達しました。</p>
+            <p>……</p>
+            <p>NASAは「ボイジャー1号は、地球から1光日分の距離を旅するのに49年2ヶ月11日を要したことになります。これはあらゆる基準から見ても大きな節目であり、祝うに値する日です」と述べています。</p>
+            <p>ボイジャー1号は、地球から17光年以上離れた「AC +79 3888(グリーゼ445)」というこぐま座にある恒星に向かっています。ボイジャー1号は4万年後にこの恒星から約1.7光年以内まで接近すると予想されています。</p>
+            <p>ボイジャー1号はプルトニウムの崩壊熱を電気に変換する原子力電源が毎年約4Wずつ出力が低下しており、今後どれくらい活動できるかは不明です。</p>
+            <p>また、ボイジャー1号の姉妹機であり、16日早く打ち上げられた「ボイジャー2号」は、天王星と海王星を訪れるため太陽系内を異なる軌道で飛行しました。ボイジャー2号は9年後の2035年11月には地球から1光日の距離に到達する予定とされています。</p>
+          </div>
+          <p class="continue"><a href="https://gigazine.net/news/20261119-voyager-1-light-day/" target="_blank" rel="noopener" lang="ja">続きを読む · GIGAZINE</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p9">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★★</span> <span class="chip mins">3 min</span> <span class="chip" lang="ja">シムシティ</span> <span class="chip" lang="ja">Micropolis</span> <span class="chip" lang="ja">ソースコード</span> <span class="chip" lang="ja">ゲーム</span> <span class="chip" lang="ja">都市計画</span>
+          </div>
+          <h2 lang="ja">初代「シムシティ」のソースコードを解析して判明した高評価の都市を作るための意外な条件とは？</h2>
+          <p class="why">Um dev jogando SimCity há 35 anos leu o código do original (Micropolis) e automatizou cidades: a nota máxima (949,5/1000) veio de 16.560 habitantes, imposto 1%, poucas ruas, sem bombeiros — e com menos casas que empregos. Ainda: fontes reduzem crime e parques demais causam overflow de inteiro.</p>
+          <div class="source">
+            <span lang="ja">GIGAZINE</span>
+            <a href="https://gigazine.net/news/20261119-simcity-high-score/" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>都市開発シミュレーションゲーム「シムシティ」では、住民の生活環境や街の発展状況に応じて都市の評価スコアが算出されます。35年間にわたってシムシティをプレイしてきたソフトウェア開発者のジェフ・クエスト氏がゲームのソースコードを解析し、高い評価を得る都市の条件を調べました。</p>
+            <p>1989年に発売された初代シムシティは「Micropolis」としてソースコードが公開されています。クエスト氏はMicropolisをPythonから操作するツールを利用し、評価スコアを最大化する都市を自動生成する実験を行いました。</p>
+            <p>実験で最も評価が高かった都市は人口1万6560人、税率1％で、1000点満点中949.5点を記録しました。</p>
+            <p>一方、人口の最大化を目指して生成した約71万人の都市の評価スコアは400～500点にとどまっています。</p>
+            <p>……</p>
+            <p>さらに、評価スコア上位5つの都市には消防署がなく、うち4つには警察署もありませんでした。維持費のかかる施設を建設しないことで、低い税率でも都市を運営できます。</p>
+            <p>都市の評価スコアを算出する7つの項目をまとめたものが以下。犯罪(crime)や汚染(pollution)、税率(taxes)などは減点要素としてのみ機能しますが、失業(unemployment)に関する項目だけは負の値を取ることができ、雇用が人口に対して十分に多い場合は加点要素となります。</p>
+            <p>クエスト氏はほかにも、公園に噴水を設置すると犯罪率の平均値が低下することや、森林や公園を増やしすぎると計算処理で整数オーバーフローが発生して逆に地価が下落することを突き止めました。</p>
+            <p>住宅の供給を抑えると都市の評価が向上する仕組みについて、クエスト氏はシムシティの開発に影響を与えたジェイ・フォレスターの著書「Urban Dynamics」との共通点を指摘しています。</p>
+          </div>
+          <p class="continue"><a href="https://gigazine.net/news/20261119-simcity-high-score/" target="_blank" rel="noopener" lang="ja">続きを読む · GIGAZINE</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p10">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★☆</span> <span class="chip mins">3 min</span> <span class="chip" lang="ja">今年の単語</span> <span class="chip" lang="ja">ケンブリッジ辞典</span> <span class="chip" lang="ja">AI</span> <span class="chip" lang="ja">人間プレミアム</span> <span class="chip" lang="ja">フリクションマキシング</span>
+          </div>
+          <h2 lang="ja">ケンブリッジ辞典が2026年度版「今年の単語」に「人間(human)」を選出</h2>
+          <p class="why">Palavra do ano do Cambridge: “human” como adjetivo — “human-written”, “human-made”, por oposição à IA. Bônus: “human premium” e “friction-maxxing” (tornar o dia a dia de propósito menos cômodo). Bom vocabulário em katakana + reflexão sobre a era da IA.</p>
+          <div class="source">
+            <span lang="ja">GIGAZINE</span>
+            <a href="https://gigazine.net/news/20261119-cambridge-dictionary-word-of-the-year-human/" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>ケンブリッジ辞典が、2026年のワード・オブ・ザ・イヤー(今年の単語)に、名詞ではなく形容詞としての「human」を選びました。なぜこの単語を選んだのかも説明しています。</p>
+            <p>ケンブリッジ辞典は形容詞の「human」について、「長く、動物や神々、そして近年では機械とは対照的な『人間』を意味してきました。近年では『人間が書いた(human-written)』『人間が生成した(human-generated)』『人間が作った(human-made)』といった複合語で使われることが増えており、AIとは対照的に、人間によって作られたもの、あるいは人間に典型的なものを表す言葉にもなっています」と説明。</p>
+            <p>……</p>
+            <p>ケンブリッジ辞典によると、2026年は「人間プレミアム(human premium)」や「人間マキシング(humanmaxxing)」といった言葉が誕生・流行したとのこと。「人間プレミアム」は、AIがあらゆるコンテンツを生成するようになった時代に、人間が作ったものに価値を見いだすという考え方。</p>
+            <p>また、2026年は「フリクションマキシング(friction-maxxing)」という言葉も流行したそうです。これは、デジタル機器への依存を減らすために日常的な活動をあえて少し不便にするという意味です。</p>
+            <p>ケンブリッジ辞典は「AIは今や、人間が作ったものと見分けがつかないほどの文章、芸術作品、音楽を生み出せる段階に達しました。中には、AIが意識を獲得したのではないかと議論する人もいます。これは、人類にとって非常に重要な存在論的な問いを生み出します。AI時代において、人間であるとは一体どういうことなのでしょうか」と問いかけました。</p>
+          </div>
+          <p class="continue"><a href="https://gigazine.net/news/20261119-cambridge-dictionary-word-of-the-year-human/" target="_blank" rel="noopener" lang="ja">続きを読む · GIGAZINE</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p11">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★★</span> <span class="chip mins">3 min</span> <span class="chip" lang="ja">Claude Code</span> <span class="chip" lang="ja">テスト</span> <span class="chip" lang="ja">コードレビュー</span> <span class="chip" lang="ja">AIエージェント</span> <span class="chip" lang="ja">Anthropic</span>
+          </div>
+          <h2 lang="ja">Claude Codeチームは検証についてどのように考えて実行しているのか、エンドツーエンドテスト・プロパティテスト・差分テストで証拠に基づいて自身の作業を検証する方法</h2>
+          <p class="why">Como o time do Claude Code (90% do código escrito/revisado pelo Claude) verifica o próprio trabalho: E2E, testes de propriedade e diferenciais; checklist de confiabilidade de 39 itens; um único revisor afinado com REVIEW.md que o agente não pode reescrever; e 3 tentativas antes de chamar um humano. Direto para o seu fluxo.</p>
+          <div class="source">
+            <span lang="ja">GIGAZINE</span>
+            <a href="https://gigazine.net/news/20261118-claude-code-test-code-review/" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>AIコーディングツール「Claude Code」の開発チームでは、コードの約90％をClaudeが記述・レビューしています。</p>
+            <p>AIエージェントを使ったソフトウェア開発では、人間がすべての成果物を確認する必要がある場合、同時に稼働させられるエージェントは1つか2つに限られます。しかし、AIが自らの成果物を検証できる仕組みを整えれば、数十あるいは数百のエージェントを並行して稼働させることが可能になります。</p>
+            <p>……</p>
+            <p>オスマーニ氏はAIエージェントによる開発において特に有効なテストとして、「エンドツーエンド(E2E)テスト」「プロパティテスト」「差分テスト」の3種類を挙げています。</p>
+            <p>……</p>
+            <p>差分テストは新旧のシステムに同じデータを入力して結果を比較する手法です。システムの移行やコードの書き直しなど、機能を維持したまま内部実装を変更する際に役立ちます。</p>
+            <p>……</p>
+            <p>コードレビューについては複数のAIエージェントに同じコードをレビューさせるよりも、1つのレビュー担当エージェントの精度を高める方針を採用しています。レビュー時に注意すべき点を「REVIEW.md」というファイルに記述し、過去のレビュー結果も活用することで、コストを抑えながらバグの検出率を高めています。</p>
+            <p>AIが自らの成果物を評価するルールを書き換えられないようにすることも重要です。Claude Codeの開発チームでは、変更対象とは別に管理されたREVIEW.mdを参照するほか、レビューの対象を特定のコミットに固定しています。コードレビューや動作確認を実施していない場合にコミットを阻止できる仕組みも導入しています。</p>
+            <p>AIエージェントによる開発の品質を高めるには検証の仕組みそのものを継続的に改善することが重要だ、とオスマーニ氏は指摘しています。適切な検証の仕組みを構築すれば、人間の役割はコードを1つずつ確認することから、何をもって作業の完了とするかを定義し、その条件を満たした証拠を確認することへと変化します。</p>
+          </div>
+          <p class="continue"><a href="https://gigazine.net/news/20261118-claude-code-test-code-review/" target="_blank" rel="noopener" lang="ja">続きを読む · GIGAZINE</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p12">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★★</span> <span class="chip mins">4 min</span> <span class="chip" lang="ja">ドラゴンクエストIII</span> <span class="chip" lang="ja">Claude Code</span> <span class="chip" lang="ja">ローカルLLM</span> <span class="chip" lang="ja">YOLO</span> <span class="chip" lang="ja">JRPG</span>
+          </div>
+          <h2 lang="ja">ドラクエ3リメイクをClaude Codeでクリア：ローカルLLM（Qwen3-VL）で画面を読み、YOLOを使わなかった理由</h2>
+          <p class="why">JRPG + Claude: alguém fez o Claude Code zerar o DQ3 HD-2D no Switch, lendo a tela com um VLM local (recortar a caixa de diálogo e ampliar 2x reduziu os erros), navegando pelo mapa do jogo em vez do YOLO, deixando as batalhas nos “sakusen” — e perdendo 3 vezes para o Zoma por entrar sem MP. Ainda se perdeu 3 h na torre de Najimi.</p>
+          <div class="source">
+            <span lang="ja">Zenn</span>
+            <a href="https://zenn.dev/yadevloper/articles/8aa5f9dc37891e" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>ローカルLLM（画像も読めるVLM、Qwen3-VL 4B）とYOLOを使って、Claude CodeにNintendo Switch版「ドラゴンクエストIII」（HD-2Dリメイク）をクリアさせました。文字の読み取りの精度・速度は実測したグラフも載せています。</p>
+            <p>そこで、文字はローカルVLMに読ませ、「もの」（主人公・扉・階段など）はYOLOで見つける、という分担で始めました。</p>
+            <p>……</p>
+            <p>最初は画面全体をVLMに渡していました。すると、性格診断の「追いかけられる夢」を「追いかける愛」と読むなど、読み違いが多く出ました。</p>
+            <p>そこで、枠が出ているかは画素の数値で判定し、枠だけを切り出して2倍に拡大してから読ませるようにしました。</p>
+            <p>1回の dq3 look は、コマンドの起動も含めて約2秒です。</p>
+            <p>……</p>
+            <p>文字はVLMで読めるようになったので、次は「主人公はどこ、扉や階段はどこ」をYOLOで取ろうとしました。</p>
+            <p>……</p>
+            <p>YOLOが育つのを待たずに、歩く処理は別の方法で作りました。Yボタンで開く地図です。</p>
+            <p>地図の上の主人公の印は、白い丸と黄色い矢印で描かれています。この色の塊を探せば、カメラの向きに関係なく、地図上の位置（画素）が取れます。</p>
+            <p>YOLOの「何が写っているか」より、ゲームが用意した地図の「どこにいるか」のほうが、ずっと確実でした。地図はゲームが正しい位置を描いてくれますが、3Dの画面に写った見た目は、カメラ・明るさ・隊列の重なりで変わります。</p>
+            <p>……</p>
+            <p>戦闘のコマンドを1つずつ選ばせることはしませんでした。ゲームの「さくせん」（ガンガンいこうぜ・バッチリがんばれなど）に任せ、こちらは次のことだけをします。</p>
+            <p>ボスは、作戦と装備を変えて何度か負けながら倒しました。ゾーマには3回全滅しています。原因は、宿屋に寄らずMPが空のまま挑んでいたことと、仲間の防具が弱かったことです。</p>
+            <p>……</p>
+            <p>2周目で、ナジミの塔の入口が見つからず、約3時間さまよいました。攻略サイトの文章には「地下水道を道なりに進む」「地下水道の南の階段から塔へ」とあります。ところがそれを読んでも、どの階段か分かりませんでした。</p>
+            <p>結局、攻略サイトの地図の画像を取ってきて見たら、すぐに分かりました。入口は、地下水道の分かれ道の部屋にある大きな階段でした。来た通路と同じに見えたので、何度も素通りしていました。</p>
+          </div>
+          <p class="continue"><a href="https://zenn.dev/yadevloper/articles/8aa5f9dc37891e" target="_blank" rel="noopener" lang="ja">続きを読む · Zenn</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p13">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★☆</span> <span class="chip mins">3 min</span> <span class="chip" lang="ja">幌内鉄道</span> <span class="chip" lang="ja">義経号</span> <span class="chip" lang="ja">手宮線</span> <span class="chip" lang="ja">小樽</span> <span class="chip" lang="ja">空撮</span>
+          </div>
+          <h2 lang="ja">ここを列車が走った!? “素掘りトンネル”に街ナカの錆びたレール…空から「北海道で初めての鉄道」の痕跡を見る</h2>
+          <p class="why">A primeira ferrovia de Hokkaidō (1880), feita para levar carvão, com locomotivas americanas batizadas “Yoshitsune” e “Benkei”. Do alto: os trilhos agarrados à falésia do litoral entre Sapporo e Otaru e a linha Temiya abandonada, com os trilhos enferrujados ainda cruzando a cidade.</p>
+          <div class="source">
+            <span lang="ja">乗りものニュース</span>
+            <a href="https://trafficnews.jp/post/718808" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>北海道初の鉄道は幌内炭鉱から産出される石炭を運ぶ幌内鉄道で、札幌と小樽市内の手宮まで先行開業しました。道内初の鉄道区間の今を空から紹介します。</p>
+            <p>この機関車は、1880（明治13）年に開業した北海道初の鉄道「幌内鉄道」用に、アメリカピッツバーグのH.K.ポーター社から輸入されたうちの1台です。僚友である「弁慶」は鉄道博物館（さいたま市大宮区）で、「しづか」は小樽市総合博物館（北海道小樽市）にて静態保存されています。</p>
+            <p>……</p>
+            <p>北海道初の鉄道開通から146年、開業当時の面影はとうに消えていますが、線路の位置はだいたい同じです。札幌～手宮間を空撮した模様をお伝えします。</p>
+            <p>……</p>
+            <p>札幌駅から手稲駅にかけては札幌の市街地であり、一戸建てから集合住宅まで平野部に立ち並んでいます。幌内鉄道の開業の頃、一帯は原野だったことでしょう。</p>
+            <p>……</p>
+            <p>南小樽駅を過ぎると、函館本線の右手に錆びた線路が併走します。小樽市街を横断した手宮線の廃線跡です。この手宮線こそが、幌内鉄道の小樽側の線路で、幌内炭鉱で産出された石炭を、小樽港の手宮へ輸送していました。</p>
+            <p>手宮線は1985（昭和60）年に廃止されましたが、痕跡は十分に残っています。廃線跡はレールが残された状態で遊歩道化され、旧手宮駅跡地に整備された小樽市総合博物館へと続いています。</p>
+            <p>北海道初の鉄道の痕跡は、小樽市内で線路も剥がされずにしっかりと残り、義経や弁慶が走った往時が想像できます。一世紀半も前に北海道で産声を上げた鉄路に思いを馳せながら函館本線の電車に揺られ、手宮線の跡を散策するのも楽しい歴史旅となることでしょう。</p>
+          </div>
+          <p class="continue"><a href="https://trafficnews.jp/post/718808" target="_blank" rel="noopener" lang="ja">続きを読む · 乗りものニュース</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p14">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★☆</span> <span class="chip mins">3 min</span> <span class="chip" lang="ja">切立橋</span> <span class="chip" lang="ja">九州鉄道</span> <span class="chip" lang="ja">会津</span> <span class="chip" lang="ja">猪苗代発電所</span> <span class="chip" lang="ja">明治の鉄橋</span>
+          </div>
+          <h2 lang="ja">ドイツ生まれ130歳、元“九州の鉄道橋”がなぜ会津の山奥に!? 路面は「木製」もまだ現役 空前の“大転勤”の理由</h2>
+          <p class="why">Uma ponte de ferro feita na Alemanha em 1890, primeiro na linha principal de Kyūshū, depois aposentada — e reinstalada em 1921 nas montanhas de Aizu para levar material à usina de Inawashiro. Ainda em uso, com piso de madeira. Uma “transferência de emprego” de 1.000 km, com conexões humanas por trás.</p>
+          <div class="source">
+            <span lang="ja">乗りものニュース</span>
+            <a href="https://trafficnews.jp/post/715334" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>福島県にある古い鉄橋「切立橋」。実はドイツ生まれで、元は九州の鉄道橋でした。なぜ遠く会津の地で、今も現役で使われているのでしょうか。</p>
+            <p>福島県会津若松市と喜多方市の境を流れる日橋川に、弓なりの鉄骨が特徴的な「切立橋（きったてばし）」が架かっています。橋のたもとには「6.0t」という重量制限標識が立ち、路面に目をやると、アスファルトではなく木の板が敷き詰められています。</p>
+            <p>……</p>
+            <p>この橋が造られたのは1890（明治23）年、ドイツでのことです。日本へ輸入された後、最初の仕事場は九州でした。九州鉄道（現在のJR鹿児島本線）で、福岡県の矢部川を渡る橋として活躍しました。</p>
+            <p>……</p>
+            <p>なぜ、九州で役目を終えた橋が会津へ移されたのでしょうか。その背景には、猪苗代第四発電所の建設がありました。</p>
+            <p>……</p>
+            <p>この大規模な「転勤」には、九州と会津の意外な人のつながりもありました。橋梁設計会社の東和設計によると、九州鉄道の社長を務めた仙谷貢は、その後、猪苗代水力電気の社長にも就任しています。この縁によって、切立橋の移設が実現したと説明されています。</p>
+            <p>当時、古い鉄道橋を別の場所で再利用することは、決して特別な例ではありませんでした。土木史研究においても、明治期に輸入されたドイツ製鉄道橋の多くが、本線での使用を終えた後に別の路線や道路橋へ転用されたことが報告されています。切立橋もまた、九州で不要になった橋と、会津で新たに必要となった橋という需要が結びついた好例といえるでしょう。</p>
+            <p>発電所の建設資材を運ぶという役目を終えた後も、切立橋は日橋川に架かり続けました。現在は、路面を木張りにした道路橋として地域の人々の生活を支えています。近代化産業遺産にもなっており、近づけばリベットで留められた鋼材の接合部などを間近に見ることもできます。</p>
+          </div>
+          <p class="continue"><a href="https://trafficnews.jp/post/715334" target="_blank" rel="noopener" lang="ja">続きを読む · 乗りものニュース</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p15">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★☆☆</span> <span class="chip mins">2 min</span> <span class="chip" lang="ja">神戸</span> <span class="chip" lang="ja">北野異人館</span> <span class="chip" lang="ja">うろこの家</span> <span class="chip" lang="ja">世相サンタ</span> <span class="chip" lang="ja">物価高</span>
+          </div>
+          <h2 lang="ja">世相サンタ、今年はグレー　物価高テーマにモノクロで表現　神戸北野・うろこの家でお披露目</h2>
+          <p class="why">Kobe: o Papai Noel gigante (3 m) da Uroko no Ie, em Kitano, que todo ano veste o “clima do ano” desde 2004 — em 2026 não conseguiu comprar roupa vermelha nova: está em cinza, por causa da inflação. Curtinha, até 27/12.</p>
+          <div class="source">
+            <span lang="ja">神戸新聞NEXT</span>
+            <a href="https://www.kobe-np.co.jp/news/society/202611/0021051596.shtml" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>２０２６年の話題や流行を題材にした「世相サンタクロース」が１９日、神戸市中央区北野町２の異人館うろこの家でお披露目された。物価高騰をテーマに、赤いガウンを買えず悲しげな表情のサンタが登場。戦争などが、サンタの世界にも影を落としている様子も表現した。</p>
+            <p>高さ約３メートルの巨大サンタの装飾は、２００４年に始まり、毎年その年の世相を取り入れてきた。今年は赤いガウンを新調できず、普段着のグレーの服という設定。頭上には、ミラノ・コルティナ冬季五輪フィギュアスケートのペアで日本勢初の金メダルを獲得した「りくりゅう」の２人、こぶしを突き挙げる高市早苗首相らも並ぶ。</p>
+            <p>また、煙幕に咲くウクライナのひまわりやペルシャじゅうたんなど、戦禍が続く世界情勢を表している。</p>
+            <p>企画・広報担当の崎原朝香さん（６３）は、世界で起こるさまざまな出来事が暮らしに直結したことを表現したという。「それでもサンタは子どもたちのためにやってくる。来年こそは明るく穏やかに過ごしたい」と願いを込めた。</p>
+            <p>展示は１２月２７日まで。午前１０時～午後５時。入館料は大人１１００円、小学生２２０円。異人館うろこグループＴＥＬ０１２０・８８８・５８１</p>
+          </div>
+          <p class="continue"><a href="https://www.kobe-np.co.jp/news/society/202611/0021051596.shtml" target="_blank" rel="noopener" lang="ja">続きを読む · 神戸新聞NEXT</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p16">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★☆</span> <span class="chip mins">3 min</span> <span class="chip" lang="ja">BUCK-TICK</span> <span class="chip" lang="ja">今井寿</span> <span class="chip" lang="ja">アニメ主題歌</span> <span class="chip" lang="ja">ヴィジュアル系</span> <span class="chip" lang="ja">クロスレビュー</span>
+          </div>
+          <h2 lang="ja">BUCK∞TICK、近未来SFの世界観で打ち鳴らすスリリングな衝撃　シングル『存在理由　改』をクロスレビューで徹底解剖</h2>
+          <p class="why">Rock: os pais do visual kei lançam em 25/11 o single “Sonzai Riyū Kai”, tema de anime — dubstep, riffs de guitarra do Imai e um clipe à Laranja Mecânica. Crítica musical em japonês rico (不条理な詞, 手ぐせ). Nenhum dos seus favoritos teve notícia nova hoje.</p>
+          <div class="source">
+            <span lang="ja">Real Sound（リアルサウンド）</span>
+            <a href="https://realsound.jp/2026/11/post-2588425.html" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>BUCK∞TICKが11月25日、約1年ぶりのニューシングル『存在理由　改』をリリースする。表題曲は放送中のTVアニメ『DARK MACHINE THE ANIMATION』（フジテレビ系）のオープニング・テーマで、カップリングには「エイプリル・フールは天国のゲート」を収録。どちらも今井寿が作詞・作曲を務めた刺激的な楽曲だ。</p>
+            <p>BUCK∞TICKのニューシングル表題曲「存在理由　改」は久しぶりのアニメ主題歌。しかも書き下ろしである。驚きもしたが、Project Carbuncle原作によるオリジナルゲーム×アニメプロジェクト『DARK MACHINE』ということで納得。</p>
+            <p>……</p>
+            <p>カップリングは「エイプリル・フールは天国のゲート」。詞選びの不条理具合はこちらも負けていない。ルーズなデジタルビートに素っ頓狂な歌詞が無表情に並べられていく。サビとは言い難い、タイトルフレーズが唐突に降り注ぐ予想不可能な楽曲展開。〈リアルシリアルマテリアル〉という古くからのファンには聴き覚えのあるフレーズも飛び交う。</p>
+            <p>先述の「存在理由改」の所感、「なんだかよくわからないが、ただただカッコいい」は、かつて「唄」（1995年）のMVを初めて観たときと同じだった。あのときの、「なんだかとんでもない曲を聴いてしまった」「これまでに聴いたことのない音楽であるにもかかわらず、どこをどう聴いてもBUCK-TICKだ」という感覚と同じだ。</p>
+            <p>BUCK∞TICKはいつの時代でも、我々を斜め上から良い方向に裏切ってくる。とはいえ、本人たちはいつだって奇を衒っている感覚はないだろう。そこが彼らの大きな魅力なのである。（冬将軍）</p>
+          </div>
+          <p class="continue"><a href="https://realsound.jp/2026/11/post-2588425.html" target="_blank" rel="noopener" lang="ja">続きを読む · Real Sound（リアルサウンド）</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p17">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★☆☆</span> <span class="chip mins">2 min</span> <span class="chip" lang="ja">あいみょん</span> <span class="chip" lang="ja">西宮</span> <span class="chip" lang="ja">スマイル週間</span> <span class="chip" lang="ja">岡本太郎記念館</span> <span class="chip" lang="ja">日本武道館</span>
+          </div>
+          <h2 lang="ja">あいみょん、2年4ヶ月ぶりのフルアルバム『スマイル週間』リリース決定</h2>
+          <p class="why">A artista de Nishinomiya (Hyōgo) anuncia o 6º álbum para 27/1/2027, com um CD bônus voz e violão gravado na casa-ateliê de Okamoto Tarō, onde ele viveu 42 anos. Notinha leve para fechar.</p>
+          <div class="source">
+            <span lang="ja">BARKS</span>
+            <a href="https://barks.jp/news/1105436" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>あいみょんが、前作『猫にジェラシー』より約2年4ヶ月ぶりとなる自身6枚目のフルアルバム『スマイル週間』を2027年1月27日（水）にリリースすることを発表した。</p>
+            <p>初回限定盤には、3rdアルバム『おいしいパスタがあると聞いて』以来となるファン待望の弾き語りCD『風とリボン2 – 岡本太郎記念館, October, 2026 -』を同梱。</p>
+            <p>本作のために、あいみょんが以前より敬愛してやまない芸術家・岡本太郎が42年にわたって住まい、作品を作り続けたアトリエ「岡本太郎記念館」にてレコーディングを敢行した。</p>
+          </div>
+          <p class="continue"><a href="https://barks.jp/news/1105436" target="_blank" rel="noopener" lang="ja">続きを読む · BARKS</a></p>
+        </div>
+      </article>
+
+      <footer class="site">読解幕 · 2026-11-19 · ~50 min · <a href="../../history/" style="color:inherit">History</a> · deliton.github.io/japanese-digest</footer>
+    </main>
+  </div>
+</body>
+</html>
