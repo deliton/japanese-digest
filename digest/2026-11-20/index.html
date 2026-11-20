@@ -1,0 +1,1066 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>読解幕 · 2026-11-20 · Japanese Digest</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Noto+Serif+JP:wght@400;600;700&family=Shippori+Mincho:wght@500;700&display=swap" rel="stylesheet" />
+  <style>
+
+    :root {
+      --bg: #0a0a0a;
+      --bg-2: #121212;
+      --bg-card: #161616;
+      --ink: #f5f5f5;
+      --ink-dim: #a8a29a;
+      --ink-mute: #6b6560;
+      --shu: #c41e3a;
+      --shu-hot: #e11d48;
+      --shu-deep: #8b1228;
+      --gold: #d4a017;
+      --gold-soft: #c9a227;
+      --white: #fafafa;
+      --line: #2a2a2a;
+      --line-hot: rgba(196, 30, 58, 0.45);
+      --measure: 42rem;
+      --radius: 4px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: "Noto Sans JP", "Hiragino Sans", "Yu Gothic", system-ui, sans-serif;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .stage-bar {
+      height: 6px;
+      background: repeating-linear-gradient(
+        90deg,
+        var(--shu) 0 48px,
+        var(--white) 48px 56px,
+        #111 56px 64px,
+        var(--gold) 64px 72px,
+        #111 72px 88px
+      );
+    }
+
+    .wrap {
+      width: min(100% - 2rem, 74rem);
+      margin: 0 auto;
+      padding: 2rem 0 4.5rem;
+      display: grid;
+      grid-template-columns: 15.5rem 1fr;
+      gap: 2.75rem;
+      align-items: start;
+    }
+
+    @media (max-width: 900px) {
+      .wrap { grid-template-columns: 1fr; gap: 1.5rem; padding-top: 1.25rem; }
+      .sidebar { position: static !important; }
+    }
+
+    .sidebar { position: sticky; top: 1.25rem; }
+
+    .brand {
+      display: flex;
+      align-items: baseline;
+      gap: 0.55rem;
+      margin: 0 0 0.35rem;
+    }
+    .brand-mark {
+      font-family: "Shippori Mincho", "Noto Serif JP", serif;
+      font-size: 1.85rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      color: var(--white);
+      line-height: 1;
+    }
+    .brand-mark em {
+      font-style: normal;
+      color: var(--shu);
+    }
+    .brand-sub {
+      font-size: 0.65rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-weight: 700;
+    }
+
+    .meta {
+      color: var(--ink-mute);
+      font-size: 0.8rem;
+      margin: 0 0 1.25rem;
+    }
+
+    .stat-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-bottom: 1.35rem;
+    }
+    .stat {
+      border: 1px solid var(--line);
+      background: var(--bg-2);
+      padding: 0.32rem 0.65rem;
+      font-size: 0.72rem;
+      color: var(--ink-dim);
+      border-radius: var(--radius);
+    }
+    .stat strong { color: var(--white); font-weight: 700; }
+    .stat.hot {
+      border-color: var(--shu);
+      color: var(--shu-hot);
+      background: rgba(196, 30, 58, 0.1);
+    }
+
+    .toc {
+      border: 1px solid var(--line);
+      background: var(--bg-2);
+      padding: 0.85rem 0.9rem 0.95rem;
+      border-radius: var(--radius);
+    }
+    .toc h2 {
+      margin: 0 0 0.65rem;
+      font-size: 0.72rem;
+      letter-spacing: 0.16em;
+      color: var(--gold);
+      font-weight: 800;
+    }
+    .toc ol { list-style: none; margin: 0; padding: 0; }
+    .toc li { margin: 0; }
+    .toc a {
+      display: flex;
+      justify-content: space-between;
+      gap: 0.5rem;
+      text-decoration: none;
+      color: var(--ink-dim);
+      font-size: 0.82rem;
+      padding: 0.38rem 0.2rem;
+      border-bottom: 1px solid transparent;
+    }
+    .toc a:hover { color: var(--white); border-bottom-color: var(--line-hot); }
+    .toc .t-title { font-weight: 600; }
+    .toc .t-min { color: var(--gold); font-size: 0.72rem; font-weight: 700; flex-shrink: 0; }
+
+    .main { max-width: var(--measure); }
+
+    .digest-banner {
+      display: flex;
+      gap: 0.75rem;
+      align-items: flex-start;
+      background: #141014;
+      border: 1px solid var(--line);
+      border-left: 3px solid var(--shu);
+      padding: 0.85rem 1rem;
+      margin-bottom: 1.5rem;
+      font-size: 0.78rem;
+      color: var(--ink-dim);
+      line-height: 1.55;
+    }
+    .digest-banner .tag {
+      flex-shrink: 0;
+      background: var(--shu);
+      color: #fff;
+      font-size: 0.65rem;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      padding: 0.28rem 0.5rem;
+      border-radius: var(--radius);
+    }
+
+    .hero {
+      margin-bottom: 2rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid var(--line);
+      position: relative;
+    }
+    .hero::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -1px;
+      width: 4.5rem;
+      height: 2px;
+      background: var(--shu);
+    }
+    .kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.7rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--shu-hot);
+      font-weight: 800;
+      margin-bottom: 0.85rem;
+    }
+    .kicker::before {
+      content: "◆";
+      font-size: 0.55rem;
+      color: var(--gold);
+    }
+    .hero h1 {
+      font-family: "Shippori Mincho", "Noto Serif JP", serif;
+      font-size: clamp(1.85rem, 4vw, 2.55rem);
+      font-weight: 700;
+      line-height: 1.2;
+      margin: 0 0 0.75rem;
+      color: var(--white);
+      letter-spacing: 0.02em;
+    }
+    .hero p {
+      margin: 0;
+      color: var(--ink-dim);
+      font-size: 0.98rem;
+      max-width: 36rem;
+    }
+
+    article.piece {
+      background: var(--bg-card);
+      border: 1px solid var(--line);
+      margin-bottom: 1.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+    article.piece::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: linear-gradient(90deg, var(--shu) 0%, var(--shu) 35%, var(--gold) 35%, var(--gold) 42%, transparent 42%);
+    }
+
+    .piece-inner { padding: 1.6rem 1.55rem 1.35rem; }
+
+    .piece-head {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-bottom: 0.85rem;
+    }
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      border: 1px solid var(--line);
+      background: #111;
+      color: var(--ink-dim);
+      padding: 0.22rem 0.6rem;
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      border-radius: var(--radius);
+    }
+    .chip.interest {
+      border-color: var(--shu);
+      color: var(--shu-hot);
+      background: rgba(196, 30, 58, 0.12);
+    }
+    .chip.mins {
+      border-color: var(--gold);
+      color: var(--gold);
+      background: transparent;
+    }
+
+    .piece h2 {
+      font-family: "Noto Serif JP", "Shippori Mincho", "Yu Mincho", serif;
+      font-size: 1.38rem;
+      font-weight: 700;
+      line-height: 1.5;
+      margin: 0 0 0.6rem;
+      color: var(--white);
+      letter-spacing: 0.02em;
+    }
+
+    .why {
+      margin: 0 0 1rem;
+      color: var(--ink-dim);
+      font-size: 0.9rem;
+      border-left: 2px solid var(--gold);
+      padding-left: 0.85rem;
+    }
+
+    .source {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.65rem 1.1rem;
+      font-size: 0.76rem;
+      color: var(--ink-mute);
+      margin-bottom: 1.25rem;
+    }
+    .source a {
+      color: var(--shu-hot);
+      text-decoration: none;
+      font-weight: 600;
+    }
+    .source a:hover { color: var(--gold); }
+
+    .ja {
+      font-family: "Noto Serif JP", "Hiragino Mincho ProN", "Yu Mincho", serif;
+      font-size: 1.08rem;
+      line-height: 2;
+      letter-spacing: 0.03em;
+      color: #ebe7e1;
+    }
+    .ja p { margin: 0 0 1.15em; }
+    .ja p:last-child { margin-bottom: 0; }
+
+    .continue {
+      margin-top: 1.25rem;
+      padding-top: 1rem;
+      border-top: 1px solid var(--line);
+      font-size: 0.86rem;
+    }
+    .continue a {
+      color: var(--white);
+      text-decoration: none;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      border-bottom: 2px solid var(--shu);
+      padding-bottom: 0.1rem;
+    }
+    .continue a:hover {
+      color: var(--shu-hot);
+      border-bottom-color: var(--gold);
+    }
+
+    footer.site {
+      max-width: var(--measure);
+      margin-top: 1.75rem;
+      color: var(--ink-mute);
+      font-size: 0.72rem;
+      letter-spacing: 0.06em;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+    footer.site::before {
+      content: "";
+      width: 1.25rem;
+      height: 2px;
+      background: var(--shu);
+    }
+
+  
+    .excerpt-label { font-size: 0.66rem; letter-spacing: 0.18em; color: var(--gold); font-weight: 800; margin: 0 0 0.6rem; }
+    .brand-sub a, .stat a { color: var(--gold); text-decoration: none; }
+    .toc .t-min { font-variant-numeric: tabular-nums; }
+  </style>
+</head>
+<body>
+  <div class="stage-bar" aria-hidden="true"></div>
+
+  <div class="wrap">
+    <aside class="sidebar">
+      <div class="brand">
+        <span class="brand-mark" lang="ja">読解<em>幕</em></span>
+      </div>
+      <p class="brand-sub">Kabuki Digest · <a href="/japanese-digest/history/">History</a></p>
+      <p class="meta">2026-11-20 · America/Sao_Paulo</p>
+      <div class="stat-row">
+        <span class="stat"><strong>53</strong> min</span>
+        <span class="stat"><strong>17</strong> pieces</span>
+        <span class="stat"><strong>~13,100</strong> 字</span>
+        <span class="stat"><a href="/japanese-digest/history/">History</a></span>
+      </div>
+
+      <nav class="toc" aria-label="Índice">
+        <h2 lang="ja">本日の演目</h2>
+        <ol>
+          <li>
+            <a href="#p1">
+              <span class="t-title" lang="ja">明日は一休宗純の命日――とんち小僧ではない「風狂」の禅僧</span>
+              <span class="t-min">4′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p2">
+              <span class="t-title" lang="ja">信長は官位を「道具」にした――内大臣昇進と突然の辞官</span>
+              <span class="t-min">3′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p3">
+              <span class="t-title" lang="ja">71歳で北条を撃退――息子と家名を守った女武将・妙印尼</span>
+              <span class="t-min">3′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p4">
+              <span class="t-title" lang="ja">島津を圧倒した大名、堺の浜辺に置き去りに――伊東義祐</span>
+              <span class="t-min">4′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p5">
+              <span class="t-title" lang="ja">海坊主は実在したのか？――江戸の目撃談とその正体</span>
+              <span class="t-min">3′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p6">
+              <span class="t-title" lang="ja">ノストラダムスの本業は医師だった</span>
+              <span class="t-min">3′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p7">
+              <span class="t-title" lang="ja">ヒッタイトの粘土板131点――首都の外の帝国の声</span>
+              <span class="t-min">3′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p8">
+              <span class="t-title" lang="ja">神に捧げられた猫たちの過酷な生涯</span>
+              <span class="t-min">3′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p9">
+              <span class="t-title" lang="ja">地球を囲む放射線帯が「4本」に</span>
+              <span class="t-min">3′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p10">
+              <span class="t-title" lang="ja">メガロドン亡きあとの海の覇者――北海の巨大シャチ</span>
+              <span class="t-min">3′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p11">
+              <span class="t-title" lang="ja">肖像画486点が語る「美の基準」300年の変化</span>
+              <span class="t-min">3′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p12">
+              <span class="t-title" lang="ja">AIが自分の重みを書き換えて賢くなった</span>
+              <span class="t-min">4′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p13">
+              <span class="t-title" lang="ja">最近、コードを真面目に読まなくなった</span>
+              <span class="t-min">3′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p14">
+              <span class="t-title" lang="ja">1ターンだけSonnetに任せたら、Opusより高くついた</span>
+              <span class="t-min">4′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p15">
+              <span class="t-title" lang="ja">覚えていますか「北総・公団線」――他社の色を復刻する理由</span>
+              <span class="t-min">3′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p16">
+              <span class="t-title" lang="ja">神戸市が「空室税」へ――全国初、マンション空室に課税</span>
+              <span class="t-min">2′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p17">
+              <span class="t-title" lang="ja">SCANDAL、大阪城ホールの20周年ライブを映像化</span>
+              <span class="t-min">2′</span>
+            </a>
+          </li>
+        </ol>
+      </nav>
+    </aside>
+
+    <main class="main">
+      <div class="digest-banner">
+        <span class="tag">TRIAGE</span>
+        <span>História: amanhã (calendário antigo) é aniversário de morte do Ikkyū real e dos 450 anos de Nobunaga como Naidaijin (BUSHOO); a matriarca Myōinni que aos 71 anos venceu os Hōjō (Japaaan); Itō Yoshisuke largado numa praia de Sakai, o umibōzu e Nostradamus médico (草の実堂). Mundo/ciência: tabuinhas hititas (NatGeo), gatos-oferenda do Egito e cinturões de Van Allen em 4 (ナゾロジー), a orca gigante pós-megalodonte (カラパイア), 300 anos de ideal de beleza em retratos (GIGAZINE). IA/dev: o modelo que reescreve os próprios pesos (GIGAZINE), parar de ler diffs e preparar premissas, e a armadilha de cache ao trocar Opus→Sonnet no Claude Code (Zenn). Trens/Kobe/música: o “Kōdan-sen” do Hokusō (乗りもの), o imposto sobre apartamento vazio em Sannomiya (神戸新聞), SCANDAL (BARKS). Pontos fracos: Kobe Shimbun hoje quase só notícia dura/paga (só a nota curta do 空室税; o 霜月大祭 de Harima tinha 1 frase só); NatGeo JP só a abertura livre (paywall); música só o SCANDAL (nada novo de BABYMETAL/HYDE/DIR EN GREY/L’Arc); nada bom de vistos/sailing/JRPG.</span>
+      </div>
+
+      <header class="hero">
+        <div class="kicker">Daily curated reading</div>
+        <h1 lang="ja">一休宗純の素顔、信長と官位、71歳の女武将・妙印尼、浜辺に捨てられた伊東義祐、海坊主の正体、医師ノストラダムス、ヒッタイトの粘土板131点、神に捧げられた猫たち、4本に割れた放射線帯、北海の巨大シャチ、肖像画300年の美の基準、自分の重みを書き換えるAI、コードを読まなくなった開発者、Sonnetが高くついた話、北総・公団線、神戸の空室税、SCANDAL</h1>
+        <p lang="ja">旧暦で明日、11月21日は二つの「記念日」。文明十三年（1481年）のこの日に一休宗純が世を去り、天正四年（1576年）のこの日に織田信長が内大臣に昇進しました。今日の幕開けは、とんち小僧とは別人の「風狂」の禅僧と、官位を政権づくりの道具にした信長から。続いて、71歳で北条勢を退け息子と家名を守った女武将・妙印尼（赤井輝子）、島津を圧倒しながら堺の浜辺に置き去りにされた伊東義祐、江戸の船乗りを震え上がらせた海坊主、そして本業は医師だったノストラダムス。世界と科学の幕では、ヒッタイト帝国の地方都市から出た粘土板131点、神に捧げられたエジプトの猫たちの過酷な生涯、磁気嵐のあと「4本」に割れた地球の放射線帯、メガロドン亡きあとの海を制した北海の巨大シャチ、肖像画486点が語る300年の美の基準の変化。AIと開発の幕は、自分のウェイトを書き換えて賢くなったAI、「コードを真面目に読まなくなった」開発者の考え、1ターンだけSonnetに任せたら高くついたClaude Codeの話。最後は北総・公団線の復刻カラー、神戸市の「空室税」、そしてSCANDALの20周年ライブ映像で締めます。約53分の読解です。</p>
+      </header>
+
+      <article class="piece" id="p1">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★★</span> <span class="chip mins">4 min</span> <span class="chip" lang="ja">一休宗純</span> <span class="chip" lang="ja">大徳寺</span> <span class="chip" lang="ja">室町時代</span> <span class="chip" lang="ja">狂雲集</span> <span class="chip" lang="ja">禅宗</span>
+          </div>
+          <h2 lang="ja">リアル一休はどんな僧侶だった？とんち話からは想像もつかない破天荒な素顔</h2>
+          <p class="why">Amanhã (21/11 no calendário antigo, 1481) é o aniversário de morte do Ikkyū real: nada do monge-mirim espertinho dos contos (invenção do período Edo). Possível filho do imperador, comia carne, vivia com uma mulher cega (Shinjisha), satirizava a hipocrisia dos templos, tentou morrer de fome em protesto — e aos 81 anos virou abade do Daitoku-ji e o reconstruiu após a Guerra de Ōnin.</p>
+          <div class="source">
+            <span lang="ja">BUSHOO!JAPAN（武将ジャパン）</span>
+            <a href="https://bushoojapan.com/jphistory/middle/2026/11/20/223237" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>文明十三年11月21日（1481年12月12日）は一休宗純の命日です。</p>
+            <p>そう聞けば、屏風の虎を捕まえてみせろと言われて見事に切り返す、とんち上手な小坊主を思い浮かべますよね。</p>
+            <p>しかし室町時代を生きたリアル一休は、一言でいえば型破りな破戒僧。</p>
+            <p>……</p>
+            <p>そんな型破りな僧が、晩年には大徳寺を支える立場に立っていたのです。</p>
+            <p>……</p>
+            <p>一休宗純は応永元年（1394年）、京都で生まれました。</p>
+            <p>父は後小松天皇とも伝わりますが、確かなことは分かっていません。</p>
+            <p>……</p>
+            <p>一休さんのとんち話が数多く作られたのは、江戸時代に入ってからのことです。</p>
+            <p>橋の「はし」を渡らず真ん中を歩いた――そんな話もすべて創作ですから、室町時代の一休宗純とは別物だとご理解ください。</p>
+            <p>……</p>
+            <p>当時の禅宗で栄えていたのは、幕府の後ろ盾を得た「五山」と呼ばれる大寺院の一派です。</p>
+            <p>しかし一休は、やがて五山に見切りをつけ、大徳寺の流れを汲む禅僧となります。</p>
+            <p>16歳のとき、家柄を重んじる僧たちの噂話を建仁寺の法会で聞き、耳をふさぎながら席を立ったという逸話も残ります。</p>
+            <p>……</p>
+            <p>激しく対立したのが、兄弟子の養叟宗頤（ようそうそうい）です。</p>
+            <p>一休は著書『自戒集』で養叟を悪口と嘲笑でつづり、その一派の禅風を偽善だとして厳しく風刺しました。</p>
+            <p>……</p>
+            <p>さらに文安四年（1447年）には、大徳寺の僧が投獄される事件に心を痛め、山にこもって餓死しようとまでしたそうです。</p>
+            <p>……</p>
+            <p>正長元年（1428年）に師の華叟が亡くなると、一休宗純は京都へ戻り、「風狂」と呼ばれる生き方を続けます。</p>
+            <p>……</p>
+            <p>晩年には森侍者（しんじしゃ）という盲目の女性をそばに置き、実の子もいる程です。</p>
+            <p>森侍者を詠んだ詩は、一休の詩文集『狂雲集』に数多く収められています。</p>
+            <p>……</p>
+            <p>そんな一休が晩年に引き受けたのは、意外な役目でした。</p>
+            <p>長禄二年（1458年）、一休宗純は龍翔寺が荒れているのを嘆き、修理費として21貫500文を寄進しています。</p>
+            <p>……</p>
+            <p>そして文明六年（1474年）、数え81歳の一休は、後土御門天皇から大徳寺の住持に任じられました。</p>
+            <p>堺の豪商・尾和四郎左衛門の援助を受けて法堂を建てるなど、戦乱で荒れた大徳寺の復興に大きく力を尽くします。</p>
+            <p>……</p>
+            <p>そして文明十三年11月21日（1481年12月12日）、一休は数え88歳で逝去。</p>
+            <p>寺の偽善を厳しく批判し、型破りな暮らしも隠さなかった僧が、最後には寺を建て直す側に回っていました。</p>
+            <p>とんち小僧の一休さんとは、ずいぶん違う素顔だったと言えるでしょう。</p>
+          </div>
+          <p class="continue"><a href="https://bushoojapan.com/jphistory/middle/2026/11/20/223237" target="_blank" rel="noopener" lang="ja">続きを読む · BUSHOO!JAPAN（武将ジャパン）</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p2">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★☆</span> <span class="chip mins">3 min</span> <span class="chip" lang="ja">織田信長</span> <span class="chip" lang="ja">正親町天皇</span> <span class="chip" lang="ja">官位</span> <span class="chip" lang="ja">内大臣</span> <span class="chip" lang="ja">右大臣</span>
+          </div>
+          <h2 lang="ja">織田信長は朝廷の官位をバカにしていた？内大臣への昇進と突然の辞任</h2>
+          <p class="why">Amanhã também faz 450 anos (calendário antigo) que Nobunaga virou Naidaijin. O “destruidor da velha ordem” recusou títulos, depois aceitou com cerimônia faustosa, subiu até Udaijin — e largou tudo de repente, tentando passar o cargo ao filho. O imperador simplesmente não respondeu. Um jogo de xadrez político entre corte e senhor da guerra.</p>
+          <div class="source">
+            <span lang="ja">BUSHOO!JAPAN（武将ジャパン）</span>
+            <a href="https://bushoojapan.com/bushoo/oda/2026/11/20/223248" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>天正四年11月21日（1576年12月11日）、織田信長は内大臣に昇進しました。</p>
+            <p>古い権威を壊す人――そんなイメージのある信長ですが、実は朝廷から官職を受け、わずか数年で右大臣にまで上り詰めていました。</p>
+            <p>あれほどの武力を持つ信長に、なぜ官位が必要だったのか？</p>
+            <p>しかも信長は、昇進を重ねた後で、あっさり官職を辞めてしまいます。</p>
+            <p>……</p>
+            <p>元亀四年（1573年）7月、織田信長は十五代将軍・足利義昭を京都から追い出しました。</p>
+            <p>だからといって信長がすぐに将軍になったわけではありません。</p>
+            <p>……</p>
+            <p>当時の任官は、天皇の側に仕える女官を通じて申請し、文書で伝える簡略な形式が通例となっていました。</p>
+            <p>……</p>
+            <p>叙任の前後には、大量の砂金や反物を天皇へ進上しており、公家や門跡に対しては一斉に領地も与えています。</p>
+            <p>……</p>
+            <p>実際、翌天正四年11月21日（1576年12月11日）、信長は正三位・内大臣へと昇進。</p>
+            <p>このときも公家たちに知行を加増し、天皇には太刀や馬代を進上しました。</p>
+            <p>……</p>
+            <p>官位を与えて取り込みたい天皇と、高い官位で将軍や各地の勢力へ優位を示したい信長。</p>
+            <p>ようやく双方の思惑が重なったため、その後の昇進が急速に進んだのでしょう。</p>
+            <p>天正五年11月20日（1577年12月29日）、信長は右大臣に就任。</p>
+            <p>……</p>
+            <p>ここまでを見れば、信長は官位の頂点を目指して突き進んでいるように思えます。</p>
+            <p>天正六年4月9日（1578年5月15日）、織田信長は突然、右大臣と右近衛大将の官を辞しました。</p>
+            <p>……</p>
+            <p>同時に、自分の官を嫡男・織田信忠に譲るよう申し出ました。</p>
+            <p>……</p>
+            <p>正親町天皇は、信長の辞官を許す一方、信忠への譲与に関しては返事をせず、事実上無視します。</p>
+            <p>天皇は、信長が息子を通じて朝廷の上に立つ構想を、返事をしないことで封じたのです。</p>
+            <p>……</p>
+            <p>信長は、古い価値観を捨て、次から次へ改革をしていくイメージが未だに根強いです。</p>
+            <p>しかし、朝廷の官位という古い秩序については、捨てるというチョイスではなく、自らの政権にどう役立てようか？冷静に判断していたように思えます。</p>
+            <p>いわば政権づくりの道具として官位を使っていたんですね。</p>
+          </div>
+          <p class="continue"><a href="https://bushoojapan.com/bushoo/oda/2026/11/20/223248" target="_blank" rel="noopener" lang="ja">続きを読む · BUSHOO!JAPAN（武将ジャパン）</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p3">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★☆</span> <span class="chip mins">3 min</span> <span class="chip" lang="ja">赤井輝子</span> <span class="chip" lang="ja">妙印尼</span> <span class="chip" lang="ja">由良氏</span> <span class="chip" lang="ja">北条氏</span> <span class="chip" lang="ja">小田原征伐</span>
+          </div>
+          <h2 lang="ja">凄まじき母の力！戦国時代、実子と敵対関係でありながら実子と家名を守った最強の女武将「赤井輝子」</h2>
+          <p class="why">Com os dois filhos presos pelos Hōjō, a mãe de 71 anos assumiu o clã Yura e repeliu o inimigo com 300 homens em guerrilha. Em 1590, com os filhos forçados a lutar pelos Hōjō, ela foi para o lado de Hideyoshi com o neto — e salvou a vida deles e o nome da casa. Avó da Kai-hime de “Nobō no Shiro”.</p>
+          <div class="source">
+            <span lang="ja">Japaaan（ジャパーン）</span>
+            <a href="https://mag.japaaan.com/archives/294729" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>戦国時代には実の息子たちと対峙しようとも、家名を守るために力を尽くした肝っ玉母さんがいました。その人物の名前は妙印尼 (みょういんに)こと赤井輝子 (あかい-てるこ)です。</p>
+            <p>輝子は息子たちと戦いに臨んだ歳が70を越えていたにも関わらず武勇誉れ高ったので、巷では戦国最強の女武将とも言われています。</p>
+            <p>……</p>
+            <p>そして、同年に起きた本能寺の変で織田信長が亡くなると、一益は北条家との合戦(神流川の戦い)の後、関東から逃亡してしまったので国繁は北条家に仕えました。</p>
+            <p>……</p>
+            <p>そんな成繁の子である国繁たちも再度裏切るのではないかと危機感を抱いたから、幽閉にまで至ったと考えられます。</p>
+            <p>……</p>
+            <p>北条家は2人を返す条件として金山城と館林城の明け渡しを言い渡します。しかし、輝子はこれに対抗するかのように当主不在の由良家をまとめ上げ、北条と戦う意志を示しました。</p>
+            <p>71 歳の老体でありながら、輝子は300人の兵を巧みに扱ったゲリラ戦法で北条勢を撃退させることに成功しました。</p>
+            <p>その後は北条家と和睦を結び、金山城と館林城を失いますが、2人の子が由良家に戻すことに成功しています。</p>
+            <p>そして、天正(1590)の小田原征伐になると再び輝子の出番が来ることになります。</p>
+            <p>小田原征伐時、国繁は北条家に脅迫されたので、やむなく北条方として豊臣秀吉と対峙しました。しかし、輝子は孫の貞繁を大将に200人の兵を率い、豊臣方の前田利家と共に戦いました。</p>
+            <p>そこで戦果を挙げた輝子は利家の尽力もあって、国繁と顕長の助命に成功した上に新たな領地、常陸国牛久を与えられ家名の存続を達成します。</p>
+            <p>そして、由良家の家名を守るために戦った輝子は一仕事終えて満足したのか文禄3年(1593)に81歳で亡くなりました。</p>
+            <p>ちなみに輝子の孫には映画や小説の「のぼうの城」で有名になった女性、甲斐姫がいます。まさに血は争えないと思わざるをえないですね</p>
+          </div>
+          <p class="continue"><a href="https://mag.japaaan.com/archives/294729" target="_blank" rel="noopener" lang="ja">続きを読む · Japaaan（ジャパーン）</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p4">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★★</span> <span class="chip mins">4 min</span> <span class="chip" lang="ja">伊東義祐</span> <span class="chip" lang="ja">日向伊東氏</span> <span class="chip" lang="ja">木崎原の戦い</span> <span class="chip" lang="ja">島津義弘</span> <span class="chip" lang="ja">伊東マンショ</span>
+          </div>
+          <h2 lang="ja">戦国大名の悲惨すぎる最期… 島津氏を圧倒した伊東義祐は、なぜ浜辺に捨てられたのか？</h2>
+          <p class="why">Senhor de 48 castelos em Hyūga, com Grande Buda e um “Pavilhão Dourado” particular, Itō Yoshisuke perdeu tudo para os Shimazu, fugiu pela montanha no inverno (no grupo, o futuro embaixador Itō Mancio) e, velho e doente, foi largado numa praia de Sakai por um barqueiro que não sabia quem ele era. Ascensão e queda shakespeariana.</p>
+          <div class="source">
+            <span lang="ja">草の実堂</span>
+            <a href="https://kusanomido.com/study/history/japan/sengoku/136904/" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>壮絶な最期を遂げた戦国武将は多くいたが、伊東義祐（いとうよしすけ）ほど、侘しくむなしい最期を迎えた武将はいないのではないだろうか。</p>
+            <p>名門であった日向伊東氏に生まれ、長年敵対していた島津氏を圧倒して伊東氏の最盛期を築いた義祐は、命運尽きて浜辺に捨て置かれた末に病死したと伝えられている。</p>
+            <p>……</p>
+            <p>彼はなぜ、そのような憂き目を見る羽目になってしまったのか。</p>
+            <p>……</p>
+            <p>だが武士としてこの上ないほどの名誉を手にした義祐は、本来の身の丈に合わない贅沢をするようになった。</p>
+            <p>当主となる前に仏門に入っていた義祐は、特に仏事に傾倒して湯水のように金を投じた。</p>
+            <p>……</p>
+            <p>1568年に島津氏から飫肥城を奪取した翌年、当主として家臣や民衆からの信頼が厚かった息子の義益が、病により急死してしまった。</p>
+            <p>そして「九州の桶狭間」と呼ばれる「木崎原の戦い」に、従兄弟の伊東祐安（いとうすけやす）を総大将として出陣させる。</p>
+            <p>だが敵方の約10倍の兵力を有していたにもかかわらず、伊東軍は島津義弘の「釣り野伏せ」にしてやられて崩壊し、撤退を余儀なくされた。</p>
+            <p>日向国の完全支配を目前にしていた伊東氏だったが、この手痛い敗北を境に、義祐の勢力は衰退に向かう。</p>
+            <p>……</p>
+            <p>義祐自身が自分の意に反する意見を呈する家臣を遠ざけていたため、実情がなかなか義祐本人にまで伝わらなかったとも言われる。</p>
+            <p>……</p>
+            <p>一行の中には義祐の娘孫であり、後に天正遣欧少年使節の1人となる伊東マンショの姿もあった。</p>
+            <p>……</p>
+            <p>しかし70歳を超える老齢に加え、長旅で疲れた義祐を看病する者はおらず、船の中で病状はますます悪化していった。</p>
+            <p>……</p>
+            <p>だが手厚い看病も功を奏さず、救出されてから7日後の1585年8月5日に息を引き取った。享年73。</p>
+            <p>……</p>
+            <p>しかし義祐は思い留まって豊後まで逃げ延び、その後は息子の祐兵とともに伊予や播磨へと渡った。祐兵はやがて秀吉の九州征伐の先導役として活躍し、秀吉から飫肥城を賜って日向への復帰を果たしている。</p>
+            <p>その後、祐兵に連なる日向伊東氏は、飫肥藩大名として江戸時代を通じて存続し、明治期には藩知事を務め、廃藩置県後は子爵家に列せられた。</p>
+            <p>名門氏族の滅亡や断絶が往々にしてあった時代に、義祐が諦めずに行動し続けたからこそ、鎌倉時代から続いた家名を次代に繋ぐことができたとも言えるだろう。</p>
+          </div>
+          <p class="continue"><a href="https://kusanomido.com/study/history/japan/sengoku/136904/" target="_blank" rel="noopener" lang="ja">続きを読む · 草の実堂</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p5">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★☆</span> <span class="chip mins">3 min</span> <span class="chip" lang="ja">海坊主</span> <span class="chip" lang="ja">妖怪</span> <span class="chip" lang="ja">江戸時代</span> <span class="chip" lang="ja">クラーケン</span> <span class="chip" lang="ja">民俗学</span>
+          </div>
+          <h2 lang="ja">海坊主は実在したのか？古い文献に残された奇妙な目撃談と、その正体</h2>
+          <p class="why">O umibōzu, a cabeça-de-monge gigante que afunda barcos: relatos de Edo dão de 30 metros a 2 metros, um lutador de sumô que capturou um “escorregadio”, e uma carcaça de 2,4 m que encalhou em Wakayama em 1888. Baleias? Focas? Redemoinhos? E primos estrangeiros como o “monge do mar” de Java e o Kraken.</p>
+          <div class="source">
+            <span lang="ja">草の実堂</span>
+            <a href="https://kusanomido.com/study/fushigi/story/136075/" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>江戸時代の日本では海運が発達し、各地の港を行き交う商船や漁船が、人々の暮らしを支えていた。</p>
+            <p>ところが船乗りたちの間では、海上に突如として現れる恐ろしい怪物の噂が語り継がれていた。</p>
+            <p>その名は「海坊主（うみぼうず）」。巨大な黒い坊主頭の姿で船の前に立ちはだかり、時には船を沈めるとも恐れられた怪異である。</p>
+            <p>……</p>
+            <p>俳人・菊岡沾涼（1680～1747年）の『本朝俗諺志』には、阿波（徳島県）と土佐（高知県）の境目の沖合に、海坊主が現れたとの記述がある。</p>
+            <p>……</p>
+            <p>この妖怪に出会ったとき、一言でも言葉を発しようものなら、たちまち船を沈められるという。</p>
+            <p>ゆえに船乗りたちは、海入道が現れても見て見ぬフリをし、無言でやり過ごすのだそうだ。</p>
+            <p>……</p>
+            <p>因幡国・伯耆国（ともに現在の鳥取県）の怪談を集めた『因幡怪談集』によると、昔、とある村に相撲が得意な男がいたそうだ。</p>
+            <p>……</p>
+            <p>怪物を村に持ち帰ったところ、一人の古老がこう語ったという。</p>
+            <p>……</p>
+            <p>海坊主の正体については、さまざまな考察がある。その一つが、大型の水棲哺乳類を妖怪と見做したという説だ。</p>
+            <p>……</p>
+            <p>これらの動物は水面から頭を出して周囲の様子をうかがうことがあり、その姿を遠目に見た人々が、黒い坊主頭の怪物と誤認した可能性はあるだろう。</p>
+            <p>……</p>
+            <p>もう一つ有力な説に、海上で発生する自然現象を、海坊主という妖怪に見立てたというものがある。</p>
+            <p>……</p>
+            <p>これは一見、人間のような姿をしているが、口が耳まで裂けた異形である。</p>
+            <p>海和尚は人間の目の前に現れると、その裂けた口で大笑いをし、これを見た船乗りは激しい風や大波に見舞われ、船が転覆する恐れがあるとして恐れられていた。</p>
+            <p>……</p>
+            <p>このように、海で遭遇した未知の生き物や不可解な自然現象への恐怖が、各地でさまざまな海坊主の姿を生み出していったのだろう。</p>
+          </div>
+          <p class="continue"><a href="https://kusanomido.com/study/fushigi/story/136075/" target="_blank" rel="noopener" lang="ja">続きを読む · 草の実堂</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p6">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★☆</span> <span class="chip mins">3 min</span> <span class="chip" lang="ja">ノストラダムス</span> <span class="chip" lang="ja">ルネサンス</span> <span class="chip" lang="ja">ペスト</span> <span class="chip" lang="ja">カトリーヌ・ド・メディシス</span> <span class="chip" lang="ja">五島勉</span>
+          </div>
+          <h2 lang="ja">『1999年の恐怖の大王』を予言したノストラダムス、実はフランス国王に仕えた医師だった</h2>
+          <p class="why">O homem do “Grande Rei do Terror de julho de 1999” (que apavorou o Japão dos anos 90) era médico da peste, autor de livro de geleias e cosméticos e médico honorário de Carlos IX. Expulso da faculdade, perdeu mulher e filhos para a peste — e virou mestre do “self-branding” com quadras ambíguas. E por que o Japão caiu nessa em 1973.</p>
+          <div class="source">
+            <span lang="ja">草の実堂</span>
+            <a href="https://kusanomido.com/sekai/136644/" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>「1999年七の月、空から恐怖の大王が降りてくるだろう」</p>
+            <p>この恐ろしいフレーズで、1990年代の日本を震撼させた占星術師・ノストラダムス。</p>
+            <p>世界滅亡を匂わせる不穏な予言が世間から注目されたが、実際の彼はとても多才な人物だった。</p>
+            <p>……</p>
+            <p>ノストラダムスという名は、本名の姓であるノートルダムをラテン語風に読んだものだ。</p>
+            <p>……</p>
+            <p>これは当時、南フランス一帯でペストが蔓延していた影響を受けて、1520年にアヴィニョン大学が休講になってしまったことが理由と考えられる。</p>
+            <p>……</p>
+            <p>だが多くの医師が嫌がったペスト流行地に果敢に乗り込み、患者に寄り添い治療に尽力した勇敢な医師であったことは確かだ。</p>
+            <p>……</p>
+            <p>ノストラダムスが予言者として世間から注目されるようになったのは、1550年代に入ってからのことだ。</p>
+            <p>……</p>
+            <p>占い好きだったカトリーヌ・ド・メディシスは、個人的な会談の中で告げられた予言に心酔し、ノストラダムスを重用するようになった。</p>
+            <p>……</p>
+            <p>だがそれから約2年後、長年患っていた痛風や、晩年に悪化した浮腫などの症状に苦しむ中、1566年7月2日に62歳でこの世を去った。</p>
+            <p>……</p>
+            <p>特に暦書に記された何らかの警告と思わせる抽象的な一文は、不穏な国内情勢に不安を抱える人々の心に深く突き刺さった。</p>
+            <p>……</p>
+            <p>ノストラダムスが予言者として注目を浴びた16世紀後半のフランスでは、度々ペストなどの死に至る疫病が流行していた上に、宗教対立が激化しつつある最中、国王が不慮の事故で急逝してから幼い王子たちが相次いで王位に就くという、民衆が不安を抱えやすい状態だった。</p>
+            <p>日本でノストラダムスの予言が大きなブームになったのは、1973年に五島勉の『ノストラダムスの大予言』が刊行されたことがきっかけだった。</p>
+            <p>当時は公害問題やオイルショックなどで社会不安が高まっていた時期であり、その後も予言への関心は続き、バブル崩壊後の不景気に見舞われた1990年代には、1999年の世界滅亡を恐れる声が再び広がっていった。</p>
+          </div>
+          <p class="continue"><a href="https://kusanomido.com/sekai/136644/" target="_blank" rel="noopener" lang="ja">続きを読む · 草の実堂</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p7">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★★</span> <span class="chip mins">3 min</span> <span class="chip" lang="ja">ヒッタイト</span> <span class="chip" lang="ja">楔形文字</span> <span class="chip" lang="ja">カヤルプナル遺跡</span> <span class="chip" lang="ja">青銅器時代</span> <span class="chip" lang="ja">トルコ</span>
+          </div>
+          <h2 lang="ja">ヒッタイトの楔形文字の粘土板を131点発掘、未知の病の記録ほか</h2>
+          <p class="why">131 tabuinhas cuneiformes de ~1400 a.C. num sítio do interior da Turquia: quase todos os 30 mil textos hititas conhecidos vêm da capital e da elite; estes mostram a vida nas províncias — sacerdotes adivinhos e uma princesinha morta por uma doença desconhecida. (Reportagem completa é paga; a abertura é livre.)</p>
+          <div class="source">
+            <span lang="ja">ナショナル ジオグラフィック日本版</span>
+            <a href="https://natgeo.nikkeibp.co.jp/atcl/news/26/111700627/" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>トルコ中央部のカヤルプナル遺跡で発掘作業を行っている考古学者らが、楔形文字の粘土板131点を見つけたと発表した。ヒッタイト語とフルリ語で記されたこれらの粘土板は、紀元前1400年頃のヒッタイト王トゥドハリヤ2世の治世にさかのぼるものだ。</p>
+            <p>今回発見された粘土板によって、ヒッタイト文明についての知見は、発掘が進んでいるかつての首都の範囲を越えて広がった。研究者らは、未来を占った神官から、それまで知られていなかった疫病にかかった幼い王女まで、広大な帝国各地で暮らし、戦い、神々を崇拝し、そして死んでいった人々の暮らしぶりを、詳しく知ることができるようになった。</p>
+            <p>……</p>
+            <p>ヒッタイト帝国は、後期青銅器時代に現代のトルコとシリアにあたる地域で興り、エジプト新王国に匹敵するほどの勢力に成長したあと、忽然と姿を消したように見える。ヒッタイト人はインド・ヨーロッパ語族に属する言語を使っており、書記たちはその言語を、音節や母音を表す記号を用いる楔形文字という書字体系に合わせて表記していた。</p>
+            <p>しかし、現存するヒッタイトの粘土板の大半は、帝国の住民全体の姿を代表するものではない。約3万点にのぼる粘土板や破片は、ヒッタイト帝国の首都ハットゥシャ（現代のボアズカレ）から出土したものであり、主に王城にいたエリート層や王族の視点を伝えている。</p>
+            <p>つまり、帝国内にあるその他何百もの街で暮らしていた人々の日常生活や儀礼については、あまり知られていない。だが、そうした状況は、カヤルプナル遺跡での今回の発掘によって変わりつつある。</p>
+          </div>
+          <p class="continue"><a href="https://natgeo.nikkeibp.co.jp/atcl/news/26/111700627/" target="_blank" rel="noopener" lang="ja">続きを読む · ナショナル ジオグラフィック日本版</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p8">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★★</span> <span class="chip mins">3 min</span> <span class="chip" lang="ja">古代エジプト</span> <span class="chip" lang="ja">ネコのミイラ</span> <span class="chip" lang="ja">ベニ・ハサン</span> <span class="chip" lang="ja">動物考古学</span> <span class="chip" lang="ja">ウィーン自然史博物館</span>
+          </div>
+          <h2 lang="ja">神に捧げられたエジプトの猫の過酷な生涯、131点の6割に病と傷</h2>
+          <p class="why">Gatos mumificados como oferenda aos deuses: dos 131 crânios esquecidos num museu de Viena, 62% têm doença ou ferimento — tártaro, fraturas, até corte de lâmina cicatrizado. Eram criados amontoados como gado. E de brinde: navios com 200 mil múmias de animais moídas como adubo na Liverpool de 1890.</p>
+          <div class="source">
+            <span lang="ja">ナゾロジー</span>
+            <a href="https://nazology.kusuguru.co.jp/archives/209163" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>ベルギー王立自然科学研究所などの研究チームが、ウィーン自然史博物館に眠っていた古代エジプトのミイラ用のネコの頭骨131点を1点ずつ調べたところ、81点（62％）に、歯石や歯周病、あるはずの歯が無いこと、治った骨折といった異常が見つかりました。</p>
+            <p>頭骨はベニ・ハサンの墓地から出た一群で、この墓地のミイラは大量に掘り出され、ヨーロッパで肥料用に砕かれましたが、この131点は博物館の収蔵庫にまとまって残りました。研究チームは歯の生え替わりから死んだときの年齢を推定し、歯と骨に残る病気と傷の跡を1点ずつ記録しました。</p>
+            <p>……</p>
+            <p>神にささげるために育てられ、布に巻かれて葬られたネコの骨に、いったいなぜ、これほど多くの病と傷が刻まれていたのでしょうか？</p>
+            <p>……</p>
+            <p>ところが、この場所からは大量のネコのミイラが運び出され、肥料にするためヨーロッパへ輸出されました。</p>
+            <p>1890年には、推定20万体の動物のミイラを積んだ船がリバプールに着き、競売にかけられて肥料用に砕かれています。</p>
+            <p>……</p>
+            <p>結果、ミイラ用のネコの頭骨131点のうち81点、全体の62％に、1つ以上の異常が見つかりました。</p>
+            <p>いちばん多かったのは歯と歯ぐきの問題です。歯石が22点、歯ぐきから顎の骨が溶ける歯周病が26点、あるはずの歯が無かったものが24点あり、どれも全体の2割前後を占めていました。</p>
+            <p>……</p>
+            <p>「私たちがいちばん驚いたのは、けがと病気の証拠の割合が高かったことです。これらのネコが悪い環境で生きていたことをうかがわせます」と、共著者であるベルギー王立自然科学研究所の動物考古学者ベア・デ・キュペール氏は話します。「奉納のミイラになる運命の動物に、期待することではありません」</p>
+            <p>その環境について、ファン・ネール氏はこう説明します。「動物が高い密度で置かれれば、ストレスと互いへの攻撃が必ず起こり、けがにつながります。その一方で、病気も簡単に広がります」</p>
+            <p>つまり神へのささげ物は、清らかに育てられた特別な動物ではなく、密に集められ、口の中を傷め、病気が広がりやすい場に置かれた群れだったらしいのです。</p>
+          </div>
+          <p class="continue"><a href="https://nazology.kusuguru.co.jp/archives/209163" target="_blank" rel="noopener" lang="ja">続きを読む · ナゾロジー</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p9">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★☆</span> <span class="chip mins">3 min</span> <span class="chip" lang="ja">ヴァン・アレン帯</span> <span class="chip" lang="ja">磁気嵐</span> <span class="chip" lang="ja">母の日の嵐</span> <span class="chip" lang="ja">PROBA-V</span> <span class="chip" lang="ja">宇宙天気</span>
+          </div>
+          <h2 lang="ja">地球を囲む放射線の帯が観測史上初の「4本」に分かれていた</h2>
+          <p class="why">Depois da tempestade magnética do “Dia das Mães” (maio de 2024), os cinturões de radiação de Van Allen se dividiram em 4 pela primeira vez. Contraintuitivo: não surgiu partícula nova — ondas de rádio de baixíssima frequência “escavaram” elétrons, abrindo vales novos. Explicado com a analogia de diques de areia.</p>
+          <div class="source">
+            <span lang="ja">ナゾロジー</span>
+            <a href="https://nazology.kusuguru.co.jp/archives/210140" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>ベルギー王立宇宙航空研究所（BIRA-IASB）やルーヴァン・カトリック大学（UCLouvain）などの研究チームにより、 2024年5月の巨大な磁気嵐のあと、地球を囲む電子の放射線帯が、ふだんの2本から4本に分かれていたことが報告されました。</p>
+            <p>4本の帯が観測されたのは、これが初めてです。さらに、2012年に初めて見つかった3本の帯も、2024年以降の大きな磁気嵐のあとに何度も現れていました。</p>
+            <p>ふつうに考えれば、帯が増えるのは粒子が増えたときのように思えます。しかし今回、帯の数を増やしたのは、意外な出来事でした。</p>
+            <p>いったい地球のまわりで、何が起きていたのでしょうか？</p>
+            <p>……</p>
+            <p>私たちの頭のはるか上の宇宙には、目に見えない「放射線の帯」が地球をぐるりと取り巻いています。</p>
+            <p>……</p>
+            <p>この帯は、ふつうは内側と外側の2本に分かれています。</p>
+            <p>……</p>
+            <p>ここで、放射線の帯を「砂の土手」にたとえてみましょう。</p>
+            <p>……</p>
+            <p>そして嵐のあと、電子の帯が、これまで一度も観測されたことのない「4本」に分かれていたことが分かったのです。</p>
+            <p>……</p>
+            <p>こうして描いた2024年6月の姿では、電子の帯が4本、その間の隙間が3本、はっきり並んでいました。</p>
+            <p>……</p>
+            <p>嵐の前の5月7日、帯はいつもの2本でした。しばらく大きな嵐がなかったため、内側の帯はとても薄くなっていました。</p>
+            <p>……</p>
+            <p>数日たつと、いつもの隙間が少しずつ戻ってきて、帯は3本になりました。内側の帯、新しく電子がたまった帯、外側の帯の3本です。</p>
+            <p>……</p>
+            <p>つまり帯が増えたのは、粒子の山が新しくできたからというより、帯の決まった場所から電子が抜け落ち、新しい隙間ができたためでした。</p>
+            <p>砂の土手で言えば、見えないスコップが土手の決まった所だけ砂をかき出し、1本の土手を2本に割ってしまったようなものです。</p>
+            <p>このスコップにあたるのが、宇宙を飛び交う「電波」です。研究チームによると、新しい隙間ができるのは主に、とても周波数の低い電波（VLF波）に勢いのある電子が揺さぶられ、向きを変えて地球の大気へ落ちていくためだと考えられます。</p>
+          </div>
+          <p class="continue"><a href="https://nazology.kusuguru.co.jp/archives/210140" target="_blank" rel="noopener" lang="ja">続きを読む · ナゾロジー</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p10">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★☆</span> <span class="chip mins">3 min</span> <span class="chip" lang="ja">シャチ</span> <span class="chip" lang="ja">メガロドン</span> <span class="chip" lang="ja">化石</span> <span class="chip" lang="ja">北海</span> <span class="chip" lang="ja">更新世</span>
+          </div>
+          <h2 lang="ja">200万年以上前の北海で大型化したシャチの化石を発見。メガロドン絶滅後の海の覇者</h2>
+          <p class="why">Uma rede de arrasto no Mar do Norte pescou fósseis de uma orca de 7,5 m de 2+ milhões de anos — o dobro das orcas antigas conhecidas. Quando o megalodonte sumiu, as orcas cresceram e assumiram o trono de superpredador, bem antes do que a genética sugeria.</p>
+          <div class="source">
+            <span lang="ja">カラパイア</span>
+            <a href="https://karapaia.com/archives/638862.html" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>かつての海で生態系の頂点にメガロドンが君臨していた時代、シャチの仲間は体長3.5mほどと小さかった。</p>
+            <p>ところが、オランダとイギリスの間にある北海で引き揚げられた化石は、200万年以上前の、大型化したシャチであることがわかった。</p>
+            <p>メガロドンなどの巨大ザメが消えた海で、大型化したシャチの仲間が新たな覇者となっていた可能性が高いという。</p>
+            <p>……</p>
+            <p>オランダの国際港湾都、ロッテルダムの西約100kmの海域でトロール船の網に化石がかかった。</p>
+            <p>……</p>
+            <p>残された骨から体長を推定すると7.2〜7.7mに達し、現在生きているシャチに匹敵するサイズであることがわかった。</p>
+            <p>……</p>
+            <p>鮮新世の海で大きな獲物を狩る役割は、メガロドンなどの巨大ザメが担っていたと考えられているが、約260万年前に絶滅したとされている。</p>
+            <p>巨大ザメがいなくなった海で、シャチの仲間はその生態を変化させていった。</p>
+            <p>今回見つかった化石の下あごには大きく深い歯の穴が並び、首の骨は頭を大きく動かせる形をしていた。</p>
+            <p>もともとは魚を食べていたシャチの仲間だが、大きな獲物を狩るハンターとして進化していったと考えられる。</p>
+            <p>……</p>
+            <p>遺伝子解析で、シャチの仲間は更新世中期の77万〜12万年前に別々のグループに枝分かれし、大きな獲物を狩るようになったと考えられていた。</p>
+            <p>しかし今回の化石によって、シャチの仲間が大きな獲物を狩り始めた時期は、200万年以上前までさかのぼる可能性が高くなった。</p>
+            <p>今回の発見は、200万年以上もまえに、シャチの仲間が大型化し、巨大ザメに代わって海の頂点捕食者の座についていたという説を裏付けることとなった。</p>
+          </div>
+          <p class="continue"><a href="https://karapaia.com/archives/638862.html" target="_blank" rel="noopener" lang="ja">続きを読む · カラパイア</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p11">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★☆</span> <span class="chip mins">3 min</span> <span class="chip" lang="ja">美術史</span> <span class="chip" lang="ja">肖像画</span> <span class="chip" lang="ja">美の基準</span> <span class="chip" lang="ja">文化進化</span> <span class="chip" lang="ja">ウエスト・ヒップ比</span>
+          </div>
+          <h2 lang="ja">300年分の肖像画486点から判明した女性の「美しさ」の基準の変化とは？</h2>
+          <p class="why">486 retratos ingleses e franceses de 1650 a 1950: a cintura marcada foi sumindo e as retratadas foram ficando mais velhas — muito antes de Hollywood e revistas. Hipótese: menos mortalidade infantil e filhos mais tarde mudaram o que se achava belo.</p>
+          <div class="source">
+            <span lang="ja">GIGAZINE</span>
+            <a href="https://gigazine.net/news/20261120-female-beauty-change/" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>イギリスのノーサンブリア大学などの研究チームが1650年から1950年までの約300年間に描かれた486点の肖像画を分析した結果、女性の美しさに関する価値観が現代のマスメディアが登場するよりもはるか以前から変化していたと指摘しています。</p>
+            <p>女性の理想的な体形は時代によって変化しており、20世紀以降は「細身で縦に長く、曲線が強調されない体形」がファッションや広告などで広く見られるようになりました。こうした変化は映画や雑誌などのマスメディアの影響によるものと考えられてきましたが、歴史的な資料から見るとそれ以前にも美の基準が変化していた可能性があると指摘されていました。</p>
+            <p>……</p>
+            <p>つまり、300年間で女性の美しさの基準は若さや腰のくびれを強調した曲線的な体形から、年齢を重ねた外見や腰のくびれが目立たない中性的な体形を受け入れる方向へと変化してきたと考えられます。こうした変化は20世紀に突然起きたものではなく、今のようなマスメディアが登場する以前の18世紀から徐々に進んでいたことが今回の研究で示されました。</p>
+            <p>研究チームは、こうした変化の背景として、ヨーロッパにおける生活水準の向上や乳幼児死亡率の低下、教育の普及などを挙げています。出産の時期が遅くなり、少ない子どもに多くの資源を費やす社会へと移行したことで、若さや生殖能力を連想させる身体的特徴が以前ほど重視されなくなった可能性があるとのこと。</p>
+            <p>ただし、出生率の低下とWHRの上昇には共通する長期的な傾向が見られたものの、両者の直接的な因果関係は確認できませんでした。また、今回の研究対象はイギリスとフランスの上流階級の女性を描いた肖像画に限られており、当時の社会全体の美的価値観を反映しているとは限らないと研究チームは注意を促しています。</p>
+          </div>
+          <p class="continue"><a href="https://gigazine.net/news/20261120-female-beauty-change/" target="_blank" rel="noopener" lang="ja">続きを読む · GIGAZINE</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p12">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★★</span> <span class="chip mins">4 min</span> <span class="chip" lang="ja">LLM</span> <span class="chip" lang="ja">自己書き換え</span> <span class="chip" lang="ja">再帰的自己改善</span> <span class="chip" lang="ja">Qwen</span> <span class="chip" lang="ja">機械学習</span>
+          </div>
+          <h2 lang="ja">AIが追加学習なしで自らのウェイトを書き換えて「自分自身を賢くする」ことに成功</h2>
+          <p class="why">Um modelo de 27B, com acesso de leitura/escrita aos próprios pesos e um Python, diagnosticou seu loop de repetição, editou os pesos sem gradiente e subiu de 57,2% para 63,8% em matemática — e até consertou uma cópia corrompida de si mesmo. Os modelos menores pioraram. Um primeiro passo (bem limitado) rumo ao autoaperfeiçoamento recursivo.</p>
+          <div class="source">
+            <span lang="ja">GIGAZINE</span>
+            <a href="https://gigazine.net/news/20261120-large-language-model-can-rewrite-itself/" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>大規模言語モデル(LLM)は通常、学習が完了すると内部のウェイト(重み)が固定され、性能を向上させるには追加学習などが必要になります。こうした従来の仕組みとは異なり、AIが自分自身のウェイトを分析して書き換え、性能を向上させられることを示した研究論文が発表されました。</p>
+            <p>イリノイ大学アーバナ・シャンペーン校やカーネギーメロン大学などの研究者らは、AIモデルが自らのウェイトを分析し、追加学習なしで書き換える「Self-Rewriting(自己書き換え)」という手法を研究しました。</p>
+            <p>研究チームはAlibabaのAIモデルであるQwen3.5の20億、40億、90億、270億パラメーターの4モデルを実験に使用しました。各モデルには自分自身のウェイトを読み書きする機能や、Pythonコードを実行する環境を与えています。</p>
+            <p>AIは数学の問題に対する自分の回答や内部状態を分析し、問題の原因を推測してウェイトを変更した上で、その効果を検証しました。一般的な機械学習で使われる勾配降下法や誤差逆伝播は使用していません。</p>
+            <p>……</p>
+            <p>この方法で8回の自己書き換えセッションを実施したところ、AIは5回のセッションで変更を取り消し、3回で変更を採用しました。</p>
+            <p>これは、AIが自らの問題点を特定し、ウェイトを書き換えることで未知の問題に対する性能まで向上させられることを示しています。</p>
+            <p>……</p>
+            <p>研究チームはさらに、ウェイトの一部を意図的に破損させたモデルを修復する実験も実施しました。270億パラメーターの正常なモデルに破損した自身のコピーを調べさせたところ、AIは異常な値を持つ部分を特定し、元のウェイトを参照することなく修正に成功しました。</p>
+            <p>研究チームは今回の成果について、AIが自身の能力を高め、改善されたAIがさらに自分自身を改良する「再帰的自己改善」に向けた一歩だと位置付けています。</p>
+            <p>ただし、今回の実験では各セッションが元のウェイトを使って変更案を作成しており、性能が向上したAIがさらに自分自身を改善する仕組みまでは実証されていません。また、性能向上の検証も主に数学の問題に限られています。</p>
+          </div>
+          <p class="continue"><a href="https://gigazine.net/news/20261120-large-language-model-can-rewrite-itself/" target="_blank" rel="noopener" lang="ja">続きを読む · GIGAZINE</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p13">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★★</span> <span class="chip mins">3 min</span> <span class="chip" lang="ja">AIエージェント</span> <span class="chip" lang="ja">コードレビュー</span> <span class="chip" lang="ja">Agent Skills</span> <span class="chip" lang="ja">開発プロセス</span> <span class="chip" lang="ja">Claude</span>
+          </div>
+          <h2 lang="ja">最近、コードを真面目に読まなくなった</h2>
+          <p class="why">Um dev (Flutter/Next.js) confessa: parou de ler cada diff da IA linha a linha e passou a investir em “premissas” — requisitos e Skills. Exemplo ótimo: a IA fez UI otimista no botão de excluir, uma decisão sensata, mas errada para aquela tela; o problema não é o código, é o contexto não compartilhado. Bem relevante para o seu fluxo com Cursor/Claude.</p>
+          <div class="source">
+            <span lang="ja">Zenn</span>
+            <a href="https://zenn.dev/hiromoo/articles/reading-less-preparing-more" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>AIに実装を任せて、出てきた差分を最初から最後まで丁寧に追う。以前ほど、そういう時間を取らなくなっています。</p>
+            <p>決して、不真面目になったつもりはありません。私の開発では、前提をきちんと整えておけば、AIが出すコードは大体正しいと感じることが増えたからです。</p>
+            <p>……</p>
+            <p>コードを読めば、何かしら気になるところは見つかります。命名を変えたい。処理を分けたい。この書き方より、あちらの方が好みだ。</p>
+            <p>ただ、それを直したことで、成果がどれくらいよくなるのかは別の話です。</p>
+            <p>……</p>
+            <p>ここで言う「前提」は、機能の要件や技術的な制約だけではありません。自分にとっては当たり前なので、わざわざ伝えていなかったことも含みます。</p>
+            <p>……</p>
+            <p>英語の画面としては正しくできているので、実装の間違いとは少し違います。日本語を使ってほしいという、こちらの前提が共有されていなかったわけです。</p>
+            <p>……</p>
+            <p>AIが依頼どおりに作ってくれることが増えるほど、依頼そのものの曖昧さは、自分が引き受ける必要があると感じます。</p>
+            <p>……</p>
+            <p>要件には、今回何を作りたいのかを書きます。誰が使い、何ができ、どんな条件を満たしてほしいのか。今回の仕事で判断すべきことを整理します。</p>
+            <p>Skillには、繰り返し使いたい判断や設計方針、作業手順を残します。どこに責務を置くか、既存の構成をどう確認するか、実装後に何を検証するか、といったことです。</p>
+            <p>たとえば、「画面に通信処理を直接書かないでほしい」と毎回指摘しているなら、通信の責務をどこに置き、なぜそうするのかをSkillに書いておけます。</p>
+            <p>……</p>
+            <p>コードを読む力は、これからも使うと思います。実装できる条件なのか、設計に無理がないか、期待した動作にならない原因は何か。そうしたことを判断するとき、コードへの理解が役立ちます。</p>
+            <p>その力があるからといって、毎回すべてを同じ深さで読む必要はないのでしょう。</p>
+            <p>最近、コードを真面目に読まなくなりました。その代わり、AIが正しく仕事をできる前提を整えることに、もっと真面目でありたいと思っています。</p>
+          </div>
+          <p class="continue"><a href="https://zenn.dev/hiromoo/articles/reading-less-preparing-more" target="_blank" rel="noopener" lang="ja">続きを読む · Zenn</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p14">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★★</span> <span class="chip mins">4 min</span> <span class="chip" lang="ja">Claude Code</span> <span class="chip" lang="ja">Skills</span> <span class="chip" lang="ja">プロンプトキャッシュ</span> <span class="chip" lang="ja">コスト</span> <span class="chip" lang="ja">Sonnet</span>
+          </div>
+          <h2 lang="ja">1ターンだけ Sonnet に任せるスキルを作ったら、Opus のままより高くついていた話</h2>
+          <p class="why">Criou /ask-sonnet para economizar trocando de modelo por um turno — e pagou o dobro: o cache de prompt é por modelo, então trocar no meio da conversa reescreve todo o histórico (20× o preço da leitura de cache). Haiku compensou; abaixar o effort é melhor. E o Sonnet ainda jurava ser o Opus.</p>
+          <div class="source">
+            <span lang="ja">Zenn</span>
+            <a href="https://zenn.dev/no215/articles/claude-code-one-turn-model-skill" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>Claude Code で、ふだんは Opus を使いつつ「この質問だけは Haiku や Sonnet で十分」という場面がよくあります。そこで、1ターンだけ下位モデルに答えさせるスキル /ask-haiku と /ask-sonnet を作りました。この記事では、スキルの作り方と、自分のセッション記録で費用を確かめた結果を紹介します。</p>
+            <p>……</p>
+            <p>気になったのは、プロンプトキャッシュとの関係です。Claude Code は会話の履歴を毎回送り直しますが、前回と同じ部分はキャッシュから安く読めます。ところが、このキャッシュはモデルごとに別々です。公式ドキュメントには、スキルでモデルを切り替えた場合についても書いてあります。</p>
+            <p>つまり、会話の途中で /ask-sonnet を使うと、そのターンは会話の履歴全体を Sonnet 用に書き直します。実際のログで見ると、次のようになっていました。</p>
+            <p>……</p>
+            <p>Opus のままなら、会話の履歴は $0.20 で読めます。Sonnet に切り替えると、同じ履歴を $4 で書き込むことになり、20 倍の単価です。Sonnet は出力の単価が Opus の半分ですが、それでは埋め合わせられません。</p>
+            <p>筆者の記録で、会話の途中で /ask-sonnet を使ったのは 2 回でした。どちらも Opus のまま答えさせた場合の試算より高くなっていました。</p>
+            <p>安くするつもりで作ったスキルで、倍の費用を払っていました。品質も下げたうえで、です(笑)</p>
+            <p>……</p>
+            <p>自分がどのモデルかという情報は、セッションの開始時にシステムプロンプトに入ります。そのため、スキルで切り替えたターンでも「Opus で動いている」と書かれた古い情報が残っていて、モデルがそれをもとに答えてしまうことがあります。どのモデルが答えたかを確かめるときは、モデル本人に聞くより、会話ログや費用の記録を見るほうが確実です。</p>
+            <p>本人に聞くと Opus を名乗るのに、請求は Sonnet。ややこしいです。</p>
+            <p>安いモデルを選べば安くなる、とは限りませんでした。費用を記録していなかったら、気づかないまま使い続けていたと思います。</p>
+          </div>
+          <p class="continue"><a href="https://zenn.dev/no215/articles/claude-code-one-turn-model-skill" target="_blank" rel="noopener" lang="ja">続きを読む · Zenn</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p15">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★☆</span> <span class="chip mins">3 min</span> <span class="chip" lang="ja">北総鉄道</span> <span class="chip" lang="ja">千葉ニュータウン鉄道</span> <span class="chip" lang="ja">リバイバルカラー</span> <span class="chip" lang="ja">9000形</span> <span class="chip" lang="ja">公団線</span>
+          </div>
+          <h2 lang="ja">覚えていますか「北総・公団線」 北総鉄道が“他社の車両”の復刻カラー電車を走らせるワケ</h2>
+          <p class="why">O Hokusō pintou um trem com as cores verde-laranja de um trem que nem era dele — era da antiga corporação habitacional pública dona dos trilhos. Bom para entender a estrutura curiosa de ferrovias japonesas onde uma empresa possui a via e outra opera (e vocabulário: 譲り受ける, 乗り入れ, 改番).</p>
+          <div class="source">
+            <span lang="ja">乗りものニュース</span>
+            <a href="https://trafficnews.jp/post/728889" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>北総鉄道で「リバイバルカラー」の電車が走り始めました。いろいろな節目を記念するものですが、じつは「他社の車両」のカラーを復刻したもの。北総線のちょっと複雑な歴史がここに現れています。</p>
+            <p>北総鉄道で2026年11月15日からリバイバルカラーの電車が運行を始め、千葉ニュータウンから京成線や都営浅草線、京急線を経由して羽田空港などに乗り入れています。このリバイバルカラーは、2017（平成29）年に引退した北総鉄道9000形電車の色を復刻したもので、緑とオレンジ色に灰色を組み合わせています。</p>
+            <p>……</p>
+            <p>先の通り、復刻したカラーリングは北総鉄道9000形電車のものですが、厳密には9000形は他社の車両で、千葉ニュータウン鉄道が保有していたものです。</p>
+            <p>……</p>
+            <p>千葉ニュータウン鉄道は線路や車両を保有していますが、列車の運行や駅・車両の管理などは北総鉄道が担当しています。このため、小室から先も北総鉄道の路線のようになっています。</p>
+            <p>名前から察する通り、千葉ニュータウン鉄道は千葉ニュータウンの足として整備された路線です。開業した当時は住宅・都市整備公団という名称で、住宅を整備する組織が鉄道を保有していました。</p>
+            <p>……</p>
+            <p>かつては、北総線方面を指して北総・公団線方面と呼ばれていた時期があり、9000形は「公団線」の電車として京成線や都営浅草線などにも乗り入れていました。</p>
+            <p>旧住宅・都市整備公団や千葉ニュータウン鉄道の車両には、独自のカラーリングが施されています。9000形の緑とオレンジ色は公団のシンボルカラーで、さらに先頭部を矢羽根のようなデザインとしてスピード感を表現しています。</p>
+            <p>……</p>
+            <p>9000形は2編成ありましたが、2013（平成25）年に1本が、2017（平成29）年に残り1本が引退しています。その引退からまもなく10年という節目を迎えること、7300形が登場から今年で35年を迎えたことと合わせて、今回のリバイバルカラーが施されています。</p>
+          </div>
+          <p class="continue"><a href="https://trafficnews.jp/post/728889" target="_blank" rel="noopener" lang="ja">続きを読む · 乗りものニュース</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p16">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★★</span> <span class="chip mins">2 min</span> <span class="chip" lang="ja">神戸市</span> <span class="chip" lang="ja">空室税</span> <span class="chip" lang="ja">タワーマンション</span> <span class="chip" lang="ja">三宮</span> <span class="chip" lang="ja">不動産</span>
+          </div>
+          <h2 lang="ja">神戸市が「空室税」の条例案提出へ　都心マンションの空き部屋、利活用促進　30年度導入目指す</h2>
+          <p class="why">Imóveis em Kobe: a prefeitura vai propor um “imposto sobre apartamento vazio” em Sannomiya, mirando torres compradas como investimento sem morador — seria o primeiro do Japão restrito a condomínios, meta 2030. Afeta diretamente o mercado que você acompanha.</p>
+          <div class="source">
+            <span lang="ja">神戸新聞NEXT</span>
+            <a href="https://www.kobe-np.co.jp/news/society/202611/0021052622.shtml" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>神戸・三宮周辺で居住実態がないマンションの空き部屋に課税する「空室税」導入に向け、神戸市が条例案を提出する方針を固めたことが１９日、関係者への取材で分かった。マンション空室に限った課税が実現すれば全国で初という。市は２０３０年度の導入を目指し、関連議案を２７日にも市会本会議に提出する。（岩崎昂志）</p>
+            <p>三宮周辺のタワーマンション（タワマン）の空室税を巡っては、投資目的で居住していない例があることなどから、市が昨年５月、有識者検討会に諮問。同検討会は今年７月、久元喜造市長に提出した答申で、タワマンに限定しない課税制度の検討を提言していた。</p>
+            <p>関係者によると、市の条例案では都心での住宅の利活用促進を主な目的とし、居住者を増やすことで適正な建物管理につながる副次的効果も狙う。空室税の導入には市議会の議決や総務大臣の同意が必要となる。</p>
+          </div>
+          <p class="continue"><a href="https://www.kobe-np.co.jp/news/society/202611/0021052622.shtml" target="_blank" rel="noopener" lang="ja">続きを読む · 神戸新聞NEXT</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p17">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★☆</span> <span class="chip mins">2 min</span> <span class="chip" lang="ja">SCANDAL</span> <span class="chip" lang="ja">大阪城ホール</span> <span class="chip" lang="ja">ライブ映像</span> <span class="chip" lang="ja">47都道府県ツアー</span> <span class="chip" lang="ja">ガールズバンド</span>
+          </div>
+          <h2 lang="ja">SCANDAL、結成20周年ライブを収めたLIVE Blu-ray &amp; DVDのトレーラー映像公開</h2>
+          <p class="why">Saiu o trailer do Blu-ray do show de 20 anos do SCANDAL no Osaka-jō Hall (lança 23/12). Lembrete agridoce: a banda encerra as atividades em 21/08/2027, depois da turnê final pelas 47 províncias (já em andamento) e de um último show na Yokohama Arena.</p>
+          <div class="source">
+            <span lang="ja">BARKS</span>
+            <a href="https://barks.jp/news/1105524" target="_blank" rel="noopener">原文を開く ↗</a> · <a href="https://barks.jp/news/1085225" target="_blank" rel="noopener" lang="ja">活動終了の発表（BARKS） ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>SCANDALが12月23日(水)にリリースする、LIVE Blu-ray &amp; DVD『SCANDAL 20th Anniversary Live “Chapter 20” at OSAKA-JO HALL』のトレーラー映像を公開した。</p>
+            <p>結成20周年記念日に行われたメモリアルなライブの一端がうかがえる映像となっている。</p>
+            <p>LIVE Blu-ray &amp; DVD『SCANDAL 20th Anniversary Live “Chapter 20” at OSAKA-JO HALL』はそれぞれ、通常盤と初回限定盤でのリリースとなり、初回限定盤はセットリスト全22曲を収録したライブCD、さらに、当日撮影されたライブフォトをたっぷりまとめた特製フォトブックレット(全56ページ/フルカラー)が付属した、特殊パッケージ仕様になっている。</p>
+            <p>なお、SCANDALは現在＜SCANDAL FINAL TOUR 2026-2027 「SCANDALの47都道府県ツアー」＞を開催中だ。</p>
+          </div>
+          <p class="continue"><a href="https://barks.jp/news/1105524" target="_blank" rel="noopener" lang="ja">続きを読む · BARKS</a></p>
+        </div>
+      </article>
+
+      <footer class="site">読解幕 · 2026-11-20 · ~53 min · <a href="/japanese-digest/history/" style="color:inherit">History</a> · deliton.github.io/japanese-digest</footer>
+    </main>
+  </div>
+</body>
+</html>
