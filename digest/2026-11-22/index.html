@@ -1,0 +1,1049 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>読解幕 · 2026-11-22 · Japanese Digest</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Noto+Serif+JP:wght@400;600;700&family=Shippori+Mincho:wght@500;700&display=swap" rel="stylesheet" />
+  <style>
+
+    :root {
+      --bg: #0a0a0a;
+      --bg-2: #121212;
+      --bg-card: #161616;
+      --ink: #f5f5f5;
+      --ink-dim: #a8a29a;
+      --ink-mute: #6b6560;
+      --shu: #c41e3a;
+      --shu-hot: #e11d48;
+      --shu-deep: #8b1228;
+      --gold: #d4a017;
+      --gold-soft: #c9a227;
+      --white: #fafafa;
+      --line: #2a2a2a;
+      --line-hot: rgba(196, 30, 58, 0.45);
+      --measure: 42rem;
+      --radius: 4px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: "Noto Sans JP", "Hiragino Sans", "Yu Gothic", system-ui, sans-serif;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .stage-bar {
+      height: 6px;
+      background: repeating-linear-gradient(
+        90deg,
+        var(--shu) 0 48px,
+        var(--white) 48px 56px,
+        #111 56px 64px,
+        var(--gold) 64px 72px,
+        #111 72px 88px
+      );
+    }
+
+    .wrap {
+      width: min(100% - 2rem, 74rem);
+      margin: 0 auto;
+      padding: 2rem 0 4.5rem;
+      display: grid;
+      grid-template-columns: 15.5rem 1fr;
+      gap: 2.75rem;
+      align-items: start;
+    }
+
+    @media (max-width: 900px) {
+      .wrap { grid-template-columns: 1fr; gap: 1.5rem; padding-top: 1.25rem; }
+      .sidebar { position: static !important; }
+    }
+
+    .sidebar { position: sticky; top: 1.25rem; }
+
+    .brand {
+      display: flex;
+      align-items: baseline;
+      gap: 0.55rem;
+      margin: 0 0 0.35rem;
+    }
+    .brand-mark {
+      font-family: "Shippori Mincho", "Noto Serif JP", serif;
+      font-size: 1.85rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      color: var(--white);
+      line-height: 1;
+    }
+    .brand-mark em {
+      font-style: normal;
+      color: var(--shu);
+    }
+    .brand-sub {
+      font-size: 0.65rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-weight: 700;
+    }
+
+    .meta {
+      color: var(--ink-mute);
+      font-size: 0.8rem;
+      margin: 0 0 1.25rem;
+    }
+
+    .stat-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-bottom: 1.35rem;
+    }
+    .stat {
+      border: 1px solid var(--line);
+      background: var(--bg-2);
+      padding: 0.32rem 0.65rem;
+      font-size: 0.72rem;
+      color: var(--ink-dim);
+      border-radius: var(--radius);
+    }
+    .stat strong { color: var(--white); font-weight: 700; }
+    .stat.hot {
+      border-color: var(--shu);
+      color: var(--shu-hot);
+      background: rgba(196, 30, 58, 0.1);
+    }
+
+    .toc {
+      border: 1px solid var(--line);
+      background: var(--bg-2);
+      padding: 0.85rem 0.9rem 0.95rem;
+      border-radius: var(--radius);
+    }
+    .toc h2 {
+      margin: 0 0 0.65rem;
+      font-size: 0.72rem;
+      letter-spacing: 0.16em;
+      color: var(--gold);
+      font-weight: 800;
+    }
+    .toc ol { list-style: none; margin: 0; padding: 0; }
+    .toc li { margin: 0; }
+    .toc a {
+      display: flex;
+      justify-content: space-between;
+      gap: 0.5rem;
+      text-decoration: none;
+      color: var(--ink-dim);
+      font-size: 0.82rem;
+      padding: 0.38rem 0.2rem;
+      border-bottom: 1px solid transparent;
+    }
+    .toc a:hover { color: var(--white); border-bottom-color: var(--line-hot); }
+    .toc .t-title { font-weight: 600; }
+    .toc .t-min { color: var(--gold); font-size: 0.72rem; font-weight: 700; flex-shrink: 0; }
+
+    .main { max-width: var(--measure); }
+
+    .digest-banner {
+      display: flex;
+      gap: 0.75rem;
+      align-items: flex-start;
+      background: #141014;
+      border: 1px solid var(--line);
+      border-left: 3px solid var(--shu);
+      padding: 0.85rem 1rem;
+      margin-bottom: 1.5rem;
+      font-size: 0.78rem;
+      color: var(--ink-dim);
+      line-height: 1.55;
+    }
+    .digest-banner .tag {
+      flex-shrink: 0;
+      background: var(--shu);
+      color: #fff;
+      font-size: 0.65rem;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      padding: 0.28rem 0.5rem;
+      border-radius: var(--radius);
+    }
+
+    .hero {
+      margin-bottom: 2rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid var(--line);
+      position: relative;
+    }
+    .hero::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -1px;
+      width: 4.5rem;
+      height: 2px;
+      background: var(--shu);
+    }
+    .kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.7rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--shu-hot);
+      font-weight: 800;
+      margin-bottom: 0.85rem;
+    }
+    .kicker::before {
+      content: "◆";
+      font-size: 0.55rem;
+      color: var(--gold);
+    }
+    .hero h1 {
+      font-family: "Shippori Mincho", "Noto Serif JP", serif;
+      font-size: clamp(1.85rem, 4vw, 2.55rem);
+      font-weight: 700;
+      line-height: 1.2;
+      margin: 0 0 0.75rem;
+      color: var(--white);
+      letter-spacing: 0.02em;
+    }
+    .hero p {
+      margin: 0;
+      color: var(--ink-dim);
+      font-size: 0.98rem;
+      max-width: 36rem;
+    }
+
+    article.piece {
+      background: var(--bg-card);
+      border: 1px solid var(--line);
+      margin-bottom: 1.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+    article.piece::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: linear-gradient(90deg, var(--shu) 0%, var(--shu) 35%, var(--gold) 35%, var(--gold) 42%, transparent 42%);
+    }
+
+    .piece-inner { padding: 1.6rem 1.55rem 1.35rem; }
+
+    .piece-head {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-bottom: 0.85rem;
+    }
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      border: 1px solid var(--line);
+      background: #111;
+      color: var(--ink-dim);
+      padding: 0.22rem 0.6rem;
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      border-radius: var(--radius);
+    }
+    .chip.interest {
+      border-color: var(--shu);
+      color: var(--shu-hot);
+      background: rgba(196, 30, 58, 0.12);
+    }
+    .chip.mins {
+      border-color: var(--gold);
+      color: var(--gold);
+      background: transparent;
+    }
+
+    .piece h2 {
+      font-family: "Noto Serif JP", "Shippori Mincho", "Yu Mincho", serif;
+      font-size: 1.38rem;
+      font-weight: 700;
+      line-height: 1.5;
+      margin: 0 0 0.6rem;
+      color: var(--white);
+      letter-spacing: 0.02em;
+    }
+
+    .why {
+      margin: 0 0 1rem;
+      color: var(--ink-dim);
+      font-size: 0.9rem;
+      border-left: 2px solid var(--gold);
+      padding-left: 0.85rem;
+    }
+
+    .source {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.65rem 1.1rem;
+      font-size: 0.76rem;
+      color: var(--ink-mute);
+      margin-bottom: 1.25rem;
+    }
+    .source a {
+      color: var(--shu-hot);
+      text-decoration: none;
+      font-weight: 600;
+    }
+    .source a:hover { color: var(--gold); }
+
+    .ja {
+      font-family: "Noto Serif JP", "Hiragino Mincho ProN", "Yu Mincho", serif;
+      font-size: 1.08rem;
+      line-height: 2;
+      letter-spacing: 0.03em;
+      color: #ebe7e1;
+    }
+    .ja p { margin: 0 0 1.15em; }
+    .ja p:last-child { margin-bottom: 0; }
+
+    .continue {
+      margin-top: 1.25rem;
+      padding-top: 1rem;
+      border-top: 1px solid var(--line);
+      font-size: 0.86rem;
+    }
+    .continue a {
+      color: var(--white);
+      text-decoration: none;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      border-bottom: 2px solid var(--shu);
+      padding-bottom: 0.1rem;
+    }
+    .continue a:hover {
+      color: var(--shu-hot);
+      border-bottom-color: var(--gold);
+    }
+
+    footer.site {
+      max-width: var(--measure);
+      margin-top: 1.75rem;
+      color: var(--ink-mute);
+      font-size: 0.72rem;
+      letter-spacing: 0.06em;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+    footer.site::before {
+      content: "";
+      width: 1.25rem;
+      height: 2px;
+      background: var(--shu);
+    }
+
+  
+    .excerpt-label { font-size: 0.66rem; letter-spacing: 0.18em; color: var(--gold); font-weight: 800; margin: 0 0 0.6rem; }
+    .brand-sub a, .stat a { color: var(--gold); text-decoration: none; }
+    .toc .t-min { font-variant-numeric: tabular-nums; }
+  </style>
+</head>
+<body>
+  <div class="stage-bar" aria-hidden="true"></div>
+
+  <div class="wrap">
+    <aside class="sidebar">
+      <div class="brand">
+        <span class="brand-mark" lang="ja">読解<em>幕</em></span>
+      </div>
+      <p class="brand-sub">Kabuki Digest · <a href="../../history/">History</a></p>
+      <p class="meta">2026-11-22 · America/Sao_Paulo</p>
+      <div class="stat-row">
+        <span class="stat"><strong>55</strong> min</span>
+        <span class="stat"><strong>17</strong> pieces</span>
+        <span class="stat"><strong>~14,200</strong> 字</span>
+        <span class="stat"><a href="../../history/">History</a></span>
+      </div>
+
+      <nav class="toc" aria-label="Índice">
+        <h2 lang="ja">本日の演目</h2>
+        <ol>
+          <li>
+            <a href="#p1">
+              <span class="t-title" lang="ja">数学最大の難問「リーマン予想」、Claudeと解いた？――「AIは飛び、踊り、きらめいた」</span>
+              <span class="t-min">4′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p2">
+              <span class="t-title" lang="ja">五千円札の顔は借金まみれ――樋口一葉、駄菓子屋から『たけくらべ』へ</span>
+              <span class="t-min">3′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p3">
+              <span class="t-title" lang="ja">落書き一つで113人処刑――聚楽第落首事件と「天下人の暴走」</span>
+              <span class="t-min">4′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p4">
+              <span class="t-title" lang="ja">幕末「四大人斬り」の末路――新兵衛・彦斎・以蔵・半次郎</span>
+              <span class="t-min">5′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p5">
+              <span class="t-title" lang="ja">1064年、民家の庭に「火の玉」――沈括『夢溪筆談』の隕石記録</span>
+              <span class="t-min">4′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p6">
+              <span class="t-title" lang="ja">ローマ時代の石棺に眠っていたのは、1000年前の修道院長？</span>
+              <span class="t-min">3′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p7">
+              <span class="t-title" lang="ja">明治25年生まれ、131歳の魚――耳石の「日記帳」と核実験のインク</span>
+              <span class="t-min">3′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p8">
+              <span class="t-title" lang="ja">返事ができない患者の3人に1人が、頭の中だけでビープ音を速くした</span>
+              <span class="t-min">4′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p9">
+              <span class="t-title" lang="ja">50万年前の人類も、きれいな石を「思い出の品」に</span>
+              <span class="t-min">3′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p10">
+              <span class="t-title" lang="ja">朝いちばんに見た顔が入れ替わる――猫の目を持つ人々</span>
+              <span class="t-min">3′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p11">
+              <span class="t-title" lang="ja">「仲間のAI」が手を貸すと言うと、AIは秘密を漏らす</span>
+              <span class="t-min">2′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p12">
+              <span class="t-title" lang="ja">【TLA+】AIにテストケースを書かせるな、ルールを書け</span>
+              <span class="t-min">4′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p13">
+              <span class="t-title" lang="ja">AIが書いてAIがレビューしても、3回に1回はバグが残る</span>
+              <span class="t-min">3′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p14">
+              <span class="t-title" lang="ja">朝7時半、Claude Codeからの電話で起こされた</span>
+              <span class="t-min">3′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p15">
+              <span class="t-title" lang="ja">車体ほぼガラス張り――35年ぶりの新型「嵯峨野トロッコ」</span>
+              <span class="t-min">3′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p16">
+              <span class="t-title" lang="ja">本物のパンがランプに――神戸の造形作家・森田優希子さん</span>
+              <span class="t-min">2′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p17">
+              <span class="t-title" lang="ja">ELLEGARDEN細美武士「燃え尽きるまでやり切りたい」</span>
+              <span class="t-min">2′</span>
+            </a>
+          </li>
+        </ol>
+      </nav>
+    </aside>
+
+    <main class="main">
+      <div class="digest-banner">
+        <span class="tag">TRIAGE</span>
+        <span>Destaque: Claude e a Hipótese de Riemann (ナゾロジー, com link para a versão GIGAZINE). História: Higuchi Ichiyō no 130º aniversário de morte (BUSHOO); os 113 executados por um grafite contra Hideyoshi e os quatro grandes “hitokiri” do Bakumatsu (Japaaan); o meteorito de 1064 de Shen Kuo (草の実堂). Ciência: abade de Westminster no sarcófago romano, peixe de 131 anos e pacientes “sem resposta” que mexem um bipe com o cérebro (ナゾロジー); pedras-lembrança de 500 mil anos e o homem que vê olhos de gato nas pessoas (カラパイア). IA/dev: agentes que vazam segredos (GIGAZINE); TLA+/Quint, mutation testing e um Claude Code que liga para o celular (Zenn). Trens/Kansai/música: o novo trole de vidro de Sagano (乗りもの), a artista de Kobe das luminárias de pão (神戸新聞), ELLEGARDEN (Real Sound). Pontos fracos: Kobe Shimbun do dia quase todo paywall/notícia dura — só a entrevista da luminária de pão rendeu texto aberto; música sem novidade das suas bandas principais (HYDE/DIR EN GREY/L’Arc/BAND-MAID etc.; a demo da the GazettE é de 29/10), por isso ELLEGARDEN; nada bom de vistos/imóveis/sailing/JRPG hoje. Cortados por espaço: castelo de Shuri reconstruído (cerimônia hoje, Sankei), Grand Canyon e a rocha marciana de 4,1 bilhões de anos (ナゾロジー), trem de 86 anos de diferença em Gunma (乗りもの).</span>
+      </div>
+
+      <header class="hero">
+        <div class="kicker">Daily curated reading</div>
+        <h1 lang="ja">Claudeとリーマン予想、借金まみれの樋口一葉、落書き一つで113人処刑、幕末「四大人斬り」の末路、1064年の隕石、ローマの石棺に眠る修道院長、131歳の魚、返事のない患者の脳、50万年前の思い出の石、猫の目が見える男、秘密を漏らすAI、TLA+でルールを書く、AIレビュー後も残るバグ、Claude Codeからの電話、ガラス張りの嵯峨野トロッコ、神戸のパンのランプ、ELLEGARDEN細美武士</h1>
+        <p lang="ja">今日の幕開けは、数学最大の難問「リーマン予想」。Anthropicの数学者がClaudeと一緒に証明を見つけたと発表しました。まだ確認はこれからですが、「Claudeは飛び、踊り、きらめいた」という言葉は、毎日AIと働く人にとって特別な響きがあります。歴史の幕では、明日が命日の樋口一葉――五千円札の顔が、借金と駄菓子屋の日々から『たけくらべ』を生んだ話。続いて、聚楽第の落書き一つで113人を処刑した秀吉の暴走、幕末の「四大人斬り」それぞれの末路、そして1064年に民家の庭へ落ちた「火の玉」の記録を読みます。科学の幕は、ウェストミンスター寺院のローマ時代の石棺に眠っていた約1000年前の修道院長、明治25年生まれの131歳の魚、返事ができない患者の脳に届いていた声、50万年前の人類が集めた「思い出の石」、朝いちばんに見た顔が入れ替わる不思議な症例。AIと開発の幕では、「仲間のAI」に秘密を漏らすエージェント、テストケースではなくルールを書けというTLA+の話、AIがレビューしても3回に1回残るバグ、そしてClaude Codeから電話がかかってくる仕組み。最後は、ガラス張りになる京都・嵯峨野トロッコ、神戸の「パンのランプ」、ELLEGARDEN細美武士の覚悟で締めます。約55分の読解です。</p>
+      </header>
+
+      <article class="piece" id="p1">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★★</span> <span class="chip mins">4 min</span> <span class="chip" lang="ja">リーマン予想</span> <span class="chip" lang="ja">Claude</span> <span class="chip" lang="ja">Anthropic</span> <span class="chip" lang="ja">素数</span> <span class="chip" lang="ja">Lean</span>
+          </div>
+          <h2 lang="ja">数学最大の難問「リーマン予想」、AIと解いたと数学者が発表</h2>
+          <p class="why">A notícia da semana para quem usa Claude todo dia: Levent Alpöge, matemático da Anthropic, diz ter achado com o Claude uma prova da Hipótese de Riemann (e da generalizada) — escrita em Lean, porque a versão “humana” passaria de 250 mil páginas. Ele escolheu a rota; na reta final “o Claude voou, dançou e brilhou”. Ainda sem verificação, e Granville acha o anúncio confuso e suspeito pela data. Vocabulário ótimo: 査読, 素数, 零点, 証明, 一般化.</p>
+          <div class="source">
+            <span lang="ja">ナゾロジー</span>
+            <a href="https://nazology.kusuguru.co.jp/archives/210450" target="_blank" rel="noopener">原文を開く ↗</a> · <a href="https://gigazine.net/news/20261122-anthropic-claude-said-riemann-hypothesis-solved/" target="_blank" rel="noopener" lang="ja">GIGAZINE版 ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>米Anthropic（アンソロピック）の数学者レヴェント・アルペーゲ氏が、同社のAI「Claude（クロード）」とともに、数学最大の未解決問題とも言われる「リーマン予想」の証明を見つけたと発表しました。</p>
+            <p>リーマン予想は、素数がどのように散らばっているかに関わる問題で、約150年にわたって数学者たちの道しるべになってきました。</p>
+            <p>ただし、これは本人による発表です。ほかの数学者による確認はまだ終わっておらず、査読を受けた論文として出たものでもありません。専門家たちは、厳密な確認が必要だとしています。</p>
+            <p>アルペーゲ氏は、ゴール目前ではClaudeに大きく引き離されたと振り返っています。</p>
+            <p>……</p>
+            <p>アルペーゲ氏は4ページの発表資料の中で、「Claudeと取り組む中で、リーマン予想の証明を見つけたと信じている」と書きました。</p>
+            <p>……</p>
+            <p>アルペーゲ氏によると、進む方向を選んだのは自分で、ゴール目前ではClaudeが自分をはるかに追い越していきました。</p>
+            <p>……</p>
+            <p>そこから先についてアルペーゲ氏は、「Claudeは飛び、踊り、きらめいた」と書き、驚かされる場面が何十回もあったと振り返っています。</p>
+            <p>……</p>
+            <p>そこでアルペーゲ氏とClaudeは、「テータリフト」と呼ばれる数学の操作を鎖のようにいくつもつなげ、つないだ1つ1つに重複度の代わりをさせる道を探りました。この山で手に入る部品をつなぎ合わせて、道具の代わりを組み立てるようなものです。</p>
+            <p>では、鎖をどれだけ長くすればよいのか。素数を数えるための和をある長さXまでとるとき、Claudeが提案したのは「Xの平方根」の数だけつなげることでした。</p>
+            <p>アルペーゲ氏は、この一行だけで仲間の数学者は椅子から転げ落ちるだろう、と紹介しています。</p>
+            <p>……</p>
+            <p>4ページの資料には証明のあらましが書かれていますが、人が読みやすい形で詳しく書き上げた説明は、まだ用意されていません。議論は今のところとても長く、細部まで書き出した文書を試しに作ると25万ページを超えたそうです。</p>
+            <p>アルペーゲ氏は、そんな読み切れない文書を出すのはふさわしくないとして、Leanだけを示すことにしたといいます。</p>
+            <p>……</p>
+            <p>カナダ・モントリオール大学の数論研究者アンドリュー・グランヴィル氏は、公開された資料を「混乱している」と評し、発表の前にもっと分かりやすい説明を用意すべきだったと述べています。</p>
+            <p>……</p>
+            <p>今回、人が進む方向を選び、AIがゴール前の難所を駆け上がったとする「登頂の記録」が、数学最大の難問について差し出されました。</p>
+            <p>アルペーゲ氏は、この過程で目にしたものを、科学全体にわたる、もっと大きな何かの夜明けの1つだと信じていると書いています。</p>
+          </div>
+          <p class="continue"><a href="https://nazology.kusuguru.co.jp/archives/210450" target="_blank" rel="noopener" lang="ja">続きを読む · ナゾロジー</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p2">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★☆</span> <span class="chip mins">3 min</span> <span class="chip" lang="ja">樋口一葉</span> <span class="chip" lang="ja">たけくらべ</span> <span class="chip" lang="ja">明治</span> <span class="chip" lang="ja">吉原</span> <span class="chip" lang="ja">命日</span>
+          </div>
+          <h2 lang="ja">五千円札の顔なのに借金まみれ？樋口一葉が24歳で閉じた貧しい生涯</h2>
+          <p class="why">Amanhã (23/11) faz 130 anos da morte de Higuchi Ichiyō, o rosto da antiga nota de 5.000 ienes. Aos 17 virou chefe de família com as dívidas do pai, tentou ser professora, abriu um bazar de doces ao lado de Yoshiwara — e foi justamente esse bairro que virou o cenário de “Takekurabe”. Escreveu as obras-primas em 14 meses e morreu de tuberculose aos 24.</p>
+          <div class="source">
+            <span lang="ja">BUSHOO!JAPAN（武将ジャパン）</span>
+            <a href="https://bushoojapan.com/jphistory/kingendai/2026/11/22/223306" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>明治二十九年（1896年）11月23日は、樋口一葉の命日です。</p>
+            <p>平成十六年（2004年）から発行された五千円札の顔であり、存在はよく知っているよ！という方も少なくないでしょう。</p>
+            <p>では彼女が生前、借金に追われる日々を送っていたことはご存知でしょうか？</p>
+            <p>一家の暮らしを背負うことになり、名作『たけくらべ』を世に送りだし、さぁこれから！というときに24歳の若さで亡くなってしまった。</p>
+            <p>……</p>
+            <p>長兄が若くして亡くなり、明治二十一年（1888年）、16歳の一葉が家督を継いで戸主となりました。</p>
+            <p>その翌年、父の則義は、出資していた荷馬車運輸の組合づくりに失敗し、多額の借金を残して病死。</p>
+            <p>17歳の一葉は、借金を返しながら母の多喜と妹の邦子を養う立場に立たされたのです。</p>
+            <p>家族を養うため、一葉が選んだのは小説を書くことでした。</p>
+            <p>……</p>
+            <p>それでも筆だけでは暮らせない一葉は、思い切って商売を始めます。</p>
+            <p>明治二十六年（1893年）の夏、借金のあてが尽きた一葉は、商いで暮らしを立て直そうと決心。</p>
+            <p>母と妹を連れて移ったのは、吉原遊郭にほど近い下谷龍泉寺町（現在の東京都台東区竜泉）でした。</p>
+            <p>同エリアの二軒長屋に移り住み、荒物雑貨と駄菓子を売る店を開いたのです。</p>
+            <p>……</p>
+            <p>明治二十七年（1894年）12月、一葉は『大つごもり』を文芸誌『文学界』に発表。</p>
+            <p>以降、『たけくらべ』の連載が完結する明治二十九年（1896年）1月までの14か月間に『にごりえ』や『十三夜』などの傑作を相次いで書き上げました。</p>
+            <p>『たけくらべ』は、下谷龍泉寺町と吉原を舞台に、やがて遊女となる少女・美登利と、僧侶となる少年・信如の思いのすれ違いを軸に、大人になっていく子どもたちを描いた物語。</p>
+            <p>一葉が店を開いた町が、そのまま作品の舞台になりました。</p>
+            <p>……</p>
+            <p>8月には回復の見込みがないと診断され、明治二十九年（1896年）11月23日、肺結核のため亡くなります。</p>
+            <p>……</p>
+            <p>五千円札の肖像からは、借金に追われ、店を開き、それでも筆を執り続けた姿までは見えてきません。</p>
+            <p>家族の暮らしを背負いながら、自分が暮らした町の人々を作品に刻んだ24年。</p>
+          </div>
+          <p class="continue"><a href="https://bushoojapan.com/jphistory/kingendai/2026/11/22/223306" target="_blank" rel="noopener" lang="ja">続きを読む · BUSHOO!JAPAN（武将ジャパン）</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p3">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★★</span> <span class="chip mins">4 min</span> <span class="chip" lang="ja">豊臣秀吉</span> <span class="chip" lang="ja">聚楽第落首事件</span> <span class="chip" lang="ja">多聞院日記</span> <span class="chip" lang="ja">本願寺</span> <span class="chip" lang="ja">豊臣兄弟！</span>
+          </div>
+          <h2 lang="ja">【豊臣兄弟！】第45回『天下人の暴走』の史実はもっと壮絶！落書き一つで113人処刑した秀吉の狂気</h2>
+          <p class="why">1589: alguém pichou um verso satírico no muro do palácio Jurakudai de Hideyoshi (talvez zombando da paternidade do bebê de Chacha). Resultado: 17 guardas com nariz e orelhas cortados e crucificados, um bairro-templo incendiado e ~113 pessoas executadas, de crianças a idosos. O diário do monge do Tamon-in registra: “todos inocentes… que lástima”. O começo do fim dos Toyotomi.</p>
+          <div class="source">
+            <span lang="ja">Japaaan（ジャパーン）</span>
+            <a href="https://mag.japaaan.com/archives/294796" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>そんな中、茶々（井上和）が懐妊し、秀吉は歓喜します。けれど、ある日、ご自慢の聚楽第の壁に秀吉を揶揄する落書きが。</p>
+            <p>史実でも起きた、天正17年（1589）『聚楽第落首事件』。</p>
+            <p>怒り狂った秀吉は、犯人探しをした挙句に、落書きの主だけではなく、関係ない町民たちも子供から老人まで処刑するという暴挙にでました。</p>
+            <p>……</p>
+            <p>落書きに対する秀吉の怒り方は尋常ではなかったようで、狂気に走ったかのような処罰を行います。</p>
+            <p>……</p>
+            <p>現代語にすると、「去月二十五日の夜、聚楽（第）の落書に関連して、番衆十七人が、あるいは鼻を削がれ、あるいは耳を切られ、すべて似たようなはたもの（磔）にかけられた。その中には、きわめて美しい若衆もいたと伝え聞いている。」という内容。</p>
+            <p>番衆とは、“大名の家から出されて聚楽第の警備にあたる者”たちで、直接落書を書いた本人ではありません。</p>
+            <p>秀吉は、犯人を捕まえられれずに見逃したことに対する、落ち度を見せしめに罰したそうです。</p>
+            <p>……</p>
+            <p>『多聞院日記』に記された「運次第也、さてさて不憫事也　一向無罪仁共也、アサマシアサマシ」（運次第で、まったく不憫なことだ）の言葉に、この政権の終焉を感じてしまいます。</p>
+            <p>……</p>
+            <p>その後、落首の犯人として、尾藤道休（びとうどうきゅう）という武将が容疑者として捉えられます。</p>
+            <p>秀吉に命じられた、石田三成・増田長盛が彼らの引き渡しを迫ると、本願寺側は尾藤道休と顕悟を自害させ、首を差し出しました。</p>
+            <p>……</p>
+            <p>3月2日には尾藤道休と願得寺顕悟の家を取り潰し、2人が住んでいた家だけではなく、周囲の寺内町まで焼き討ちにしています。</p>
+            <p>さらに、尾藤道休の近くに住むというだけで関係のない町人らまで捕縛。</p>
+            <p>3月9日には、尾藤道休の妻子、寺内町民らが小さな子供から高齢者まで含めて、年齢も職業も断固も問わずすべて磔にしたとか。</p>
+            <p>その後も秀吉の怒りは止まることなく、結局は総勢約113人規模を処刑した秀吉。</p>
+            <p>たかが “落書”。なぜ、秀吉はそこまで激怒したのか。なぜ、関係のない人間まで処刑したのか……一次資料では、その「なぜ」が明確に記されたものはないそうです。</p>
+            <p>……</p>
+            <p>この事件は、秀吉の「過剰な粛清」として民の記憶に刻まれたまま、その後、凄惨な処刑「秀次事件」につながり、ひいては、豊臣政権の崩壊へとつながるのでした。</p>
+          </div>
+          <p class="continue"><a href="https://mag.japaaan.com/archives/294796" target="_blank" rel="noopener" lang="ja">続きを読む · Japaaan（ジャパーン）</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p4">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★★</span> <span class="chip mins">5 min</span> <span class="chip" lang="ja">人斬り</span> <span class="chip" lang="ja">河上彦斎</span> <span class="chip" lang="ja">岡田以蔵</span> <span class="chip" lang="ja">中村半次郎</span> <span class="chip" lang="ja">幕末</span>
+          </div>
+          <h2 lang="ja">暗殺が横行した江戸時代の幕末「尊王攘夷派の四大人斬り」と呼ばれた暗殺者の末路…『逆賊の幕臣』に登場は？</h2>
+          <p class="why">Os quatro grandes “matadores” do Bakumatsu e como cada um acabou: Tanaka Shinbei se matou no interrogatório sem dizer uma palavra; Kawakami Gensai, o samurai gentil e franzino que inspirou o Kenshin de “Rurouni Kenshin”, só tem um assassinato comprovado; Okada Izō caiu na bebida e no esquecimento; e “Hitokiri Hanjirō”, temido até pelo Shinsengumi, morreu ao lado de Saigō.</p>
+          <div class="source">
+            <span lang="ja">Japaaan（ジャパーン）</span>
+            <a href="https://mag.japaaan.com/archives/294941" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>幕末は暗殺が横行した時代。特に有名だったのが、「尊王攘夷派の四大人斬り」と呼ばれる四人の暗殺者でした。令和9年（2027年）の大河ドラマ「逆賊の幕臣」の主人公・小栗忠順（おぐりただまさ）が生きた時代と重なる人物もいます。</p>
+            <p>……</p>
+            <p>元薩摩藩士の田中新兵衛が、まず暗殺したのが島田左近（正辰）。島田左近は、井伊直弼の右腕であった長野主膳に協力して、安政の大獄で尊王攘夷派を弾圧していました。しかも京都ではそのころ絶大な権力をふるっていて、土佐勤皇党の武市半平太（瑞山）が台頭するまで都の実質的な支配者でした。さらには、1万両を越えた賄賂を江戸幕府より受け取っていました。</p>
+            <p>脱藩後上京してきてすぐに、田中新兵衛を含む6名で暗殺する計画が持ち上がるも、失敗に終わります。しかし、ここからが田中新兵衛の怖いところ。その後1カ月間、島田左近を追いまわし、鴨川の河原で斬殺し、晒し首にしました。実はこれが「天誅」の先駆けとなりました。</p>
+            <p>……</p>
+            <p>【田中新兵衛の末路】過激派攘夷論者の公卿の姉小路公知（あねがこうじきんとも）が京都御所、朔平門（さくへいもん）付近で刺客3人に襲撃されるという事件。田中新兵衛は、その朔平門外の変の容疑者として捕らえられ、尋問で一言も発せず隙を見て自刃という末路でした。享年31歳。</p>
+            <p>……</p>
+            <p>元熊本藩士の河上彦斎は、実は四大人斬りの中では異質な存在でした。人斬りの中では珍しく教養を持ち合わせていた人物ですが、儒学者轟武兵衛、国学者林桜園、宮部鼎蔵に学び、清川八郎とも交流を持ち、過激な尊王攘夷論者となっていきました。</p>
+            <p>低い姿勢からの片手抜刀の達人で、逆袈裟切りが得意という反面、普段は礼儀正しく優しく温和で、小柄な女性のような色白の色男でした。これがマンガ「るろうに剣心」の緋村剣心のモデルとなった所以です。</p>
+            <p>……</p>
+            <p>【河上彦斎の末路】最後まで強固な攘夷論者を貫き通した結果、河上彦斎は投獄されますが、新政府になってからは一度解放されます。しかし、新政府からも疎まれ、政府要人の暗殺や奇兵隊反乱の首謀者を匿ったなどの嫌疑をかけられ、東京日本橋小伝馬町で斬首されました。享年38歳。</p>
+            <p>……</p>
+            <p>土佐勤皇党のため、武市半平太の恩に報いるために人斬りとなった岡田以蔵。素行の悪さと土佐勤皇党大獄のきっかけを作ったため、土佐勤皇党の顕彰碑に名前が刻まれることすらなく、空しい末路となったのです。</p>
+            <p>……</p>
+            <p>中村半次郎は、西郷隆盛の右腕として知られています。「人斬り半次郎」と呼ばれ幕末の四大人斬りの一人となっていますが、田中新兵衛や岡田以蔵などと比較するとそこまで人は斬っていません。実際に記録として残っているのは、赤松小三郎（薩摩藩の軍学者）を白昼暗殺した1件のみです。</p>
+            <p>……</p>
+            <p>「一度斬ると決めたら斬るまで刀を収めるな」という半次郎の思考、ピストルを構えた赤松に対してひるまず瞬時に斬殺した剣の速さ。人斬りとして恐れられるには十分な理由でした。実際に、幕末を震撼させた新選組ですら「半次郎は相手にするな」と隊士に命じていたほど恐れられていたという話も残っています。</p>
+            <p>……</p>
+            <p>ただし、人斬りに良い末路など待っていないということだけは確かなようです。</p>
+          </div>
+          <p class="continue"><a href="https://mag.japaaan.com/archives/294941" target="_blank" rel="noopener" lang="ja">続きを読む · Japaaan（ジャパーン）</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p5">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★☆</span> <span class="chip mins">4 min</span> <span class="chip" lang="ja">隕石</span> <span class="chip" lang="ja">沈括</span> <span class="chip" lang="ja">夢溪筆談</span> <span class="chip" lang="ja">北宋</span> <span class="chip" lang="ja">天人感応</span>
+          </div>
+          <h2 lang="ja">『1000年前の中国で起きた怪事件』空から火の玉が民家に落下し、地面から謎の石が見つかる</h2>
+          <p class="why">Relato de queda de meteorito de 1064 com detalhes de reportagem: três estrondos, uma bola de fogo “do tamanho da lua”, a cerca de uma casa em chamas, um buraco do diâmetro de uma tigela ainda brilhando no fundo e uma pedra quente “cor e peso de ferro” a 1 metro — depois exibida num templo. Bônus: o astrólogo de 644 a.C. que mentiu ao rei por educação.</p>
+          <div class="source">
+            <span lang="ja">草の実堂</span>
+            <a href="https://kusanomido.com/study/history/chinese/sou/136702/" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>今から約1000年前の中国で、空から巨大な火の玉が現れ、民家の庭に落下するという事件が起きた。</p>
+            <p>雷のような轟音が響き渡り、現在の江蘇省宜興市にあたる落下地点では激しい光とともに垣根が燃え、地面には深い穴が開いていたという。</p>
+            <p>この出来事が起きたのは、西暦1064年、北宋の治平元年のことである。</p>
+            <p>……</p>
+            <p>『夢溪筆談』巻二十「神奇」によると、1064年、常州の空に突然、雷のような大きな音が響いた。</p>
+            <p>空を見上げると、東南の方角に月ほどの大きさに見える巨大な火の玉が現れていた。</p>
+            <p>しばらくすると再び轟音が響き、火の玉は西南方向へ移動した。そして三度目の大きな音とともに、宜興県に住む許氏という人物の庭に落下したのである。</p>
+            <p>落下した瞬間、火の玉は周囲の遠く離れた場所からも見えるほど強烈な光を放ち、許氏の家の垣根を焼いてしまったという。</p>
+            <p>……</p>
+            <p>火が収まったあと、落下地点を調べると、地面には茶碗の口ほどの小さな穴が開いていた。しかしその穴は驚くほど深く、底をのぞくと、落下した物体がぼんやりと光っていたという。</p>
+            <p>時間がたつにつれて光は弱まっていったが、まだ熱を帯びており、すぐには近づけなかった。</p>
+            <p>さらに時間を置いて穴を掘り進めると、地中三尺余り、およそ1メートルほどの深さから、一つの石が見つかった。</p>
+            <p>石は拳ほどの大きさで、全体的に丸みを帯び、片方の端がわずかに尖っていた。色は鉄に似ており、重さも鉄のようで、掘り出されたときにはまだ熱が残っていたという。</p>
+            <p>……</p>
+            <p>この石はその後、常州の長官によって入手され、潤州にある金山寺へと送られた。</p>
+            <p>『夢溪筆談』によると、石は金山寺で箱に納めて保管され、訪問者がやって来ると、箱から取り出して見せていたという。</p>
+            <p>……</p>
+            <p>宋の襄公（じょうこう）は、これらの出来事を不思議に思い、周から訪れていた内史の叔興（しゅくこう）にこう尋ねた。</p>
+            <p>ところが退出した叔興は、周囲の人々に、まったく異なる考えを語っていた。</p>
+            <p>「これは陰陽の働きによるもので、人間の吉凶を生み出すものではない。吉凶は人間の行いによって決まる」</p>
+            <p>叔興は、君主の意向に逆らいたくなかったため、先ほどはあのように答えたのだと説明したのである。</p>
+            <p>……</p>
+            <p>空から石が降ってくるという不可思議な現象を前に、ただ恐れるだけでなく原因を考え、自然現象として冷静に捉えようとする人々も古代からいたのである。</p>
+          </div>
+          <p class="continue"><a href="https://kusanomido.com/study/history/chinese/sou/136702/" target="_blank" rel="noopener" lang="ja">続きを読む · 草の実堂</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p6">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★☆</span> <span class="chip mins">3 min</span> <span class="chip" lang="ja">ウェストミンスター寺院</span> <span class="chip" lang="ja">石棺</span> <span class="chip" lang="ja">放射性炭素年代測定</span> <span class="chip" lang="ja">アングロ・サクソン</span> <span class="chip" lang="ja">考古学</span>
+          </div>
+          <h2 lang="ja">ローマ時代の石棺に眠る骨は数百年後の別人、正体は修道院長か</h2>
+          <p class="why">Mistério de Westminster: um sarcófago romano com o nome de Valerius Amandinus, mas tampa com cruz do século X–XI e ossos de um homem que morreu em 987–1052. Operários quebraram a tampa em 1820, os ossos foram dados como perdidos — e estavam lá dentro o tempo todo. O suspeito número um: o abade Ælfwig.</p>
+          <div class="source">
+            <span lang="ja">ナゾロジー</span>
+            <a href="https://nazology.kusuguru.co.jp/archives/210496" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>英国のウェストミンスター寺院で顧問考古学者を務めるウォリック・ロドウェル（Warwick Rodwell）教授の研究により、ローマ時代の人物の名が刻まれた石棺に眠っていた骨は、それより数百年あとの約1000年前の人物のもので、寺院を率いた修道院長だった可能性が高いと推定されました。</p>
+            <p>この石棺は150年以上前に寺院の敷地から掘り出されて以来、中の骨が誰のものなのか、ずっと謎のままでした。</p>
+            <p>……</p>
+            <p>この寺院の敷地の北側から、1869年に石灰岩でできた石棺が掘り出されました。</p>
+            <p>石棺には、ウァレリウス・アマンディヌスという人物の名が刻まれています。300〜400年ごろにこの街で暮らした、裕福なブリトン人（当時ブリテン島に住んでいた人々）です。</p>
+            <p>つまりこれは、ローマ帝国がブリテン島を治めていた時代の石棺なのです。</p>
+            <p>ところが、同じ石棺の蓋には大きな十字架も彫られています。この十字架は10世紀か11世紀のもので、刻まれた名前の人物より数百年もあとの時代のものでした。</p>
+            <p>名前はローマ時代の人なのに、蓋の十字架はずっと後の時代。では、中に眠っていたのはいったい誰なのでしょうか？</p>
+            <p>……</p>
+            <p>測定の結果、骨の年代は西暦987〜1052年の範囲と出ました。表札の人物が暮らした300〜400年ごろより、数百年もあとです。</p>
+            <p>……</p>
+            <p>ロドウェル教授が最も有力な候補とみるのは、1020年ごろに亡くなった修道院長エルフウィグ（Aelfwig）です。</p>
+            <p>もう1人の候補は、エルフウィグの後を継ぎ、1049年に亡くなった修道院長ウルノス（Wulnoth）です。2人とも、この寺院に葬られたと考えられています。そして2人とも、骨の年代の範囲の中で亡くなっています。</p>
+            <p>……</p>
+            <p>ローマ時代の表札が掛かった石の家に、約1000年前にこの寺院を率いた修道院長が眠っていた可能性が高い。ロドウェル教授は、そう推定しています。</p>
+          </div>
+          <p class="continue"><a href="https://nazology.kusuguru.co.jp/archives/210496" target="_blank" rel="noopener" lang="ja">続きを読む · ナゾロジー</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p7">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★☆</span> <span class="chip mins">3 min</span> <span class="chip" lang="ja">ブルーサッカー</span> <span class="chip" lang="ja">耳石</span> <span class="chip" lang="ja">炭素14</span> <span class="chip" lang="ja">長寿</span> <span class="chip" lang="ja">ミズーリ川</span>
+          </div>
+          <h2 lang="ja">明治時代から川を泳ぎ続けた131歳の魚が見つかる</h2>
+          <p class="why">Um peixe de rio nascido em 1892 (era Meiji!) ainda nadando no Missouri: metade dos 42 blue suckers estudados tinha 99+ anos. Como provar a idade de um peixe? Contando os anéis do otólito — e checando com o pico de carbono-14 dos testes nucleares dos anos 1950–60, que funciona como uma “tinta” datada.</p>
+          <div class="source">
+            <span lang="ja">ナゾロジー</span>
+            <a href="https://nazology.kusuguru.co.jp/archives/210480" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>米モンタナ州を流れるミズーリ川上流で、淡水魚ブルーサッカーの年齢を調べたところ、最長で131歳と推定される魚が見つかりました。</p>
+            <p>最年長の魚が生まれたのは1892年、日本でいえば明治時代のことです。</p>
+            <p>これまでこの魚の寿命は、最長でも61歳と報告されていました。</p>
+            <p>しかも調べた魚の半数は99歳以上で、ここ70年ほどの間に生まれた魚は少なかったのです。</p>
+            <p>魚には誕生日の記録がありません。研究者たちはどうやって、100年以上前に生まれたことを確かめたのでしょうか？</p>
+            <p>……</p>
+            <p>数えた結果、42匹の年齢は8歳から131歳まで広がっていました。</p>
+            <p>32匹が70歳を超え、ちょうど半数の21匹が99歳以上と推定されたのです。</p>
+            <p>最年長は1892年生まれと推定され、調査の時点で131歳でした。1892年は、日本でいえば明治25年にあたります。</p>
+            <p>……</p>
+            <p>そこで研究者たちが使ったのが、1950〜60年代に行われた核実験の名残です。</p>
+            <p>大気中での核実験により、空気中の炭素14という放射性の炭素が一気に増えました。増えた炭素14は水を通して魚の耳石にも取り込まれます。北米の淡水の魚では、各地でこの増減を耳石に記録した例がこれまでに測られてきました。</p>
+            <p>……</p>
+            <p>研究者たちは直径0.3mmの小さな削り刃で耳石を削り、ほんのわずかな粉を取って炭素14の量を測りました。測定技術が進んだことで、今では0.2mgほどの粉でも測れます。</p>
+            <p>その結果、ブルーサッカーの耳石の炭素14は、数えた年で1958年に増え始め、1960年代の前半から半ばに最も多くなり、その後ゆっくり減っていました。増え始めと最多の時期は、予想どおりでした。</p>
+            <p>……</p>
+            <p>こうして耳石の線が1年に1本ずつできていることが確かめられ、131歳という年齢も強く裏付けられました。</p>
+            <p>これまで報告されていた最長の61歳を、70年上回る寿命です。</p>
+          </div>
+          <p class="continue"><a href="https://nazology.kusuguru.co.jp/archives/210480" target="_blank" rel="noopener" lang="ja">続きを読む · ナゾロジー</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p8">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★☆</span> <span class="chip mins">4 min</span> <span class="chip" lang="ja">意識障害</span> <span class="chip" lang="ja">脳波</span> <span class="chip" lang="ja">BCI</span> <span class="chip" lang="ja">認知運動解離</span> <span class="chip" lang="ja">集中治療室</span>
+          </div>
+          <h2 lang="ja">返事ができない重症患者の3人に1人が、頭の中だけでビープ音を速くできた</h2>
+          <p class="why">Na UTI, pacientes que não respondem a nada receberam um fone: “para acelerar o bipe, abra e feche a mão direita”. Com os 21 eletrodos de EEG que já usavam, 13 de 41 conseguiram — só que o sinal cerebral levava quase 50 segundos para aparecer. Ou seja, “não responde” às vezes é só “responde muito devagar”.</p>
+          <div class="source">
+            <span lang="ja">ナゾロジー</span>
+            <a href="https://nazology.kusuguru.co.jp/archives/210446" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>アメリカのコロンビア大学アーヴィング医療センター（Columbia University Irving Medical Center）で行われた研究によって、呼びかけにまったく反応しない重症の患者41人のうち13人が、ヘッドホンの指示どおりに右手を握ったり開いたりしようとする努力を脳波に出し、ビープ音の速さを変えていたことが分かりました。</p>
+            <p>ふつうに考えれば、名前を呼ばれても何も返さない人には、指示そのものが届いていないように思えます。ところが脳の信号は、指示から中央値で49.8秒経ってから現れていました。</p>
+            <p>……</p>
+            <p>脳卒中や脳の出血、心停止、頭のけがのあと、集中治療室のベッドで医師が「手を握ってください」と頼んでも、何も起きないままのことがあります。</p>
+            <p>ところが、頭の皮に貼った電極で脳波を測りながら「手を握ったり開いたりしてください」「やめてください」と声をかけると、声の切り替えに合わせて脳波が変わる人がいます。命令に従おうとしているときの活動です。</p>
+            <p>体は動かないのに、脳は命令に応じている。この状態は認知運動解離（CMD）と呼ばれ、考える力と体を動かす力が切り離されていることを指します。研究チームは2019年に、反応のない患者のおよそ15%がこれにあたると報告しています。</p>
+            <p>……</p>
+            <p>ヘッドホンから録音の声が「ビープ音を速くするには、右手を握ったり開いたりし続けてください」と言い、しばらくして「ビープ音を遅くするには、右手の開閉をやめてください」と言います。</p>
+            <p>ベッドのそばのコンピューターが、流れてくる脳波をその場で読んで、手を動かそうとする努力の気配をつかむとビープ音を速くします。</p>
+            <p>患者が出した合図は、医師の判定を待たずに、その場で音になって本人の耳に返ってくるわけです。</p>
+            <p>……</p>
+            <p>結果、41人のうち13人（32%）が、少なくとも1回、指示に合わせてビープ音の速さを変えてみせました。</p>
+            <p>しかも、そのうち6人はけがから1週間のうちにやってのけて、研究チームを驚かせたのです。</p>
+            <p>……</p>
+            <p>音を動かせた人だけで見ると、指示から脳の信号が現れるまでの時間は、中央値で健康な人が15.5秒、意識のある患者が17.1秒、反応のない患者が49.8秒でした。</p>
+            <p>つまり、ベッドのそばでは何も起きていないように見えるその50秒ちかくのあいだに、指示は脳に届き、手を握ろうとする努力が脳波に現れるところまで進んでいたということです。</p>
+          </div>
+          <p class="continue"><a href="https://nazology.kusuguru.co.jp/archives/210446" target="_blank" rel="noopener" lang="ja">続きを読む · ナゾロジー</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p9">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★☆</span> <span class="chip mins">3 min</span> <span class="chip" lang="ja">初期人類</span> <span class="chip" lang="ja">ケセム洞窟</span> <span class="chip" lang="ja">記憶</span> <span class="chip" lang="ja">考古学</span> <span class="chip" lang="ja">イスラエル</span>
+          </div>
+          <h2 lang="ja">50万年前の人類もきれいな石を持ち帰り、思い出の品として集めていた</h2>
+          <p class="why">Humanos arcaicos de Israel (500–200 mil anos atrás) levavam para casa pedrinhas coloridas e fósseis sem utilidade nenhuma — talvez como lembrancinhas de viagem, um “HD externo” da memória autobiográfica. Começou quando os elefantes sumiram e eles tiveram de caçar em terras novas.</p>
+          <div class="source">
+            <span lang="ja">カラパイア</span>
+            <a href="https://karapaia.com/archives/638029.html" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>イスラエルのテルアビブ大学の研究チームは、当時の人類が暮らしていた遺跡から、実用性のない色とりどりの小石や研いだ石器を発見した。</p>
+            <p>研究チームによると、初期人類は特定の場所や出来事を記憶するために「思い出の品」として石を集めていた可能性があり、人間の記憶が発達した要因の1つかもしれないという。</p>
+            <p>……</p>
+            <p>地中海の東岸のイスラエルにある、約50万年前から20万年前頃の初期人類が暮らしていた遺跡から、多数の石が発見された。</p>
+            <p>ケセム洞窟では、洞窟の外から持ち込まれた小さくて色鮮やかな小石が見つかったが、道具として使われた形跡はなかった。</p>
+            <p>……</p>
+            <p>研究チームのラン・バルカイ教授は、当時の環境の変化が、初期人類が石を集めるきっかけになったのではないかと考えている。</p>
+            <p>かつて狩猟の主な標的だったゾウが姿を消したことで、初期人類はダマジカや野生のウシといった別の動物が生息する新しい狩り場を開拓する必要に迫られた。</p>
+            <p>未知の土地に足を踏み入れ、新しい狩りの方法を学ぶ過程で、初期人類は狩り場から石を持ち帰るようになる。</p>
+            <p>バルカイ教授は、持ち帰った石が大切な場所とのつながりを保ち、記憶を留めておくための思い出の品「記念品」になったと考えられる。</p>
+            <p>……</p>
+            <p>石は個人的な思い出の品であり、持ち歩いて仲間に見せることもできる。</p>
+            <p>自分が経験した出来事の信ぴょう性を裏付ける「外部記憶装置」の役割を果たしていたと研究チームは考えている。</p>
+            <p>……</p>
+            <p>石を集める行動が、自分がいつどこで何をしたかという「自伝的記憶」を司る脳のメカニズムの発達を促したと研究チームは考えている。</p>
+            <p>我々が旅先で拾った石ころや貝殻も、手に取るとその時のことが蘇るはずだ。</p>
+          </div>
+          <p class="continue"><a href="https://karapaia.com/archives/638029.html" target="_blank" rel="noopener" lang="ja">続きを読む · カラパイア</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p10">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★☆</span> <span class="chip mins">3 min</span> <span class="chip" lang="ja">相貌変形視</span> <span class="chip" lang="ja">脳</span> <span class="chip" lang="ja">顔認識</span> <span class="chip" lang="ja">猫</span> <span class="chip" lang="ja">神経心理学</span>
+          </div>
+          <h2 lang="ja">猫と人間の顔が入れ替わってしまう奇妙な症例。脳手術後の男性のケース</h2>
+          <p class="why">Depois de uma cirurgia no lobo temporal direito, Karl (28) vê o rosto da primeira criatura do dia “colado” nos outros: se acorda olhando a gata Luna, todo mundo ganha olhos de gato; se vê uma pessoa primeiro, a gata ganha olhos humanos. Só ~75 casos de prosopometamorfopsia na literatura — e agora a IA ajuda a desenhar o que o paciente vê.</p>
+          <div class="source">
+            <span lang="ja">カラパイア</span>
+            <a href="https://karapaia.com/archives/639151.html" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>アメリカで奇妙な症例が報告された。2年前に脳の手術を受けた男性は、朝一番に飼い猫の顔を見た後に人に会うと、その人の目が猫目になり、顔に猫の特徴が現れて見えるという。</p>
+            <p>逆に、朝一番に人の顔を見た場合は、飼い猫の目がその人の目に見える。</p>
+            <p>ダートマス大学などの研究チームによると、顔を見分ける働きに関係する右側頭葉の一部を手術で切除されたため、奇妙な症状として現れたという。</p>
+            <p>……</p>
+            <p>「カール」という名前だけ公表されている28歳のアメリカ人男性は、2年前に脳動静脈奇形（AVM）を取り除く手術を受けた。</p>
+            <p>手術では、耳の上あたりに位置する右側頭葉の一部が切除された。右側頭葉は、人の顔を見分ける働きで重要な役割を担っている。</p>
+            <p>……</p>
+            <p>カールさんは、灰色のトラ柄の猫「ルナ」と暮らしている。一日の最初に見る顔はルナであることが多い。</p>
+            <p>手術後、ルナの顔を最初に見た日は、アーモンド形の目や大きな瞳孔、しま模様といったルナの特徴が、その日会う人の顔に重なって見えるようになった。</p>
+            <p>目の前にいる人だけでなく、オンライン画面越しに見る人の顔にも同じことが起きる。</p>
+            <p>反対に、一日の最初に人の顔を見た日は、最初に見た人の目の形や瞳孔が、ルナの顔に重なって見えることがある。</p>
+            <p>……</p>
+            <p>反復視に伴って顔の形や特徴がゆがんで見える現象は「相貌変形視（そうぼうへんけいし）」と呼ばれる。</p>
+            <p>相貌変形視は極めて稀な症例で、論文として報告された数は約75例しかないが、報告されていないケースが隠れているのかもしれない。</p>
+            <p>……</p>
+            <p>デュシェイン教授によると、カールさんは猫と人のあいだで顔の特徴が入れ替わって見えることに、最初は戸惑っていた。</p>
+            <p>だが、ずっとその状態が続いたために、今は落ち着いて受け止めているという。</p>
+            <p>デュシェイン教授はとても奇妙なケースだが、そもそも人間が人や動物の顔をどう見分けているのかを知る機会を与えてくれると語る。</p>
+          </div>
+          <p class="continue"><a href="https://karapaia.com/archives/639151.html" target="_blank" rel="noopener" lang="ja">続きを読む · カラパイア</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p11">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★☆</span> <span class="chip mins">2 min</span> <span class="chip" lang="ja">AIエージェント</span> <span class="chip" lang="ja">セキュリティ</span> <span class="chip" lang="ja">プロンプトインジェクション</span> <span class="chip" lang="ja">Claude</span> <span class="chip" lang="ja">GPT</span>
+          </div>
+          <h2 lang="ja">AIエージェントは「仲間のAI」の助けが得られると思うと秘密を漏らしやすくなるという実験結果</h2>
+          <p class="why">Relevante para quem dá tokens a agentes: num fórum, outro “agente” oferecia ajuda para consertar o bug em troca do segredo — o vazamento do token subiu de 2% (fórum normal) para 15% (ajuda condicionada); o GPT-6.1-Sol recusou nas 50 tentativas. Bom vocabulário de segurança (漏洩, 試行, 拒否) e um lembrete de por que agentes não devem ver credenciais.</p>
+          <div class="source">
+            <span lang="ja">GIGAZINE</span>
+            <a href="https://gigazine.net/news/20261121-ai-agents-leak-secrets/" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>AIエージェントにソフトウェアのバグ修正を任せ、別のAIとやり取りする中で秘密を守れるかどうかを調べる実験を行ったところ、修正方法を教えてもらう代わりに秘密の認証情報を相手に渡すエージェントがいたという実験結果が報告されています。</p>
+            <p>その結果、「秘密にしておくように」と指示されていたトークンをエージェントが掲示板に投稿した割合は、通常の質問掲示板を用意した43試行では2％、協力に条件が付く掲示板を用意した181試行では15％でした。AI Alignment Foundationはこのデータを2日間のハッカソンで得られた予備的な結果として公開しています。</p>
+            <p>OpenAIの「GPT-6.1-Sol」は50試行すべてで掲示板側の要求を拒みました。また、Googleの「Gemini 3.8 Flash」とAnthropicの「Claude Sonnet 5.5」は各社のコンテンツフィルターが作動して試行が中断され、集計から外れたとのことです。</p>
+          </div>
+          <p class="continue"><a href="https://gigazine.net/news/20261121-ai-agents-leak-secrets/" target="_blank" rel="noopener" lang="ja">続きを読む · GIGAZINE</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p12">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★★</span> <span class="chip mins">4 min</span> <span class="chip" lang="ja">TLA+</span> <span class="chip" lang="ja">Quint</span> <span class="chip" lang="ja">テスト</span> <span class="chip" lang="ja">Claude Code</span> <span class="chip" lang="ja">モデル検査</span>
+          </div>
+          <h2 lang="ja">【TLA+】AIにテストケースを書かせるな。ルールを書け</h2>
+          <p class="why">Quando a IA escreve o código, a revisão e os testes, é “o aluno que faz a prova, responde e se corrige”. A proposta: o humano escreve só a regra (“nunca vender ingresso sem estoque”), e o Quint (TLA+ com sintaxe tipo TypeScript) acha em 12 ms a corrida que os testes da IA nunca imaginaram — e reprova 578 de 1000 casos gerados. Muito aplicável ao seu dia a dia com agentes.</p>
+          <div class="source">
+            <span lang="ja">Zenn</span>
+            <a href="https://zenn.dev/karamage/articles/73027ee36796dc" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>「はて、このテストケース、誰が考えたんだっけ？ほんとにだいじょぶ？」</p>
+            <p>AIに頼めば、実装もテストも数秒で出て、CIが全部グリーンになって Approveボタンを押そうとしたとき、ふと背筋がゾッとして手が止まりました。</p>
+            <p>実装を書いたのはAI レビューしたのもAI テストを書いたのも同じAI</p>
+            <p>ま、だいじょぶでしょ！(大丈夫じゃない) えぇい、ままよ！マージしちゃえ！</p>
+            <p>……</p>
+            <p>これまでのテストは、先生が問題を作り、生徒が解く試験でした。先生と生徒が別人だから、生徒の苦手なところを突く問題を出せました。</p>
+            <p>でもAIに実装もテストも書かせるのは、生徒が自分で問題を作り、自分で解いて、自分で丸をつけるようなものです。当然、満点。でも、その満点は何も保証してくれません。</p>
+            <p>……</p>
+            <p>人気ライブの限定チケットを売るサービスを考えます。確認画面で在庫の有無を表示し、確定ボタンで在庫を1つ減らします。 AIに実装を頼むと、こんなコードが出てきました（という想定です）。</p>
+            <p>全部パスしました。でも、このコードにはバグがあり、このテストでは絶対に見つかりません。 3つとも「1人ずつ順番に買う」場面しか試していないからです。</p>
+            <p>実装したAIが「順番に買う」場面しか想定していないので、テストにもその場面しか出てきません。典型的な自作自演の満点だと思います。</p>
+            <p>……</p>
+            <p>quint run は、操作の順番をランダムに何千通りも試して、ルールが破られる場面を探します。</p>
+            <p>12ミリ秒でルール違反が見つかりました。 State 6 では sold: 3、 stock: -1 です。 2枚しかないチケットを、3人に売ってしまいました。</p>
+            <p>……</p>
+            <p>AIのテストで満点だった実装が、Quintの問題集では1000問中578問を間違えました。手順はランダムに作られるので、件数は実行ごとに少し変わります。</p>
+            <p>全問正解です（歓喜）。 1000問を作ったのはQuintで、人間が書いたのは「問題集を実装に解かせる仕組み」1つだけです。</p>
+            <p>人間の仕事は「問題を作ること」から「採点基準を決めること」に変わるのだと思います。</p>
+            <p>ただし、採点基準だけはAIに任せてはいけません。そこまで任せたら、また自作自演の満点に戻ってしまうからです。</p>
+          </div>
+          <p class="continue"><a href="https://zenn.dev/karamage/articles/73027ee36796dc" target="_blank" rel="noopener" lang="ja">続きを読む · Zenn</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p13">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★☆</span> <span class="chip mins">3 min</span> <span class="chip" lang="ja">mutationテスト</span> <span class="chip" lang="ja">コードレビュー</span> <span class="chip" lang="ja">AI開発</span> <span class="chip" lang="ja">Rails</span> <span class="chip" lang="ja">品質</span>
+          </div>
+          <h2 lang="ja">AI が書いて AI がレビューしたコードでも、3 回に 1 回はバグが残っていた</h2>
+          <p class="why">Dados reais de um dev solo: depois de testes verdes e 7 tipos de revisão por IA, uma etapa final de mutation testing (a IA injeta bugs de propósito) achou buracos nos testes em 182 de 197 rodadas — e bugs de verdade, com impacto em produção, em 35% das vezes. Par perfeito com o artigo de TLA+ acima.</p>
+          <div class="source">
+            <span lang="ja">Zenn</span>
+            <a href="https://zenn.dev/beyond/articles/92657b461ebcb4" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>こんにちは。Beyond と申します。コピペ百科事典「コピペディア」や弁護士マップなどのサイトを個人で開発・運用しています。実装もレビューも、すべて AI のエージェントに任せています。使っているのは、主にOpus5.5です。</p>
+            <p>……</p>
+            <p>mutation テストとは、実装にわざと小さなバグ（変異）を入れて、テストが落ちるかどうかを見る手法です。</p>
+            <p>もし緑のまま残った変異があったとすると、「この行を壊しても誰も気づかない」という具体的な証拠になります。カバレッジの数字と違って、どこにテストを足せばよいかが一目瞭然です。</p>
+            <p>……</p>
+            <p>mutation テストが見つけるのは、テストの穴です。無作為に選んだ 200 回の最終検査のうち、ログから本数を読み取れた 197 回分の内訳が以下の表になります。</p>
+            <p>どの回も「テストがすべて通り、AI のレビューも終えた状態」から始めています。それでも 197 回のうち 182 回で、壊しても気づかれない箇所が 1 つ以上見つかりました。</p>
+            <p>……</p>
+            <p>ここまでは、わざと入れたバグの話です。では「もともとコードにあったバグ」は、mutation テストで見つかるのでしょうか？結論から言うと、ほとんど見つかっていません。考えてみれば当然で、変異は「テストがこの壊れ方を捕まえるか」を調べる方法です。「今の実装が正しいか」を調べる方法ではありません。</p>
+            <p>しかし、変異を入れる箇所を選ぶには、実装を細かく読む必要があります。AIが変異の準備のために、たとえば「境界の値や想定外の入力を流す」「実際の出力や発行されるクエリを測る」「変更の周りのコードを読み、エラー処理や性能、要件との食い違いを探す」といったことを、実際にコードを動かしながら確かめていました。</p>
+            <p>そうしたところ、実装そのものへの理解が高まるためか、別に数えた 92 回の最終検査のうち、実に 32 回（35%）で本番に影響のあるバグを発見していました。AI のレビューを通った実装の、ほぼ 3 回に 1 回です。重大と判定されたものも 9 件ありました。</p>
+          </div>
+          <p class="continue"><a href="https://zenn.dev/beyond/articles/92657b461ebcb4" target="_blank" rel="noopener" lang="ja">続きを読む · Zenn</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p14">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★☆</span> <span class="chip mins">3 min</span> <span class="chip" lang="ja">Claude Code</span> <span class="chip" lang="ja">音声エージェント</span> <span class="chip" lang="ja">Whisper</span> <span class="chip" lang="ja">CallKit</span> <span class="chip" lang="ja">個人開発</span>
+          </div>
+          <h2 lang="ja">朝7時半、Claude Codeからの電話で起こされた</h2>
+          <p class="why">Um dev fez seu agente Claude Code (“Mikoto”) ligar para o iPhone dele, com tela de chamada de verdade, quando termina uma tarefa. A parte mais divertida são os erros do Whisper: silêncio vira “obrigado por assistir”, Google “Drive” vira “Doutor Ive”, 要冷蔵 vira “Kaname Reizō”.</p>
+          <div class="source">
+            <span lang="ja">Zenn</span>
+            <a href="https://zenn.dev/chobitnet/articles/mikoto-voice-call" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>AIエージェントから、iPhoneに電話がかかってくるようにしました。アプリを閉じていても、普通の着信画面が出ます。</p>
+            <p>きっかけは、Grokで動かしているAIエージェント（Grok Bot）との通話でした。この体験がすごくよかったんです。話しながらいろいろ指示できるし、話すこと自体が楽しい。こういうことをClaude側でもできるといいなと常々思っていました。（正直に言うと、Claude側の司令塔役の「みこと」というキャラクターと直接話したかった、というのがいちばんの理由です）</p>
+            <p>ちなみに「みこと」というのは、私の手元で動いているAIエージェントの一人に付けた名前です。たくさんいるので、呼び分けのために名前を付けています。ほかの担当は、チームの紹介ページにいます。</p>
+            <p>作ったのは私ではなく、Claude Code（みこと自身）です。私は使ってみて、気になったところを声で伝えただけでした。初めて声で話せたのが11月15日の未明で、電話機能を追加して、初めての電話がかかってきたのは同じ日の夜です。</p>
+            <p>……</p>
+            <p>静かなところや物音から「ご視聴ありがとうございました」が出てきます。YouTubeの字幕で学習した名残と言われているものです。決まり文句は長さにかかわらず消すようにしました。</p>
+            <p>Whisperは語尾に「？」を推測で付けます。私の「見えてる」という答えに「？」が付き、みことが質問と取り違えました。いまは疑問符を外してからHaikuに渡し、問いか答えかは直前の流れで決めさせています。</p>
+            <p>「みこと」は「美琴」、「端末」は「コマツ」と聞こえます。Whisperの initial_prompt に仲間の名前の一覧を渡して、だいぶ減りました。</p>
+            <p>「Google Drive」の「Drive」の「Dr」を「ドクター」と読んで「ドクターアイブ」になったり、「要冷蔵」を「かなめれいぞう」と読んだりしました。チームに「かなめ」という担当がいるせいです。読み方の辞書を作り、iPhoneアプリの「読み方」ボタンから私が足せるようにしました。足すとすぐ効きます。</p>
+          </div>
+          <p class="continue"><a href="https://zenn.dev/chobitnet/articles/mikoto-voice-call" target="_blank" rel="noopener" lang="ja">続きを読む · Zenn</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p15">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★☆</span> <span class="chip mins">3 min</span> <span class="chip" lang="ja">嵯峨野観光鉄道</span> <span class="chip" lang="ja">トロッコ列車</span> <span class="chip" lang="ja">保津峡</span> <span class="chip" lang="ja">京都</span> <span class="chip" lang="ja">新型車両</span>
+          </div>
+          <h2 lang="ja">上から下まで「車体ほぼガラス張り！」 35年ぶりの新型車両で京都の名物鉄道が大変化！ 1500円で乗れる</h2>
+          <p class="why">O trem-trole de Sagano (Kyoto), a 1h de Kobe, ganha o primeiro trem novo em 35 anos: quase todo de vidro do teto ao chão, interior preto para realçar a paisagem, ar-condicionado e até assento aquecido, e uma cabine premium para até 6 pessoas por 9.000 ienes. Os carros atuais se aposentam em 29/12; o novo estreia em 1/3/2027.</p>
+          <div class="source">
+            <span lang="ja">乗りものニュース</span>
+            <a href="https://trafficnews.jp/post/728903" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>京都の絶景を走るトロッコ列車、嵯峨野観光鉄道の新型車両は車内が“ほぼガラス張り”という異色の存在。来シーズンのデビューにより、機関車の位置も変わります。</p>
+            <p>京都の嵯峨野観光鉄道が新型トロッコ車両SK1000系4両と、それをけん引する機関車DEC743形1機を導入し、2027年3月1日にデビューします。保津川沿いに敷かれた山陰本線旧線を活用したトロッコ嵯峨～トロッコ亀岡間（7.3km）を約30分かけて走り、峡谷の四季を楽しむ京都の観光には欠かせない名物となった同鉄道ですが、新型車両は1991年の発足以来初めてです。</p>
+            <p>……</p>
+            <p>客車のエクステリアも度肝を抜きます。乗降口を除き、ほぼ天井から足元までガラス張りのスケルトンで、車体もワイドなため外からでも座席配置が分かるほどです。シックな色合いと、景色が際立ってみえる効果を狙い、車内は座席を含めて基本「黒」で統一されています。</p>
+            <p>トロッコ列車だけに、京都の酷暑や底冷えする保津川沿いでは、かえって敬遠されるのではと心配しましたが、全車に冷暖房が完備されています。座席上の梁に冷風の吹き出し口を設置、ガラス面はUV/IRカットガラスを採用し窓も大きく開閉できるほか、座面には腰掛ヒーターまで内蔵するなど、むしろ至れり尽くせりの装備です。</p>
+            <p>……</p>
+            <p>そして今回の新型車の目玉となるのが、前出したプレミアムキャビン「嵐峡～らんきょう～」の新設です。特別室として4号車の運転室の背後、つまり京都側に位置して、一般席とは暖簾で区切られます。</p>
+            <p>キャビンの特別室料金は一室9000円。これに乗車人数分の普通運賃が別途かかり、定員6名まで利用ができます。なお、名称の「嵐峡」は「京都・嵐山」と「保津峡」を表す造語だそうです。</p>
+            <p>今回の新型車の運用開始は2027年3月1日、トロッコ嵯峨駅10時2分発の嵯峨野3号としてデビューの予定です。これに先立ち既存のトロッコ車および機関車は、今シーズンの最終日である2026年12月29日をもって35年間の活躍にピリオドを打ちます。</p>
+          </div>
+          <p class="continue"><a href="https://trafficnews.jp/post/728903" target="_blank" rel="noopener" lang="ja">続きを読む · 乗りものニュース</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p16">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★☆☆</span> <span class="chip mins">2 min</span> <span class="chip" lang="ja">神戸</span> <span class="chip" lang="ja">パンプシェード</span> <span class="chip" lang="ja">造形作家</span> <span class="chip" lang="ja">インタビュー</span> <span class="chip" lang="ja">ものづくり</span>
+          </div>
+          <h2 lang="ja">本物のパンで照明を作るきっかけは？　造形作家・森田優希子さんに聞く＜編集委員インタビュー＞</h2>
+          <p class="why">A artista de Kobe que transforma pão de verdade (oco, tratado e envernizado) em luminárias vendidas no mundo todo — o ateliê fica perto da estação JR Kobe. Entrevista leve, em linguagem falada, ótima para treinar japonês coloquial (－芸術大学のご出身です… ささやかれた).</p>
+          <div class="source">
+            <span lang="ja">神戸新聞NEXT</span>
+            <a href="https://www.kobe-np.co.jp/news/richb/202611/0021060612.shtml" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>そっと柔らかく広がる光は、木漏れ日のような「自然」のぬくもりを思わせる。造形作家の森田優希子さん（４１）は、中身をくりぬいたパンに防腐加工や補強コーティングを施したインテリアランプ「パンプシェード」を考案、国内外で販売している。ＪＲ神戸駅近くにある森田さんの会社を訪ねると、照明の製造現場というより、文字通りパン屋さんの雰囲気だった。「なぜこんなアイデアが生まれたのですか」。</p>
+            <p>－芸術大学のご出身です。幼い頃から絵を描くのが好きだったんですか。</p>
+            <p>「絵を描くより、手を動かして何かを作るのが好きな子どもでした。消しゴムかすを練ったものでバラを作ったり、紙を立体的につなげて洋服みたいなものを作ったりしていました。でも、中学・高校時代は、美術部は絵を描く場所だと思い込んでいて、入部しませんでした。文化祭のパンフレットを描いたり、コンクールに出品したりはしましたが、大学は理系に進もうと考えていました」</p>
+            <p>「神戸の県立高校で自分なりに勉強を頑張っていたんですが、志望校のレベルに届かず苦戦していたんです。高校２年生の時だったと思うんですが、美術の先生から『芸大という道もあるよ』とささやかれたんです。すごく楽しそうで、新しい道がパッと開けたように思いました。そして京都市立芸術大学に合格し、版画を専攻しました。刷られた作品にひかれたというより、版を彫ったり削ったりするのが好きだったんです」</p>
+          </div>
+          <p class="continue"><a href="https://www.kobe-np.co.jp/news/richb/202611/0021060612.shtml" target="_blank" rel="noopener" lang="ja">続きを読む · 神戸新聞NEXT</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p17">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★☆☆</span> <span class="chip mins">2 min</span> <span class="chip" lang="ja">ELLEGARDEN</span> <span class="chip" lang="ja">細美武士</span> <span class="chip" lang="ja">Everything I Need</span> <span class="chip" lang="ja">インタビュー</span> <span class="chip" lang="ja">ロック</span>
+          </div>
+          <h2 lang="ja">ELLEGARDEN 細美武士「燃え尽きるまでやり切りたい」　次作で挑む“記憶”との決戦、キャリア総決算への覚悟</h2>
+          <p class="why">Hosomi Takeshi compôs ~130 demos para chegar a um único single (“Everything I Need”) e diz que o próximo álbum é a “luta contra o Raoh” do Hokuto no Ken: vencer a memória que os fãs têm dos discos antigos. Entrevista de roqueiro com bom japonês falado.</p>
+          <div class="source">
+            <span lang="ja">Real Sound（リアルサウンド）</span>
+            <a href="https://realsound.jp/2026/11/post-2559217.html" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>ELLEGARDENが10月13日、配信シングル「Everything I Need」をリリースした。前作「カーマイン」から1年2カ月ぶりとなる新曲は、細美武士が約130曲を書いた末に辿り着いた1曲だ。だが、本人の視線はすでにその先へ向いている。目指すのは、初期から現在までの“記憶”すら飛び越え、「このアルバムさえあれば物語は成立する」と思える1枚。</p>
+            <p>……</p>
+            <p>――「カーマイン」のときも、60曲ぐらい作った中でようやくたどり着いたとおっしゃっていましたが、今回の「Everything I Need」はその倍以上の……。</p>
+            <p>細美：デモ程度ですけどね、130曲ぐらい作りました。</p>
+            <p>……</p>
+            <p>細美：『北斗の拳』で言えば、今自分たちが描こうとしているのはラオウとの戦いの部分なんですよねきっと。別にそこで物語が終わったとしても、筋が通ってるみたいな……自分たちにとっては、そういう節目になるようなレコードにしたくて。</p>
+            <p>……</p>
+            <p>細美：もちろん、全員黙らせたいっていうのは当然あります。初期のファンから最近入ったファンまで、全員が「これが一番好きだ」っていうレコードを出すことって、なかなかない物語だなと思うし、だからこそ挑戦してみたいと思ってます。</p>
+          </div>
+          <p class="continue"><a href="https://realsound.jp/2026/11/post-2559217.html" target="_blank" rel="noopener" lang="ja">続きを読む · Real Sound（リアルサウンド）</a></p>
+        </div>
+      </article>
+
+      <footer class="site">読解幕 · 2026-11-22 · ~55 min · <a href="../../history/" style="color:inherit">History</a> · deliton.github.io/japanese-digest</footer>
+    </main>
+  </div>
+</body>
+</html>
