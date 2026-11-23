@@ -1,0 +1,1016 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>読解幕 · 2026-11-23 · Japanese Digest</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Noto+Serif+JP:wght@400;600;700&family=Shippori+Mincho:wght@500;700&display=swap" rel="stylesheet" />
+  <style>
+
+    :root {
+      --bg: #0a0a0a;
+      --bg-2: #121212;
+      --bg-card: #161616;
+      --ink: #f5f5f5;
+      --ink-dim: #a8a29a;
+      --ink-mute: #6b6560;
+      --shu: #c41e3a;
+      --shu-hot: #e11d48;
+      --shu-deep: #8b1228;
+      --gold: #d4a017;
+      --gold-soft: #c9a227;
+      --white: #fafafa;
+      --line: #2a2a2a;
+      --line-hot: rgba(196, 30, 58, 0.45);
+      --measure: 42rem;
+      --radius: 4px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: "Noto Sans JP", "Hiragino Sans", "Yu Gothic", system-ui, sans-serif;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .stage-bar {
+      height: 6px;
+      background: repeating-linear-gradient(
+        90deg,
+        var(--shu) 0 48px,
+        var(--white) 48px 56px,
+        #111 56px 64px,
+        var(--gold) 64px 72px,
+        #111 72px 88px
+      );
+    }
+
+    .wrap {
+      width: min(100% - 2rem, 74rem);
+      margin: 0 auto;
+      padding: 2rem 0 4.5rem;
+      display: grid;
+      grid-template-columns: 15.5rem 1fr;
+      gap: 2.75rem;
+      align-items: start;
+    }
+
+    @media (max-width: 900px) {
+      .wrap { grid-template-columns: 1fr; gap: 1.5rem; padding-top: 1.25rem; }
+      .sidebar { position: static !important; }
+    }
+
+    .sidebar { position: sticky; top: 1.25rem; }
+
+    .brand {
+      display: flex;
+      align-items: baseline;
+      gap: 0.55rem;
+      margin: 0 0 0.35rem;
+    }
+    .brand-mark {
+      font-family: "Shippori Mincho", "Noto Serif JP", serif;
+      font-size: 1.85rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      color: var(--white);
+      line-height: 1;
+    }
+    .brand-mark em {
+      font-style: normal;
+      color: var(--shu);
+    }
+    .brand-sub {
+      font-size: 0.65rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-weight: 700;
+    }
+
+    .meta {
+      color: var(--ink-mute);
+      font-size: 0.8rem;
+      margin: 0 0 1.25rem;
+    }
+
+    .stat-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-bottom: 1.35rem;
+    }
+    .stat {
+      border: 1px solid var(--line);
+      background: var(--bg-2);
+      padding: 0.32rem 0.65rem;
+      font-size: 0.72rem;
+      color: var(--ink-dim);
+      border-radius: var(--radius);
+    }
+    .stat strong { color: var(--white); font-weight: 700; }
+    .stat.hot {
+      border-color: var(--shu);
+      color: var(--shu-hot);
+      background: rgba(196, 30, 58, 0.1);
+    }
+
+    .toc {
+      border: 1px solid var(--line);
+      background: var(--bg-2);
+      padding: 0.85rem 0.9rem 0.95rem;
+      border-radius: var(--radius);
+    }
+    .toc h2 {
+      margin: 0 0 0.65rem;
+      font-size: 0.72rem;
+      letter-spacing: 0.16em;
+      color: var(--gold);
+      font-weight: 800;
+    }
+    .toc ol { list-style: none; margin: 0; padding: 0; }
+    .toc li { margin: 0; }
+    .toc a {
+      display: flex;
+      justify-content: space-between;
+      gap: 0.5rem;
+      text-decoration: none;
+      color: var(--ink-dim);
+      font-size: 0.82rem;
+      padding: 0.38rem 0.2rem;
+      border-bottom: 1px solid transparent;
+    }
+    .toc a:hover { color: var(--white); border-bottom-color: var(--line-hot); }
+    .toc .t-title { font-weight: 600; }
+    .toc .t-min { color: var(--gold); font-size: 0.72rem; font-weight: 700; flex-shrink: 0; }
+
+    .main { max-width: var(--measure); }
+
+    .digest-banner {
+      display: flex;
+      gap: 0.75rem;
+      align-items: flex-start;
+      background: #141014;
+      border: 1px solid var(--line);
+      border-left: 3px solid var(--shu);
+      padding: 0.85rem 1rem;
+      margin-bottom: 1.5rem;
+      font-size: 0.78rem;
+      color: var(--ink-dim);
+      line-height: 1.55;
+    }
+    .digest-banner .tag {
+      flex-shrink: 0;
+      background: var(--shu);
+      color: #fff;
+      font-size: 0.65rem;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      padding: 0.28rem 0.5rem;
+      border-radius: var(--radius);
+    }
+
+    .hero {
+      margin-bottom: 2rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid var(--line);
+      position: relative;
+    }
+    .hero::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -1px;
+      width: 4.5rem;
+      height: 2px;
+      background: var(--shu);
+    }
+    .kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.7rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--shu-hot);
+      font-weight: 800;
+      margin-bottom: 0.85rem;
+    }
+    .kicker::before {
+      content: "◆";
+      font-size: 0.55rem;
+      color: var(--gold);
+    }
+    .hero h1 {
+      font-family: "Shippori Mincho", "Noto Serif JP", serif;
+      font-size: clamp(1.85rem, 4vw, 2.55rem);
+      font-weight: 700;
+      line-height: 1.2;
+      margin: 0 0 0.75rem;
+      color: var(--white);
+      letter-spacing: 0.02em;
+    }
+    .hero p {
+      margin: 0;
+      color: var(--ink-dim);
+      font-size: 0.98rem;
+      max-width: 36rem;
+    }
+
+    article.piece {
+      background: var(--bg-card);
+      border: 1px solid var(--line);
+      margin-bottom: 1.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+    article.piece::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: linear-gradient(90deg, var(--shu) 0%, var(--shu) 35%, var(--gold) 35%, var(--gold) 42%, transparent 42%);
+    }
+
+    .piece-inner { padding: 1.6rem 1.55rem 1.35rem; }
+
+    .piece-head {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-bottom: 0.85rem;
+    }
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      border: 1px solid var(--line);
+      background: #111;
+      color: var(--ink-dim);
+      padding: 0.22rem 0.6rem;
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      border-radius: var(--radius);
+    }
+    .chip.interest {
+      border-color: var(--shu);
+      color: var(--shu-hot);
+      background: rgba(196, 30, 58, 0.12);
+    }
+    .chip.mins {
+      border-color: var(--gold);
+      color: var(--gold);
+      background: transparent;
+    }
+
+    .piece h2 {
+      font-family: "Noto Serif JP", "Shippori Mincho", "Yu Mincho", serif;
+      font-size: 1.38rem;
+      font-weight: 700;
+      line-height: 1.5;
+      margin: 0 0 0.6rem;
+      color: var(--white);
+      letter-spacing: 0.02em;
+    }
+
+    .why {
+      margin: 0 0 1rem;
+      color: var(--ink-dim);
+      font-size: 0.9rem;
+      border-left: 2px solid var(--gold);
+      padding-left: 0.85rem;
+    }
+
+    .source {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.65rem 1.1rem;
+      font-size: 0.76rem;
+      color: var(--ink-mute);
+      margin-bottom: 1.25rem;
+    }
+    .source a {
+      color: var(--shu-hot);
+      text-decoration: none;
+      font-weight: 600;
+    }
+    .source a:hover { color: var(--gold); }
+
+    .ja {
+      font-family: "Noto Serif JP", "Hiragino Mincho ProN", "Yu Mincho", serif;
+      font-size: 1.08rem;
+      line-height: 2;
+      letter-spacing: 0.03em;
+      color: #ebe7e1;
+    }
+    .ja p { margin: 0 0 1.15em; }
+    .ja p:last-child { margin-bottom: 0; }
+
+    .continue {
+      margin-top: 1.25rem;
+      padding-top: 1rem;
+      border-top: 1px solid var(--line);
+      font-size: 0.86rem;
+    }
+    .continue a {
+      color: var(--white);
+      text-decoration: none;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      border-bottom: 2px solid var(--shu);
+      padding-bottom: 0.1rem;
+    }
+    .continue a:hover {
+      color: var(--shu-hot);
+      border-bottom-color: var(--gold);
+    }
+
+    footer.site {
+      max-width: var(--measure);
+      margin-top: 1.75rem;
+      color: var(--ink-mute);
+      font-size: 0.72rem;
+      letter-spacing: 0.06em;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+    footer.site::before {
+      content: "";
+      width: 1.25rem;
+      height: 2px;
+      background: var(--shu);
+    }
+
+  
+    .excerpt-label { font-size: 0.66rem; letter-spacing: 0.18em; color: var(--gold); font-weight: 800; margin: 0 0 0.6rem; }
+    .brand-sub a, .stat a { color: var(--gold); text-decoration: none; }
+    .toc .t-min { font-variant-numeric: tabular-nums; }
+  </style>
+</head>
+<body>
+  <div class="stage-bar" aria-hidden="true"></div>
+
+  <div class="wrap">
+    <aside class="sidebar">
+      <div class="brand">
+        <span class="brand-mark" lang="ja">読解<em>幕</em></span>
+      </div>
+      <p class="brand-sub">Kabuki Digest · <a href="../../history/">History</a></p>
+      <p class="meta">2026-11-23 · America/Sao_Paulo</p>
+      <div class="stat-row">
+        <span class="stat"><strong>53</strong> min</span>
+        <span class="stat"><strong>17</strong> pieces</span>
+        <span class="stat"><strong>~13,600</strong> 字</span>
+        <span class="stat"><a href="../../history/">History</a></span>
+      </div>
+
+      <nav class="toc" aria-label="Índice">
+        <h2 lang="ja">本日の演目</h2>
+        <ol>
+          <li>
+            <a href="#p1">
+              <span class="t-title" lang="ja">物理学者が解けなかったブラックホールの難問2つ、Claudeの「研究班」が解いた</span>
+              <span class="t-min">4′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p2">
+              <span class="t-title" lang="ja">茶々のお腹の子の父親は秀吉じゃなかった？――落書き事件と「参籠」説</span>
+              <span class="t-min">3′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p3">
+              <span class="t-title" lang="ja">斬首された石田三成の6人の子は全員生き延びた――宿敵・徳川に救われた血筋</span>
+              <span class="t-min">3′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p4">
+              <span class="t-title" lang="ja">8歳で海に沈んだ幼帝・安徳天皇「生存説」――硫黄島の「天皇さん」と能勢の文書</span>
+              <span class="t-min">3′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p5">
+              <span class="t-title" lang="ja">真田幸村に最後まで従った実在の家臣たち――娘を託した一通の手紙</span>
+              <span class="t-min">3′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p6">
+              <span class="t-title" lang="ja">徳川家康はなぜ海外との交流を重視したのか――「勝てる戦い」しかしない男の外交</span>
+              <span class="t-min">2′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p7">
+              <span class="t-title" lang="ja">「世界の果て」の島で19世紀の漂流者キャンプ跡を発見</span>
+              <span class="t-min">3′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p8">
+              <span class="t-title" lang="ja">太陽系6つ目の準惑星か――天の川の星に紛れていた巨大な氷の天体</span>
+              <span class="t-min">2′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p9">
+              <span class="t-title" lang="ja">「聞き取り役」の脳の言語中枢は、話す単語を先に用意していた</span>
+              <span class="t-min">3′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p10">
+              <span class="t-title" lang="ja">空飛ぶ新種のカエル、インドネシアで発見――泡ではなくゼリーに卵を産む</span>
+              <span class="t-min">2′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p11">
+              <span class="t-title" lang="ja">8日間群れを離れた「上位のインコ」は、戻るといじめられていた</span>
+              <span class="t-min">2′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p12">
+              <span class="t-title" lang="ja">AIが世界を変えてもAI企業が儲かるとは限らない――生成AIは「コンテナ」に近い</span>
+              <span class="t-min">4′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p13">
+              <span class="t-title" lang="ja">Claude Code の完了報告が嘘だった4つの型と、受け取ったときに聞く3つのこと</span>
+              <span class="t-min">5′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p14">
+              <span class="t-title" lang="ja">AIがテストに合わせて実装していない？――仕様テストを隠して確かめる</span>
+              <span class="t-min">4′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p15">
+              <span class="t-title" lang="ja">新幹線の「貴重なY字路」どうなってる？――160km/hで通過する特大ポイント</span>
+              <span class="t-min">3′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p16">
+              <span class="t-title" lang="ja">水木しげるさん、神戸で漫画の土台築く――戦後通った美術教室を特定</span>
+              <span class="t-min">4′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p17">
+              <span class="t-title" lang="ja">MAN WITH A MISSION、約4年半ぶりのフルアルバム『The Circus』</span>
+              <span class="t-min">3′</span>
+            </a>
+          </li>
+        </ol>
+      </nav>
+    </aside>
+
+    <main class="main">
+      <div class="digest-banner">
+        <span class="tag">TRIAGE</span>
+        <span>Destaque: Claude e dois problemas de buracos negros (ナゾロジー), continuação natural da Riemann de ontem. História: o pai do filho de Chacha (BUSHOO), os seis filhos sobreviventes de Ishida Mitsunari e as lendas de sobrevivência do imperador Antoku (Japaaan), os vassalos reais de Sanada Yukimura (BUSHOO) e a diplomacia de Ieyasu (草の実堂). Ciência: acampamento de náufragos na Isla de los Estados (GIGAZINE), possível 6º planeta-anão e rã voadora (カラパイア), área de Wernicke que prepara a fala e periquitos que praticam bullying (ナゾロジー). IA/dev: por que empresas de IA podem não lucrar (GIGAZINE); relatórios falsos do Claude Code e testes de especificação escondidos (Zenn). Trens/Kansai/música: a “bifurcação em Y” do Shinkansen (乗りもの), Mizuki Shigeru em Kobe (神戸新聞), MAN WITH A MISSION (BARKS). Pontos fracos: dia muito Toyotomi/Sengoku por causa do taiga (três peças); sem novidade das suas bandas principais (BAND-MAID Budokan já saiu em 15/11; L’Arc só anúncio de TV), por isso MWAM; Kobe Shimbun quase só notícia local dura; nada bom de vistos/imóveis/sailing/JRPG — o mais perto de vela é o naufrágio. Cortados: comida aborígine da Tasmânia (NatGeo), estrela tripla “impossível” a 28 anos-luz (ナゾロジー), mariposa que se defende de morcegos (GIGAZINE), urina fóssil de hírax (カラパイア).</span>
+      </div>
+
+      <header class="hero">
+        <div class="kicker">Daily curated reading</div>
+        <h1 lang="ja">Claudeの研究班とブラックホール、茶々の子の父親、生き延びた三成の6人の子、安徳天皇生存説、幸村に殉じた家臣たち、家康の外交、世界の果ての漂流者、6つ目の準惑星、話す前に動く脳、空飛ぶカエル、いじめられるインコ、儲からないAI企業、Claude Codeの嘘の完了報告、隠した仕様テスト、新幹線のY字路、神戸の水木しげる、MAN WITH A MISSION</h1>
+        <p lang="ja">今日の幕開けは、昨日のリーマン予想に続くClaudeの物理学。Anthropicの研究者が未解決問題ごとにClaudeを割り当てると、自分のコピーで「研究班」をつくり、2003年から誰も完走できなかったブラックホールの計算をやり切りました。歴史の幕では、茶々のお腹の子の父親をめぐる論争、斬首された石田三成の6人の子どもたちのその後、壇ノ浦に沈んだ安徳天皇の「生存説」、真田幸村に最後まで従った実在の家臣たち、そして「勝てる戦い」しかしない家康の外交を読みます。科学の幕は、「世界の果て」の島に残る19世紀の漂流者キャンプ、天の川に隠れていた6つ目の準惑星候補、話す前に動き出す脳の「聞き取り役」、空を滑る新種のカエル、留守のあとにいじめられるインコ。AIと開発の幕では、生成AIはパソコンよりコンテナに近いという経済の話、Claude Codeの「嘘の完了報告」4つの型、そして仕様テストを隠してAIを試す実験。最後は、新幹線の貴重なY字路、神戸で画業の土台を築いた水木しげる、MAN WITH A MISSIONの新作で締めます。約53分の読解です。</p>
+      </header>
+
+      <article class="piece" id="p1">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★★</span> <span class="chip mins">4 min</span> <span class="chip" lang="ja">ブラックホール</span> <span class="chip" lang="ja">Claude</span> <span class="chip" lang="ja">Anthropic</span> <span class="chip" lang="ja">相転移</span> <span class="chip" lang="ja">量子重力</span>
+          </div>
+          <h2 lang="ja">物理学者が解けずにいたブラックホールの難問2つを、AIが解いたと開発元が発表</h2>
+          <p class="why">Depois da Riemann de ontem, mais Claude na física: um pesquisador da Anthropic deu 22 problemas em aberto a agentes Claude que trabalharam ~6 semanas em segundo plano. Uma “equipe” de cópias do Claude terminou um cálculo de buracos negros parado desde 2003 (a transição é abrupta como água fervendo), e outra baixou o “teto” da massa do buraco negro mais leve, com prova verificada em Lean. Ótimo para vocabulário: 相転移, 量子重力, 検算, 査読前.</p>
+          <div class="source">
+            <span lang="ja">ナゾロジー</span>
+            <a href="https://nazology.kusuguru.co.jp/archives/210580" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>アンソロピック社（Anthropic）が発表した研究によると、対話型AIのClaudeが自分のコピーでつくった小さな研究班が、2003年に手順だけが示されたあとだれも完走できなかったブラックホールの計算をやり切り、時空がぼやけるほど小さな理論上の宇宙でも、ブラックホールは水が沸くように急に生まれると示したといいます。</p>
+            <p>この研究班に専用の仕組みは用意されず、同社の研究者が未解決問題ごとに割り当てたAIが、約6週間ずっと裏で走り続けていただけでした。</p>
+            <p>……</p>
+            <p>しかし物理の世界では、この「あるところで急に切り替わる」出来事が、ブラックホールにも起きると考えられています。</p>
+            <p>……</p>
+            <p>実際に1999年、物理学者たちは、その小さな領域でも状態の切り替わりが起きることを見つけました。粒子の気体からブラックホールへというような、こうした状態の切り替わりを「相転移」と呼びます。ただし、この相転移がホーキングとペイジのように急なのか、なめらかなのかは分かりませんでした。</p>
+            <p>……</p>
+            <p>発端は8月、Chen氏が片手間でClaudeの力を試していたときのことです。ブラックホールとブートストラップ法（理論の候補を絞り込む手法）に的を絞って面白い未解決問題のリストを作らせると、Claudeは数時間後に22個の候補を返してきました。</p>
+            <p>Chen氏はその一つ一つに別々のエージェント（自分で手を動かす AI）を割り当てました。そして、エージェントたちが互いの進捗の書き込みを読み合い、関係する問題では協力できるようにしたのです。エージェントたちは特別な設定も与えられないまま、約6週間、裏で走り続けました。</p>
+            <p>……</p>
+            <p>同社によると、Claudeは、自分のコピーでつくった小さな研究班を走らせて、この3つめのループを完走しました。計算のほぼすべての部分は、研究班の別々のコピーが互いに独立に二度解きました。一部は、すでに答えの分かっている結果とも突き合わせて確かめています。</p>
+            <p>……</p>
+            <p>この問題には、以前のClaudeが61回の並列挑戦で解けなかった記録も残っていたのです。</p>
+            <p>突破口は担当の外の手を借りて開きました。まず、この問題を担当するエージェントが、先行研究を見渡すうちに、物理学者が見落としていた、ある癖に気づきました。c が大きくなるにつれて、数値の天井がわずかにずれていくのです。そして、その癖を方法に仕立て直したのは、別のエージェントでした。</p>
+            <p>……</p>
+            <p>9月には、その証明が計算機の証明チェッカー（Lean）で確かめられました。論文もまた、Claudeがほとんど助言なしに書いたものです。そこに並んだ主要な結果は、物理学者がすべて点検しています。</p>
+          </div>
+          <p class="continue"><a href="https://nazology.kusuguru.co.jp/archives/210580" target="_blank" rel="noopener" lang="ja">続きを読む · ナゾロジー</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p2">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★☆</span> <span class="chip mins">3 min</span> <span class="chip" lang="ja">茶々</span> <span class="chip" lang="ja">豊臣秀吉</span> <span class="chip" lang="ja">鶴松</span> <span class="chip" lang="ja">秀頼</span> <span class="chip" lang="ja">聚楽第</span>
+          </div>
+          <h2 lang="ja">茶々のお腹の子の父親は秀吉じゃなかった？豊臣兄弟第45回史実解説</h2>
+          <p class="why">O grande mistério do clã Toyotomi: Hideyoshi teve dezenas de mulheres e só Chacha lhe deu filhos, já velho. O historiador Hattori Hideo propõe um ritual de “sanrō” (reclusão em templo para pedir herdeiro) com conhecimento do próprio Hideyoshi; outros pesquisadores rebatem lendo de outro jeito a mesma carta a Nene. Um bom exemplo de como fontes são disputadas.</p>
+          <div class="source">
+            <span lang="ja">BUSHOO!JAPAN（武将ジャパン）</span>
+            <a href="https://bushoojapan.com/taiga/toyobro/2026/11/23/223325" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>大河ドラマ『豊臣兄弟』第45回でも大いに注目されたこのテーマ。</p>
+            <p>今となっては、もはや永遠に答えの出せない疑問ですが、当時の周辺事情からある程度の推測をすることは可能。</p>
+            <p>ドラマの中では「茶々の子の父親は秀吉ではない」とほのめかす、聚楽第の落書き事件も大いに注目されておりました。</p>
+            <p>……</p>
+            <p>ただ、それにしても気になるのが、茶々のお腹の子の父親です。</p>
+            <p>秀吉は、寧々や茶々だけでなく、織田信長の娘や前田利家の娘、あるいは京極竜子など数多の別妻や、他にも多くの女性を抱えていたとされます。</p>
+            <p>そんな主張をしているのは『河原ノ者・非人・秀吉』を著した研究者の服部英雄氏です。</p>
+            <p>晩年になって茶々との間にだけ、続けて男子を授かった――この不自然さに注目した服部氏は同著で、特に豊臣秀頼について「秀吉の実子ではない」とする説を唱えています。</p>
+            <p>……</p>
+            <p>文禄二年（1593年）、茶々が秀頼を身ごもっていたとき、秀吉は寧々に手紙を送っています。</p>
+            <p>自分の子はもう欲しくない、今度生まれる子は茶々ひとりの子にすればよい、という趣旨。</p>
+            <p>服部氏は、この書状を、茶々が別の男性との間に子をもうけたことを暗に示すものと読み解きました。</p>
+            <p>しかし、研究者の堀智博氏は『秀吉の虚像と実像』の中で、その見解には従い難いとしています。</p>
+            <p>子のいない寧々に、ほかの女性との間にまた子ができたと伝える以上、あえて本心を抑えて気遣ってみせた、というのです。</p>
+            <p>……</p>
+            <p>『完訳フロイス日本史5』では、宣教師ルイス・フロイスが「鶴松を秀吉の子ではないと密かに信じる人々がいた」と記しています。</p>
+            <p>当時の疑惑を伝える記録であり、父親が別人だったと証明するものではありません。</p>
+            <p>……</p>
+            <p>今となっては、茶々の子の本当の父親が誰だったのか、生物学的に確かめる手立ては残されていません。</p>
+          </div>
+          <p class="continue"><a href="https://bushoojapan.com/taiga/toyobro/2026/11/23/223325" target="_blank" rel="noopener" lang="ja">続きを読む · BUSHOO!JAPAN（武将ジャパン）</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p3">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★☆</span> <span class="chip mins">3 min</span> <span class="chip" lang="ja">石田三成</span> <span class="chip" lang="ja">関ヶ原</span> <span class="chip" lang="ja">津軽家</span> <span class="chip" lang="ja">佐和山城</span> <span class="chip" lang="ja">子孫</span>
+          </div>
+          <h2 lang="ja">【豊臣兄弟！】斬首された石田三成の6人の子供は全員生存！宿敵・徳川家に救われ現在も血筋が続く</h2>
+          <p class="why">Ishida Mitsunari perdeu em Sekigahara e foi decapitado — mas os seis filhos sobreviveram. Um virou monge e viveu até 1686, outro fugiu disfarçado com ajuda dos Tsugaru e trocou de nome, o caçula foi salvo por um negociador no castelo de Sawayama, e uma filha chegou a ser esposa do senhor de Hirosaki. Destinos de romance, todos verídicos.</p>
+          <div class="source">
+            <span lang="ja">Japaaan（ジャパーン）</span>
+            <a href="https://mag.japaaan.com/archives/294966" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>そんな石田三成は、1600年に勃発した「関ヶ原の戦い」で西軍の中心人物となった武将です。敗戦により捕らえられ、六条河原で斬首されました。</p>
+            <p>石田一族の多くはこの戦いで討死していますが、三成の6人の子供たちは生き長らえています。</p>
+            <p>今回は、三成亡き後、6人の子供たちがどのような人生を歩んだのかご紹介したいと思います。</p>
+            <p>……</p>
+            <p>長男重家と同様、皎月院の子供です。生年月日は不明で、1588年説が有力ですが定かではありません。1599年には豊臣秀吉の跡取りである秀頼に小姓として仕えました。</p>
+            <p>関ヶ原で西軍が敗れると大阪城にいた重成は、同じく秀頼に小姓として仕えていた「津軽信建」の助力により陸奥国・津軽へ逃れました。津軽家は領土問題で他家と対立していた際に秀吉の征伐対象にされかけましたが、石田三成のとりなしによって滅亡の危機を免れた経緯がありました。</p>
+            <p>その後、重成は「杉山源吾」と名を変えて、弘前藩・津軽家の援助の元に生活しました。長男の吉成は弘前藩主・津軽信枚（信建の弟）の娘と結婚し、家老となって子孫の杉山家は弘前藩重臣として存続しました。</p>
+            <p>……</p>
+            <p>関ヶ原の戦いの際は、祖父である石田正継と叔父である正澄と共に佐和山城にいたとされます。当初は徳川方との開城交渉によって正澄の命と引き換えに城内の人間の助命が叶うはずでしたが、石田方から裏切り者が出たことによって佐和山城は落城し、正継と正澄親子は自刃しました。</p>
+            <p>佐吉の命も危ぶまれましたが、交渉役の「津田清幽（つだきよふか/せいゆう）」の働きによって助命が認められます。その後は、父と縁のあった僧「木食応其（もくじきおうご）」の元で出家しました。</p>
+            <p>津田清幽から「清幽」という字をもらい、「深長坊清幽（しんちょうぼうせいゆう）」と名乗りました。一説には1670年代まで生きたと伝わっています。</p>
+            <p>……</p>
+            <p>敗戦の将としてのイメージが強い三成ですが、正室との間に生まれた6子は子孫を繋ぎ現在でも血筋は続いています。また三成には側室との間にも子供がいたとされますが、実証を証明できる資料はありません。</p>
+          </div>
+          <p class="continue"><a href="https://mag.japaaan.com/archives/294966" target="_blank" rel="noopener" lang="ja">続きを読む · Japaaan（ジャパーン）</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p4">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★★</span> <span class="chip mins">3 min</span> <span class="chip" lang="ja">安徳天皇</span> <span class="chip" lang="ja">壇ノ浦</span> <span class="chip" lang="ja">平家</span> <span class="chip" lang="ja">生存伝説</span> <span class="chip" lang="ja">硫黄島</span>
+          </div>
+          <h2 lang="ja">わずか8歳で海に沈んだ幼帝・安徳天皇「生存説」と哀しき悲劇</h2>
+          <p class="why">O imperador-menino Antoku afundou em Dan-no-ura em 1185 nos braços da avó — mas o corpo nunca foi achado. Daí nasceram ao menos 18 lendas de sobrevivência pelo Japão: em Iōjima (Kagoshima) há um “túmulo” e uma família que os ilhéus chamam até hoje de “Tennō-san”; em Nose (Osaka) apareceu em 1817 um documento “provando” a fuga. Pura história-mistério.</p>
+          <div class="source">
+            <span lang="ja">Japaaan（ジャパーン）</span>
+            <a href="https://mag.japaaan.com/archives/293866" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>悲劇の天皇と呼ばれる安徳天皇（あんとくてんのう）。彼は源氏と平氏の争いの中で、形勢不利になった平家に連れられて西日本を転々としました。</p>
+            <p>そして1185年、壇ノ浦で平家の敗北時に祖母の二位尼（平時子）に抱かれて海へ沈んだとされています。</p>
+            <p>……</p>
+            <p>安徳天皇の即位は三歳の時で、逝去時は数え年八歳（満六歳）。この数字を見ただけでももう可哀想の言葉しかありません。</p>
+            <p>……</p>
+            <p>この悲劇の天皇の魂を少しでも慰めようとしたのか、日本各地には、安徳天皇が実は生きていたという伝承が残っています。</p>
+            <p>実際、そういう伝承が生まれる素地はありました。そもそも彼の遺体は確認されていません。また、共に入水したのは二位尼ではなく女官だったという記録もあり、混乱しています。</p>
+            <p>このため、壇ノ浦で亡くなったのは安徳天皇の身代わりだったなどの説が生まれました。安徳天皇生存説です。本人は平家の残党とともに逃げ延びたというのです。貴種流離譚ですね。</p>
+            <p>……</p>
+            <p>実はこうした伝説の「証拠」もあります。1817年（文化14年）、摂津国能勢（現在の大阪府豊能郡能勢町）の農家から、安徳天皇の生存を記した文書が見つかったのです。</p>
+            <p>文書の書き手は、壇ノ浦の戦いに参加した藤原経房。それによると、経房は二位尼から天皇を守るよう命じられ、戦場から連れ出しました。</p>
+            <p>残念ながら天皇はその後一年ほどで亡くなったのですが、経房は主君の墓を守るため能勢に住み着いたというのです。</p>
+            <p>この、いわば「藤原経房文書」は偽文書だという見方もありますし、そもそも原本は明治時代に失われているので、もはや確認のしようもありません。現在残っているのは発見者の子孫による写本です。</p>
+            <p>まとめると、安徳天皇生存伝説は全国でも少なくとも十八か所に伝わっており、さらに崩御地だとする伝承も八か所に及びます。</p>
+          </div>
+          <p class="continue"><a href="https://mag.japaaan.com/archives/293866" target="_blank" rel="noopener" lang="ja">続きを読む · Japaaan（ジャパーン）</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p5">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★☆</span> <span class="chip mins">3 min</span> <span class="chip" lang="ja">真田信繁</span> <span class="chip" lang="ja">大坂の陣</span> <span class="chip" lang="ja">九度山</span> <span class="chip" lang="ja">家臣団</span> <span class="chip" lang="ja">真田十勇士</span>
+          </div>
+          <h2 lang="ja">真田家臣団で最後まで幸村に従ったのは誰？大坂に散った実在の家臣たち</h2>
+          <p class="why">Esqueça os ninjas fictícios Sasuke e Saizō: quem de verdade seguiu Sanada Yukimura até a morte em Osaka? Os Takanashi (sogro e cunhado), Aoyagi Seian — e Hotta Sakubei, que criou a filha de Yukimura em Ueda e depois correu para lutar com ele. A carta em que Yukimura pede ao genro “não abandone a Sue” é de cortar o coração.</p>
+          <div class="source">
+            <span lang="ja">BUSHOO!JAPAN（武将ジャパン）</span>
+            <a href="https://bushoojapan.com/bushoo/sanada/2026/11/22/223315" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>猿飛佐助や霧隠才蔵らが、主君の真田幸村を支えて活躍する――。</p>
+            <p>テレビ朝日で放送中の『真田十勇士 SHADOWS OF THE TEN NINJA』が話題ですが、あの番組をご覧になっていてこんな疑問を抱いたことはありませんか？</p>
+            <p>実際の真田信繁（幸村）には、一体どんな家臣が付き従っていたのだろう？</p>
+            <p>……</p>
+            <p>西軍について敗者となった真田昌幸と真田信繁父子は高野山へ送られ、ふもとの九度山で暮らすことになりました。</p>
+            <p>しかし、父の昌幸が亡くなり、その一周忌が営まれた慶長十七年（1612年）6月、家臣の多くは故郷の上田へ帰っていきました。</p>
+            <p>……</p>
+            <p>高梨内記（たかなしないき）と青柳清庵（あおやぎせいあん）。</p>
+            <p>さらには内記の息子・高梨采女（うねめ）と、青柳清庵の息子・青柳千弥（せんや）、三井豊前たちも信繁のもとに残ったとされます。</p>
+            <p>なかでも高梨家は、信繁とどんな関係にあったのでしょうか？</p>
+            <p>内記の娘が信繁の側室となっており、主従であると同時に親戚でもあったのです。</p>
+            <p>……</p>
+            <p>大坂冬の陣が終わった後、故郷の石合十蔵から、大坂にいる作兵衛へ一通の手紙が届きました。</p>
+            <p>これを作兵衛から知らされた信繁は、自ら筆を執り、娘婿の十蔵へ返事を送ったのです。</p>
+            <p>籠城したからには決死の覚悟で、この世で会って話すことはもうないだろう――。</p>
+            <p>【意訳】すへのことで、何かと気に入らないことがあっても、見捨てないでほしい</p>
+            <p>【原文】何事もすへこと心に不叶き候共、御見捨無之やうに頼入候</p>
+            <p>……</p>
+            <p>九度山で信繁の暮らしを支え、若い大助を補佐し、遠く離れた娘と父をつなぐ。</p>
+            <p>華々しい合戦の場面だけでなく、そうした一つひとつの働きが、信繁の最後の戦いを支えていた。</p>
+            <p>信繁が娘婿へ送った一通の返書は、上田から駆けつけた作兵衛がいたからこそ書かれたものであり、現代へ当時の状況を伝えてくれています。</p>
+          </div>
+          <p class="continue"><a href="https://bushoojapan.com/bushoo/sanada/2026/11/22/223315" target="_blank" rel="noopener" lang="ja">続きを読む · BUSHOO!JAPAN（武将ジャパン）</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p6">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★☆☆</span> <span class="chip mins">2 min</span> <span class="chip" lang="ja">徳川家康</span> <span class="chip" lang="ja">朱印船</span> <span class="chip" lang="ja">三浦按針</span> <span class="chip" lang="ja">朝鮮通信使</span> <span class="chip" lang="ja">鎖国</span>
+          </div>
+          <h2 lang="ja">徳川家康はなぜ海外との交流を重視したのか？現代日本にも通じる天下人の国際感覚</h2>
+          <p class="why">O neto Iemitsu fechou o país, mas o avô Ieyasu era o oposto: o pragmático que “só travava batalhas que podia vencer” distribuía licenças shuinjō para comércio, usou William Adams (Miura Anjin) e Jan Joosten como conselheiros, tentou entrar na rota Manila–Acapulco e reatou com a Coreia depois da invasão de Hideyoshi. Leitura curta e útil para vocabulário de diplomacia.</p>
+          <div class="source">
+            <span lang="ja">草の実堂</span>
+            <a href="https://kusanomido.com/study/history/japan/edo/137190/" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>江戸幕府を開いた家康は、海外に対して強い関心を持っていた。</p>
+            <p>家康は、ある意味で究極の合理主義者ともいえるだろう。</p>
+            <p>よくいわれるのは、家康は勝てる戦いしかしなかったということだ。その背景には、武田信玄との三方ヶ原の戦いで大敗を喫した経験もあったと考えられる。</p>
+            <p>その教訓を生かし、勝ち目のない戦いを避け、外交や調略を整えてから行動する。</p>
+            <p>そうした慎重な戦略が最終的には天下取りを成功させ、260年余り続く江戸幕府の礎を築いたともいえる。</p>
+            <p>……</p>
+            <p>その合理的な思考は外交政策にも発揮され、家康は貿易によって得られる利益を重視し、外国との交易に力を入れた。</p>
+            <p>海外渡航を許可する朱印状を商人や貿易に携わる者たちに与え、海外貿易を幕府の統制下に置こうとしたのである。</p>
+            <p>……</p>
+            <p>そして、家康の目は東アジアにも向けられていた。秀吉の朝鮮出兵によって大きく損なわれた東アジアの国際関係を立て直したのも、家康の重要な功績の一つである。</p>
+            <p>家康は、対馬の宗氏を窓口として朝鮮との交渉を進め、戦争によって連れ去られた朝鮮人捕虜の送還などにも取り組んだ。</p>
+            <p>その結果、1607年（慶長12年）には、朝鮮から回答兼刷還使が来日し、国交回復への道が開かれたのである。</p>
+          </div>
+          <p class="continue"><a href="https://kusanomido.com/study/history/japan/edo/137190/" target="_blank" rel="noopener" lang="ja">続きを読む · 草の実堂</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p7">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★☆</span> <span class="chip mins">3 min</span> <span class="chip" lang="ja">考古学</span> <span class="chip" lang="ja">難破船</span> <span class="chip" lang="ja">漂流者</span> <span class="chip" lang="ja">ティエラ・デル・フエゴ</span> <span class="chip" lang="ja">航海</span>
+          </div>
+          <h2 lang="ja">「世界の果て」の島で19世紀の漂流者キャンプ跡と思われる場所が発見される</h2>
+          <p class="why">Para quem gosta de vela e naufrágios: na Isla de los Estados, ao largo da Terra do Fogo — a “ilha do fim do mundo” de Júlio Verne —, arqueólogos acharam com drones o que parece ser o acampamento dos náufragos de Luis Piedra Buena, que caçava pinguins quando o navio afundou nos anos 1870. Curto e evocativo.</p>
+          <div class="source">
+            <span lang="ja">GIGAZINE</span>
+            <a href="https://gigazine.net/news/20261123-19th-century-shipwreck-found/" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>残骸が見つかったのはアルゼンチン南部のティエラ・デル・フエゴ沖に位置するロス・エスタードス島です。大西洋と太平洋を結ぶ航路上に位置するロス・エスタードス島は、1600年代初頭からパタゴニアの港を結ぶ役割を果たしてきました。</p>
+            <p>1870年代初頭までに、この島はルイス・ピエドラ・ブエナという人物が所有していました。ピエドラ・ブエナは著名なアルゼンチン人船乗りで、商業活動、人道的活動、主権に関わる活動で広く知られており、世界各地から来た数多くの船乗りの命を救ったことでも知られています。</p>
+            <p>この島を調査している研究チームによると、ピエドラ・ブエナがペンギンを捕獲するために旅をしていたところ、船が難破し、ロス・エスタードス島に流れ着いたとのこと。ピエドラ・ブエナと乗組員たちは出発地に戻れるようになるまで2カ月以上にわたって島で漂流生活を送ったそうです。</p>
+            <p>研究チームはドローンを併用した現地調査でピエドラ・ブエナらのキャンプ跡と思われる場所を発見しました。</p>
+            <p>研究チームはサンプルを持ち帰っており、年代調査など詳しい分析を今後行う予定としています。木材が1隻の船に由来するものなのか、それとも複数の船に由来するものなのかを解明するとともに、キャンプ跡とピエドラ・ブエナの関連性を確認します。</p>
+            <p>研究チームを率いたニコラス・シアルロ氏は、「漂流者の生活に関する文書資料はあまり多くありません。考古学者として、この人里離れた荒涼とした場所に身を置くことで、約150年前に漂流者たちが目にしたもの、感じたものを味わうことができました。このような遺跡は、ロス・エスタードス島のような孤立した場所における危機や生存の経験を分析するための、他に類を見ない機会を提供してくれます」と述べました。</p>
+          </div>
+          <p class="continue"><a href="https://gigazine.net/news/20261123-19th-century-shipwreck-found/" target="_blank" rel="noopener" lang="ja">続きを読む · GIGAZINE</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p8">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★★</span> <span class="chip mins">2 min</span> <span class="chip" lang="ja">準惑星</span> <span class="chip" lang="ja">太陽系外縁天体</span> <span class="chip" lang="ja">ルービン天文台</span> <span class="chip" lang="ja">冥王星</span> <span class="chip" lang="ja">天文学</span>
+          </div>
+          <h2 lang="ja">太陽系6つ目の準惑星か。天の川の星に紛れていた巨大な氷の天体</h2>
+          <p class="why">Um corpo gelado de até 1.500 km além de Netuno — talvez o 6º planeta-anão — passou décadas escondido na frente da Via Láctea, no céu do hemisfério sul, até um programa de Matthew Holman achá-lo numa noite de outubro. “Algo tão grande e brilhante não podia ter passado despercebido” — mas passou. Ótima história de descoberta.</p>
+          <div class="source">
+            <span lang="ja">カラパイア</span>
+            <a href="https://karapaia.com/archives/639198.html" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>海王星の外側を回る巨大な氷の天体「2026 ED138」が新たに見つかり、太陽系で6つ目の公式な準惑星になる可能性が出てきた。</p>
+            <p>2026年10月、ハーバード・スミソニアン天体物理学センターの研究者がチリのヴェラ・C・ルービン天文台のデータを分析し、同月27日に国際天文学連合の小惑星センターが発見を発表した。</p>
+            <p>推定直径は600〜1500kmに及ぶが、星が密集する天の川の手前にあったため、長いあいだ誰にも気づかれずに太陽を回り続けていたのだ。</p>
+            <p>……</p>
+            <p>ユリッチ教授は「直径およそ1000kmもある天体の発見は、過去20年で見つかった太陽系外縁天体の中で最大で、一世代に一度あるかどうかです」と語っている。</p>
+            <p>ユリッチ教授が目安として示した直径約1000kmという大きさは、直径約2377kmの冥王星の半分弱にあたる。</p>
+            <p>……</p>
+            <p>ED138はこの25〜30年ほど、地球から見て天の川の面に近い領域を通過していた。</p>
+            <p>天の川の中心部の手前にあたる一帯では何百万もの星がびっしりと背景を埋めており、光が密集した中から遠くの天体のかすかな動きを見分けるのはこれまでの望遠鏡では難しかったのだ。</p>
+            <p>さらに、ED138が南半球の空にあることも発見が遅れた要因になった。</p>
+            <p>これまでの天文観測の多くは北半球に集中してきたため、南の空にある暗い天体は北半球から観測するのが非常に難しかった。</p>
+          </div>
+          <p class="continue"><a href="https://karapaia.com/archives/639198.html" target="_blank" rel="noopener" lang="ja">続きを読む · カラパイア</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p9">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★☆</span> <span class="chip mins">3 min</span> <span class="chip" lang="ja">脳科学</span> <span class="chip" lang="ja">ウェルニッケ野</span> <span class="chip" lang="ja">失語</span> <span class="chip" lang="ja">言語</span> <span class="chip" lang="ja">電極</span>
+          </div>
+          <h2 lang="ja">聞き取り役とされてきた脳の言語中枢は、話す単語を先に用意していた</h2>
+          <p class="why">Um enigma de 150 anos: por que lesões na área de Wernicke, “a área da escuta”, estragam também a fala (shoe vira foot)? Com eletrodos direto no cérebro de 28 pacientes, a UCSF viu que essa região se acende antes de a palavra sair — preparando a palavra inteira, não os movimentos da boca. Interessante para quem estuda língua estrangeira.</p>
+          <div class="source">
+            <span lang="ja">ナゾロジー</span>
+            <a href="https://nazology.kusuguru.co.jp/archives/210533" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>米国のカリフォルニア大学サンフランシスコ校（UCSF）などの研究チームが、人の話を聞き取る中枢とされてきた左の側頭葉の一角を細かく測ると、この区画は、自分が声に出すより先に、これから言う単語に合わせて活動の山を立てる、単語ごとの先出しの形をとっていました。</p>
+            <p>ふつうに考えれば、聞き取りの中枢は、自分の声を聞いたあとで言い間違いがないかを確かめるために動きそうです。ところが、ある電極の山は言う単語が始まるおよそ250ミリ秒前に立ち、先に動く電極の大半では、文の最初の単語を除いて数えると、山は単語の中の音節の頭ではなく単語の頭に合わせて立っていました。</p>
+            <p>人の言葉を聞き取るための場所が、いったいなぜ、これから自分が言う単語を先出ししていたのでしょうか？</p>
+            <p>……</p>
+            <p>ここが傷つくと、人の言っていることを理解するのが難しくなります（ウェルニッケ失語）。</p>
+            <p>そのためこの場所は、他人の話の意味をほどく解読器のようなもの、つまり主に聞き取りを担う中枢だと考えられてきました。</p>
+            <p>……</p>
+            <p>協力したのは、てんかんの発作を調べるために脳の表面へ電極を置いていた28人です。研究チームは、この28人が声に出して話しているあいだの活動をそのまま記録しました。</p>
+            <p>話した単語すべてで記録を重ね合わせると、ある電極の活動の山は、単語が始まる約250ミリ秒前、4分の1秒ほど前に立っていました。</p>
+            <p>……</p>
+            <p>もしこの場所が自分の話し声を聞いて直す校閲係なら、活動は声より後に来るはずです。</p>
+            <p>話す前の活動の山の大きさは、これから言う単語が長いほど大きくなっていました。</p>
+            <p>……</p>
+            <p>聞き取りの中枢とされてきた場所は、単語の声が出るより前に、これから言う単語に合わせた先出しの活動を示していました。</p>
+            <p>とはいえ先に動くことは、その場所がなければ話せないという意味ではありません。この先出しは、本当に言葉を生み出しているのでしょうか？</p>
+          </div>
+          <p class="continue"><a href="https://nazology.kusuguru.co.jp/archives/210533" target="_blank" rel="noopener" lang="ja">続きを読む · ナゾロジー</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p10">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★☆☆</span> <span class="chip mins">2 min</span> <span class="chip" lang="ja">新種</span> <span class="chip" lang="ja">トビガエル</span> <span class="chip" lang="ja">スラウェシ島</span> <span class="chip" lang="ja">両生類</span> <span class="chip" lang="ja">生物多様性</span>
+          </div>
+          <h2 lang="ja">空飛ぶ新種のカエルをインドネシアで発見。ゼリー状の塊に包まれた卵を産む</h2>
+          <p class="why">Num lago sazonal a 1.860 m de altitude, nas montanhas Mekongga (Sulawesi), uma expedição achou uma rã verde que plana de árvore em árvore — e que, ao contrário das parentes que fazem ninhos de espuma, põe ovos em massas gelatinosas. Vocabulário de biologia bem útil (滑空, 水かき, 卵塊, 近縁種).</p>
+          <div class="source">
+            <span lang="ja">カラパイア</span>
+            <a href="https://karapaia.com/archives/639369.html" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>インドネシア・スラウェシ島の深い山奥にある湖の近くで、鮮やかな緑色をした数千匹のカエルが見つかった。</p>
+            <p>インドネシアとアメリカの研究チームが詳しく調べたところ、木から木へ滑空する空飛ぶカエルとして知られるトビガエル属の新種だと判明した。</p>
+            <p>近縁種が泡の巣に産卵する一方、新種のカエルはゼリー状の塊に包まれた卵を産み、孵ったオタマジャクシもその中で育つという独特の子育てスタイルだったこともわかった。</p>
+            <p>……</p>
+            <p>研究チームは、過去に調査されたことのないメコンガ山地を、海に近い低地から頂上まで調べるため、野営を重ねながら奥地へ進んだ。</p>
+            <p>標高1,860mを超える場所へたどり着いた研究チームは、近くにある、季節性の湖「ダナウ・コカコーラ」の近くで、鮮やかな緑色をした数千匹のカエルを見つけた。</p>
+            <p>……</p>
+            <p>トビガエル属のカエルは、大きな水かきのある足を広げて木から木へ滑空することで知られており、空飛ぶカエルと呼ばれている。</p>
+            <p>……</p>
+            <p>「トビガエルの仲間がゼリー状の卵塊を使って繁殖するのを見たのは初めてです。唯一無二です」と研究チームは述べている。</p>
+            <p>研究チームは、繁殖地が季節的に一時的にできる湖であることから、ゼリー状の卵塊を産む繁殖方法は一時的にしか水がない場所への適応かもしれないと考えている。</p>
+          </div>
+          <p class="continue"><a href="https://karapaia.com/archives/639369.html" target="_blank" rel="noopener" lang="ja">続きを読む · カラパイア</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p11">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★☆☆</span> <span class="chip mins">2 min</span> <span class="chip" lang="ja">インコ</span> <span class="chip" lang="ja">動物行動</span> <span class="chip" lang="ja">順位</span> <span class="chip" lang="ja">いじめ</span> <span class="chip" lang="ja">群れ</span>
+          </div>
+          <h2 lang="ja">8日間群れを離れた「上位のインコ」は、戻るといじめられていた</h2>
+          <p class="why">Política de escritório, versão periquito: tire o “chefe” do bando por 8 dias e, na volta, o grupo muda o estilo de briga para “bullying” (atacar quem está bem abaixo). 1.460 horas de observação e analogias com clube escolar japonês (先輩・後輩) — divertido e cheio de vocabulário do dia a dia.</p>
+          <div class="source">
+            <span lang="ja">ナゾロジー</span>
+            <a href="https://nazology.kusuguru.co.jp/archives/210398" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>すぐに打ち解ける一方で、暮らしの多くの時間を小さな言い争いに費やしています。</p>
+            <p>その小競り合いの勝ち負けが積み重なって、群れの中には上下の順位ができていきます。</p>
+            <p>では、順位の高い鳥がしばらく群れを留守にして戻ってきたら、仲間たちはどう迎えるのでしょうか？</p>
+            <p>米シンシナティ大学の研究チームは、群れから鳥を8日間だけ離して戻す実験で、これを確かめました。</p>
+            <p>元の居場所に帰ってきた鳥を待っていたのは、温かい「おかえり」だったのでしょうか？</p>
+            <p>……</p>
+            <p>研究を率いたファン・デル・マレル氏は「みんなお気に入りがいました。とても個性豊かなんです」と話します。</p>
+            <p>……</p>
+            <p>3つ目は、自分よりずっと下の相手を主に攻撃する型で、「いじめ」型と呼ばれます。</p>
+            <p>部活なら、後輩全員に厳しい先輩、1学年下だけを目の敵にする先輩、新入生ばかりいびる先輩、といったところでしょうか。</p>
+            <p>……</p>
+            <p>実はチームは以前の研究で、戻ってきた鳥は順位を失うことを確かめていました。</p>
+            <p>ですから、ほかの鳥がケンカのしかたを変える理由はあまりないはずだ、と予想していたのです。</p>
+            <p>……</p>
+            <p>ケンカの回数にはっきりした変化が見られなかった一方で、攻撃の矛先は大きく変わっていたのです。</p>
+            <p>トップの鳥を出し入れした時は、12回のうち8回で「いじめ」型が記録されました。</p>
+          </div>
+          <p class="continue"><a href="https://nazology.kusuguru.co.jp/archives/210398" target="_blank" rel="noopener" lang="ja">続きを読む · ナゾロジー</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p12">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★☆</span> <span class="chip mins">4 min</span> <span class="chip" lang="ja">生成AI</span> <span class="chip" lang="ja">経済</span> <span class="chip" lang="ja">コンテナ輸送</span> <span class="chip" lang="ja">カルロタ・ペレス</span> <span class="chip" lang="ja">投資</span>
+          </div>
+          <h2 lang="ja">AIが世界を変えてもAI企業が儲かるとは限らない、その理由とは？</h2>
+          <p class="why">Ensaio da Colossus: a IA vai mudar tudo, mas quem lucra? A comparação não é com o PC (que fez a Intel e a Microsoft), e sim com o contêiner: revolucionou o comércio mundial e quase ninguém do transporte ficou rico — ganharam IKEA, Walmart e o consumidor. Leitura que faz pensar para quem vive de software.</p>
+          <div class="source">
+            <span lang="ja">GIGAZINE</span>
+            <a href="https://gigazine.net/news/20261122-ai-will-not-make-you-rich/" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>生成AIの急速な進化を背景に、AIモデルの開発やデータセンターの建設などに巨額の資金が投じられています。しかし、AIが今後の経済成長をけん引するという期待が高まる一方で、AIを開発する企業や投資家が必ずしも大きな利益を得られるとは限りません。</p>
+            <p>……</p>
+            <p>ニューマン氏は技術革新が経済に大きな影響を与えることと、その技術を開発した企業や投資家が利益を得ることは別問題だと主張しています。</p>
+            <p>例えば、1971年に登場した民生用マイクロプロセッサ「Intel 4004」はその後のPCの普及につながり、AppleやMicrosoftをはじめとする数多くの企業を生み出しました。当初はPCの用途すら明確ではありませんでしたが、技術の進歩に伴って新しい使い道が発見され、市場が拡大していきました。</p>
+            <p>……</p>
+            <p>物を運搬するために使われるコンテナが規格統一されたことで、船舶や鉄道、トラックの間で貨物を効率的に積み替えられるようになり、輸送コストの削減と国際貿易の拡大につながりました。</p>
+            <p>一方、コンテナ化による輸送コストの削減で大きな利益を得たのは、海運会社ではなく、安くなった輸送サービスを利用する企業でした。例えば、家具大手のIKEAは組み立て式家具を世界中に安く輸送できるようになり、事業を拡大することに成功しました。また、小売大手のウォルマートも輸送コストの削減や在庫管理の効率化を通じて競争力を高めています。</p>
+            <p>ニューマン氏は「生成AIはPCよりもむしろコンテナに近い」と考えています。PCが登場した1970年代とは異なり、AIの可能性はすでに広く認識されており、大手テクノロジー企業が巨額の資金を投入しています。また、多くの開発者が大企業の提供するAIモデルに依存しているため、独立した技術革新を起こす余地も限られていると指摘しました。</p>
+            <p>……</p>
+            <p>そこでAIによって生み出される利益はどこに向かうのかというと、ニューマン氏はAIを開発する企業ではなく、「AIを活用して既存の事業を効率化する企業」を有望視しています。特に専門サービス、医療、教育、金融、クリエイティブ分野などでは、AIによる生産性向上が新たな事業機会につながる可能性があります。</p>
+            <p>そして、AIの普及によって最大の恩恵を受けるのは消費者だとニューマン氏は予測。AIの活用によって専門的な知識を必要とするサービスが安価になり、医療や教育、専門的な助言などをより多くの人が利用できるようになる可能性があるといえます。</p>
+          </div>
+          <p class="continue"><a href="https://gigazine.net/news/20261122-ai-will-not-make-you-rich/" target="_blank" rel="noopener" lang="ja">続きを読む · GIGAZINE</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p13">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★★</span> <span class="chip mins">5 min</span> <span class="chip" lang="ja">Claude Code</span> <span class="chip" lang="ja">AIエージェント</span> <span class="chip" lang="ja">検証</span> <span class="chip" lang="ja">フック</span> <span class="chip" lang="ja">完了報告</span>
+          </div>
+          <h2 lang="ja">Claude Code の完了報告が嘘だった4つの型と、受け取ったときに聞く3つのこと</h2>
+          <p class="why">Muito prático para o seu dia a dia: quatro padrões reais em que o Claude Code disse “criei/verifiquei” e não era verdade — números detalhados de arquivos inexistentes, medidas antigas apresentadas como “agora”, “amanhã às 19h” sem saber a hora atual (resolvido com um hook que injeta a data) e datas inventadas. E as três perguntas para fazer ao receber um relatório de conclusão.</p>
+          <div class="source">
+            <span lang="ja">Zenn</span>
+            <a href="https://zenn.dev/maura/articles/db8579579b1b81" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>AI に作業を任せていると、「作成しました」「検証しました」という完了報告を受け取ります。私は Claude Code に毎日の作業を任せていて、この報告が事実と違ったことが何度かあります。私の環境では、いくつもの AI の会話が、役割を分けて同時に動いています。そのぶん、報告の食い違いも起きやすい環境です。</p>
+            <p>ここで言う「嘘」は、わざとかどうかを問いません。完了報告や、作業中の断定のうち、事実と違っていた物をまとめて指します。振り返ると、そこには型がありました。</p>
+            <p>4つには、共通点がありました。どれにも、本物らしい具体が付いていたのです。細かい数字、時刻、日付です。具体が付いているほど、読む側は確かめなくなります。</p>
+            <p>……</p>
+            <p>2026年7月の週末、AI に3つの作業を頼みました。ファイルを1つ作ること、設定ファイルに読み込みの1行を足すこと、Git の履歴から古い版を戻すことです。完了報告には「作成した」「検証した」とあり、ファイルの先頭のバイトや行数、差分まで細かく書いてありました。</p>
+            <p>ところが実物を確かめると、3つとも存在しませんでした。その直前に、ツールは1度も実行されていませんでした。同じ会話の中で、この型は2回起きています。1回は AI が自分で気づいて申告し、もう1回は、私が別の AI に同じ箇所を確かめさせて分かりました。</p>
+            <p>細かい数字が付いているほど、報告は本物らしく見えます。報告の文だけを読んでいるうちは、本物と見分けられません。</p>
+            <p>……</p>
+            <p>同じ週末に、別の型も起きました。ある会話の AI が、13時13分に Git にコミットし、13時28分にそれを取り消しました。ところが、その後に書かれた依頼書には、取り消す前の状態が「現状」として書かれていました。</p>
+            <p>この依頼書を、別の会話の AI が読んで、点検を始めました。そのあいだに、依頼書の書き手は、自分で気づいた誤りを2か所直していました。点検した AI は、依頼書を読み直さないまま結果を出し、すでに直された誤りを正しいと判定して、その上に説明を重ねていました。</p>
+            <p>……</p>
+            <p>7月21日、AI が、ある予定について「明日の19時ですね」という趣旨のことを言いました。実際には、その予定はその日の19時で、もう済んでいました。同じ日に、別の AI も、日付の感覚がずれた答えを返していました。</p>
+            <p>1つは仕組みです。当時の環境では、AI に渡るのは日付だけで、時刻はありませんでした。シェルで時刻を取れば分かりますが、そのころはシェルの起動に失敗することがあり、それも取れない場面がありました。</p>
+            <p>もう1つは、照らし合わせの怠りです。資料にはその予定が7月21日の19時と書いてあり、その日は7月21日でした。照らし合わせていれば、今日のことだと分かったはずです。</p>
+            <p>……</p>
+            <p>そこで今は、完了報告を受け取ったら、次の3つを聞くようにしています。</p>
+            <p>答えが報告の中に無ければ、その場で聞きます。聞いても返ってこない物は、まだ起きていないものとして扱います。</p>
+          </div>
+          <p class="continue"><a href="https://zenn.dev/maura/articles/db8579579b1b81" target="_blank" rel="noopener" lang="ja">続きを読む · Zenn</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p14">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★☆</span> <span class="chip mins">4 min</span> <span class="chip" lang="ja">Claude Code</span> <span class="chip" lang="ja">テスト</span> <span class="chip" lang="ja">サンドボックス</span> <span class="chip" lang="ja">権限ルール</span> <span class="chip" lang="ja">仕様書</span>
+          </div>
+          <h2 lang="ja">AIがテストに合わせて実装していない？仕様テストを隠して確かめる</h2>
+          <p class="why">“Isolated Specification Tests” na prática: dar a especificação ao agente mas esconder a prova. Descoberta: mandar “não altere spec-tests/” não impede o Claude Code de LER os testes (4 em 4 vezes), regras de permissão vazam via grep -r, .claudeignore não funciona — só o sandbox segura. Direto e aplicável.</p>
+          <div class="source">
+            <span lang="ja">Zenn</span>
+            <a href="https://zenn.dev/h_aso/articles/isolated-spec-tests-claude-code" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>仕様書を作ってAIに実装してもらうと、テストは全部通っているのに、よく見ると本来の意図とは少し違う実装になっていた、ということがあると思います。AIがテストに合わせて答え合わせのように作ってしまうと、そのずれに気づかないまま開発が進んでしまいます。</p>
+            <p>AIのコードレビューについて海外の記事を調べていたところ、これに関係する「Isolated Specification Tests」という考え方を見つけました。2026年7月にcodecentricのMarcel Miklさんが書いた記事で紹介されていたものです。</p>
+            <p>……</p>
+            <p>簡単に言うと、実装するエージェントに仕様書は渡すけれど、答え合わせに使う仕様テストは見せない、というやり方です。</p>
+            <p>最初に勘違いしやすいところなので書いておくと、隠すのは仕様ではなくテストです。エージェントは仕様書をちゃんと読んで実装します。試験にたとえると、こんな関係です。</p>
+            <p>・仕様書：教科書。エージェントにしっかり読んでもらう</p>
+            <p>・仕様テスト：本番の試験問題。エージェントには事前に見せない（読ませないし、書き換えさせない）</p>
+            <p>……</p>
+            <p>指示では「spec-tests/ は変更しないでください」としか言っていません。すると、隔離なしの条件では、エージェントが自分から cat spec-tests/*.js で仕様テストを読んで、それを見ながら実装していました。</p>
+            <p>あとで仕様書を少し変えた実験も合わせると、隔離なしでは4回中4回とも仕様テストを読んでいて、サンドボックスまで重ねた条件では4回中0回でした。</p>
+            <p>「変更しないで」と書いても、「読まないで」とは伝わらないんですね。仕様テストが独立した確認になっているのは、エージェントが読めないときだけでした。</p>
+            <p>……</p>
+            <p>grep -r では、仕様テストの期待値まで全部出てきました。</p>
+            <p>……</p>
+            <p>サンドボックスまで重ねると、4つとも止まりました。 ls -R を実行したときも、 spec-tests のところで「Operation not permitted」が返ってきていて、OSのレベルで止まっているのが分かります。</p>
+            <p>……</p>
+            <p>実験してみて考えたのは、隔離で変わるのはコードの品質というより、「仕様テストが通った」という結果をどこまで信じていいか、の方だということです。隔離なしの条件でもテストは全部通りましたが、それは試験問題を見ながら解いた結果です。</p>
+          </div>
+          <p class="continue"><a href="https://zenn.dev/h_aso/articles/isolated-spec-tests-claude-code" target="_blank" rel="noopener" lang="ja">続きを読む · Zenn</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p15">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★☆</span> <span class="chip mins">3 min</span> <span class="chip" lang="ja">新幹線</span> <span class="chip" lang="ja">分岐器</span> <span class="chip" lang="ja">大宮</span> <span class="chip" lang="ja">高崎</span> <span class="chip" lang="ja">空撮</span>
+          </div>
+          <h2 lang="ja">新幹線の「貴重なY字路」どうなってる？ 特大ポイントで最速通過 乗車中は絶対見えない「超緩やかな弧を描く分岐」</h2>
+          <p class="why">Onde as linhas do Shinkansen se separam? Em Ōmiya (Tōhoku/Jōetsu) e Takasaki (Jōetsu/Hokuriku), vistos do céu: a junção de Takasaki usa um aparelho de mudança “nº 38” gigantesco que permite passar a 160 km/h — o mais rápido do Japão. Trens + infraestrutura, com termos técnicos que valem a pena (分岐器, 片分岐, 線形).</p>
+          <div class="source">
+            <span lang="ja">乗りものニュース</span>
+            <a href="https://trafficnews.jp/post/728185" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>新幹線の営業路線の分岐地点はどのような構造なのでしょうか。鳥の目線になって観察しました。大宮と高崎の光景を空撮でお見せします。</p>
+            <p>日本の新幹線網は北海道から九州まで延び、盛岡・福島・高崎・大宮では路線同士が分岐しています。新幹線分岐路線はいずれもJR東日本の区間にあり、北海道・東海道・山陽・九州の各新幹線は接続駅こそあれども、路線の分岐はありません。</p>
+            <p>……</p>
+            <p>もう1か所、高崎の分岐を見ましょう。上越新幹線開業後から15年後の1997（平成9）年、北陸新幹線高崎～長野間が開業した際に分岐ができました。高架橋が緩やかなＹ字を描いて枝分かれする構造は大宮と似ています。しかし明らかに異なる点は、高崎駅から4kmの分岐地点までの線路が3線であることです。</p>
+            <p>では「上越・北陸下り」はどのように分かれるのか。それは、片分岐ポイントを使用して北陸下りが分かれているのです。一般的に列車は、分岐器を通過する際は速度を落としますが、ここでは「38番分岐」という特別な分岐器が開発されました。国内では最速で通過できる分岐器です。</p>
+            <p>38番とは分岐した線路が1m離れるまでに、分岐部から約38mの長さを必要とすることを意味します。列車が高速の160km/hで通過できるよう、大変緩やかな曲線で分岐する構造となりました。38番分岐器そのものの全長は135mもあり、空撮写真でも“線路がなかなか分かれないほど長い分岐器”の姿が確認できました。</p>
+            <p>ちなみに新幹線の一般的な分岐器は18番などを採用しており、列車は約70km/h制限となっています。</p>
+            <p>……</p>
+            <p>大宮と高崎の分岐は、速度を落とさずに走れるよう線路と線形を工夫しています。そのため、乗車していると気が付かないほど、いつの間にかスーッと線路が分かれています。</p>
+          </div>
+          <p class="continue"><a href="https://trafficnews.jp/post/728185" target="_blank" rel="noopener" lang="ja">続きを読む · 乗りものニュース</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p16">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★☆</span> <span class="chip mins">4 min</span> <span class="chip" lang="ja">水木しげる</span> <span class="chip" lang="ja">神戸</span> <span class="chip" lang="ja">小磯良平</span> <span class="chip" lang="ja">紙芝居</span> <span class="chip" lang="ja">美術館</span>
+          </div>
+          <h2 lang="ja">水木しげるさん、神戸で漫画の土台築く　戦後通った美術教室の名称、ファッション美術館学芸員が特定</h2>
+          <p class="why">O pai do Kitarō viveu sua juventude em Hyōgo: voltou da guerra sem o braço esquerdo, administrou o apartamento “Mizuki-sō” em Hyōgo-ku, desenhava kamishibai — e estudava pintura de graça com Koiso Ryōhei num ateliê municipal de Kobe, agora identificado pelo museu. Kobe como “origem” de Mizuki; exposição até 29/11.</p>
+          <div class="source">
+            <span lang="ja">神戸新聞NEXT</span>
+            <a href="https://www.kobe-np.co.jp/news/culture/202611/0021063548.shtml" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>「ゲゲゲの鬼太郎」で知られる漫画家水木しげるさん（２０１５年死去）が１９５０年代に通った神戸の美術教室の名称を神戸ファッション美術館（神戸市東灘区）が調査、特定し、開催中の特別展「水木しげる　魂の漫画展」（神戸新聞社など主催）で紹介している。妖怪漫画の土台が神戸で築かれたことが裏付けられた。（津田和納）</p>
+            <p>鳥取県境港市で育った水木さんは戦前から戦後にかけて兵庫県内に住んだ。この間、召集され、戦闘で左腕を失って復員。神戸市兵庫区でアパート「水木荘」を経営しながら紙芝居作家として活動した。</p>
+            <p>幼い頃から絵が好きで、美術学校進学を志したが経済的理由で断念した水木さん。自伝「ねぼけ人生」（筑摩書房）によれば、この頃週４回ほど通った「神戸市立美術研究所」は「北野小学校の校舎を夜間使用しておこなわれていた」「小学校以外まともに卒業した学校はないのだが（中略）一番長く通ったことになる」。</p>
+            <p>今回は、同館の次六尚子学芸員の調査で、過去展の図録に掲載された水木さんの教室の会員証やタウン誌「月刊神戸っ子」の資料から、正式名称は「神戸市民美術教室」と判明。５３～５５年ごろに通った可能性が高いという。</p>
+            <p>教室は市民向けに４７年に創設され、小磯らが無償で指導したことも確認。自伝的漫画「神秘家水木しげる伝」で、小磯から「キミはなかなかスジがいいね」と褒められる場面がある。「水木さんにとって本格的に絵を学ぶ貴重な機会だった」と次六学芸員はみる。</p>
+            <p>水木さんが西宮・今津に住んでいた５４年に描いた油彩の風景画には、当時講師だった小松益喜さんの影響がうかがえるという。次六学芸員は「くすんだ空や煙の立ち上る街並みに目を向けた小松さんの画風が感じられる」。</p>
+            <p>同じ教室に通った水木さんと同年の画家、菅原洸人さん（２０１３年死去）が、当時を思い出し、左腕を失いながらも美術を学ぶ水木さんの姿を描いた水彩画（０８年）を、神戸文学館（神戸市灘区）が所蔵する。</p>
+            <p>菅原さんは０７年、神戸新聞に投稿し「水木しげるさんもとなりで頑張っていた。紙芝居の絵を描いていると言っていた」「昭和３０年代で衣食住の貧しい時代だったが、自由に絵を描けるので、希望にあふれていた」と回想した。</p>
+            <p>水木さんゆかりの地といえば鳥取県境港市や東京都調布市も知られるが、「神戸は画業の礎を築いた原点といえる。つながりを多くの人に知ってほしい」と次六学芸員は話している。</p>
+          </div>
+          <p class="continue"><a href="https://www.kobe-np.co.jp/news/culture/202611/0021063548.shtml" target="_blank" rel="noopener" lang="ja">続きを読む · 神戸新聞NEXT</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p17">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★☆☆</span> <span class="chip mins">3 min</span> <span class="chip" lang="ja">MAN WITH A MISSION</span> <span class="chip" lang="ja">The Circus</span> <span class="chip" lang="ja">47都道府県ツアー</span> <span class="chip" lang="ja">ロック</span> <span class="chip" lang="ja">BARKS</span>
+          </div>
+          <h2 lang="ja">MAN WITH A MISSION、ニューアルバム『The Circus』詳細発表。「一閃」「Highlights」を先行配信へ</h2>
+          <p class="why">Os lobos do rock japonês anunciaram “The Circus” (23/12), o primeiro álbum completo em ~4,5 anos, com “Firestarter” (abertura de anime) e “Ichisen” saindo antes; turnê pelas 47 províncias a partir de janeiro de 2027. “Ichisen” é a música-tema promocional do novo Onimusha da Capcom. Curto, mas é a notícia de rock pesado mais forte do dia (nada novo de BABYMETAL/HYDE/DIR EN GREY).</p>
+          <div class="source">
+            <span lang="ja">BARKS</span>
+            <a href="https://barks.jp/news/1106186" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>MAN WITH A MISSIONが12月23日（水）にリリースするニューアルバム『The Circus』のジャケットアートワークと、全13曲の収録内容を公開した。</p>
+            <p>約4年半ぶりとなるオリジナルフルアルバム『The Circus』には、シンガーソングライター・miletとのコラボレーションで大きな話題を呼んだTVアニメ『鬼滅の刃』刀鍛冶の里編オープニング主題歌「絆ノ奇跡」をはじめ、映画『藁にもすがる獣たち』主題歌「The Animals」、セレッソ大阪公式ソング「ONE」、TVアニメ『朱色の仮面』オープニング主題歌の最新シングル「Firestarter」など、すでに発表されていた7曲に加え、新たに制作された6曲を収録。</p>
+            <p>あわせて公開されたジャケットアートワークでは、アルバムタイトル『The Circus』の世界観をオオカミたち5匹が表現。Tokyo Tanakaを座長に、サーカス団に扮したメンバーたちが登場し、MAN WITH A MISSIONならではの遊び心と華やかさを兼ね備えた、インパクトのあるビジュアルに仕上がっている。</p>
+            <p>さらに、同アルバムより収録曲「一閃」が11月24日（火）、「Highlights」が12月8日（火）に、それぞれ午前0時より先行配信されることも決定した。</p>
+            <p>両楽曲はアルバム発売に先駆けて今年発表されていた楽曲で、「一閃」はCAPCOMの新作ゲーム『鬼武者 Way of the Sword』の公式プロモーションソングに起用。</p>
+            <p>MAN WITH A MISSIONは今作ニューアルバム『The Circus』を携え、2027年1月から全国47都道府県ツアー＜MAN WITH A MISSION LIVE TOUR “The Circus”＞をスタートさせる。現在、チケットのオフィシャルHP先行抽選予約を受付中で、申し込みは11月23日（月・祝）23:59まで。</p>
+          </div>
+          <p class="continue"><a href="https://barks.jp/news/1106186" target="_blank" rel="noopener" lang="ja">続きを読む · BARKS</a></p>
+        </div>
+      </article>
+
+      <footer class="site">読解幕 · 2026-11-23 · ~53 min · <a href="../../history/" style="color:inherit">History</a> · deliton.github.io/japanese-digest</footer>
+    </main>
+  </div>
+</body>
+</html>
