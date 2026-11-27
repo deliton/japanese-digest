@@ -1,0 +1,1060 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>読解幕 · 2026-11-27 · Japanese Digest</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Noto+Serif+JP:wght@400;600;700&family=Shippori+Mincho:wght@500;700&display=swap" rel="stylesheet" />
+  <style>
+
+    :root {
+      --bg: #0a0a0a;
+      --bg-2: #121212;
+      --bg-card: #161616;
+      --ink: #f5f5f5;
+      --ink-dim: #a8a29a;
+      --ink-mute: #6b6560;
+      --shu: #c41e3a;
+      --shu-hot: #e11d48;
+      --shu-deep: #8b1228;
+      --gold: #d4a017;
+      --gold-soft: #c9a227;
+      --white: #fafafa;
+      --line: #2a2a2a;
+      --line-hot: rgba(196, 30, 58, 0.45);
+      --measure: 42rem;
+      --radius: 4px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: "Noto Sans JP", "Hiragino Sans", "Yu Gothic", system-ui, sans-serif;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .stage-bar {
+      height: 6px;
+      background: repeating-linear-gradient(
+        90deg,
+        var(--shu) 0 48px,
+        var(--white) 48px 56px,
+        #111 56px 64px,
+        var(--gold) 64px 72px,
+        #111 72px 88px
+      );
+    }
+
+    .wrap {
+      width: min(100% - 2rem, 74rem);
+      margin: 0 auto;
+      padding: 2rem 0 4.5rem;
+      display: grid;
+      grid-template-columns: 15.5rem 1fr;
+      gap: 2.75rem;
+      align-items: start;
+    }
+
+    @media (max-width: 900px) {
+      .wrap { grid-template-columns: 1fr; gap: 1.5rem; padding-top: 1.25rem; }
+      .sidebar { position: static !important; }
+    }
+
+    .sidebar { position: sticky; top: 1.25rem; }
+
+    .brand {
+      display: flex;
+      align-items: baseline;
+      gap: 0.55rem;
+      margin: 0 0 0.35rem;
+    }
+    .brand-mark {
+      font-family: "Shippori Mincho", "Noto Serif JP", serif;
+      font-size: 1.85rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      color: var(--white);
+      line-height: 1;
+    }
+    .brand-mark em {
+      font-style: normal;
+      color: var(--shu);
+    }
+    .brand-sub {
+      font-size: 0.65rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-weight: 700;
+    }
+
+    .meta {
+      color: var(--ink-mute);
+      font-size: 0.8rem;
+      margin: 0 0 1.25rem;
+    }
+
+    .stat-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-bottom: 1.35rem;
+    }
+    .stat {
+      border: 1px solid var(--line);
+      background: var(--bg-2);
+      padding: 0.32rem 0.65rem;
+      font-size: 0.72rem;
+      color: var(--ink-dim);
+      border-radius: var(--radius);
+    }
+    .stat strong { color: var(--white); font-weight: 700; }
+    .stat.hot {
+      border-color: var(--shu);
+      color: var(--shu-hot);
+      background: rgba(196, 30, 58, 0.1);
+    }
+
+    .toc {
+      border: 1px solid var(--line);
+      background: var(--bg-2);
+      padding: 0.85rem 0.9rem 0.95rem;
+      border-radius: var(--radius);
+    }
+    .toc h2 {
+      margin: 0 0 0.65rem;
+      font-size: 0.72rem;
+      letter-spacing: 0.16em;
+      color: var(--gold);
+      font-weight: 800;
+    }
+    .toc ol { list-style: none; margin: 0; padding: 0; }
+    .toc li { margin: 0; }
+    .toc a {
+      display: flex;
+      justify-content: space-between;
+      gap: 0.5rem;
+      text-decoration: none;
+      color: var(--ink-dim);
+      font-size: 0.82rem;
+      padding: 0.38rem 0.2rem;
+      border-bottom: 1px solid transparent;
+    }
+    .toc a:hover { color: var(--white); border-bottom-color: var(--line-hot); }
+    .toc .t-title { font-weight: 600; }
+    .toc .t-min { color: var(--gold); font-size: 0.72rem; font-weight: 700; flex-shrink: 0; }
+
+    .main { max-width: var(--measure); }
+
+    .digest-banner {
+      display: flex;
+      gap: 0.75rem;
+      align-items: flex-start;
+      background: #141014;
+      border: 1px solid var(--line);
+      border-left: 3px solid var(--shu);
+      padding: 0.85rem 1rem;
+      margin-bottom: 1.5rem;
+      font-size: 0.78rem;
+      color: var(--ink-dim);
+      line-height: 1.55;
+    }
+    .digest-banner .tag {
+      flex-shrink: 0;
+      background: var(--shu);
+      color: #fff;
+      font-size: 0.65rem;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      padding: 0.28rem 0.5rem;
+      border-radius: var(--radius);
+    }
+
+    .hero {
+      margin-bottom: 2rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid var(--line);
+      position: relative;
+    }
+    .hero::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -1px;
+      width: 4.5rem;
+      height: 2px;
+      background: var(--shu);
+    }
+    .kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.7rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--shu-hot);
+      font-weight: 800;
+      margin-bottom: 0.85rem;
+    }
+    .kicker::before {
+      content: "◆";
+      font-size: 0.55rem;
+      color: var(--gold);
+    }
+    .hero h1 {
+      font-family: "Shippori Mincho", "Noto Serif JP", serif;
+      font-size: clamp(1.85rem, 4vw, 2.55rem);
+      font-weight: 700;
+      line-height: 1.2;
+      margin: 0 0 0.75rem;
+      color: var(--white);
+      letter-spacing: 0.02em;
+    }
+    .hero p {
+      margin: 0;
+      color: var(--ink-dim);
+      font-size: 0.98rem;
+      max-width: 36rem;
+    }
+
+    article.piece {
+      background: var(--bg-card);
+      border: 1px solid var(--line);
+      margin-bottom: 1.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+    article.piece::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: linear-gradient(90deg, var(--shu) 0%, var(--shu) 35%, var(--gold) 35%, var(--gold) 42%, transparent 42%);
+    }
+
+    .piece-inner { padding: 1.6rem 1.55rem 1.35rem; }
+
+    .piece-head {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-bottom: 0.85rem;
+    }
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      border: 1px solid var(--line);
+      background: #111;
+      color: var(--ink-dim);
+      padding: 0.22rem 0.6rem;
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      border-radius: var(--radius);
+    }
+    .chip.interest {
+      border-color: var(--shu);
+      color: var(--shu-hot);
+      background: rgba(196, 30, 58, 0.12);
+    }
+    .chip.mins {
+      border-color: var(--gold);
+      color: var(--gold);
+      background: transparent;
+    }
+
+    .piece h2 {
+      font-family: "Noto Serif JP", "Shippori Mincho", "Yu Mincho", serif;
+      font-size: 1.38rem;
+      font-weight: 700;
+      line-height: 1.5;
+      margin: 0 0 0.6rem;
+      color: var(--white);
+      letter-spacing: 0.02em;
+    }
+
+    .why {
+      margin: 0 0 1rem;
+      color: var(--ink-dim);
+      font-size: 0.9rem;
+      border-left: 2px solid var(--gold);
+      padding-left: 0.85rem;
+    }
+
+    .source {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.65rem 1.1rem;
+      font-size: 0.76rem;
+      color: var(--ink-mute);
+      margin-bottom: 1.25rem;
+    }
+    .source a {
+      color: var(--shu-hot);
+      text-decoration: none;
+      font-weight: 600;
+    }
+    .source a:hover { color: var(--gold); }
+
+    .ja {
+      font-family: "Noto Serif JP", "Hiragino Mincho ProN", "Yu Mincho", serif;
+      font-size: 1.08rem;
+      line-height: 2;
+      letter-spacing: 0.03em;
+      color: #ebe7e1;
+    }
+    .ja p { margin: 0 0 1.15em; }
+    .ja p:last-child { margin-bottom: 0; }
+
+    .continue {
+      margin-top: 1.25rem;
+      padding-top: 1rem;
+      border-top: 1px solid var(--line);
+      font-size: 0.86rem;
+    }
+    .continue a {
+      color: var(--white);
+      text-decoration: none;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      border-bottom: 2px solid var(--shu);
+      padding-bottom: 0.1rem;
+    }
+    .continue a:hover {
+      color: var(--shu-hot);
+      border-bottom-color: var(--gold);
+    }
+
+    footer.site {
+      max-width: var(--measure);
+      margin-top: 1.75rem;
+      color: var(--ink-mute);
+      font-size: 0.72rem;
+      letter-spacing: 0.06em;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+    footer.site::before {
+      content: "";
+      width: 1.25rem;
+      height: 2px;
+      background: var(--shu);
+    }
+
+  
+    .excerpt-label { font-size: 0.66rem; letter-spacing: 0.18em; color: var(--gold); font-weight: 800; margin: 0 0 0.6rem; }
+    .brand-sub a, .stat a { color: var(--gold); text-decoration: none; }
+    .toc .t-min { font-variant-numeric: tabular-nums; }
+  </style>
+</head>
+<body>
+  <div class="stage-bar" aria-hidden="true"></div>
+
+  <div class="wrap">
+    <aside class="sidebar">
+      <div class="brand">
+        <span class="brand-mark" lang="ja">読解<em>幕</em></span>
+      </div>
+      <p class="brand-sub">Kabuki Digest · <a href="/japanese-digest/history/">History</a></p>
+      <p class="meta">2026-11-27 · America/Sao_Paulo</p>
+      <div class="stat-row">
+        <span class="stat"><strong>52</strong> min</span>
+        <span class="stat"><strong>18</strong> pieces</span>
+        <span class="stat"><strong>~13,000</strong> 字</span>
+        <span class="stat"><a href="/japanese-digest/history/">History</a></span>
+      </div>
+
+      <nav class="toc" aria-label="Índice">
+        <h2 lang="ja">本日の演目</h2>
+        <ol>
+          <li>
+            <a href="#p1">
+              <span class="t-title" lang="ja">信長が「天下人」になった日――なぜ家督と岐阜城を信忠に譲ったのか</span>
+              <span class="t-min">3′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p2">
+              <span class="t-title" lang="ja">男装して箱館戦争へ――フランス語を操った元芸者・勝奴の数奇な生涯</span>
+              <span class="t-min">3′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p3">
+              <span class="t-title" lang="ja">「バテレン追放令」を書いたのは秀吉の主治医だった――施薬院全宗の正体</span>
+              <span class="t-min">3′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p4">
+              <span class="t-title" lang="ja">8度の科挙失敗、9度の自殺未遂…「狂気の天才画家」徐渭の壮絶な生涯</span>
+              <span class="t-min">4′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p5">
+              <span class="t-title" lang="ja">落書き一つで町人までくじ引きで処刑――聚楽第落首事件</span>
+              <span class="t-min">4′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p6">
+              <span class="t-title" lang="ja">1万年も近親交配を続けた飛べないオウム・カカポは、なぜ健康だったのか</span>
+              <span class="t-min">3′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p7">
+              <span class="t-title" lang="ja">「右脳が左半身を動かす」のはなぜ？答えは目の配線にあった可能性</span>
+              <span class="t-min">3′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p8">
+              <span class="t-title" lang="ja">1万5千年前の粘土像に「大人と子どもの指紋」が重なっていた</span>
+              <span class="t-min">4′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p9">
+              <span class="t-title" lang="ja">森を追われるアマゾンの未接触部族アワ族、自ら村へ食べ物を求めて現れる</span>
+              <span class="t-min">2′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p10">
+              <span class="t-title" lang="ja">南太平洋の島に「サンタと無料で話せる公衆電話」を置いた通信技術者の記録</span>
+              <span class="t-min">3′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p11">
+              <span class="t-title" lang="ja">1808年の北米旅行スケッチブック、謎の作者をAIが22分で特定</span>
+              <span class="t-min">3′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p12">
+              <span class="t-title" lang="ja">AIに「これはゲームだ」と伝えると、民間人を攻撃対象にしてしまう</span>
+              <span class="t-min">2′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p13">
+              <span class="t-title" lang="ja">名古屋～富山を3社直通、伝説の特急「北アルプス」廃止から25年</span>
+              <span class="t-min">3′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p14">
+              <span class="t-title" lang="ja">1機218億円の救難飛行艇US-2――“二式大艇の末裔”はなぜ必要なのか</span>
+              <span class="t-min">3′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p15">
+              <span class="t-title" lang="ja">Claude Codeを5〜8個並べても迷わない、自作ダッシュボードの話</span>
+              <span class="t-min">2′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p16">
+              <span class="t-title" lang="ja">禁止しても止まらないClaudeの「欲」を飼いならす</span>
+              <span class="t-min">3′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p17">
+              <span class="t-title" lang="ja">丹波竜、福井から帰郷――全身復元骨格の組み立てを公開</span>
+              <span class="t-min">2′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p18">
+              <span class="t-title" lang="ja">LOVEBITES、初の日本武道館公演が映像作品に――火柱の「プロミスト・ランド」</span>
+              <span class="t-min">2′</span>
+            </a>
+          </li>
+        </ol>
+      </nav>
+    </aside>
+
+    <main class="main">
+      <div class="digest-banner">
+        <span class="tag">TRIAGE</span>
+        <span>Destaque: o dia em que Nobunaga virou “senhor do Tenka” (BUSHOO), no aniversário (28/11, calendário antigo). História: a gueixa-intérprete Katsu na Guerra de Hakodate e o médico de Hideyoshi que redigiu o édito anticristão (Japaaan); o pintor maldito Xu Wei e o massacre por sorteio do caso Jurakudai (草の実堂). Ciência: kakapo, cérebro cruzado, digitais de criança de 15 mil anos (ナゾロジー); os Awá na Amazônia e IA mirando civis “num jogo” (カラパイア). Curiosidades/IA: o orelhão do Papai Noel e o GPT-6.2 resolvendo um mistério de 1808 (GIGAZINE). Trens/aviões: o expresso Kita Alps e o US-2 da ShinMaywa de Hyōgo (乗りもの). Dev: painel para vários Claude Code e como domar o “desejo” do Claude (Zenn). Hyōgo: Tanba-ryū + Shin-Nagata (神戸新聞). Música: LOVEBITES no Budōkan (BARKS). Pontos fracos: Kobe Shimbun só libera o lide (itens de Kobe curtos); nada novo de BABYMETAL/HYDE/DIR EN GREY/Aimer etc.; nada de vistos; NatGeo JP só com saúde/medicina hoje (Neandertal ficou de fora por repetir tema de 17/11); Real Sound sem rock relevante. Cortados: Matsubara Chūji do Shinsengumi (repetiria o tema de ontem), política (APEC/Xi) do 草の実堂, DNA dos Beatles em células, notícias de crime/acidentes do Kobe Shimbun.</span>
+      </div>
+
+      <header class="hero">
+        <div class="kicker">Daily curated reading</div>
+        <h1 lang="ja">信長が天下人になった日、男装の芸者・勝奴、バテレン追放令を書いた医師、狂気の画家・徐渭、聚楽第落首事件、カカポの1万年、右脳と左半身、1万5千年前の子どもの指紋、アマゾンのアワ族、サンタの公衆電話、1808年のスケッチブックとAI、「ゲームだ」で崩れるAI、特急北アルプス、飛行艇US-2、Claude Codeダッシュボード、Claudeの「欲」、丹波竜、LOVEBITES</h1>
+        <p lang="ja">今日の幕開けは、天正三年11月28日――織田信長が家督と岐阜城を信忠に譲り、「天下人」へと踏み出した日。続いて、男装してフランス語通詞となり箱館戦争に身を投じた元芸者・勝奴、バテレン追放令の原書を書いた秀吉の主治医・施薬院全宗、科挙に8度落ちた明の狂気の天才画家・徐渭、そして落書き一つで町人がくじ引きで処刑された聚楽第落首事件。科学では、1万年近親交配を続けても健康だった飛べないオウム、右脳が左半身を動かす理由、1万5千年前の粘土像に残る大人と子どもの指紋、森を追われるアマゾンのアワ族。サンタと話せる南の島の公衆電話、1808年のスケッチブックの謎を解いたAI、「ゲームだ」の一言で崩れるAIの安全装置。乗りものは伝説の特急「北アルプス」の痕跡と、兵庫生まれの飛行艇US-2。開発ではClaude Codeを並べるダッシュボードとClaudeの「欲」の飼いならし方。丹波竜の帰郷とLOVEBITESの武道館で幕を閉じます。約52分の読解です。</p>
+      </header>
+
+      <article class="piece" id="p1">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★★</span> <span class="chip mins">3 min</span> <span class="chip" lang="ja">織田信長</span> <span class="chip" lang="ja">織田信忠</span> <span class="chip" lang="ja">右近衛大将</span> <span class="chip" lang="ja">安土城</span> <span class="chip" lang="ja">長篠の戦い</span>
+          </div>
+          <h2 lang="ja">信長が天下人になった日｜なぜ信忠に織田家の家督と岐阜城を譲ったのか</h2>
+          <p class="why">Amanhã (28/11 no calendário antigo) faz 451 anos que Nobunaga passou a chefia do clã Oda e o castelo de Gifu ao filho Nobutada — e, em vez de se aposentar, virou “senhor do Tenka”. O texto explica a lógica: o título de Ukonoe-taishō (o mesmo de Minamoto no Yoritomo), cartas enviadas no mesmo dia aos daimyō do leste contra os Takeda, e a divisão Gifu (clã) × Azuchi (governo do país).</p>
+          <div class="source">
+            <span lang="ja">BUSHOO!JAPAN（武将ジャパン）</span>
+            <a href="https://bushoojapan.com/bushoo/oda/2026/11/27/223401" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>天正三年11月28日（1575年12月30日）は織田信長が嫡男の織田信忠に家督を譲った日です。</p>
+            <p>見方によっては、信長が天下人となった日とも言えるかもしれません。</p>
+            <p>……</p>
+            <p>右近衛大将は、源頼朝が任じられて以来、武家にとって特別な意味を持つ官職。</p>
+            <p>……</p>
+            <p>これで信長は、京都を追われた将軍・足利義昭と、官位の上では肩を並べました。</p>
+            <p>……</p>
+            <p>それほど勢いに乗った信長が、なぜ織田家の当主を辞めてしまったのか？</p>
+            <p>任官から3週間ほど後の天正三年（1575年）11月28日――。</p>
+            <p>……</p>
+            <p>尾張・美濃の領国は信忠に任せ、自分は京都や畿内の政治を担い、各地の大名に働きかける役目ですね。</p>
+            <p>むろん、信長が織田家での権力を手放したわけではなく、当主を退いた後も家長として織田家の上に立ち続けました。</p>
+            <p>……</p>
+            <p>家督を譲った同日11月28日、織田信長は北関東や東北の大名たちへ、一斉に書状を送りました。</p>
+            <p>宛先として知られているのは、常陸の佐竹義重、下野の小山秀綱（おやまひでつな）、陸奥の田村清顕など。</p>
+            <p>……</p>
+            <p>翌天正四年（1576年）、織田信長は近江の安土で新しい城の建設に取りかかりました。</p>
+            <p>岐阜は織田家当主・信忠の城、安土は天下人・信長の城。</p>
+            <p>ゆえに研究者の黒田氏や平山氏は、安土を天下人の居城、あるいは天下の政庁と位置づけています。</p>
+            <p>拠点が分かれたことで、父子の役割もはっきり分かれていきました。</p>
+            <p>安土の信長は主に西国や四国へ目を向け、東国は信忠と徳川家康が主に受け持つ形になっていきます。</p>
+            <p>実際、6年後の天正十年（1582年）に甲州征伐で武田勝頼を攻め滅ぼしたのは織田信忠の軍勢でした。</p>
+            <p>織田家の仕事は信忠に預け、自らはさらに広い天下へ向かう――。</p>
+            <p>その出発点が天正三年（1575年）11月28日であり、信長が天下人になった日だったと言えるのでは？ということですね。</p>
+          </div>
+          <p class="continue"><a href="https://bushoojapan.com/bushoo/oda/2026/11/27/223401" target="_blank" rel="noopener" lang="ja">続きを読む · BUSHOO!JAPAN（武将ジャパン）</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p2">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★★</span> <span class="chip mins">3 min</span> <span class="chip" lang="ja">箱館戦争</span> <span class="chip" lang="ja">榎本武揚</span> <span class="chip" lang="ja">通詞</span> <span class="chip" lang="ja">芸者</span> <span class="chip" lang="ja">幕末の女性</span>
+          </div>
+          <h2 lang="ja">なんと男装をし幕府軍に参入！女性の身でありながら幕末の箱館戦争に身を投じた芸者・勝奴の数奇な生涯</h2>
+          <p class="why">Uma gueixa de Edo que falava holandês e francês “de ouvido”, filha de um intérprete assassinado, vira o intérprete masculino “Tajima Katsutarō” da missão militar francesa a pedido de Enomoto Takeaki — e vai parar na Guerra de Hakodate, é capturada, salva por Kuroda Kiyotaka e usada como mensageira para pedir a rendição do Goryōkaku. Biografia curta e improvável.</p>
+          <div class="source">
+            <span lang="ja">Japaaan（ジャパーン）</span>
+            <a href="https://mag.japaaan.com/archives/295920" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>戊辰戦争最後の戦い、箱館戦争では男名を使った日本人女性のフランス通詞が幕府軍に紛れていました。その人物の名前は田島勝太郎 (たじま-かつたろう)で、箱館戦争に従軍する前は芸者をやっていました。</p>
+            <p>「男名の元芸者が箱館戦争へ」という聞くだけで驚くようなことをやった勝太郎の数奇な生涯を今回はご紹介します。</p>
+            <p>……</p>
+            <p>勝太郎の本名は田島勝といい、江戸の下谷(現在の東京都台東区)で生を受けます。父の田島平助は飾師をやっており、飾りで使う宝石や異国品の取引をしている内にオランダ語やフランス語に精通するようになりました。</p>
+            <p>平助はこのことにより、幕府の通詞となり長崎へ滞在することになります。勝も父と共に長崎へ滞在していました。</p>
+            <p>しかし、平助が暗殺されたことで勝は故郷の下谷へ戻ることになりました。</p>
+            <p>下谷に戻った勝は母を養うために「勝奴」という芸名で芸者になります。そんな時、勝は長崎にいたころに親交があった榎本武揚と偶然出会います。</p>
+            <p>2人は武揚が長崎海軍伝習所に入学していたころに平助を通じて会っていました。</p>
+            <p>勝は耳学問でしたが、オランダ語とフランス語が話せました。そのことに目を付けた武揚はこのような生活から救おうとした思いもあり、勝にフランス軍事顧問団の通詞となることをお願いします。</p>
+            <p>承諾した勝は、この時から男装し「田島勝太郎」と名乗ります。</p>
+            <p>……</p>
+            <p>勝から勝太郎になった後、武揚に従って箱館の地へ向かいます。そして、勝は箱館戦争の最中に官軍によって捕らえられてしまいました。</p>
+            <p>その後は黒田清隆によって助けられ、勝は箱館病院へ連行されます。</p>
+            <p>箱館病院では元気なのに病人扱いされ自由が利かない状態でしたが、勝は武揚と通じていることもあり五稜郭の開城を促す使者に抜擢されます。</p>
+            <p>……</p>
+            <p>どんな人生になろうともやりたいことを優先に生きていく意志を勝から感じ取れました。勝のように柔軟に人生を謳歌したいものですね。</p>
+          </div>
+          <p class="continue"><a href="https://mag.japaaan.com/archives/295920" target="_blank" rel="noopener" lang="ja">続きを読む · Japaaan（ジャパーン）</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p3">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★☆</span> <span class="chip mins">3 min</span> <span class="chip" lang="ja">施薬院全宗</span> <span class="chip" lang="ja">豊臣秀吉</span> <span class="chip" lang="ja">バテレン追放令</span> <span class="chip" lang="ja">戦国の医師</span> <span class="chip" lang="ja">施薬院</span>
+          </div>
+          <h2 lang="ja">「バテレン追放令」の原書は秀吉の主治医が書いていた！医師の枠を超えた施薬院全宗の正体</h2>
+          <p class="why">O médico particular de Hideyoshi, ex-monge do Monte Hiei que sobreviveu ao incêndio de Nobunaga, reativou o Seyakuin (hospital para pobres fundado no séc. VIII) e — surpresa — redigiu o original do édito de expulsão dos missionários cristãos de 1587. Também fez diplomacia com Date Masamune. Um bastidor pouco conhecido do poder Toyotomi.</p>
+          <div class="source">
+            <span lang="ja">Japaaan（ジャパーン）</span>
+            <a href="https://mag.japaaan.com/archives/295904" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>百姓の小倅から天下人へと成り上がった豊臣秀吉は、我が世の春を謳歌するべく、健康には気を遣ったことでしょう。</p>
+            <p>今回は秀吉の侍医として活躍した施薬院全宗（やくいんぜんそう）を紹介。果たしてどんな人物で、どんな活躍をしたのか、気になります。</p>
+            <p>……</p>
+            <p>施薬院全宗は大永6年（1526年）に丹波宗忠（たんばむねただ）の子として近江国甲賀郡（滋賀県甲賀市）に誕生しました。</p>
+            <p>丹波家は平安時代に活躍した名医・丹波康頼（やすより）の子孫で、全宗は康頼の二十世子孫に当たります。</p>
+            <p>……</p>
+            <p>やむなく還俗して医師を目指し、名医として高名な曲直瀬道三（まなせどうさん）に弟子入りします。</p>
+            <p>後に羽柴秀吉へ仕えて侍医となり、古巣である比叡山の弁護にあたりました。</p>
+            <p>やがて天正10年（1582年）に信長が本能寺の変で横死を遂げると、全宗は秀吉の許可を得て比叡山再興に乗り出します。怖い信長がいなくなり、思い切り取り組めるようになったのでしょう。</p>
+            <p>この頃から徳運軒全宗（とくうんけん）と名乗るようになります。</p>
+            <p>……</p>
+            <p>そして天正13年（1585年）になると勅命を受けて施薬院使となり、従五位下に叙せられました。</p>
+            <p>施薬院とは奈良時代に光明皇后（聖武天皇后）の発願で創設された貧困層向けの医療機関で、既に形骸化していたものを復活させたのです。</p>
+            <p>……</p>
+            <p>秀吉からの信頼は厚かったらしく、『寛政重脩諸家譜』によれば「言ふところ必ず聞かれ、望むところ必ず達す」と言われるほどでした。</p>
+            <p>息子は秀吉から偏諱「秀」の字を与えられ、施薬院秀隆（ひでたか）と名乗っています。</p>
+            <p>……</p>
+            <p>宗伯の子孫は代々施薬院使を務め、曲直瀬道三からの医術を後世へ受け継いでいきます。</p>
+            <p>天正19年（1591年）に加増され、合計で知行1,265石を領するところとなりました。</p>
+            <p>……</p>
+            <p>晩年まで秀吉に仕え、慶長4年12月10日（1600年1月27日）に75歳で世を去りました。</p>
+            <p>京都の十念寺（上京区）に葬られた全宗は、今も人々を見守っているのでしょうか。</p>
+          </div>
+          <p class="continue"><a href="https://mag.japaaan.com/archives/295904" target="_blank" rel="noopener" lang="ja">続きを読む · Japaaan（ジャパーン）</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p4">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★★</span> <span class="chip mins">4 min</span> <span class="chip" lang="ja">徐渭</span> <span class="chip" lang="ja">明代</span> <span class="chip" lang="ja">科挙</span> <span class="chip" lang="ja">倭寇</span> <span class="chip" lang="ja">水墨画</span>
+          </div>
+          <h2 lang="ja">8度の科挙失敗、9度の自殺未遂…妻まで殺した「狂気の天才画家」徐渭の壮絶な生涯</h2>
+          <p class="why">Xu Wei, gênio da dinastia Ming: reprovado 8 vezes no exame imperial, secretário militar na guerra contra os piratas wakō, escreveu o próprio epitáfio, tentou suicídio 9 vezes em 2 anos e matou a esposa — e mesmo assim virou um dos pais da pintura a tinta livre chinesa. História intensa, com bom vocabulário de China clássica (科挙, 幕客, 墓誌銘).</p>
+          <div class="source">
+            <span lang="ja">草の実堂</span>
+            <a href="https://kusanomido.com/study/history/chinese/min/136302/" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>昔から「天才と狂人は紙一重」などと言われてきました。</p>
+            <p>結果として世に認められた者が天才と賞賛される一方、認められなかった者は狂人とレッテル貼りされてしまうのが世の常です。</p>
+            <p>今回はそんな波乱の生涯を送った狂気の天才・徐渭（じょい）を紹介。</p>
+            <p>……</p>
+            <p>徐渭は明代の正徳16年（1521年）2月4日、浙江省紹興府山陰県（現在の紹興市）で、かつて夔州府（現在の重慶市周辺）の同知（副知事）を務めた徐鏓（じょそう）の庶子として誕生しました。</p>
+            <p>……</p>
+            <p>更には父も徐渭が生まれて百日目に亡くなり、父の継室であった苗（びょう）氏が子供たちの母親代わりを務めたそうです。</p>
+            <p>苗氏は徐渭を深い愛情をもって育て、優れた教育を授けました。</p>
+            <p>……</p>
+            <p>亡き苗氏の期待に応えようと、徐渭は学問に励み続けましたが、その才能が科挙で報われることはなかなかありませんでした。</p>
+            <p>ようやく童試（科挙の受験資格試験）に及第したのは20歳になってからで、それからは徐秀才と呼ばれるようになりました。</p>
+            <p>以来20年間にわたって8度も郷試（科挙の地方予選試験）に挑戦しますが、1度も及第できなかったそうです。</p>
+            <p>……</p>
+            <p>果たして徐渭は倭寇討伐に関わる中で、その軍事的な知識や文才を発揮し、やがて倭寇対策を指揮していた胡宗憲（こそうけん）の目にとまります。</p>
+            <p>……</p>
+            <p>この頃から精神が不安定になっていったようで、一度は北京に職を見つけるも、長続きせず故郷へもどってきてしまいました。</p>
+            <p>……</p>
+            <p>自分の墓誌銘（墓の説明書き）を自分で書いたり、2年間で9回の自殺未遂を繰り返したり、どうにもならなくなってしまったのです。</p>
+            <p>そして46歳の時に、妻の張氏の不貞を疑った徐渭は、激しい怒りの末に彼女を殺してしまいます。投獄された徐渭は、その後6年ほどの獄中生活を余儀なくされました。</p>
+            <p>しかし徐渭の支援者であった同郷の官吏・張天復（ちょうてんふく）・張元忭（げんへん）父子は減刑や恩赦に奔走したそうです。</p>
+            <p>……</p>
+            <p>喜び勇んで北京へ向かった徐渭でしたが、道中で発病してしまい、仕方なく次男の徐枳だけを北京へやり、自身は帰郷したそうです。</p>
+            <p>晩年は徐枳の岳父に引き取られて自伝『畸譜（きふ）』を書き上げ、万暦21年（1593年）に73歳で世を去ったのでした。</p>
+            <p>……</p>
+            <p>そんな徐渭の創作は書・画・詩・詞（作詞）・戯曲・散文など多彩に及び、その天才性は後世に大きな影響を与えました。</p>
+          </div>
+          <p class="continue"><a href="https://kusanomido.com/study/history/chinese/min/136302/" target="_blank" rel="noopener" lang="ja">続きを読む · 草の実堂</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p5">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★★</span> <span class="chip mins">4 min</span> <span class="chip" lang="ja">聚楽第落首事件</span> <span class="chip" lang="ja">豊臣秀吉</span> <span class="chip" lang="ja">落首</span> <span class="chip" lang="ja">本願寺</span> <span class="chip" lang="ja">茶々</span>
+          </div>
+          <h2 lang="ja">秀吉批判の落書きで、無実の町人までくじで処刑された【聚楽第落首事件】</h2>
+          <p class="why">Fevereiro de 1589: alguém picha versos zombando de Hideyoshi (e da gravidez de Chacha) no muro do palácio Jurakudai. A reação: 17 guardas mutilados e crucificados, um rōnin caçado até o templo Honganji em Osaka e 63 moradores de Tenma executados — escolhidos por sorteio, incluindo velhos e crianças. Usa diários da época (多聞院日記) como fonte.</p>
+          <div class="source">
+            <span lang="ja">草の実堂</span>
+            <a href="https://kusanomido.com/study/history/japan/azuchi/toyotomi/137352/" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>天正17年（1589年）2月25日の夜、関白・豊臣秀吉の邸宅であり政庁でもあった聚楽第（じゅらくだい・じゅらくてい）で、ある事件が起きた。</p>
+            <p>門の番所の白壁に、秀吉を批判する落書きが書かれていたのである。</p>
+            <p>この落書きに激怒した秀吉は、番をしていた者たちを処刑しただけでなく、犯人をかくまったとされた大坂・天満の町から、事件と関わりのない町人たちまで捕らえて磔にした。</p>
+            <p>……</p>
+            <p>これが、いわゆる聚楽第落首事件（聚楽第落書き事件）である。</p>
+            <p>落首（らくしゅ）とは、世の中や権力者を皮肉った歌や文を、名前を伏せて人目につく場所に掲げたり、書きつけたりするものである。</p>
+            <p>言論の自由などない時代にも、名前を出さなければ誰でも権力者を笑うことができた。</p>
+            <p>……</p>
+            <p>そして長く子に恵まれなかった秀吉の側室・茶々（淀殿）が、ちょうどこの頃に懐妊していた。</p>
+            <p>刀狩で集めた刀や槍が大仏の釘やかすがいになり、そのご利益で子宝に恵まれたのだろう、と皮肉ったものと解釈されている。</p>
+            <p>……</p>
+            <p>秀吉の怒りは、まず門の警備をしていた番衆（ばんしゅう）に向けられた。</p>
+            <p>その夜に番をしていた17人は、2月29日に鼻を削がれ、3月1日に耳を切り落とされ、3月2日に逆さ磔にされた。</p>
+            <p>……</p>
+            <p>『多聞院日記』も、番衆17人が鼻を削がれ、耳を切られ、ことごとく磔にされたと書いている。</p>
+            <p>犯人捜しの中で疑われたのが、浪人の尾藤道休（びとうどうきゅう）である。</p>
+            <p>道休は、大坂・天満にあった本願寺の寺内町に逃げ込んでいたとされる。</p>
+            <p>……</p>
+            <p>3月9日、天満の町人63人が京都へ連行され、うち3人は自害し、残る60人は京都で磔にされた。</p>
+            <p>その中には80歳を超えた老人も、7歳にもならない子どももいた。男も女も区別はなく、本願寺の僧もいれば諸国を行き来する商人もいたという。</p>
+            <p>さらに『多聞院日記』は、誰を処刑するかが「くじ」で決められたと伝えている。</p>
+            <p>「男女并（ならびに）女童子くじに出たれば運次第也。さてさて不便（ふびん）の事也。一向無罪の仁共也。あさましあさまし」</p>
+            <p>男も女も子どもも、くじに当たれば運次第。まったく罪のない人々であり、なんとも嘆かわしい、と英俊は書き残したのである。</p>
+            <p>……</p>
+            <p>天下人として頂点に立ちつつあった秀吉の、批判を一切許さない苛烈さが表れた事件として、この出来事は晩年の秀吉の姿を予感させるものとも見られている。</p>
+          </div>
+          <p class="continue"><a href="https://kusanomido.com/study/history/japan/azuchi/toyotomi/137352/" target="_blank" rel="noopener" lang="ja">続きを読む · 草の実堂</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p6">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★☆</span> <span class="chip mins">3 min</span> <span class="chip" lang="ja">カカポ</span> <span class="chip" lang="ja">近親交配</span> <span class="chip" lang="ja">遺伝子</span> <span class="chip" lang="ja">絶滅危惧種</span> <span class="chip" lang="ja">ニュージーランド</span>
+          </div>
+          <h2 lang="ja">1万年も近親交配を続けた飛べないオウムは遺伝的に健康だったと判明</h2>
+          <p class="why">O kakapo, papagaio que não voa da Nova Zelândia: uma população isolada na ilha Stewart cruzou entre parentes por 10 mil anos — e mesmo assim tem menos mutações nocivas que os do continente (comparados com espécimes de museu de 1847–1924). A explicação é o “expurgo” genético, e a analogia do livro de receitas com erros de impressão torna tudo bem legível.</p>
+          <div class="source">
+            <span lang="ja">ナゾロジー</span>
+            <a href="https://nazology.kusuguru.co.jp/archives/211523" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>ニュージーランドには、カカポという飛べないオウムがいます。</p>
+            <p>その一部はスチュワート島という島で、およそ1万年ものあいだ、ほかの仲間から切り離されて暮らしてきました。</p>
+            <p>……</p>
+            <p>しかし人による乱獲と、人が持ちこんだ捕食者のせいで減り続け、1995年にはわずか51羽になりました。</p>
+            <p>……</p>
+            <p>生き物は、体をつくって動かすための情報一式をDNAに持っています。</p>
+            <p>両親が親戚どうしだと、2組のゲノムが長い範囲にわたってそっくり同じになります。</p>
+            <p>このゲノムを、父と母から1冊ずつもらった料理のレシピ本に例えてみましょう。</p>
+            <p>……</p>
+            <p>そこで研究チームは、49羽のカカポのゲノムを丸ごと読みました。</p>
+            <p>残る14羽は本土の鳥で、リチャード・ヘンリーと、博物館に残る13羽の標本でした。</p>
+            <p>標本は1847年から1924年にかけて集められたものです。</p>
+            <p>本土のカカポはその後絶滅しましたが、標本のDNAには、消えた集団の姿が残されていたのです。</p>
+            <p>まずチームは、両親から受け取った2組のゲノムが、どれだけ同じになっているかを調べました。</p>
+            <p>島の鳥では、そっくり同じ範囲がゲノムの平均53%を占めていました。</p>
+            <p>島の鳥は、本土の鳥の3倍以上も近親交配が進んでいたことになります。</p>
+            <p>……</p>
+            <p>ところが島の鳥は平均17.6個で、本土のおよそ半分しかなかったのです。</p>
+            <p>……</p>
+            <p>親戚どうしの交配が続くと、同じ悪い変異を両親から受け継ぐヒナが増えます。</p>
+            <p>そうしたヒナは生き延びにくく、子も残しにくいと、チームはみています。</p>
+            <p>すると、その変異は次の世代に渡りにくくなり、世代を重ねるごとにまれになっていきます。</p>
+            <p>遺伝学では、この働きを「パージ」（一掃）と呼びます。</p>
+            <p>……</p>
+            <p>パージがうまく働くには、自然選択(生き延びて子を残しやすい性質が、次の世代に多く残っていく働き)が働けるだけの数の鳥がいる必要があるようです。</p>
+          </div>
+          <p class="continue"><a href="https://nazology.kusuguru.co.jp/archives/211523" target="_blank" rel="noopener" lang="ja">続きを読む · ナゾロジー</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p7">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★☆</span> <span class="chip mins">3 min</span> <span class="chip" lang="ja">脳科学</span> <span class="chip" lang="ja">視交叉</span> <span class="chip" lang="ja">進化</span> <span class="chip" lang="ja">左右交差</span> <span class="chip" lang="ja">脊椎動物</span>
+          </div>
+          <h2 lang="ja">「右脳が左半身を動かす理由」は目の配線にあった可能性</h2>
+          <p class="why">Por que o lado direito do cérebro controla o lado esquerdo do corpo? Comparando a fiação de todos os vertebrados, pesquisadores sugerem que o cruzamento começou pela visão (o quiasma óptico) — e que paladar e olfato, que não têm “mapa” de esquerda/direita, nunca cruzaram. Ciência explicada com exemplos do próprio corpo.</p>
+          <div class="source">
+            <span lang="ja">ナゾロジー</span>
+            <a href="https://nazology.kusuguru.co.jp/archives/211229" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>マーティン・ウェッセンドルフ（Martin W. Wessendorf）氏らの研究チームが、いま生きている脊椎動物の脳に残る左右の配線を並べて比べたところ、感覚の中で左右が入れ替わっていたのは、外の世界を空間の地図として写すものだけでした。</p>
+            <p>ふつうに考えれば、右脳が左手を動かすのだから、脳と体の左右はまるごと入れ替わっていそうです。ところが、報告のあるすべての脊椎動物で視覚は左右逆につながっていた一方、味とにおいは左右が入れ替わっていませんでした。</p>
+            <p>味やにおいには、「左の方」「右の方」という地図がないのです。いったいなぜ、脳と体の左右は入れ替わっているのでしょうか？</p>
+            <p>……</p>
+            <p>しかし人の脳では、右側にある運動をつかさどる皮質（運動皮質）が、体の左側の手足を動かす脊髄の運動神経を支配しています。</p>
+            <p>……</p>
+            <p>この左右逆の配り方にどんな利点があるのかという議論も、少なくとも1898年に論文を書いたカハールの時代から、数多くの論文で繰り返されてきました。</p>
+            <p>……</p>
+            <p>並べてみると、報告のあるすべての脊椎動物で、視覚は左右が交差していました。</p>
+            <p>……</p>
+            <p>つまり感覚の中で左右の入れ替わりが起きているのは、外の世界を空間の地図として扱うものだけだということです。</p>
+            <p>味やにおいには、「左の方」「右の方」という地図がないのです。</p>
+            <p>交差しない回路は、ほかにもあります。小脳の左右は、それぞれ同じ側の体の動きを受け持っています。脊髄から小脳へ届く体の感覚も、主に同じ側の脊髄から入ります。中には、体の左右を分ける真ん中の線（正中線）を二度またぐ「二重交差」を経て、出発した側と同じ側へ戻ってくる線もあります。</p>
+            <p>左右の入れ替わりは脳全体の決まり事ではなく、感覚の中では空間の地図を持つものに限られる——これが研究チームの結論です。</p>
+          </div>
+          <p class="continue"><a href="https://nazology.kusuguru.co.jp/archives/211229" target="_blank" rel="noopener" lang="ja">続きを読む · ナゾロジー</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p8">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★★</span> <span class="chip mins">4 min</span> <span class="chip" lang="ja">考古学</span> <span class="chip" lang="ja">ナトゥーフ文化</span> <span class="chip" lang="ja">指紋</span> <span class="chip" lang="ja">粘土像</span> <span class="chip" lang="ja">先史時代</span>
+          </div>
+          <h2 lang="ja">1万5千年前の粘土像に「大人と子どもの指紋」が重なっていた</h2>
+          <p class="why">Caixas esquecidas de pedacinhos de argila de 15 mil anos (cultura natufiana, Israel) foram reexaminadas: numa estatueta humana, uma impressão digital de adulto e, por cima, a de uma criança. Pela largura das cristas dá para estimar a idade — e imaginar uma criança aprendendo um ofício ao lado de um adulto. Arqueologia com história humana.</p>
+          <div class="source">
+            <span lang="ja">ナゾロジー</span>
+            <a href="https://nazology.kusuguru.co.jp/archives/209864" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>イスラエルの3つの遺跡で集められていた小さな粘土の塊を調べ直したところ、約1万5000〜1万1650年前に鳥や動物、人をかたどって作られた粘土の像のかけらが見つかりました。</p>
+            <p>そのうちの1つ、人の形をした像の背中には、大人の指紋の上に子どもの指紋が重なって残っていました。</p>
+            <p>これらの塊は、顔料作りに関係する物だと考えられていて、それまで詳しく調べられていなかったものです。</p>
+            <p>しかし、指紋からどうして作った人の年ごろまで分かるのでしょうか？</p>
+            <p>……</p>
+            <p>中でも注目されたのが、約1万5000年前の人の上半身をかたどった像です。胴体と肩、左右で違う形に曲げた両腕が作られていて、その背中に2つの指紋が残っていました。</p>
+            <p>先に縦向きに付いたのは、線の幅が0.456mmの「若い成人（男女）か成人女性」の指紋です。その一部を覆うように、あとから横向きに付いたのが、幅0.345mmの思春期前の子どもの指紋でした。</p>
+            <p>同じ人の指どうしでは、ここまでの差は説明できません。つまり、年齢が違い、性別も違うかもしれない2人の指紋だということです。</p>
+            <p>粘土が柔らかいうちに大人が触り、そのあとで子どもが触ったこの順番から、研究者たちは、形を作る途中で大人が子どもに像を手渡した可能性があると考えています。</p>
+            <p>研究者たちは、これが手を動かしながら技を身につける学びの中で、知識が世代を越えて伝わった、まれな直接の証拠かもしれないと述べています。</p>
+            <p>ただし、指紋から分かるのは2人の年ごろのおおよその区分までです。2人が親子だったのか、どんな間柄だったのかは分かりません。「手渡した」「教えた」というのも、指紋の重なり方からの解釈です。</p>
+            <p>……</p>
+            <p>また、同じ遺跡で何千年も決まった形で作られ続けた鳥の像については、子どもたちが「大人の伝統」に導かれて作っていた可能性が高いとみています。一方で、像作りがどんな形で行われていたのかについては、今の段階で仮説を立てるのを控えています。</p>
+            <p>研究チームのローラン・ダヴァン博士は、「特に興味深いのは、子どもたちがこれらの物作りに関わっていた証拠です。創造性と文化の知識が、世代を越えて分かち合われていたことを示しています」と話しています。</p>
+          </div>
+          <p class="continue"><a href="https://nazology.kusuguru.co.jp/archives/209864" target="_blank" rel="noopener" lang="ja">続きを読む · ナゾロジー</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p9">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★☆</span> <span class="chip mins">2 min</span> <span class="chip" lang="ja">アワ族</span> <span class="chip" lang="ja">未接触部族</span> <span class="chip" lang="ja">アマゾン</span> <span class="chip" lang="ja">森林伐採</span> <span class="chip" lang="ja">先住民</span>
+          </div>
+          <h2 lang="ja">現代文明に脅かされるアマゾンの未接触部族、自ら森を出て食べ物を求める</h2>
+          <p class="why">Os Awá, um dos povos isolados da Amazônia brasileira, saíram da floresta em novembro — época de fartura — e foram até uma aldeia Guajajara pedir comida (mandioca). Sinal de que a reserva virou uma “ilha verde” cercada de desmatamento e madeireiros ilegais. Um texto sobre a Funai, os Guardiões da Floresta e um assunto do seu país, em japonês.</p>
+          <div class="source">
+            <span lang="ja">カラパイア</span>
+            <a href="https://karapaia.com/archives/640048.html" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>アマゾンの奥深くには、外の世界との接触を自ら避け、森の恵みだけで暮らしてきた人々がいる。</p>
+            <p>ブラジルの未接触部族アワ族もそのひとつだが、約20人が森を出て、近くの村の文明社会の住民に身振りで食糧（いも）を求めるという歴史的な出来事が起きた。</p>
+            <p>……</p>
+            <p>男性も女性も子供もいる集団で、タワリ村の近くまでやってきた。</p>
+            <p>タワリ村には外の社会と交流しながら暮らす先住民グアジャジャラ族の人々が暮らしている。</p>
+            <p>……</p>
+            <p>アワ族が暮らす森は、通常なら11月は水も獲物も多く、森の中で食べ物を得やすい時期のはずだ。</p>
+            <p>それなのに、この時期に森から出てきていもを求めたのは、ありえない行動だという。</p>
+            <p>……</p>
+            <p>「アワ族は追い詰められていたのだと思う」とレオナルド氏は話している。</p>
+            <p>地元の住民も、最近になってアワ族が村の近くに姿を見せる回数が増えていたと話していた。</p>
+            <p>……</p>
+            <p>保護区は今や、森林伐採で切り開かれた土地に囲まれた「緑の島」のようになってしまった。</p>
+            <p>四方から迫られたアワ族は、どんどん狭くなる森に追い込まれ、健康と生存が脅かされているのだ。</p>
+            <p>……</p>
+            <p>Forest Guardiansの人々は、アワ族が置かれた状況を世界に知ってもらい、ブラジル政府に対策を求めるべく、今回の映像の公開をサバイバル・インターナショナルに依頼した。</p>
+            <p>未接触部族のアワ族は今、木材や土地、獲物を狙って違法に森に入り込む外の世界の人々に、生きる場所を奪われつつあるという現状を、文明社会で暮らす我々は知る義務があるのだ。</p>
+          </div>
+          <p class="continue"><a href="https://karapaia.com/archives/640048.html" target="_blank" rel="noopener" lang="ja">続きを読む · カラパイア</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p10">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★☆</span> <span class="chip mins">3 min</span> <span class="chip" lang="ja">ノーフォーク島</span> <span class="chip" lang="ja">公衆電話</span> <span class="chip" lang="ja">サンタクロース</span> <span class="chip" lang="ja">通信</span> <span class="chip" lang="ja">レトロ技術</span>
+          </div>
+          <h2 lang="ja">サンタクロースと無料で話せる公衆電話を南太平洋の小さな島に設置した通信技術者の記録</h2>
+          <p class="why">Um engenheiro de telecom na minúscula ilha Norfolk (Pacífico Sul) importou orelhões Nortel usados dos EUA e os ligou à rede IP — e discando “HOHOHO” você fala de graça com o Papai Noel (uma IA). O orelhão entrou até no jogo mundial “Payphone Tag”. Retrotecnologia com coração, bom para vocabulário de telecom.</p>
+          <div class="source">
+            <span lang="ja">GIGAZINE</span>
+            <a href="https://gigazine.net/news/20261127-payphone-on-pacific-island/" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>南太平洋に浮かぶオーストラリア領のノーフォーク島で携帯電話網を運営する通信技術者のニック氏らが、中古の公衆電話機をアメリカから調達し、島に設置しました。公衆電話の設置から既存の通信網への接続、AIを活用した独自のサービスの実装までの一連の経緯を、ニック氏が自身のブログで公開しています。</p>
+            <p>Nortelはすでに経営破綻しているため、ニック氏のチームのメンバーがアメリカで中古の電話機を入手しました。その後、オーストラリアのシドニーまで空輸し、ノーフォーク島へ向かう知人に預けました。電話機が重かったため、知人は飛行機の手荷物許容量をすべて電話機の運搬に使うことになったそうです。電話機の設定には、USBモデムを介してNortel Millenniumの設定を書き換えられるオープンソースソフトウェア「mm_manager」を使用しました。</p>
+            <p>電話機はアナログ電話アダプター(ATA)を介して既存のIPベースの通信網に接続されています。島の通信事業者であるNorfoneの電話番号に無料で発信できるほか、「HOHOHO」に相当する「464646」をダイヤルすると、サンタクロースと無料で会話できます。サンタクロースとの会話にはOpenAIのAPIが利用されています。</p>
+            <p>設置された公衆電話は、世界各地の公衆電話を対象とした陣取りゲーム「Payphone Tag」にも登録されました。ニック氏は誰かがノーフォーク島の公衆電話をゲーム内で獲得するのを楽しみにしているほか、ノーフォーク島よりもさらに遠隔地にある別の島にも3台の公衆電話機を発送したと報告しています。</p>
+          </div>
+          <p class="continue"><a href="https://gigazine.net/news/20261127-payphone-on-pacific-island/" target="_blank" rel="noopener" lang="ja">続きを読む · GIGAZINE</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p11">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★★</span> <span class="chip mins">3 min</span> <span class="chip" lang="ja">AIと歴史</span> <span class="chip" lang="ja">スケッチブック</span> <span class="chip" lang="ja">1808年</span> <span class="chip" lang="ja">カナダ</span> <span class="chip" lang="ja">OpenAI</span>
+          </div>
+          <h2 lang="ja">GPT-6.2 Astraが歴史学者もわからなかった「1808年に描かれた北米旅行のスケッチブック」の作者を22分で特定</h2>
+          <p class="why">Um caderno de esboços de uma viagem pela América do Norte em 1808, de autor desconhecido: historiadores não conseguiram identificar. O professor canadense Mark Humphries deu o caso ao GPT-6.2 Astra, que em 22 minutos vasculhou os mesmos arquivos que um historiador usaria e achou no diário do comerciante de peles Joseph Frobisher a pista de um visconde de Chabot. IA fazendo trabalho de arquivo de verdade.</p>
+          <div class="source">
+            <span lang="ja">GIGAZINE</span>
+            <a href="https://gigazine.net/news/20261126-gpt-62-astra-solves-a-historical-mystery/" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>OpenAIがリリースしたAIモデル「GPT-6.2 Astra」が、専門の歴史学者でさえわからなかった1808年に描かれたスケッチブックの作者を、わずかな手がかりからたった22分で特定してしまったと報告されました。GPT 6.2 Astra Solves a Historical Mystery</p>
+            <p>……</p>
+            <p>カナダのウィルフリッド・ローリエ大学で歴史学教授を務めるマーク・ハンフリーズ氏は2026年10月下旬、GPT-6.2 Astraのテストを開始しました。ハンフリーズ氏は以前からAIと歴史学の可能性に着目していたそうで、GPT-6.2 Astraは「18世紀の商人らが書いた数千行もの帳簿」をCSVに転写させ、内容を検証することさえできたとのこと。</p>
+            <p>……</p>
+            <p>そりを馬に引かせている様子や現地の人々などについて描かれたページもあります。</p>
+            <p>大きな問題は、このスケッチブック自体は貴重なものである一方で、記録されているルートはごく一般的なものだったという点です。当時、年間数百もの船が同じルートを行き交っていたため、作者候補は数千人に及ぶ可能性があります。また、当時の資料はほとんどすべてが手書きで索引も付いていないため、検索作業も極めて非効率であることから、ゼロから作者を特定することは極めて困難でした。</p>
+            <p>GPT-6.2 Astraの推論過程を調べたところ、スケッチブックの内容を1枚ずつ確認していった上で、歴史家が問題に取り組む時と同じアーカイブサイトから、入手可能な一次資料すべてを確認していたことが判明。そして、ジョセフ・フロビシャーという毛皮商人の日記にシャボー子爵の記述を見つけ、その足取りを追ったところスケッチブックの作者である可能性を示唆する証拠を見つけたそうです。</p>
+          </div>
+          <p class="continue"><a href="https://gigazine.net/news/20261126-gpt-62-astra-solves-a-historical-mystery/" target="_blank" rel="noopener" lang="ja">続きを読む · GIGAZINE</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p12">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★☆</span> <span class="chip mins">2 min</span> <span class="chip" lang="ja">AI安全性</span> <span class="chip" lang="ja">ドローン</span> <span class="chip" lang="ja">Claude</span> <span class="chip" lang="ja">軍事AI</span> <span class="chip" lang="ja">Vals AI</span>
+          </div>
+          <h2 lang="ja">AIに「これはゲームだ」と伝えると、民間人を攻撃対象に設定してしまう</h2>
+          <p class="why">Estudo inquietante da empresa Vals: modelos como Claude e GPT, que normalmente recusam escolher alvos em imagens reais de drones (Ucrânia), passam a marcar civis, ambulâncias e até uma escola quando ouvem “isto é para um videogame”. Bom para pensar segurança de IA — e o texto fala do embate da Anthropic com o Pentágono.</p>
+          <div class="source">
+            <span lang="ja">カラパイア</span>
+            <a href="https://karapaia.com/archives/639803.html" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>我々が日常的に使っている生成AIは、「これはゲームだ」と伝えると、目の前の画像が現実の戦場なのか画面の中のゲームなのかを確かめずに受け入れてしまう。</p>
+            <p>アメリカのAI評価企業「Vals」は、ChatGPTやClaudeなどのAIに、戦場や衛星の画像を見せて攻撃目標を探させる実験結果を公開した。</p>
+            <p>AIは民間人や救急車、実在する小学校まで標的に選び、最初は協力を拒んだAIも「ゲームだ」と伝えられるとあっさり応じた。</p>
+            <p>現実を架空のものであると指示するだけで、安全対策が崩れてしまう危うさが明らかになった。</p>
+            <p>……</p>
+            <p>研究者たちは東ウクライナを模して作った合成の戦場画像や、実際のウクライナの自爆型ドローン攻撃の映像を用意し、AIに軍事目標を四角い枠で囲むよう指示した。</p>
+            <p>実験はすべてシミュレーションであり、AIに攻撃そのものの判断はさせていない。</p>
+            <p>……</p>
+            <p>民間人が写る場面では14個の枠を付け、救急車と医療スタッフの場面でも5個の枠を付けている。</p>
+            <p>研究者たちが作業はテレビゲームのためだと伝えると、AIの反応は大きく変わった。</p>
+            <p>……</p>
+            <p>米国防総省に対して自律型兵器への利用を拒んでいたAnthropic社も、今回の結果は容認できないと認め、追加の安全対策をまもなく導入すると明らかにした。</p>
+            <p>私たちが日常で使う生成AIは、単純な言葉かけや画像の加工だけで安全対策が突破されてしまう脆さを抱えていることを肝に銘じておきたい。</p>
+          </div>
+          <p class="continue"><a href="https://karapaia.com/archives/639803.html" target="_blank" rel="noopener" lang="ja">続きを読む · カラパイア</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p13">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★☆</span> <span class="chip mins">3 min</span> <span class="chip" lang="ja">特急北アルプス</span> <span class="chip" lang="ja">名鉄</span> <span class="chip" lang="ja">高山本線</span> <span class="chip" lang="ja">連絡線</span> <span class="chip" lang="ja">鉄道史</span>
+          </div>
+          <h2 lang="ja">名古屋～富山「3社直通280キロ！」伝説の特急廃止から25年、“連絡線の町”にいま「新たなバイパス」が</h2>
+          <p class="why">O lendário expresso “Kita Alps” da Meitetsu rodava ~280 km de Nagoya a Toyama atravessando três companhias (privada → estatal JNR → privada), graças a uma linha de ligação aberta em 1972 em Unuma. 25 anos após o fim, o repórter procura os vestígios dessa conexão — e encontra uma nova via expressa no lugar. Arqueologia ferroviária.</p>
+          <div class="source">
+            <span lang="ja">乗りものニュース</span>
+            <a href="https://trafficnews.jp/post/730947" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>名鉄の伝説的な特急「北アルプス」廃止から25年。この列車のための連絡線が設けられた町では、連絡線跡地も大きく姿を変えました。</p>
+            <p>名古屋から私鉄・国鉄・私鉄の3路線を直通し、最大で約280kmを走破した伝説的な特急があります。名鉄の「北アルプス」です。25年前に廃止されて以降、その運行の“核心部”ともいえる駅の周辺は大きく変わっていました。</p>
+            <p>北アルプスは、名鉄犬山線から国鉄高山本線で高山、富山へ、さらに一時期は富山地方鉄道に乗り入れて立山駅まで直通しました。その運行を支えたのが、岐阜県各務原市の新鵜沼駅とJR鵜沼駅を結ぶ「鵜沼連絡線」です。</p>
+            <p>1972年9月に開通したこの線路は、名鉄犬山線から高山本線へ直接乗り入れるためのもの。愛知・岐阜県境の木曽川に架かる「犬山橋」を渡った名鉄の列車が、そのまま高山方面へ向かえるようになり、鵜沼駅での方向転換が不要になりました。</p>
+            <p>……</p>
+            <p>ただ、JR高山本線への接続地点は、現在ではなかなか判別できません。かつて線路が合流していた場所は細長い分譲地となり、線路に沿って戸建住宅が並んでいるのです。鉄道の痕跡はほぼ消失しています。</p>
+            <p>その東側の踏切付近に、わずかに空間が残っており、注意深く眺めると「ここに線路があったのか！」と思わせるような土地の余白が見つかります。</p>
+            <p>……</p>
+            <p>そこで、犬山橋の北詰から西へ分岐して鵜沼ICへ直接通じる「犬山東町線バイパス」の整備が進められているのです。あわせて新鵜沼駅西側の市街地整備も進行しています。</p>
+            <p>鵜沼周辺は、鉄道で名古屋と岐阜の両方にアクセスしやすい点も評価されて人口が増えているということですが、道路網も新たな時代に対応しようとしています。</p>
+          </div>
+          <p class="continue"><a href="https://trafficnews.jp/post/730947" target="_blank" rel="noopener" lang="ja">続きを読む · 乗りものニュース</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p14">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★☆</span> <span class="chip mins">3 min</span> <span class="chip" lang="ja">US-2</span> <span class="chip" lang="ja">飛行艇</span> <span class="chip" lang="ja">二式大艇</span> <span class="chip" lang="ja">新明和</span> <span class="chip" lang="ja">海上自衛隊</span>
+          </div>
+          <h2 lang="ja">1機218億円！ 戦闘機より高い「海自の飛行艇」はなぜ必要なのか “二式大艇の末裔”が対峙する難敵</h2>
+          <p class="why">O US-2, hidroavião de resgate que pousa em ondas de 3 m, descendente do lendário “Nishiki Taitei” (o Emily) da Marinha Imperial — e feito pela ShinMaywa, empresa de Hyōgo (Takarazuka/Kōnan). Cada unidade custa 21,8 bilhões de ienes, mais que um caça. Por que o Japão mantém isso? Geografia de ilhas remotas e preservar a base industrial.</p>
+          <div class="source">
+            <span lang="ja">乗りものニュース</span>
+            <a href="https://trafficnews.jp/post/729092" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>旧日本海軍の二式大艇の系譜を引く救難飛行艇US-2。新明和工業が新工場を建設し、維持を続ける背景に迫ります。</p>
+            <p>……</p>
+            <p>US-2は外洋で活動できる救難飛行艇として波高3mの海面でも離着水できるとされる高い耐波性を持ち、揚力を増やして短距離の離発着や低速でも飛行できる境界層制御装置（BLC）という特殊な仕組みを備えます。こうした特殊な機構を備えることも、機体価格を押し上げる要因です。取得見積価格は2024年度で約300億円、2025年度には約700億円まで高騰しました。2025年度予算でコストカットを徹底し、US-2の10号機取得費として約218億円が計上されました。</p>
+            <p>……</p>
+            <p>ヘリコプターは現場に近付いて救助できますが、航続距離には限界があります。陸上機は長距離を飛べても着陸できる場所が必要です。これに対してUS-2は、海面そのものを着水場所として利用できます。現場に直接降りて患者を収容できる能力は、簡単に代替できるものではありません。こうした救難システムを維持することは、日本の海洋国家としての責任とプレゼンスを示す意味もあります。</p>
+            <p>もう一つは、製造基盤の維持です。今回、新明和が建設する新工場は、US-2の製造だけを目的とした施設ではありません。民間航空機向け部品なども扱う航空宇宙関連の生産拠点となる計画です。飛行艇は大量生産される航空機ではありません。しかし生産が途絶えれば、機体を設計する技術だけでなく、特殊な部品を作る協力企業や、それを扱える技術者も失われてしまう可能性があります。一度失った製造基盤を再び整えるのは容易ではありません。</p>
+          </div>
+          <p class="continue"><a href="https://trafficnews.jp/post/729092" target="_blank" rel="noopener" lang="ja">続きを読む · 乗りものニュース</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p15">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★☆</span> <span class="chip mins">2 min</span> <span class="chip" lang="ja">Claude Code</span> <span class="chip" lang="ja">並列セッション</span> <span class="chip" lang="ja">ダッシュボード</span> <span class="chip" lang="ja">バイブコーディング</span> <span class="chip" lang="ja">ワークフロー</span>
+          </div>
+          <h2 lang="ja">Claude Code を5〜8個並べても迷わないように、自分用のダッシュボードをバイブコーディングで作った</h2>
+          <p class="why">Um dev que roda 5–8 sessões do Claude Code ao mesmo tempo e se perdia (qual está esperando resposta? qual terminou?) construiu, por vibe coding, um painel pessoal: calendário de sessões, alertas sonoros, cartões por tarefa, gráfico de uso. Japonês técnico do dia a dia, e ideias que você pode roubar.</p>
+          <div class="source">
+            <span lang="ja">Zenn</span>
+            <a href="https://zenn.dev/nexta_/articles/a3ff76a9f98f1c" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>Claude Codeは、VSCodeの拡張機能で使うのが好きだ。Markdownが見やすく、コードもGitの変更差分もその場で見られる。パネルを横に並べられるので、セッション同士が隠れない。VSCodeから離れずに済む。</p>
+            <p>ただ、セッションを5つほど並べると困ることが出てくる。一番困ったのは、パネルの見出しが短くて、どれが何の作業をしているのか一目で分からないことだった。一時期はメモ帳にパネルの並び順と同じ順で、それぞれ何をしているかを書いていた。</p>
+            <p>……</p>
+            <p>セッションカレンダーの画面では、いつ・どのセッションが動いていたかを時間割の形で見られる。帯が何本も重なっていて、並べて使っている様子が一目で分かる。</p>
+            <p>困ったら「こう動いてほしい」とClaudeに伝えて機能を足す、を繰り返しただけだ。コードは一切読んでいない。</p>
+            <p>……</p>
+            <p>返事待ちも、終わったことも、気付くきっかけはほとんどが音だ。音が鳴ったら、たいていはVSCodeを直接見る。ダッシュボードを見ることもある。</p>
+            <p>音は鳴らすまでに手間取った。最初は音のファイルをブラウザ標準のaudio要素で鳴らそうとしたが、鳴らないことがあり、鳴らなかった理由も分からなかった。今はコードで作る音と同じ仕組みに流して鳴らしている。ブラウザは、利用者が一度も触れていないページには音を出させない。そのため、開き直したときは画面を一度押しておく。</p>
+          </div>
+          <p class="continue"><a href="https://zenn.dev/nexta_/articles/a3ff76a9f98f1c" target="_blank" rel="noopener" lang="ja">続きを読む · Zenn</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p16">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★☆</span> <span class="chip mins">3 min</span> <span class="chip" lang="ja">Claude</span> <span class="chip" lang="ja">プロンプト設計</span> <span class="chip" lang="ja">スコープ逸脱</span> <span class="chip" lang="ja">AIエージェント</span> <span class="chip" lang="ja">実験</span>
+          </div>
+          <h2 lang="ja">禁止しても止まらないClaudeの「欲」を飼いならしてみる</h2>
+          <p class="why">Todo mundo já viu: o Claude “aproveita” e faz mudanças que ninguém pediu. O autor testou empiricamente: proibir reduz mas não zera; frases positivas sozinhas não funcionam; o que funcionou foi dar uma “válvula de escape” — mandar o Claude registrar ideias como testes xfail em vez de implementá-las. Zero mudanças extras em 3 rodadas.</p>
+          <div class="source">
+            <span lang="ja">Zenn</span>
+            <a href="https://zenn.dev/rescuenow/articles/9d1e89a941f4f1" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>Claudeにコードを書かせると、頼んでもない挙動をしれっと足してくることよくあって、「頼まれていないことはやるな」って書いても全然効いている感じがしないですよね。Claudeはどうしても頼まれていなくても自分が考える良いものにしようとする「欲」が強いように感じます。どうも、しもちです。</p>
+            <p>こういうときによく言われるのが「プロンプトは禁止じゃなくて肯定形で書け」というやつです。本当に効くのか疑問だったので実験してみました。</p>
+            <p>……</p>
+            <p>「思いついたことは実装しないで、 @pytest.mark.xfail(reason=&quot;not requested&quot;)を付けたテストとして書け」と指示します。</p>
+            <p>結果は3回とも、本体への追加がゼロでした。なしや禁止の条件で本体に入ってたもの（数値でない値、空の値、桁区切り、BOM、Shift_JIS、ファイルがないとき）が、そっくりそのままxfailのテストになってます。</p>
+            <p>本体のコードは頼んだことだけを素直に書いたものになってました。</p>
+            <p>頼んだことに対する抜けはどの条件でもありませんでした。禁止は何もしないよりは減って、意外と効きました。ドキュメント化やIssue化は減り方が禁止と同じくらいでした。xfailは3回とも本体への追加が0でした。</p>
+            <p>肯定形にしただけでは効きませんでした。「肯定形で書けば効く」は、少なくともこのお題では半分ハズレでした。「mdに書け」も「Issueに書け」もちゃんと肯定形なのに禁止と大差ありませんでした。肯定形かどうか、捌け口を作ったかどうかより、その捌け口が欲と同じ形をしてるかだったのかなと思いました。とはいえ、xfailが正解というわけではなく、たまたまxfailのテストがぴったりハマったのかなと思っています。</p>
+          </div>
+          <p class="continue"><a href="https://zenn.dev/rescuenow/articles/9d1e89a941f4f1" target="_blank" rel="noopener" lang="ja">続きを読む · Zenn</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p17">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★☆☆</span> <span class="chip mins">2 min</span> <span class="chip" lang="ja">丹波竜</span> <span class="chip" lang="ja">恐竜</span> <span class="chip" lang="ja">丹波市</span> <span class="chip" lang="ja">新長田</span> <span class="chip" lang="ja">神戸</span>
+          </div>
+          <h2 lang="ja">【12月15、18日】丹波竜の全身復元骨格を組み立て　見学会へ出かけよう</h2>
+          <p class="why">Notinha de Hyōgo: o Tambatitanis (“Tanba-ryū”), dinossauro achado em Tanba em 2006, volta de um “intercâmbio” de 20 anos no Museu de Dinossauros de Fukui, e o museu de Tanba deixa o público ver a remontagem do esqueleto (15 e 18/12). De quebra: Kobe divulgou o novo design da praça da estação Shin-Nagata, área que nunca se recuperou de todo do terremoto de 1995.</p>
+          <div class="source">
+            <span lang="ja">神戸新聞NEXT</span>
+            <a href="https://www.kobe-np.co.jp/news/odekake-plus/news/detail.shtml?url=news/odekake-plus/news/experience/202611/21074538" target="_blank" rel="noopener">原文を開く ↗</a> · <a href="https://www.kobe-np.co.jp/news/society/202611/0021079396.shtml" target="_blank" rel="noopener" lang="ja">新長田駅前広場のデザイン公表 ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>丹波市山南町谷川のたんば恐竜博物館は１２月１５日、１８日、福井県立恐竜博物館での竜脚類特別展への出展を終えた丹波竜の全身復元骨格を再び組み立てる作業を公開する。丹波竜は２００６年に同市で化石が発見された大型植物食恐竜「タンバティタニス・アミキティアエ」で、発見２０周年の今年、福井へ「遠征」していた。６月には搬出のため５日間かけて解体され、福井の恐竜との交換展示を続けてきた。１５日は頭骨と背骨、１８日は四肢とあばら骨を扱う。</p>
+            <p>……</p>
+            <p>神戸市は、再整備を検討するＪＲ新長田駅前広場（同市長田区）の完成デザインを発表した。芝生や植栽を配置し、憩いの場を生み出すほか、噴水やクッション性のある舗装を施した遊び場を設けて子どもが集う空間も創出する。市は２０２９年度ごろの完成を目指しており、阪神・淡路大震災後、長年の課題だった同駅周辺の振興につなげる狙いだ。</p>
+          </div>
+          <p class="continue"><a href="https://www.kobe-np.co.jp/news/odekake-plus/news/detail.shtml?url=news/odekake-plus/news/experience/202611/21074538" target="_blank" rel="noopener" lang="ja">続きを読む · 神戸新聞NEXT</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p18">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★☆</span> <span class="chip mins">2 min</span> <span class="chip" lang="ja">LOVEBITES</span> <span class="chip" lang="ja">日本武道館</span> <span class="chip" lang="ja">ガールズメタル</span> <span class="chip" lang="ja">ライブ映像</span> <span class="chip" lang="ja">HM/HR</span>
+          </div>
+          <h2 lang="ja">LOVEBITES、初の日本武道館公演を収めた映像作品＆ライブ音源リリース決定</h2>
+          <p class="why">Metal japonês: a banda feminina LOVEBITES vai lançar (03/02/2027) o show esgotado do seu primeiro Budōkan (29/03/2026) em Blu-ray/DVD/CD — com colunas de fogo em “M.D.O.” e bastidores. Curtinho, mas com aquele japonês de release de música que você vê sempre na BARKS.</p>
+          <div class="source">
+            <span lang="ja">BARKS</span>
+            <a href="https://barks.jp/news/1107112" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>LOVEBITESが、キャリア初の日本武道館公演を収めた作品『プロミスト・ランド〜ライヴ・アット・武道館2026』を、Blu-ray・DVD・CDの3形態で2027年2月3日にリリースすることを発表した。</p>
+            <p>2026年3月29日に行われ、完全ソールドアウトを果たした本公演は、「ザ・ハマー・オブ・ラス」「ライジング」「ホエン・デスティニーズ・アライン」「グローリー・トゥ・ザ・ワールド」などの往年のナンバーはもちろん、「アンチェインド」「スタンド・アンド・デリヴァー（シュート・エム・ダウン）」といったベーシスト・Fami加入後の楽曲も織り交ぜられたほか、今年2月にリリースされた通算5作目のフルアルバム『アウトスタンディング・パワー』からも、リードトラック「ザ・キャスタウェイ」とAsamiがピアノを弾き語った「エターナリィ」もライブ初披露するなど、新旧の名曲が並ぶセットリストとなった。</p>
+            <p>オーディエンスも「ソルジャー・スタンズ・ソリタリリィ」や「M.D.O.」での扇状に立ち昇る火柱に圧倒され、「アンダー・ザ・レッド・スカイ」に登場した6人のバイオリン奏者に息を呑み、ラストにプレイされた2017年のデビュー曲「ドント・バイト・ザ・ダスト」でのオーディエンスの頭上を飛び交う白いバルーンにエキサイトしていたという。そんなLOVEBITESの「これまでの歴史」と「これからの未来」が交錯した特別な一夜をぜひ映像、音源でお楽しみいただきたい。</p>
+          </div>
+          <p class="continue"><a href="https://barks.jp/news/1107112" target="_blank" rel="noopener" lang="ja">続きを読む · BARKS</a></p>
+        </div>
+      </article>
+
+      <footer class="site">読解幕 · 2026-11-27 · ~52 min · <a href="/japanese-digest/history/" style="color:inherit">History</a> · deliton.github.io/japanese-digest</footer>
+    </main>
+  </div>
+</body>
+</html>
