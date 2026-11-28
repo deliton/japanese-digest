@@ -1,0 +1,1055 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>読解幕 · 2026-11-28 · Japanese Digest</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Noto+Serif+JP:wght@400;600;700&family=Shippori+Mincho:wght@500;700&display=swap" rel="stylesheet" />
+  <style>
+
+    :root {
+      --bg: #0a0a0a;
+      --bg-2: #121212;
+      --bg-card: #161616;
+      --ink: #f5f5f5;
+      --ink-dim: #a8a29a;
+      --ink-mute: #6b6560;
+      --shu: #c41e3a;
+      --shu-hot: #e11d48;
+      --shu-deep: #8b1228;
+      --gold: #d4a017;
+      --gold-soft: #c9a227;
+      --white: #fafafa;
+      --line: #2a2a2a;
+      --line-hot: rgba(196, 30, 58, 0.45);
+      --measure: 42rem;
+      --radius: 4px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: "Noto Sans JP", "Hiragino Sans", "Yu Gothic", system-ui, sans-serif;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .stage-bar {
+      height: 6px;
+      background: repeating-linear-gradient(
+        90deg,
+        var(--shu) 0 48px,
+        var(--white) 48px 56px,
+        #111 56px 64px,
+        var(--gold) 64px 72px,
+        #111 72px 88px
+      );
+    }
+
+    .wrap {
+      width: min(100% - 2rem, 74rem);
+      margin: 0 auto;
+      padding: 2rem 0 4.5rem;
+      display: grid;
+      grid-template-columns: 15.5rem 1fr;
+      gap: 2.75rem;
+      align-items: start;
+    }
+
+    @media (max-width: 900px) {
+      .wrap { grid-template-columns: 1fr; gap: 1.5rem; padding-top: 1.25rem; }
+      .sidebar { position: static !important; }
+    }
+
+    .sidebar { position: sticky; top: 1.25rem; }
+
+    .brand {
+      display: flex;
+      align-items: baseline;
+      gap: 0.55rem;
+      margin: 0 0 0.35rem;
+    }
+    .brand-mark {
+      font-family: "Shippori Mincho", "Noto Serif JP", serif;
+      font-size: 1.85rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      color: var(--white);
+      line-height: 1;
+    }
+    .brand-mark em {
+      font-style: normal;
+      color: var(--shu);
+    }
+    .brand-sub {
+      font-size: 0.65rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-weight: 700;
+    }
+
+    .meta {
+      color: var(--ink-mute);
+      font-size: 0.8rem;
+      margin: 0 0 1.25rem;
+    }
+
+    .stat-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-bottom: 1.35rem;
+    }
+    .stat {
+      border: 1px solid var(--line);
+      background: var(--bg-2);
+      padding: 0.32rem 0.65rem;
+      font-size: 0.72rem;
+      color: var(--ink-dim);
+      border-radius: var(--radius);
+    }
+    .stat strong { color: var(--white); font-weight: 700; }
+    .stat.hot {
+      border-color: var(--shu);
+      color: var(--shu-hot);
+      background: rgba(196, 30, 58, 0.1);
+    }
+
+    .toc {
+      border: 1px solid var(--line);
+      background: var(--bg-2);
+      padding: 0.85rem 0.9rem 0.95rem;
+      border-radius: var(--radius);
+    }
+    .toc h2 {
+      margin: 0 0 0.65rem;
+      font-size: 0.72rem;
+      letter-spacing: 0.16em;
+      color: var(--gold);
+      font-weight: 800;
+    }
+    .toc ol { list-style: none; margin: 0; padding: 0; }
+    .toc li { margin: 0; }
+    .toc a {
+      display: flex;
+      justify-content: space-between;
+      gap: 0.5rem;
+      text-decoration: none;
+      color: var(--ink-dim);
+      font-size: 0.82rem;
+      padding: 0.38rem 0.2rem;
+      border-bottom: 1px solid transparent;
+    }
+    .toc a:hover { color: var(--white); border-bottom-color: var(--line-hot); }
+    .toc .t-title { font-weight: 600; }
+    .toc .t-min { color: var(--gold); font-size: 0.72rem; font-weight: 700; flex-shrink: 0; }
+
+    .main { max-width: var(--measure); }
+
+    .digest-banner {
+      display: flex;
+      gap: 0.75rem;
+      align-items: flex-start;
+      background: #141014;
+      border: 1px solid var(--line);
+      border-left: 3px solid var(--shu);
+      padding: 0.85rem 1rem;
+      margin-bottom: 1.5rem;
+      font-size: 0.78rem;
+      color: var(--ink-dim);
+      line-height: 1.55;
+    }
+    .digest-banner .tag {
+      flex-shrink: 0;
+      background: var(--shu);
+      color: #fff;
+      font-size: 0.65rem;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      padding: 0.28rem 0.5rem;
+      border-radius: var(--radius);
+    }
+
+    .hero {
+      margin-bottom: 2rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid var(--line);
+      position: relative;
+    }
+    .hero::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -1px;
+      width: 4.5rem;
+      height: 2px;
+      background: var(--shu);
+    }
+    .kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.7rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--shu-hot);
+      font-weight: 800;
+      margin-bottom: 0.85rem;
+    }
+    .kicker::before {
+      content: "◆";
+      font-size: 0.55rem;
+      color: var(--gold);
+    }
+    .hero h1 {
+      font-family: "Shippori Mincho", "Noto Serif JP", serif;
+      font-size: clamp(1.85rem, 4vw, 2.55rem);
+      font-weight: 700;
+      line-height: 1.2;
+      margin: 0 0 0.75rem;
+      color: var(--white);
+      letter-spacing: 0.02em;
+    }
+    .hero p {
+      margin: 0;
+      color: var(--ink-dim);
+      font-size: 0.98rem;
+      max-width: 36rem;
+    }
+
+    article.piece {
+      background: var(--bg-card);
+      border: 1px solid var(--line);
+      margin-bottom: 1.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+    article.piece::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: linear-gradient(90deg, var(--shu) 0%, var(--shu) 35%, var(--gold) 35%, var(--gold) 42%, transparent 42%);
+    }
+
+    .piece-inner { padding: 1.6rem 1.55rem 1.35rem; }
+
+    .piece-head {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-bottom: 0.85rem;
+    }
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      border: 1px solid var(--line);
+      background: #111;
+      color: var(--ink-dim);
+      padding: 0.22rem 0.6rem;
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      border-radius: var(--radius);
+    }
+    .chip.interest {
+      border-color: var(--shu);
+      color: var(--shu-hot);
+      background: rgba(196, 30, 58, 0.12);
+    }
+    .chip.mins {
+      border-color: var(--gold);
+      color: var(--gold);
+      background: transparent;
+    }
+
+    .piece h2 {
+      font-family: "Noto Serif JP", "Shippori Mincho", "Yu Mincho", serif;
+      font-size: 1.38rem;
+      font-weight: 700;
+      line-height: 1.5;
+      margin: 0 0 0.6rem;
+      color: var(--white);
+      letter-spacing: 0.02em;
+    }
+
+    .why {
+      margin: 0 0 1rem;
+      color: var(--ink-dim);
+      font-size: 0.9rem;
+      border-left: 2px solid var(--gold);
+      padding-left: 0.85rem;
+    }
+
+    .source {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.65rem 1.1rem;
+      font-size: 0.76rem;
+      color: var(--ink-mute);
+      margin-bottom: 1.25rem;
+    }
+    .source a {
+      color: var(--shu-hot);
+      text-decoration: none;
+      font-weight: 600;
+    }
+    .source a:hover { color: var(--gold); }
+
+    .ja {
+      font-family: "Noto Serif JP", "Hiragino Mincho ProN", "Yu Mincho", serif;
+      font-size: 1.08rem;
+      line-height: 2;
+      letter-spacing: 0.03em;
+      color: #ebe7e1;
+    }
+    .ja p { margin: 0 0 1.15em; }
+    .ja p:last-child { margin-bottom: 0; }
+
+    .continue {
+      margin-top: 1.25rem;
+      padding-top: 1rem;
+      border-top: 1px solid var(--line);
+      font-size: 0.86rem;
+    }
+    .continue a {
+      color: var(--white);
+      text-decoration: none;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      border-bottom: 2px solid var(--shu);
+      padding-bottom: 0.1rem;
+    }
+    .continue a:hover {
+      color: var(--shu-hot);
+      border-bottom-color: var(--gold);
+    }
+
+    footer.site {
+      max-width: var(--measure);
+      margin-top: 1.75rem;
+      color: var(--ink-mute);
+      font-size: 0.72rem;
+      letter-spacing: 0.06em;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+    footer.site::before {
+      content: "";
+      width: 1.25rem;
+      height: 2px;
+      background: var(--shu);
+    }
+
+  
+    .excerpt-label { font-size: 0.66rem; letter-spacing: 0.18em; color: var(--gold); font-weight: 800; margin: 0 0 0.6rem; }
+    .brand-sub a, .stat a { color: var(--gold); text-decoration: none; }
+    .toc .t-min { font-variant-numeric: tabular-nums; }
+  </style>
+</head>
+<body>
+  <div class="stage-bar" aria-hidden="true"></div>
+
+  <div class="wrap">
+    <aside class="sidebar">
+      <div class="brand">
+        <span class="brand-mark" lang="ja">読解<em>幕</em></span>
+      </div>
+      <p class="brand-sub">Kabuki Digest · <a href="/japanese-digest/history/">History</a></p>
+      <p class="meta">2026-11-28 · America/Sao_Paulo</p>
+      <div class="stat-row">
+        <span class="stat"><strong>49</strong> min</span>
+        <span class="stat"><strong>17</strong> pieces</span>
+        <span class="stat"><strong>~12,700</strong> 字</span>
+        <span class="stat"><a href="/japanese-digest/history/">History</a></span>
+      </div>
+
+      <nav class="toc" aria-label="Índice">
+        <h2 lang="ja">本日の演目</h2>
+        <ol>
+          <li>
+            <a href="#p1">
+              <span class="t-title" lang="ja">弓一本で93歳まで戦場へ――信長・秀次・家康に仕えた老将・大島光義</span>
+              <span class="t-min">3′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p2">
+              <span class="t-title" lang="ja">「開けた者は即死する」――9歳の皇女の墓に刻まれた4文字の真意</span>
+              <span class="t-min">4′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p3">
+              <span class="t-title" lang="ja">国家予算の4倍が消えた――旧日本軍の隠し財産「隠退蔵物資」</span>
+              <span class="t-min">4′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p4">
+              <span class="t-title" lang="ja">家康が送った木材はヒノキ一本だけ？――大仏造りに課された大名たちの負担</span>
+              <span class="t-min">3′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p5">
+              <span class="t-title" lang="ja">京都・南座の「まねき上げ」――「南」があれば「北」もあった</span>
+              <span class="t-min">3′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p6">
+              <span class="t-title" lang="ja">オオカミが野生のブルーベリーを「育てて」いた</span>
+              <span class="t-min">3′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p7">
+              <span class="t-title" lang="ja">アヤソフィアの消えた中庭の下に眠る、未知の地下構造</span>
+              <span class="t-min">3′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p8">
+              <span class="t-title" lang="ja">350年前、人類はどうやって「光にも速さがある」と気づいたのか</span>
+              <span class="t-min">2′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p9">
+              <span class="t-title" lang="ja">光速の75%で、光の帆は自分を押す光にブレーキをかけられる</span>
+              <span class="t-min">3′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p10">
+              <span class="t-title" lang="ja">ゴミ捨て場から大量に――古代エジプトの呪いの儀式「アポピス退治」</span>
+              <span class="t-min">2′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p11">
+              <span class="t-title" lang="ja">年を取っても記憶は残っている、弱るのは「思い出す力」かもしれない</span>
+              <span class="t-min">3′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p12">
+              <span class="t-title" lang="ja">野生に返したワタリガラスが戻ってきて、いたずら三昧</span>
+              <span class="t-min">2′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p13">
+              <span class="t-title" lang="ja">小田急の8000形が「2本目」西武線へ――2年ぶりの甲種輸送</span>
+              <span class="t-min">2′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p14">
+              <span class="t-title" lang="ja">AIエージェントの原型は3本の論文にあった――ReAct、SWE-bench、SWE-agent</span>
+              <span class="t-min">4′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p15">
+              <span class="t-title" lang="ja">Claude Codeを複数ターミナル＋git worktreeで並べ、ほぼ1人で4つのSaaSを作る</span>
+              <span class="t-min">3′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p16">
+              <span class="t-title" lang="ja">「こども震災学校」淡路で初開催――野島断層と1・17の記憶</span>
+              <span class="t-min">3′</span>
+            </a>
+          </li>
+          <li>
+            <a href="#p17">
+              <span class="t-title" lang="ja">BAND-MAID、初の日本武道館で見せた5人の揺るぎない絆</span>
+              <span class="t-min">2′</span>
+            </a>
+          </li>
+        </ol>
+      </nav>
+    </aside>
+
+    <main class="main">
+      <div class="digest-banner">
+        <span class="tag">TRIAGE</span>
+        <span>Destaque: o arqueiro Ōshima Mitsuyoshi, que lutou em Sekigahara aos 93 (Japaaan). História: o túmulo “quem abrir morre” da menina Sui e o sumiço dos estoques militares em 1945 (草の実堂); a hinoki única de Ieyasu (BUSHOO); maneki do Minamiza (Japaaan). Ciência: lobos jardineiros, subsolo da Hagia Sophia, freio da vela de luz, memória e idade (ナゾロジー); Rømer e a velocidade da luz, maldições contra Apófis (GIGAZINE); o corvo Allen (カラパイア). Trens: Odakyū 8000 para a Seibu (乗りもの). Dev: 3 papers dos agentes e 4 SaaS com Claude Code + worktrees (Zenn). Hyōgo: escola do terremoto em Awaji + dívida de 1 tri de ienes (神戸新聞). Música: BAND-MAID no Budōkan (Real Sound). Pontos fracos: sábado fraco no BUSHOO (só mangá/audiência, usei texto de 17/11); Kobe Shimbun só com notas curtas; NatGeo JP só saúde; nada novo de BABYMETAL/HYDE/DIR EN GREY/Aimer etc. (BAND-MAID repete o tema do Budōkan já visto no BARKS, mas é outra resenha); nada de vistos/imóveis. Cortados: Nitta Yoshisada (Japaaan, série interrompida antes do clímax), Jinbo Yukiko (parte 1 só), onsen de Dōgo (fora de Hyōgo), política/APEC, acidentes e crimes.</span>
+      </div>
+
+      <header class="hero">
+        <div class="kicker">Daily curated reading</div>
+        <h1 lang="ja">93歳で関ヶ原を戦った弓の老将・大島光義、「開けた者は即死する」皇女の墓、消えた隠退蔵物資、家康のヒノキ一本、南座のまねき上げ、ブルーベリーを育てるオオカミ、アヤソフィアの地下、レーマーと光速、光の帆のブレーキ、アポピスの呪い、老いと記憶、いたずらワタリガラス、小田急8000形が西武へ、AIエージェントの3本の論文、Claude Codeで4つのSaaS、こども震災学校、BAND-MAID武道館</h1>
+        <p lang="ja">今日の幕開けは、弓一本で戦国を生き抜き、93歳で関ヶ原に立った老将・大島光義。続いて「開者即死」と刻まれた隋の9歳の皇女の墓、終戦の日に国家が黙認した旧日本軍の隠し財産「隠退蔵物資」、大仏殿にヒノキ一本だけを送った家康のしたたかさ、そして師走を告げる南座の「まねき上げ」。科学では、ブルーベリーを「育てる」オオカミ、アヤソフィアの消えた中庭の地下、350年前に光の速さに気づいたレーマー、光速の75%で自らにブレーキをかける光の帆、ゴミ捨て場から出たアポピスの呪い、老いても消えない記憶、人間が好きすぎるワタリガラス。乗りものは西武へ渡った小田急8000形の2本目。開発ではAIエージェントの原型となった3本の論文と、Claude Codeを並べて4つのSaaSを動かす話。淡路の「こども震災学校」とBAND-MAID初の武道館で幕を閉じます。約49分の読解です。</p>
+      </header>
+
+      <article class="piece" id="p1">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★★</span> <span class="chip mins">3 min</span> <span class="chip" lang="ja">大島光義</span> <span class="chip" lang="ja">弓術</span> <span class="chip" lang="ja">織田信長</span> <span class="chip" lang="ja">関ヶ原の戦い</span> <span class="chip" lang="ja">戦国の老将</span>
+          </div>
+          <h2 lang="ja">もはやレジェンド！戦国時代、弓を片手に93歳まで戦場を駆け抜け豊臣秀次に仕えた老将・大島光義</h2>
+          <p class="why">Ōshima Mitsuyoshi: órfão aos 7 anos, só lhe restou o arco — matou o primeiro inimigo aos 13, virou chefe de arqueiros de Nobunaga aos 60, serviu Hideyoshi/Hidetsugu e ainda lutou em Sekigahara aos 93. Morreu aos 97 depois de 53 batalhas. Uma biografia de “velho lendário” que parece ficção.</p>
+          <div class="source">
+            <span lang="ja">Japaaan（ジャパーン）</span>
+            <a href="https://mag.japaaan.com/archives/296108" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>弓を片手に戦場を駆け抜け、弓技に長けた那須与一のような戦国武将がいました。その者の名前は大島光義 (おおしま-みつよし)。</p>
+            <p>孤児を経験し90歳を越えた時は関ヶ原の戦いにおり、戦果を挙げた武勇はもはや伝説と言っても過言ではないほどです。</p>
+            <p>今回は生涯現役の権化とも言える光義を紹介したいと思います。</p>
+            <p>……</p>
+            <p>永正5年(1508)に光義は美濃国関大島又は山県郡で生まれますが、永正12年(1515)に父、大島光宗が山県合戦で戦死したことにより、幼いながら孤児となってしまいます。</p>
+            <p>その後は大島家の縁者、大杉家の者によって育てられます。</p>
+            <p>全てを失った光義に残されたのは弓のみで来るべき時に備えて、ひたすら弓の鍛錬を続けました。</p>
+            <p>……</p>
+            <p>やがて、斎藤家が美濃攻略によって勢いを落とすと光義は信長にスカウトされました。</p>
+            <p>信長に仕えてからは弓大将に命じられ、永禄11年(1568)に100貫の土地を得る出世を果たします。この時光義は60歳を迎える年齢。</p>
+            <p>……</p>
+            <p>実は光義は槍にも長けていました。斎藤家旧臣の武藤平弥兵衛から弓を馬鹿にされたことがきっかけで槍術を極めます。</p>
+            <p>このことにより、槍と弓を比較できたことで弓は大人数で戦う時に適しているとわかり、これ以後は弓を使用するようになりました。</p>
+            <p>……</p>
+            <p>その後は丹羽長秀に仕え、天正11年(1583)の賤ヶ岳の戦いの戦功で8000石に加増されます。</p>
+            <p>賤ヶ岳の戦いで光義の活躍を見ていた豊臣秀吉にスカウトされ、豊臣秀次に仕えました。</p>
+            <p>……</p>
+            <p>秀吉死後、93歳になった光義は徳川家康の元で会津征伐に赴きます。続く関ヶ原の戦いでは戦功を挙げ、1万8,000石にまで加増されました。</p>
+            <p>そして慶長9年(1604)、生涯53度の戦に臨んだ老将は97歳の長寿をもって亡くなりました。</p>
+            <p>光義を見ていると老いが理由なんてことは理由にならないと思ってしまいます。</p>
+            <p>光義は非常に遅咲きの花でしたが、それでも若者に負けるまいと功を競い合ったバイタリティーには尊敬の念を感じます。</p>
+            <p>ここまでくると光義が仙人の部類にいても可笑しくはないと考えてしまいますね。</p>
+          </div>
+          <p class="continue"><a href="https://mag.japaaan.com/archives/296108" target="_blank" rel="noopener" lang="ja">続きを読む · Japaaan（ジャパーン）</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p2">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★★</span> <span class="chip mins">4 min</span> <span class="chip" lang="ja">李静訓</span> <span class="chip" lang="ja">隋</span> <span class="chip" lang="ja">煬帝</span> <span class="chip" lang="ja">考古学</span> <span class="chip" lang="ja">墓誌</span>
+          </div>
+          <h2 lang="ja">「開けた者は即死する」9歳の少女の墓に刻まれた恐ろしい4文字とは</h2>
+          <p class="why">Em 1957, arqueólogos em Xi’an abriram um túmulo da dinastia Sui com “quem abrir morre na hora” gravado na tampa. Dentro: uma menina de 9 anos, Li Jingxun, bisneta do fundador da dinastia, com ouro, sedas e até moeda sassânida — e o túmulo resistiu 1.300 anos aos saqueadores. A explicação final é comovente.</p>
+          <div class="source">
+            <span lang="ja">草の実堂</span>
+            <a href="https://kusanomido.com/study/history/chinese/zui/133173/" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>古代中国の墓から、もしこんな言葉が見つかったら発掘した人間は恐怖に慄いてしまうだろう。</p>
+            <p>1957年8月、中国科学院考古研究所の調査隊は、西安の玉祥門外で隋代の墓を発掘した。</p>
+            <p>墓の内部には石棺が納められており、その外側を囲む石槨（せっかく）の蓋には「開者即死」という四文字が刻まれていたのである。</p>
+            <p>……</p>
+            <p>では、なぜここまで強烈な言葉が墓に刻まれていたのだろうか。</p>
+            <p>……</p>
+            <p>ササン朝ペルシアの王ペーローズ1世の時代に鋳造された銀貨まで出土している。</p>
+            <p>つまり、9歳の少女を葬った墓としては、あまりにも豪華だったのである。</p>
+            <p>西暦600年ごろに生まれ、608年6月1日にわずか9歳で亡くなった少女である。</p>
+            <p>李静訓の母・宇文娥英（うぶんがえい）は、北周の皇帝である宣帝・宇文贇（うぶんいん）と、その皇后だった楊麗華（ようれいか）の娘だった。</p>
+            <p>楊麗華はさらに、隋を建国した文帝・楊堅と独孤伽羅（どっこから）の長女でもある。</p>
+            <p>つまり李静訓は、北周の宣帝の孫であると同時に、隋の初代皇帝・楊堅の曾孫でもあったのだ。</p>
+            <p>父方も名門で、父の李敏（りびん）は北周以来の有力武門の家柄である。</p>
+            <p>また、李静訓の墓誌には、彼女が幼いころから外祖母の楊麗華に養育され、特別な慈愛を受けていたと記されている。</p>
+            <p>李静訓は宮中で育てられ、608年には楊麗華とともに隋の煬帝の巡幸に同行した。しかし旅の途中、汾源宮で病にかかり、そのまま9歳で帰らぬ人となったという。</p>
+            <p>その遺体は長安へ運ばれ、約半年後、万善尼寺の境内に葬られた。</p>
+            <p>……</p>
+            <p>李静訓が息を引き取ると、隋の第2代皇帝・煬帝はその死を悼み、音楽を止め、食事を減らしたという。</p>
+            <p>……</p>
+            <p>さらに遺体を長安へ送り返すよう命じ、葬儀のために多くの品を与えた。</p>
+            <p>そして幼いころから李静訓を育ててきた外祖母・楊麗華は、孫娘を万善尼寺の境内に葬り、その墓の上には仏塔まで建てている。</p>
+            <p>「この子が蓮華から生まれる童子のように生まれ変わり、いつまでも仏法のそばにいられますように」</p>
+            <p>わずか9歳でこの世を去った孫娘に対して、残された者たちは「死後も安らかであってほしい」と願ったのだろう。</p>
+            <p>「開者即死」という恐ろしい四文字は、盗掘者を脅すための警告であると同時に「この子の眠りを決して邪魔するな」という強烈な意思表示だったのかもしれない。</p>
+          </div>
+          <p class="continue"><a href="https://kusanomido.com/study/history/chinese/zui/133173/" target="_blank" rel="noopener" lang="ja">続きを読む · 草の実堂</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p3">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★★</span> <span class="chip mins">4 min</span> <span class="chip" lang="ja">隠退蔵物資</span> <span class="chip" lang="ja">終戦</span> <span class="chip" lang="ja">ヤミ市</span> <span class="chip" lang="ja">GHQ</span> <span class="chip" lang="ja">昭和史</span>
+          </div>
+          <h2 lang="ja">闇に消えた旧日本軍の隠し財産【隠退蔵物資】～国家予算の４倍の物資はどこへ？</h2>
+          <p class="why">No dia 14/8/1945 o próprio gabinete japonês autorizou, por decreto, que militares e burocratas sumissem com os estoques do Exército antes da chegada de MacArthur: ~240 bilhões de ienes, quatro vezes o orçamento de 1946, foram para esconderijos e mercado negro enquanto o povo passava fome. Daí nasceu a promotoria especial de Tóquio.</p>
+          <div class="source">
+            <span lang="ja">草の実堂</span>
+            <a href="https://kusanomido.com/study/history/japan/shouwa/90872/" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>敗戦後、日本国中だれもが空腹を抱えていた1946年1月22日、東京板橋区の陸軍倉庫から大豆380俵、木炭450俵など大量の物資が発見されました。</p>
+            <p>これらは政府主導で隠匿された旧日本軍の保有物資であり、当時は「隠退蔵物資（いんたいぞうぶっし）」と呼ばれました。</p>
+            <p>この事件は新聞で大きく取り上げられ、映画館ではニュース映像が上映されています。</p>
+            <p>当時の国家予算の4倍を超えるとされる「隠退蔵物資」はいかにして生まれ、どこへ消えてしまったのか？</p>
+            <p>著作家・貴志謙介氏の著書『戦後ゼロ年　東京ブラックホール』をもとに紐解いてみたいと思います。</p>
+            <p>……</p>
+            <p>昭和20年8月14日、日本がポツダム宣言を受諾したこの日、鈴木貫太郎内閣は閣議決定を行い、通達を出しました。</p>
+            <p>『軍其の他に保有する軍需用保有物資私財の緊急処分の件』と題された文書は、連合国軍の上陸前に陸海軍に軍需物資を放出することを命じる通達でした。</p>
+            <p>連合国軍が上陸すれば、軍の保有物資は差し押さえられてしまいます。「それならば取られる前にさっさと処分してしまおう」という決定が、降伏と同時になされたのです。</p>
+            <p>……</p>
+            <p>貴志氏は『陸機三六三号』についてこう指摘しています。</p>
+            <p>「要するに、これは、国民の財産を横領することを国家が黙認するという、驚くべき指令なのである。」『戦後ゼロ年　東京ブラックホール』</p>
+            <p>……</p>
+            <p>軍需物資処分が閣議決定された8月14日から、マッカーサーが到着するまでの約2週間の間、軍やエリート官僚、軍御用達の商人による軍需物資の放出と隠匿が始まりました。</p>
+            <p>まず、軍需物資を貯蔵していた造兵廠（ぞうへいしょう : 兵器や弾薬などを製造する工場）から大量の物資が運び出されました。</p>
+            <p>……</p>
+            <p>その額は約2400億円といわれており、1946年度の国家予算560億円の約４倍にのぼります。（『改訂新版　世界大百科事典』）</p>
+            <p>横領された物資は、軍の倉庫、廃墟、海底などに隠された他、ヤミ業者の手を経て闇市で処分されました。</p>
+            <p>……</p>
+            <p>隠匿物資の問題を重く見た政府は、1947年7月25日、衆議院に「隠退蔵物資等に関する特別委員会」を設置しました。</p>
+            <p>さらに、東京地方検察庁に物資を摘発する組織「隠退蔵物資事件捜査部」が発足します。この組織が、後に政界汚職や脱税事件などを手掛ける「東京地検特捜部」へとつながっていったのでした。</p>
+          </div>
+          <p class="continue"><a href="https://kusanomido.com/study/history/japan/shouwa/90872/" target="_blank" rel="noopener" lang="ja">続きを読む · 草の実堂</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p4">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★☆</span> <span class="chip mins">3 min</span> <span class="chip" lang="ja">徳川家康</span> <span class="chip" lang="ja">豊臣秀吉</span> <span class="chip" lang="ja">方広寺大仏</span> <span class="chip" lang="ja">島津義久</span> <span class="chip" lang="ja">御神木</span>
+          </div>
+          <h2 lang="ja">家康が秀吉に送った木材はヒノキ一本だけ？大仏殿造りで諸大名に課された負担</h2>
+          <p class="why">Hideyoshi exigiu madeira de todos os daimyō para o Grande Buda de Kyoto; Maeda e Ukita mandaram montes de toras, Ieyasu mandou… uma única hinoki “sagrada” do Monte Fuji. O texto separa drama e fato com diários da época e mostra o peso real disso sobre Mōri e Shimazu.</p>
+          <div class="source">
+            <span lang="ja">BUSHOO!JAPAN（武将ジャパン）</span>
+            <a href="https://bushoojapan.com/bushoo/tokugawa/2026/11/17/223127" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>大仏殿建立のため、前田利家や宇喜多秀家らが数多の材木を献上する中、家康が用意したのは一本のヒノキ――。</p>
+            <p>大河ドラマ『豊臣兄弟』第44回で、そんな印象的な場面が描かれました。</p>
+            <p>……</p>
+            <p>巨木の運搬業務を担ったのは徳川家康の家臣たちでした。</p>
+            <p>富士山の「木引（きびき）」、つまり木材を引き出す普請には、三河の深溝（ふこうず）を本拠とする松平家忠も8月から11月にかけて動員されています。</p>
+            <p>研究者の盛本昌広氏が著書『松平家忠日記をよむ』の中で、日記に残された普請の様子を紹介しています。</p>
+            <p>それによると家忠はまず「夫丸（ぶまる）」と呼ばれる人夫を送り出し、自分は駿府の城へ出仕しました。</p>
+            <p>家康からは、人夫を先に富士山麓の大宮（静岡県富士宮市）まで行かせるよう指示されたといいます。</p>
+            <p>人夫とは、領内の百姓が徴発されたものだろうと盛本氏は指摘。</p>
+            <p>……</p>
+            <p>家康が、そうして京都へ材木を送ったことは間違いないのでしょう。</p>
+            <p>例えば、中国地方の毛利家も、材木に追われていました。</p>
+            <p>天正十六年（1588年）9月、毛利輝元は家臣に宛てた書状で、</p>
+            <p>秀吉から大仏殿の材木を早く送るよう催促されていることを伝え、これを国家の一大事だと認識。</p>
+            <p>……</p>
+            <p>材木だけでなく、人の負担も各地に広がっていたのです。</p>
+            <p>天正十七年（1589年）正月、秀吉は島津義久に朱印状を送り、大仏の材木を献上するよう命じています。</p>
+            <p>……</p>
+            <p>富士の巨木を引く徳川の家臣も、安芸の山で木を伐る毛利の家臣も、九州から柱材を送り出す島津家も、すべては秀吉の大仏殿のために動いていました。</p>
+            <p>ただし、“御神木”という言い訳で秀吉を納得させるあたりは、なんとも家康らしい“したたかさ”を感じさせますね。</p>
+          </div>
+          <p class="continue"><a href="https://bushoojapan.com/bushoo/tokugawa/2026/11/17/223127" target="_blank" rel="noopener" lang="ja">続きを読む · BUSHOO!JAPAN（武将ジャパン）</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p5">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★☆</span> <span class="chip mins">3 min</span> <span class="chip" lang="ja">歌舞伎</span> <span class="chip" lang="ja">南座</span> <span class="chip" lang="ja">顔見世</span> <span class="chip" lang="ja">出雲阿国</span> <span class="chip" lang="ja">京都</span>
+          </div>
+          <h2 lang="ja">京都・南座で今年も「まねき上げ」。「南」もあれば「北」もあった？歌舞伎発祥の地が継ぐ歴史</h2>
+          <p class="why">Todo fim de novembro o teatro Minamiza de Kyoto ergue as “maneki”, tábuas com os nomes dos atores do kabuki de dezembro. Por que “Minami” (sul)? Porque havia um “Kita” (norte) bem em frente — e o texto conta o que sobrou dele e de onde vem a tradição dos contratos anuais. Combina com o tema kabuki do site.</p>
+          <div class="source">
+            <span lang="ja">Japaaan（ジャパーン）</span>
+            <a href="https://mag.japaaan.com/archives/279378" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>街にクリスマスツリーやイルミネーションが灯り、年の瀬の気配が深まる11月末。2026年11月27日、京都でも師走の到来を告げる「まねき上げ」が行われました。</p>
+            <p>舞台となるのは、四条大橋のたもとに佇む南座です。</p>
+            <p>……</p>
+            <p>歌舞伎のルーツは、出雲阿国（いずものおくに）による「かぶき踊り」とされています。その発祥の地となったのが、京都でした。今も南座正面横には「歌舞伎発祥の地」の碑があり、四条大橋のたもとに出雲阿国の銅像が立っています。</p>
+            <p>この銅像から見えるところに、南座はあります。江戸時代初期の慶長年間（1596～1615）に誕生して以来、約400年以上、同じ場所で京都の歴史を見て来ました。</p>
+            <p>……</p>
+            <p>たしかに「北座」も存在しました。現在の南座のちょうど真向かいあたりにあったのが北座です。また「西（西の芝居）」も存在していました。</p>
+            <p>七つあった芝居小屋で、江戸中期以降まで残ったのが、この「南」「北」「西」でした。</p>
+            <p>その後「西」は寛政6（1794）年に火事によって焼失後再建されず、「北座」は明治25（1892）年に、四条通の道路拡張のため閉座となります。現存するのは「南」だけです。</p>
+            <p>しかし北座に関しては、今も劇場があったエリアには、「北座」の名を冠したビルが建っており、「北座跡」の石碑も存在しています。</p>
+            <p>……</p>
+            <p>京都の芸能の足跡を知ることのできる貴重な場として「北」の名前は今も息づいています。</p>
+            <p>……</p>
+            <p>12月の「吉例顔見世興行」では、出演俳優の名前が「まねき」と呼ばれる白木の看板に勘亭流の文字で書かれ、一同に劇場正面に飾られます。</p>
+            <p>……</p>
+            <p>本来はどの劇場でも「顔見世興行」が行われても良いのですが、歌舞伎発祥の地である京都、そして伝統の「まねき上げ」が風物詩として定着していることからも、「顔見世興行」＝南座という興行形態が定着したものと考えられます。</p>
+          </div>
+          <p class="continue"><a href="https://mag.japaaan.com/archives/279378" target="_blank" rel="noopener" lang="ja">続きを読む · Japaaan（ジャパーン）</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p6">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★★</span> <span class="chip mins">3 min</span> <span class="chip" lang="ja">オオカミ</span> <span class="chip" lang="ja">種子散布</span> <span class="chip" lang="ja">ブルーベリー</span> <span class="chip" lang="ja">ミネソタ</span> <span class="chip" lang="ja">生態学</span>
+          </div>
+          <h2 lang="ja">オオカミが野生のブルーベリーを育てていたと判明</h2>
+          <p class="why">Lobos de Minnesota comem tanto mirtilo no verão que até 83% da dieta vira fruta. Pesquisadores germinaram 802 sementes tiradas de fezes de lobo: elas brotam mais e uma semana mais rápido que sementes direto do fruto. O predador como “jardineiro” da floresta.</p>
+          <div class="source">
+            <span lang="ja">ナゾロジー</span>
+            <a href="https://nazology.kusuguru.co.jp/archives/211522" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>ところが米ミネソタ州北部の森に暮らすオオカミは、夏になると野生のブルーベリーを盛んに食べることが知られています。</p>
+            <p>実が熟す7〜8月には、大人のオオカミの1週間の食事のうち、最大83%をベリー類が占めるほどです。</p>
+            <p>では、食べられてしまうブルーベリーの側にも、何か得になることはあるのでしょうか？</p>
+            <p>米国のミネソタ大学の研究チームは、オオカミのフンから種を取り出して育て、この疑問を確かめました。</p>
+            <p>肉食のオオカミは、森のブルーベリーにとってどんな存在なのでしょうか？</p>
+            <p>研究の詳細は、米ミネソタ大学らにより、2026年8月26日付で学術誌『Biology Letters』に掲載されました。</p>
+            <p>オオカミは、その時々に手に入りやすいものを食べる、好き嫌いの少ない動物です。</p>
+            <p>主な獲物はひづめのある動物ですが、別の獲物が手に入りやすい時には、そちらに切り替えることもあります。</p>
+            <p>……</p>
+            <p>フンの中から取り出したブルーベリーの種は、802粒です。</p>
+            <p>比べる相手として、動物に食べられていない野生の実からも、484粒の種を取り出しました。</p>
+            <p>これらをシャーレに並べ、条件をそろえた育成装置の中で育てます。</p>
+            <p>いわば「オオカミのおなか経由」の種と「実からの直送」の種による、芽出し競争です。</p>
+            <p>……</p>
+            <p>10粒まけば、オオカミ経由はほぼ10粒、直送は7粒ほどが芽吹く計算です。</p>
+            <p>まいた種の半分が芽を出すまでに、オオカミ経由は19日、直送は26日かかりました。</p>
+            <p>……</p>
+            <p>さらにフンそのものが肥料のように働き、病原体から種を守る可能性もあるといいます。</p>
+            <p>ただし、この差がどれほど大きいのかには注意が必要です。</p>
+            <p>比べる相手の種は3つの組に分かれていて、それぞれ保管のしかたが違っていました。</p>
+            <p>組ごとの発芽率は、低い組で42%、高い組で91%と大きくばらつきました。</p>
+            <p>……</p>
+            <p>そのため著者たちは、5ポイントの差でも、育つ株の数にすればかなりの数になりうると述べています。</p>
+            <p>差の大きさにはまだ幅があるものの、オオカミのおなかを通ったブルーベリーの種は、より多く、より早く芽を出したのです。</p>
+          </div>
+          <p class="continue"><a href="https://nazology.kusuguru.co.jp/archives/211522" target="_blank" rel="noopener" lang="ja">続きを読む · ナゾロジー</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p7">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★☆</span> <span class="chip mins">3 min</span> <span class="chip" lang="ja">アヤソフィア</span> <span class="chip" lang="ja">イスタンブール</span> <span class="chip" lang="ja">ビザンツ帝国</span> <span class="chip" lang="ja">地下構造</span> <span class="chip" lang="ja">考古学</span>
+          </div>
+          <h2 lang="ja">アヤソフィアの消えた中庭の下に、未知の地下構造が眠っていた</h2>
+          <p class="why">Uma limpeza no subsolo da Hagia Sophia, sob um pátio que nem existe mais, revelou corredores e camadas desconhecidas — e reacendeu a velha lenda de túneis secretos ligando a igreja a outros prédios de Constantinopla. Bom vocabulário de arqueologia sem jargão de construção.</p>
+          <div class="source">
+            <span lang="ja">ナゾロジー</span>
+            <a href="https://nazology.kusuguru.co.jp/archives/212330" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>トルコ・イスタンブールのアヤソフィアでは、2025年の初めから地下の清掃が進められてきました。</p>
+            <p>その作業の中で、今はもう地上に残っていない中庭の地下から、これまで知られていなかった地下構造が姿を現しました。</p>
+            <p>土やがれきの下から見えてきたのは、何層にも重なった複雑な地下のしくみです。</p>
+            <p>アヤソフィアの下には、何世紀も前から「街の大事な建物へ続く隠し通路がある」という噂がありました。</p>
+            <p>見つかった構造は、その噂とどこまで重なるのでしょうか？</p>
+            <p>研究の詳細は、2026年3月16日付で学術誌『Open Archaeology』に掲載されました。</p>
+            <p>トルコのイスタンブールにあるアヤソフィアは、大きなドームで知られる歴史的な建物です。</p>
+            <p>報道によると、この場所には4世紀から教会が建てられてきました。</p>
+            <p>……</p>
+            <p>最初に作業が始まったのは、今は無くなった中庭の地下階にあたる部分です。</p>
+            <p>そこには、丸みのある天井（ヴォールト）を持つ地下室がありました。</p>
+            <p>ほかの場所より比較的入りやすかったため、まずここから手をつけたのです。</p>
+            <p>古い家でいえば、地下の中でも、出入り口のある地下物置から片づけ始めたようなものです。</p>
+            <p>報道によると、作業では掘削の専門家たちが狭くて暗い中で働き、地下構造から約300トンもの土やがれきを運び出しました。</p>
+            <p>乗用車1台はおよそ1〜1.5トンなので、200〜300台分にもなる重さです。</p>
+            <p>そして清掃が進むにつれて、それまで知られていなかった地下構造が姿を現しました。</p>
+            <p>物置にたまった土やガラクタをどけていったら、奥から家族の誰も知らなかった部屋や通り道が出てきた、というわけです。</p>
+            <p>……</p>
+            <p>報道が紹介している報告によると、地下構造の全体は、2つの大きな長方形の空間がL字形に組み合わさったつくりです。</p>
+            <p>さらにL字の縦の部分からは、少なくとも4本の細い通路が横方向に延びているといいます。</p>
+            <p>……</p>
+            <p>通り道が貯水槽や下水だったという見方も、報道が伝えている推定の段階です。</p>
+            <p>清掃もまだ途中で、今回の論文は最初の段階で分かったことをまとめたものです。</p>
+          </div>
+          <p class="continue"><a href="https://nazology.kusuguru.co.jp/archives/212330" target="_blank" rel="noopener" lang="ja">続きを読む · ナゾロジー</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p8">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★★</span> <span class="chip mins">2 min</span> <span class="chip" lang="ja">光速</span> <span class="chip" lang="ja">レーマー</span> <span class="chip" lang="ja">イオ</span> <span class="chip" lang="ja">木星</span> <span class="chip" lang="ja">科学史</span>
+          </div>
+          <h2 lang="ja">人類は350年前にどうやって「光にも速さがある」と気づいたのか？</h2>
+          <p class="why">Em 1676, observando os eclipses da lua Io atrasarem conforme a Terra se afastava de Júpiter, o dinamarquês Ole Rømer concluiu que a luz tem velocidade finita — contra Descartes e quase todo mundo. A história de como um “atraso” de minutos mudou a física.</p>
+          <div class="source">
+            <span lang="ja">GIGAZINE</span>
+            <a href="https://gigazine.net/news/20261128-light-speed-discovered-350-years-ago/" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>光の速さは真空中で秒速約30万kmであることが知られていますが、光が移動するのに時間がかかることが観測によって初めて実証されたのは1676年のことです。現代のような精密な測定機器が存在しなかった350年前に、デンマークの天文学者であるオーレ・レーマーがどのようにして光の速さが有限であることを突き止めたのかについて、科学メディアのScience Norwayが解説しています。</p>
+            <p>……</p>
+            <p>レーマーは商人の家に生まれ、コペンハーゲン大学で数学や天文学を学んだあと、フランス政府に招かれてパリへ渡り、パリ天文台で天文学者として活動しました。</p>
+            <p>……</p>
+            <p>レーマーの発見から約50年後にはイギリスの天文学者であるジェームズ・ブラッドリーが、「光行差」と呼ばれる現象を発見しました。光行差とは、地球の公転と光の速さが有限であることによって、恒星の見かけ上の位置が1年を通じてわずかに変化する現象です。これにより、レーマーとは全く異なる観測方法でも光の速さが有限であることが裏付けられました。</p>
+            <p>光の速さが有限であるという事実は、現代の天文学においても極めて重要な意味を持っています。例えば地球に届くまでに100億年かかった光を観測すれば、その光を放った天体の100億年前の姿を見ることができます。遠くの宇宙を観測するほど過去の宇宙の姿を知ることができるため、レーマーの発見は宇宙の歴史や進化を解明する上でも重要な意味を持っているとリンダー教授は述べています。</p>
+          </div>
+          <p class="continue"><a href="https://gigazine.net/news/20261128-light-speed-discovered-350-years-ago/" target="_blank" rel="noopener" lang="ja">続きを読む · GIGAZINE</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p9">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★☆</span> <span class="chip mins">3 min</span> <span class="chip" lang="ja">光の帆</span> <span class="chip" lang="ja">イカロス</span> <span class="chip" lang="ja">スターショット</span> <span class="chip" lang="ja">相対論</span> <span class="chip" lang="ja">宇宙探査</span>
+          </div>
+          <h2 lang="ja">光速の75%に達すると宇宙の帆は自分を押す光でブレーキがかかると判明</h2>
+          <p class="why">Velas solares empurradas por laser são o sonho para chegar a outras estrelas. Um cálculo novo mostra que, a 75% da velocidade da luz, parte da própria luz reemitida pela vela passa a frear a nave (aberração, como chuva batendo de frente quando você corre). Física explicada com metáforas do dia a dia.</p>
+          <div class="source">
+            <span lang="ja">ナゾロジー</span>
+            <a href="https://nazology.kusuguru.co.jp/archives/211587" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>宇宙を進む船といえば、炎を噴き出すロケットを思い浮かべる人が多いでしょう。</p>
+            <p>しかし、燃料を燃やす今のロケットでは、ほかの星まで現実的な時間で届く速さは出せません。</p>
+            <p>……</p>
+            <p>さらに、強力なレーザーで帆を押し続けて、光の速さのかなりの割合まで加速させる計画も考えられてきました。</p>
+            <p>ところが、帆を押してくれるはずの光そのものに、思わぬ落とし穴が潜んでいるようです。</p>
+            <p>光に押されて進む帆は、本当にどこまでも速くなれるのでしょうか？</p>
+            <p>研究の詳細は、中国ハルビン工業大学らにより、2026年6月2日付で『arXiv』に公開されました。</p>
+            <p>……</p>
+            <p>この押す力は、ふだんの条件ではきわめて弱いものです。</p>
+            <p>それでも空気の無い宇宙なら、大きな帆に光が当たり続けることで、少しずつ速さを積み上げていけます。</p>
+            <p>……</p>
+            <p>太陽の代わりに強力なレーザーを使えば、光をずっと集中して帆に当てられます。</p>
+            <p>そうすれば、ごく小さな探査機を、ふつうの推進では届かない速さまで加速できると期待されています。</p>
+            <p>……</p>
+            <p>帆が光の速さに近づいた時、まず効いてくるのがドップラー効果です。</p>
+            <p>救急車が通り過ぎるとサイレンの高さが変わって聞こえるのと同じことが、音ではなく光で起こります。</p>
+            <p>……</p>
+            <p>その結果、入射光、鏡面反射、拡散散乱の3つの力は、どれも帆が速くなるほど弱まることが分かりました。</p>
+            <p>帆が光の速さにさらに近づくと、3つの力はいずれもゼロに近づいていきます。</p>
+            <p>……</p>
+            <p>そして研究チームが見つけたのが、いちばん弱い拡散散乱の奇妙な振る舞いです。</p>
+            <p>拡散散乱は、帆の速さが光の4分の3に届くまでは、弱いながらも帆を前へ押す力になっています。</p>
+            <p>……</p>
+            <p>雨の日に走ると、まっすぐ降っているはずの雨が、前から斜めに吹きつけてくるように感じるのとよく似た話です。</p>
+            <p>帆は加速しながら、吸いこんだ光を拡散散乱として出し直しています。</p>
+            <p>……</p>
+            <p>光の4分の3という速さは、帆を押していた光の一部が、向きを変えて帆に逆らい始める境目だったのです。</p>
+          </div>
+          <p class="continue"><a href="https://nazology.kusuguru.co.jp/archives/211587" target="_blank" rel="noopener" lang="ja">続きを読む · ナゾロジー</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p10">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★★</span> <span class="chip mins">2 min</span> <span class="chip" lang="ja">古代エジプト</span> <span class="chip" lang="ja">アポピス</span> <span class="chip" lang="ja">呪術</span> <span class="chip" lang="ja">パピルス</span> <span class="chip" lang="ja">考古学</span>
+          </div>
+          <h2 lang="ja">ゴミ捨て場で大量のアポピスの儀式の痕跡が見つかり古代エジプトでは呪いの儀式が広く行われていたことが判明</h2>
+          <p class="why">Em Tebas apareceram 40 fragmentos de papiro queimado num lixão: restos do ritual para amaldiçoar Apófis, a serpente do caos. Achado mostra que a magia de maldição era prática comum, não só coisa de templo — e dá uma nova janela à religião do dia a dia no Egito.</p>
+          <div class="source">
+            <span lang="ja">GIGAZINE</span>
+            <a href="https://gigazine.net/news/20261127-curse-ritual-widespread-ancient-egypt/" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>エジプトの古代都市であるテーベの遺跡で、焼け焦げたパピルス(古代エジプトで利用された紙)の断片40点が見つかりました。ここから、古代エジプトで有名な呪いの儀式は、これまで考えられてきたよりも広く日常的に行われていた可能性が浮上しています。</p>
+            <p>……</p>
+            <p>古代エジプト時代の呪いの儀式として知られる「アポピスの儀式」に関する記述は、これまで紀元前4世紀前後に記された儀式指南書にある1例しか見つかっていなかったため、この呪いの儀式が「誰が、どれくらいの頻度で、どこで」行っていたものかはほとんど明らかになっていませんでした。</p>
+            <p>……</p>
+            <p>古代エジプト文明を科学的に研究するエジプト学では伝統的に、神殿などの建造物に残る浮き彫りや彫刻を分析して、そこから古代エジプトの宗教を読み解いてきたそうです。しかし、今回の調査では調べる遺物や場所を広げることで、古代エジプトの神殿が実際にどのように使われており、そこで働く神官たちがどのような日々を送っていたのかを明らかにできるようになると期待されています。実際、ゴミ捨て場のような地味な場所を調べる人は少なかったとハーゲン教授は指摘しました。</p>
+          </div>
+          <p class="continue"><a href="https://gigazine.net/news/20261127-curse-ritual-widespread-ancient-egypt/" target="_blank" rel="noopener" lang="ja">続きを読む · GIGAZINE</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p11">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★☆</span> <span class="chip mins">3 min</span> <span class="chip" lang="ja">記憶</span> <span class="chip" lang="ja">加齢</span> <span class="chip" lang="ja">脳科学</span> <span class="chip" lang="ja">想起</span> <span class="chip" lang="ja">高齢者</span>
+          </div>
+          <h2 lang="ja">年を取っても記憶は残っていた、弱るのは「思い出す力」かもしれない</h2>
+          <p class="why">Idosos e jovens lembraram combinações de objeto+palavra igualmente bem quando ninguém pedia para memorizar; a diferença só apareceu quando precisavam “puxar” a lembrança conscientemente. Talvez a memória não suma com a idade — o que enfraquece é o acesso.</p>
+          <div class="source">
+            <span lang="ja">ナゾロジー</span>
+            <a href="https://nazology.kusuguru.co.jp/archives/211384" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>カナダのブロック大学（Brock University）などで行われた研究によって、「覚えてください」と一度も言わずに測る「気づかない記憶」では、前に見た組み合わせに速く答えられる分に、高齢者と若年者で統計的な違いが出ませんでした。</p>
+            <p>参加者が頼まれた仕事は、日用品の写真と単語を見て「この二つは机の引き出しに一緒に入るか」を速く答えるだけです。</p>
+            <p>……</p>
+            <p>研究内容の詳細は2026年10月12日に『bioRxiv』にて公開されています。</p>
+            <p>道で会った人の顔は分かるのに、名前がどうしても出てこない。そんな経験が増えたと感じている人は、少なくないはずです。口元まで出かかっているのに、最後のひと押しが届かない、あのもどかしさです。</p>
+            <p>……</p>
+            <p>ところが、同じ組み合わせでも、思い出そうとしていないときに表に出てくる形で測ると、話が変わります。本人が記憶を試されていると気づいていないときの記憶は、年齢によらず保たれるという報告が続いていたのです。</p>
+            <p>よく分かっていなかったのは、その裏で脳の何が働いているのかでした。</p>
+            <p>……</p>
+            <p>ノースカロライナ大学チャペルヒル校の研究チームは以前に（2010年）、互いに関係のない二つの物について、大きさで分ける判断を素早くさせる課題を使って、若年者と高齢者の「気づかない記憶」を比べました。</p>
+            <p>すると、前と同じ組で判断が速くなる分は、若年者と高齢者で同じくらいでした。</p>
+            <p>判断の中身を変えた2つ目の実験でも同じ結果が出ましたが、組み合わせを意識して見分けさせるテストでは、高齢者の成績が落ちるというよく知られた結果も、あらためて確かめられました。（関連研究）</p>
+          </div>
+          <p class="continue"><a href="https://nazology.kusuguru.co.jp/archives/211384" target="_blank" rel="noopener" lang="ja">続きを読む · ナゾロジー</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p12">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★☆</span> <span class="chip mins">2 min</span> <span class="chip" lang="ja">ワタリガラス</span> <span class="chip" lang="ja">カラスの知能</span> <span class="chip" lang="ja">野生動物保護</span> <span class="chip" lang="ja">いたずら</span> <span class="chip" lang="ja">鳥類</span>
+          </div>
+          <h2 lang="ja">野生に返したワタリガラスが再び戻ってきて、いたずら三昧好き放題</h2>
+          <p class="why">Allen, um corvo-imperial reabilitado no Texas, foi solto com outros três — mas voltou para o centro de natureza, gritando com funcionários, roubando objetos e virando “arruaceiro” oficial. Leve, divertido, e com explicação sobre a inteligência e brincadeira dos corvos.</p>
+          <div class="source">
+            <span lang="ja">カラパイア</span>
+            <a href="https://karapaia.com/archives/640430.html" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>保護された野生動物は、リハビリを終えて自然へ帰される。ほとんどの動物たちは、本来の暮らしに戻っていく。</p>
+            <p>ところが、アメリカテキサス州で野生に返されたワタリガラスのアレンは、一緒に放たれた仲間たちとは違う道を選んだ。</p>
+            <p>……</p>
+            <p>ところが、アレンは野生で暮らすことよりも、新しくできた人間の友人たちに夢中になった。</p>
+            <p>スタッフに向かって大声で叫んだり、持ち物を盗んだり、物を倒したりと、注目を集めるためのいたずらに余念がない。</p>
+            <p>スタッフたちの気遣いをよそに、あっという間にトラブルメーカーとなった。</p>
+            <p>アレンはほとんどの時間をセンターでの周辺で過ごし、来園者やスタッフを見つけると大きな声で叫びながら近づいてくるのだ。</p>
+            <p>……</p>
+            <p>アレンが人間の持ち物を狙う大胆な振る舞いは、ワタリガラスが本来持つ特徴と深く結びついている。</p>
+            <p>コーネル大学鳥類学研究所によると、ワタリガラスはスズメやカラスなどが含まれるスズメ目の中で最大の鳥だ。</p>
+            <p>……</p>
+            <p>アレンは現在、人間と過ごすよりも自然で過ごすことを好むようになったという。</p>
+            <p>だが声の大きさは相変わらずで、アレンは今も大きな声で人間を驚かしている。</p>
+            <p>「最近では、遊歩道の上を飛んだり、遠くの木々で鳴く声を聞くことのほうが多くなりましたが、ハイキング中に、大きな鳴き声が聞こえてきてびっくりすることがあります」とマクレランさんは語る。</p>
+            <p>一緒に放たれた仲間たちより少し時間はかかったものの、アレンは自分なりのペースで自立を果たし、空から元気な声を響かせている。</p>
+          </div>
+          <p class="continue"><a href="https://karapaia.com/archives/640430.html" target="_blank" rel="noopener" lang="ja">続きを読む · カラパイア</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p13">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★☆</span> <span class="chip mins">2 min</span> <span class="chip" lang="ja">小田急8000形</span> <span class="chip" lang="ja">西武鉄道</span> <span class="chip" lang="ja">甲種輸送</span> <span class="chip" lang="ja">譲渡車両</span> <span class="chip" lang="ja">鉄道</span>
+          </div>
+          <h2 lang="ja">小田急から「2本目」がついに西武線へ到着！ 2年ぶりの回送は「機関車も変わった」</h2>
+          <p class="why">O segundo trem Odakyū série 8000 chegou à Seibu depois de 2 anos, numa viagem noturna pela JR (via Matsuda) — parte do programa “sustentável” da Seibu de comprar trens usados de outras empresas para substituir os 2000 da linha Kokubunji. Curto e bom para vocabulário ferroviário.</p>
+          <div class="source">
+            <span lang="ja">乗りものニュース</span>
+            <a href="https://trafficnews.jp/post/730638" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>小田急電鉄の8000形電車の“2本目”が西武鉄道へ到着しました。改造を経て西武2000系を置き換える予定です。</p>
+            <p>……</p>
+            <p>2026年11月22日から翌日にかけて、小田急電鉄の車両が西武鉄道に輸送されました。</p>
+            <p>西武鉄道では、他社から譲り受けたVVVFインバータ制御車両を「サステナ車両」として運行しています。その第一弾として小田急8000形が「西武8000系」として2025年5月から国分寺線などで運行されています。今回、西武鉄道に甲種輸送が行われたのは8000系の2本目にあたる車両で、小田急8000形8260編成（6両）です。</p>
+            <p>今回の甲種輸送は2年ぶりで、11月22日の未明にJR御殿場線松田駅との連絡線がある小田急線新松田駅を出発した甲種輸送列車は、沼津から東海道線を経由して川崎貨物駅に向かい、翌23日に西武池袋線との連絡線のある武蔵野線新秋津駅まで運転されました。</p>
+            <p>……</p>
+            <p>今後、西武8000系の2本目として改造され、国分寺線で使用されている西武2000系が置き換えられる見込みです。国分寺線には2029年度にかけ、計7本の8000系が導入される予定となっています。</p>
+          </div>
+          <p class="continue"><a href="https://trafficnews.jp/post/730638" target="_blank" rel="noopener" lang="ja">続きを読む · 乗りものニュース</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p14">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★★</span> <span class="chip mins">4 min</span> <span class="chip" lang="ja">AIエージェント</span> <span class="chip" lang="ja">ReAct</span> <span class="chip" lang="ja">SWE-bench</span> <span class="chip" lang="ja">SWE-agent</span> <span class="chip" lang="ja">Claude Code</span>
+          </div>
+          <h2 lang="ja">AIエージェントの原型は3本の論文にあった：ReAct、SWE-bench、SWE-agentを読み解く</h2>
+          <p class="why">De onde vem o loop “ler arquivo → editar → rodar teste → corrigir” do Claude Code? O autor destrincha os 3 papers fundadores: ReAct (pensar+agir), SWE-bench (régua de issues reais do GitHub) e SWE-agent (interface feita para agentes). Inclui números como 56% de falhas por alucinação no CoT.</p>
+          <div class="source">
+            <span lang="ja">Zenn</span>
+            <a href="https://zenn.dev/kentaro36/articles/ai-agent-foundation-papers" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>Claude CodeやCodexのようなコーディングエージェントを使っていると、不思議な既視感があります。</p>
+            <p>ファイルを探し、関係ありそうな箇所を読み、編集し、テストを回して、失敗したらログを見て直す。まるで人間の開発者の手順をなぞるような動きです。しかも、その合間に「次はこれを確認する」「このエラーは想定と違う」といった短い思考が挟まります。</p>
+            <p>この動きは、誰かが思いつきで決めたものではありません。2022年から2024年にかけて発表された3本の論文で、部品が1つずつ発明され、検証されてきた結果です。</p>
+            <p>・2022年　ReAct　思考と行動を交互に回す「ループ」の発明・2023年　SWE-bench　実世界の課題で測る「物差し」の発明・2024年　SWE-agent　エージェント向けに設計する「道具」の発明</p>
+            <p>……</p>
+            <p>この記事では、この3本を時系列で読み解きます。各論文を「方式」「到達点」「限界」の3点から見ることで、今のエージェントのどこが論文の延長で、どこが当時は未解決だったのかを確かめるのが狙いです。</p>
+            <p>結論を先に言うと、今のエージェントの基本形は「考えて動くループ」「実行して確かめる評価」「エージェント向けに作り込んだ道具」の3点セットです。3本の論文は、この3点を1つずつ担っています。</p>
+            <p>……</p>
+            <p>この論文の価値は、勝敗の数字だけではありません。著者らはHotpotQAで、成功・失敗の両方から抽出したReActとCoTの軌跡を各100件ずつ人手で分類し、失敗の型を比べています。</p>
+            <p>CoTの失敗のうち、幻覚は56%を占めました。思考の中で根拠のない事柄を事実として作り出し、その誤りがそのまま伝播する型です。</p>
+            <p>……</p>
+            <p>この論文の説得力は、部品を1つずつ外すアブレーションにあります。完全なACIを使った場合、SWE-bench Liteの解決率は18.0%です。各部品を外すと、解決率は次のように下がります。</p>
+            <p>ここから読み取れる教訓の中には、直感に反するものもあります。</p>
+            <p>……</p>
+            <p>典型的な進み方は、人間の開発者の手順とよく似ています。再現コードを書くか、原因のありかを探すかのいずれかから始めます。その後は「編集して、実行する」の繰り返しです。ReActのループが、実務の課題でも自然な型として現れたわけです。</p>
+          </div>
+          <p class="continue"><a href="https://zenn.dev/kentaro36/articles/ai-agent-foundation-papers" target="_blank" rel="noopener" lang="ja">続きを読む · Zenn</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p15">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★☆</span> <span class="chip mins">3 min</span> <span class="chip" lang="ja">Claude Code</span> <span class="chip" lang="ja">git worktree</span> <span class="chip" lang="ja">並列開発</span> <span class="chip" lang="ja">個人開発</span> <span class="chip" lang="ja">AIの失敗例</span>
+          </div>
+          <h2 lang="ja">Claude Code を複数ターミナル＋git worktree で並べて、ほぼ1人で4つの SaaSを作っている話</h2>
+          <p class="why">Um ex-pesquisador de sistemas operacionais (autor de livro sobre o Mach) roda 4 SaaS praticamente sozinho com vários Claude Code em git worktrees — 24 worktrees num repo, um “crachá” de deploy para evitar colisões e um caso real de bug CVSS v4 que a IA deixou passar. Muito parecido com seu fluxo de trabalho.</p>
+          <div class="source">
+            <span lang="ja">Zenn</span>
+            <a href="https://zenn.dev/newsletterready/articles/4585354b62b688" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>株式会社カーズリンクスの乾です。昔はOSの研究をしていて、『分散OS Machがわかる本』という本を書いたこともあります。</p>
+            <p>いま、Claude Codeを使って、ほぼ1人で4つのWebサービスを作って運営しています。この記事では、規模の数字、1日の流れ、複数のClaude Codeを同時に動かすときの衝突の防ぎ方、そしてAIが書いたコードで実際に起きた見落としを、なるべく具体的に書きます。</p>
+            <p>……</p>
+            <p>料金（月額いくらにするか）は、私が決めました。コードは1行も書いていません。</p>
+            <p>Claude Codeは1つのターミナルで1つの作業を進めます。速さを出すには、ターミナルを何本も開いて、別々の作業を同時に進めることになります。ここで問題になるのが衝突です。</p>
+            <p>Security Readyのリポジトリでは、AGENTS.md（Claude Codeが最初に読むルールのファイル）にこう書いています。要約です。</p>
+            <p>いまこのリポジトリにはworktreeが24個あります（終わったものも残っています）。</p>
+            <p>……</p>
+            <p>調べものや企画の相談は、Claude Codeとは別のチャットAIでしています（私はMuseと呼んでいます）。以前はMuseの書いた指示を私がコピーしてClaude Codeに貼っていましたが、これが地味に負担でした。</p>
+            <p>いまは、共有フォルダのMarkdownファイル1つを受け渡しの場所にしています。</p>
+            <p>……</p>
+            <p>直したことは、取り込みは絞らずに全件取って手元で判定する、v4.0とv3.xのどちらかでCriticalなら緊急とする、NVDの分析前は公表元（CNA）が書いた版の範囲で照合する、の3つです。詳しくは別の記事にまとめました（）。</p>
+            <p>運よく、見張っているサーバーにPHPを使っているものはなく、実害はありませんでした。</p>
+          </div>
+          <p class="continue"><a href="https://zenn.dev/newsletterready/articles/4585354b62b688" target="_blank" rel="noopener" lang="ja">続きを読む · Zenn</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p16">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★☆</span> <span class="chip mins">3 min</span> <span class="chip" lang="ja">阪神・淡路大震災</span> <span class="chip" lang="ja">野島断層</span> <span class="chip" lang="ja">淡路島</span> <span class="chip" lang="ja">防災教育</span> <span class="chip" lang="ja">兵庫県</span>
+          </div>
+          <h2 lang="ja">1・17の記憶を次世代に　「こども震災学校」淡路で初開催　小中学生らが野島断層見学</h2>
+          <p class="why">O Kobe Shimbun levou crianças ao parque memorial da falha de Nojima (Awaji) para ouvir sobreviventes de 1995 — primeira edição na ilha. Junto, o dado que poucos lembram: Hyōgo ainda carrega mais de 1 trilhão de ienes de dívida da reconstrução, 31 anos depois.</p>
+          <div class="source">
+            <span lang="ja">神戸新聞NEXT</span>
+            <a href="https://www.kobe-np.co.jp/news/society/202611/0021083336.shtml" target="_blank" rel="noopener">原文を開く ↗</a> · <a href="https://www.kobe-np.co.jp/news/society/202611/0021081200.shtml" target="_blank" rel="noopener" lang="ja">震災の負担なお1兆円超（神戸新聞） ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>阪神・淡路大震災の記憶を次世代につなぐ神戸新聞社の「こども震災学校」が２８日、淡路市小倉の北淡震災記念公園で開かれた。同園総支配人の米山正幸さん（６０）と、震災で母と弟を亡くした小学校教諭の長谷川元気さん（４０）が講師となって体験や思いを語り、兵庫県内の小中学生と保護者ら約２０人が聞き入った。（上田勇紀、古田真央子、合田純奈）</p>
+            <p>震災の教訓を伝える取り組みとして２０２４年４月に始め、６回目。淡路島では初めての開催となった。</p>
+            <p>米山さんは１９９５年１月１７日早朝の震災発生当時、被害が集中した北淡町（現淡路市）の富島地区で、消防団員として救助活動に奔走。地震のすさまじさを物語る野島断層保存館を案内しながら「自分の命は自分で守る。家族の命も守ってください。君たちにはできます」と語った。</p>
+            <p>長谷川さんは当時、神戸市東灘区に住み、小学２年生だった。自宅が全壊し、母規子さん＝当時（３４）＝と末の弟翔人ちゃん＝同（１）＝を失った。「大切な人はいて当たり前ではない。きちんと『ありがとう』や『ごめんね』と伝えてほしい」と話し、家具の固定や水などの備蓄、避難場所の確認の大切さを呼びかけた。</p>
+            <p>……</p>
+            <p>兵庫県はこのほど、１９９５年の阪神・淡路大震災関連の借金が利子を含めて２兆４５０億円に上り、およそ半分の１兆５６０億円が今後の負担として残っていると公表した。震災による借金を返済するため、どのような方法を取ったか再検証し、初めて負担の全体像を整理したが、県民にとっては巨額の将来負担が突然示された格好だ。なぜこれほど負担が膨らんだのか解説する。（岡西篤志）</p>
+            <p>震災では、県内の道路や鉄道、県立施設などあらゆるインフラが壊れた。県は国の支援も受けながら復旧・復興に取り組んだが、地元負担として２兆３千億円の支出を強いられた。このうち１兆円は手元の資金を使ったが、残りの１兆３千億円は県債（借金）で賄った。今回の再検証では、３０年間で借金の利子が７４５０億円まで膨らんだことも明らかになった。</p>
+          </div>
+          <p class="continue"><a href="https://www.kobe-np.co.jp/news/society/202611/0021083336.shtml" target="_blank" rel="noopener" lang="ja">続きを読む · 神戸新聞NEXT</a></p>
+        </div>
+      </article>
+      <article class="piece" id="p17">
+        <div class="piece-inner">
+          <div class="piece-head">
+            <span class="chip interest">★★★★★</span> <span class="chip mins">2 min</span> <span class="chip" lang="ja">BAND-MAID</span> <span class="chip" lang="ja">日本武道館</span> <span class="chip" lang="ja">ライブレポート</span> <span class="chip" lang="ja">ガールズロック</span> <span class="chip" lang="ja">お給仕</span>
+          </div>
+          <h2 lang="ja">BAND-MAID、道なき道をひた走った先に見えた景色　初の日本武道館で目の当たりにした5人の揺るぎない絆</h2>
+          <p class="why">Resenha da Real Sound do primeiro Budōkan do BAND-MAID: AKANE e MISA chorando no palco, o anúncio de pausa em 2027 e o olhar já nos 15 anos em 2028. Escrita por quem seguiu a turnê americana delas.</p>
+          <div class="source">
+            <span lang="ja">Real Sound（リアルサウンド）</span>
+            <a href="https://realsound.jp/2026/11/post-2596775.html" target="_blank" rel="noopener">原文を開く ↗</a>
+          </div>
+          <p class="excerpt-label" lang="ja">原文抜粋（「……」は中略）</p>
+          <div class="ja" lang="ja">
+            <p>AKANE（Dr）が、MISA（Ba）が、泣いていた。ボロボロと涙を流して泣いていた。これはBAND-MAIDの初の日本武道館お給仕2日目の終盤での出来事だ。</p>
+            <p>彼女たちは来年1年間、お給仕活動を小休止し、充電のための時間に充てる。楽曲制作は継続するというアナウンスもされている。しかし、この2人は、まるで無期限の活動休止に入るかのようなテンションでステージとのしばしの別れを悲しんでいた。当然、小鳩ミク（Gt/Vo）、SAIKI（Vo）、KANAMI（Gt）もさみしい思いは抱えていたはずだが、泣きじゃくる2人を目の前にすると冷静にならざるを得ない。</p>
+            <p>……</p>
+            <p>筆者は、『BAND-MAID US TOUR 2022』のニュージャージーとシカゴ公演を追いかけたことがある。海外ツアーは過酷だ。半分観光気分で追いかけていた自分でも大変だったんだから、メンバーの苦労はどれだけのものだったか。BAND-MAIDの海外における奮闘は、他の日本人バンドと比較するとそれほどフィーチャーされていないような気がするが、5人は本当に偉大な足跡を残してきたのだ。それをこの機会に改めて実感した。</p>
+            <p>彼女たちはすでに次を見据えていた。2027年のお給仕小休止を経たあと、2028年には結成15周年という大きな節目が5人を待っている。ラストナンバーの「Choose me」を終え、サブステージで円になって肩を組む5人の姿が美しかった。</p>
+          </div>
+          <p class="continue"><a href="https://realsound.jp/2026/11/post-2596775.html" target="_blank" rel="noopener" lang="ja">続きを読む · Real Sound（リアルサウンド）</a></p>
+        </div>
+      </article>
+
+      <footer class="site">読解幕 · 2026-11-28 · ~49 min · <a href="/japanese-digest/history/" style="color:inherit">History</a> · deliton.github.io/japanese-digest</footer>
+    </main>
+  </div>
+</body>
+</html>
